@@ -1,3 +1,7 @@
+> **SUPERSEDED (kept verbatim for history).** Figures in this file are the pre-merge
+> README of one of the three source repositories and may be stale; CLAIMS.json and
+> reproduce.sh are the only authority. Migrated by scripts/00_migrate_monorepo.sh.
+
 # mac-consistency-pilot
 
 The Verus proof development and the empirical Python harnesses for the paper

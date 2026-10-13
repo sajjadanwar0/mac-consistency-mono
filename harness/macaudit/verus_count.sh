@@ -157,7 +157,7 @@ warn() { printf "  \033[1;33m\xe2\x97\x8b\033[0m %s\n" "$*"; }
 err()  { printf "  \033[1;31m\xe2\x9c\x97\033[0m %s\n" "$*"; }
 have() { command -v "$1" >/dev/null 2>&1; }
 
-LOCAL_VDET="$HERE/verus-detector"
+LOCAL_VDET="${VDET_DIR:-$HERE/verus-detector}"
 if [ -n "$LOCAL_BASE" ]; then
     VDET="$LOCAL_BASE/mac-consistency-pilot/verus-detector"
     SOURCE="explicit --local: $VDET"

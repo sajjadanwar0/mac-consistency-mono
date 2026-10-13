@@ -1,0 +1,718 @@
+{
+ "probe303_cells": {
+  "Haiku|vanilla|150": {
+   "mode": "vanilla",
+   "offset_ms": 150,
+   "n": 100,
+   "revised": 51,
+   "a1": 47,
+   "a1_ci": [
+    0.3694051641943945,
+    0.5724185151099548
+   ],
+   "a7": 4,
+   "obligations_registered": 0,
+   "obligations_discharged": 0,
+   "compensation_generations": 0,
+   "booking_wrong": 51,
+   "booking_wrong_ci": [
+    0.40803632915545374,
+    0.6113558348383622
+   ],
+   "booking_wrong_given_revised": 51,
+   "regenerations": 0
+  },
+  "Haiku|validated|150": {
+   "mode": "validated",
+   "offset_ms": 150,
+   "n": 100,
+   "revised": 47,
+   "a1": 0,
+   "a1_ci": [
+    0.0,
+    0.03621669264517641
+   ],
+   "a7": 4,
+   "obligations_registered": 0,
+   "obligations_discharged": 0,
+   "compensation_generations": 0,
+   "booking_wrong": 4,
+   "booking_wrong_ci": [
+    0.011004493986188198,
+    0.09925715671265992
+   ],
+   "booking_wrong_given_revised": 4,
+   "regenerations": 43
+  },
+  "Haiku|verified|150": {
+   "mode": "verified",
+   "offset_ms": 150,
+   "n": 100,
+   "revised": 100,
+   "a1": 0,
+   "a1_ci": [
+    0.0,
+    0.03621669264517641
+   ],
+   "a7": 2,
+   "obligations_registered": 0,
+   "obligations_discharged": 0,
+   "compensation_generations": 0,
+   "booking_wrong": 2,
+   "booking_wrong_ci": [
+    0.0024313368239425423,
+    0.07038393247107011
+   ],
+   "booking_wrong_given_revised": 2,
+   "regenerations": 98
+  },
+  "Haiku|ledger|150": {
+   "mode": "ledger",
+   "offset_ms": 150,
+   "n": 100,
+   "revised": 100,
+   "a1": 0,
+   "a1_ci": [
+    0.0,
+    0.03621669264517641
+   ],
+   "a7": 0,
+   "obligations_registered": 5,
+   "obligations_discharged": 5,
+   "compensation_generations": 5,
+   "booking_wrong": 0,
+   "booking_wrong_ci": [
+    0.0,
+    0.03621669264517641
+   ],
+   "booking_wrong_given_revised": 0,
+   "regenerations": 95
+  },
+  "Haiku|vanilla|0": {
+   "mode": "vanilla",
+   "offset_ms": 0,
+   "n": 100,
+   "revised": 51,
+   "a1": 46,
+   "a1_ci": [
+    0.35984335297941195,
+    0.5625884201335287
+   ],
+   "a7": 5,
+   "obligations_registered": 0,
+   "obligations_discharged": 0,
+   "compensation_generations": 0,
+   "booking_wrong": 51,
+   "booking_wrong_ci": [
+    0.40803632915545374,
+    0.6113558348383622
+   ],
+   "booking_wrong_given_revised": 51,
+   "regenerations": 0
+  },
+  "Haiku|vanilla|500": {
+   "mode": "vanilla",
+   "offset_ms": 500,
+   "n": 100,
+   "revised": 44,
+   "a1": 4,
+   "a1_ci": [
+    0.011004493986188198,
+    0.09925715671265992
+   ],
+   "a7": 40,
+   "obligations_registered": 0,
+   "obligations_discharged": 0,
+   "compensation_generations": 0,
+   "booking_wrong": 44,
+   "booking_wrong_ci": [
+    0.34083602372345834,
+    0.5428125029366824
+   ],
+   "booking_wrong_given_revised": 44,
+   "regenerations": 0
+  },
+  "Haiku|vanilla|1500": {
+   "mode": "vanilla",
+   "offset_ms": 1500,
+   "n": 100,
+   "revised": 44,
+   "a1": 0,
+   "a1_ci": [
+    0.0,
+    0.03621669264517641
+   ],
+   "a7": 44,
+   "obligations_registered": 0,
+   "obligations_discharged": 0,
+   "compensation_generations": 0,
+   "booking_wrong": 44,
+   "booking_wrong_ci": [
+    0.34083602372345834,
+    0.5428125029366824
+   ],
+   "booking_wrong_given_revised": 44,
+   "regenerations": 0
+  },
+  "Haiku|validated|0": {
+   "mode": "validated",
+   "offset_ms": 0,
+   "n": 100,
+   "revised": 51,
+   "a1": 0,
+   "a1_ci": [
+    0.0,
+    0.03621669264517641
+   ],
+   "a7": 2,
+   "obligations_registered": 0,
+   "obligations_discharged": 0,
+   "compensation_generations": 0,
+   "booking_wrong": 2,
+   "booking_wrong_ci": [
+    0.0024313368239425423,
+    0.07038393247107011
+   ],
+   "booking_wrong_given_revised": 2,
+   "regenerations": 49
+  },
+  "Haiku|validated|500": {
+   "mode": "validated",
+   "offset_ms": 500,
+   "n": 100,
+   "revised": 52,
+   "a1": 0,
+   "a1_ci": [
+    0.0,
+    0.03621669264517641
+   ],
+   "a7": 46,
+   "obligations_registered": 0,
+   "obligations_discharged": 0,
+   "compensation_generations": 0,
+   "booking_wrong": 46,
+   "booking_wrong_ci": [
+    0.35984335297941195,
+    0.5625884201335287
+   ],
+   "booking_wrong_given_revised": 46,
+   "regenerations": 6
+  },
+  "Haiku|validated|1500": {
+   "mode": "validated",
+   "offset_ms": 1500,
+   "n": 100,
+   "revised": 42,
+   "a1": 0,
+   "a1_ci": [
+    0.0,
+    0.03621669264517641
+   ],
+   "a7": 42,
+   "obligations_registered": 0,
+   "obligations_discharged": 0,
+   "compensation_generations": 0,
+   "booking_wrong": 42,
+   "booking_wrong_ci": [
+    0.3219855393547969,
+    0.5228808042760862
+   ],
+   "booking_wrong_given_revised": 42,
+   "regenerations": 0
+  },
+  "Deepseek|vanilla|150": {
+   "mode": "vanilla",
+   "offset_ms": 150,
+   "n": 100,
+   "revised": 51,
+   "a1": 20,
+   "a1_ci": [
+    0.12665555210195584,
+    0.2918426890886281
+   ],
+   "a7": 31,
+   "obligations_registered": 0,
+   "obligations_discharged": 0,
+   "compensation_generations": 0,
+   "booking_wrong": 51,
+   "booking_wrong_ci": [
+    0.40803632915545374,
+    0.6113558348383622
+   ],
+   "booking_wrong_given_revised": 51,
+   "regenerations": 0
+  },
+  "Deepseek|validated|150": {
+   "mode": "validated",
+   "offset_ms": 150,
+   "n": 100,
+   "revised": 47,
+   "a1": 0,
+   "a1_ci": [
+    0.0,
+    0.03621669264517641
+   ],
+   "a7": 26,
+   "obligations_registered": 0,
+   "obligations_discharged": 0,
+   "compensation_generations": 0,
+   "booking_wrong": 26,
+   "booking_wrong_ci": [
+    0.17739443786765247,
+    0.3573120631001036
+   ],
+   "booking_wrong_given_revised": 26,
+   "regenerations": 21
+  },
+  "Deepseek|verified|150": {
+   "mode": "verified",
+   "offset_ms": 150,
+   "n": 100,
+   "revised": 100,
+   "a1": 0,
+   "a1_ci": [
+    0.0,
+    0.03621669264517641
+   ],
+   "a7": 52,
+   "obligations_registered": 0,
+   "obligations_discharged": 0,
+   "compensation_generations": 0,
+   "booking_wrong": 52,
+   "booking_wrong_ci": [
+    0.41778976540630663,
+    0.6209945198220415
+   ],
+   "booking_wrong_given_revised": 52,
+   "regenerations": 48
+  },
+  "Deepseek|ledger|150": {
+   "mode": "ledger",
+   "offset_ms": 150,
+   "n": 100,
+   "revised": 100,
+   "a1": 0,
+   "a1_ci": [
+    0.0,
+    0.03621669264517641
+   ],
+   "a7": 0,
+   "obligations_registered": 53,
+   "obligations_discharged": 53,
+   "compensation_generations": 53,
+   "booking_wrong": 0,
+   "booking_wrong_ci": [
+    0.0,
+    0.03621669264517641
+   ],
+   "booking_wrong_given_revised": 0,
+   "regenerations": 47
+  },
+  "Deepseek|vanilla|0": {
+   "mode": "vanilla",
+   "offset_ms": 0,
+   "n": 100,
+   "revised": 51,
+   "a1": 39,
+   "a1_ci": [
+    0.294010414853417,
+    0.49268552036763646
+   ],
+   "a7": 12,
+   "obligations_registered": 0,
+   "obligations_discharged": 0,
+   "compensation_generations": 0,
+   "booking_wrong": 51,
+   "booking_wrong_ci": [
+    0.40803632915545374,
+    0.6113558348383622
+   ],
+   "booking_wrong_given_revised": 51,
+   "regenerations": 0
+  },
+  "Deepseek|vanilla|500": {
+   "mode": "vanilla",
+   "offset_ms": 500,
+   "n": 100,
+   "revised": 44,
+   "a1": 2,
+   "a1_ci": [
+    0.0024313368239425423,
+    0.07038393247107011
+   ],
+   "a7": 42,
+   "obligations_registered": 0,
+   "obligations_discharged": 0,
+   "compensation_generations": 0,
+   "booking_wrong": 44,
+   "booking_wrong_ci": [
+    0.34083602372345834,
+    0.5428125029366824
+   ],
+   "booking_wrong_given_revised": 44,
+   "regenerations": 0
+  },
+  "Deepseek|vanilla|1500": {
+   "mode": "vanilla",
+   "offset_ms": 1500,
+   "n": 100,
+   "revised": 44,
+   "a1": 0,
+   "a1_ci": [
+    0.0,
+    0.03621669264517641
+   ],
+   "a7": 44,
+   "obligations_registered": 0,
+   "obligations_discharged": 0,
+   "compensation_generations": 0,
+   "booking_wrong": 44,
+   "booking_wrong_ci": [
+    0.34083602372345834,
+    0.5428125029366824
+   ],
+   "booking_wrong_given_revised": 44,
+   "regenerations": 0
+  },
+  "Deepseek|validated|0": {
+   "mode": "validated",
+   "offset_ms": 0,
+   "n": 100,
+   "revised": 51,
+   "a1": 0,
+   "a1_ci": [
+    0.0,
+    0.03621669264517641
+   ],
+   "a7": 17,
+   "obligations_registered": 0,
+   "obligations_discharged": 0,
+   "compensation_generations": 0,
+   "booking_wrong": 17,
+   "booking_wrong_ci": [
+    0.10226491003552825,
+    0.25817541063215865
+   ],
+   "booking_wrong_given_revised": 17,
+   "regenerations": 34
+  },
+  "Deepseek|validated|500": {
+   "mode": "validated",
+   "offset_ms": 500,
+   "n": 100,
+   "revised": 52,
+   "a1": 0,
+   "a1_ci": [
+    0.0,
+    0.03621669264517641
+   ],
+   "a7": 52,
+   "obligations_registered": 0,
+   "obligations_discharged": 0,
+   "compensation_generations": 0,
+   "booking_wrong": 52,
+   "booking_wrong_ci": [
+    0.41778976540630663,
+    0.6209945198220415
+   ],
+   "booking_wrong_given_revised": 52,
+   "regenerations": 0
+  },
+  "Deepseek|validated|1500": {
+   "mode": "validated",
+   "offset_ms": 1500,
+   "n": 100,
+   "revised": 42,
+   "a1": 0,
+   "a1_ci": [
+    0.0,
+    0.03621669264517641
+   ],
+   "a7": 42,
+   "obligations_registered": 0,
+   "obligations_discharged": 0,
+   "compensation_generations": 0,
+   "booking_wrong": 42,
+   "booking_wrong_ci": [
+    0.3219855393547969,
+    0.5228808042760862
+   ],
+   "booking_wrong_given_revised": 42,
+   "regenerations": 0
+  },
+  "Gpt|vanilla|150": {
+   "mode": "vanilla",
+   "offset_ms": 150,
+   "n": 100,
+   "revised": 51,
+   "a1": 36,
+   "a1_ci": [
+    0.2664084227332345,
+    0.46212189332742326
+   ],
+   "a7": 15,
+   "obligations_registered": 0,
+   "obligations_discharged": 0,
+   "compensation_generations": 0,
+   "booking_wrong": 51,
+   "booking_wrong_ci": [
+    0.40803632915545374,
+    0.6113558348383622
+   ],
+   "booking_wrong_given_revised": 51,
+   "regenerations": 0
+  },
+  "Gpt|validated|150": {
+   "mode": "validated",
+   "offset_ms": 150,
+   "n": 100,
+   "revised": 47,
+   "a1": 0,
+   "a1_ci": [
+    0.0,
+    0.03621669264517641
+   ],
+   "a7": 13,
+   "obligations_registered": 0,
+   "obligations_discharged": 0,
+   "compensation_generations": 0,
+   "booking_wrong": 13,
+   "booking_wrong_ci": [
+    0.07107304618542953,
+    0.21204067708744978
+   ],
+   "booking_wrong_given_revised": 13,
+   "regenerations": 34
+  },
+  "Gpt|verified|150": {
+   "mode": "verified",
+   "offset_ms": 150,
+   "n": 100,
+   "revised": 100,
+   "a1": 0,
+   "a1_ci": [
+    0.0,
+    0.03621669264517641
+   ],
+   "a7": 51,
+   "obligations_registered": 0,
+   "obligations_discharged": 0,
+   "compensation_generations": 0,
+   "booking_wrong": 51,
+   "booking_wrong_ci": [
+    0.40803632915545374,
+    0.6113558348383622
+   ],
+   "booking_wrong_given_revised": 51,
+   "regenerations": 49
+  },
+  "Gpt|ledger|150": {
+   "mode": "ledger",
+   "offset_ms": 150,
+   "n": 100,
+   "revised": 100,
+   "a1": 0,
+   "a1_ci": [
+    0.0,
+    0.03621669264517641
+   ],
+   "a7": 0,
+   "obligations_registered": 45,
+   "obligations_discharged": 45,
+   "compensation_generations": 45,
+   "booking_wrong": 0,
+   "booking_wrong_ci": [
+    0.0,
+    0.03621669264517641
+   ],
+   "booking_wrong_given_revised": 0,
+   "regenerations": 55
+  },
+  "Gpt|vanilla|0": {
+   "mode": "vanilla",
+   "offset_ms": 0,
+   "n": 100,
+   "revised": 51,
+   "a1": 40,
+   "a1_ci": [
+    0.3032947687028774,
+    0.5027908495776652
+   ],
+   "a7": 11,
+   "obligations_registered": 0,
+   "obligations_discharged": 0,
+   "compensation_generations": 0,
+   "booking_wrong": 51,
+   "booking_wrong_ci": [
+    0.40803632915545374,
+    0.6113558348383622
+   ],
+   "booking_wrong_given_revised": 51,
+   "regenerations": 0
+  },
+  "Gpt|vanilla|500": {
+   "mode": "vanilla",
+   "offset_ms": 500,
+   "n": 100,
+   "revised": 44,
+   "a1": 1,
+   "a1_ci": [
+    0.00025314603297742064,
+    0.054459385392080645
+   ],
+   "a7": 43,
+   "obligations_registered": 0,
+   "obligations_discharged": 0,
+   "compensation_generations": 0,
+   "booking_wrong": 44,
+   "booking_wrong_ci": [
+    0.34083602372345834,
+    0.5428125029366824
+   ],
+   "booking_wrong_given_revised": 44,
+   "regenerations": 0
+  },
+  "Gpt|vanilla|1500": {
+   "mode": "vanilla",
+   "offset_ms": 1500,
+   "n": 100,
+   "revised": 44,
+   "a1": 0,
+   "a1_ci": [
+    0.0,
+    0.03621669264517641
+   ],
+   "a7": 44,
+   "obligations_registered": 0,
+   "obligations_discharged": 0,
+   "compensation_generations": 0,
+   "booking_wrong": 44,
+   "booking_wrong_ci": [
+    0.34083602372345834,
+    0.5428125029366824
+   ],
+   "booking_wrong_given_revised": 44,
+   "regenerations": 0
+  },
+  "Gpt|validated|0": {
+   "mode": "validated",
+   "offset_ms": 0,
+   "n": 100,
+   "revised": 51,
+   "a1": 0,
+   "a1_ci": [
+    0.0,
+    0.03621669264517641
+   ],
+   "a7": 4,
+   "obligations_registered": 0,
+   "obligations_discharged": 0,
+   "compensation_generations": 0,
+   "booking_wrong": 4,
+   "booking_wrong_ci": [
+    0.011004493986188198,
+    0.09925715671265992
+   ],
+   "booking_wrong_given_revised": 4,
+   "regenerations": 47
+  },
+  "Gpt|validated|500": {
+   "mode": "validated",
+   "offset_ms": 500,
+   "n": 100,
+   "revised": 52,
+   "a1": 0,
+   "a1_ci": [
+    0.0,
+    0.03621669264517641
+   ],
+   "a7": 40,
+   "obligations_registered": 0,
+   "obligations_discharged": 0,
+   "compensation_generations": 0,
+   "booking_wrong": 40,
+   "booking_wrong_ci": [
+    0.3032947687028774,
+    0.5027908495776652
+   ],
+   "booking_wrong_given_revised": 40,
+   "regenerations": 12
+  },
+  "Gpt|validated|1500": {
+   "mode": "validated",
+   "offset_ms": 1500,
+   "n": 100,
+   "revised": 42,
+   "a1": 0,
+   "a1_ci": [
+    0.0,
+    0.03621669264517641
+   ],
+   "a7": 42,
+   "obligations_registered": 0,
+   "obligations_discharged": 0,
+   "compensation_generations": 0,
+   "booking_wrong": 42,
+   "booking_wrong_ci": [
+    0.3219855393547969,
+    0.5228808042760862
+   ],
+   "booking_wrong_given_revised": 42,
+   "regenerations": 0
+  }
+ },
+ "probe301": {
+  "sqlite": {
+   "replays": 165,
+   "baseline_a6": 126
+  },
+  "http": {
+   "replays": 165,
+   "baseline_a6": 112
+  }
+ },
+ "verus/lib_l5_ledger.verus.log": "verification results:: 7 verified, 0 errors\n",
+ "macros": [
+  "% generated by harness/macaudit/claims_from_results.py -- do not edit; re-run the probes instead",
+  "% --- probe 303 (results/live_a1_outcome) ---",
+  "\\renewcommand{\\LiveVanillaDeepseekAOne}{$20/100$ [12.7, 29.2]}",
+  "\\renewcommand{\\LiveVanillaDeepseekR}{$31$}",
+  "\\renewcommand{\\LiveVanillaDeepseekWrong}{$51/100$}",
+  "\\renewcommand{\\LiveVanillaDeepseekRegen}{0}",
+  "\\renewcommand{\\LiveValidatedDeepseekAOne}{$0/100$ [0.0, 3.6]}",
+  "\\renewcommand{\\LiveValidatedDeepseekR}{$26$}",
+  "\\renewcommand{\\LiveValidatedDeepseekWrong}{$26/100$}",
+  "\\renewcommand{\\LiveValidatedDeepseekRegen}{21}",
+  "\\renewcommand{\\LiveVerifiedGptAOne}{$0/100$}",
+  "\\renewcommand{\\LiveVerifiedGptR}{$51$}",
+  "\\renewcommand{\\LiveVerifiedGptWrong}{$51/100$ [40.8, 61.1]}",
+  "\\renewcommand{\\LiveVerifiedGptRegen}{49}",
+  "\\renewcommand{\\LiveLedgerGptAOne}{$0/100$}",
+  "\\renewcommand{\\LiveLedgerGptR}{$0$}",
+  "\\renewcommand{\\LiveLedgerGptWrong}{$0/100$ [0.0, 3.6]}",
+  "\\renewcommand{\\LiveLedgerGptRegen}{55$+$45 (45/45 obl.)}",
+  "\\renewcommand{\\LiveVerifiedHaikuAOne}{$0/100$}",
+  "\\renewcommand{\\LiveVerifiedHaikuR}{$2$}",
+  "\\renewcommand{\\LiveVerifiedHaikuWrong}{$2/100$ [0.2, 7.0]}",
+  "\\renewcommand{\\LiveVerifiedHaikuRegen}{98}",
+  "\\renewcommand{\\LiveLedgerHaikuAOne}{$0/100$}",
+  "\\renewcommand{\\LiveLedgerHaikuR}{$0$}",
+  "\\renewcommand{\\LiveLedgerHaikuWrong}{$0/100$ [0.0, 3.6]}",
+  "\\renewcommand{\\LiveLedgerHaikuRegen}{95$+$5 (5/5 obl.)}",
+  "\\renewcommand{\\LiveVerifiedDeepseekAOne}{$0/100$}",
+  "\\renewcommand{\\LiveVerifiedDeepseekR}{$52$}",
+  "\\renewcommand{\\LiveVerifiedDeepseekWrong}{$52/100$ [41.8, 62.1]}",
+  "\\renewcommand{\\LiveVerifiedDeepseekRegen}{48}",
+  "\\renewcommand{\\LiveLedgerDeepseekAOne}{$0/100$}",
+  "\\renewcommand{\\LiveLedgerDeepseekR}{$0$}",
+  "\\renewcommand{\\LiveLedgerDeepseekWrong}{$0/100$ [0.0, 3.6]}",
+  "\\renewcommand{\\LiveLedgerDeepseekRegen}{47$+$53 (53/53 obl.)}",
+  "\\renewcommand{\\LiveVerifiedOutcome}{gpt-4o-mini: $A_1=0/100$, booking $\\neq$ final $51/100$; haiku: $A_1=0/100$, booking $\\neq$ final $2/100$}",
+  "\\renewcommand{\\LfiveLiveOutcome}{gpt-4o-mini: booking $\\neq$ final $0/100$, 45 obligations registered, 45 discharged, 45 compensation generations; haiku: booking $\\neq$ final $0/100$, 5 obligations registered, 5 discharged, 5 compensation generations}",
+  "\\renewcommand{\\OffsetCurveAvailable}{1}",
+  "% --- probe 301 (results/a6_real_latency/sqlite.jsonl) ---",
+  "\\renewcommand{\\ToolNodeRealSqlite}{$126/165$}",
+  "% --- probe 301 (results/a6_real_latency/http.jsonl) ---",
+  "\\renewcommand{\\ToolNodeRealHttp}{$112/165$}"
+ ]
+}

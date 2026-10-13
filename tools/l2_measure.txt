@@ -1,0 +1,24 @@
+depth 2: A3, effects out on a retracted basis   verified 0/1000   unguarded 519/1000   cascade 519/1000
+         overruled A3, a surviving dependent    verified 0/1000   unguarded 519/1000   cascade 0/1000
+         exposed effects (in scenarios)          verified 402 (199)   unguarded 1538 (771)   cascade 1538 (771)
+         relabeled after release                 verified 0   unguarded 0   cascade 767
+         verified: cascaded 564  refused 830  held 748  released 2870/2870 live  retractions refused 199/771
+L2 depth=2 arm=verified a3=0 a3_overruled=0 exposed=402 exposed_scenarios=199 relabeled=0 cascaded=564 refused=830 held=748 released=2870 live=2870 retractions=771 retractions_refused=199
+L2 depth=2 arm=unguarded a3=519 a3_overruled=519 exposed=1538 exposed_scenarios=771 relabeled=0 cascaded=0 refused=830 held=0 released=4006 live=3235 retractions=771 retractions_refused=0
+L2 depth=2 arm=cascade a3=519 a3_overruled=0 exposed=1538 exposed_scenarios=771 relabeled=767 cascaded=767 refused=830 held=0 released=4006 live=2468 retractions=771 retractions_refused=0
+depth 3: A3, effects out on a retracted basis   verified 0/1000   unguarded 624/1000   cascade 624/1000
+         overruled A3, a surviving dependent    verified 0/1000   unguarded 624/1000   cascade 0/1000
+         exposed effects (in scenarios)          verified 547 (199)   unguarded 2059 (771)   cascade 2059 (771)
+         relabeled after release                 verified 0   unguarded 0   cascade 1288
+         verified: cascaded 940  refused 1177  held 1255  released 3494/3494 live  retractions refused 199/771
+L2 depth=3 arm=verified a3=0 a3_overruled=0 exposed=547 exposed_scenarios=199 relabeled=0 cascaded=940 refused=1177 held=1255 released=3494 live=3494 retractions=771 retractions_refused=199
+L2 depth=3 arm=unguarded a3=624 a3_overruled=624 exposed=2059 exposed_scenarios=771 relabeled=0 cascaded=0 refused=1177 held=0 released=5006 live=4235 retractions=771 retractions_refused=0
+L2 depth=3 arm=cascade a3=624 a3_overruled=0 exposed=2059 exposed_scenarios=771 relabeled=1288 cascaded=1288 refused=1177 held=0 released=5006 live=2947 retractions=771 retractions_refused=0
+depth 5: A3, effects out on a retracted basis   verified 0/1000   unguarded 563/1000   cascade 563/1000
+         overruled A3, a surviving dependent    verified 0/1000   unguarded 563/1000   cascade 0/1000
+         exposed effects (in scenarios)          verified 549 (199)   unguarded 2010 (771)   cascade 2010 (771)
+         relabeled after release                 verified 0   unguarded 0   cascade 1239
+         verified: cascaded 889  refused 1677  held 1272  released 5545/5545 live  retractions refused 199/771
+L2 depth=5 arm=verified a3=0 a3_overruled=0 exposed=549 exposed_scenarios=199 relabeled=0 cascaded=889 refused=1677 held=1272 released=5545 live=5545 retractions=771 retractions_refused=199
+L2 depth=5 arm=unguarded a3=563 a3_overruled=563 exposed=2010 exposed_scenarios=771 relabeled=0 cascaded=0 refused=1677 held=0 released=7006 live=6235 retractions=771 retractions_refused=0
+L2 depth=5 arm=cascade a3=563 a3_overruled=0 exposed=2010 exposed_scenarios=771 relabeled=1239 cascaded=1239 refused=1677 held=0 released=7006 live=4996 retractions=771 retractions_refused=0

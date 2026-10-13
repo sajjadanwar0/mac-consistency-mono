@@ -1,0 +1,142 @@
+{
+ "verus": {
+  "curated_total": 364,
+  "full_total": 385,
+  "errors": 0,
+  "pin": "0.2026.09.13.671956e",
+  "per_file": {
+   "lib_a3_residue.rs": 6,
+   "lib_a4_split_view.rs": 9,
+   "lib_concurrent_semantics.rs": 9,
+   "lib_consistency_lattice.rs": 53,
+   "lib_default_si.rs": 9,
+   "lib_detect_a1_exec.rs": 9,
+   "lib_detector_equivalence.rs": 24,
+   "lib_l2_exec.rs": 73,
+   "lib_l2_projection.rs": 3,
+   "lib_l2_safety.rs": 33,
+   "lib_l3_exec.rs": 7,
+   "lib_l3_safety.rs": 6,
+   "lib_l3_sequencer.rs": 5,
+   "lib_l4_exec.rs": 11,
+   "lib_l4_safety.rs": 9,
+   "lib_langgraph_refinement.rs": 7,
+   "lib_occ_l2_refinement.rs": 8,
+   "lib_pessimistic_exec.rs": 5,
+   "lib_pessimistic_invariant.rs": 3,
+   "lib_refinement_default_si.rs": 18,
+   "lib_refinement_pessimistic.rs": 31,
+   "lib_refinement_ssi_chain.rs": 19,
+   "lib_refinement_ssi.rs": 18,
+   "lib.rs": 23,
+   "lib_rustbelt_interface.rs": 4,
+   "lib_si_commit_invariant.rs": 4,
+   "lib_pess_concurrent.rs": 31,
+   "lib_si_concurrent.rs": 18,
+   "lib_si_projection.rs": 3,
+   "lib_ssi.rs": 8
+  }
+ },
+ "tlaps": {
+  "Hierarchy.tla": 15,
+  "A1LowerBound.tla": 28,
+  "CommitOrder.tla": 60
+ },
+ "tlc": {
+  "lattice16_runs": 64,
+  "lattice16_mismatches": 0,
+  "lattice16_maxops3_runs": 16,
+  "commitorder_verdicts": 15,
+  "commitorder_memory_states": 2961434
+ },
+ "live_a1": {
+  "gpt-4o-mini": {
+   "vanilla": 60,
+   "validated": 0,
+   "sequential": 0,
+   "superstep_completion": 42
+  },
+  "claude-haiku-4-5": {
+   "vanilla": 91,
+   "validated": 0,
+   "sequential": 0,
+   "superstep_completion": 72
+  },
+  "llama3.2": {
+   "vanilla": 1,
+   "validated": 0,
+   "sequential": 0,
+   "superstep_completion": 26
+  }
+ },
+ "l2_measure": {
+  "def3_unguarded": [
+   519,
+   624,
+   563
+  ],
+  "def3_verified": [
+   0,
+   0,
+   0
+  ],
+  "exposed_unguarded": [
+   1538,
+   2059,
+   2010
+  ],
+  "exposed_verified": [
+   402,
+   547,
+   549
+  ],
+  "relabeled_cascade": [
+   767,
+   1288,
+   1239
+  ]
+ },
+ "l4_measure": {
+  "phantom_live": [
+   630,
+   505,
+   387
+  ],
+  "phantom_verified": [
+   0,
+   0,
+   0
+  ]
+ },
+ "live_l2": {
+  "retractions": {
+   "claude-haiku-4-5": 1,
+   "gpt-4o-mini": 3,
+   "llama3.2": 62
+  },
+  "a3_verified": 0
+ },
+ "census": {
+  "repos_sampled": 180,
+  "repos_with_graph": 98,
+  "sites": 407,
+  "parallel": 11,
+  "confirmed": 0,
+  "upper": 8
+ },
+ "toolnode_a6": {
+  "gpt-4o-mini": {
+   "batched": 30,
+   "reordered": 22
+  },
+  "llama3.2": {
+   "batched": 3,
+   "reordered": 2
+  },
+  "claude-haiku-4-5": {
+   "batched": 0,
+   "reordered": 0
+  },
+  "l3_reordered": 0
+ }
+}

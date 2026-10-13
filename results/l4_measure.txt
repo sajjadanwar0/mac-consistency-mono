@@ -1,0 +1,3 @@
+width 2: hazard 630/1000   live A2 630/1000   snapshot A2 630/1000   validated A2 0/1000   validated refused 630   dispatched 370
+width 4: hazard 505/1000   live A2 505/1000   snapshot A2 505/1000   validated A2 0/1000   validated refused 505   dispatched 495
+width 16: hazard 387/1000   live A2 387/1000   snapshot A2 387/1000   validated A2 0/1000   validated refused 387   dispatched 613

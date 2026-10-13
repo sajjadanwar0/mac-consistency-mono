@@ -1,0 +1,74 @@
+# ---------- Rust / Cargo ----------
+target/
+**/target/
+
+# ---------- TLA+ / TLAPS / TLC (scratch; receipts live in results/ and formal/tla/*.json) ----------
+.tlacache/
+**/.tlacache/
+*.toolbox/
+*.tlaps/
+states/
+**/states/
+*_TTrace_*.tla
+*_TTrace_*.bin
+formal/tla/lattice16_runs/
+formal/tla/lattice16_maxops3_runs/
+formal/tla/lattice16_quick/
+formal/tla/mo3/
+formal/tla/co_*.log
+tools/tla2tools.jar
+tools/tlc_*/
+tools/*.log
+tools/*.json
+
+# ---------- Python ----------
+__pycache__/
+*.py[cod]
+.venv/
+envs/*/.venv/
+
+# ---------- Verus binaries ----------
+crates/verus-detector/src/*.o
+crates/verus-detector/**/*.rlib
+
+# ---------- archives, editors, OS ----------
+*.zip
+*.tar
+*.tar.gz
+.idea/
+.vscode/
+*.swp
+*~
+.DS_Store
+
+# ---------- delivery / round scripts: process, not artifact ----------
+[0-9]*_fix*.sh
+rounds/
+
+# ---------- paper build artifacts (paper sources live OUTSIDE this repo, as in resume-contract) ----------
+*.aux
+*.bbl
+*.blg
+*.synctex.gz
+
+# ---------- NOT IGNORED, DELIBERATELY ----------
+# results/**                                 every committed receipt
+# formal/tla/lattice16_results*.json         the 64-point and 16-point matrices
+# CLAIMS.json                                the single source of truth for headline figures
+# A published figure whose receipt is not in this tree is a defect.
+
+# TLC scratch of the lattice matrices (results .tsv/.json are committed)
+formal/tla/lattice16_runs/
+formal/tla/lattice32_runs/
+formal/tla/states/
+formal/tla/states_*/
+# paper build artefacts
+paper/*.aux
+paper/*.log
+paper/*.out
+paper/*.bbl
+paper/*.blg
+paper/*.toc
+paper/pg/
+paper/spg/
+paper/*.txt

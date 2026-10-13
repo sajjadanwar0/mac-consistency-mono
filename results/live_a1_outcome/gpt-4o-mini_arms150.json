@@ -1,0 +1,8105 @@
+{
+ "provider": "openai",
+ "model": "gpt-4o-mini",
+ "n": 100,
+ "p_revise": 1.0,
+ "seed": 20261012,
+ "cells": [
+  {
+   "mode": "vanilla",
+   "offset_ms": 150,
+   "n": 100,
+   "revised": 100,
+   "a1": 44,
+   "a1_ci": [
+    0.34083602372345834,
+    0.5428125029366824
+   ],
+   "a7": 56,
+   "obligations_registered": 0,
+   "obligations_discharged": 0,
+   "compensation_generations": 0,
+   "booking_wrong": 100,
+   "booking_wrong_ci": [
+    0.9637833073548235,
+    1.0
+   ],
+   "booking_wrong_given_revised": 100,
+   "regenerations": 0,
+   "sessions": [
+    {
+     "session": 0,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 1,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 2,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 3,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 4,
+     "revise": true,
+     "a1": true,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 5,
+     "revise": true,
+     "a1": true,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 6,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 7,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 8,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 9,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 10,
+     "revise": true,
+     "a1": true,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 11,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 12,
+     "revise": true,
+     "a1": true,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 13,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 14,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 15,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 16,
+     "revise": true,
+     "a1": true,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 17,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 18,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 19,
+     "revise": true,
+     "a1": true,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 20,
+     "revise": true,
+     "a1": true,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 21,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 22,
+     "revise": true,
+     "a1": true,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 23,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 24,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 25,
+     "revise": true,
+     "a1": true,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 26,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 27,
+     "revise": true,
+     "a1": true,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 28,
+     "revise": true,
+     "a1": true,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 29,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 30,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 31,
+     "revise": true,
+     "a1": true,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 32,
+     "revise": true,
+     "a1": true,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 33,
+     "revise": true,
+     "a1": true,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 34,
+     "revise": true,
+     "a1": true,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 35,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 36,
+     "revise": true,
+     "a1": true,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 37,
+     "revise": true,
+     "a1": true,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 38,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 39,
+     "revise": true,
+     "a1": true,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 40,
+     "revise": true,
+     "a1": true,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 41,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 42,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 43,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 44,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 45,
+     "revise": true,
+     "a1": true,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 46,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 47,
+     "revise": true,
+     "a1": true,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 48,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 49,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 50,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 51,
+     "revise": true,
+     "a1": true,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 52,
+     "revise": true,
+     "a1": true,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 53,
+     "revise": true,
+     "a1": true,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 54,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 55,
+     "revise": true,
+     "a1": true,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 56,
+     "revise": true,
+     "a1": true,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 57,
+     "revise": true,
+     "a1": true,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 58,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 59,
+     "revise": true,
+     "a1": true,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 60,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 61,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 62,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 63,
+     "revise": true,
+     "a1": true,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 64,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 65,
+     "revise": true,
+     "a1": true,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 66,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 67,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 68,
+     "revise": true,
+     "a1": true,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 69,
+     "revise": true,
+     "a1": true,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 70,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 71,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 72,
+     "revise": true,
+     "a1": true,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 73,
+     "revise": true,
+     "a1": true,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 74,
+     "revise": true,
+     "a1": true,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 75,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 76,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 77,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 78,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 79,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 80,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 81,
+     "revise": true,
+     "a1": true,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 82,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 83,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 84,
+     "revise": true,
+     "a1": true,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 85,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 86,
+     "revise": true,
+     "a1": true,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 87,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 88,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 89,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 90,
+     "revise": true,
+     "a1": true,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 91,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 92,
+     "revise": true,
+     "a1": true,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 93,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 94,
+     "revise": true,
+     "a1": true,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 95,
+     "revise": true,
+     "a1": true,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 96,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 97,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 98,
+     "revise": true,
+     "a1": true,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 99,
+     "revise": true,
+     "a1": true,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    }
+   ]
+  },
+  {
+   "mode": "validated",
+   "offset_ms": 150,
+   "n": 100,
+   "revised": 100,
+   "a1": 0,
+   "a1_ci": [
+    0.0,
+    0.03621669264517641
+   ],
+   "a7": 51,
+   "obligations_registered": 0,
+   "obligations_discharged": 0,
+   "compensation_generations": 0,
+   "booking_wrong": 51,
+   "booking_wrong_ci": [
+    0.40803632915545374,
+    0.6113558348383622
+   ],
+   "booking_wrong_given_revised": 51,
+   "regenerations": 49,
+   "sessions": [
+    {
+     "session": 0,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 1,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 2,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 3,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 4,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 5,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 6,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 7,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 8,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 9,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 10,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 11,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 12,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 13,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 14,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 15,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 16,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 17,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 18,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 19,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 20,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 21,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 22,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 23,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 24,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 25,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 26,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 27,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 28,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 29,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 30,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 31,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 32,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 33,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 34,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 35,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 36,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 37,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 38,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 39,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 40,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 41,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 42,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 43,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 44,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 45,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 46,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 47,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 48,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 49,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 50,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 51,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 52,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 53,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 54,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 55,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 56,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 57,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 58,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 59,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 60,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 61,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 62,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 63,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 64,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 65,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 66,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 67,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 68,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 69,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 70,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 71,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 72,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 73,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 74,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 75,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 76,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 77,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 78,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 79,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 80,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 81,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 82,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 83,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 84,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 85,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 86,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 87,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 88,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 89,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 90,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 91,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 92,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 93,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 94,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 95,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 96,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 97,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 98,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 99,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": null,
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    }
+   ]
+  },
+  {
+   "mode": "verified",
+   "offset_ms": 150,
+   "n": 100,
+   "revised": 100,
+   "a1": 0,
+   "a1_ci": [
+    0.0,
+    0.03621669264517641
+   ],
+   "a7": 51,
+   "obligations_registered": 0,
+   "obligations_discharged": 0,
+   "compensation_generations": 0,
+   "booking_wrong": 51,
+   "booking_wrong_ci": [
+    0.40803632915545374,
+    0.6113558348383622
+   ],
+   "booking_wrong_given_revised": 51,
+   "regenerations": 49,
+   "sessions": [
+    {
+     "session": 0,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 2,
+       "write_cells": [
+        2
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 1,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 2,
+       "write_cells": [
+        2
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 2,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 2,
+       "write_cells": [
+        2
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 3,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 2,
+       "write_cells": [
+        2
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 4,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        2
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 5,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 2,
+       "write_cells": [
+        2
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 6,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        2
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 7,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        2
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 8,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 2,
+       "write_cells": [
+        2
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 9,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        2
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 10,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 2,
+       "write_cells": [
+        2
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 11,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 2,
+       "write_cells": [
+        2
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 12,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 2,
+       "write_cells": [
+        2
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 13,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        2
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 14,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        2
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 15,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        2
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 16,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        2
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 17,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        2
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 18,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 2,
+       "write_cells": [
+        2
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 19,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 2,
+       "write_cells": [
+        2
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 20,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 2,
+       "write_cells": [
+        2
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 21,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        2
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 22,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 2,
+       "write_cells": [
+        2
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 23,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 2,
+       "write_cells": [
+        2
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 24,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        2
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 25,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        2
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 26,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 2,
+       "write_cells": [
+        2
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 27,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        2
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 28,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 2,
+       "write_cells": [
+        2
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 29,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 2,
+       "write_cells": [
+        2
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 30,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 2,
+       "write_cells": [
+        2
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 31,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 2,
+       "write_cells": [
+        2
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 32,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        2
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 33,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 2,
+       "write_cells": [
+        2
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 34,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 2,
+       "write_cells": [
+        2
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 35,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 2,
+       "write_cells": [
+        2
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 36,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 2,
+       "write_cells": [
+        2
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 37,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 2,
+       "write_cells": [
+        2
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 38,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 2,
+       "write_cells": [
+        2
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 39,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 2,
+       "write_cells": [
+        2
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 40,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        2
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 41,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 2,
+       "write_cells": [
+        2
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 42,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        2
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 43,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        2
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 44,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 2,
+       "write_cells": [
+        2
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 45,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 2,
+       "write_cells": [
+        2
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 46,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        2
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 47,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 2,
+       "write_cells": [
+        2
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 48,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        2
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 49,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 2,
+       "write_cells": [
+        2
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 50,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        2
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 51,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        2
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 52,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        2
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 53,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        2
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 54,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 2,
+       "write_cells": [
+        2
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 55,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 2,
+       "write_cells": [
+        2
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 56,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        2
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 57,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        2
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 58,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 2,
+       "write_cells": [
+        2
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 59,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        2
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 60,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 2,
+       "write_cells": [
+        2
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 61,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        2
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 62,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 2,
+       "write_cells": [
+        2
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 63,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 2,
+       "write_cells": [
+        2
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 64,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 2,
+       "write_cells": [
+        2
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 65,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 2,
+       "write_cells": [
+        2
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 66,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 2,
+       "write_cells": [
+        2
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 67,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        2
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 68,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        2
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 69,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        2
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 70,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        2
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 71,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        2
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 72,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        2
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 73,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        2
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 74,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        2
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 75,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 2,
+       "write_cells": [
+        2
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 76,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 2,
+       "write_cells": [
+        2
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 77,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        2
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 78,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        2
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 79,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 2,
+       "write_cells": [
+        2
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 80,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        2
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 81,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        2
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 82,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        2
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 83,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 2,
+       "write_cells": [
+        2
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 84,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        2
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 85,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 2,
+       "write_cells": [
+        2
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 86,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        2
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 87,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        2
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 88,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 2,
+       "write_cells": [
+        2
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 89,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        2
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 90,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 2,
+       "write_cells": [
+        2
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 91,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        2
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 92,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        2
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 93,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        2
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 94,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 2,
+       "write_cells": [
+        2
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 95,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        2
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 96,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 2,
+       "write_cells": [
+        2
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 97,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        2
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 98,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        2
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 99,
+     "revise": true,
+     "a1": false,
+     "a7": true,
+     "verified_trace": [
+      {
+       "agent": 0,
+       "read_cells": [],
+       "read_time": 0,
+       "write_cells": [
+        1
+       ],
+       "write_time": 1
+      },
+      {
+       "agent": 1,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        2
+       ],
+       "write_time": 2
+      },
+      {
+       "agent": 2,
+       "read_cells": [
+        1
+       ],
+       "read_time": 1,
+       "write_cells": [
+        1
+       ],
+       "write_time": 3
+      }
+     ],
+     "booking_matches_final": false,
+     "regenerations": 0,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    }
+   ]
+  },
+  {
+   "mode": "ledger",
+   "offset_ms": 150,
+   "n": 100,
+   "revised": 100,
+   "a1": 0,
+   "a1_ci": [
+    0.0,
+    0.03621669264517641
+   ],
+   "a7": 0,
+   "obligations_registered": 45,
+   "obligations_discharged": 45,
+   "compensation_generations": 45,
+   "booking_wrong": 0,
+   "booking_wrong_ci": [
+    0.0,
+    0.03621669264517641
+   ],
+   "booking_wrong_given_revised": 0,
+   "regenerations": 55,
+   "sessions": [
+    {
+     "session": 0,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 0,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "compensation_generations": 1
+    },
+    {
+     "session": 1,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 2,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 3,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 0,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "compensation_generations": 1
+    },
+    {
+     "session": 4,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 5,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 6,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 7,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 0,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "compensation_generations": 1
+    },
+    {
+     "session": 8,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 9,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 0,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "compensation_generations": 1
+    },
+    {
+     "session": 10,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 11,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 0,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "compensation_generations": 1
+    },
+    {
+     "session": 12,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 13,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 14,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 0,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "compensation_generations": 1
+    },
+    {
+     "session": 15,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 16,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 0,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "compensation_generations": 1
+    },
+    {
+     "session": 17,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 0,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "compensation_generations": 1
+    },
+    {
+     "session": 18,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 0,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "compensation_generations": 1
+    },
+    {
+     "session": 19,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 20,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 0,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "compensation_generations": 1
+    },
+    {
+     "session": 21,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 22,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 23,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 24,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 25,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 0,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "compensation_generations": 1
+    },
+    {
+     "session": 26,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 27,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 28,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 29,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 0,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "compensation_generations": 1
+    },
+    {
+     "session": 30,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 0,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "compensation_generations": 1
+    },
+    {
+     "session": 31,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 32,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 0,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "compensation_generations": 1
+    },
+    {
+     "session": 33,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 0,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "compensation_generations": 1
+    },
+    {
+     "session": 34,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 35,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 0,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "compensation_generations": 1
+    },
+    {
+     "session": 36,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 37,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 0,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "compensation_generations": 1
+    },
+    {
+     "session": 38,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 39,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 0,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "compensation_generations": 1
+    },
+    {
+     "session": 40,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 0,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "compensation_generations": 1
+    },
+    {
+     "session": 41,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 42,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 43,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 44,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 45,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 46,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 0,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "compensation_generations": 1
+    },
+    {
+     "session": 47,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 48,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 0,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "compensation_generations": 1
+    },
+    {
+     "session": 49,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 50,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 0,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "compensation_generations": 1
+    },
+    {
+     "session": 51,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 0,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "compensation_generations": 1
+    },
+    {
+     "session": 52,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 53,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 0,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "compensation_generations": 1
+    },
+    {
+     "session": 54,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 55,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 56,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 57,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 0,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "compensation_generations": 1
+    },
+    {
+     "session": 58,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 0,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "compensation_generations": 1
+    },
+    {
+     "session": 59,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 0,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "compensation_generations": 1
+    },
+    {
+     "session": 60,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 61,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 0,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "compensation_generations": 1
+    },
+    {
+     "session": 62,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 63,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 0,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "compensation_generations": 1
+    },
+    {
+     "session": 64,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 65,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 0,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "compensation_generations": 1
+    },
+    {
+     "session": 66,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 67,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 68,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 0,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "compensation_generations": 1
+    },
+    {
+     "session": 69,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 70,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 0,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "compensation_generations": 1
+    },
+    {
+     "session": 71,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 0,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "compensation_generations": 1
+    },
+    {
+     "session": 72,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 73,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 0,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "compensation_generations": 1
+    },
+    {
+     "session": 74,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 0,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "compensation_generations": 1
+    },
+    {
+     "session": 75,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 0,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "compensation_generations": 1
+    },
+    {
+     "session": 76,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 77,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 0,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "compensation_generations": 1
+    },
+    {
+     "session": 78,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 0,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "compensation_generations": 1
+    },
+    {
+     "session": 79,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 80,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 0,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "compensation_generations": 1
+    },
+    {
+     "session": 81,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 82,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 0,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "compensation_generations": 1
+    },
+    {
+     "session": 83,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 84,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 85,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 86,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 87,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 88,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 89,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 90,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 0,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "compensation_generations": 1
+    },
+    {
+     "session": 91,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 92,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 0,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "compensation_generations": 1
+    },
+    {
+     "session": 93,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 0,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "compensation_generations": 1
+    },
+    {
+     "session": 94,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 95,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 96,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 97,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "compensation_generations": 0
+    },
+    {
+     "session": 98,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 0,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "compensation_generations": 1
+    },
+    {
+     "session": 99,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "verified_trace": null,
+     "booking_matches_final": true,
+     "regenerations": 0,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "compensation_generations": 1
+    }
+   ]
+  }
+ ]
+}

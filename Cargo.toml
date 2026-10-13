@@ -1,0 +1,5 @@
+[workspace]
+members = ["crates/runtime", "crates/analyser"]
+resolver = "2"
+# crates/verus-detector is verified with `verus` directly (see reproduce.sh stage [3]);
+# it is not a cargo workspace member on purpose.
