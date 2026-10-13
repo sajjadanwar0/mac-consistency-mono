@@ -1,0 +1,175 @@
+\section{Related work}
+\label{sec:related}
+
+\subsection{Classical consistency and isolation}
+The hardware tradition~\cite{Lamport1979SC,GharachorlooEtAl1990,PulteEtAl2018ARMv8,HerlihyWing1990}
+characterizes visibility under bounded latency; ours is unbounded. The
+database isolation
+hierarchy~\cite{BerensonEtAl1995,Adya1999,AdyaLiskovOneil2000} is the direct
+ancestor: we adopt its anomaly-based method over a different operational
+model. The line through Fekete et al.~\cite{FeketeEtAl2005MakingSI} and
+Cahill et al.~\cite{CahillRohmFekete2008SSI}, productized in
+PostgreSQL~\cite{PortsGrittner2012}, is the reference for our SSI runtime; the
+difference is that the work discarded on abort is an inference. Weikum and
+Vossen's commit-order-preserving serializability~\cite{WeikumVossen2001} and
+Kung and Robinson's backward validation~\cite{KungRobinson1981OCC} are what
+\cref{thm:corc} mechanizes at the level of values read; Papadimitriou's view
+equivalence~\cite{Papadimitriou1979} is where the value-level and
+conflict-level notions meet. Bailis et al.'s highly available
+transactions~\cite{BailisEtAl2014HAT} classify isolation levels by the
+anomalies they admit under availability constraints, the taxonomy our lattice
+borrows its method from; Cerone, Bernardi and
+Gotsman~\cite{CeroneEtAl2015Framework} give the axiomatic framework our
+history predicates specialize; \emph{robustness}---whether every execution of
+an application under a weak model is
+serializable~\cite{BernardiGotsman2016Robustness,BeillahiEtAl2019RobustnessSI}---is
+what the census of \cref{sec:prevalence} asks statically; our detectors
+are polynomial~\cite{BiswasEnea2019Complexity} only because each predicate is
+existential over a constant number of records. Crooks et
+al.~\cite{CrooksEtAl2017Seeing} give the client-centric formulation we do
+not adopt (an agent operation has many clients). Compensation descends from
+sagas~\cite{GarciaMolinaSalem1987Sagas}, ConTracts~\cite{ReuterWachter1991ConTract}
+and Gray and Reuter~\cite{GrayReuter1993}; recoverability and strictness
+are Hadzilacos~\cite{Hadzilacos1988Reliability} and Bernstein et
+al.~\cite{BernsteinHadzilacosGoodman1987}. Irrevocable transactions~\cite{WelcEtAl2008Irrevocable} and transactional
+boosting~\cite{HerlihyKoskinen2008Boosting} met the same irreversibility in
+transactional memory; output commit is the dual choice, delay the effect and
+keep the operation abortable. Commutativity-based concurrency
+control~\cite{Weihl1988Commutativity} orders only what does not commute, and
+an \A6 discipline over commutativity classes rather than issuance order
+would pay the sequencing cost only where it buys something; transaction
+chopping~\cite{ShashaEtAl1995Chopping} says when a long operation may be
+split, the question an agent's multi-step plan raises. The basis of \cref{def:residue} is
+why-provenance~\cite{BunemanEtAl2001Why,GreenEtAl2007Semirings} restricted
+to copying; that literature's treatment of derivation through computation
+is what a semantic basis would need. Exactly-once stream
+processing~\cite{AkidauEtAl2013MillWheel,CarboneEtAl2017Flink} holds
+side effects at a transactional sink until the input is durable, the
+industrial precedent for output commit. The pessimistic/optimistic choice our cost
+analysis turns on is the contention-management problem of
+STM~\cite{GuerraouiHerlihyPochon2005,SchererScott2005}, and the cost-aware
+selection of a level is consistency
+rationing~\cite{KraskaEtAl2009Rationing} and, in databases today,
+TxnSails~\cite{ZhouEtAl2025TxnSails}.
+
+\subsection{Concurrency control and shared memory for LLM agents}
+A 2025--2026 line builds mechanisms for this regime, mostly without verifying
+them, and the present paper is one point in it rather than its origin.
+Agentic transactions~\cite{SunEtAl2026AgenticTx} recast ACID as four
+semantic guarantees for a single long-horizon agent (explore--execute--validate
+cycles, dependency-aware isolation) and measure task success, with no history
+predicate, model or proof; our catalog is the anomaly-level account such
+guarantees would be checked against, and supplement \S\,D places it on the
+lattice with the systems below.
+CoAgent~\cite{LyuEtAl2026CoAgent} states the regime in our three terms and
+proposes an advisory protocol in which a notified agent repairs its own plan;
+its correctness argument is conditional on a model judgment measured at a
+$5\%$ failure rate, and its lock/OCC cost inversion independently reproduces
+\cref{sec:cost}. STORM~\cite{LiuEtAl2026STORM} is read validation ($L_1$)
+deployed per file; ATCC~\cite{ZhouEtAl2026ATCC}, OptiMA~\cite{Calikyilmaz2025OptiMA},
+token coherence~\cite{Parakhin2026TokenCoherence} and GoEX~\cite{PatilEtAl2024GoEX}
+impose a remedy from the runtime. MemTX~\cite{LiEtAl2026MemTX} is the closest
+design to our $L_2$: staged writes under snapshot isolation, irreversible
+tool calls gated on current belief and cascading repair on retraction, with
+two invariants checked by bounded enumeration ($5.5$M states) and a
+five-backbone evaluation; it does not state the predicates it excludes,
+verify the runtime, or price prevention per unit of sound work. Yang et
+al.~\cite{YangEtAl2026Position} argue that coordination failures attributed
+to communication are concurrency failures; governed shared
+memory~\cite{MargalitEtAl2026Governed} and transactive
+memory~\cite{Transactive2026} address provenance, supersession and scoping
+without treating the generation window as a transaction. SagaLLM~\cite{GengChang2025SagaLLM}, Atomix~\cite{MohammadiEtAl2026Atomix}
+and CodeCRDT~\cite{Pugachev2025CodeCRDT} are placed on the lattice informally
+in supplement \S\,D; none reaches $L_4$. S-Bus~\cite{Khan2026SBus} (the
+author's prior work) recovers implicit read sets for one contract and is the
+natural supplier of trust-base item (ix). Agent-memory systems~\cite{PackerEtAl2023MemGPT} and the
+frameworks~\cite{LangGraph2026,WuEtAl2023AutoGen} supply substrate, not
+contract.
+
+
+\subsection{Commit-time guards, retraction, and what comes after commit}
+\label{sec:related-residue}
+The 2026 work on agent effects acts at the commit boundary:
+CommitGuard~\cite{SantosGrueiro2026CommitGuard} licenses a durable effect
+only by a witness still fresh at commit; Zheng et
+al.~\cite{ZhengEtAl2026Stale} show that freshness guards of our $L_1$ kind
+block $92$--$95\%$ of benign infrastructure races and argue for semantic
+commit predicates; EffectMatch~\cite{ZhangEtAl2026EffectMatch} validates
+persistent outcomes against what was approved; versioned
+execution~\cite{ZhangEtAl2026Revisable} revokes an obsolete execution's
+authority to publish. MemTX~\cite{LiEtAl2026MemTX} alone looks past
+commit: on an explicit \emph{retraction} it walks a derivation DAG to
+executed tool actions and records each as compensated or leaked. None treats the ordinary case \cref{tab:live}
+measures---no retraction, no race, a legitimate later write---and none
+states what guarantee is achievable there; \cref{prop:owed} says it is an
+obligation under an open-world store, and the ledger registers it
+atomically. Argument-level provenance is
+used by PACT~\cite{FanEtAl2026PACT} to decide whether a tool argument's
+origin is trusted; we use the same granularity for a different question,
+which value an effect depends on, and the precision objection of Zheng et
+al.\ is answered at the same place: a basis predicate ignores writes to
+cells the effect never depended on.
+
+\subsection{Asynchronous tool calling and effect order}
+Parallel function calling is pursued deliberately:
+LLMCompiler~\cite{KimEtAl2024LLMCompiler} plans a dependency graph and
+dispatches independent calls concurrently, and asynchronous function
+calling~\cite{GimEtAl2024AsyncLM,FutureAsync2026} lets a model issue calls
+and continue generating while they complete, with ordering of effects left to
+the runtime. \A6 is a wrong independence judgment seen at the effect level
+(\cref{sec:a6-eval}: made by the backbone, unnoticed by the executor). The run-to-run spread the
+evaluation reports is the documented nondeterminism of sampled
+inference~\cite{AtilEtAl2024Stability}. Sandboxes and policies
+for tool effects---ToolEmu~\cite{RuanEtAl2024ToolEmu},
+AgentDojo~\cite{DebenedettiEtAl2024AgentDojo},
+Progent~\cite{ShiEtAl2025Progent}, AgentSpec~\cite{WangEtAl2025AgentSpec}---gate
+\emph{what} an agent may do; IsolateGPT~\cite{WuEtAl2025IsolateGPT} isolates
+LLM-based applications from one another. All are orthogonal to the order and
+the basis of effects, and compose with the disciplines here.
+$\tau$-bench~\cite{YaoEtAl2024TauBench} scores end state for a single agent
+and isolates neither.
+
+\subsection{Durable execution, exactly-once and repair}
+Durable-execution engines~\cite{TemporalIO,BurckhardtEtAl2021Durable} and
+exactly-once workflow
+systems~\cite{SkiadopoulosEtAl2022DBOS,ZhangEtAl2020Beldi,JiaWitchel2021Boki,QiEtAl2023Halfmoon}
+govern whether an effect is \emph{repeated} after a crash; output commit
+governs whether it may \emph{leave} while its basis can be withdrawn, and the
+two compose, sharing the record-every-nondeterministic-step stance of
+\cref{sec:model}. Rollback
+recovery~\cite{StromYemini1985Optimistic,ElnozahyEtAl2002Rollback}
+discharges duplicates by identity because replay is deterministic; agent
+runtimes break that premise~\cite{ZhengEtAl2026ACRFence}, and the
+\texttt{interrupt} hazard of \cref{sec:prevalence} is an instance. Retro,
+Warp and Aire~\cite{KimEtAl2010Retro,ChandraEtAl2011Warp,ChandraEtAl2013Aire}
+repair effects that have already left by compensating requests; a refused
+retraction in our $L_2$ is exactly such an effect, and the closure the
+runtime records is the dependency information they consume.
+
+\subsection{Verified systems and black-box checkers}
+IronFleet~\cite{HawblitzelEtAl2015IronFleet}, Verdi~\cite{WilcoxEtAl2015Verdi}
+and Chapar~\cite{LesaniBellChlipala2016Chapar} verify running protocols and
+stores; Perennial, GoJournal and
+Argosy~\cite{ChajedEtAl2019Perennial,ChajedEtAl2021GoJournal,ChajedEtAl2019Argosy}
+verify concurrent, crash-safe storage by layered refinement, the template
+for the open step of \cref{sec:l1}. Ours are far smaller, and what they add is a verified detector and
+verified bytes executed in a measurement.
+Jepsen~\cite{Kingsbury2013Jepsen} and the black-box
+checkers~\cite{TanEtAl2020Cobra,Aphyr2020Elle,HuangEtAl2023PolySI,ZhangEtAl2023Viper,LiuEtAl2024Plume,ClarkEtAl2024Emme}
+decide serializability or snapshot isolation over database histories with
+unverified analyzers and under a uniqueness assumption we share
+(\cref{sec:a3}); our detectors decide a far simpler property and are verified
+against it, in the tradition of runtime
+verification~\cite{HavelundRosu2002,LeuckerSchallhart2009,BauerLeuckerSchallhart2011}.
+
+\subsection{Agent failure taxonomies and verification}
+MAST~\cite{CemriEtAl2025MAST} catalogs cognitive and coordination failures;
+the concurrency class is absent from it because current benchmarks do not
+stress shared state under contention, and its traces cannot show \A1 either
+way (supplement \S\,C). Agentproof~\cite{XavierEtAl2026Agentproof} analyzes
+agent graphs statically with witness generation; the census is that
+programme specialized to one predicate, and the obstacle to generalizing it
+is concrete (per-node write sets are not statically derivable in LangGraph).
+VeriMAP~\cite{Xu2025VeriMAP}, AgentVerify~\cite{AgentVerify2026} and
+MCMAS~\cite{LomuscioQuRaimondi2017MCMAS} verify task-level and strategic
+properties, a complementary layer.
