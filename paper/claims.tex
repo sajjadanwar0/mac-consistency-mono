@@ -1,0 +1,148 @@
+% claims.tex -- every headline number, as a macro.  Regenerate with
+%   python3 harness/macaudit/claims_to_tex.py CLAIMS.json > paper/claims.tex
+% so that the paper and CLAIMS.json cannot drift.  VERIFIED-HERE = re-derived
+% from committed receipts in this audit; PAPER = carried from the submitted
+% artifact's receipts and gated by reproduce.sh but not re-run in this audit.
+
+% --- formal (VERIFIED-HERE unless noted) ---
+\newcommand{\VerusCurated}{364}        % PAPER (needs the pinned Verus build)
+\newcommand{\VerusFull}{385}           % PAPER
+\newcommand{\VerusLoadBearing}{236}    % arithmetic on the per-file table (Sec. 5)
+\newcommand{\VerusScaffold}{128}       % arithmetic on the per-file table
+\newcommand{\VerusDetector}{24}        % PAPER
+\newcommand{\TlapsHierarchy}{15}       % log committed
+\newcommand{\TlapsLowerBound}{28}      % log committed
+\newcommand{\TlapsCommitOrder}{60}     % PAPER (no tlapm log committed -- commit one)
+\newcommand{\CommitOrderVerdicts}{15}  % VERIFIED-HERE
+\newcommand{\CommitOrderHistories}{35{,}659}      % VERIFIED-HERE
+\newcommand{\CommitOrderMemoryStates}{2{,}961{,}434} % VERIFIED-HERE
+\newcommand{\LatticeRuns}{64}          % VERIFIED-HERE (6-run sample identical to reference; full matrix in reference json)
+\newcommand{\LatticeMaxOpsThreeRuns}{16}
+\newcommand{\LatticeSafeStatesMin}{380{,}920}
+\newcommand{\LatticeSafeStatesMax}{2{,}015{,}279}
+
+% --- live LangGraph A1 study (VERIFIED-HERE, incl. the outcome columns) ---
+\newcommand{\LiveNPerCell}{100}
+\newcommand{\LiveGptVanillaAOne}{60}
+\newcommand{\LiveHaikuVanillaAOne}{91}
+\newcommand{\LiveLlamaVanillaAOne}{1}
+\newcommand{\LiveGptValidatedWrong}{34}
+\newcommand{\LiveHaikuValidatedWrong}{7}
+\newcommand{\LiveLlamaValidatedWrong}{100}
+\newcommand{\LiveGptRegen}{66}
+\newcommand{\LiveHaikuRegen}{93}
+\newcommand{\LiveGptPinnedMean}{1.07}
+\newcommand{\LiveGptPinnedMax}{3.79}
+\newcommand{\LiveHaikuPinnedMean}{1.21}
+\newcommand{\LiveHaikuPinnedMax}{1.96}
+\newcommand{\LiveLlamaPinnedMean}{3.77}
+\newcommand{\LiveLlamaPinnedMax}{9.06}
+\newcommand{\LiveOffsetMs}{150}
+\newcommand{\SuperstepGpt}{42}
+\newcommand{\SuperstepHaiku}{72}
+\newcommand{\SuperstepLlama}{26}
+
+% --- AutoGen pilot (VERIFIED-HERE via rescore) ---
+\newcommand{\PilotTriageRates}{42\%, 48\% and 52\%}
+\newcommand{\PilotTriagePooled}{142/300}
+\newcommand{\PilotSiEditResidual}{5}
+\newcommand{\PilotSiTriageResidual}{8}
+
+% --- cost (VERIFIED-HERE: workcost.py, realstore_metrics.py --check) ---
+\newcommand{\CostRun}{20260913T0150Z}
+
+% --- L2 / L4 / A6 (PAPER; receipts to be committed as results/*.json) ---
+\newcommand{\LtwoDefThreeBaseline}{519, 624 and 563}
+\newcommand{\LtwoExposedBaseline}{1{,}538, 2{,}059 and 2{,}010}
+\newcommand{\LtwoExposedVerified}{402, 547 and 549}
+\newcommand{\LtwoRelabeled}{767, 1{,}288 and 1{,}239}
+\newcommand{\LiveLtwoRetractions}{66}
+\newcommand{\LfourPhantom}{630, 505 and 387}
+
+% --- ToolNode A6 (VERIFIED-HERE from per-turn receipts) ---
+\newcommand{\ToolNodeGptBatched}{30}
+\newcommand{\ToolNodeGptReordered}{22}
+\newcommand{\ToolNodeGptFull}{18}
+\newcommand{\ToolNodeLlamaBatched}{3}
+\newcommand{\ToolNodeLlamaReordered}{2}
+\newcommand{\ToolNodeBatchedTurns}{33}
+\newcommand{\ToolNodeReorderings}{24}
+
+% --- census (VERIFIED-HERE: langgraph_census.py --summary/--check) ---
+\newcommand{\CensusRepos}{98}
+\newcommand{\CensusSites}{407}
+\newcommand{\CensusSequential}{392}
+\newcommand{\CensusParallelRepos}{11}
+\newcommand{\CensusUpperRepos}{8}
+\newcommand{\CensusErrorStringRepos}{34}
+
+% --- residue predicate R (artifact: A7 / NoA7) and the ledger (added 2026-10-13) ---
+% VERIFIED-HERE: A7 witness (3 s), NoA7 exhaustive under G7 (5,213,012 states; 9,688,601 with G3), the full lattice32 matrix (160 runs, 0 mismatches),
+% the partition A1+A7 = booking!=final on every live cell (harness/macaudit/a7_rescore.py --check).
+\newcommand{\AsevenGptVanilla}{40}
+\newcommand{\AsevenHaikuVanilla}{9}
+\newcommand{\AsevenLlamaVanilla}{99}
+\newcommand{\AsevenGptValidated}{34}
+\newcommand{\AsevenHaikuValidated}{7}
+\newcommand{\AsevenLlamaValidated}{100}
+\newcommand{\LatticeThirtyTwoRuns}{160}
+\newcommand{\LatticeThirtyTwoSafeMin}{1{,}803{,}848}   % VERIFIED-HERE (lattice32_results.reference.json)
+\newcommand{\LatticeThirtyTwoSafeMax}{9{,}688{,}601}
+\newcommand{\NoAsevenStates}{5{,}213{,}012}
+\newcommand{\NoAsevenStatesGthree}{9{,}688{,}601}
+% PENDING (your machine): verus count for lib_l5_ledger.rs; probe 303 --modes ledger outcome
+\newcommand{\LfiveVerus}{\textbf{[verus: pending]}}
+% short forms for the abstract / intro: replace with "verified, N obligations" once lib_l5_ledger.rs verifies
+\newcommand{\LfiveVerusStatus}{specified in Verus, its proof pending}
+\newcommand{\LfiveVerusIntro}{specified (proof pending)}
+\newcommand{\LfiveLiveOutcome}{\textbf{[probe 303 -{}-modes ledger: pending]}}
+% per-cell defaults for the verified / ledger rows of Table 3 ("--" = pending); claims_results.tex overrides
+\newcommand{\Pend}{--}
+\newcommand{\LiveVerifiedGptAOne}{\Pend}\newcommand{\LiveVerifiedGptR}{\Pend}\newcommand{\LiveVerifiedGptWrong}{\Pend}\newcommand{\LiveVerifiedGptRegen}{\Pend}
+\newcommand{\LiveVerifiedHaikuAOne}{\Pend}\newcommand{\LiveVerifiedHaikuR}{\Pend}\newcommand{\LiveVerifiedHaikuWrong}{\Pend}\newcommand{\LiveVerifiedHaikuRegen}{\Pend}
+\newcommand{\LiveLedgerGptAOne}{\Pend}\newcommand{\LiveLedgerGptR}{\Pend}\newcommand{\LiveLedgerGptWrong}{\Pend}\newcommand{\LiveLedgerGptRegen}{\Pend}
+\newcommand{\LiveLedgerHaikuAOne}{\Pend}\newcommand{\LiveLedgerHaikuR}{\Pend}\newcommand{\LiveLedgerHaikuWrong}{\Pend}\newcommand{\LiveLedgerHaikuRegen}{\Pend}
+\newcommand{\LiveVerifiedLlamaAOne}{\Pend}\newcommand{\LiveVerifiedLlamaR}{\Pend}\newcommand{\LiveVerifiedLlamaWrong}{\Pend}\newcommand{\LiveVerifiedLlamaRegen}{\Pend}
+\newcommand{\LiveLedgerLlamaAOne}{\Pend}\newcommand{\LiveLedgerLlamaR}{\Pend}\newcommand{\LiveLedgerLlamaWrong}{\Pend}\newcommand{\LiveLedgerLlamaRegen}{\Pend}
+% probe 301 / 302 defaults
+\newcommand{\ToolNodeRealSqlite}{\textbf{[probe 301: pending]}}
+\newcommand{\ToolNodeRealHttp}{\textbf{[probe 301: pending]}}
+\newcommand{\WallclockPairedGptAvailable}{0}\newcommand{\WallclockPairedClaudeAvailable}{0}
+\newcommand{\WallclockPairedGptTriagePess}{\Pend}\newcommand{\WallclockPairedGptTriageSI}{\Pend}
+\newcommand{\WallclockPairedGptEditReviewPess}{\Pend}\newcommand{\WallclockPairedGptEditReviewSI}{\Pend}
+\newcommand{\WallclockPairedGptPlanExecutePess}{\Pend}\newcommand{\WallclockPairedGptPlanExecuteSI}{\Pend}
+\newcommand{\WallclockPairedClaudeTriagePess}{\Pend}\newcommand{\WallclockPairedClaudeTriageSI}{\Pend}
+\newcommand{\WallclockPairedClaudeEditReviewPess}{\Pend}\newcommand{\WallclockPairedClaudeEditReviewSI}{\Pend}
+\newcommand{\WallclockPairedClaudePlanExecutePess}{\Pend}\newcommand{\WallclockPairedClaudePlanExecuteSI}{\Pend}
+\newcommand{\OffsetCurveAvailable}{0}
+\newcommand{\LatticeThirtyTwoOutcome}{All \LatticeThirtyTwoRuns{} runs match their expectation (0 mismatches); the exhaustive runs range over 1{,}803{,}848--9{,}688{,}601 distinct states, and the sixty-four commit-time cells with $G_7$ off return the verdicts of \texttt{lattice16.sh} one for one.}
+\newcommand{\LiveVerifiedOutcome}{\textbf{[probe 303 -{}-modes verified: pending]}}
+
+% --- hypothesis gates (VERIFIED-HERE: harness/macaudit/hypothesis_gates.py --tex, over every committed record) ---
+\newcommand{\HypRecords}{25{,}637}
+\newcommand{\HypTraces}{6{,}588}
+\newcommand{\HypSameAgentOverlaps}{0}
+\newcommand{\HypReadBeforeCommitViolations}{0}
+\newcommand{\HypCampaigns}{14}
+\newcommand{\HypValueUniqueCampaigns}{8}
+\newcommand{\HypCollisionCells}{126}
+\newcommand{\HypCollisionTraces}{105}
+\newcommand{\HypLiveLtwoSessions}{600}
+\newcommand{\HypLiveLtwoCollisions}{0}
+\newcommand{\HypAOneWitnesses}{292}
+\newcommand{\HypRestored}{0}
+\newcommand{\HypBookings}{900}
+\newcommand{\HypBasisRecovered}{900}
+% two-value safety half of lattice16 on the CURRENT model (lattice16_v2.sh); filled in by finalize
+\newcommand{\LatticeVtwoOutcome}{all $32$ safety runs \textsc{safe}, $2.4$--$17.3$M states}
+\newcommand{\LiveLtwoHaikuThousand}{\Pend}
+
+% a fourth API family (DeepSeek, OpenAI-compatible endpoint) -- all four arms "--" until step 2 runs
+\newcommand{\LiveVanillaDeepseekAOne}{\Pend}\newcommand{\LiveVanillaDeepseekR}{\Pend}\newcommand{\LiveVanillaDeepseekWrong}{\Pend}\newcommand{\LiveVanillaDeepseekRegen}{\Pend}
+\newcommand{\LiveValidatedDeepseekAOne}{\Pend}\newcommand{\LiveValidatedDeepseekR}{\Pend}\newcommand{\LiveValidatedDeepseekWrong}{\Pend}\newcommand{\LiveValidatedDeepseekRegen}{\Pend}
+\newcommand{\LiveVerifiedDeepseekAOne}{\Pend}\newcommand{\LiveVerifiedDeepseekR}{\Pend}\newcommand{\LiveVerifiedDeepseekWrong}{\Pend}\newcommand{\LiveVerifiedDeepseekRegen}{\Pend}
+\newcommand{\LiveLedgerDeepseekAOne}{\Pend}\newcommand{\LiveLedgerDeepseekR}{\Pend}\newcommand{\LiveLedgerDeepseekWrong}{\Pend}\newcommand{\LiveLedgerDeepseekRegen}{\Pend}
+\newcommand{\LiveVanillaSonnetAOne}{\Pend}\newcommand{\LiveVanillaSonnetR}{\Pend}\newcommand{\LiveVanillaSonnetWrong}{\Pend}\newcommand{\LiveVanillaSonnetRegen}{\Pend}
+\newcommand{\LiveValidatedSonnetAOne}{\Pend}\newcommand{\LiveValidatedSonnetR}{\Pend}\newcommand{\LiveValidatedSonnetWrong}{\Pend}\newcommand{\LiveValidatedSonnetRegen}{\Pend}
+\newcommand{\LiveVerifiedSonnetAOne}{\Pend}\newcommand{\LiveVerifiedSonnetR}{\Pend}\newcommand{\LiveVerifiedSonnetWrong}{\Pend}\newcommand{\LiveVerifiedSonnetRegen}{\Pend}
+\newcommand{\LiveLedgerSonnetAOne}{\Pend}\newcommand{\LiveLedgerSonnetR}{\Pend}\newcommand{\LiveLedgerSonnetWrong}{\Pend}\newcommand{\LiveLedgerSonnetRegen}{\Pend}

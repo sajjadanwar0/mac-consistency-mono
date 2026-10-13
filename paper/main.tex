@@ -1,0 +1,98 @@
+\documentclass[journal,compsoc,10pt]{IEEEtran}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{mathptmx}
+\usepackage[scaled=.90]{helvet}
+\usepackage{courier}
+\usepackage{microtype}
+\usepackage[hyphens]{url}
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts,amsthm,mathtools}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{makecell}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta,calc,decorations.pathreplacing}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.17}
+\usepackage[colorlinks=true,linkcolor=black,citecolor=black,urlcolor=black]{hyperref}
+\usepackage[noabbrev,capitalize]{cleveref}
+\sloppy
+\emergencystretch=2em
+\hbadness=3000
+
+% ---- theorem environments ----
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\theoremstyle{remark}
+\newtheorem*{observation}{Observation}
+\crefname{definition}{Definition}{Definitions}
+\Crefname{definition}{Definition}{Definitions}
+\Crefname{proposition}{Proposition}{Propositions}
+
+% ---- field macros (as in the artifact) ----
+\newcommand{\fld}[1]{\mathit{#1}}
+\newcommand{\rs}{\fld{read\_set}}
+\newcommand{\ws}{\fld{write\_set}}
+\newcommand{\rt}{\fld{read\_time}}
+\newcommand{\wt}{\fld{write\_time}}
+\newcommand{\rv}{\fld{read\_values}}
+\newcommand{\wv}{\fld{write\_values}}
+\newcommand{\rreg}{\fld{read\_registry}}
+\newcommand{\wreg}{\fld{write\_registry}}
+\newcommand{\pt}{\fld{planned\_tool}}
+\newcommand{\tool}[1]{\texttt{#1}}
+\newcommand{\A}[1]{$A_{#1}$}
+\newcommand{\Rp}{$R$}                      % the residue predicate (artifact name: NoA7 / SupersededBasisEffect)
+\newcommand{\Lv}[1]{$L_{#1}$}
+\newcommand{\TLA}{TLA\textsuperscript{+}}
+\newcommand{\ie}{i.e.}
+\newcommand{\eg}{e.g.}
+
+% ---- numbers that the experiment kit regenerates (one place to edit) ----
+\input{claims.tex}
+\IfFileExists{claims_results.tex}{\input{claims_results.tex}}{}   % generated from the probes' receipts (harness/macaudit/claims_from_results.py)
+
+\begin{document}
+
+\title{Verified Detection and Prevention of Concurrency Anomalies in Multi-Agent Large Language Model Systems}
+
+\author{Sajjad~Khan%
+\thanks{S.~Khan is an independent researcher (e-mail: sajjadanwar200@gmail.com).}%
+\thanks{Artifact: \url{https://github.com/sajjadanwar0/mac-consistency} (\TLA{} models, Verus proofs, the reference runtime, every harness, and the committed traces behind every table; \texttt{reproduce.sh} re-derives each figure from committed data). A supplementary document (\S\S\,A--S) holds raw tables and proofs omitted here for length.}}
+
+\markboth{IEEE Transactions (submitted)}{Khan: Verified Detection and Prevention of Concurrency Anomalies in Multi-Agent LLM Systems}
+
+\IEEEtitleabstractindextext{%
+\begin{abstract}
+Agents in a multi-agent LLM system share state through memory stores and tool registries, and an agent's step spans an inference call of unbounded latency between its read and its commit. We formalize four concurrency anomalies for this regime---stale generation, phantom tool, causal cascade, tool-effect reordering---and name the classical condition each ports: stale generation is a failed commit-time read validation, and we prove (TLAPS) that its absence implies value-level consistency with the serial execution in commit order, a conditional guarantee over faithful histories whose hypotheses the artifact checks on every committed record. Each anomaly has a verified detector, each point of the $2^4$ exclusion lattice is realized by a checked runtime configuration, and along one chain $L_0\subsetneq\dots\subsetneq L_4$ the disciplines are verified in Verus, with the $L_1$, $L_2$ and $L_4$ bytes the ones measured, including the $L_1$ decision of the live study; every claim is labeled with its assurance level, from checked model to verified bytes. The evaluation is scored on outcomes, not flags. On an unmodified LangGraph runtime under live models, read-set validation removes every commit grounded in a superseded read at one re-spent generation per conflict, yet at a 150\,ms race offset the booking still contradicts the final trip date in $34\%$ and $7\%$ of sessions, because the revision landed after the commit. That residue is not a concurrency anomaly---it occurs in correct sequential executions---and no commit-time discipline reaches it; we define the residue predicate on effects and their recovered bases, show that under an open-world store it can only be owed, and realize a basis ledger that registers the obligation atomically (TLC-checked at every lattice point; invariant verified in Verus). On the same live study, with the commit decision taken by the verified store, the ledger with a rebooking compensator ends with $0/100$ wrong bookings on three API families where read validation alone leaves $12$--$63$. Per sound committed operation, snapshot isolation costs $+0.4\%$ to $+11.1\%$ in tokens and pessimistic locking up to $+97\%$. A census of $98$ public LangGraph repositories finds the stale-generation precondition in no graph site, which we report as a negative prevalence result, while a released tool executor batches an order-dependent pipeline on $30/30$ turns of one backbone. We state every number's provenance and every gap between predicate and harm.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Multi-agent systems, large language models, memory consistency, isolation levels, formal verification, TLA+, Verus.
+\end{IEEEkeywords}}
+
+\maketitle
+\IEEEdisplaynontitleabstractindextext
+\IEEEpeerreviewmaketitle
+
+\input{sec/01-intro}
+\input{sec/02-model}
+\input{sec/03-catalog}
+\input{sec/04-lattice}
+\input{sec/05-mechanization}
+\input{sec/06-evaluation}
+\input{sec/07-related}
+\input{sec/08-limitations}
+\input{sec/09-conclusion}
+
+\input{bib}
+
+\end{document}
