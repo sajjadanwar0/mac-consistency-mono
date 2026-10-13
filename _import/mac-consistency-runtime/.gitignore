@@ -1,0 +1,18 @@
+# Project exclude paths
+/target/
+# --- Rust / Cargo ---
+/target/
+**/target/
+*.rs.bk
+
+# --- Verus ---
+.verus/
+.verus-log/
+*.smt2
+
+# live-experiment output and build
+/l2_live_out/
+/l2-live/target/
+.idea/
+[0-9]*_*.sh
+build.err
