@@ -1,0 +1,114 @@
+[
+  {
+    "op_id": 0,
+    "agent": "agent_2",
+    "cell": "shared_plan",
+    "t_read": 1,
+    "t_commit": 2,
+    "read_values": {
+      "shared_plan": "Shared plan:\n"
+    },
+    "write_values": {
+      "shared_plan": "Shared plan:\n[agent_2|r0] Review the current task requirements and update the shared plan accordingly."
+    },
+    "committed": false
+  },
+  {
+    "op_id": 1,
+    "agent": "agent_3",
+    "cell": "shared_plan",
+    "t_read": 1,
+    "t_commit": 3,
+    "read_values": {
+      "shared_plan": "Shared plan:\n"
+    },
+    "write_values": {
+      "shared_plan": "Shared plan:\n[agent_3|r0] Append a new agent_3 next-step entry to the shared plan."
+    },
+    "committed": false
+  },
+  {
+    "op_id": 2,
+    "agent": "agent_1",
+    "cell": "shared_plan",
+    "t_read": 1,
+    "t_commit": 4,
+    "read_values": {
+      "shared_plan": "Shared plan:\n"
+    },
+    "write_values": {
+      "shared_plan": "Shared plan:\n[agent_1|r0] Review the current task requirements and update the shared plan accordingly."
+    },
+    "committed": false
+  },
+  {
+    "op_id": 3,
+    "agent": "agent_4",
+    "cell": "shared_plan",
+    "t_read": 1,
+    "t_commit": 5,
+    "read_values": {
+      "shared_plan": "Shared plan:\n"
+    },
+    "write_values": {
+      "shared_plan": "Shared plan:\n[agent_4|r0] Append a new agent_4 next-step entry to the shared plan."
+    },
+    "committed": true
+  },
+  {
+    "op_id": 4,
+    "agent": "agent_3",
+    "cell": "shared_plan",
+    "t_read": 6,
+    "t_commit": 7,
+    "read_values": {
+      "shared_plan": "Shared plan:\n\n[agent_4|r0] Append a new agent_4 next-step entry to the shared plan."
+    },
+    "write_values": {
+      "shared_plan": "Shared plan:\n\n[agent_4|r0] Append a new agent_4 next-step entry to the shared plan.\n[agent_3|r1] Append a new agent_3 next-step entry to the shared plan."
+    },
+    "committed": false
+  },
+  {
+    "op_id": 5,
+    "agent": "agent_1",
+    "cell": "shared_plan",
+    "t_read": 6,
+    "t_commit": 8,
+    "read_values": {
+      "shared_plan": "Shared plan:\n\n[agent_4|r0] Append a new agent_4 next-step entry to the shared plan."
+    },
+    "write_values": {
+      "shared_plan": "Shared plan:\n\n[agent_4|r0] Append a new agent_4 next-step entry to the shared plan.\n[agent_1|r1] Append a new agent_1 next-step entry to the shared plan."
+    },
+    "committed": false
+  },
+  {
+    "op_id": 6,
+    "agent": "agent_4",
+    "cell": "shared_plan",
+    "t_read": 6,
+    "t_commit": 9,
+    "read_values": {
+      "shared_plan": "Shared plan:\n\n[agent_4|r0] Append a new agent_4 next-step entry to the shared plan."
+    },
+    "write_values": {
+      "shared_plan": "Shared plan:\n\n[agent_4|r0] Append a new agent_4 next-step entry to the shared plan.\n[agent_4|r1] Append a new agent_4 next-step entry to the shared plan."
+    },
+    "committed": false
+  },
+  {
+    "op_id": 7,
+    "agent": "agent_2",
+    "cell": "shared_plan",
+    "t_read": 6,
+    "t_commit": 10,
+    "read_values": {
+      "shared_plan": "Shared plan:\n\n[agent_4|r0] Append a new agent_4 next-step entry to the shared plan."
+    },
+    "write_values": {
+      "shared_plan": "Shared plan:\n\n[agent_4|r0] Append a new agent_4 next-step entry to the shared plan.\n[agent_2|r1] Review the shared plan and add the next required task entry."
+    },
+    "committed": true
+  }
+]
