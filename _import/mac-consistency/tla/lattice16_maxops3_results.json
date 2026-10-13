@@ -1,0 +1,18 @@
+[
+  {"tag":"M3_G1F_G2F_G3F_G6F_NoA3","invariant":"NoA3","expected":"WITNESS","result":"WITNESS","distinct_states":1376,"queue_left":1138,"MaxOps":3,"Cells":1},
+  {"tag":"M3_G1F_G2F_G3F_G6T_NoA3","invariant":"NoA3","expected":"WITNESS","result":"WITNESS","distinct_states":1376,"queue_left":1138,"MaxOps":3,"Cells":1},
+  {"tag":"M3_G1F_G2F_G3T_G6F_NoA3","invariant":"NoA3","expected":"SAFE","result":"SAFE","distinct_states":4050807,"queue_left":0,"MaxOps":3,"Cells":1},
+  {"tag":"M3_G1F_G2F_G3T_G6T_NoA3","invariant":"NoA3","expected":"SAFE","result":"SAFE","distinct_states":4050807,"queue_left":0,"MaxOps":3,"Cells":1},
+  {"tag":"M3_G1F_G2T_G3F_G6F_NoA3","invariant":"NoA3","expected":"WITNESS","result":"WITNESS","distinct_states":1318,"queue_left":1084,"MaxOps":3,"Cells":1},
+  {"tag":"M3_G1F_G2T_G3F_G6T_NoA3","invariant":"NoA3","expected":"WITNESS","result":"WITNESS","distinct_states":1318,"queue_left":1084,"MaxOps":3,"Cells":1},
+  {"tag":"M3_G1F_G2T_G3T_G6F_NoA3","invariant":"NoA3","expected":"SAFE","result":"SAFE","distinct_states":3092611,"queue_left":0,"MaxOps":3,"Cells":1},
+  {"tag":"M3_G1F_G2T_G3T_G6T_NoA3","invariant":"NoA3","expected":"SAFE","result":"SAFE","distinct_states":3092611,"queue_left":0,"MaxOps":3,"Cells":1},
+  {"tag":"M3_G1T_G2F_G3F_G6F_NoA3","invariant":"NoA3","expected":"WITNESS","result":"WITNESS","distinct_states":1360,"queue_left":1122,"MaxOps":3,"Cells":1},
+  {"tag":"M3_G1T_G2F_G3F_G6T_NoA3","invariant":"NoA3","expected":"WITNESS","result":"WITNESS","distinct_states":1360,"queue_left":1122,"MaxOps":3,"Cells":1},
+  {"tag":"M3_G1T_G2F_G3T_G6F_NoA3","invariant":"NoA3","expected":"SAFE","result":"SAFE","distinct_states":3470467,"queue_left":0,"MaxOps":3,"Cells":1},
+  {"tag":"M3_G1T_G2F_G3T_G6T_NoA3","invariant":"NoA3","expected":"SAFE","result":"SAFE","distinct_states":3470467,"queue_left":0,"MaxOps":3,"Cells":1},
+  {"tag":"M3_G1T_G2T_G3F_G6F_NoA3","invariant":"NoA3","expected":"WITNESS","result":"WITNESS","distinct_states":1302,"queue_left":1068,"MaxOps":3,"Cells":1},
+  {"tag":"M3_G1T_G2T_G3F_G6T_NoA3","invariant":"NoA3","expected":"WITNESS","result":"WITNESS","distinct_states":1302,"queue_left":1068,"MaxOps":3,"Cells":1},
+  {"tag":"M3_G1T_G2T_G3T_G6F_NoA3","invariant":"NoA3","expected":"SAFE","result":"SAFE","distinct_states":2681627,"queue_left":0,"MaxOps":3,"Cells":1},
+  {"tag":"M3_G1T_G2T_G3T_G6T_NoA3","invariant":"NoA3","expected":"SAFE","result":"SAFE","distinct_states":2681627,"queue_left":0,"MaxOps":3,"Cells":1}
+]

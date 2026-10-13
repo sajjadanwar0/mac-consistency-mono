@@ -1,0 +1,10 @@
+L0 StaleGeneration ADMITS
+L0 PhantomTool ADMITS
+L0 CausalCascade ADMITS
+L0 LongGeneration ADMITS
+L0 ToolEffectReordering ADMITS
+L1 StaleGeneration ADMITS
+L1 PhantomTool ADMITS
+L1 CausalCascade ADMITS
+L1 LongGeneration ADMITS
+L1 ToolEffectReordering ADMITS

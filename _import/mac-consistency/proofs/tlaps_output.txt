@@ -1,0 +1,5 @@
+(* fingerprints file ".tlacache/A1LowerBound.tlaps/fingerprints" removed *)
+(* created new ".tlacache/A1LowerBound.tlaps/A1LowerBound.thy" *)
+(* fingerprints written in ".tlacache/A1LowerBound.tlaps/fingerprints" *)
+File "./proofs/A1LowerBound.tla", line 1, character 1 to line 105, character 74:
+[INFO]: All 28 obligations proved.

@@ -1,0 +1,56 @@
+TLC2 Version 2026.04.09.014118 (rev: 389440f)
+Warning: Please run the Java VM, which executes TLC with a throughput optimized garbage collector, by passing the "-XX:+UseParallelGC" property.
+(Use the -nowarning option to disable this warning.)
+Running breadth-first search Model-Checking with fp 108 and seed 8596418856196625902 with 1 worker on 16 cores with 7716MB heap and 64MB offheap memory [pid: 211789] (Linux 6.8.0-124-generic amd64, Ubuntu 21.0.11 64bit, MSBDiskFPSet, DiskStateQueue).
+Parsing file /home/neo/RustroverProjects/mac-consistency/tla/MC_A3.tla
+Parsing file /home/neo/RustroverProjects/mac-consistency/tla/Memory.tla
+Parsing file /home/neo/RustroverProjects/mac-consistency/tla/Anomalies.tla
+Parsing file /tmp/tlc-9700412325996391779/_TLCTrace.tla (jar:file:/home/neo/tla2tools.jar!/tla2sany/StandardModules/_TLCTrace.tla)
+Parsing file /tmp/tlc-9700412325996391779/Naturals.tla (jar:file:/home/neo/tla2tools.jar!/tla2sany/StandardModules/Naturals.tla)
+Parsing file /tmp/tlc-9700412325996391779/Sequences.tla (jar:file:/home/neo/tla2tools.jar!/tla2sany/StandardModules/Sequences.tla)
+Parsing file /tmp/tlc-9700412325996391779/FiniteSets.tla (jar:file:/home/neo/tla2tools.jar!/tla2sany/StandardModules/FiniteSets.tla)
+Parsing file /tmp/tlc-9700412325996391779/TLC.tla (jar:file:/home/neo/tla2tools.jar!/tla2sany/StandardModules/TLC.tla)
+Parsing file /tmp/tlc-9700412325996391779/TLCExt.tla (jar:file:/home/neo/tla2tools.jar!/tla2sany/StandardModules/TLCExt.tla)
+Parsing file /tmp/tlc-9700412325996391779/Integers.tla (jar:file:/home/neo/tla2tools.jar!/tla2sany/StandardModules/Integers.tla)
+Semantic processing of module Naturals
+Semantic processing of module Sequences
+Semantic processing of module FiniteSets
+Semantic processing of module TLC
+Semantic processing of module Memory
+Semantic processing of module Anomalies
+Semantic processing of module Integers
+Semantic processing of module TLCExt
+Semantic processing of module _TLCTrace
+Semantic processing of module MC_A3
+Linting of module Memory
+Linting of module Anomalies
+Linting of module TLCExt
+Linting of module _TLCTrace
+Linting of module MC_A3
+Starting... (2026-06-05 01:15:44)
+Computing initial states...
+Finished computing initial states: 1 distinct state generated at 2026-06-05 01:15:44.
+Error: Invariant NoCausalCascade is violated.
+Error: The behavior up to this point is:
+State 1: <Initial predicate>
+/\ log = <<>>
+/\ inflight = (a1 :> [pending |-> FALSE, agent |-> a1, read_set |-> {}, read_values |-> (c1 :> "NULL" @@ e1 :> "NULL"), read_registry |-> {}, planned_tool |-> "NULL", read_time |-> 0, write_set |-> {}, write_values |-> (c1 :> "NULL" @@ e1 :> "NULL"), write_registry |-> {}, write_time |-> 0, io |-> <<>>, co |-> <<>>] @@ a2 :> [pending |-> FALSE, agent |-> a2, read_set |-> {}, read_values |-> (c1 :> "NULL" @@ e1 :> "NULL"), read_registry |-> {}, planned_tool |-> "NULL", read_time |-> 0, write_set |-> {}, write_values |-> (c1 :> "NULL" @@ e1 :> "NULL"), write_registry |-> {}, write_time |-> 0, io |-> <<>>, co |-> <<>>])
+/\ registry = {t1}
+/\ memory = (c1 :> "NULL" @@ e1 :> "NULL")
+
+State 2: <StartRead(a1) line 95, col 5 to line 119, col 42 of module Memory>
+/\ log = <<>>
+/\ inflight = (a1 :> [pending |-> TRUE, agent |-> a1, read_set |-> {c1}, read_values |-> (c1 :> v1 @@ e1 :> v1), read_registry |-> {t1}, planned_tool |-> t1, read_time |-> 0, write_set |-> {}, write_values |-> (c1 :> "NULL" @@ e1 :> "NULL"), write_registry |-> {}, write_time |-> 0, io |-> <<>>, co |-> <<>>] @@ a2 :> [pending |-> FALSE, agent |-> a2, read_set |-> {}, read_values |-> (c1 :> "NULL" @@ e1 :> "NULL"), read_registry |-> {}, planned_tool |-> "NULL", read_time |-> 0, write_set |-> {}, write_values |-> (c1 :> "NULL" @@ e1 :> "NULL"), write_registry |-> {}, write_time |-> 0, io |-> <<>>, co |-> <<>>])
+/\ registry = {t1}
+/\ memory = (c1 :> "NULL" @@ e1 :> "NULL")
+
+State 3: <CompleteWrite(a1) line 125, col 5 to line 153, col 29 of module Memory>
+/\ log = <<[pending |-> FALSE, agent |-> a1, read_set |-> {c1}, read_values |-> (c1 :> v1 @@ e1 :> v1), read_registry |-> {t1}, planned_tool |-> t1, read_time |-> 0, write_set |-> {}, write_values |-> (c1 :> v1 @@ e1 :> v1), write_registry |-> {t1}, write_time |-> 1, io |-> <<>>, co |-> <<>>]>>
+/\ inflight = (a1 :> [pending |-> FALSE, agent |-> a1, read_set |-> {}, read_values |-> (c1 :> "NULL" @@ e1 :> "NULL"), read_registry |-> {}, planned_tool |-> "NULL", read_time |-> 0, write_set |-> {}, write_values |-> (c1 :> "NULL" @@ e1 :> "NULL"), write_registry |-> {}, write_time |-> 0, io |-> <<>>, co |-> <<>>] @@ a2 :> [pending |-> FALSE, agent |-> a2, read_set |-> {}, read_values |-> (c1 :> "NULL" @@ e1 :> "NULL"), read_registry |-> {}, planned_tool |-> "NULL", read_time |-> 0, write_set |-> {}, write_values |-> (c1 :> "NULL" @@ e1 :> "NULL"), write_registry |-> {}, write_time |-> 0, io |-> <<>>, co |-> <<>>])
+/\ registry = {t1}
+/\ memory = (c1 :> "NULL" @@ e1 :> "NULL")
+
+283 states generated, 283 distinct states found, 279 states left on queue.
+The depth of the complete state graph search is 3.
+Finished in 00s at (2026-06-05 01:15:44)
+Trace exploration spec path: ./MC_A3_TTrace_1780604143.tla

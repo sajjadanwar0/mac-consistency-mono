@@ -1,0 +1,62 @@
+TLC2 Version 2026.04.09.014118 (rev: 389440f)
+Warning: Please run the Java VM, which executes TLC with a throughput optimized garbage collector, by passing the "-XX:+UseParallelGC" property.
+(Use the -nowarning option to disable this warning.)
+Running breadth-first search Model-Checking with fp 1 and seed 7760734981425638155 with 4 workers on 16 cores with 7716MB heap and 64MB offheap memory [pid: 135598] (Linux 6.8.0-111-generic amd64, Ubuntu 21.0.10 64bit, MSBDiskFPSet, DiskStateQueue).
+Parsing file /home/neo/RustroverProjects/mac-consistency/tla/MC_A2.tla
+Parsing file /home/neo/RustroverProjects/mac-consistency/tla/Memory.tla
+Parsing file /home/neo/RustroverProjects/mac-consistency/tla/Anomalies.tla
+Parsing file /tmp/tlc-13915564141161795707/_TLCTrace.tla (jar:file:/home/neo/RustroverProjects/mac-consistency/tla/tla2tools.jar!/tla2sany/StandardModules/_TLCTrace.tla)
+Parsing file /tmp/tlc-13915564141161795707/Naturals.tla (jar:file:/home/neo/RustroverProjects/mac-consistency/tla/tla2tools.jar!/tla2sany/StandardModules/Naturals.tla)
+Parsing file /tmp/tlc-13915564141161795707/Sequences.tla (jar:file:/home/neo/RustroverProjects/mac-consistency/tla/tla2tools.jar!/tla2sany/StandardModules/Sequences.tla)
+Parsing file /tmp/tlc-13915564141161795707/FiniteSets.tla (jar:file:/home/neo/RustroverProjects/mac-consistency/tla/tla2tools.jar!/tla2sany/StandardModules/FiniteSets.tla)
+Parsing file /tmp/tlc-13915564141161795707/TLC.tla (jar:file:/home/neo/RustroverProjects/mac-consistency/tla/tla2tools.jar!/tla2sany/StandardModules/TLC.tla)
+Parsing file /tmp/tlc-13915564141161795707/TLCExt.tla (jar:file:/home/neo/RustroverProjects/mac-consistency/tla/tla2tools.jar!/tla2sany/StandardModules/TLCExt.tla)
+Parsing file /tmp/tlc-13915564141161795707/Integers.tla (jar:file:/home/neo/RustroverProjects/mac-consistency/tla/tla2tools.jar!/tla2sany/StandardModules/Integers.tla)
+Semantic processing of module Naturals
+Semantic processing of module Sequences
+Semantic processing of module FiniteSets
+Semantic processing of module TLC
+Semantic processing of module Memory
+Semantic processing of module Anomalies
+Semantic processing of module Integers
+Semantic processing of module TLCExt
+Semantic processing of module _TLCTrace
+Semantic processing of module MC_A2
+Linting of module Memory
+Linting of module Anomalies
+Linting of module TLCExt
+Linting of module _TLCTrace
+Linting of module MC_A2
+Starting... (2026-05-08 18:28:24)
+Computing initial states...
+Finished computing initial states: 1 distinct state generated at 2026-05-08 18:28:25.
+Error: Invariant PhantomToolFree is violated.
+Error: The behavior up to this point is:
+State 1: <Initial predicate>
+/\ inflight = (a1 :> [pending |-> FALSE, agent |-> a1, read_set |-> {}, read_values |-> (c1 :> "NULL"), read_registry |-> {}, planned_tool |-> "NULL", read_time |-> 0, write_set |-> {}, write_values |-> (c1 :> "NULL"), write_registry |-> {}, write_time |-> 0, io |-> <<>>, co |-> <<>>] @@ a2 :> [pending |-> FALSE, agent |-> a2, read_set |-> {}, read_values |-> (c1 :> "NULL"), read_registry |-> {}, planned_tool |-> "NULL", read_time |-> 0, write_set |-> {}, write_values |-> (c1 :> "NULL"), write_registry |-> {}, write_time |-> 0, io |-> <<>>, co |-> <<>>])
+/\ registry = {t1, t2}
+/\ memory = (c1 :> "NULL")
+/\ log = <<>>
+
+State 2: <StartRead(a1) line 80, col 5 to line 99, col 42 of module Memory>
+/\ inflight = (a1 :> [pending |-> TRUE, agent |-> a1, read_set |-> {c1}, read_values |-> (c1 :> "NULL"), read_registry |-> {t1, t2}, planned_tool |-> t2, read_time |-> 0, write_set |-> {}, write_values |-> (c1 :> "NULL"), write_registry |-> {}, write_time |-> 0, io |-> <<>>, co |-> <<>>] @@ a2 :> [pending |-> FALSE, agent |-> a2, read_set |-> {}, read_values |-> (c1 :> "NULL"), read_registry |-> {}, planned_tool |-> "NULL", read_time |-> 0, write_set |-> {}, write_values |-> (c1 :> "NULL"), write_registry |-> {}, write_time |-> 0, io |-> <<>>, co |-> <<>>])
+/\ registry = {t1, t2}
+/\ memory = (c1 :> "NULL")
+/\ log = <<>>
+
+State 3: <RemoveTool(t2) line 143, col 5 to line 145, col 42 of module Memory>
+/\ inflight = (a1 :> [pending |-> TRUE, agent |-> a1, read_set |-> {c1}, read_values |-> (c1 :> "NULL"), read_registry |-> {t1, t2}, planned_tool |-> t2, read_time |-> 0, write_set |-> {}, write_values |-> (c1 :> "NULL"), write_registry |-> {}, write_time |-> 0, io |-> <<>>, co |-> <<>>] @@ a2 :> [pending |-> FALSE, agent |-> a2, read_set |-> {}, read_values |-> (c1 :> "NULL"), read_registry |-> {}, planned_tool |-> "NULL", read_time |-> 0, write_set |-> {}, write_values |-> (c1 :> "NULL"), write_registry |-> {}, write_time |-> 0, io |-> <<>>, co |-> <<>>])
+/\ registry = {t1}
+/\ memory = (c1 :> "NULL")
+/\ log = <<>>
+
+State 4: <CompleteWrite(a1) line 108, col 5 to line 140, col 25 of module Memory>
+/\ inflight = (a1 :> [pending |-> FALSE, agent |-> a1, read_set |-> {}, read_values |-> (c1 :> "NULL"), read_registry |-> {}, planned_tool |-> "NULL", read_time |-> 0, write_set |-> {}, write_values |-> (c1 :> "NULL"), write_registry |-> {}, write_time |-> 0, io |-> <<>>, co |-> <<>>] @@ a2 :> [pending |-> FALSE, agent |-> a2, read_set |-> {}, read_values |-> (c1 :> "NULL"), read_registry |-> {}, planned_tool |-> "NULL", read_time |-> 0, write_set |-> {}, write_values |-> (c1 :> "NULL"), write_registry |-> {}, write_time |-> 0, io |-> <<>>, co |-> <<>>])
+/\ registry = {t1}
+/\ memory = (c1 :> "NULL")
+/\ log = <<[pending |-> FALSE, agent |-> a1, read_set |-> {c1}, read_values |-> (c1 :> "NULL"), read_registry |-> {t1, t2}, planned_tool |-> t2, read_time |-> 0, write_set |-> {}, write_values |-> (c1 :> "NULL"), write_registry |-> {t1}, write_time |-> 1, io |-> <<>>, co |-> <<>>]>>
+
+575 states generated, 538 distinct states found, 474 states left on queue.
+The depth of the complete state graph search is 4.
+Finished in 00s at (2026-05-08 18:28:25)
+Trace exploration spec path: ./MC_A2_TTrace_1778246904.tla

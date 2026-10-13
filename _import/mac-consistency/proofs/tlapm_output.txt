@@ -1,0 +1,5 @@
+(* fingerprints file ".tlacache/Hierarchy.tlaps/fingerprints" removed *)
+(* created new ".tlacache/Hierarchy.tlaps/Hierarchy.thy" *)
+(* fingerprints written in ".tlacache/Hierarchy.tlaps/fingerprints" *)
+File "./proofs/Hierarchy.tla", line 1, character 1 to line 97, character 74:
+[INFO]: All 15 obligations proved.
