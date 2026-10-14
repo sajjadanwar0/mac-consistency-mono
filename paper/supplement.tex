@@ -90,8 +90,232 @@
 \Crefname{paragraph}{Section}{Sections}
 \Crefname{anomaly}{Definition}{Definitions}
 
-\input{claims}            % every headline number, shared with main.tex
-\IfFileExists{claims_results.tex}{\input{claims_results.tex}}{}  % receipts of run_experiments, when present
+% ============================================================================
+% claims.tex: every headline number, shared with main.tex
+% ============================================================================
+% claims.tex -- every headline number, as a macro.  Regenerate with
+%   python3 harness/macaudit/claims_to_tex.py CLAIMS.json > paper/claims.tex
+% so that the paper and CLAIMS.json cannot drift.  VERIFIED-HERE = re-derived
+% from committed receipts in this audit; PAPER = carried from the submitted
+% artifact's receipts and gated by reproduce.sh but not re-run in this audit.
+
+% --- formal (VERIFIED-HERE unless noted) ---
+\newcommand{\VerusCurated}{371}        % PAPER: verus_count.sh under the pinned build 0.2026.09.13 (364 + the 7 of lib_l5_ledger.rs), 2026-10-13
+\newcommand{\VerusFull}{392}           % PAPER: verus_count.sh --full under the pinned build
+\newcommand{\VerusLoadBearing}{236}    % arithmetic on the per-file table (Sec. 5)
+\newcommand{\VerusScaffold}{135}       % arithmetic on the per-file table (+7: the ledger file)
+\newcommand{\VerusDetector}{24}        % PAPER
+\newcommand{\TlapsHierarchy}{15}       % log committed
+\newcommand{\TlapsLowerBound}{28}      % log committed
+\newcommand{\TlapsCommitOrder}{60}     % PAPER; tlapm log committed 2026-10-14: formal/tla/tlaps.CommitOrder.log ("All 60 obligations proved")
+\newcommand{\CommitOrderVerdicts}{15}  % VERIFIED-HERE
+\newcommand{\CommitOrderHistories}{35{,}659}      % VERIFIED-HERE
+\newcommand{\CommitOrderMemoryStates}{2{,}961{,}434} % VERIFIED-HERE
+\newcommand{\LatticeRuns}{64}          % VERIFIED-HERE (6-run sample identical to reference; full matrix in reference json)
+\newcommand{\LatticeMaxOpsThreeRuns}{16}
+\newcommand{\LatticeSafeStatesMin}{380{,}920}
+\newcommand{\LatticeSafeStatesMax}{2{,}015{,}279}
+
+% --- live LangGraph A1 study (VERIFIED-HERE, incl. the outcome columns) ---
+\newcommand{\LiveNPerCell}{100}
+\newcommand{\LiveGptVanillaAOne}{60}
+\newcommand{\LiveHaikuVanillaAOne}{91}
+\newcommand{\LiveLlamaVanillaAOne}{1}
+\newcommand{\LiveGptValidatedWrong}{34}
+\newcommand{\LiveHaikuValidatedWrong}{7}
+\newcommand{\LiveLlamaValidatedWrong}{100}
+\newcommand{\LiveGptRegen}{66}
+\newcommand{\LiveHaikuRegen}{93}
+\newcommand{\LiveGptPinnedMean}{1.07}
+\newcommand{\LiveGptPinnedMax}{3.79}
+\newcommand{\LiveHaikuPinnedMean}{1.21}
+\newcommand{\LiveHaikuPinnedMax}{1.96}
+\newcommand{\LiveLlamaPinnedMean}{3.77}
+\newcommand{\LiveLlamaPinnedMax}{9.06}
+\newcommand{\LiveOffsetMs}{150}
+\newcommand{\SuperstepGpt}{42}
+\newcommand{\SuperstepHaiku}{72}
+\newcommand{\SuperstepLlama}{26}
+
+% --- AutoGen pilot (VERIFIED-HERE via rescore) ---
+\newcommand{\PilotTriageRates}{42\%, 48\% and 52\%}
+\newcommand{\PilotTriagePooled}{142/300}
+\newcommand{\PilotSiEditResidual}{5}
+\newcommand{\PilotSiTriageResidual}{8}
+
+% --- cost (VERIFIED-HERE: workcost.py, realstore_metrics.py --check) ---
+\newcommand{\CostRun}{20260913T0150Z}
+
+% --- L2 / L4 / A6 (PAPER; receipts to be committed as results/*.json) ---
+\newcommand{\LtwoDefThreeBaseline}{519, 624 and 563}
+\newcommand{\LtwoExposedBaseline}{1{,}538, 2{,}059 and 2{,}010}
+\newcommand{\LtwoExposedVerified}{402, 547 and 549}
+\newcommand{\LtwoRelabeled}{767, 1{,}288 and 1{,}239}
+\newcommand{\LiveLtwoRetractions}{66}
+\newcommand{\LfourPhantom}{630, 505 and 387}
+
+% --- ToolNode A6 (VERIFIED-HERE from per-turn receipts) ---
+\newcommand{\ToolNodeGptBatched}{30}
+\newcommand{\ToolNodeGptReordered}{22}
+\newcommand{\ToolNodeGptFull}{18}
+\newcommand{\ToolNodeLlamaBatched}{3}
+\newcommand{\ToolNodeLlamaReordered}{2}
+\newcommand{\ToolNodeBatchedTurns}{33}
+\newcommand{\ToolNodeReorderings}{24}
+
+% --- census (VERIFIED-HERE: langgraph_census.py --summary/--check) ---
+\newcommand{\CensusRepos}{98}
+\newcommand{\CensusSites}{407}
+\newcommand{\CensusSequential}{392}
+\newcommand{\CensusParallelRepos}{11}
+\newcommand{\CensusUpperRepos}{8}
+\newcommand{\CensusErrorStringRepos}{34}
+
+% --- residue predicate R (artifact: A7 / NoA7) and the ledger (added 2026-10-13) ---
+% VERIFIED-HERE: A7 witness (3 s), NoA7 exhaustive under G7 (5,213,012 states; 9,688,601 with G3), the full lattice32 matrix (160 runs, 0 mismatches),
+% the partition A1+A7 = booking!=final on every live cell (harness/macaudit/a7_rescore.py --check).
+\newcommand{\AsevenGptVanilla}{40}
+\newcommand{\AsevenHaikuVanilla}{9}
+\newcommand{\AsevenLlamaVanilla}{99}
+\newcommand{\AsevenGptValidated}{34}
+\newcommand{\AsevenHaikuValidated}{7}
+\newcommand{\AsevenLlamaValidated}{100}
+\newcommand{\LatticeThirtyTwoRuns}{160}
+\newcommand{\LatticeThirtyTwoSafeMin}{1{,}803{,}848}   % VERIFIED-HERE (lattice32_results.reference.json)
+\newcommand{\LatticeThirtyTwoSafeMax}{9{,}688{,}601}
+\newcommand{\NoAsevenStates}{5{,}213{,}012}
+\newcommand{\NoAsevenStatesGthree}{9{,}688{,}601}
+% PENDING (your machine): verus count for lib_l5_ledger.rs; probe 303 --modes ledger outcome
+\newcommand{\LfiveVerus}{7 obligations, 0 errors}   % results/verus/lib_l5_ledger.verus.log, pinned build
+% short forms for the abstract / intro: replace with "verified, N obligations" once lib_l5_ledger.rs verifies
+\newcommand{\LfiveVerusStatus}{verified in Verus (7 obligations, 0 errors)}
+\newcommand{\LfiveVerusIntro}{verified (7 obligations)}
+\newcommand{\LfiveLiveOutcome}{\textbf{[probe 303 -{}-modes ledger: pending]}}
+% per-cell defaults for the verified / ledger rows of Table 3 ("--" = pending); claims_results.tex overrides
+\newcommand{\Pend}{--}
+\newcommand{\LiveVerifiedGptAOne}{\Pend}\newcommand{\LiveVerifiedGptR}{\Pend}\newcommand{\LiveVerifiedGptWrong}{\Pend}\newcommand{\LiveVerifiedGptRegen}{\Pend}
+\newcommand{\LiveVerifiedHaikuAOne}{\Pend}\newcommand{\LiveVerifiedHaikuR}{\Pend}\newcommand{\LiveVerifiedHaikuWrong}{\Pend}\newcommand{\LiveVerifiedHaikuRegen}{\Pend}
+\newcommand{\LiveLedgerGptAOne}{\Pend}\newcommand{\LiveLedgerGptR}{\Pend}\newcommand{\LiveLedgerGptWrong}{\Pend}\newcommand{\LiveLedgerGptRegen}{\Pend}
+\newcommand{\LiveLedgerHaikuAOne}{\Pend}\newcommand{\LiveLedgerHaikuR}{\Pend}\newcommand{\LiveLedgerHaikuWrong}{\Pend}\newcommand{\LiveLedgerHaikuRegen}{\Pend}
+\newcommand{\LiveVerifiedLlamaAOne}{\Pend}\newcommand{\LiveVerifiedLlamaR}{\Pend}\newcommand{\LiveVerifiedLlamaWrong}{\Pend}\newcommand{\LiveVerifiedLlamaRegen}{\Pend}
+\newcommand{\LiveLedgerLlamaAOne}{\Pend}\newcommand{\LiveLedgerLlamaR}{\Pend}\newcommand{\LiveLedgerLlamaWrong}{\Pend}\newcommand{\LiveLedgerLlamaRegen}{\Pend}
+% probe 301 / 302 defaults
+\newcommand{\ToolNodeRealSqlite}{\textbf{[probe 301: pending]}}
+\newcommand{\ToolNodeRealHttp}{\textbf{[probe 301: pending]}}
+\newcommand{\WallclockPairedGptAvailable}{0}\newcommand{\WallclockPairedClaudeAvailable}{0}
+\newcommand{\WallclockPairedGptTriagePess}{\Pend}\newcommand{\WallclockPairedGptTriageSI}{\Pend}
+\newcommand{\WallclockPairedGptEditReviewPess}{\Pend}\newcommand{\WallclockPairedGptEditReviewSI}{\Pend}
+\newcommand{\WallclockPairedGptPlanExecutePess}{\Pend}\newcommand{\WallclockPairedGptPlanExecuteSI}{\Pend}
+\newcommand{\WallclockPairedClaudeTriagePess}{\Pend}\newcommand{\WallclockPairedClaudeTriageSI}{\Pend}
+\newcommand{\WallclockPairedClaudeEditReviewPess}{\Pend}\newcommand{\WallclockPairedClaudeEditReviewSI}{\Pend}
+\newcommand{\WallclockPairedClaudePlanExecutePess}{\Pend}\newcommand{\WallclockPairedClaudePlanExecuteSI}{\Pend}
+\newcommand{\OffsetCurveAvailable}{0}
+\newcommand{\LatticeThirtyTwoOutcome}{All \LatticeThirtyTwoRuns{} runs match their expectation (0 mismatches); the exhaustive runs range over 1{,}803{,}848--9{,}688{,}601 distinct states, and the sixty-four commit-time cells with $G_7$ off return the verdicts of \texttt{lattice16.sh} one for one.}
+\newcommand{\LiveVerifiedOutcome}{\textbf{[probe 303 -{}-modes verified: pending]}}
+
+% --- hypothesis gates (VERIFIED-HERE: harness/macaudit/hypothesis_gates.py --tex, over every committed record) ---
+\newcommand{\HypRecords}{36{,}036}     % hypothesis_gates.py over results/ on 2026-10-14: 25,637 September + 9,649 probe 303 + 750 Claude op-record pilot
+\newcommand{\HypTraces}{10{,}488}      % 6,588 + 3,600 + 300
+\newcommand{\HypSameAgentOverlaps}{0}
+\newcommand{\HypReadBeforeCommitViolations}{0}
+\newcommand{\HypCampaigns}{16}
+\newcommand{\HypValueUniqueCampaigns}{10}
+\newcommand{\HypCollisionCells}{126}
+\newcommand{\HypCollisionTraces}{105}
+\newcommand{\HypLiveLtwoSessions}{600}
+\newcommand{\HypLiveLtwoCollisions}{0}
+\newcommand{\HypAOneWitnesses}{710}    % 292 + 418
+\newcommand{\HypRestored}{0}
+\newcommand{\HypBookings}{4{,}500}      % 900 + 3,600
+\newcommand{\HypBasisRecovered}{4{,}500}
+% two-value safety half of lattice16 on the CURRENT model (lattice16_v2.sh); filled in by finalize
+\newcommand{\LatticeVtwoOutcome}{all $32$ safety runs \textsc{safe}, $2.4$--$17.3$M states}
+\newcommand{\LiveLtwoHaikuThousand}{\Pend}
+
+% a fourth API family (DeepSeek, OpenAI-compatible endpoint) -- all four arms "--" until step 2 runs
+\newcommand{\LiveVanillaDeepseekAOne}{\Pend}\newcommand{\LiveVanillaDeepseekR}{\Pend}\newcommand{\LiveVanillaDeepseekWrong}{\Pend}\newcommand{\LiveVanillaDeepseekRegen}{\Pend}
+\newcommand{\LiveValidatedDeepseekAOne}{\Pend}\newcommand{\LiveValidatedDeepseekR}{\Pend}\newcommand{\LiveValidatedDeepseekWrong}{\Pend}\newcommand{\LiveValidatedDeepseekRegen}{\Pend}
+\newcommand{\LiveVerifiedDeepseekAOne}{\Pend}\newcommand{\LiveVerifiedDeepseekR}{\Pend}\newcommand{\LiveVerifiedDeepseekWrong}{\Pend}\newcommand{\LiveVerifiedDeepseekRegen}{\Pend}
+\newcommand{\LiveLedgerDeepseekAOne}{\Pend}\newcommand{\LiveLedgerDeepseekR}{\Pend}\newcommand{\LiveLedgerDeepseekWrong}{\Pend}\newcommand{\LiveLedgerDeepseekRegen}{\Pend}
+\newcommand{\LiveVanillaSonnetAOne}{\Pend}\newcommand{\LiveVanillaSonnetR}{\Pend}\newcommand{\LiveVanillaSonnetWrong}{\Pend}\newcommand{\LiveVanillaSonnetRegen}{\Pend}
+\newcommand{\LiveValidatedSonnetAOne}{\Pend}\newcommand{\LiveValidatedSonnetR}{\Pend}\newcommand{\LiveValidatedSonnetWrong}{\Pend}\newcommand{\LiveValidatedSonnetRegen}{\Pend}
+\newcommand{\LiveVerifiedSonnetAOne}{\Pend}\newcommand{\LiveVerifiedSonnetR}{\Pend}\newcommand{\LiveVerifiedSonnetWrong}{\Pend}\newcommand{\LiveVerifiedSonnetRegen}{\Pend}
+\newcommand{\LiveLedgerSonnetAOne}{\Pend}\newcommand{\LiveLedgerSonnetR}{\Pend}\newcommand{\LiveLedgerSonnetWrong}{\Pend}\newcommand{\LiveLedgerSonnetRegen}{\Pend}
+
+% ============================================================================
+% claims_results.tex (2026-10-14): the receipt overrides generated by harness/macaudit/claims_from_results.py
+% ============================================================================
+% generated by harness/macaudit/claims_from_results.py -- do not edit; re-run the probes instead
+% --- probe 303 (results/live_a1_outcome; *_arms150.json -> Table 3, *_sweep.json -> offset curve) ---
+\renewcommand{\LiveVanillaDeepseekAOne}{$45/100$ [35.0, 55.3]}
+\renewcommand{\LiveVanillaDeepseekR}{$55$}
+\renewcommand{\LiveVanillaDeepseekWrong}{$100/100$ [96.4, 100.0]}
+\renewcommand{\LiveVanillaDeepseekRegen}{0}
+\renewcommand{\LiveValidatedDeepseekAOne}{$0/100$ [0.0, 3.6]}
+\renewcommand{\LiveValidatedDeepseekR}{$63$}
+\renewcommand{\LiveValidatedDeepseekWrong}{$63/100$ [52.8, 72.4]}
+\renewcommand{\LiveValidatedDeepseekRegen}{37}
+\renewcommand{\LiveVerifiedGptAOne}{$0/100$ [0.0, 3.6]}
+\renewcommand{\LiveVerifiedGptR}{$51$}
+\renewcommand{\LiveVerifiedGptWrong}{$51/100$ [40.8, 61.1]}
+\renewcommand{\LiveVerifiedGptRegen}{49}
+\renewcommand{\LiveLedgerGptAOne}{$0/100$ [0.0, 3.6]}
+\renewcommand{\LiveLedgerGptR}{$0$}
+\renewcommand{\LiveLedgerGptWrong}{$0/100$ [0.0, 3.6]}
+\renewcommand{\LiveLedgerGptRegen}{55$+$45 (45/45 obl.)}
+\renewcommand{\LiveVerifiedHaikuAOne}{$0/100$ [0.0, 3.6]}
+\renewcommand{\LiveVerifiedHaikuR}{$2$}
+\renewcommand{\LiveVerifiedHaikuWrong}{$2/100$ [0.2, 7.0]}
+\renewcommand{\LiveVerifiedHaikuRegen}{98}
+\renewcommand{\LiveLedgerHaikuAOne}{$0/100$ [0.0, 3.6]}
+\renewcommand{\LiveLedgerHaikuR}{$0$}
+\renewcommand{\LiveLedgerHaikuWrong}{$0/100$ [0.0, 3.6]}
+\renewcommand{\LiveLedgerHaikuRegen}{95$+$5 (5/5 obl.)}
+\renewcommand{\LiveVerifiedDeepseekAOne}{$0/100$ [0.0, 3.6]}
+\renewcommand{\LiveVerifiedDeepseekR}{$52$}
+\renewcommand{\LiveVerifiedDeepseekWrong}{$52/100$ [41.8, 62.1]}
+\renewcommand{\LiveVerifiedDeepseekRegen}{48}
+\renewcommand{\LiveLedgerDeepseekAOne}{$0/100$ [0.0, 3.6]}
+\renewcommand{\LiveLedgerDeepseekR}{$0$}
+\renewcommand{\LiveLedgerDeepseekWrong}{$0/100$ [0.0, 3.6]}
+\renewcommand{\LiveLedgerDeepseekRegen}{47$+$53 (53/53 obl.)}
+\renewcommand{\LiveVerifiedOutcome}{$A_1=0/300$; booking $\neq$ final $2$, $51$, $52$ of $100$ on haiku, gpt-4o-mini, deepseek-chat}
+\renewcommand{\LfiveLiveOutcome}{booking $\neq$ final $0/100$ on all three families (5, 45, 53 obligations, all discharged)}
+\providecommand{\SweepHaikuVanillaOZ}{46/5/51}
+\providecommand{\SweepHaikuVanillaOOXZ}{47/4/51}
+\providecommand{\SweepHaikuVanillaOXZZ}{4/40/44}
+\providecommand{\SweepHaikuVanillaOOXZZ}{0/44/44}
+\providecommand{\SweepHaikuValidatedOZ}{0/2/2}
+\providecommand{\SweepHaikuValidatedOOXZ}{0/4/4}
+\providecommand{\SweepHaikuValidatedOXZZ}{0/46/46}
+\providecommand{\SweepHaikuValidatedOOXZZ}{0/42/42}
+\providecommand{\SweepGptVanillaOZ}{40/11/51}
+\providecommand{\SweepGptVanillaOOXZ}{36/15/51}
+\providecommand{\SweepGptVanillaOXZZ}{1/43/44}
+\providecommand{\SweepGptVanillaOOXZZ}{0/44/44}
+\providecommand{\SweepGptValidatedOZ}{0/4/4}
+\providecommand{\SweepGptValidatedOOXZ}{0/13/13}
+\providecommand{\SweepGptValidatedOXZZ}{0/40/40}
+\providecommand{\SweepGptValidatedOOXZZ}{0/42/42}
+\providecommand{\SweepDeepseekVanillaOZ}{39/12/51}
+\providecommand{\SweepDeepseekVanillaOOXZ}{20/31/51}
+\providecommand{\SweepDeepseekVanillaOXZZ}{2/42/44}
+\providecommand{\SweepDeepseekVanillaOOXZZ}{0/44/44}
+\providecommand{\SweepDeepseekValidatedOZ}{0/17/17}
+\providecommand{\SweepDeepseekValidatedOOXZ}{0/26/26}
+\providecommand{\SweepDeepseekValidatedOXZZ}{0/52/52}
+\providecommand{\SweepDeepseekValidatedOOXZZ}{0/42/42}
+\renewcommand{\OffsetCurveAvailable}{1}
+% --- verus ledger (results/verus/lib_l5_ledger.verus.log) ---
+\renewcommand{\LfiveVerus}{7 obligations, 0 errors}
+\renewcommand{\LfiveVerusStatus}{verified in Verus (7 obligations, 0 errors)}
+\renewcommand{\LfiveVerusIntro}{verified (7 obligations)}
+% --- merged from b4fca224-paper_receipts_summary.json (receipts absent in this checkout) ---
+\renewcommand{\ToolNodeRealSqlite}{$126/165$}
+\renewcommand{\ToolNodeRealHttp}{$112/165$}
+% a regenerated claims_results.tex beside this file (run_experiments.sh step 13) overrides the block above
+\IfFileExists{claims_results.tex}{\input{claims_results.tex}}{}
+
 \providecommand{\A}[1]{$A_{#1}$}
 % --- Field-name macros ---
 \newcommand{\fld}[1]{\mathit{#1}}
@@ -613,7 +837,7 @@ therefore describe the result as a same-agent exclusion lemma, which is what it
 is, rather than as a bound on executions.
 
 \medskip
-\noindent\textbf{A third result: $L_1$ is commit-order serializability.} \texttt{CommitOrder.tla} proves the main paper's Theorem~1 in TLAPS ($60$ obligations, no omitted step): under the store axiom, read-before-commit and per-agent non-overlap, a history with no \textsc{StaleGeneration} witness is serializable in commit order. \texttt{check\_commitorder.sh} runs fifteen TLC claims that pin down what the statement says: it holds over all $35{,}659$ histories of length at most three, is not vacuous, fails when either droppable hypothesis is removed, its relational definitions equal \texttt{Memory.tla}'s \texttt{CHOOSE}-based helper and a literal serial replay, its converse fails (a value overwritten and then restored), \textsc{StaleGeneration} also fires on a history serializable in another order, and its three hypotheses are invariants of \texttt{Memory.tla} over $2{,}961{,}434$ reachable states. The shared definitions are byte-identical across the proof module and the two TLC harnesses, and the round's script diffs them, so TLC cannot silently check other definitions than the ones TLAPS proved about.
+\noindent\textbf{A third result: $L_1$ is commit-order serializability.} \texttt{CommitOrder.tla} proves the main paper's Theorem~1 in TLAPS ($60$ obligations, no omitted step; \texttt{tlapm --toolbox 0 0 CommitOrder.tla}, log \texttt{formal/tla/tlaps.CommitOrder.log}, 2026-10-14: ``All 60 obligations proved''): under the store axiom, read-before-commit and per-agent non-overlap, a history with no \textsc{StaleGeneration} witness is serializable in commit order. \texttt{check\_commitorder.sh} runs fifteen TLC claims that pin down what the statement says: it holds over all $35{,}659$ histories of length at most three, is not vacuous, fails when either droppable hypothesis is removed, its relational definitions equal \texttt{Memory.tla}'s \texttt{CHOOSE}-based helper and a literal serial replay, its converse fails (a value overwritten and then restored), \textsc{StaleGeneration} also fires on a history serializable in another order, and its three hypotheses are invariants of \texttt{Memory.tla} over $2{,}961{,}434$ reachable states. The shared definitions are byte-identical across the proof module and the two TLC harnesses, and the round's script diffs them, so TLC cannot silently check other definitions than the ones TLAPS proved about.
 
 \section*{Raw experimental and benchmarking tables}
 
@@ -1966,6 +2190,30 @@ the full 900-session protocol against Anthropic's
 identical instrumentation. Table~S2 (this appendix) reports the
 per-session cost. Claude pricing at the time of the run is
 \$3.00/M input tokens, \$15.00/M output tokens.
+
+\smallskip
+\noindent\textbf{Rerun with operation records (run
+\texttt{20261014T0253Z-claude}, 2026-10-14).} The replication above
+predates the operation recorder, so its sessions carry no \A1 verdict. The
+vanilla column was rerun on \texttt{claude-sonnet-4-5} with the recorder
+on, $100$ sessions per workload, seed $42$, and scored under Definition~1 by
+the same scorer as the gpt-4o cells: edit-review $100/100$ (the forced
+overlap, as on gpt-4o), plan-execute $0/100$ (the sequential control).
+Per session the vanilla cells cost $4{,}315$ and $2{,}504$ tokens
+($\$0.0162$, $\$0.0094$; $8.3$\,s and $4.8$\,s wall-clock) against $1{,}016$
+and $620$ tokens on gpt-4o, the model answering at greater length in five
+and three calls respectively. The triage cell is \emph{void}: in $100/100$
+sessions the reporter wrote a ticket reading ``no bug description provided''
+and the triager and engineer wrote nothing, so no operation of the pipeline
+could overlap a write; the same harness delivered the ticket text to
+gpt-4o's reporter (run \texttt{20260913T0150Z}: $17$ distinct trace shapes,
+\texttt{priority} written in $28/100$ sessions). Whether the description was
+dropped by the provider adapter or declined by the model is not resolved by
+these records, and the cell is reported as void rather than as $0/100$. The
+guarded cells (pessimistic, snapshot isolation) of this rerun did not
+execute (an import path broken by the repository migration) and remain
+listed as not run in the main paper. All $750$ records pass the H0/H1 gates
+(\texttt{hypothesis\_gates}: $0$ overlaps, $0$ read-after-commit).
 
 
 \medskip
@@ -3471,7 +3719,11 @@ written by no other guard and read by no other predicate, so the sixty-four
 anomaly cells with $G_7$ on reproduce \texttt{lattice16.sh}'s verdicts, and
 \textsc{NoA7}'s verdict depends on $G_7$ alone. \LatticeThirtyTwoOutcome{}
 The two-value safety half of \texttt{lattice16.sh} on the current model
-(\texttt{lattice16\_v2.sh}): \LatticeVtwoOutcome{}
+(\texttt{lattice16\_v2.sh}): \LatticeVtwoOutcome{} Both matrices were rerun
+on the author's machine on 2026-10-14 (TLC 1.8.0): $160/160$ and $32/32$
+verdicts as expected, with the same distinct-state counts
+(\texttt{formal/tla/lattice32\_results.json},
+\texttt{lattice16\_v2\_results.json}).
 
 \smallskip\noindent\textbf{Appendix T$'$: $A_7$ by argument provenance on the
 live records.} \texttt{harness/macaudit/a7\_rescore.py} scores every

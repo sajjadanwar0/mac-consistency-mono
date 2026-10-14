@@ -47,6 +47,7 @@ env_for() { [ -f "envs/$1/pyproject.toml" ] && echo "envs/$1" || echo "envs/pilo
 UVG="uv run --project $(env_for langgraph-1.2.0) python"
 UVG5="uv run --project $(env_for langgraph-1.2.5) python"
 UVA="uv run --project $(env_for autogen) python"
+UVA_ABS="uv run --project $PWD/$(env_for autogen) python"   # for scripts that cd elsewhere (probe 302)
 log() { printf '\n\033[1m[%s] %s\033[0m\n' "$1" "$2"; }
 want() { local n=$1; [ "$n" -ge "$FROM" ] || return 1; [ -z "$ONLY" ] && return 0; case ",$ONLY," in *",$n,"*) return 0;; *) return 1;; esac; }
 have() { command -v "$1" >/dev/null 2>&1; }
@@ -96,11 +97,11 @@ if want 4; then log 4 "probe 301: ToolNode replay against real effects (no key)"
 
 if want 5; then log 5 "probe 302: interleaved wall-clock rerun, gpt-4o, N=60 (fits the OpenAI balance)"
   need_key OPENAI_API_KEY
-  run "N=60 PROVIDER=openai MODEL=gpt-4o PY=\"$UVA\" ./probes/302_wallclock_interleaved.sh"; fi
+  run "N=60 PROVIDER=openai MODEL=gpt-4o PY=\"$UVA_ABS\" ./probes/302_wallclock_interleaved.sh"; fi
 
 if want 6; then log 6 "probe 302: interleaved wall-clock rerun, claude-sonnet-4-5, N=100"
   need_key ANTHROPIC_API_KEY
-  run "N=100 PROVIDER=anthropic MODEL=claude-sonnet-4-5 PY=\"$UVA\" ./probes/302_wallclock_interleaved.sh"; fi
+  run "N=100 PROVIDER=anthropic MODEL=claude-sonnet-4-5 PY=\"$UVA_ABS\" ./probes/302_wallclock_interleaved.sh"; fi
 
 # the PINNED verus binary: VERUS if set, else ~/.local/opt/verus-<pin>/verus, else whatever is on PATH
 PIN="$(grep -oE '^verus\s*=\s*\S+' crates/verus-detector/verus-version.txt 2>/dev/null | sed -E 's/.*=\s*//')"
@@ -150,14 +151,33 @@ if want 9; then log 9 "TLC on your machine: lattice32 (160 runs) and the two-val
 
 if want 10; then log 10 "live L2 replay, 1,000 haiku sessions (per-model L2 statement)"
   need_key ANTHROPIC_API_KEY
+  # the l2-live tool was a standalone crate in the runtime repo; inside the monorepo cargo assigns it to the root
+  # workspace, whose members list does not include it -> "believes it's in a workspace when it's not"
+  if [ -f crates/runtime/l2-live/Cargo.toml ] && ! grep -q '^\[workspace\]' crates/runtime/l2-live/Cargo.toml; then
+    run "printf '\n[workspace]\n' >> crates/runtime/l2-live/Cargo.toml"
+  fi
   run "cargo run --release --manifest-path crates/runtime/l2-live/Cargo.toml -- --provider anthropic --model claude-haiku-4-5 --n 1000 --validator llm --out results/live_l2_haiku1000 --seed 20261013 2>&1 | tee results/live_l2_haiku1000.log | tail -15"; fi
 
 if want 11; then log 11 "pilot replication WITH op-records on claude-sonnet-4-5 (Table 4/7 Claude panel)"
   need_key ANTHROPIC_API_KEY
-  PILOT="$(ls probes/*_autogen_pilot.py | head -1)"; STAMP="${STAMP:-$(date -u +%Y%m%dT%H%MZ)-claude}"; RUN="results/runs/$STAMP"
+  PILOT="$(ls probes/*_autogen_pilot.py | head -1)"
+  # python packages that lived beside the pilot (baselines/, ...) were filed under results/ by 00_migrate_monorepo.sh
+  # as if they were data; the pilot imports them, so they belong beside it under probes/
+  for d in results/*/; do
+    [ -f "$d/__init__.py" ] || continue; pkg="$(basename "$d")"
+    [ -e "probes/$pkg" ] || run "mv results/$pkg probes/$pkg && echo '  moved python package $pkg: results/ -> probes/'"
+  done
+  # resume the newest *-claude run if one exists (a cell with 100 traces is not rerun; delete a cell to redo it)
+  if [ -z "${STAMP:-}" ]; then prev="$(ls -d results/runs/*-claude 2>/dev/null | sort | tail -1)"; fi
+  STAMP="${STAMP:-${prev:+$(basename "$prev")}}"; STAMP="${STAMP:-$(date -u +%Y%m%dT%H%MZ)-claude}"; RUN="results/runs/$STAMP"
   for rt in vanilla pessimistic snapshot_isolation; do for wl in edit-review plan-execute triage; do
+    if [ "$(ls "$RUN/$wl-$rt"/*.jsonl 2>/dev/null | wc -l)" -ge 100 ] && [ "$FORCE" = 0 ]; then echo "  $RUN/$wl-$rt has 100 traces, skipping"; continue; fi
     run "$UVA $PILOT --provider anthropic --model claude-sonnet-4-5 --workload $wl --runtime $rt --n 100 --seed 42 --output $RUN/$wl-$rt --tokens-output $RUN/tokens-$wl-$rt"
   done; done
+  # a void triage cell (every ticket "no bug description provided") means the reporter never received the ticket text
+  if [ "$DRY" = 0 ] && [ -d "$RUN/triage-vanilla" ] && grep -lq "No bug description" "$RUN"/triage-vanilla/*.jsonl 2>/dev/null; then
+    echo "  WARN: $RUN/triage-vanilla holds tickets without a description ($(grep -l 'No bug description' "$RUN"/triage-vanilla/*.jsonl | wc -l) sessions): the cell is void; see the step-11 note in EXPERIMENT_PLAN.md"
+  fi
   run "python3 harness/macaudit/rescore_cells.py --root results | tail -12"; fi
 
 if want 12; then log 12 "L2/L4 measurement receipts (seeded cargo examples; their text output is the receipt)"
@@ -166,6 +186,14 @@ if want 12; then log 12 "L2/L4 measurement receipts (seeded cargo examples; thei
   done; fi
 
 if want 13; then log 13 "fold every receipt into ONE file; run the gates"
+  if [ "$DRY" = 0 ] && [ -f CLAIMS.json ] && [ -f crates/runtime/README.md ]; then python3 - <<'PY'
+import json, re
+c = json.load(open("CLAIMS.json")).get("verus", {}); cur, full = c.get("curated_total"), c.get("full_total")
+p = "crates/runtime/README.md"; s = open(p).read()
+s2 = re.sub(r"\d{3} curated /\s*\n?\s*\d{3} full", f"{cur} curated /\n{full} full", s) if cur and full else s
+if s2 != s: open(p, "w").write(s2); print(f"  rewrote the Verus count line in {p} -> {cur} curated / {full} full")
+PY
+  fi
   run "python3 harness/macaudit/claims_from_results.py --root results --paper paper | tail -4"
   if [ -f paper/main.tex ] && have pdflatex; then
     run "(cd paper && pdflatex -interaction=nonstopmode main.tex >/dev/null && pdflatex -interaction=nonstopmode main.tex | grep -E 'Output written')"
