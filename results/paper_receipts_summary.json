@@ -879,6 +879,8 @@
   "\\renewcommand{\\ToolNodeRealSqlite}{$126/165$}",
   "% --- probe 301 (results/a6_real_latency/http.jsonl) ---",
   "\\renewcommand{\\ToolNodeRealHttp}{$112/165$}",
+  "% --- probe 302 (results/runs/20261014T0617Z-interleaved; model gpt-4o) ---",
+  "\\renewcommand{\\WallclockPairedGptAvailable}{1}",
   "% --- verus ledger (results/verus/lib_l5_ledger.verus.log) ---",
   "\\renewcommand{\\LfiveVerus}{7 obligations, 0 errors}",
   "\\renewcommand{\\LfiveVerusStatus}{verified in Verus (7 obligations, 0 errors)}",
