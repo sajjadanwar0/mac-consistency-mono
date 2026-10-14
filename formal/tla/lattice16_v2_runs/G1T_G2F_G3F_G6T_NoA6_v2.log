@@ -1,0 +1,40 @@
+TLC2 Version 2026.10.13.164326 (rev: 210df3a)
+Running breadth-first search Model-Checking with fp 101 and seed 2927914901160432440 with 16 workers on 16 cores with 5461MB heap and 64MB offheap memory [pid: 214035] (Linux 7.0.0-38-generic amd64, Ubuntu 25.0.4.1 64bit, MSBDiskFPSet, DiskStateQueue).
+Parsing file /home/neo/RustroverProjects/mac-consistency-mono/formal/tla/lattice16_v2_runs/G1T_G2F_G3F_G6T_NoA6_v2.tla
+Parsing file /tmp/tlc-10836249406562289129/Naturals.tla (jar:file:/home/neo/RustroverProjects/mac-consistency-mono/tools/tla2tools.jar!/tla2sany/StandardModules/Naturals.tla)
+Parsing file /tmp/tlc-10836249406562289129/Sequences.tla (jar:file:/home/neo/RustroverProjects/mac-consistency-mono/tools/tla2tools.jar!/tla2sany/StandardModules/Sequences.tla)
+Parsing file /tmp/tlc-10836249406562289129/FiniteSets.tla (jar:file:/home/neo/RustroverProjects/mac-consistency-mono/tools/tla2tools.jar!/tla2sany/StandardModules/FiniteSets.tla)
+Parsing file /tmp/tlc-10836249406562289129/TLC.tla (jar:file:/home/neo/RustroverProjects/mac-consistency-mono/tools/tla2tools.jar!/tla2sany/StandardModules/TLC.tla)
+Parsing file /home/neo/RustroverProjects/mac-consistency-mono/formal/tla/lattice16_v2_runs/Anomalies.tla
+Parsing file /tmp/tlc-10836249406562289129/_TLCTrace.tla (jar:file:/home/neo/RustroverProjects/mac-consistency-mono/tools/tla2tools.jar!/tla2sany/StandardModules/_TLCTrace.tla)
+Parsing file /home/neo/RustroverProjects/mac-consistency-mono/formal/tla/lattice16_v2_runs/Memory.tla
+Parsing file /tmp/tlc-10836249406562289129/TLCExt.tla (jar:file:/home/neo/RustroverProjects/mac-consistency-mono/tools/tla2tools.jar!/tla2sany/StandardModules/TLCExt.tla)
+Parsing file /tmp/tlc-10836249406562289129/Integers.tla (jar:file:/home/neo/RustroverProjects/mac-consistency-mono/tools/tla2tools.jar!/tla2sany/StandardModules/Integers.tla)
+Semantic processing of module Naturals
+Semantic processing of module Sequences
+Semantic processing of module FiniteSets
+Semantic processing of module TLC
+Semantic processing of module Memory
+Semantic processing of module Anomalies
+Semantic processing of module Integers
+Semantic processing of module TLCExt
+Semantic processing of module _TLCTrace
+Semantic processing of module G1T_G2F_G3F_G6T_NoA6_v2
+Linting of module Memory
+Linting of module Anomalies
+Linting of module TLCExt
+Linting of module _TLCTrace
+Linting of module G1T_G2F_G3F_G6T_NoA6_v2
+Starting... (2026-10-14 07:44:06)
+Computing initial states...
+Finished computing initial states: 1 distinct state generated at 2026-10-14 07:44:06.
+Progress(8) at 2026-10-14 07:44:09: 388,626 states generated (388,626 s/min), 331,347 distinct states found (331,347 ds/min), 284,802 states left on queue.
+Model checking completed. No error has been found.
+  Estimates of the probability that TLC did not check all reachable states
+  because two distinct states had the same fingerprint:
+  calculated (optimistic):  val = 3.0E-7
+  based on the actual fingerprints:  val = 6.9E-6
+4839200 states generated, 2997658 distinct states found, 0 states left on queue.
+The depth of the complete state graph search is 9.
+The average outdegree of the complete state graph is 1 (minimum is 0, the maximum 28 and the 95th percentile is 3).
+Finished in 18s at (2026-10-14 07:44:24)
