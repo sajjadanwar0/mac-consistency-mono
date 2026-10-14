@@ -230,7 +230,7 @@
 \newcommand{\HypBasisRecovered}{4{,}500}
 % two-value safety half of lattice16 on the CURRENT model (lattice16_v2.sh); filled in by finalize
 \newcommand{\LatticeVtwoOutcome}{all $32$ safety runs \textsc{safe}, $2.4$--$17.3$M states}
-\newcommand{\LiveLtwoHaikuThousand}{\Pend}
+\newcommand{\LiveLtwoHaikuThousand}{$0/1{,}000$ retractions; hold of kept effects median $687$\,ms, p90 $789$\,ms}   % results/live_l2_haiku1000.log, seed 20261013, 2026-10-14
 
 % a fourth API family (DeepSeek, OpenAI-compatible endpoint) -- all four arms "--" until step 2 runs
 \newcommand{\LiveVanillaDeepseekAOne}{\Pend}\newcommand{\LiveVanillaDeepseekR}{\Pend}\newcommand{\LiveVanillaDeepseekWrong}{\Pend}\newcommand{\LiveVanillaDeepseekRegen}{\Pend}
@@ -2200,19 +2200,17 @@ on, $100$ sessions per workload, seed $42$, and scored under Definition~1 by
 the same scorer as the gpt-4o cells: edit-review $100/100$ (the forced
 overlap, as on gpt-4o), plan-execute $0/100$ (the sequential control).
 Per session the vanilla cells cost $4{,}315$ and $2{,}504$ tokens
-($\$0.0162$, $\$0.0094$; $8.3$\,s and $4.8$\,s wall-clock) against $1{,}016$
-and $620$ tokens on gpt-4o, the model answering at greater length in five
-and three calls respectively. The triage cell is \emph{void}: in $100/100$
+($\$0.0162$, $\$0.0094$; $8.3$\,s and $4.8$\,s) against $1{,}016$ and $620$
+tokens on gpt-4o, in the same number of calls. The triage cell is \emph{void}: in $100/100$
 sessions the reporter wrote a ticket reading ``no bug description provided''
 and the triager and engineer wrote nothing, so no operation of the pipeline
 could overlap a write; the same harness delivered the ticket text to
 gpt-4o's reporter (run \texttt{20260913T0150Z}: $17$ distinct trace shapes,
 \texttt{priority} written in $28/100$ sessions). Whether the description was
 dropped by the provider adapter or declined by the model is not resolved by
-these records, and the cell is reported as void rather than as $0/100$. The
-guarded cells (pessimistic, snapshot isolation) of this rerun did not
-execute (an import path broken by the repository migration) and remain
-listed as not run in the main paper. All $750$ records pass the H0/H1 gates
+these records; the cell is reported as void, not as $0/100$. The guarded
+cells of this rerun did not execute (an import path broken by the repository
+migration) and remain listed as not run in the main paper. All $750$ records pass the H0/H1 gates
 (\texttt{hypothesis\_gates}: $0$ overlaps, $0$ read-after-commit).
 
 
@@ -2630,6 +2628,20 @@ reasoning \emph{causes} $A_3$; they demonstrate the verified discipline
 operating under real, divergent agent behavior (a $0.5$--$31.0\%$ spread of
 supervisor judgment) at real cost and liveness, closing the gap between the
 model-level proof and a running multi-agent loop.
+
+\smallskip\noindent\textbf{The $1{,}000$-session haiku replay (2026-10-14).}
+To put a per-model number on the family that retracts least, the live
+driver (\texttt{crates/runtime/l2-live}, seed $20261013$, LLM supervisor)
+ran $1{,}000$ further \texttt{claude-haiku-4-5} sessions through the
+verified and the unguarded arm: \LiveLtwoHaikuThousand{}; both arms released
+all $1{,}000$ executor effects, and \A3 could not arise on either. Over
+$1{,}200$ haiku sessions the supervisor has retracted once; the hold is the
+supervisor call itself (median $687$\,ms), the whole price of output commit
+on a workload whose reviews are never adverse, and the hazard $L_2$ removes
+is on this evidence a property of the backbone's willingness to retract
+($62/200$ on Llama-3.2), not of the runtime
+(\texttt{results/live\_l2\_haiku1000/}: per-session JSON, effect logs,
+\texttt{summary.json}).
 
 
 \noindent\textbf{Mechanized refinement of the executable runtime.}
@@ -3757,7 +3769,10 @@ offsets). Under the ledger arm the records carry no $\fld{obligation}$
 field; the ledger registers the obligation by firing the compensator, so the
 scorer reads an obligation off the later compensation record on the same
 effect cell---the probe's own count and the independent one agree on $R=0$
-in all three ledger cells. \texttt{hypothesis\_gates.py} on the same $9{,}649$
+in all three ledger cells. After a discharge the harness ledger re-arms the
+entry with the compensated basis, so a further revision would register a
+further obligation; this workload revises once per session, and that path is
+not exercised by Table~3. \texttt{hypothesis\_gates.py} on the same $9{,}649$
 records ($3{,}600$ traces): H0 and H1 hold ($0$ violations), value-unique
 writes hold, $418$ \A1 witnesses, none overwrite-restore, basis recovered for
 $3{,}600/3{,}600$ bookings; the totals in the main paper add these to the
@@ -4349,8 +4364,7 @@ E.~Y. Chang and L.~Geng, ``{SagaLLM}: Context management, validation, and
 \bibitem{MohammadiEtAl2026Atomix}
 B.~Mohammadi, N.~Potamitis, L.~Klein, A.~Arora, and L.~Bindschaedler, ``Atomix:
   Timely, transactional tool use for reliable agentic workflows,'' \emph{arXiv
-  preprint arXiv:2602.14849}, 2026, preprint; not yet peer-reviewed at time of
-  writing.
+  preprint arXiv:2602.14849}, 2026 (preprint).
 
 \end{thebibliography}
 

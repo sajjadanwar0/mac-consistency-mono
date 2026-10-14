@@ -197,7 +197,7 @@
 \newcommand{\HypBasisRecovered}{4{,}500}
 % two-value safety half of lattice16 on the CURRENT model (lattice16_v2.sh); filled in by finalize
 \newcommand{\LatticeVtwoOutcome}{all $32$ safety runs \textsc{safe}, $2.4$--$17.3$M states}
-\newcommand{\LiveLtwoHaikuThousand}{\Pend}
+\newcommand{\LiveLtwoHaikuThousand}{$0/1{,}000$ retractions; hold of kept effects median $687$\,ms, p90 $789$\,ms}   % results/live_l2_haiku1000.log, seed 20261013, 2026-10-14
 
 % a fourth API family (DeepSeek, OpenAI-compatible endpoint) -- all four arms "--" until step 2 runs
 \newcommand{\LiveVanillaDeepseekAOne}{\Pend}\newcommand{\LiveVanillaDeepseekR}{\Pend}\newcommand{\LiveVanillaDeepseekWrong}{\Pend}\newcommand{\LiveVanillaDeepseekRegen}{\Pend}
@@ -296,7 +296,7 @@
 
 \IEEEtitleabstractindextext{%
 \begin{abstract}
-Agents in a multi-agent LLM system share state through memory stores and tool registries, and an agent's step spans an inference call of unbounded latency between its read and its commit. We formalize four concurrency anomalies for this regime---stale generation, phantom tool, causal cascade, tool-effect reordering---and name the classical condition each ports: stale generation is a failed commit-time read validation, and we prove (TLAPS) that its absence implies value-level consistency with the serial execution in commit order, a conditional guarantee over faithful histories whose hypotheses the artifact checks on every committed record. Each anomaly has a verified detector, each point of the $2^4$ exclusion lattice is realized by a checked runtime configuration, and along one chain $L_0\subsetneq\dots\subsetneq L_4$ the disciplines are verified in Verus, with the $L_1$, $L_2$ and $L_4$ bytes the ones measured, including the $L_1$ decision of the live study; every claim is labeled with its assurance level, from checked model to verified bytes. The evaluation is scored on outcomes, not flags. On an unmodified LangGraph runtime under live models, read-set validation removes every commit grounded in a superseded read at one re-spent generation per conflict, yet at a 150\,ms race offset the booking still contradicts the final trip date in $34\%$ and $7\%$ of sessions, because the revision landed after the commit; sweeping the race offset from $0$ to $1.5$\,s drives the predicate to $0$ and the residue to $52\%$. That residue is not a concurrency anomaly---it occurs in correct sequential executions---and no commit-time discipline reaches it; we define the residue predicate on effects and their recovered bases, show that under an open-world store it can only be owed, and realize a basis ledger that registers the obligation atomically (TLC-checked at every lattice point; invariant verified in Verus). On the same live study, with the commit decision taken by the verified store, the ledger with a rebooking compensator ends with $0/100$ wrong bookings on three API families where read validation alone leaves $12$--$63$. Per sound committed operation, snapshot isolation costs $+0.4\%$ to $+11.1\%$ in tokens and pessimistic locking up to $+97\%$. A census of $98$ public LangGraph repositories finds the stale-generation precondition in no graph site, which we report as a negative prevalence result, while a released tool executor batches an order-dependent pipeline on $30/30$ turns of one backbone. We state every number's provenance and every gap between predicate and harm.
+Agents in a multi-agent LLM system share state through memory stores and tool registries, and an agent's step spans an inference call of unbounded latency between its read and its commit. We formalize four concurrency anomalies for this regime---stale generation, phantom tool, causal cascade, tool-effect reordering---and name the classical condition each ports: stale generation is a failed commit-time read validation, and we prove (TLAPS) that its absence implies value-level consistency with the serial execution in commit order, a conditional guarantee over faithful histories whose hypotheses the artifact checks on every committed record. Each anomaly has a verified detector, each point of the $2^4$ exclusion lattice is realized by a checked runtime configuration, and along one chain $L_0\subsetneq\dots\subsetneq L_4$ the disciplines are verified in Verus, with the $L_1$, $L_2$ and $L_4$ bytes the ones measured, including the $L_1$ decision of the live study; every claim is labeled with its assurance level, from checked model to verified bytes. The evaluation is scored on outcomes, not flags. On an unmodified LangGraph runtime under live models, read-set validation removes every commit grounded in a superseded read at one re-spent generation per conflict, yet at a 150\,ms race offset the booking still contradicts the final trip date in $34$--$51\%$ and $7$--$12\%$ of sessions across two runs, because the revision landed after the commit; sweeping the race offset from $0$ to $1.5$\,s drives the predicate to $0$ and the residue to $52\%$. That residue is not a concurrency anomaly---it occurs in correct sequential executions---and no commit-time discipline reaches it; we define the residue predicate on effects and their recovered bases, show that under an open-world store it can only be owed, and realize a basis ledger that registers the obligation atomically (TLC-checked at every lattice point; invariant verified in Verus). On the same live study, with the commit decision taken by the verified store, the ledger with a rebooking compensator ends with $0/100$ wrong bookings on three API families where read validation alone leaves $12$--$63$. Per sound committed operation, snapshot isolation costs $+0.4\%$ to $+11.1\%$ in tokens and pessimistic locking up to $+97\%$. A census of $98$ public LangGraph repositories finds the stale-generation precondition in no graph site, which we report as a negative prevalence result, while a released tool executor batches an order-dependent pipeline on $30/30$ turns of one backbone. We state every number's provenance and every gap between predicate and harm.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -469,8 +469,8 @@ harness code, labeled as such.
 (\cref{sec:eval}). For each discipline we report the anomaly it excludes, the
 harm that remains, and the price: on the live LangGraph study, the $L_1$
 residue is \Rp{} in $\LiveGptValidatedWrong\%$ and
-$\LiveHaikuValidatedWrong\%$ of sessions at the $150$\,ms offset, decided on
-the records; with the commit decision taken by the verified $L_1$ store
+$\LiveHaikuValidatedWrong\%$ of sessions at the $150$\,ms offset ($51\%$ and
+$12\%$ in a second run), decided on the records; with the commit decision taken by the verified $L_1$ store
 through a $100$-line bridge the residue is the same kind of number
 (\LiveVerifiedOutcome), and the basis ledger with a compensator removes it
 (\LfiveLiveOutcome) at one compensation generation per supersession; on
@@ -1547,26 +1547,29 @@ was refused. The figures decompose by arithmetic ($1{,}538 = 402 + 572 +
 reviewed operation per early review, any runtime that declines to release an
 operation under review avoids; the third ($37$--$46\%$ of the unguarded
 exposure) is output commit's own contribution, dependents whose release it
-refused and the cascade then cancelled. Its cost is delay, not liveness:
-$748$, $1{,}255$ and $1{,}272$ operations had a release refused at least
-once, and every committed-and-unaborted operation was eventually released.
-The quarter of late reviews is a harness parameter, so the overall exposure
-reduction ($73$--$74\%$) is that parameter seen from the other side and is
-not a finding.
+refused and the cascade then cancelled. Its cost is delay, not liveness
+($748$--$1{,}272$ operations had a release refused at least once; every
+committed, unaborted operation was eventually released). The quarter of late
+reviews is a harness parameter, so the overall exposure reduction
+($73$--$74\%$) is that parameter seen from the other side, not a finding.
 
 \smallskip\noindent\textbf{Live verdicts.} A plan--execute--revise workload
-driven by real models (a planner commits a plan; an executor reads it,
-acquiring the planner as predecessor, and commits; a supervisor decides from
-the ticket and plan whether to retract) was recorded for $200$ sessions on
-each of three families and replayed through the three arms. Retraction rates
+driven by real models (a planner commits a plan; an executor reads it and
+commits, acquiring the planner as predecessor; a supervisor decides whether
+to retract) was recorded for $200$ sessions on each of three families and
+replayed through the three arms. Retraction rates
 varied sharply---$1/200$ (claude-haiku-4-5), $3/200$ (gpt-4o-mini),
 $62/200$ (Llama-3.2)---so we make the pooled statement only: in every one of
 the \LiveLtwoRetractions{} retracted sessions the unguarded baseline and the
 cascade design left a \cref{def:a3} witness (the latter while satisfying the
 surviving-dependent predicate), and the verified runtime released no executor
-effect on a retracted plan, at a pooled release rate of $89.0\%$. The zero is
-structural; what the replay adds is that the discipline executes under
-divergent live supervisor behavior at a stated cost.
+effect on a retracted plan, at a pooled release rate of $89.0\%$. A further
+$1{,}000$ haiku sessions produced no retraction at all, so on that family the
+discipline's only observable cost is the hold: each kept effect waited for
+the supervisor's verdict, a median $687$\,ms (p90 $789$\,ms). The zero is
+structural; the replay shows the discipline executing under supervisor
+behavior that ranges from $0/1{,}000$ to $62/200$ retractions, and the \A3
+hazard itself is a property of the backbone's retraction rate.
 
 \subsection{RQ1 for $L_3$: a released tool executor reorders}
 \label{sec:a6-eval}
@@ -1736,9 +1739,9 @@ three star bands; $60$ drawn per band under a fixed seed from the API's $500$
 most recently updated. \emph{Instrument}: a static front end that recovers,
 from the syntax tree alone, each \texttt{StateGraph} site, the node pairs one
 fork releases into a superstep, and each node's read and written keys;
-whatever it cannot resolve is \emph{unknown}, never guessed; eleven fixtures
-pin its rules and a differential oracle finds no disagreement between its
-pairs and the executed ones on the eight runnable fixtures.
+whatever it cannot resolve is \emph{unknown}, never guessed (eleven fixtures
+pin its rules; a differential oracle agrees with execution on the eight
+runnable ones).
 
 \begin{table}[t]
 \centering
@@ -1778,10 +1781,10 @@ $51\%$; restricting to the $251$ source-path sites changes nothing. An
 enriched population---the \CensusErrorStringRepos{} third-party repositories
 whose issues quote LangGraph's co-superstep writer/writer error, projects that
 demonstrably ran parallel writers---has parallel graphs in $12/26$ but again
-no confirmed site in $391$. The honest bracket is \emph{none confirmed, at
-most about half}; the narrow reading is a negative result for the motivation
-of \cref{sec:live-a1} and we record it as one. The census measures how code
-is written, not how often a graph runs or whether a co-scheduled read goes
+no confirmed site in $391$. The bracket is \emph{none confirmed, at most
+about half}; the narrow reading is a negative result for the motivation of
+\cref{sec:live-a1}, recorded as one. The census measures how code is
+written, not how often a graph runs or whether a co-scheduled read goes
 stale.
 
 \smallskip\noindent\textbf{Mechanisms, not rates.} Of five deployed designs we
@@ -1791,26 +1794,26 @@ re-executes a node from its start on resume; CrewAI rejects a concurrent read
 of a concurrently produced value at construction; AutoGen's actors own their
 state. LangGraph's superstep channels and cross-thread store pin a read across
 a node body that may contain a model call, which is where \cref{sec:live-a1}
-measures it. Five systems is not a sample; the value of the list is that each
-entry names a mechanism a designer can choose. Two framework defects outside
-the catalog were found on the way: the widely cited deer-flow bug (\#3123) is
-a sequential blind overwrite under a last-value channel, not a concurrency
-anomaly, and \texttt{interrupt}'s re-execution emits an effect issued before
-the gate twice, with different arguments when the shared value was revised
-during the gate (supplement \S\,Q).
+measures it. Five systems is not a sample; each entry names a mechanism a designer
+can choose. Two framework defects outside the catalog were found on the way: the
+widely cited deer-flow bug (\#3123) is a sequential blind overwrite under a
+last-value channel, not a concurrency anomaly, and \texttt{interrupt}'s
+re-execution emits an effect issued before the gate twice (supplement
+\S\,Q).
 
 \subsection{Threats to validity}
 \label{sec:threats}
 \emph{Construct.} \A1 tracks the window, not the harm; \cref{tab:live}
-reports both, the gap is the paper's own finding, and \Rp{} is its name. The
-basis is argument provenance, verbatim and not semantic. Whether a booking
-that disagrees with a later revision is harm is the application's call; we
-count it because the user asked for one trip. \A6 fires on commuting
-effects and is silent on dropped ones. \emph{Internal.} The live rates are
+reports both and \Rp{} names the gap. The basis is argument provenance,
+verbatim and not semantic. Whether a booking that disagrees with a later
+revision is harm is the application's call; we count it because the user
+asked for one trip. \A6 fires on commuting effects and is silent on dropped
+ones. \emph{Internal.} The live rates are
 latency races, $n=100$ single runs per cell, at one offset in \cref{tab:live}
 and four in \cref{fig:offset}; the wall-clock cells carry a run-order
 confound we bound rather than remove (probe~302 removes it; not run); the L2
-live replay rests on $66$ retractions, $62$ from one family. \emph{External.} Three API families and one local; one
+live replay rests on $66$ retractions, $62$ from one family ($1{,}000$
+further haiku sessions added none). \emph{External.} Three API families and one local; one
 framework driven live; toy workloads of two to three agents. \emph{Reproducibility.} Every cell is
 committed with its traces and rescored by an independent implementation of
 \cref{def:a1}; run \texttt{20260913T0424Z} carries a manifest captured at run
@@ -2084,8 +2087,8 @@ which a verified basis ledger registers the obligation atomically at every
 lattice point and, with a compensator, removes the residue on three API
 families. The evaluation's contribution is not the verified arms' zeros, which are
 theorems, but what sits beside them: the harm each discipline leaves (\Rp{}
-in $34\%$ and $7\%$ of live sessions under $L_1$ at $150$\,ms and up to
-$52\%$ as the race offset grows; $402$--$549$
+in $7$--$51\%$ of live sessions under $L_1$ at $150$\,ms and up to $52\%$
+as the race offset grows; $402$--$549$
 exposed effects per $1{,}000$ cascades under $L_2$), its cost per unit of
 sound work ($+0.4$--$11\%$ for snapshot isolation, up to $+97\%$ for
 locking), and where the preconditions occur in deployed code (nowhere

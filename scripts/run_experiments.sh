@@ -59,9 +59,16 @@ export PYTHONPATH="$PWD/probes/_modules${PYTHONPATH:+:$PYTHONPATH}"   # renumber
 # python packages that lived beside the pilot (baselines/ ...) were filed under results/ by 00_migrate_monorepo.sh
 # as if they were data; the pilot imports them, so they belong beside it under probes/ (steps 5, 6, 11 need them)
 pilot_packages() {
-  for d in results/*/; do
-    [ -f "$d/__init__.py" ] || continue; pkg="$(basename "$d")"
-    [ -e "probes/$pkg" ] || run "mv results/$pkg probes/$pkg && echo '  moved python package $pkg: results/ -> probes/'"
+  # every top-level module the pilot imports that is neither beside it, nor an alias in probes/_modules, nor
+  # installed in the env: find the package directory wherever the migration filed it and move it beside the probes
+  local pilot pkg src
+  pilot="$(ls probes/*_autogen_pilot.py 2>/dev/null | head -1)"; [ -n "$pilot" ] || return 0
+  for pkg in $(grep -ohE '^(from|import) [A-Za-z_][A-Za-z0-9_]*' "$pilot" | awk '{print $2}' | sort -u); do
+    [ -e "probes/$pkg" ] || [ -e "probes/$pkg.py" ] || [ -e "probes/_modules/$pkg.py" ] && continue
+    src="$(find . \( -path ./.venv -o -path '*/.venv' -o -path '*/target' -o -path ./.git -o -path ./probes \) -prune -o -type d -name "$pkg" -print 2>/dev/null | head -1)"
+    if [ -n "$src" ] && [ -f "$src/__init__.py" ]; then
+      run "mv $src probes/$pkg && echo '  moved python package $pkg: $src -> probes/$pkg'"
+    fi
   done
 }
 # the workspace Cargo.toml at the root puts build output under target/; a standalone checkout under crates/runtime/target/
@@ -105,11 +112,13 @@ if want 4; then log 4 "probe 301: ToolNode replay against real effects (no key)"
 
 if want 5; then log 5 "probe 302: interleaved wall-clock rerun, gpt-4o, N=60 (fits the OpenAI balance)"
   need_key OPENAI_API_KEY; pilot_packages
-  run "N=60 PROVIDER=openai MODEL=gpt-4o PY=\"$UVA_ABS\" ./probes/302_wallclock_interleaved.sh"; fi
+  st="$(ls -d results/runs/*-interleaved-gpt-4o 2>/dev/null | sort | tail -1)"; st="${st:+$(basename "$st")}"; st="${st:-$(date -u +%Y%m%dT%H%MZ)-interleaved-gpt-4o}"
+  run "N=60 PROVIDER=openai MODEL=gpt-4o STAMP=$st PY=\"$UVA_ABS\" ./probes/302_wallclock_interleaved.sh"; fi
 
 if want 6; then log 6 "probe 302: interleaved wall-clock rerun, claude-sonnet-4-5, N=100"
   need_key ANTHROPIC_API_KEY; pilot_packages
-  run "N=100 PROVIDER=anthropic MODEL=claude-sonnet-4-5 PY=\"$UVA_ABS\" ./probes/302_wallclock_interleaved.sh"; fi
+  st="$(ls -d results/runs/*-interleaved-claude-sonnet-4-5 2>/dev/null | sort | tail -1)"; st="${st:+$(basename "$st")}"; st="${st:-$(date -u +%Y%m%dT%H%MZ)-interleaved-claude-sonnet-4-5}"
+  run "N=100 PROVIDER=anthropic MODEL=claude-sonnet-4-5 STAMP=$st PY=\"$UVA_ABS\" ./probes/302_wallclock_interleaved.sh"; fi
 
 # the PINNED verus binary: VERUS if set, else ~/.local/opt/verus-<pin>/verus, else whatever is on PATH
 PIN="$(grep -oE '^verus\s*=\s*\S+' crates/verus-detector/verus-version.txt 2>/dev/null | sed -E 's/.*=\s*//')"

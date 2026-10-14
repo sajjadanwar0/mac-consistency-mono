@@ -144,7 +144,7 @@ def probe301(root, out):
 
 
 def probe302(root, out, boot=2000, seed=1):
-    runs = sorted(glob.glob(os.path.join(root, "runs", "*-interleaved")))
+    runs = sorted(glob.glob(os.path.join(root, "runs", "*-interleaved*")))
     if not runs:
         return
     rng = random.Random(seed)
@@ -163,7 +163,7 @@ def probe302(root, out, boot=2000, seed=1):
         if not sess:
             continue
         mk = "Claude" if (model or "").startswith("claude") else "Gpt"
-        out.append(f"% --- probe 302 ({run}; model {model}) ---")
+        emitted = 0
         for wl in sorted({k[0] for k in sess}):
             base = sess.get((wl, "vanilla"), {})
             for rt in ("pessimistic", "snapshot_isolation"):
@@ -180,9 +180,13 @@ def probe302(root, out, boot=2000, seed=1):
                 bs.sort(); lo, hi = bs[int(0.025 * boot)], bs[int(0.975 * boot) - 1]
                 key = {"pessimistic": "Pess", "snapshot_isolation": "SI"}[rt]
                 wlk = "".join(p.capitalize() for p in wl.split("-"))
+                if emitted == 0:
+                    out.append(f"% --- probe 302 ({run}; model {model}) ---")
+                emitted += 1
                 out.append(f"\\renewcommand{{\\WallclockPaired{mk}{wlk}{key}}}{{${mean:+.1f}\\%$ [{lo:+.1f}, {hi:+.1f}], $n={len(diffs)}$}}")
                 SUMMARY.setdefault("probe302", {}).setdefault(os.path.basename(run), {"model": model})[f"{wl}/{rt}"] = {"mean_pct": mean, "ci95": [lo, hi], "n": len(diffs)}
-        out.append(f"\\renewcommand{{\\WallclockPaired{mk}Available}}{{1}}")
+        if emitted:   # a stub run (fewer than five paired sessions in every cell) sets nothing
+            out.append(f"\\renewcommand{{\\WallclockPaired{mk}Available}}{{1}}")
 
 
 def verus(root, out):
