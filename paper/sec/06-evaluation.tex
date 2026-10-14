@@ -32,9 +32,8 @@ the date, asks its model for a one-week revision and puts it. Three modes:
 layer (re-read before \texttt{put}, discard the generation and regenerate on
 change); and \emph{sequential}, a control in which the date agent runs after
 the flight agent commits. \LiveNPerCell{} sessions per cell on three model
-families. Every session records the \A1 verdict on the emitted records, the
-regenerations, the booking's date and the trip date at the end of the
-session; \cref{tab:live} reports all four.
+families. Each session records the \A1 verdict, the regenerations, and the booking's
+and final trip dates (\cref{tab:live}).
 
 \begin{table*}[t]
 \centering
@@ -49,8 +48,10 @@ the commit decision from the verified $L_1$ store through a JSON bridge;
 three blocks' vanilla/validated/sequential rows are the committed September
 run; the verified, ledger and deepseek-chat rows are an October run of all
 four arms (its own vanilla/validated arms: $A_1=94$, $44$; residue $12$,
-$51$), whose \Rp{} cells (``--'') are filled once its records pass the \Rp{}
-gate---no cell is inferred as $100-A_1$.}
+$51$). Every \Rp{} cell is re-derived from the records
+(\texttt{a7\_rescore -{}-check}, $39/39$ probe-303 cells agree); under the
+ledger each superseded basis carries a registered obligation, so \Rp{} is
+$0$ by \cref{def:residue} and the outcome column is the compensator's.}
 \label{tab:live}
 \footnotesize
 \setlength{\tabcolsep}{6pt}
@@ -100,13 +101,13 @@ framework blocked, validated or reported any of them.
 revision changed the value in $300/300$ sessions, and whether it landed
 inside the window is the reviser's latency relative to the writer's plus the
 fixed offset. The open-weights family makes this explicit: behind a
-request-serializing local server the reviser's generation began only after
-the flight agent's had finished, so the revision landed after the commit in
-$99/100$ sessions and the one firing is the session with the longest pinned
-interval ($\LiveLlamaPinnedMax$\,s). These are properties of the serving
-configuration, not of the model or the framework.
+request-serializing local server the revision landed after the commit in
+$99/100$ sessions, the one firing being the session with the longest pinned
+interval ($\LiveLlamaPinnedMax$\,s)---a property of the serving
+configuration, not of the model.
 
 
+\ifnum\OffsetCurveAvailable=1 \input{offset_curve.tex}\else
 \begin{figure}[t]
 \centering
 \begin{tikzpicture}
@@ -132,6 +133,7 @@ leaves is the post-commit supersession, which the sequential control
 (\emph{seq.}) exhibits in every session while satisfying every predicate.}
 \label{fig:outcome}
 \end{figure}
+\fi
 
 \smallskip\noindent\textbf{What $L_1$ removes, and what it does not.}
 Read-set validation removed every firing ($0/300$) at one discarded
@@ -139,18 +141,16 @@ generation per realized conflict (\LiveGptRegen{} and \LiveHaikuRegen{} per
 $100$ sessions, never two in one session, none where the race never
 realized). It did not make the booking agree with the final trip date: in
 $\LiveGptValidatedWrong$ and $\LiveHaikuValidatedWrong$ of $100$ sessions the
-revision landed after the commit, the committed record is current at its
+revision landed after the commit: the committed record is current at its
 commit point exactly as \cref{thm:corc} says, and the booking is stale with
 respect to a state that did not yet exist. That residue is a post-commit
 supersession---the blind overwrite of \cref{sec:a1}, serializable in commit
-order, outside every isolation discipline---and it is the shape the $L_2$
-question addresses from the other side: the booking is an externalized
-effect whose basis was later withdrawn, and only compensation (or holding the
-effect until the basis is final) reaches it. On this workload $L_1$ buys
-exactly commit-order read consistency; the \emph{sequential} control, clean
-under every commit-time predicate, delivers the wrong booking in $100/100$
-sessions for the same reason. Reporting the predicate alone would have
-credited $L_1$ with a correctness it does not provide (\cref{fig:outcome}).
+order, outside every isolation discipline---and only compensation, or
+holding the effect until its basis is final, reaches it. The
+\emph{sequential} control, clean under every commit-time predicate, delivers
+the wrong booking in $100/100$ sessions for the same reason; reporting the
+predicate alone would have credited $L_1$ with a correctness it does not
+provide.
 
 \smallskip\noindent\textbf{\Rp{} decides the residue on the records.}
 \Cref{def:residue} names what is left, and the \Rp{} column of
@@ -170,13 +170,27 @@ verified store through the bridge of \cref{sec:trust}: \A1 fires in $0/300$
 sessions, and the residue is $2$, $51$ and $52$ of $100$---the same kind of
 number the application-layer arm leaves in the same run ($12$, $51$, $63$),
 the haiku pair differing by run-to-run sampling of which revisions land
-after the commit; the two runs of the validated arm on gpt-4o-mini ($34$ in
-September, $51$ in October) show the same spread across runs, which is why
-the offset sweep repeats every cell.
-In the \emph{ledger} arm a superseding put registers the obligation and a
-compensator issues a replacement booking: the outcome column is $0/100$ on
-all three families, at the price of the discarded generations of $L_1$ plus
-one compensation generation per registered obligation. What
+after the commit, and the two runs of the validated arm on gpt-4o-mini ($34$
+in September, $51$ in October) showing the same spread. In the \emph{ledger}
+arm a superseding put registers the obligation and a compensator issues a
+replacement booking: the outcome column is $0/100$ on all three families
+($5$, $45$ and $53$ obligations registered, each discharged by one
+compensation generation), at the price of the discarded generations of $L_1$
+plus one generation per obligation.
+
+\smallskip\noindent\textbf{The offset sweep.} \Cref{fig:offset} varies the
+race instead of fixing it: the date agent starts $0$, $150$, $500$ or
+$1{,}500$\,ms after the flight agent's read and revises in about half the
+sessions ($p=0.5$), $n=100$ per point on the three API families. Without a
+discipline \A1 fires in $39$--$46$ of $100$ sessions at $0$\,ms and in $0$ at
+$1{,}500$\,ms, where every revision lands after the commit, while the
+booking is wrong in every revised session at every offset ($44$--$51$).
+Under $L_1$ the curve inverts: the residue is $2$--$17$ at $0$\,ms and
+$42$--$52$ at $500$--$1{,}500$\,ms, the discarded generations falling from
+$34$--$49$ to $0$. Predicate and residue are the two halves of one quantity,
+the revision rate, split by where the revision lands relative to the commit;
+which half a deployment sees is a property of its latencies, and the ledger
+is the only arm whose outcome does not depend on them. What
 \cref{prop:owed} says must remain after release does remain under every
 commit-time discipline, and the ledger is the one arm that answers it.
 
@@ -185,14 +199,12 @@ summarizer of one reducer-declared channel in one Pregel
 superstep~\cite{MalewiczEtAl2010Pregel}; the barrier hands both the snapshot
 at superstep entry, so in $300/300$ sessions the summary names the
 destination the writer had changed. This is the snapshot-insufficiency shape
-of \cref{sec:snapshot} observed live---a reducer buys lost-update freedom,
-not $L_1$---reported as documented BSP semantics, not as a rate: the census
-finds the shape in no public graph, and under a completion clock
-\cref{def:a1} fires exactly when the writer's body returned first
-(\SuperstepGpt, \SuperstepHaiku, \SuperstepLlama{} of $100$;
-\texttt{check\_clocks.sh}).
+of \cref{sec:snapshot} observed live (a reducer buys lost-update freedom,
+not $L_1$), reported as documented BSP semantics, not a rate: the census
+finds it in no public graph, and under a completion clock \cref{def:a1}
+fires exactly when the writer's body returned first (\SuperstepGpt,
+\SuperstepHaiku, \SuperstepLlama{} of $100$; \texttt{check\_clocks.sh}).
 
-\ifnum\OffsetCurveAvailable=1 \input{offset_curve.tex}\fi
 
 \subsection{RQ1 across three disciplines: the AutoGen pilot}
 \label{sec:pilot}
@@ -371,10 +383,10 @@ run \texttt{\CostRun} (gpt-4o, $900$ sessions) and of its Claude Sonnet~4.5
 replication; pricing is list price at the time of the run. Per session,
 snapshot isolation's token cost is not separable from the unguarded
 runtime's on either provider (overlapping intervals in every cell), and
-pessimistic locking's overhead is bounded but provider-dependent (at most
-$1.6\times$ on gpt-4o and $2.3\times$ on Claude, both on triage, where it
-retries). A per-session denominator, however, credits a discipline for work
-it declined to do. \Cref{tab:cost} re-prices the same run per committed
+pessimistic locking's overhead is provider-dependent (at most $1.6\times$
+on gpt-4o and $2.3\times$ on Claude, both on triage, where it retries). A
+per-session denominator, however, credits a discipline for work it declined
+to do. \Cref{tab:cost} re-prices the same run per committed
 operation and per \emph{sound} committed operation---one that is not the
 stale reader of any \cref{def:a1} witness---so that no runtime earns credit
 for output an anomaly has invalidated.
@@ -441,16 +453,15 @@ triage pessimistic \WallclockPairedGptTriagePess{} and SI
 \subsection{Operational materiality of a firing}
 \label{sec:materiality}
 A value mismatch may be lexical. Holding an agent's context fixed and varying
-only the shared value it read, we record whether its decision changes. In a
-controlled triage task with a categorical decision, the decision changed in
-$150/200$ flagged mismatches ($75.0\%$ $[68.4, 80.8]$), and divergence tracks
-whether the value pair straddles a decision boundary---so the rate is a
-property of the value pairs sampled as much as of the agents, and we offer it
-as the only value-staleness estimate this paper has, not as a constant. On the
-pilot's genuine \cref{def:a1} firings (all cold-start reads by the reviewer)
-materiality is $43/43$ under an LLM judge, blind-coded by hand on $15$ of the
-$43$; a human-judge agreement of $59/60$ on a broader sample is evidence that
-the judge reads decision-level divergence, not a validation of those $43$.
+only the shared value it read, the decision changed in $150/200$ flagged
+mismatches of a controlled triage task ($75.0\%$ $[68.4, 80.8]$); divergence
+tracks whether the value pair straddles a decision boundary, so the rate is
+a property of the pairs sampled as much as of the agents, offered as the
+paper's only value-staleness estimate, not a constant. On the pilot's
+\cref{def:a1} firings (all cold-start reads by the reviewer) materiality is
+$43/43$ under an LLM judge, blind-coded by hand on $15$; a human-judge
+agreement of $59/60$ on a broader sample says the judge reads decision-level
+divergence, not that those $43$ are validated.
 
 \subsection{RQ3: where the preconditions occur}
 \label{sec:prevalence}
@@ -535,10 +546,10 @@ basis is argument provenance, verbatim and not semantic. Whether a booking
 that disagrees with a later revision is harm is the application's call; we
 count it because the user asked for one trip. \A6 fires on commuting
 effects and is silent on dropped ones. \emph{Internal.} The live rates are
-latency races at one offset, $n=100$ single runs per cell; the wall-clock
-cells carry a run-order confound we bound rather than remove (probe~302
-removes it; not run); the L2 live replay rests on $66$ retractions, $62$
-from one family. \emph{External.} Three API families and one local; one
+latency races, $n=100$ single runs per cell, at one offset in \cref{tab:live}
+and four in \cref{fig:offset}; the wall-clock cells carry a run-order
+confound we bound rather than remove (probe~302 removes it; not run); the L2
+live replay rests on $66$ retractions, $62$ from one family. \emph{External.} Three API families and one local; one
 framework driven live; toy workloads of two to three agents. \emph{Reproducibility.} Every cell is
 committed with its traces and rescored by an independent implementation of
 \cref{def:a1}; run \texttt{20260913T0424Z} carries a manifest captured at run

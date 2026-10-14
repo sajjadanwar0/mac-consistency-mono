@@ -279,7 +279,7 @@ def main() -> int:
                                  read_time=t_w2 - 1 if t_w2 > 0 else 0, write_set=[f"trip/bookings/{_key}"],
                                  write_values={f"trip/bookings/{_key}": new_date}, write_time=t_w2,
                                  experiment="store-outcome", mode=mode, session=_session, compensation=True,
-                                 booking_text=text2)
+                                 offset_ms=offset_ms, booking_text=text2)
                     ledger.register(key, {DATE_CELL: seen}, compensate)
                     # close the put->register gap: a revision that landed in between is superseding now
                     cur_item = s.get(TRIP_NS, "date"); cur = cur_item.value["date"] if cur_item else NULL
@@ -318,7 +318,8 @@ def main() -> int:
                 s.put(TRIP_NS, "date", {"date": new}); _, t_write, _ = s.last_stamp()
             rec.emit(agent="date_agent", read_set=[DATE_CELL], read_values={DATE_CELL: old}, read_time=t_read,
                      write_set=[DATE_CELL], write_values={DATE_CELL: new}, write_time=t_write,
-                     experiment="store-outcome", mode=mode, session=state["session"], model_fallback=fallback)
+                     experiment="store-outcome", mode=mode, session=state["session"], offset_ms=offset_ms,
+                     model_fallback=fallback)
             return {"new_date": new, "fallback": fallback}
 
         ga = StateGraph(H.FlightState); ga.add_node("book", flight_node); ga.add_edge(START, "book"); ga.add_edge("book", END)
@@ -346,7 +347,7 @@ def main() -> int:
                     store.put(TRIP_NS, "date", {"date": "2026-06-14"}); _, t_seed, _ = store.last_stamp()
                 rec.emit(agent="seed", read_set=[], read_values={}, read_time=0, write_set=[DATE_CELL],
                          write_values={DATE_CELL: "2026-06-14"}, write_time=t_seed, experiment="store-outcome",
-                         mode=mode, session=k, seed=True)
+                         mode=mode, session=k, offset_ms=off, seed=True)   # every record of a run carries its offset
                 ev = [threading.Event() for _ in range(3)]
                 ga, gb = build(store, ev, mode, off, revise, ledger, vb)
                 out: dict[str, Any] = {}

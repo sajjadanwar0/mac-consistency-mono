@@ -35,8 +35,8 @@ revision lands \emph{after} the commit, the booking contradicts the final trip
 date just the same, and no isolation discipline can prevent it. We report both
 numbers throughout, because the distance between them is the distance between a
 consistency predicate and the harm it is meant to track. The rates themselves
-are properties of the race we opened (a fixed $150$\,ms offset) and we attach
-no prevalence reading to them.
+are properties of the race we opened (a $150$\,ms offset; swept from $0$ to
+$1.5$\,s in \cref{fig:offset}) and we attach no prevalence reading to them.
 
 \smallskip\noindent\textbf{What this paper is not claiming.} A census of
 \CensusRepos{} public LangGraph repositories (\cref{sec:prevalence}) finds
@@ -142,10 +142,10 @@ two concurrent $L_1$ stores proved window-free under a verified reader--writer
 lock, $L_2$ (output commit), $L_3$ (commit-order sequencing) and $L_4$
 (validation at dispatch) runtimes whose $L_2$ and $L_4$ bytes are the ones
 measured. \Cref{tab:assurance} labels every claim with its assurance
-level---checked model, verified decision procedure, verified bytes, unverified
-port, open---and names each correspondence between a \TLA{} definition, its
-Verus restatement, the executed code and the scorer, with the hypothesis
-under which it holds and the gate that checks the hypothesis on the data.
+level (checked model, verified decision procedure, verified bytes,
+unverified port, open) and names each correspondence between \TLA{}
+definition, Verus restatement, executed code and scorer, with its hypothesis
+and the gate that checks it on the data.
 We account for the obligations by what they bear (supplement \S\,S):
 \VerusLoadBearing{} underpin a deployed or measured artifact and
 \VerusScaffold{} are scaffolding. The basis ledger that answers \Rp{} is
@@ -180,9 +180,8 @@ and never on another, which is the case for \A6.
 \smallskip\noindent\textbf{What this paper does not establish.} It does not
 establish a production prevalence for any anomaly: every occurrence figure is
 a race our harness opened or a rate on our own workloads, and the census
-measures how public code is written, not how often it runs. It does not verify
-the instrumentation that produces the traces, nor the Python harnesses; the
-trust base is enumerated in \cref{sec:trust}. And it does not claim that a
-verified arm's zero is evidence: a verified arm's zero is a theorem executing,
-so the evaluation leads with costs and with the counts that read no runtime
-flag.
+measures how public code is written, not how often it runs. It does not
+verify the instrumentation or the Python harnesses (trust base:
+\cref{sec:trust}). And a verified arm's zero is a theorem executing, not
+evidence, so the evaluation leads with costs and with counts that read no
+runtime flag.

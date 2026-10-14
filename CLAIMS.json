@@ -1,7 +1,7 @@
 {
  "verus": {
-  "curated_total": 364,
-  "full_total": 385,
+  "curated_total": 371,
+  "full_total": 392,
   "errors": 0,
   "pin": "0.2026.09.13.671956e",
   "per_file": {
@@ -20,6 +20,7 @@
    "lib_l3_sequencer.rs": 5,
    "lib_l4_exec.rs": 11,
    "lib_l4_safety.rs": 9,
+   "lib_l5_ledger.rs": 7,
    "lib_langgraph_refinement.rs": 7,
    "lib_occ_l2_refinement.rs": 8,
    "lib_pessimistic_exec.rs": 5,

@@ -1,48 +1,48 @@
 {
- "probe303_cells": {
+ "probe303_arms150": {
   "Haiku|vanilla|150": {
    "mode": "vanilla",
    "offset_ms": 150,
    "n": 100,
-   "revised": 51,
-   "a1": 47,
+   "revised": 100,
+   "a1": 94,
    "a1_ci": [
-    0.3694051641943945,
-    0.5724185151099548
+    0.8739700654191771,
+    0.9776651139286836
    ],
-   "a7": 4,
+   "a7": 6,
    "obligations_registered": 0,
    "obligations_discharged": 0,
    "compensation_generations": 0,
-   "booking_wrong": 51,
+   "booking_wrong": 100,
    "booking_wrong_ci": [
-    0.40803632915545374,
-    0.6113558348383622
+    0.9637833073548235,
+    1.0
    ],
-   "booking_wrong_given_revised": 51,
+   "booking_wrong_given_revised": 100,
    "regenerations": 0
   },
   "Haiku|validated|150": {
    "mode": "validated",
    "offset_ms": 150,
    "n": 100,
-   "revised": 47,
+   "revised": 100,
    "a1": 0,
    "a1_ci": [
     0.0,
     0.03621669264517641
    ],
-   "a7": 4,
+   "a7": 12,
    "obligations_registered": 0,
    "obligations_discharged": 0,
    "compensation_generations": 0,
-   "booking_wrong": 4,
+   "booking_wrong": 12,
    "booking_wrong_ci": [
-    0.011004493986188198,
-    0.09925715671265992
+    0.06356890256115931,
+    0.20023568361996882
    ],
-   "booking_wrong_given_revised": 4,
-   "regenerations": 43
+   "booking_wrong_given_revised": 12,
+   "regenerations": 88
   },
   "Haiku|verified|150": {
    "mode": "verified",
@@ -88,6 +88,184 @@
    "booking_wrong_given_revised": 0,
    "regenerations": 95
   },
+  "Deepseek|vanilla|150": {
+   "mode": "vanilla",
+   "offset_ms": 150,
+   "n": 100,
+   "revised": 100,
+   "a1": 45,
+   "a1_ci": [
+    0.35032022923967193,
+    0.552719811226064
+   ],
+   "a7": 55,
+   "obligations_registered": 0,
+   "obligations_discharged": 0,
+   "compensation_generations": 0,
+   "booking_wrong": 100,
+   "booking_wrong_ci": [
+    0.9637833073548235,
+    1.0
+   ],
+   "booking_wrong_given_revised": 100,
+   "regenerations": 0
+  },
+  "Deepseek|validated|150": {
+   "mode": "validated",
+   "offset_ms": 150,
+   "n": 100,
+   "revised": 100,
+   "a1": 0,
+   "a1_ci": [
+    0.0,
+    0.03621669264517641
+   ],
+   "a7": 63,
+   "obligations_registered": 0,
+   "obligations_discharged": 0,
+   "compensation_generations": 0,
+   "booking_wrong": 63,
+   "booking_wrong_ci": [
+    0.527648359448317,
+    0.7244334203854486
+   ],
+   "booking_wrong_given_revised": 63,
+   "regenerations": 37
+  },
+  "Deepseek|verified|150": {
+   "mode": "verified",
+   "offset_ms": 150,
+   "n": 100,
+   "revised": 100,
+   "a1": 0,
+   "a1_ci": [
+    0.0,
+    0.03621669264517641
+   ],
+   "a7": 52,
+   "obligations_registered": 0,
+   "obligations_discharged": 0,
+   "compensation_generations": 0,
+   "booking_wrong": 52,
+   "booking_wrong_ci": [
+    0.41778976540630663,
+    0.6209945198220415
+   ],
+   "booking_wrong_given_revised": 52,
+   "regenerations": 48
+  },
+  "Deepseek|ledger|150": {
+   "mode": "ledger",
+   "offset_ms": 150,
+   "n": 100,
+   "revised": 100,
+   "a1": 0,
+   "a1_ci": [
+    0.0,
+    0.03621669264517641
+   ],
+   "a7": 0,
+   "obligations_registered": 53,
+   "obligations_discharged": 53,
+   "compensation_generations": 53,
+   "booking_wrong": 0,
+   "booking_wrong_ci": [
+    0.0,
+    0.03621669264517641
+   ],
+   "booking_wrong_given_revised": 0,
+   "regenerations": 47
+  },
+  "Gpt|vanilla|150": {
+   "mode": "vanilla",
+   "offset_ms": 150,
+   "n": 100,
+   "revised": 100,
+   "a1": 44,
+   "a1_ci": [
+    0.34083602372345834,
+    0.5428125029366824
+   ],
+   "a7": 56,
+   "obligations_registered": 0,
+   "obligations_discharged": 0,
+   "compensation_generations": 0,
+   "booking_wrong": 100,
+   "booking_wrong_ci": [
+    0.9637833073548235,
+    1.0
+   ],
+   "booking_wrong_given_revised": 100,
+   "regenerations": 0
+  },
+  "Gpt|validated|150": {
+   "mode": "validated",
+   "offset_ms": 150,
+   "n": 100,
+   "revised": 100,
+   "a1": 0,
+   "a1_ci": [
+    0.0,
+    0.03621669264517641
+   ],
+   "a7": 51,
+   "obligations_registered": 0,
+   "obligations_discharged": 0,
+   "compensation_generations": 0,
+   "booking_wrong": 51,
+   "booking_wrong_ci": [
+    0.40803632915545374,
+    0.6113558348383622
+   ],
+   "booking_wrong_given_revised": 51,
+   "regenerations": 49
+  },
+  "Gpt|verified|150": {
+   "mode": "verified",
+   "offset_ms": 150,
+   "n": 100,
+   "revised": 100,
+   "a1": 0,
+   "a1_ci": [
+    0.0,
+    0.03621669264517641
+   ],
+   "a7": 51,
+   "obligations_registered": 0,
+   "obligations_discharged": 0,
+   "compensation_generations": 0,
+   "booking_wrong": 51,
+   "booking_wrong_ci": [
+    0.40803632915545374,
+    0.6113558348383622
+   ],
+   "booking_wrong_given_revised": 51,
+   "regenerations": 49
+  },
+  "Gpt|ledger|150": {
+   "mode": "ledger",
+   "offset_ms": 150,
+   "n": 100,
+   "revised": 100,
+   "a1": 0,
+   "a1_ci": [
+    0.0,
+    0.03621669264517641
+   ],
+   "a7": 0,
+   "obligations_registered": 45,
+   "obligations_discharged": 45,
+   "compensation_generations": 45,
+   "booking_wrong": 0,
+   "booking_wrong_ci": [
+    0.0,
+    0.03621669264517641
+   ],
+   "booking_wrong_given_revised": 0,
+   "regenerations": 55
+  }
+ },
+ "probe303_sweep": {
   "Haiku|vanilla|0": {
    "mode": "vanilla",
    "offset_ms": 0,
@@ -99,6 +277,28 @@
     0.5625884201335287
    ],
    "a7": 5,
+   "obligations_registered": 0,
+   "obligations_discharged": 0,
+   "compensation_generations": 0,
+   "booking_wrong": 51,
+   "booking_wrong_ci": [
+    0.40803632915545374,
+    0.6113558348383622
+   ],
+   "booking_wrong_given_revised": 51,
+   "regenerations": 0
+  },
+  "Haiku|vanilla|150": {
+   "mode": "vanilla",
+   "offset_ms": 150,
+   "n": 100,
+   "revised": 51,
+   "a1": 47,
+   "a1_ci": [
+    0.3694051641943945,
+    0.5724185151099548
+   ],
+   "a7": 4,
    "obligations_registered": 0,
    "obligations_discharged": 0,
    "compensation_generations": 0,
@@ -176,6 +376,28 @@
    "booking_wrong_given_revised": 2,
    "regenerations": 49
   },
+  "Haiku|validated|150": {
+   "mode": "validated",
+   "offset_ms": 150,
+   "n": 100,
+   "revised": 47,
+   "a1": 0,
+   "a1_ci": [
+    0.0,
+    0.03621669264517641
+   ],
+   "a7": 4,
+   "obligations_registered": 0,
+   "obligations_discharged": 0,
+   "compensation_generations": 0,
+   "booking_wrong": 4,
+   "booking_wrong_ci": [
+    0.011004493986188198,
+    0.09925715671265992
+   ],
+   "booking_wrong_given_revised": 4,
+   "regenerations": 43
+  },
   "Haiku|validated|500": {
    "mode": "validated",
    "offset_ms": 500,
@@ -220,94 +442,6 @@
    "booking_wrong_given_revised": 42,
    "regenerations": 0
   },
-  "Deepseek|vanilla|150": {
-   "mode": "vanilla",
-   "offset_ms": 150,
-   "n": 100,
-   "revised": 51,
-   "a1": 20,
-   "a1_ci": [
-    0.12665555210195584,
-    0.2918426890886281
-   ],
-   "a7": 31,
-   "obligations_registered": 0,
-   "obligations_discharged": 0,
-   "compensation_generations": 0,
-   "booking_wrong": 51,
-   "booking_wrong_ci": [
-    0.40803632915545374,
-    0.6113558348383622
-   ],
-   "booking_wrong_given_revised": 51,
-   "regenerations": 0
-  },
-  "Deepseek|validated|150": {
-   "mode": "validated",
-   "offset_ms": 150,
-   "n": 100,
-   "revised": 47,
-   "a1": 0,
-   "a1_ci": [
-    0.0,
-    0.03621669264517641
-   ],
-   "a7": 26,
-   "obligations_registered": 0,
-   "obligations_discharged": 0,
-   "compensation_generations": 0,
-   "booking_wrong": 26,
-   "booking_wrong_ci": [
-    0.17739443786765247,
-    0.3573120631001036
-   ],
-   "booking_wrong_given_revised": 26,
-   "regenerations": 21
-  },
-  "Deepseek|verified|150": {
-   "mode": "verified",
-   "offset_ms": 150,
-   "n": 100,
-   "revised": 100,
-   "a1": 0,
-   "a1_ci": [
-    0.0,
-    0.03621669264517641
-   ],
-   "a7": 52,
-   "obligations_registered": 0,
-   "obligations_discharged": 0,
-   "compensation_generations": 0,
-   "booking_wrong": 52,
-   "booking_wrong_ci": [
-    0.41778976540630663,
-    0.6209945198220415
-   ],
-   "booking_wrong_given_revised": 52,
-   "regenerations": 48
-  },
-  "Deepseek|ledger|150": {
-   "mode": "ledger",
-   "offset_ms": 150,
-   "n": 100,
-   "revised": 100,
-   "a1": 0,
-   "a1_ci": [
-    0.0,
-    0.03621669264517641
-   ],
-   "a7": 0,
-   "obligations_registered": 53,
-   "obligations_discharged": 53,
-   "compensation_generations": 53,
-   "booking_wrong": 0,
-   "booking_wrong_ci": [
-    0.0,
-    0.03621669264517641
-   ],
-   "booking_wrong_given_revised": 0,
-   "regenerations": 47
-  },
   "Deepseek|vanilla|0": {
    "mode": "vanilla",
    "offset_ms": 0,
@@ -319,6 +453,28 @@
     0.49268552036763646
    ],
    "a7": 12,
+   "obligations_registered": 0,
+   "obligations_discharged": 0,
+   "compensation_generations": 0,
+   "booking_wrong": 51,
+   "booking_wrong_ci": [
+    0.40803632915545374,
+    0.6113558348383622
+   ],
+   "booking_wrong_given_revised": 51,
+   "regenerations": 0
+  },
+  "Deepseek|vanilla|150": {
+   "mode": "vanilla",
+   "offset_ms": 150,
+   "n": 100,
+   "revised": 51,
+   "a1": 20,
+   "a1_ci": [
+    0.12665555210195584,
+    0.2918426890886281
+   ],
+   "a7": 31,
    "obligations_registered": 0,
    "obligations_discharged": 0,
    "compensation_generations": 0,
@@ -396,6 +552,28 @@
    "booking_wrong_given_revised": 17,
    "regenerations": 34
   },
+  "Deepseek|validated|150": {
+   "mode": "validated",
+   "offset_ms": 150,
+   "n": 100,
+   "revised": 47,
+   "a1": 0,
+   "a1_ci": [
+    0.0,
+    0.03621669264517641
+   ],
+   "a7": 26,
+   "obligations_registered": 0,
+   "obligations_discharged": 0,
+   "compensation_generations": 0,
+   "booking_wrong": 26,
+   "booking_wrong_ci": [
+    0.17739443786765247,
+    0.3573120631001036
+   ],
+   "booking_wrong_given_revised": 26,
+   "regenerations": 21
+  },
   "Deepseek|validated|500": {
    "mode": "validated",
    "offset_ms": 500,
@@ -440,94 +618,6 @@
    "booking_wrong_given_revised": 42,
    "regenerations": 0
   },
-  "Gpt|vanilla|150": {
-   "mode": "vanilla",
-   "offset_ms": 150,
-   "n": 100,
-   "revised": 51,
-   "a1": 36,
-   "a1_ci": [
-    0.2664084227332345,
-    0.46212189332742326
-   ],
-   "a7": 15,
-   "obligations_registered": 0,
-   "obligations_discharged": 0,
-   "compensation_generations": 0,
-   "booking_wrong": 51,
-   "booking_wrong_ci": [
-    0.40803632915545374,
-    0.6113558348383622
-   ],
-   "booking_wrong_given_revised": 51,
-   "regenerations": 0
-  },
-  "Gpt|validated|150": {
-   "mode": "validated",
-   "offset_ms": 150,
-   "n": 100,
-   "revised": 47,
-   "a1": 0,
-   "a1_ci": [
-    0.0,
-    0.03621669264517641
-   ],
-   "a7": 13,
-   "obligations_registered": 0,
-   "obligations_discharged": 0,
-   "compensation_generations": 0,
-   "booking_wrong": 13,
-   "booking_wrong_ci": [
-    0.07107304618542953,
-    0.21204067708744978
-   ],
-   "booking_wrong_given_revised": 13,
-   "regenerations": 34
-  },
-  "Gpt|verified|150": {
-   "mode": "verified",
-   "offset_ms": 150,
-   "n": 100,
-   "revised": 100,
-   "a1": 0,
-   "a1_ci": [
-    0.0,
-    0.03621669264517641
-   ],
-   "a7": 51,
-   "obligations_registered": 0,
-   "obligations_discharged": 0,
-   "compensation_generations": 0,
-   "booking_wrong": 51,
-   "booking_wrong_ci": [
-    0.40803632915545374,
-    0.6113558348383622
-   ],
-   "booking_wrong_given_revised": 51,
-   "regenerations": 49
-  },
-  "Gpt|ledger|150": {
-   "mode": "ledger",
-   "offset_ms": 150,
-   "n": 100,
-   "revised": 100,
-   "a1": 0,
-   "a1_ci": [
-    0.0,
-    0.03621669264517641
-   ],
-   "a7": 0,
-   "obligations_registered": 45,
-   "obligations_discharged": 45,
-   "compensation_generations": 45,
-   "booking_wrong": 0,
-   "booking_wrong_ci": [
-    0.0,
-    0.03621669264517641
-   ],
-   "booking_wrong_given_revised": 0,
-   "regenerations": 55
-  },
   "Gpt|vanilla|0": {
    "mode": "vanilla",
    "offset_ms": 0,
@@ -539,6 +629,28 @@
     0.5027908495776652
    ],
    "a7": 11,
+   "obligations_registered": 0,
+   "obligations_discharged": 0,
+   "compensation_generations": 0,
+   "booking_wrong": 51,
+   "booking_wrong_ci": [
+    0.40803632915545374,
+    0.6113558348383622
+   ],
+   "booking_wrong_given_revised": 51,
+   "regenerations": 0
+  },
+  "Gpt|vanilla|150": {
+   "mode": "vanilla",
+   "offset_ms": 150,
+   "n": 100,
+   "revised": 51,
+   "a1": 36,
+   "a1_ci": [
+    0.2664084227332345,
+    0.46212189332742326
+   ],
+   "a7": 15,
    "obligations_registered": 0,
    "obligations_discharged": 0,
    "compensation_generations": 0,
@@ -616,6 +728,28 @@
    "booking_wrong_given_revised": 4,
    "regenerations": 47
   },
+  "Gpt|validated|150": {
+   "mode": "validated",
+   "offset_ms": 150,
+   "n": 100,
+   "revised": 47,
+   "a1": 0,
+   "a1_ci": [
+    0.0,
+    0.03621669264517641
+   ],
+   "a7": 13,
+   "obligations_registered": 0,
+   "obligations_discharged": 0,
+   "compensation_generations": 0,
+   "booking_wrong": 13,
+   "booking_wrong_ci": [
+    0.07107304618542953,
+    0.21204067708744978
+   ],
+   "booking_wrong_given_revised": 13,
+   "regenerations": 34
+  },
   "Gpt|validated|500": {
    "mode": "validated",
    "offset_ms": 500,
@@ -661,6 +795,12 @@
    "regenerations": 0
   }
  },
+ "sweep_offsets": [
+  0,
+  150,
+  500,
+  1500
+ ],
  "probe301": {
   "sqlite": {
    "replays": 165,
@@ -674,45 +814,73 @@
  "verus/lib_l5_ledger.verus.log": "verification results:: 7 verified, 0 errors\n",
  "macros": [
   "% generated by harness/macaudit/claims_from_results.py -- do not edit; re-run the probes instead",
-  "% --- probe 303 (results/live_a1_outcome) ---",
-  "\\renewcommand{\\LiveVanillaDeepseekAOne}{$20/100$ [12.7, 29.2]}",
-  "\\renewcommand{\\LiveVanillaDeepseekR}{$31$}",
-  "\\renewcommand{\\LiveVanillaDeepseekWrong}{$51/100$}",
+  "% --- probe 303 (results/live_a1_outcome; *_arms150.json -> Table 3, *_sweep.json -> offset curve) ---",
+  "\\renewcommand{\\LiveVanillaDeepseekAOne}{$45/100$ [35.0, 55.3]}",
+  "\\renewcommand{\\LiveVanillaDeepseekR}{$55$}",
+  "\\renewcommand{\\LiveVanillaDeepseekWrong}{$100/100$ [96.4, 100.0]}",
   "\\renewcommand{\\LiveVanillaDeepseekRegen}{0}",
   "\\renewcommand{\\LiveValidatedDeepseekAOne}{$0/100$ [0.0, 3.6]}",
-  "\\renewcommand{\\LiveValidatedDeepseekR}{$26$}",
-  "\\renewcommand{\\LiveValidatedDeepseekWrong}{$26/100$}",
-  "\\renewcommand{\\LiveValidatedDeepseekRegen}{21}",
-  "\\renewcommand{\\LiveVerifiedGptAOne}{$0/100$}",
+  "\\renewcommand{\\LiveValidatedDeepseekR}{$63$}",
+  "\\renewcommand{\\LiveValidatedDeepseekWrong}{$63/100$ [52.8, 72.4]}",
+  "\\renewcommand{\\LiveValidatedDeepseekRegen}{37}",
+  "\\renewcommand{\\LiveVerifiedGptAOne}{$0/100$ [0.0, 3.6]}",
   "\\renewcommand{\\LiveVerifiedGptR}{$51$}",
   "\\renewcommand{\\LiveVerifiedGptWrong}{$51/100$ [40.8, 61.1]}",
   "\\renewcommand{\\LiveVerifiedGptRegen}{49}",
-  "\\renewcommand{\\LiveLedgerGptAOne}{$0/100$}",
+  "\\renewcommand{\\LiveLedgerGptAOne}{$0/100$ [0.0, 3.6]}",
   "\\renewcommand{\\LiveLedgerGptR}{$0$}",
   "\\renewcommand{\\LiveLedgerGptWrong}{$0/100$ [0.0, 3.6]}",
   "\\renewcommand{\\LiveLedgerGptRegen}{55$+$45 (45/45 obl.)}",
-  "\\renewcommand{\\LiveVerifiedHaikuAOne}{$0/100$}",
+  "\\renewcommand{\\LiveVerifiedHaikuAOne}{$0/100$ [0.0, 3.6]}",
   "\\renewcommand{\\LiveVerifiedHaikuR}{$2$}",
   "\\renewcommand{\\LiveVerifiedHaikuWrong}{$2/100$ [0.2, 7.0]}",
   "\\renewcommand{\\LiveVerifiedHaikuRegen}{98}",
-  "\\renewcommand{\\LiveLedgerHaikuAOne}{$0/100$}",
+  "\\renewcommand{\\LiveLedgerHaikuAOne}{$0/100$ [0.0, 3.6]}",
   "\\renewcommand{\\LiveLedgerHaikuR}{$0$}",
   "\\renewcommand{\\LiveLedgerHaikuWrong}{$0/100$ [0.0, 3.6]}",
   "\\renewcommand{\\LiveLedgerHaikuRegen}{95$+$5 (5/5 obl.)}",
-  "\\renewcommand{\\LiveVerifiedDeepseekAOne}{$0/100$}",
+  "\\renewcommand{\\LiveVerifiedDeepseekAOne}{$0/100$ [0.0, 3.6]}",
   "\\renewcommand{\\LiveVerifiedDeepseekR}{$52$}",
   "\\renewcommand{\\LiveVerifiedDeepseekWrong}{$52/100$ [41.8, 62.1]}",
   "\\renewcommand{\\LiveVerifiedDeepseekRegen}{48}",
-  "\\renewcommand{\\LiveLedgerDeepseekAOne}{$0/100$}",
+  "\\renewcommand{\\LiveLedgerDeepseekAOne}{$0/100$ [0.0, 3.6]}",
   "\\renewcommand{\\LiveLedgerDeepseekR}{$0$}",
   "\\renewcommand{\\LiveLedgerDeepseekWrong}{$0/100$ [0.0, 3.6]}",
   "\\renewcommand{\\LiveLedgerDeepseekRegen}{47$+$53 (53/53 obl.)}",
-  "\\renewcommand{\\LiveVerifiedOutcome}{gpt-4o-mini: $A_1=0/100$, booking $\\neq$ final $51/100$; haiku: $A_1=0/100$, booking $\\neq$ final $2/100$}",
-  "\\renewcommand{\\LfiveLiveOutcome}{gpt-4o-mini: booking $\\neq$ final $0/100$, 45 obligations registered, 45 discharged, 45 compensation generations; haiku: booking $\\neq$ final $0/100$, 5 obligations registered, 5 discharged, 5 compensation generations}",
+  "\\renewcommand{\\LiveVerifiedOutcome}{$A_1=0/300$; booking $\\neq$ final $2$, $51$, $52$ of $100$ on haiku, gpt-4o-mini, deepseek-chat}",
+  "\\renewcommand{\\LfiveLiveOutcome}{booking $\\neq$ final $0/100$ on all three families (5, 45, 53 obligations, all discharged)}",
+  "\\providecommand{\\SweepHaikuVanillaOZ}{46/5/51}",
+  "\\providecommand{\\SweepHaikuVanillaOOXZ}{47/4/51}",
+  "\\providecommand{\\SweepHaikuVanillaOXZZ}{4/40/44}",
+  "\\providecommand{\\SweepHaikuVanillaOOXZZ}{0/44/44}",
+  "\\providecommand{\\SweepHaikuValidatedOZ}{0/2/2}",
+  "\\providecommand{\\SweepHaikuValidatedOOXZ}{0/4/4}",
+  "\\providecommand{\\SweepHaikuValidatedOXZZ}{0/46/46}",
+  "\\providecommand{\\SweepHaikuValidatedOOXZZ}{0/42/42}",
+  "\\providecommand{\\SweepGptVanillaOZ}{40/11/51}",
+  "\\providecommand{\\SweepGptVanillaOOXZ}{36/15/51}",
+  "\\providecommand{\\SweepGptVanillaOXZZ}{1/43/44}",
+  "\\providecommand{\\SweepGptVanillaOOXZZ}{0/44/44}",
+  "\\providecommand{\\SweepGptValidatedOZ}{0/4/4}",
+  "\\providecommand{\\SweepGptValidatedOOXZ}{0/13/13}",
+  "\\providecommand{\\SweepGptValidatedOXZZ}{0/40/40}",
+  "\\providecommand{\\SweepGptValidatedOOXZZ}{0/42/42}",
+  "\\providecommand{\\SweepDeepseekVanillaOZ}{39/12/51}",
+  "\\providecommand{\\SweepDeepseekVanillaOOXZ}{20/31/51}",
+  "\\providecommand{\\SweepDeepseekVanillaOXZZ}{2/42/44}",
+  "\\providecommand{\\SweepDeepseekVanillaOOXZZ}{0/44/44}",
+  "\\providecommand{\\SweepDeepseekValidatedOZ}{0/17/17}",
+  "\\providecommand{\\SweepDeepseekValidatedOOXZ}{0/26/26}",
+  "\\providecommand{\\SweepDeepseekValidatedOXZZ}{0/52/52}",
+  "\\providecommand{\\SweepDeepseekValidatedOOXZZ}{0/42/42}",
   "\\renewcommand{\\OffsetCurveAvailable}{1}",
   "% --- probe 301 (results/a6_real_latency/sqlite.jsonl) ---",
   "\\renewcommand{\\ToolNodeRealSqlite}{$126/165$}",
   "% --- probe 301 (results/a6_real_latency/http.jsonl) ---",
-  "\\renewcommand{\\ToolNodeRealHttp}{$112/165$}"
+  "\\renewcommand{\\ToolNodeRealHttp}{$112/165$}",
+  "% --- verus ledger (results/verus/lib_l5_ledger.verus.log) ---",
+  "\\renewcommand{\\LfiveVerus}{7 obligations, 0 errors}",
+  "\\renewcommand{\\LfiveVerusStatus}{verified in Verus (7 obligations, 0 errors)}",
+  "\\renewcommand{\\LfiveVerusIntro}{verified (7 obligations)}"
  ]
 }

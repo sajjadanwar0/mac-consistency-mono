@@ -35,7 +35,7 @@
 #  12    L2/L4 measurement receipts (cargo examples, seeded)           cargo            $0             5 min
 #  13    fold every receipt into results/paper_receipts_summary.json;  python3          $0             1 min
 #        run the gates; print what to upload
-set -euo pipefail
+set -uo pipefail   # not -e: a failing step is recorded and the next step still runs (summary at the end)
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"; cd "$ROOT"
 DRY=0; FORCE=0; ONLY=""; FROM=1
 while [ $# -gt 0 ]; do case "$1" in
@@ -50,8 +50,9 @@ UVA="uv run --project $(env_for autogen) python"
 log() { printf '\n\033[1m[%s] %s\033[0m\n' "$1" "$2"; }
 want() { local n=$1; [ "$n" -ge "$FROM" ] || return 1; [ -z "$ONLY" ] && return 0; case ",$ONLY," in *",$n,"*) return 0;; *) return 1;; esac; }
 have() { command -v "$1" >/dev/null 2>&1; }
-run() { if [ "$DRY" = 1 ]; then echo "  would run: $*"; else echo "  + $*"; eval "$@"; fi; }
-need_key() { [ -n "${!1:-}" ] && return 0; [ "$DRY" = 1 ] && { echo "  (needs $1)"; return 0; }; echo "  FAIL: $1 is not set" >&2; return 1; }
+FAILED=()
+run() { if [ "$DRY" = 1 ]; then echo "  would run: $*"; else echo "  + $*"; eval "$@" || { echo "  FAIL (exit $?): $*" >&2; FAILED+=("$*"); return 1; }; fi; }
+need_key() { [ -n "${!1:-}" ] && return 0; [ "$DRY" = 1 ] && { echo "  (needs $1)"; return 0; }; echo "  FAIL: $1 is not set (export it, then re-run this step)" >&2; FAILED+=("$1 unset"); return 1; }
 mkdir -p results/live_a1_outcome results/a6_real_latency results/verus tools
 export PYTHONPATH="probes/_modules${PYTHONPATH:+:$PYTHONPATH}"   # renumbered probes import each other by original name
 # the workspace Cargo.toml at the root puts build output under target/; a standalone checkout under crates/runtime/target/
@@ -95,15 +96,20 @@ if want 4; then log 4 "probe 301: ToolNode replay against real effects (no key)"
 
 if want 5; then log 5 "probe 302: interleaved wall-clock rerun, gpt-4o, N=60 (fits the OpenAI balance)"
   need_key OPENAI_API_KEY
-  run "N=60 PROVIDER=openai MODEL=gpt-4o ./probes/302_wallclock_interleaved.sh"; fi
+  run "N=60 PROVIDER=openai MODEL=gpt-4o PY=\"$UVA\" ./probes/302_wallclock_interleaved.sh"; fi
 
 if want 6; then log 6 "probe 302: interleaved wall-clock rerun, claude-sonnet-4-5, N=100"
   need_key ANTHROPIC_API_KEY
-  run "N=100 PROVIDER=anthropic MODEL=claude-sonnet-4-5 ./probes/302_wallclock_interleaved.sh"; fi
+  run "N=100 PROVIDER=anthropic MODEL=claude-sonnet-4-5 PY=\"$UVA\" ./probes/302_wallclock_interleaved.sh"; fi
 
+# the PINNED verus binary: VERUS if set, else ~/.local/opt/verus-<pin>/verus, else whatever is on PATH
+PIN="$(grep -oE '^verus\s*=\s*\S+' crates/verus-detector/verus-version.txt 2>/dev/null | sed -E 's/.*=\s*//')"
+if [ -z "${VERUS:-}" ] && [ -n "$PIN" ] && [ -x "$HOME/.local/opt/verus-$PIN/verus" ]; then export VERUS="$HOME/.local/opt/verus-$PIN/verus"; fi
+export VERUS="${VERUS:-verus}"
 if want 7; then log 7 "Verus: the ledger model, then the pinned counts, then the README line and CLAIMS.json"
-  if have verus; then
-    run "(cd crates/verus-detector && verus --crate-type=lib src/lib_l5_ledger.rs 2>&1 | tee ../../results/verus/lib_l5_ledger.verus.log)"
+  echo "  using $VERUS ($($VERUS --version 2>/dev/null | grep -oE 'Version: *\S+' || echo '?'); pin $PIN)"
+  if have "$VERUS" || [ -x "$VERUS" ]; then
+    run "(cd crates/verus-detector && $VERUS --crate-type=lib src/lib_l5_ledger.rs 2>&1 | tee ../../results/verus/lib_l5_ledger.verus.log)"
     # verus_count.sh looks for the crate beside itself (pilot layout); in the monorepo it lives at crates/verus-detector
     if ! grep -q 'VDET_DIR' harness/macaudit/verus_count.sh; then
       run "sed -i 's|^LOCAL_VDET=\"\$HERE/verus-detector\"|LOCAL_VDET=\"\${VDET_DIR:-\$HERE/verus-detector}\"|' harness/macaudit/verus_count.sh"
@@ -173,4 +179,10 @@ UPLOAD these to the chat and the paper is regenerated from them:
   results/live_l2_haiku1000.log                (if step 10 ran)
   tools/rescore_cells.log  or the last 30 lines of step 11's output   (if step 11 ran)
 EOF
+fi
+
+if [ "$DRY" = 0 ]; then
+  if [ ${#FAILED[@]} -gt 0 ]; then
+    echo; echo "FAILED steps/commands (${#FAILED[@]}); fix and re-run with --only <n>:"; printf '  %s\n' "${FAILED[@]}"; exit 1
+  else echo; echo "all requested steps completed"; fi
 fi

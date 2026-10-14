@@ -60,7 +60,17 @@ def traces(root):
             for r in rs:
                 groups[(r.get("mode"), r.get("experiment"), r.get("session"))].append(r)
             for k, g in groups.items():
-                yield f"{fp}#{k}", g
+                # probe 303's offset sweep appends every offset's run of a session to the same file, each run
+                # starting with its own seed record: a seed record opens a new trace
+                runs, cur = [], []
+                for r in g:
+                    if r.get("seed") and cur:
+                        runs.append(cur); cur = []
+                    cur.append(r)
+                if cur:
+                    runs.append(cur)
+                for i, run in enumerate(runs):
+                    yield f"{fp}#{k}#run{i}", run
         else:
             yield fp, rs
 

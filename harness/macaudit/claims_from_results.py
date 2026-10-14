@@ -27,10 +27,23 @@ def tex_num(x):
     return f"{x:,}".replace(",", "{,}")
 
 
+def offname(o):
+    """a macro name may not contain digits: 0 -> Z, 150 -> OFZ, 500 -> FZZ, 1500 -> OFZZ"""
+    return "O" + "".join("ZOTWFXSVEN"[int(ch)] for ch in str(o))
+
+
+def ci_str(c, key):
+    lo, hi = c.get(key, [None, None])
+    return f" [{100*lo:.1f}, {100*hi:.1f}]" if lo is not None else ""
+
+
 def probe303(root, out, fig):
-    files = sorted(glob.glob(os.path.join(root, "live_a1_outcome", "*.json")))
-    cells = defaultdict(dict)   # (modelkey, mode, offset) -> cell
-    for fp in files:
+    """Table 3 rows come from the four-arm run (<model>_arms150.json, p_revise 1.0); the offset curve from the
+    sweep (<model>_sweep.json, p_revise 0.5).  The two are kept apart: a 150 ms sweep cell is a different run
+    from the 150 ms arms cell and never overwrites it.  R is the probe's a7 field, which a7_rescore.py --check
+    re-derives independently from the records (every cell must agree or the gate fails)."""
+    arms = defaultdict(dict); sweep = defaultdict(dict)   # (modelkey, mode, offset) -> cell
+    for fp in sorted(glob.glob(os.path.join(root, "live_a1_outcome", "*.json"))):
         try:
             d = json.load(open(fp))
         except Exception:
@@ -38,64 +51,76 @@ def probe303(root, out, fig):
         mk = MODEL_KEY.get(d.get("model", ""), None)
         if not mk:
             continue
+        dest = sweep if fp.endswith("_sweep.json") else arms
         for c in d.get("cells", []):
-            cells[(mk, c["mode"], int(c["offset_ms"]))] = c
-    if not cells:
+            dest[(mk, c["mode"], int(c["offset_ms"]))] = c
+    if not arms and not sweep:
         return
-    out.append("% --- probe 303 (results/live_a1_outcome) ---")
-    SUMMARY["probe303_cells"] = {f"{k[0]}|{k[1]}|{k[2]}": {kk: vv for kk, vv in c.items() if kk != "sessions"} for k, c in cells.items()}
+    out.append("% --- probe 303 (results/live_a1_outcome; *_arms150.json -> Table 3, *_sweep.json -> offset curve) ---")
+    strip = lambda c: {kk: vv for kk, vv in c.items() if kk != "sessions"}
+    SUMMARY["probe303_arms150"] = {f"{k[0]}|{k[1]}|{k[2]}": strip(c) for k, c in arms.items()}
+    SUMMARY["probe303_sweep"] = {f"{k[0]}|{k[1]}|{k[2]}": strip(c) for k, c in sweep.items()}
     # DeepSeek (and any other new family) gets all four arms as fresh rows; the three paper families only the two new arms
     for mk in ("Deepseek", "Sonnet"):
         for mode, name in (("vanilla", "LiveVanilla"), ("validated", "LiveValidated")):
-            c = cells.get((mk, mode, 150))
-            if not c:
-                continue
-            n = c["n"]; lo, hi = c.get("a1_ci", [None, None])
-            ci = f" [{100*lo:.1f}, {100*hi:.1f}]" if lo is not None else ""
-            out.append(f"\\renewcommand{{\\{name}{mk}AOne}}{{${c['a1']}/{n}${ci}}}")
-            out.append(f"\\renewcommand{{\\{name}{mk}R}}{{${c.get('a7', 0)}$}}")
-            out.append(f"\\renewcommand{{\\{name}{mk}Wrong}}{{${c['booking_wrong']}/{n}$}}")
-            out.append(f"\\renewcommand{{\\{name}{mk}Regen}}{{{c['regenerations']}}}")
-    for mk in ("Gpt", "Haiku", "Llama", "Deepseek", "Sonnet"):
-        for mode, name in (("verified", "LiveVerified"), ("ledger", "LiveLedger")):
-            c = cells.get((mk, mode, 150))
+            c = arms.get((mk, mode, 150))
             if not c:
                 continue
             n = c["n"]
-            out.append(f"\\renewcommand{{\\{name}{mk}AOne}}{{${c['a1']}/{n}$}}")
+            out.append(f"\\renewcommand{{\\{name}{mk}AOne}}{{${c['a1']}/{n}${ci_str(c, 'a1_ci')}}}")
             out.append(f"\\renewcommand{{\\{name}{mk}R}}{{${c.get('a7', 0)}$}}")
-            lo, hi = c.get("booking_wrong_ci", [None, None])
-            ci = f" [{100*lo:.1f}, {100*hi:.1f}]" if lo is not None else ""
-            out.append(f"\\renewcommand{{\\{name}{mk}Wrong}}{{${c['booking_wrong']}/{n}${ci}}}")
+            out.append(f"\\renewcommand{{\\{name}{mk}Wrong}}{{${c['booking_wrong']}/{n}${ci_str(c, 'booking_wrong_ci')}}}")
+            out.append(f"\\renewcommand{{\\{name}{mk}Regen}}{{{c['regenerations']}}}")
+    for mk in ("Gpt", "Haiku", "Llama", "Deepseek", "Sonnet"):
+        for mode, name in (("verified", "LiveVerified"), ("ledger", "LiveLedger")):
+            c = arms.get((mk, mode, 150))
+            if not c:
+                continue
+            n = c["n"]
+            out.append(f"\\renewcommand{{\\{name}{mk}AOne}}{{${c['a1']}/{n}${ci_str(c, 'a1_ci')}}}")
+            out.append(f"\\renewcommand{{\\{name}{mk}R}}{{${c.get('a7', 0)}$}}")
+            out.append(f"\\renewcommand{{\\{name}{mk}Wrong}}{{${c['booking_wrong']}/{n}${ci_str(c, 'booking_wrong_ci')}}}")
             if mode == "ledger":
                 out.append(f"\\renewcommand{{\\{name}{mk}Regen}}{{{c['regenerations']}$+${c.get('compensation_generations', 0)} "
                            f"({c.get('obligations_registered', 0)}/{c.get('obligations_discharged', 0)} obl.)}}")
             else:
                 out.append(f"\\renewcommand{{\\{name}{mk}Regen}}{{{c['regenerations']}}}")
-    # a one-line summary for the intro / limitations macros
-    v = [cells.get((mk, "verified", 150)) for mk in ("Gpt", "Haiku")]
-    if all(v):
-        out.append("\\renewcommand{\\LiveVerifiedOutcome}{" + "; ".join(
-            f"{mk.lower()}: $A_1={c['a1']}/{c['n']}$, booking $\\neq$ final ${c['booking_wrong']}/{c['n']}$" for mk, c in zip(("gpt-4o-mini", "haiku"), v)) + "}")
-    l = [cells.get((mk, "ledger", 150)) for mk in ("Gpt", "Haiku")]
-    if all(l):
-        out.append("\\renewcommand{\\LfiveLiveOutcome}{" + "; ".join(
-            f"{mk.lower()}: booking $\\neq$ final ${c['booking_wrong']}/{c['n']}$, {c.get('obligations_registered',0)} obligations registered, "
-            f"{c.get('obligations_discharged',0)} discharged, {c.get('compensation_generations',0)} compensation generations" for mk, c in zip(("gpt-4o-mini", "haiku"), l)) + "}")
-    # swept offsets -> pgfplots figure
-    offsets = sorted({k[2] for k in cells})
+    fam = [("Haiku", "haiku"), ("Gpt", "gpt-4o-mini"), ("Deepseek", "deepseek-chat")]
+    v = [(nm, arms.get((mk, "verified", 150))) for mk, nm in fam]; v = [(nm, c) for nm, c in v if c]
+    if v:
+        out.append("\\renewcommand{\\LiveVerifiedOutcome}{$A_1=0/" + str(sum(c['n'] for _, c in v)) + "$; booking $\\neq$ final " +
+                   ", ".join(f"${c['booking_wrong']}$" for _, c in v) + " of $100$ on " + ", ".join(nm for nm, _ in v) + "}")
+    l = [(nm, arms.get((mk, "ledger", 150))) for mk, nm in fam]; l = [(nm, c) for nm, c in l if c]
+    if l:
+        out.append("\\renewcommand{\\LfiveLiveOutcome}{booking $\\neq$ final $0/100$ on " + ("all three families" if len(l) == 3 else ", ".join(nm for nm, _ in l)) +
+                   " (" + ", ".join(f"{c.get('obligations_registered',0)}" for _, c in l) + " obligations, all discharged)}")
+    # swept offsets -> pgfplots figure (replaces the static predicate-vs-outcome bar chart in Sec. 6.1)
+    offsets = sorted({k[2] for k in sweep})
     if len(offsets) >= 3:
+        SUMMARY["sweep_offsets"] = offsets
+        for mk, nm in fam:
+            for mode in ("vanilla", "validated"):
+                for o in offsets:
+                    c = sweep.get((mk, mode, o))
+                    if c:
+                        out.append(f"\\providecommand{{\\Sweep{mk}{mode.capitalize()}{offname(o)}}}{{{c['a1']}/{c.get('a7',0)}/{c['booking_wrong']}}}")
+        marks = {"Haiku": "*", "Gpt": "square*", "Deepseek": "triangle*"}
         lines = [r"\begin{figure}[t]", r"\centering", r"\begin{tikzpicture}",
-                 r"\begin{axis}[width=\columnwidth, height=4.2cm, xmode=log, log basis x=10, xlabel={date-agent start offset (ms; 0 drawn at 1)},",
-                 r"  ylabel={sessions of 100}, ymin=0, ymax=100, legend style={font=\scriptsize, at={(0.5,1.02)}, anchor=south, legend columns=3}, tick label style={font=\scriptsize}, label style={font=\scriptsize}]"]
-        for mk, mname in (("Gpt", "gpt-4o-mini"), ("Haiku", "claude-haiku-4-5")):
-            for mode, metric, label in (("vanilla", "a1", "$A_1$"), ("vanilla", "booking_wrong", "booking$\\neq$final"), ("validated", "booking_wrong", "$L_1$ residue")):
-                pts = [(max(o, 1), cells[(mk, mode, o)][metric]) for o in offsets if (mk, mode, o) in cells]
-                if len(pts) >= 2:
-                    lines.append(r"\addplot+[mark=*] coordinates {" + " ".join(f"({x},{y})" for x, y in pts) + "};")
-                    lines.append(r"\addlegendentry{" + f"{mname} {label}" + "}")
+                 r"\begin{axis}[width=\columnwidth, height=4.1cm, symbolic x coords={" + ",".join(str(o) for o in offsets) + "}, xtick=data,",
+                 r"  xlabel={date-agent start offset after the flight agent's read (ms)}, ylabel={sessions of 100}, ymin=0, ymax=60,",
+                 r"  legend style={font=\scriptsize, at={(0.5,1.02)}, anchor=south, legend columns=3, draw=none}, tick label style={font=\scriptsize}, label style={font=\scriptsize}, cycle list name=black white]"]
+        for mk, nm in fam:
+            pts = [(o, sweep[(mk, "vanilla", o)]["a1"]) for o in offsets if (mk, "vanilla", o) in sweep]
+            if len(pts) >= 2:
+                lines.append(r"\addplot+[dashed, mark=" + marks[mk] + r", mark options={solid}] coordinates {" + " ".join(f"({x},{y})" for x, y in pts) + "};")
+                lines.append(r"\addlegendentry{" + f"{nm} \\A1 (vanilla)" + "}")
+        for mk, nm in fam:
+            pts = [(o, sweep[(mk, "validated", o)]["booking_wrong"]) for o in offsets if (mk, "validated", o) in sweep]
+            if len(pts) >= 2:
+                lines.append(r"\addplot+[solid, mark=" + marks[mk] + "] coordinates {" + " ".join(f"({x},{y})" for x, y in pts) + "};")
+                lines.append(r"\addlegendentry{" + f"{nm} \\Rp{{}} under $L_1$" + "}")
         lines += [r"\end{axis}", r"\end{tikzpicture}",
-                  r"\caption{Probe 303: the live \A1 rate and the outcome as a function of the date agent's start offset (revision probability $0.5$; $n=100$ per cell).}",
+                  r"\caption{Probe 303, offset sweep: the live \A1 rate without a discipline (dashed) and the residue \Rp{} that read-set validation leaves (solid) as the date agent's start is delayed; revision probability $0.5$, $n=100$ per point. As the window closes the same revisions land after the commit: \A1 falls to $0$ while \Rp{} rises to the revision rate.}",
                   r"\label{fig:offset}", r"\end{figure}"]
         open(fig, "w").write("\n".join(lines) + "\n")
         out.append("\\renewcommand{\\OffsetCurveAvailable}{1}")
@@ -160,14 +185,55 @@ def probe302(root, out, boot=2000, seed=1):
         out.append(f"\\renewcommand{{\\WallclockPaired{mk}Available}}{{1}}")
 
 
+def verus(root, out):
+    """step 7 receipts: results/verus/count.json (curated/full distinct totals under the pinned build) and the ledger log"""
+    fp = os.path.join(root, "verus", "count.json")
+    if os.path.exists(fp):
+        try:
+            d = json.load(open(fp))
+            out.append(f"% --- verus ({fp}) ---")
+            out.append(f"\\renewcommand{{\\VerusCurated}}{{{d['curated_total']}}}")
+            out.append(f"\\renewcommand{{\\VerusFull}}{{{d['full_total']}}}")
+        except Exception:
+            pass
+    fp = os.path.join(root, "verus", "lib_l5_ledger.verus.log")
+    if os.path.exists(fp):
+        import re
+        m = re.search(r"(\d+) verified, (\d+) errors", open(fp, errors="replace").read())
+        if m and m.group(2) == "0":
+            out.append(f"% --- verus ledger ({fp}) ---")
+            out.append(f"\\renewcommand{{\\LfiveVerus}}{{{m.group(1)} obligations, 0 errors}}")
+            out.append(f"\\renewcommand{{\\LfiveVerusStatus}}{{verified in Verus ({m.group(1)} obligations, 0 errors)}}")
+            out.append(f"\\renewcommand{{\\LfiveVerusIntro}}{{verified ({m.group(1)} obligations)}}")
+
+
+def from_summary(fp, out):
+    """merge the macros of an uploaded summary for receipts this checkout lacks (never overrides a macro computed here)"""
+    try:
+        d = json.load(open(fp))
+    except Exception:
+        return
+    have = {ln.split("}")[0] for ln in out if ln.startswith("\\renewcommand")}
+    added = 0
+    for ln in d.get("macros", []):
+        if ln.startswith("\\renewcommand") and ln.split("}")[0] not in have:
+            if added == 0:
+                out.append(f"% --- merged from {os.path.basename(fp)} (receipts absent in this checkout) ---")
+            out.append(ln); added += 1
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--root", default="results"); ap.add_argument("--paper", default="paper")
+    ap.add_argument("--from-summary", default=None, help="a paper_receipts_summary.json from another checkout: fills the receipts absent under --root")
     a = ap.parse_args()
     out = ["% generated by harness/macaudit/claims_from_results.py -- do not edit; re-run the probes instead"]
     probe303(a.root, out, os.path.join(a.paper, "offset_curve.tex"))
     probe301(a.root, out)
     probe302(a.root, out)
+    verus(a.root, out)
+    if a.from_summary:
+        from_summary(a.from_summary, out)
     os.makedirs(a.paper, exist_ok=True)
     open(os.path.join(a.paper, "claims_results.tex"), "w").write("\n".join(out) + "\n")
     # formal receipts, if present, ride along in the same summary

@@ -1003,7 +1003,8 @@ Section~5.2 of the main paper; and 3 for the $L_1$ projection
 (\texttt{lib\_si\_projection.rs}, Theorem L1j in the same section), which
 transports the concurrent SI store's structural guarantee to a
 Definition~1 of the main paper guarantee on the emitted history.
-\textbf{Total: 364 distinct verified obligations} (0 errors), all unconditional under the two
+Finally 7 for the basis ledger model (\texttt{lib\_l5\_ledger.rs}, Appendix~U), counted as scaffolding.
+\textbf{Total: \VerusCurated{} distinct verified obligations} (0 errors), all unconditional under the two
 foundational axioms; the stochastic case is
 left open at the specification level (Appendix~I) and the
 artifact carries no probabilistic obligation or axiom. Every named lattice
@@ -1015,12 +1016,12 @@ $A_2$: $0/1000$ versus $387$--$630/1000$ for live and for snapshot
 resolution alike); $L_3$ is exec-verified and measured on a separate twin
 ($A_6$: $0/1000$ versus $487$--$1000/1000$). Counting every verified source
 file and subtracting module/textual re-inclusion, the development verifies
-\textbf{385 distinct obligations}; the 21 between the 364 curated headline
-and 385 are independent invariant lemmas and exec runtimes
+\textbf{\VerusFull{} distinct obligations}; the 21 between the \VerusCurated{} curated headline
+and \VerusFull{} are independent invariant lemmas and exec runtimes
 (\texttt{lib\_detect\_a1\_exec.rs} 9, \texttt{lib\_pessimistic\_exec.rs} 5,
 \texttt{lib\_pessimistic\_invariant.rs} 3, \texttt{lib\_si\_commit\_invariant.rs}
 4) that support the named results without being lattice points.
-\texttt{verus\_count.sh} regenerates both figures (364 curated; 385 with
+\texttt{verus\_count.sh} regenerates both figures (\VerusCurated{} curated; \VerusFull{} with
 \texttt{--full}), measuring the working tree and printing its revision.
 
 
@@ -1713,7 +1714,7 @@ larger configurations; the safety runs are exhaustive within the bounds,
 not proofs. The Verus product of the $L_2$, $L_3$, and $L_4$ models
 (Section~5.4 of the main paper) mechanizes the all-enabled point; extending that
 product with the four switches is the proof-level follow-up. The
-364-obligation headline of Section~5.2 of the main paper does not include
+\VerusCurated-obligation headline of Section~5.2 of the main paper does not include
 these runs.
 
 % =====================================================================
@@ -3448,9 +3449,7 @@ counted as scaffolding and not as a lattice point: the executable ledger of
 the live study is harness code, so the correspondence between these bytes
 and the measurement is weaker than at $L_1$, $L_2$ and $L_4$ (main paper
 Table~2). With it, \texttt{verus\_count.sh} reports \VerusCurated{} curated
-and \VerusFull{} full distinct obligations; the per-file inventory of
-Appendix~S predates the ledger file and its totals ($364/385$) are the
-headline without it.
+and \VerusFull{} full distinct obligations (Appendix~S).
 
 \smallskip\noindent\textbf{Exhaustive runs with $G_7$.} At the lattice
 bounds ($|A|=2$, two cells, one value, $\fld{MaxOps}=2$, symmetry on agents
@@ -3496,8 +3495,47 @@ is registered; the scorer reads its $\fld{obligation}$ and
 $\fld{compensation}$ fields, so a correct ledger yields $R=0$ by
 construction and the outcome column measures the compensator. In the
 October run (main paper Table~3) the ledger arm's outcome is
-\LfiveLiveOutcome{}; its records, like those of the October verified arm,
-await the same \texttt{-{}-check} pass before their $R$ cells are printed.
+\LfiveLiveOutcome{}. \texttt{a7\_rescore.py -{}-check} now also scores every
+probe-303 trace (a trace is one seed-to-booking run; the offset sweep
+appends every offset's run of a session to one file, each opening with its
+own seed record) and compares $A_1$, $R$ and \emph{booking $\neq$ final}
+with the cell the probe wrote: $39/39$ cells agree (three families $\times$
+four arms at $150$\,ms, plus three $\times$ two modes $\times$ four
+offsets). Under the ledger arm the records carry no $\fld{obligation}$
+field; the ledger registers the obligation by firing the compensator, so the
+scorer reads an obligation off the later compensation record on the same
+effect cell---the probe's own count and the independent one agree on $R=0$
+in all three ledger cells. \texttt{hypothesis\_gates.py} on the same $9{,}649$
+records ($3{,}600$ traces): H0 and H1 hold ($0$ violations), value-unique
+writes hold, $418$ \A1 witnesses, none overwrite-restore, basis recovered for
+$3{,}600/3{,}600$ bookings; the totals in the main paper add these to the
+September campaigns. (An earlier version of the gate split a sweep file by
+session only, merging the four offset runs of a session into one trace and
+reporting $1{,}014$ spurious same-agent overlaps; the trace delimiter is now
+the seed record, and the probe tags every record with its offset.)
+
+\smallskip\noindent\textbf{The offset sweep (main paper Fig.~3).}
+\Cref{tab:sweep} lists every cell of the sweep: revision probability $0.5$,
+$n=100$ per cell, the date agent started $0$, $150$, $500$ or $1{,}500$\,ms
+after the flight agent's read.
+
+\begin{table}[t]
+\centering\footnotesize
+\caption{Probe 303 offset sweep, per cell: $A_1$ / $R$ / booking $\neq$ final (of $100$ sessions; about half revise). The three columns of each cell sum as $A_1+R=$ wrong in every cell.}
+\label{tab:sweep}
+\begin{tabular}{@{}llcccc@{}}
+\toprule
+Model & Mode & $0$\,ms & $150$\,ms & $500$\,ms & $1{,}500$\,ms \\
+\midrule
+gpt-4o-mini & vanilla & \SweepGptVanillaOZ & \SweepGptVanillaOOXZ & \SweepGptVanillaOXZZ & \SweepGptVanillaOOXZZ \\
+ & validated ($L_1$) & \SweepGptValidatedOZ & \SweepGptValidatedOOXZ & \SweepGptValidatedOXZZ & \SweepGptValidatedOOXZZ \\
+claude-haiku-4-5 & vanilla & \SweepHaikuVanillaOZ & \SweepHaikuVanillaOOXZ & \SweepHaikuVanillaOXZZ & \SweepHaikuVanillaOOXZZ \\
+ & validated ($L_1$) & \SweepHaikuValidatedOZ & \SweepHaikuValidatedOOXZ & \SweepHaikuValidatedOXZZ & \SweepHaikuValidatedOOXZZ \\
+deepseek-chat & vanilla & \SweepDeepseekVanillaOZ & \SweepDeepseekVanillaOOXZ & \SweepDeepseekVanillaOXZZ & \SweepDeepseekVanillaOOXZZ \\
+ & validated ($L_1$) & \SweepDeepseekValidatedOZ & \SweepDeepseekValidatedOOXZ & \SweepDeepseekValidatedOXZZ & \SweepDeepseekValidatedOOXZZ \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \section*{Appendix V: Closest systems, dimension by dimension; the verified-store bridge}
 \label{app:v}
@@ -3552,10 +3590,7 @@ path.
 \label{app:obligations}
 
 The verification sections report \VerusCurated{} curated and \VerusFull{}
-full distinct verified proof obligations (0 errors), of which 7 are the
-ledger file \texttt{lib\_l5\_ledger.rs} added after this inventory was
-emitted (Appendix~U); the table below is the inventory without it
-(364 curated, 385 full). This appendix reproduces the per-file accounting
+full distinct verified proof obligations (0 errors). This appendix reproduces the per-file accounting
 those figures derive from, exactly as emitted by \texttt{verus\_count.sh}. The script verifies every
 \texttt{src/*.rs} file in the \texttt{verus-detector} crate standalone under
 \texttt{verus --crate-type=lib}, subtracts each obligation that one file
@@ -3570,7 +3605,7 @@ clears that exclusion. Every counted file verifies at 0 errors.
 \footnotesize
 \caption{Per-file Verus obligation counts
 (\texttt{verus\_count.sh --full}). $\dagger$ marks the four helper files
-excluded from the 364 curated headline; the default \texttt{verus\_count.sh}
+excluded from the \VerusCurated{} curated headline; the default \texttt{verus\_count.sh}
 run applies that exclusion. \texttt{verified\_a1.rs} carries no proof
 obligations. The distinct totals subtract re-included obligations once per
 edge (listed below the table).}
@@ -3594,6 +3629,7 @@ File (\texttt{verus-detector/src/}) & Verified \\
 \texttt{lib\_l3\_sequencer.rs}                   & 5  \\
 \texttt{lib\_l4\_exec.rs}                        & 11  \\
 \texttt{lib\_l4\_safety.rs}                      & 9  \\
+\texttt{lib\_l5\_ledger.rs}                      & 7  \\
 \texttt{lib\_langgraph\_refinement.rs}           & 7  \\
 \texttt{lib\_occ\_l2\_refinement.rs}             & 8  \\
 \texttt{lib\_pessimistic\_exec.rs}$\dagger$      & 5  \\
@@ -3611,7 +3647,7 @@ File (\texttt{verus-detector/src/}) & Verified \\
 \texttt{lib\_ssi.rs}                             & 8  \\
 \texttt{verified\_a1.rs}                         & --- \\
 \midrule
-Raw per-file sum (counted files)                 & 466 \\
+Raw per-file sum (counted files)                 & 473 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -3625,10 +3661,12 @@ double-counted obligations. \texttt{lib\_l2\_safety.rs} is subtracted twice---
 once for each distinct parent that re-includes it---leaving its 33 obligations
 counted exactly once.
 
-\emph{Totals.} The full distinct total is $466 - 81 = 385$. The four
+\emph{Totals.} The full distinct total is $473 - 81 = 392$. The four
 $\dagger$ helper files contribute $9 + 5 + 3 + 4 = 21$ obligations to the raw
-sum; excluding them gives a curated raw sum of $445$ and hence the curated
-distinct total $445 - 81 = 364$. \texttt{verus\_count.sh} reproduces the
+sum; excluding them gives a curated raw sum of $452$ and hence the curated
+distinct total $452 - 81 = 371$ (both under the pinned build
+\texttt{0.2026.09.13.671956e}; the previous build counted $364/385$ before
+\texttt{lib\_l5\_ledger.rs} existed). \texttt{verus\_count.sh} reproduces the
 latter; \texttt{verus\_count.sh --full} reproduces the former.
 
 % =====================================================================

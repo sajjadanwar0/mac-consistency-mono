@@ -1,22 +1,23 @@
 \begin{figure}[t]
 \centering
 \begin{tikzpicture}
-\begin{axis}[width=\columnwidth, height=4.2cm, xmode=log, log basis x=10, xlabel={date-agent start offset (ms; 0 drawn at 1)},
-  ylabel={sessions of 100}, ymin=0, ymax=100, legend style={font=\scriptsize, at={(0.5,1.02)}, anchor=south, legend columns=3}, tick label style={font=\scriptsize}, label style={font=\scriptsize}]
-\addplot+[mark=*] coordinates {(1,40) (150,36) (500,1) (1500,0)};
-\addlegendentry{gpt-4o-mini $A_1$}
-\addplot+[mark=*] coordinates {(1,51) (150,51) (500,44) (1500,44)};
-\addlegendentry{gpt-4o-mini booking$\neq$final}
-\addplot+[mark=*] coordinates {(1,4) (150,13) (500,40) (1500,42)};
-\addlegendentry{gpt-4o-mini $L_1$ residue}
-\addplot+[mark=*] coordinates {(1,46) (150,47) (500,4) (1500,0)};
-\addlegendentry{claude-haiku-4-5 $A_1$}
-\addplot+[mark=*] coordinates {(1,51) (150,51) (500,44) (1500,44)};
-\addlegendentry{claude-haiku-4-5 booking$\neq$final}
-\addplot+[mark=*] coordinates {(1,2) (150,4) (500,46) (1500,42)};
-\addlegendentry{claude-haiku-4-5 $L_1$ residue}
+\begin{axis}[width=\columnwidth, height=4.1cm, symbolic x coords={0,150,500,1500}, xtick=data,
+  xlabel={date-agent start offset after the flight agent's read (ms)}, ylabel={sessions of 100}, ymin=0, ymax=60,
+  legend style={font=\scriptsize, at={(0.5,1.02)}, anchor=south, legend columns=3, draw=none}, tick label style={font=\scriptsize}, label style={font=\scriptsize}, cycle list name=black white]
+\addplot+[dashed, mark=*, mark options={solid}] coordinates {(0,46) (150,47) (500,4) (1500,0)};
+\addlegendentry{haiku \A1 (vanilla)}
+\addplot+[dashed, mark=square*, mark options={solid}] coordinates {(0,40) (150,36) (500,1) (1500,0)};
+\addlegendentry{gpt-4o-mini \A1 (vanilla)}
+\addplot+[dashed, mark=triangle*, mark options={solid}] coordinates {(0,39) (150,20) (500,2) (1500,0)};
+\addlegendentry{deepseek-chat \A1 (vanilla)}
+\addplot+[solid, mark=*] coordinates {(0,2) (150,4) (500,46) (1500,42)};
+\addlegendentry{haiku \Rp{} under $L_1$}
+\addplot+[solid, mark=square*] coordinates {(0,4) (150,13) (500,40) (1500,42)};
+\addlegendentry{gpt-4o-mini \Rp{} under $L_1$}
+\addplot+[solid, mark=triangle*] coordinates {(0,17) (150,26) (500,52) (1500,42)};
+\addlegendentry{deepseek-chat \Rp{} under $L_1$}
 \end{axis}
 \end{tikzpicture}
-\caption{Probe 303: the live \A1 rate and the outcome as a function of the date agent's start offset (revision probability $0.5$; $n=100$ per cell).}
+\caption{Probe 303, offset sweep: the live \A1 rate without a discipline (dashed) and the residue \Rp{} that read-set validation leaves (solid) as the date agent's start is delayed; revision probability $0.5$, $n=100$ per point. As the window closes the same revisions land after the commit: \A1 falls to $0$ while \Rp{} rises to the revision rate.}
 \label{fig:offset}
 \end{figure}

@@ -36,17 +36,15 @@ driver's extreme is unmeasured.
 
 \smallskip\noindent\emph{Verification is relative to the trace, and the
 triangle does not yet close on one system.} Trust-base item (ix) is the
-largest: every record's read set is declared by the instrumentation, and a
-stale read the instrumentation did not declare is invisible. Recovering
-implicit read sets from prompts and tool surfaces is a separate
-problem~\cite{Khan2026SBus}. The scorer that produced the tables is a
-hand-written port gated against the verified predicate rather than the
-verified predicate itself; the refinement from the two concurrent stores to
-their abstract machines is open; $L_3$ is measured on a twin; the
-$L_2$--$L_4$ exec artifacts are sequential objects a multi-threaded caller
-must serialize. The live study's verified arm puts verification and the flagship
-measurement on one system for $L_1$; the ledger arm's executable is harness
-code. Liveness is verified nowhere.
+largest: a stale read the instrumentation did not declare is invisible, and
+recovering implicit read sets is a separate problem~\cite{Khan2026SBus}. The
+scorer is a hand-written port gated against the verified predicate, not the
+predicate itself; the refinement from the two concurrent stores to their
+abstract machines is open; $L_3$ is measured on a twin; the $L_2$--$L_4$
+exec artifacts are sequential objects a multi-threaded caller must
+serialize. The verified arm puts verification and the flagship measurement
+on one system for $L_1$ only; the ledger arm's executable is harness code.
+Liveness is verified nowhere.
 
 \smallskip\noindent\emph{At-most-once externalization is assumed, and a
 deployed path breaks it.} LangGraph's \texttt{interrupt} resumes by
@@ -57,17 +55,16 @@ duplication and we record it as a limitation of the model.
 
 \smallskip\noindent\emph{Prevalence is not established, and the census
 points the other way.} The census bounds a structural precondition in public
-code (none confirmed; at most about half once every unresolved site is
-counted) and says nothing about private deployments, run frequency or the
-cross-thread store variant; its honest reading is that public LangGraph
-code rarely contends. Whether these anomalies occur in production at a rate
+code (none confirmed; at most about half counting every unresolved site)
+and says nothing about private deployments, run frequency or the
+cross-thread store variant; its reading is that public LangGraph code
+rarely contends. Whether these anomalies occur in production at a rate
 that justifies the costs of \cref{sec:cost} is open; the live rates are
-latency races at one offset from single runs of $n=100$ sessions.
+latency races from single runs of $n=100$ sessions per point.
 
 \smallskip\noindent\emph{Not yet run}, each a step of the artifact's runner:
-the swept-offset, multi-run version of the live study and the \Rp{} gate on
-its October records; the interleaved cost rerun (probe~302); a tlapm log for
-\texttt{CommitOrder.tla}; JSON receipts for the $L_2$/$L_4$ measurements; and
-wiring the verified detector into the scorer. Longer tasks, more agents and
+a multi-run repetition of the live cells; the interleaved cost rerun
+(probe~302); a tlapm log for \texttt{CommitOrder.tla}; and wiring the
+verified detector into the scorer. Longer tasks, more agents and
 an instrumented deployment remain the empirical follow-up; the store
 refinements, the formal one.

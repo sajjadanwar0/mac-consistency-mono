@@ -66,9 +66,19 @@ def a1(h):
     return False
 
 
+def obligated(ri, h):
+    """the obligation field, or -- for probe 303's ledger arm, whose ledger registers the obligation by firing the
+    compensator -- a later compensation record on the same effect cell (ledger.register -> compensate -> emit)"""
+    if ri.get("obligation"):
+        return True
+    cells = [c for c in ri.get("write_set", []) if c.startswith(EXTERNAL_PREFIX)]
+    return any(rj.get("compensation") and rj["write_time"] > ri["write_time"] and set(cells) & set(rj.get("write_set", []))
+               for rj in h)
+
+
 def a7(h):
     for i, ri in enumerate(h):
-        if not is_effect(ri) or ri.get("obligation"): continue
+        if not is_effect(ri) or ri.get("compensation") or obligated(ri, h): continue
         for (c, v) in basis(ri):
             later = [rj for rj in h if c in rj.get("write_set", []) and rj["write_time"] > ri["write_time"]]
             if later:
@@ -78,9 +88,54 @@ def a7(h):
     return False
 
 
+def runs_303(fp):
+    """probe 303 records: one file per campaign; a trace is one (mode, session) run, and the offset sweep appends
+    every offset's run of a session to the same file, each opening with its own seed record"""
+    from collections import defaultdict
+    groups = defaultdict(list)
+    for r in load(fp):
+        groups[(r.get("mode"), r.get("session"))].append(r)
+    for (mode, sess), g in groups.items():
+        cur = []
+        for r in g:
+            if r.get("seed") and cur:
+                yield mode, sess, cur; cur = []
+            cur.append(r)
+        if cur:
+            yield mode, sess, cur
+
+
+def october(root, check):
+    """probe 303 campaigns (results/live_a1_outcome/<model>_<run>.records.jsonl): A1 and R re-derived from the records
+    and, with --check, compared with the cells the probe wrote (a1, a7, booking_wrong) in <model>_<run>.json"""
+    bad = 0
+    for fp in sorted(glob.glob(os.path.join(root, "live_a1_outcome", "*.records.jsonl"))):
+        stem = os.path.basename(fp)[:-len(".records.jsonl")]
+        cells = {}
+        try:
+            for c in json.load(open(fp[:-len(".records.jsonl")] + ".json")).get("cells", []):
+                cells[(c["mode"], int(c["offset_ms"]))] = c
+        except Exception:
+            pass
+        from collections import defaultdict
+        tally = defaultdict(lambda: [0, 0, 0, 0])   # (mode, offset) -> n, a1, r, either
+        for mode, sess, h in runs_303(fp):
+            off = next((r.get("offset_ms") for r in h if r.get("offset_ms") is not None), None)
+            x1, x7 = a1(h), a7(h)
+            t = tally[(mode, off)]; t[0] += 1; t[1] += x1; t[2] += x7; t[3] += (x1 or x7)
+        for (mode, off), (n, n1, n7, either) in sorted(tally.items(), key=lambda kv: (str(kv[0][0]), kv[0][1] or 0)):
+            c = cells.get((mode, off)); exp = (c["a1"], c.get("a7"), c["booking_wrong"]) if c else None
+            flag = "" if not c else ("" if exp == (n1, n7, either) else "  MISMATCH vs probe cell " + str(exp))
+            print(f"{stem:34s} {mode:11s} {str(off)+'ms':7s} {n:4d} {n1:4d} {n7:4d} {either:9d}{flag}")
+            if check and c and exp != (n1, n7, either):
+                bad += 1
+    return bad
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(); ap.add_argument("--root", default="results"); ap.add_argument("--check", action="store_true")
     a = ap.parse_args()
+    bad_oct = october(a.root, a.check)
     print(f"{'model':18s} {'mode':11s} {'n':>4s} {'A1':>4s} {'A7':>4s} {'A1 or A7':>9s}   (A1: superseded inside the window; A7: superseded after commit)")
     bad = 0
     for mdir, label in MODELS:
@@ -93,8 +148,9 @@ def main() -> int:
             print(f"{label:18s} {mode:11s} {n:4d} {n1:4d} {n7:4d} {either:9d}")
             if a.check and EXPECTED.get((mdir, mode)) != (n1, n7, either):
                 bad += 1; print(f"  MISMATCH: expected {EXPECTED.get((mdir, mode))}", file=sys.stderr)
+    bad += bad_oct
     if a.check:
-        print("OK: A7 table reproduced" if not bad else f"FAIL: {bad} cell(s) differ"); return 1 if bad else 0
+        print("OK: A7 table reproduced (September cells and every probe-303 cell)" if not bad else f"FAIL: {bad} cell(s) differ"); return 1 if bad else 0
     return 0
 
 

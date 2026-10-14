@@ -5,10 +5,10 @@
 % artifact's receipts and gated by reproduce.sh but not re-run in this audit.
 
 % --- formal (VERIFIED-HERE unless noted) ---
-\newcommand{\VerusCurated}{364}        % PAPER (needs the pinned Verus build)
-\newcommand{\VerusFull}{385}           % PAPER
+\newcommand{\VerusCurated}{371}        % PAPER: verus_count.sh under the pinned build 0.2026.09.13 (364 + the 7 of lib_l5_ledger.rs), 2026-10-13
+\newcommand{\VerusFull}{392}           % PAPER: verus_count.sh --full under the pinned build
 \newcommand{\VerusLoadBearing}{236}    % arithmetic on the per-file table (Sec. 5)
-\newcommand{\VerusScaffold}{128}       % arithmetic on the per-file table
+\newcommand{\VerusScaffold}{135}       % arithmetic on the per-file table (+7: the ledger file)
 \newcommand{\VerusDetector}{24}        % PAPER
 \newcommand{\TlapsHierarchy}{15}       % log committed
 \newcommand{\TlapsLowerBound}{28}      % log committed
@@ -91,10 +91,10 @@
 \newcommand{\NoAsevenStates}{5{,}213{,}012}
 \newcommand{\NoAsevenStatesGthree}{9{,}688{,}601}
 % PENDING (your machine): verus count for lib_l5_ledger.rs; probe 303 --modes ledger outcome
-\newcommand{\LfiveVerus}{\textbf{[verus: pending]}}
+\newcommand{\LfiveVerus}{7 obligations, 0 errors}   % results/verus/lib_l5_ledger.verus.log, pinned build
 % short forms for the abstract / intro: replace with "verified, N obligations" once lib_l5_ledger.rs verifies
-\newcommand{\LfiveVerusStatus}{specified in Verus, its proof pending}
-\newcommand{\LfiveVerusIntro}{specified (proof pending)}
+\newcommand{\LfiveVerusStatus}{verified in Verus (7 obligations, 0 errors)}
+\newcommand{\LfiveVerusIntro}{verified (7 obligations)}
 \newcommand{\LfiveLiveOutcome}{\textbf{[probe 303 -{}-modes ledger: pending]}}
 % per-cell defaults for the verified / ledger rows of Table 3 ("--" = pending); claims_results.tex overrides
 \newcommand{\Pend}{--}
@@ -119,20 +119,20 @@
 \newcommand{\LiveVerifiedOutcome}{\textbf{[probe 303 -{}-modes verified: pending]}}
 
 % --- hypothesis gates (VERIFIED-HERE: harness/macaudit/hypothesis_gates.py --tex, over every committed record) ---
-\newcommand{\HypRecords}{25{,}637}
-\newcommand{\HypTraces}{6{,}588}
+\newcommand{\HypRecords}{35{,}286}     % 25,637 (September campaigns) + 9,649 (probe 303, October); hypothesis_gates.py on each
+\newcommand{\HypTraces}{10{,}188}      % 6,588 + 3,600
 \newcommand{\HypSameAgentOverlaps}{0}
 \newcommand{\HypReadBeforeCommitViolations}{0}
-\newcommand{\HypCampaigns}{14}
-\newcommand{\HypValueUniqueCampaigns}{8}
+\newcommand{\HypCampaigns}{15}
+\newcommand{\HypValueUniqueCampaigns}{9}
 \newcommand{\HypCollisionCells}{126}
 \newcommand{\HypCollisionTraces}{105}
 \newcommand{\HypLiveLtwoSessions}{600}
 \newcommand{\HypLiveLtwoCollisions}{0}
-\newcommand{\HypAOneWitnesses}{292}
+\newcommand{\HypAOneWitnesses}{710}    % 292 + 418
 \newcommand{\HypRestored}{0}
-\newcommand{\HypBookings}{900}
-\newcommand{\HypBasisRecovered}{900}
+\newcommand{\HypBookings}{4{,}500}      % 900 + 3,600
+\newcommand{\HypBasisRecovered}{4{,}500}
 % two-value safety half of lattice16 on the CURRENT model (lattice16_v2.sh); filled in by finalize
 \newcommand{\LatticeVtwoOutcome}{all $32$ safety runs \textsc{safe}, $2.4$--$17.3$M states}
 \newcommand{\LiveLtwoHaikuThousand}{\Pend}

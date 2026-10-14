@@ -25,11 +25,14 @@
 # paper's ~$3m/session that is ~$3 of inference.  Re-runnable: a cell that
 # already holds N traces is skipped.
 set -euo pipefail
-PY="${PY:-python3}"
 N="${N:-100}"; SEED="${SEED:-42}"
 PROVIDER="${PROVIDER:-openai}"; MODEL="${MODEL:-gpt-4o}"
 STAMP="${STAMP:-$(date -u +%Y%m%dT%H%MZ)-interleaved}"
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+# the pilot imports autogen_agentchat: run it inside the pilot's uv project (envs/pilot-legacy), not the system python
+if [ -z "${PY:-}" ]; then
+  if [ -f "$ROOT/envs/pilot-legacy/pyproject.toml" ]; then PY="uv run --project $ROOT/envs/pilot-legacy python"; else PY=python3; fi
+fi
 PILOT="$(ls "$ROOT"/probes/*_autogen_pilot.py | head -1)"
 [ -f "$PILOT" ] || { echo "FAIL: autogen_pilot probe not found under probes/" >&2; exit 1; }
 case "$PROVIDER" in

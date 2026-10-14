@@ -42,7 +42,7 @@ Anomaly witnesses, lattice realizability & \TLA{} & TLC, $|A|{=}2$, $\le2$ cells
 \texttt{detect\_a2} & Verus spec (id, signature) & Verus & $L_4$ dispatcher, scorer & \textbf{proof}; \cref{def:a2} (identifiers) coincides under the re-sign-as-replace encoding; \textbf{encoding stated, not proved} \\
 \texttt{detect\_a3} & Verus spec (unsupported read) & Verus & scorer & \textbf{proof} for the screen; $=$ \cref{def:a3} under value-unique writes, which hold on every scored trace (\texttt{hypothesis\_gates}: \HypLiveLtwoSessions{} sessions, \HypLiveLtwoCollisions{} collisions) \\
 \texttt{detect\_a6} & Verus spec & Verus & scorer & \textbf{proof}; single-record equivalence to \cref{def:a6} \\
-$L_1$ stores window-free & Verus & Verus (lock predicate) & pilot (bytes); live study \emph{validated} arm (application layer) and \emph{verified} arm (bytes via bridge) & \textbf{bytes} in the pilot and the verified arm; \textbf{port} in the validated arm; refinement to the abstract machine \textbf{open} (bounded simulation only) \\
+$L_1$ stores window-free & Verus & Verus (lock predicate) & pilot (bytes); live \emph{verified} arm (bytes via bridge); \emph{validated} arm (application layer) & \textbf{bytes} in the pilot and the verified arm; \textbf{port} in the validated arm; refinement to the abstract machine \textbf{open} \\
 $L_2$ output commit & Verus & Verus & \texttt{l2\_exec} (bytes) & \textbf{bytes}; sequential object, caller serializes \\
 $L_3$ sequencing & Verus & Verus & twin (inspection) & \textbf{port} \\
 $L_4$ validation at dispatch & Verus & Verus & \texttt{l4\_exec} (bytes) & \textbf{bytes} \\

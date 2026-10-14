@@ -6,7 +6,8 @@ The artifact currently states FIVE different Verus obligation totals:
   pilot REPRODUCE.md  331 curated / 352 full
   tla README          338 curated / 359 full
   runtime README      358 curated / (379 full)
-  paper (Sec 4.8)     364 curated / 385 full
+  paper (v3)          364 curated / 385 full
+  paper (v4)          371 curated / 392 full   (pinned build; + lib_l5_ledger.rs)
 and per-file counts that disagree with the paper (lib_l2_safety 22 vs 33,
 lib_l4_safety 5 vs 9, lib_l2_exec 49 vs 73, lib_l4_exec 9 vs 11).  A referee who
 opens any README finds a number that contradicts the paper.
@@ -24,14 +25,14 @@ import argparse, json, os, re, sys
 
 SKELETON = {
     "verus": {
-        "curated_total": 364, "full_total": 385, "errors": 0,
+        "curated_total": 371, "full_total": 392, "errors": 0,   # pinned build 0.2026.09.13, incl. lib_l5_ledger.rs (7)
         "pin": "0.2026.09.13.671956e",
         "per_file": {
             "lib_a3_residue.rs": 6, "lib_a4_split_view.rs": 9, "lib_concurrent_semantics.rs": 9,
             "lib_consistency_lattice.rs": 53, "lib_default_si.rs": 9, "lib_detect_a1_exec.rs": 9,
             "lib_detector_equivalence.rs": 24, "lib_l2_exec.rs": 73, "lib_l2_projection.rs": 3,
             "lib_l2_safety.rs": 33, "lib_l3_exec.rs": 7, "lib_l3_safety.rs": 6, "lib_l3_sequencer.rs": 5,
-            "lib_l4_exec.rs": 11, "lib_l4_safety.rs": 9, "lib_langgraph_refinement.rs": 7,
+            "lib_l4_exec.rs": 11, "lib_l4_safety.rs": 9, "lib_l5_ledger.rs": 7, "lib_langgraph_refinement.rs": 7,
             "lib_occ_l2_refinement.rs": 8, "lib_pessimistic_exec.rs": 5, "lib_pessimistic_invariant.rs": 3,
             "lib_refinement_default_si.rs": 18, "lib_refinement_pessimistic.rs": 31,
             "lib_refinement_ssi_chain.rs": 19, "lib_refinement_ssi.rs": 18, "lib.rs": 23,

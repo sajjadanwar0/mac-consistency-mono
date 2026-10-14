@@ -27,7 +27,7 @@ what the census of \cref{sec:prevalence} asks statically; our detectors
 are polynomial~\cite{BiswasEnea2019Complexity} only because each predicate is
 existential over a constant number of records. Crooks et
 al.~\cite{CrooksEtAl2017Seeing} give the client-centric formulation we do
-not adopt (an agent operation has many clients). Compensation descends from
+not adopt. Compensation descends from
 sagas~\cite{GarciaMolinaSalem1987Sagas}, ConTracts~\cite{ReuterWachter1991ConTract}
 and Gray and Reuter~\cite{GrayReuter1993}; recoverability and strictness
 are Hadzilacos~\cite{Hadzilacos1988Reliability} and Bernstein et
@@ -119,15 +119,11 @@ and continue generating while they complete, with ordering of effects left to
 the runtime. \A6 is a wrong independence judgment seen at the effect level
 (\cref{sec:a6-eval}: made by the backbone, unnoticed by the executor). The run-to-run spread the
 evaluation reports is the documented nondeterminism of sampled
-inference~\cite{AtilEtAl2024Stability}. Sandboxes and policies
-for tool effects---ToolEmu~\cite{RuanEtAl2024ToolEmu},
-AgentDojo~\cite{DebenedettiEtAl2024AgentDojo},
-Progent~\cite{ShiEtAl2025Progent}, AgentSpec~\cite{WangEtAl2025AgentSpec}---gate
-\emph{what} an agent may do; IsolateGPT~\cite{WuEtAl2025IsolateGPT} isolates
-LLM-based applications from one another. All are orthogonal to the order and
-the basis of effects, and compose with the disciplines here.
-$\tau$-bench~\cite{YaoEtAl2024TauBench} scores end state for a single agent
-and isolates neither.
+inference~\cite{AtilEtAl2024Stability}. Sandboxes and policies for tool
+effects~\cite{RuanEtAl2024ToolEmu,DebenedettiEtAl2024AgentDojo,ShiEtAl2025Progent,WangEtAl2025AgentSpec,WuEtAl2025IsolateGPT}
+gate \emph{what} an agent may do, orthogonally to the order and basis of
+effects; $\tau$-bench~\cite{YaoEtAl2024TauBench} scores end state for a
+single agent and isolates neither.
 
 \subsection{Durable execution, exactly-once and repair}
 Durable-execution engines~\cite{TemporalIO,BurckhardtEtAl2021Durable} and
@@ -135,16 +131,15 @@ exactly-once workflow
 systems~\cite{SkiadopoulosEtAl2022DBOS,ZhangEtAl2020Beldi,JiaWitchel2021Boki,QiEtAl2023Halfmoon}
 govern whether an effect is \emph{repeated} after a crash; output commit
 governs whether it may \emph{leave} while its basis can be withdrawn, and the
-two compose, sharing the record-every-nondeterministic-step stance of
-\cref{sec:model}. Rollback
+two compose. Rollback
 recovery~\cite{StromYemini1985Optimistic,ElnozahyEtAl2002Rollback}
 discharges duplicates by identity because replay is deterministic; agent
 runtimes break that premise~\cite{ZhengEtAl2026ACRFence}, and the
 \texttt{interrupt} hazard of \cref{sec:prevalence} is an instance. Retro,
 Warp and Aire~\cite{KimEtAl2010Retro,ChandraEtAl2011Warp,ChandraEtAl2013Aire}
 repair effects that have already left by compensating requests; a refused
-retraction in our $L_2$ is exactly such an effect, and the closure the
-runtime records is the dependency information they consume.
+retraction in our $L_2$ is such an effect, and the recorded closure is the
+dependency information they consume.
 
 \subsection{Verified systems and black-box checkers}
 IronFleet~\cite{HawblitzelEtAl2015IronFleet}, Verdi~\cite{WilcoxEtAl2015Verdi}
@@ -157,19 +152,19 @@ verified bytes executed in a measurement.
 Jepsen~\cite{Kingsbury2013Jepsen} and the black-box
 checkers~\cite{TanEtAl2020Cobra,Aphyr2020Elle,HuangEtAl2023PolySI,ZhangEtAl2023Viper,LiuEtAl2024Plume,ClarkEtAl2024Emme}
 decide serializability or snapshot isolation over database histories with
-unverified analyzers and under a uniqueness assumption we share
-(\cref{sec:a3}); our detectors decide a far simpler property and are verified
-against it, in the tradition of runtime
+unverified analyzers under a uniqueness assumption we share (\cref{sec:a3});
+ours decide a far simpler property and are verified against it, in the
+tradition of runtime
 verification~\cite{HavelundRosu2002,LeuckerSchallhart2009,BauerLeuckerSchallhart2011}.
 
 \subsection{Agent failure taxonomies and verification}
 MAST~\cite{CemriEtAl2025MAST} catalogs cognitive and coordination failures;
-the concurrency class is absent from it because current benchmarks do not
-stress shared state under contention, and its traces cannot show \A1 either
-way (supplement \S\,C). Agentproof~\cite{XavierEtAl2026Agentproof} analyzes
+the concurrency class is absent because current benchmarks do not stress
+shared state under contention, and its traces cannot show \A1 either way
+(supplement \S\,C). Agentproof~\cite{XavierEtAl2026Agentproof} analyzes
 agent graphs statically with witness generation; the census is that
-programme specialized to one predicate, and the obstacle to generalizing it
-is concrete (per-node write sets are not statically derivable in LangGraph).
+programme specialized to one predicate (per-node write sets are not
+statically derivable in LangGraph).
 VeriMAP~\cite{Xu2025VeriMAP}, AgentVerify~\cite{AgentVerify2026} and
 MCMAS~\cite{LomuscioQuRaimondi2017MCMAS} verify task-level and strategic
 properties, a complementary layer.
