@@ -67,11 +67,16 @@ def a1(h):
 
 
 def obligated(ri, h):
-    """the obligation field, or -- for probe 303's ledger arm, whose ledger registers the obligation by firing the
-    compensator -- a later compensation record on the same effect cell (ledger.register -> compensate -> emit)"""
+    """the obligation field; or an explicit obligation record the ledger emits at the superseding put
+    (`obligation_for` = the effect cell; probes 303/304 since 2026-10-14, independent of whether the compensation
+    then succeeded); or -- for the October ledger arm, whose harness ledger registered the obligation only by firing
+    the compensator -- a later compensation record on the same effect cell (that reading is definitional: R = 0 there
+    says the compensator ran, see main paper Table 3 caption)"""
     if ri.get("obligation"):
         return True
     cells = [c for c in ri.get("write_set", []) if c.startswith(EXTERNAL_PREFIX)]
+    if any(rj.get("obligation_for") in cells and rj.get("write_time", 0) >= ri["write_time"] for rj in h):
+        return True
     return any(rj.get("compensation") and rj["write_time"] > ri["write_time"] and set(cells) & set(rj.get("write_set", []))
                for rj in h)
 

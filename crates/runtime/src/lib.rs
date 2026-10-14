@@ -40,6 +40,21 @@ pub mod l2_replay_lib;
 #[allow(dead_code)]
 pub mod l3_sequencer;
 
+// The VERIFIED A1 detector in exec mode, byte-identical to
+// ../verus-detector/src/lib_detect_a1_exec.rs (9 obligations: sound and complete
+// against is_a1_witness), compiled here by plain cargo with the proofs erased,
+// and the interning wrapper that applies it to string-valued OpRecords. The
+// analyser crate scores every published A1 cell through this path
+// (harness/macaudit/verified_scorer_gate.py is the receipt).
+pub mod detect_a1_exec;
+pub mod detect_a1_verified;
+
+// The VERIFIED L3 commit-order sequencer in exec mode, byte-identical to
+// ../verus-detector/src/lib_l3_exec.rs (7 obligations); examples/l3_server.rs
+// puts it behind the ToolNode replay so the measured L3 arm is these bytes.
+pub mod l3_exec;
+
+
 // The VERIFIED L4 dispatcher, byte-identical to
 // ../mac-consistency-pilot/verus-detector/src/lib_l4_exec.rs (round 29):
 // dispatch is refused unless the live registry still binds the planned tool to

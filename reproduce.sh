@@ -133,6 +133,12 @@ hdr 4 "Rescoring gates (python3 only, offline)"
 cd "$ROOT"
 if python3 harness/macaudit/rescore_cells.py --root results >tools/rescore_cells.log 2>&1; then ok "rescore_cells: $(grep -oE '[0-9]+ cells' tools/rescore_cells.log | head -1) rescored under Definition 1, 0 disagreements"; else bad "rescore_cells (tools/rescore_cells.log)"; fi
 if python3 harness/macaudit/predicate_matrix_a1.py --root results --strict >tools/predicate_matrix.log 2>&1; then ok "predicate_matrix_a1: TLA+/Verus/analyser transcriptions agree on every cell"; else bad "predicate_matrix_a1: transcriptions DIVERGE (tools/predicate_matrix.log)"; fi
+# 2026-10-14: the bytes claim and the arm-timing analysis are gates too
+if bash harness/macaudit/verified_bytes_gate.sh >tools/verified_bytes.log 2>&1; then ok "verified_bytes_gate: every measured verified file is byte-identical to its verified source"; else bad "verified_bytes_gate: a measured file DIFFERS from its verified source (tools/verified_bytes.log)"; fi
+if python3 harness/macaudit/arm_timing.py --root results --check >tools/arm_timing.log 2>&1; then ok "arm_timing: the four-arm receipts are complete (sequential blocks; Fisher tests in tools/arm_timing.log)"; else bad "arm_timing: a four-arm receipt is missing or short (tools/arm_timing.log)"; fi
+if [ -f tools/verified_scorer.json ]; then
+  if python3 -c 'import json,sys; d=json.load(open("tools/verified_scorer.json")); sys.exit(1 if d.get("problems") else 0)'; then ok "verified_scorer_gate receipt: every published A1 cell rescored by the verified detector, 0 problems"; else bad "verified_scorer_gate receipt reports problems (tools/verified_scorer.json)"; fi
+else skip "verified_scorer_gate: no receipt yet (run_experiments.sh --only 14 builds the analyser and writes tools/verified_scorer.json)"; fi
 if python3 harness/macaudit/outcome_rescore.py --root results --check >tools/outcome.log 2>&1; then ok "outcome_rescore: booking-outcome table reproduced"; else bad "outcome_rescore (tools/outcome.log)"; fi
 if [ -f harness/macaudit/a7_rescore.py ]; then
   if python3 harness/macaudit/a7_rescore.py --root results --check >tools/a7.log 2>&1; then ok "a7_rescore: A1 + R = (booking != final) on every live cell (Table 3, R column)"; else bad "a7_rescore (tools/a7.log)"; fi

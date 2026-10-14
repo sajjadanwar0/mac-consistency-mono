@@ -1,3 +1,6 @@
+> **SUPERSEDED (historical, kept for provenance).** Figures below are from an earlier round of the artifact;
+> the current numbers are in `CLAIMS.json` at the repository root and in the manuscript. Do not cite this file.
+
 # Hostile review of the submitted version (arXiv:2606.17182, 19 Sep 2026 sources)
 
 Scope of this audit: both documents read in full (25 + 27 pages); every

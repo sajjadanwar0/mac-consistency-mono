@@ -3,10 +3,12 @@
 Reference Rust runtime for the paper **Verified Detection and Prevention of
 Concurrency Anomalies in Multi-Agent Large Language Model Systems**
 (arXiv:2606.17182). It implements the consistency-control backends of the
-L₀–L₄ lattice over a common `Store` trait, ports the four Verus-verified
-anomaly detectors to executable Rust, and runs the verified L₂ runtime
-(`src/l2_exec.rs`) against an unguarded baseline, synthetically and on 600
-recorded live-agent sessions.
+L₀–L₄ lattice over a common `Store` trait, compiles the Verus-verified A1
+detector unchanged (`src/detect_a1_exec.rs`, applied to string-valued records
+by `src/detect_a1_verified.rs`, which the analyser uses for every A1 verdict),
+ports the other three detectors to executable Rust, and runs the verified L₂
+runtime (`src/l2_exec.rs`) against an unguarded baseline, synthetically and on
+600 recorded live-agent sessions.
 
 This is the artifact referenced in §6 as the principal Rust deliverable, plus
 the L₂ measurement and session replay for §5 (executable L₂ runtime).
@@ -27,9 +29,15 @@ This crate **is**:
   pessimistic locking, snapshot isolation (with optional SSI), and the L₂/L₃/L₄
   discipline models (causal tracking with output commit and cascading abort, an
   effect sequencer, registry validation at dispatch).
-- A Rust port of the four detectors (`detect_a1/a2/a3/a6`) proved sound *and*
-  complete in Verus (in `mac-consistency-pilot/verus-detector/`), written to
-  mirror the Verus source line-for-line.
+- The verified A1 detector itself (`src/detect_a1_exec.rs`, byte-identical to
+  `crates/verus-detector/src/lib_detect_a1_exec.rs`, 9 obligations) behind an
+  interning wrapper (`src/detect_a1_verified.rs`, the one unverified piece
+  between the verified bytes and a string-valued `OpRecord`, listed in the
+  paper's trust base), and Rust ports of `detect_a2/a3/a6` that mirror the
+  Verus source line-for-line (`src/detectors.rs`).
+- The verified L₃ sequencer (`src/l3_exec.rs`, byte-identical to
+  `lib_l3_exec.rs`, 7 obligations) behind `examples/l3_server.rs`, so the
+  ToolNode replay can release real effects in the order the verified bytes decide.
 - The verified L₂ runtime (`src/l2_exec.rs`, byte-identical to
   `mac-consistency-pilot/verus-detector/src/lib_l2_exec.rs`) measured against two
   release-at-commit baselines, an unguarded store and the superseded cascade
@@ -40,12 +48,15 @@ This crate **is**:
   effect.
 
 This crate **is not**:
-- Fully verified Rust. The detectors mirror the verified Verus versions by
-  inspection, and the locking and SI runtimes are unverified. `src/l2_exec.rs`
-  and `src/l4_exec.rs` are Verus source, byte-identical copies of the pilot's
-  `lib_l2_exec.rs` (73 verified) and `lib_l4_exec.rs` (11 verified); plain cargo
-  erases their proofs, and every entry point checks its own precondition at run
-  time rather than relying on an erased `requires`.
+- Fully verified Rust. The A2/A3/A6 detectors mirror the verified Verus
+  versions by inspection; the A1 verdict is the verified bytes behind an
+  unverified interning wrapper. `src/l2_exec.rs`, `src/l4_exec.rs`,
+  `src/l3_exec.rs` and `src/detect_a1_exec.rs` are Verus source, byte-identical
+  copies of `lib_l2_exec.rs` (73 verified), `lib_l4_exec.rs` (11),
+  `lib_l3_exec.rs` (7) and `lib_detect_a1_exec.rs` (9); plain cargo erases their
+  proofs, and every entry point checks its own precondition at run time rather
+  than relying on an erased `requires` (`harness/macaudit/verified_bytes_gate.sh`
+  checks the byte identity).
   `verified_si.rs` and `lib_si_validate_exec.rs` are Verus source — standard
   `cargo build`/`cargo test` compiles and runs them as ordinary Rust; the Verus
   toolchain is needed only to *re-check* their proofs.

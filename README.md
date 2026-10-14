@@ -17,6 +17,17 @@ numbered probes (`probes/`) whose receipts are committed (`results/`).
 Every headline figure is in **`CLAIMS.json`**. `./reproduce.sh` re-derives each
 one from committed data and fails on any disagreement; `harness/macaudit/claims_gate.py`
 fails if any README, doc or `.tex` states a figure that `CLAIMS.json` does not.
+The manuscript cites this repository at the tag named in `CLAIMS.json`
+(`artifact.tag`; `scripts/release_tag.sh` creates it after the gates pass).
+
+**What is the verified code, byte for byte.** `harness/macaudit/verified_bytes_gate.sh`
+checks that every file the runtime compiles with plain cargo (proofs erased) is
+byte-identical to the file the pinned Verus build verified: the L1 stores on
+`vstd`'s lock, the L2 output-commit runtime, the L3 sequencer behind
+`examples/l3_server.rs`, the L4 dispatcher, and the A1 detector
+(`detect_a1_exec.rs`) that `crates/analyser` uses for every A1 verdict since
+2026-10-14 (`harness/macaudit/verified_scorer_gate.py` rescores every published
+A1 cell through it and writes `tools/verified_scorer.json`).
 
 ## Single-command audit
 
@@ -44,8 +55,11 @@ crates/runtime/          reference runtime: L0/L1 stores on vstd's verified lock
 crates/verus-detector/   the Verus development (31 files + lib_l5_ledger.rs, the
                          L5 basis-ledger model); verus-version.txt pins the build
                          the counts were measured with
-crates/analyser/         the Rust scorer used on the pilot traces (NOT verified;
-                         see predicate_matrix_a1 for how it differs from Def. 1)
+crates/analyser/         the scorer: its A1 verdict is the VERIFIED exec detector
+                         (runtime::detect_a1_verified -> detect_a1_exec.rs, byte-identical
+                         to the Verus source) with the former hand-written port kept
+                         beside it as a cross-check (--strict fails on disagreement);
+                         A2/A3/A6 remain ports gated against the Verus specs
 formal/tla/              Memory/Anomalies/Guarded/CommitOrder .tla, the MC_* models,
                          lattice16.sh + committed matrices, check_*.sh verdict scripts;
                          Guarded5.tla + mkcfg5.py + lattice32.sh (A7 / G7 basis ledger,
@@ -57,7 +71,10 @@ harness/macaudit/        gates: rescore_cells.py (Def-1 rescoring of every cell)
                          predicate_matrix_a1.py (TLA+/Verus/analyser transcriptions agree),
                          outcome_rescore.py (booking-outcome table), a7_rescore.py
                          (A7 by argument provenance; A1 + A7 = booking != final),
-                         claims_gate.py, verus_count.sh
+                         claims_gate.py (+ --artifact-url / --remote-readme), verus_count.sh,
+                         verified_bytes_gate.sh, verified_scorer_gate.py, arm_timing.py
+                         (are the arms of Table 3 the same race?), live_runs_aggregate.py
+                         (between-run intervals), hypothesis_gates.py H0-H6
 probes/                  numbered probes (101..); `make setup` resolves their envs
 results/                 committed evidence, one directory per campaign:
                          runs/ (AutoGen pilot, 3 stamped runs), live_a1_*/ (LangGraph live),

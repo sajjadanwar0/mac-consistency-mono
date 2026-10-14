@@ -1,3 +1,6 @@
+> **SUPERSEDED (historical, kept for provenance).** Figures below are from an earlier round of the artifact;
+> the current numbers are in `CLAIMS.json` at the repository root and in the manuscript. Do not cite this file.
+
 # What changed in v4, objection by objection
 
 Four external reviews of v3 (scores 4, 7.5, 3, 6 out of 10) converge on nine

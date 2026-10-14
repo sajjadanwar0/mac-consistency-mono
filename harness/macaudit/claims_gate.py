@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""claims_gate.py -- ONE source of truth for every headline number.
+r"""claims_gate.py -- ONE source of truth for every headline number.
 
 The artifact currently states FIVE different Verus obligation totals:
   pilot README        274 curated / 295 full
@@ -19,6 +19,13 @@ claimed one.  Run it in CI and before every submission.
 
     python3 claims_gate.py --claims CLAIMS.json --scan README.md docs paper/*.tex
     python3 claims_gate.py --init          # write a CLAIMS.json skeleton from the paper's figures
+
+Added 2026-10-14 (a referee opens the artifact URL the paper prints, not the working tree):
+    --artifact-url paper/main.tex    the \url{} in the title footnote must name the mono repo AND a
+                                     release tag or commit (CLAIMS.json "artifact": {"url", "tag"});
+    --remote-readme                  fetch the README the artifact URL serves (raw.githubusercontent.com)
+                                     and scan it with the same patterns, so a stale public README fails
+                                     the gate before a reviewer finds it.
 """
 from __future__ import annotations
 import argparse, json, os, re, sys
@@ -71,6 +78,8 @@ def scan(path: str, claims: dict) -> list[str]:
         text = open(path, encoding="utf-8", errors="replace").read()
     except OSError:
         return [f"{path}: unreadable"]
+    if "SUPERSEDED (" in text[:400]:
+        return []          # a bannered historical file: its figures are labeled as superseded
     v = claims["verus"]
     for pat, (sec, k1, k2) in PATTERNS:
         for m in pat.finditer(text):
@@ -89,11 +98,53 @@ def scan(path: str, claims: dict) -> list[str]:
     return problems
 
 
+def artifact_url_check(tex_path: str, claims: dict) -> list[str]:
+    """the paper's artifact footnote must point at the repository and revision CLAIMS.json names"""
+    problems = []
+    art = claims.get("artifact") or {}
+    want_url, want_tag = art.get("url"), art.get("tag")
+    if not want_url or not want_tag:
+        return [f"CLAIMS.json has no artifact.url / artifact.tag (add them: the tag you pushed, e.g. v4.1-tse)"]
+    try:
+        tex = open(tex_path, encoding="utf-8").read()
+    except OSError:
+        return [f"{tex_path}: unreadable"]
+    urls = re.findall(r"\\url\{([^}]*)\}", tex[: tex.find("\\section{") if "\\section{" in tex else len(tex)])
+    if not any(want_url in u for u in urls):
+        problems.append(f"{tex_path}: no \\url{{}} before the first section names the artifact {want_url} (found: {urls[:3]})")
+    if want_tag not in tex:
+        problems.append(f"{tex_path}: the release tag {want_tag} does not appear in the paper (the footnote must pin the revision)")
+    return problems
+
+
+def remote_readme(claims: dict) -> tuple[str | None, list[str]]:
+    art = claims.get("artifact") or {}
+    url, tag = art.get("url"), art.get("tag")
+    if not url:
+        return None, ["CLAIMS.json has no artifact.url"]
+    m = re.search(r"github\.com/([^/]+)/([^/\s]+)", url)
+    if not m:
+        return None, [f"artifact.url {url} is not a github.com URL"]
+    owner, repo = m.group(1), m.group(2).removesuffix(".git")
+    raw = f"https://raw.githubusercontent.com/{owner}/{repo}/{tag or 'main'}/README.md"
+    try:
+        import urllib.request
+        with urllib.request.urlopen(raw, timeout=20) as r:  # noqa: S310
+            text = r.read().decode("utf-8", errors="replace")
+    except Exception as e:  # noqa: BLE001
+        return None, [f"could not fetch {raw}: {e} (push the tag first)"]
+    tmp = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".remote_README.md")
+    open(tmp, "w", encoding="utf-8").write(text)
+    return tmp, []
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--claims", default="CLAIMS.json")
     ap.add_argument("--scan", nargs="*", default=["README.md"])
     ap.add_argument("--init", action="store_true")
+    ap.add_argument("--artifact-url", default=None, help="paper/main.tex: check the artifact footnote against CLAIMS.json artifact.{url,tag}")
+    ap.add_argument("--remote-readme", action="store_true", help="fetch and scan the README the artifact URL serves at artifact.tag")
     a = ap.parse_args()
     if a.init:
         with open(a.claims, "w") as f:
@@ -111,6 +162,16 @@ def main() -> int:
     problems = []
     for f in sorted(set(files)):
         problems += scan(f, claims)
+    if a.artifact_url:
+        problems += artifact_url_check(a.artifact_url, claims)
+    if a.remote_readme:
+        tmp, errs = remote_readme(claims)
+        problems += errs
+        if tmp:
+            rp = scan(tmp, claims)
+            problems += [x.replace(tmp, "REMOTE README") for x in rp]
+            print(f"remote README at artifact.tag scanned: {len(rp)} mismatching figure(s)")
+            os.remove(tmp)
     for p in problems:
         print("CLAIM-MISMATCH", p)
     print(f"{len(files)} file(s) scanned, {len(problems)} mismatching figure(s)")

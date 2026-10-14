@@ -1,0 +1,52 @@
+D reachable: effect before the gate, resume re-issues it     VIOLATED  (expected VIOLATED) 21 distinct states found; witness depth 5
+Error: Invariant AtMostOnce is violated.
+Error: The behavior up to this point is:
+State 1: <Initial predicate>
+/\ emitted = <<>>
+/\ phase = (a1 :> "start")
+/\ cell = v1
+State 2: <Issue(a1) line 64, col 5 to line 69, col 45 of module Duplication>
+/\ emitted = <<[agent |-> a1, arg |-> v1]>>
+/\ phase = (a1 :> "issued")
+/\ cell = v1
+State 3: <Gate(a1) line 73, col 5 to line 75, col 54 of module Duplication>
+/\ emitted = <<[agent |-> a1, arg |-> v1]>>
+/\ phase = (a1 :> "gated")
+/\ cell = v1
+State 4: <Resume(a1) line 79, col 5 to line 83, col 45 of module Duplication>
+/\ emitted = <<[agent |-> a1, arg |-> v1]>>
+/\ phase = (a1 :> "start")
+/\ cell = v1
+State 5: <Issue(a1) line 64, col 5 to line 69, col 45 of module Duplication>
+/\ emitted = <<[agent |-> a1, arg |-> v1], [agent |-> a1, arg |-> v1]>>
+/\ phase = (a1 :> "issued")
+/\ cell = v1
+the two emissions differ (revision during the gate)          VIOLATED  (expected VIOLATED) 33 distinct states found; witness depth 6
+Error: Invariant NoDivergentDuplicate is violated.
+Error: The behavior up to this point is:
+State 1: <Initial predicate>
+/\ emitted = <<>>
+/\ phase = (a1 :> "start")
+/\ cell = v1
+State 2: <Issue(a1) line 64, col 5 to line 69, col 45 of module Duplication>
+/\ emitted = <<[agent |-> a1, arg |-> v1]>>
+/\ phase = (a1 :> "issued")
+/\ cell = v1
+State 3: <Gate(a1) line 73, col 5 to line 75, col 54 of module Duplication>
+/\ emitted = <<[agent |-> a1, arg |-> v1]>>
+/\ phase = (a1 :> "gated")
+/\ cell = v1
+State 4: <Resume(a1) line 79, col 5 to line 83, col 45 of module Duplication>
+/\ emitted = <<[agent |-> a1, arg |-> v1]>>
+/\ phase = (a1 :> "start")
+/\ cell = v1
+State 5: <Revise line 92, col 5 to line 95, col 44 of module Duplication>
+/\ emitted = <<[agent |-> a1, arg |-> v1]>>
+/\ phase = (a1 :> "start")
+/\ cell = v2
+State 6: <Issue(a1) line 64, col 5 to line 69, col 45 of module Duplication>
+/\ emitted = <<[agent |-> a1, arg |-> v1], [agent |-> a1, arg |-> v2]>>
+/\ phase = (a1 :> "issued")
+/\ cell = v2
+idempotency key restores at-most-once (exhaustive)           SAFE      (expected SAFE    ) 1714 distinct states found; witness depth 0
+OK: Duplication.tla verdicts as expected

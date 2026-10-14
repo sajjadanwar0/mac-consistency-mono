@@ -1,4 +1,4 @@
-use crate::anomalies::{detect_a1, detect_a2, detect_a3, detect_a6};
+use crate::anomalies::{detect_a2, detect_a3, detect_a6};
 use crate::oprecord::OpRecord;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -22,8 +22,9 @@ impl Level {
     }
 }
 
-pub fn classify(h: &[OpRecord]) -> Level {
-    if !detect_a1(h).is_empty() {
+/// `a1` is the verified detector's verdict (main.rs); the port is not consulted here.
+pub fn classify(h: &[OpRecord], a1: bool) -> Level {
+    if a1 {
         return Level::L0;
     }
     if !detect_a3(h).is_empty() {

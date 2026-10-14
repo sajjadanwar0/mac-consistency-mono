@@ -9,8 +9,14 @@ inputs it if it exists) and, when a swept-offset run exists, paper/offset_curve.
 
 Receipts understood:
   results/live_a1_outcome/*.json        probe 303 (A1 sweep; verified and ledger arms)
-  results/a6_real_latency/*.jsonl       probe 301 (ToolNode replay against real effects)
+  results/live_a1_outcome/*_arms150i.run<r>.json
+                                        probe 303 --interleave --runs R (2026-10-14): replicated,
+                                        interleaved arms incl. ledger_verified -> Table 3 (replicated rows)
+  results/ledger_world/*.json           probe 304 (the ledger in a world: consumer, cancellation, failures)
+  results/a6_real_latency/*.jsonl       probe 301 (ToolNode replay against real effects; l3_verified arm)
   results/runs/*-interleaved/           probe 302 (interleaved wall-clock rerun; token sidecars)
+  tools/verified_scorer.json            verified_scorer_gate.py (every A1 cell rescored by the verified detector)
+  formal/tla/tlc.Duplication.log        check_duplication.sh (predicate D: witness, divergent witness, dedup safe)
 Nothing is overridden for a receipt that is absent, so the paper keeps printing
 [pending] for exactly the runs that have not happened.
 """
@@ -44,6 +50,8 @@ def probe303(root, out, fig):
     re-derives independently from the records (every cell must agree or the gate fails)."""
     arms = defaultdict(dict); sweep = defaultdict(dict)   # (modelkey, mode, offset) -> cell
     for fp in sorted(glob.glob(os.path.join(root, "live_a1_outcome", "*.json"))):
+        if ".run" in os.path.basename(fp):          # replicated interleaved runs: probe303_runs() reads those
+            continue
         try:
             d = json.load(open(fp))
         except Exception:
@@ -127,20 +135,38 @@ def probe303(root, out, fig):
 
 
 def probe301(root, out):
+    """<backend>.jsonl: the committed replay (baseline vs the sequential-loop L3 arm);
+    <backend>_verified.jsonl: the same batches replayed with the verified L3 bytes deciding the release
+    order under concurrent dispatch (probe 301 --l3-server), with its own baseline count."""
     for backend in ("sqlite", "http"):
         fp = os.path.join(root, "a6_real_latency", f"{backend}.jsonl")
-        if not os.path.exists(fp):
-            continue
-        n = reord = 0
-        for line in open(fp):
-            line = line.strip()
-            if not line:
-                continue
-            r = json.loads(line); n += 1; reord += int(bool(r.get("baseline_a6")))
-        if n:
-            out.append(f"% --- probe 301 ({fp}) ---")
-            out.append(f"\\renewcommand{{\\ToolNodeReal{backend.capitalize()}}}{{${reord}/{n}$}}")
-            SUMMARY.setdefault("probe301", {})[backend] = {"replays": n, "baseline_a6": reord}
+        if os.path.exists(fp):
+            n = reord = 0
+            for line in open(fp):
+                line = line.strip()
+                if not line:
+                    continue
+                r = json.loads(line); n += 1; reord += int(bool(r.get("baseline_a6")))
+            if n:
+                out.append(f"% --- probe 301 ({fp}) ---")
+                out.append(f"\\renewcommand{{\\ToolNodeReal{backend.capitalize()}}}{{${reord}/{n}$}}")
+                SUMMARY.setdefault("probe301", {})[backend] = {"replays": n, "baseline_a6": reord}
+        fv = os.path.join(root, "a6_real_latency", f"{backend}_verified.jsonl")
+        if os.path.exists(fv):
+            nv = vreord = vbase = 0
+            for line in open(fv):
+                line = line.strip()
+                if not line:
+                    continue
+                r = json.loads(line)
+                if "l3_verified_a6" in r:
+                    nv += 1; vreord += int(bool(r["l3_verified_a6"])); vbase += int(bool(r.get("baseline_a6")))
+            if nv:
+                out.append(f"% --- probe 301 --l3-server ({fv}) ---")
+                out.append(f"\\renewcommand{{\\ToolNodeVerified{backend.capitalize()}}}{{${vreord}/{nv}$}}")
+                out.append(f"\\renewcommand{{\\ToolNodeVerifiedBaseline{backend.capitalize()}}}{{${vbase}/{nv}$}}")
+                out.append("\\renewcommand{\\ToolNodeVerifiedAvailable}{1}")
+                SUMMARY.setdefault("probe301", {})[backend + "_verified"] = {"replays": nv, "baseline_a6": vbase, "l3_verified_a6": vreord}
 
 
 def probe302(root, out, boot=2000, seed=1):
@@ -211,6 +237,110 @@ def verus(root, out):
             out.append(f"\\renewcommand{{\\LfiveVerusIntro}}{{verified ({m.group(1)} obligations)}}")
 
 
+def probe303_runs(root, out):
+    """replicated, interleaved arms: <model>_arms150i.run<r>.json -> per-cell per-run values and pooled counts"""
+    import re
+    runs = defaultdict(list)
+    for fp in sorted(glob.glob(os.path.join(root, "live_a1_outcome", "*_arms150i.run*.json"))):
+        try:
+            d = json.load(open(fp))
+        except Exception:
+            continue
+        runs[MODEL_KEY.get(d.get("model", ""), None)].append(d)
+    runs.pop(None, None)
+    if not runs:
+        return
+    out.append("% --- probe 303 --interleave --runs (results/live_a1_outcome/*_arms150i.run*.json): replicated Table 3 rows ---")
+    out.append("\\renewcommand{\\LiveRunsAvailable}{1}")
+    for mk, ds in sorted(runs.items()):
+        ds.sort(key=lambda d: d.get("run", 0)); R = len(ds); n = ds[0]["n"]
+        out.append(f"\\providecommand{{\\LiveRuns{mk}}}{{{R}}}")
+        cells = defaultdict(dict)
+        for r, d in enumerate(ds):
+            for c in d["cells"]:
+                if int(c["offset_ms"]) == 150:
+                    cells[c["mode"]][r] = c
+        for mode, by_run in cells.items():
+            mname = {"vanilla": "Vanilla", "validated": "Validated", "verified": "Verified", "ledger": "Ledger", "ledger_verified": "LedgerVerified"}.get(mode, mode.title().replace("_", ""))
+            for key, label in (("a1", "AOne"), ("a7", "R"), ("booking_wrong", "Wrong"), ("regenerations", "Regen")):
+                vals = [by_run[r][key] for r in sorted(by_run)]
+                pooled = sum(vals); N = n * len(vals)
+                if key == "regenerations":
+                    out.append(f"\\providecommand{{\\Runs{mk}{mname}{label}}}{{{'/'.join(map(str, vals))}}}")
+                else:
+                    try:
+                        from scipy.stats import beta
+                        lo = 0.0 if pooled == 0 else float(beta.ppf(0.025, pooled, N - pooled + 1)); hi = 1.0 if pooled == N else float(beta.ppf(0.975, pooled + 1, N - pooled))
+                        ci = f" [{100*lo:.1f}, {100*hi:.1f}]"
+                    except Exception:
+                        ci = ""
+                    out.append(f"\\providecommand{{\\Runs{mk}{mname}{label}}}{{{'/'.join(map(str, vals))} (${pooled}/{N}${ci})}}")
+            lag = [by_run[r].get("revision_lag_ms", {}).get("after_commit") for r in sorted(by_run)]
+            if all(x is not None for x in lag):
+                out.append(f"\\providecommand{{\\Runs{mk}{mname}LagAfter}}{{{'/'.join(map(str, lag))}}}")
+            SUMMARY.setdefault("probe303_runs", {})[f"{mk}|{mode}"] = {k: [by_run[r][k] for r in sorted(by_run)] for k in ("a1", "a7", "booking_wrong", "regenerations")}
+            SUMMARY["probe303_runs"][f"{mk}|{mode}"]["lag_after_commit"] = lag
+            SUMMARY["probe303_runs"][f"{mk}|{mode}"]["interleaved"] = [d.get("interleaved") for d in ds]
+
+
+def probe304(root, out):
+    """the ledger in a world (results/ledger_world/<model>.json)"""
+    found = False
+    for fp in sorted(glob.glob(os.path.join(root, "ledger_world", "*.json"))):
+        try:
+            d = json.load(open(fp))
+        except Exception:
+            continue
+        mk = MODEL_KEY.get(d.get("model", ""), None)
+        if not mk:
+            continue
+        if not found:
+            out.append("% --- probe 304 (results/ledger_world): the ledger with a consumer, a cancellation step and a fallible compensator ---")
+            out.append("\\renewcommand{\\LedgerWorldAvailable}{1}")
+            out.append(f"\\renewcommand{{\\LedgerWorldRevisions}}{{{d.get('revisions')}}}")
+            out.append(f"\\renewcommand{{\\LedgerWorldPCancelFail}}{{{d.get('p_cancel_fail')}}}")
+            out.append(f"\\renewcommand{{\\LedgerWorldPRebookFail}}{{{d.get('p_rebook_fail')}}}")
+            out.append(f"\\renewcommand{{\\LedgerWorldConsumerMaxMs}}{{{d.get('consumer_max_ms')}}}")
+            found = True
+        for c in d.get("cells", []):
+            mname = {"validated": "Validated", "ledger": "Ledger", "ledger_norollback": "LedgerNoRollback"}.get(c["mode"], c["mode"].title().replace("_", ""))
+            n = c["n"]
+            for key, label in (("a7", "R"), ("store_wrong", "StoreWrong"), ("world_wrong_sessions", "WorldWrong"), ("world_none", "WorldNone"),
+                               ("double_booked", "Double"), ("consumer_saw_stale", "ConsumerStale"), ("consumer_saw_none", "ConsumerNone")):
+                out.append(f"\\providecommand{{\\LW{mk}{mname}{label}}}{{{c.get(key, 0)}}}")
+            out.append(f"\\providecommand{{\\LW{mk}{mname}Obl}}{{{c.get('obligations_registered', 0)}/{c.get('obligations_discharged', 0)}/{c.get('obligations_failed', 0)}}}")
+            out.append(f"\\providecommand{{\\LW{mk}{mname}N}}{{{n}}}")
+            SUMMARY.setdefault("probe304", {})[f"{mk}|{c['mode']}"] = {k: v for k, v in c.items() if k != "sessions"}
+
+
+def gates(root, out):
+    """receipts of the gates that have no probe: the verified scorer gate and the TLC duplication check"""
+    vs = os.path.join(os.path.dirname(root.rstrip("/")) or ".", "tools", "verified_scorer.json")
+    if os.path.exists(vs):
+        try:
+            d = json.load(open(vs)); cells = d.get("cells", {}); probs = d.get("problems", [])
+            out.append(f"% --- verified_scorer_gate ({vs}) ---")
+            out.append(f"\\renewcommand{{\\VerifiedScorerCells}}{{{len(cells)}}}")
+            out.append(f"\\renewcommand{{\\VerifiedScorerTraces}}{{{tex_num(sum(c['n'] for c in cells.values()))}}}")
+            out.append(f"\\renewcommand{{\\VerifiedScorerProblems}}{{{len(probs)}}}")
+            out.append("\\renewcommand{\\VerifiedScorerAvailable}{1}")
+            SUMMARY["verified_scorer"] = {"cells": len(cells), "traces": sum(c["n"] for c in cells.values()), "problems": probs}
+        except Exception:
+            pass
+    tl = os.path.join(os.path.dirname(root.rstrip("/")) or ".", "formal", "tla", "tlc.Duplication.log")
+    if os.path.exists(tl):
+        txt = open(tl, errors="replace").read()
+        import re
+        st = re.findall(r"(VIOLATED|SAFE)\s+\(expected (VIOLATED|SAFE)\s*\)\s+([0-9,]+) distinct states found; witness depth (\d+)", txt)
+        if len(st) == 3 and all(a == b for a, b, _, _ in st):
+            out.append(f"% --- check_duplication.sh ({tl}) ---")
+            out.append(f"\\renewcommand{{\\DupWitnessDepth}}{{{st[0][3]}}}")
+            out.append(f"\\renewcommand{{\\DupDivergentDepth}}{{{st[1][3]}}}")
+            out.append(f"\\renewcommand{{\\DupDedupStates}}{{{tex_num(int(st[2][2].replace(',', '')))}}}")
+            out.append("\\renewcommand{\\DupAvailable}{1}")
+            SUMMARY["tlc_duplication"] = {"witness_depth": st[0][3], "divergent_depth": st[1][3], "dedup_states": st[2][2]}
+
+
 def from_summary(fp, out):
     """merge the macros of an uploaded summary for receipts this checkout lacks (never overrides a macro computed here)"""
     try:
@@ -233,9 +363,12 @@ def main() -> int:
     a = ap.parse_args()
     out = ["% generated by harness/macaudit/claims_from_results.py -- do not edit; re-run the probes instead"]
     probe303(a.root, out, os.path.join(a.paper, "offset_curve.tex"))
+    probe303_runs(a.root, out)
+    probe304(a.root, out)
     probe301(a.root, out)
     probe302(a.root, out)
     verus(a.root, out)
+    gates(a.root, out)
     if a.from_summary:
         from_summary(a.from_summary, out)
     os.makedirs(a.paper, exist_ok=True)

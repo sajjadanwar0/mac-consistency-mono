@@ -94,24 +94,56 @@ def cells(root: str):
                 yield d, files
 
 
+def cells_303(root: str):
+    """probe-303 campaigns (2026-10-14): one trace per (mode, session, run) from <model>_<run>.records.jsonl,
+    split by seed record (the sweep appends every offset's run of a session to one file)"""
+    from collections import defaultdict
+    for fp in sorted(glob.glob(os.path.join(root, "live_a1_outcome", "*.records.jsonl"))):
+        stem = os.path.basename(fp)[:-len(".records.jsonl")]
+        groups = defaultdict(list)
+        for r in load(fp):
+            groups[(r.get("mode"), r.get("session"))].append(r)
+        by_cell = defaultdict(list)
+        for (mode, sess), g in groups.items():
+            cur = []
+            for r in g:
+                if r.get("seed") and cur:
+                    by_cell[(mode, next((x.get("offset_ms") for x in cur if x.get("offset_ms") is not None), None))].append(cur); cur = []
+                cur.append(r)
+            if cur:
+                by_cell[(mode, next((x.get("offset_ms") for x in cur if x.get("offset_ms") is not None), None))].append(cur)
+        for (mode, off), hs in sorted(by_cell.items(), key=lambda kv: (str(kv[0][0]), kv[0][1] or 0)):
+            yield f"live_a1_outcome/{stem}/{mode}@{off}ms", hs
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--root", default="results")
     ap.add_argument("--strict", action="store_true")
+    ap.add_argument("--tex", action="store_true", help="print the rows of the supplement's transcription-gate table")
     a = ap.parse_args()
     print(f"{'cell':52s} {'n':>5s} {'Def1':>5s} {'Verus':>5s} {'analyser':>8s}")
-    diverging = 0
-    for name, files in cells(a.root):
+    diverging = 0; rows = []
+    def score(name, histories):
+        nonlocal diverging
         n = d1 = dv = da = 0
-        for fp in files:
-            h = load(fp)
+        for h in histories:
             n += 1
             d1 += fires(h, "def1"); dv += fires(h, "verus"); da += fires(h, "analyser")
         flag = "" if d1 == dv == da else "   <-- DIVERGES"
         if flag:
             diverging += 1
         print(f"{name:52s} {n:5d} {d1:5d} {dv:5d} {da:8d}{flag}")
+        rows.append((name, n, d1, dv, da))
+    for name, files in cells(a.root):
+        score(name, (load(fp) for fp in files))
+    for name, hs in cells_303(a.root):
+        score(name, hs)
     print(f"cells where the three transcriptions disagree: {diverging}")
+    if a.tex:
+        print("% --- transcription-gate rows (predicate_matrix_a1.py --tex) ---")
+        for name, n, d1, dv, da in rows:
+            print(f"{name.replace('_', chr(92)+'_')} & {n} & {d1} & {'same' if dv == d1 else dv} & {'same' if da == d1 else da} \\\\")
     if a.strict and diverging:
         return 1
     return 0

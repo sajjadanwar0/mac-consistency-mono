@@ -139,5 +139,10 @@
    "reordered": 0
   },
   "l3_reordered": 0
+ },
+ "artifact": {
+  "url": "https://github.com/sajjadanwar0/mac-consistency-mono",
+  "tag": "v4.1-tse",
+  "note": "the tag the paper's footnote pins; push it with scripts/release_tag.sh before submission"
  }
 }

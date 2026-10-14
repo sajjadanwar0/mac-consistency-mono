@@ -15,6 +15,17 @@ those hypotheses the data satisfies, and prints the counts the paper quotes.
       booking records, how many carry their read date verbatim in the effect's
       arguments (write values or booking text), i.e. how many bases the
       argument-provenance extractor recovers.
+  H5  at-most-once externalization (the runtime model's assumption, stated as
+      predicate D in formal/tla/Duplication.tla): within one trace, an external
+      effect key (trip/bookings/*) written by two or more non-compensation
+      records is a duplicate emission.  The interrupt probe's receipt
+      (results/python_loose/interrupt_probe_results.json) is reported beside it:
+      the one place the artifact observed the hypothesis fail.
+  H6  declared vs observed read sets (trust-base item ix, at the store boundary):
+      on records that carry `observed_read_set` (probes 303/304 since 2026-10-14),
+      the store keys the node actually read between its first read and its
+      commit; a key read but not declared is an undeclared store read.  Reads
+      that reach the model through prompt context are outside this instrument.
 
     python3 harness/macaudit/hypothesis_gates.py --root results            # report
     python3 harness/macaudit/hypothesis_gates.py --root results --check    # exit 1 if H1 fails anywhere
@@ -82,7 +93,7 @@ def campaign(fp, root):
 
 def h0_read_before_commit(rs):
     """records (seed excluded) whose read_time is not strictly before their write_time"""
-    return sum(1 for r in rs if not r.get("seed") and not (r["read_time"] < r["write_time"]))
+    return sum(1 for r in rs if not r.get("seed") and not r.get("obligation_for") and not (r["read_time"] < r["write_time"]))
 
 
 def h1_overlaps(rs):
@@ -90,7 +101,7 @@ def h1_overlaps(rs):
     n = 0
     by_agent = defaultdict(list)
     for r in rs:
-        if r.get("seed"):
+        if r.get("seed") or r.get("obligation_for"):     # seed writes and ledger registrations are not operations
             continue
         by_agent[r.get("agent")].append((r["read_time"], r["write_time"]))
     for ag, ws in by_agent.items():
@@ -156,6 +167,31 @@ def h4_recall(rs):
     return tot, rec
 
 
+def h5_duplicates(rs):
+    """(external effect keys, keys written by >= 2 non-compensation records in this trace)"""
+    writers = defaultdict(int)
+    for r in rs:
+        if r.get("compensation"):
+            continue
+        for c in r.get("write_set", []):
+            if c.startswith(EXTERNAL_PREFIX):
+                writers[c] += 1
+    return len(writers), sum(1 for c, n in writers.items() if n >= 2)
+
+
+def h6_coverage(rs):
+    """(records carrying observed_read_set, records with an undeclared store read)"""
+    tot = und = 0
+    for r in rs:
+        obs = r.get("observed_read_set")
+        if obs is None:
+            continue
+        tot += 1
+        if set(obs) - set(r.get("read_set", [])):
+            und += 1
+    return tot, und
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--root", default="results"); ap.add_argument("--check", action="store_true"); ap.add_argument("--tex", action="store_true")
@@ -163,7 +199,7 @@ def main() -> int:
     ap.add_argument("--include-mock", action="store_true", help="count *mock* campaigns (excluded from the paper's totals by default)")
     a = ap.parse_args()
     per = defaultdict(lambda: {"traces": 0, "records": 0, "h0": 0, "h1": 0, "h2_multi": 0, "h2_coll": 0, "h2_traces_with_coll": 0,
-                               "a1": 0, "restored": 0, "book": 0, "recall": 0})
+                               "a1": 0, "restored": 0, "book": 0, "recall": 0, "ext": 0, "dup": 0, "obs": 0, "und": 0})
     for fp, rs in traces(a.root):
         c = campaign(fp, a.root)
         if "mock" in c and not a.include_mock:
@@ -176,6 +212,8 @@ def main() -> int:
         if c.startswith("live_a1"):
             w, r = h3_restored(rs); d["a1"] += w; d["restored"] += r
             t, r2 = h4_recall(rs); d["book"] += t; d["recall"] += r2
+        e, k = h5_duplicates(rs); d["ext"] += e; d["dup"] += k
+        o, u = h6_coverage(rs); d["obs"] += o; d["und"] += u
     # the live L2 replay: the one live campaign the A3 residue detector scores; one plan cell and one
     # result cell per session, so value-uniqueness is the question whether the two values differ
     l2n = l2bad = 0
@@ -201,6 +239,15 @@ def main() -> int:
         print(f"H2 (live L2 replay, where the A3 residue detector is scored): {l2n} sessions, value collision in {l2bad}")
     print(f"H3: {tot['restored']} of {tot['a1']} live A1 witnesses are overwrite-restore shapes")
     print(f"H4: argument provenance recovers the basis of {tot['recall']}/{tot['book']} live booking records")
+    ip = os.path.join(a.root, "python_loose", "interrupt_probe_results.json"); ip_before = ip_div = None
+    if os.path.exists(ip):
+        try:
+            j = json.load(open(ip)); ip_before = len(j.get("effects_before", [])); ip_div = bool(j.get("effects_diverge"))
+        except Exception:
+            pass
+    print(f"H6: {tot['und']} undeclared store reads over {tot['obs']} records that carry an observed read set (0 records = no run has carried it yet)")
+    print(f"H5: {tot['dup']} external effect keys emitted twice over {tot['ext']} externalized effects in the committed records"
+          + (f"; the interrupt probe emitted the pre-gate effect {ip_before} times (arguments diverge: {ip_div})" if ip_before is not None else ""))
     if a.tex:
         print("\n% --- hypothesis gates (harness/macaudit/hypothesis_gates.py --tex) ---")
         print(f"\\newcommand{{\\HypRecords}}{{{tot['records']:,}}}".replace(",", "{,}"))
@@ -217,6 +264,12 @@ def main() -> int:
         print(f"\\newcommand{{\\HypRestored}}{{{tot['restored']}}}")
         print(f"\\newcommand{{\\HypBookings}}{{{tot['book']}}}")
         print(f"\\newcommand{{\\HypBasisRecovered}}{{{tot['recall']}}}")
+        print(f"\\newcommand{{\\HypExternalEffects}}{{{tot['ext']:,}}}".replace(",", "{,}"))
+        print(f"\\newcommand{{\\HypDuplicateEffects}}{{{tot['dup']}}}")
+        print(f"\\newcommand{{\\HypObservedRecords}}{{{tot['obs']:,}}}".replace(",", "{,}"))
+        print(f"\\newcommand{{\\HypUndeclaredReads}}{{{tot['und']}}}")
+        if ip_before is not None:
+            print(f"\\newcommand{{\\HypInterruptEmissions}}{{{ip_before}}}")
     if a.check and (tot["h1"] or tot["h0"]):
         print("FAIL: Theorem 1's hypotheses do not hold on this data (H0 read-before-commit or H1 per-agent non-overlap violated)"); return 1
     return 0

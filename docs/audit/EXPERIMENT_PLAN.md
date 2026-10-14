@@ -1,3 +1,6 @@
+> **SUPERSEDED (historical, kept for provenance).** Figures below are from an earlier round of the artifact;
+> the current numbers are in `CLAIMS.json` at the repository root and in the manuscript. Do not cite this file.
+
 # Experiment plan (v4): one command, thirteen steps, sized to your balances
 
 Budgets this plan is sized to: **Claude $200, OpenAI $2.66, DeepSeek $4.28.**

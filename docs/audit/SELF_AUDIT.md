@@ -1,3 +1,6 @@
+> **SUPERSEDED (historical, kept for provenance).** Figures below are from an earlier round of the artifact;
+> the current numbers are in `CLAIMS.json` at the repository root and in the manuscript. Do not cite this file.
+
 # Hostile re-review of v4 (`paper/main.pdf`, 16 pp. + `paper/supplement.pdf`, 30 pp.)
 
 v4 answers four external reviews of v3 (4, 7.5, 3, 6 /10). `REVIEWER_RESPONSE.md`

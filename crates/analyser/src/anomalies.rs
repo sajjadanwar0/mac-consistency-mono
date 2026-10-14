@@ -91,10 +91,17 @@ pub fn detect_a3(h: &[OpRecord]) -> Vec<Witness> {
     out
 }
 
+/// Definition 5 verbatim: |io| >= 2, co != io, and co a permutation of io
+/// (a dropped or duplicated effect is NOT a reordering and does not fire;
+/// the earlier port fired on any io != co, which was not the definition).
 pub fn detect_a6(h: &[OpRecord]) -> Vec<Witness> {
     let mut out = Vec::new();
     for (i, op) in h.iter().enumerate() {
-        if op.io != op.co && !op.io.is_empty() {
+        let mut a = op.io.clone();
+        let mut b = op.co.clone();
+        a.sort();
+        b.sort();
+        if op.io.len() >= 2 && op.io != op.co && a == b {
             out.push(Witness {
                 i,
                 j: i,

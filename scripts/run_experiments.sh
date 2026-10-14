@@ -35,6 +35,24 @@
 #  12    L2/L4 measurement receipts (cargo examples, seeded)           cargo            $0             5 min
 #  13    fold every receipt into results/paper_receipts_summary.json;  python3          $0             1 min
 #        run the gates; print what to upload
+#  --- added 2026-10-14 (the second hostile round: verified bytes in the scoring path, arm timing, the
+#      ledger in a world, at-most-once, replication) ---
+#  14    cargo: build the analyser (A1 by the VERIFIED detector) and     cargo            $0             5 min
+#        l3_server; verified_bytes_gate; verified_scorer_gate over
+#        EVERY published A1 cell -> tools/verified_scorer.json
+#  15    probe 301 with --l3-server: ToolNode replay, real effects,     none             $0             15 min
+#        third arm = verified L3 bytes deciding the release order
+#  16    TLC: Duplication.tla (predicate D, witness + dedup)            java             $0             1 min
+#  17    probe 303 --interleave --runs 3, five arms (vanilla, validated, Claude, OpenAI,  haiku ~$4,     ~4 h
+#        verified, ledger, ledger_verified), n=100, 150 ms, on haiku,   DeepSeek         4o-mini ~$0.8,
+#        gpt-4o-mini, deepseek-chat -> Table 3 replicated rows                           deepseek ~$0.8
+#  18    probe 304: the ledger in a WORLD (consumer, cancellation,      Claude, OpenAI,  haiku ~$1.5,   ~1.5 h
+#        fallible compensator, two revisions), n=100, three arms,       DeepSeek         4o-mini ~$0.3,
+#        on the same three families                                                      deepseek ~$0.3
+#  19    arm_timing + live_runs_aggregate + hypothesis_gates --tex      python3          $0             2 min
+#        (claims_results.tex gets the new macros; then run 13 again)
+#  Claude-side reruns that existed before: 6 (probe 302 on sonnet, ~$15-25) and 11 (the pilot replication
+#  with op-records; its triage cells are void and must be DELETED and rerun with the seeded-ticket reporter).
 set -uo pipefail   # not -e: a failing step is recorded and the next step still runs (summary at the end)
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"; cd "$ROOT"
 DRY=0; FORCE=0; ONLY=""; FROM=1
@@ -185,10 +203,15 @@ if want 11; then log 11 "pilot replication WITH op-records on claude-sonnet-4-5 
     if [ "$(ls "$RUN/$wl-$rt"/*.jsonl 2>/dev/null | wc -l)" -ge 100 ] && [ "$FORCE" = 0 ]; then echo "  $RUN/$wl-$rt has 100 traces, skipping"; continue; fi
     run "$UVA $PILOT --provider anthropic --model claude-sonnet-4-5 --workload $wl --runtime $rt --n 100 --seed 42 --output $RUN/$wl-$rt --tokens-output $RUN/tokens-$wl-$rt"
   done; done
-  # a void triage cell (every ticket "no bug description provided") means the reporter never received the ticket text
-  if [ "$DRY" = 0 ] && [ -d "$RUN/triage-vanilla" ] && grep -lq "No bug description" "$RUN"/triage-vanilla/*.jsonl 2>/dev/null; then
-    echo "  WARN: $RUN/triage-vanilla holds tickets without a description ($(grep -l 'No bug description' "$RUN"/triage-vanilla/*.jsonl | wc -l) sessions): the cell is void; see the step-11 note in EXPERIMENT_PLAN.md"
-  fi
+  # a void triage cell (every ticket "no bug description provided"): the reporter was never given a bug to report;
+  # since 2026-10-14 the pilot hands it one (--seeded-tickets, default on) -- a cell recorded under the old protocol
+  # is detected here and must be deleted and rerun:  rm -r "$RUN"/triage-*  then  --only 11
+  for cell in "$RUN"/triage-*; do
+    [ -d "$cell" ] || continue
+    if [ "$DRY" = 0 ] && grep -lqi "no bug description" "$cell"/*.jsonl 2>/dev/null; then
+      echo "  WARN: $cell holds tickets without a description ($(grep -li 'no bug description' "$cell"/*.jsonl | wc -l) sessions): VOID under the old protocol -- rm -r $cell and rerun --only 11"
+    fi
+  done
   run "python3 harness/macaudit/rescore_cells.py --root results | tail -12"; fi
 
 if want 12; then log 12 "L2/L4 measurement receipts (seeded cargo examples; their text output is the receipt)"
@@ -213,12 +236,62 @@ PY
   cat <<EOF
 
 UPLOAD these to the chat and the paper is regenerated from them:
-  results/paper_receipts_summary.json          (everything: probe 303/301/302 numbers, Verus counts, ledger log)
+  results/paper_receipts_summary.json          (everything: probe 303/301/302/304 numbers, Verus counts, ledger log, gates)
+  tools/verified_scorer.log  tools/arm_timing.log  tools/live_runs.log  tools/hypothesis_gates.log   (step 14 / 19 receipts)
+  formal/tla/tlc.Duplication.log               (step 16)
   results/verus/lib_l5_ledger.verus.log        (if step 7 ran and it is not already inside the summary)
   results/live_l2_haiku1000.log                (if step 10 ran)
   tools/rescore_cells.log  or the last 30 lines of step 11's output   (if step 11 ran)
 EOF
 fi
+
+if want 14; then log 14 "cargo: the analyser scores A1 with the VERIFIED detector; l3_server; the two bytes gates"
+  run "bash harness/macaudit/verified_bytes_gate.sh"
+  run "cargo build --release -p mac-analyser 2>&1 | tail -3"
+  run "cargo build --release --manifest-path crates/runtime/Cargo.toml --example l3_server 2>&1 | tail -3"
+  run "cargo test --release -p agent-consistency-runtime detect_a1_verified 2>&1 | tail -5"
+  AN="$( { ls target/release/analyser crates/analyser/target/release/analyser 2>/dev/null || true; } | head -1)"
+  run "python3 harness/macaudit/verified_scorer_gate.py --analyser ${AN:-target/release/analyser} --root results --out tools/verified_scorer.json 2>&1 | tee tools/verified_scorer.log | tail -8"; fi
+
+L3SERVER="${L3SERVER:-$( { ls target/release/examples/l3_server crates/runtime/target/release/examples/l3_server 2>/dev/null || true; } | head -1)}"
+if want 15; then log 15 "probe 301 with the verified L3 sequencer deciding the release order (no key)"
+  [ -n "$L3SERVER" ] || { echo "  FAIL: l3_server not built (run --only 14)"; FAILED+=("l3_server missing"); }
+  for eff in sqlite http; do
+    out="results/a6_real_latency/${eff}_verified.jsonl"
+    if [ -f "$out" ] && [ "$FORCE" = 0 ]; then echo "  $out exists, skipping"; continue; fi
+    run "$UVG5 probes/301_a6_toolnode_real_latency.py --batches results/langgraph_a6_natural --effect $eff --reps 5 --l3-server $L3SERVER --out $out"
+  done
+  # claims_from_results.py reads {sqlite,http}.jsonl (step 4, the committed baseline) AND {sqlite,http}_verified.jsonl (this step)
+  fi
+
+if want 16; then log 16 "TLC: Duplication.tla (predicate D: witness, divergent witness, idempotency guard)"
+  J="${TLA_TOOLS:-$ROOT/tools/tla2tools.jar}"
+  [ -f "$J" ] || run "curl -sSL -o $J https://github.com/tlaplus/tlaplus/releases/download/v1.8.0/tla2tools.jar"
+  run "(cd formal/tla && ./check_duplication.sh $J 2>&1 | grep -v JAVA_TOOL_OPTIONS | tee tlc.Duplication.log | tail -4)"; fi
+
+if want 17; then log 17 "probe 303 --interleave --runs 3: five arms per session, three families (Table 3 replicated rows)"
+  need_key ANTHROPIC_API_KEY; need_key OPENAI_API_KEY; need_key DEEPSEEK_API_KEY
+  for spec in "$P_HAIKU" "$P_4OMINI" "$P_DEEPSEEK"; do set -- $spec; prov=$1; model=$2; shift 2
+    out="results/live_a1_outcome/${model}_arms150i.json"
+    if [ -f "results/live_a1_outcome/${model}_arms150i.run2.json" ] && [ "$FORCE" = 0 ]; then echo "  ${model}_arms150i.run{0,1,2}.json exist, skipping"; continue; fi
+    run "$UVG probes/303_live_a1_outcome.py --provider $prov --model $model $* --n 100 --p-revise 1.0 --offsets 150 --modes vanilla,validated,verified,ledger,ledger_verified --interleave --runs 3 --seed 20261015 --l1-server $L1SERVER --out $out"
+  done; fi
+
+if want 18; then log 18 "probe 304: the ledger in a world (consumer, cancellation, fallible compensator, two revisions)"
+  need_key ANTHROPIC_API_KEY; need_key OPENAI_API_KEY; need_key DEEPSEEK_API_KEY
+  mkdir -p results/ledger_world
+  for spec in "$P_HAIKU" "$P_4OMINI" "$P_DEEPSEEK"; do set -- $spec; prov=$1; model=$2; shift 2
+    out="results/ledger_world/${model}.json"
+    if [ -f "$out" ] && [ "$FORCE" = 0 ]; then echo "  $out exists, skipping"; continue; fi
+    run "$UVG probes/304_ledger_world.py --provider $prov --model $model $* --n 100 --p-revise 1.0 --offset-ms 150 --revisions 2 --second-gap-ms 800 --modes validated,ledger,ledger_norollback --p-cancel-fail 0.1 --p-rebook-fail 0.1 --consumer-max-ms 1500 --seed 20261014 --out $out"
+  done; fi
+
+if want 19; then log 19 "receipt-derived analyses: arm timing, replicated runs, hypothesis gates (then re-run 13)"
+  run "python3 harness/macaudit/arm_timing.py --root results --tex --check 2>&1 | tee tools/arm_timing.log | tail -16"
+  run "python3 harness/macaudit/live_runs_aggregate.py --root results/live_a1_outcome --tex 2>&1 | tee tools/live_runs.log | tail -30"
+  run "python3 harness/macaudit/hypothesis_gates.py --root results --check --tex 2>&1 | tee tools/hypothesis_gates.log | tail -24"
+  run "python3 harness/macaudit/a7_rescore.py --check 2>&1 | tail -3"
+  run "python3 harness/macaudit/claims_gate.py --claims CLAIMS.json --scan README.md crates/runtime/README.md paper/main.tex paper/supplement.tex --artifact-url paper/main.tex 2>&1 | tail -4"; fi
 
 if [ "$DRY" = 0 ]; then
   if [ ${#FAILED[@]} -gt 0 ]; then

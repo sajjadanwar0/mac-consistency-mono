@@ -221,6 +221,42 @@ WORKLOADS = {
 }
 
 
+# 2026-10-14: the triage reporter is told to write "<one-sentence bug description>" but is given
+# no bug.  gpt-4o invents one; claude-sonnet-4-5 wrote "no bug description provided" in 100/100
+# sessions (the void cell of the Claude replication, supplement S M).  With --seeded-tickets
+# (default on) the reporter is handed a concrete bug, drawn from this list by scenario id, so
+# the cell measures the protocol and not whether a model fabricates content.  The gpt-4o
+# campaign 20260913T0150Z predates this flag; its manifest says seeded_tickets=false.
+SEEDED_BUGS = [
+    "The export button returns a 500 error when the report has more than 1,000 rows.",
+    "Password reset emails arrive with an expired link if the user has two-factor enabled.",
+    "The dashboard shows yesterday's totals until the page is reloaded twice.",
+    "Uploading a PNG larger than 8 MB silently truncates the file.",
+    "Search results ignore the date filter when sorted by relevance.",
+    "The mobile menu cannot be closed after rotating the device.",
+    "Invoices are generated with the previous month's tax rate on the first of the month.",
+    "The API returns duplicate records when paginating with a page size of 50.",
+    "Deleting a project leaves its scheduled jobs running.",
+    "Timezone offsets are applied twice on the calendar view for UTC+5 users.",
+    "The CSV importer rejects rows whose names contain an apostrophe.",
+    "Notifications are sent to archived users.",
+    "The settings page loses unsaved changes when the session token refreshes.",
+    "Currency totals are rounded before summation, so the grand total is off by cents.",
+    "The audit log records the wrong actor for actions performed through the API.",
+    "Long comments overflow the card layout on narrow screens.",
+    "The nightly backup job fails when a table name contains a hyphen.",
+    "Webhooks are retried indefinitely after a 410 response.",
+    "The login page redirects to the home page instead of the originally requested URL.",
+    "Thumbnails are not regenerated after an image is replaced.",
+    "Bulk edit applies the change to the first page of results only.",
+    "The rate limiter counts failed requests twice.",
+    "Dark mode renders chart labels in black on a dark background.",
+    "The invitation link works only once even when the invite allows multiple uses.",
+    "Searching for an exact email address returns partial matches first.",
+]
+SEEDED_TICKETS = True
+
+
 def _attach_token_recorder(model_client, tok_rec: SessionRecorder) -> None:
     """
     Monkey-patch the AutoGen model client's `.create(...)` method so that
@@ -269,9 +305,12 @@ async def run_one(scenario_id: int,
         chat_agents = []
         for name in wl["agents"]:
             rd, wr = tools_per_agent[name]
+            prompt = wl["prompts"][name]
+            if SEEDED_TICKETS and workload == "triage" and name == "reporter":
+                prompt += f"\nThe bug you observed (report exactly this, in one sentence): {SEEDED_BUGS[scenario_id % len(SEEDED_BUGS)]}"
             chat_agents.append(AssistantAgent(
                 name=name, model_client=model, tools=[rd, wr],
-                system_message=wl["prompts"][name],
+                system_message=prompt,
                 reflect_on_tool_use=False,
             ))
 
@@ -301,7 +340,11 @@ async def main() -> None:
                         default="openai")
     parser.add_argument("--model", type=str, default=None,
                         help="model name; defaults are gpt-4o / claude-3-5-sonnet-20241022 / llama3.2:latest")
+    parser.add_argument("--no-seeded-tickets", action="store_true",
+                        help="triage: do NOT hand the reporter a concrete bug (the pre-2026-10-14 protocol of run 20260913T0150Z)")
     args = parser.parse_args()
+    global SEEDED_TICKETS
+    SEEDED_TICKETS = not args.no_seeded_tickets
 
     model_name = args.model or DEFAULT_MODEL[args.provider]
     _check_api_key(args.provider)
@@ -312,7 +355,10 @@ async def main() -> None:
     tokens_output = args.tokens_output or Path("../pilot_tokens")
     tokens_output.mkdir(parents=True, exist_ok=True)
 
-    print(f"provider={args.provider}  model={model_name}  workload={args.workload}  runtime={_runtime}  n={args.n}")
+    print(f"provider={args.provider}  model={model_name}  workload={args.workload}  runtime={_runtime}  n={args.n}  seeded_tickets={SEEDED_TICKETS}")
+    import json as _json
+    (output / "protocol.json").write_text(_json.dumps({"seeded_tickets": SEEDED_TICKETS, "provider": args.provider, "model": model_name,
+                                                        "workload": args.workload, "runtime": _runtime, "n": args.n, "seed": args.seed}, indent=1))
     print(f"traces  -> {output.resolve()}")
     print(f"tokens  -> {tokens_output.resolve()}")
     print()
