@@ -90,7 +90,11 @@ class BasisLedger:
             e["compensate"](new_value)
             with self.lock:
                 e["discharged"] = True; self.discharged += 1
-                e["basis"][cell] = new_value   # the compensated effect's basis is now current
+                e["basis"][cell] = new_value   # the compensated effect's basis is now current ...
+                e["obligation"] = False        # ... and it is a fresh effect: a further revision owes a further obligation
+                                               # (the per-record flag in Guarded5.tla stays set; the replacement booking is
+                                               # its own record with its own flag -- this workload revises once, so the
+                                               # path is not exercised by Table 3)
 
 
 def ledgered_store(H, clock, ledger):

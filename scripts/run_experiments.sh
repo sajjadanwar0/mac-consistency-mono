@@ -55,7 +55,15 @@ FAILED=()
 run() { if [ "$DRY" = 1 ]; then echo "  would run: $*"; else echo "  + $*"; eval "$@" || { echo "  FAIL (exit $?): $*" >&2; FAILED+=("$*"); return 1; }; fi; }
 need_key() { [ -n "${!1:-}" ] && return 0; [ "$DRY" = 1 ] && { echo "  (needs $1)"; return 0; }; echo "  FAIL: $1 is not set (export it, then re-run this step)" >&2; FAILED+=("$1 unset"); return 1; }
 mkdir -p results/live_a1_outcome results/a6_real_latency results/verus tools
-export PYTHONPATH="probes/_modules${PYTHONPATH:+:$PYTHONPATH}"   # renumbered probes import each other by original name
+export PYTHONPATH="$PWD/probes/_modules${PYTHONPATH:+:$PYTHONPATH}"   # renumbered probes import each other by original name (absolute: probe 302 cds into probes/)
+# python packages that lived beside the pilot (baselines/ ...) were filed under results/ by 00_migrate_monorepo.sh
+# as if they were data; the pilot imports them, so they belong beside it under probes/ (steps 5, 6, 11 need them)
+pilot_packages() {
+  for d in results/*/; do
+    [ -f "$d/__init__.py" ] || continue; pkg="$(basename "$d")"
+    [ -e "probes/$pkg" ] || run "mv results/$pkg probes/$pkg && echo '  moved python package $pkg: results/ -> probes/'"
+  done
+}
 # the workspace Cargo.toml at the root puts build output under target/; a standalone checkout under crates/runtime/target/
 l1srv() { { ls target/release/examples/l1_server crates/runtime/target/release/examples/l1_server 2>/dev/null || true; } | head -1; }
 DEEPSEEK_URL="${DEEPSEEK_URL:-https://api.deepseek.com}"
@@ -96,11 +104,11 @@ if want 4; then log 4 "probe 301: ToolNode replay against real effects (no key)"
   done; fi
 
 if want 5; then log 5 "probe 302: interleaved wall-clock rerun, gpt-4o, N=60 (fits the OpenAI balance)"
-  need_key OPENAI_API_KEY
+  need_key OPENAI_API_KEY; pilot_packages
   run "N=60 PROVIDER=openai MODEL=gpt-4o PY=\"$UVA_ABS\" ./probes/302_wallclock_interleaved.sh"; fi
 
 if want 6; then log 6 "probe 302: interleaved wall-clock rerun, claude-sonnet-4-5, N=100"
-  need_key ANTHROPIC_API_KEY
+  need_key ANTHROPIC_API_KEY; pilot_packages
   run "N=100 PROVIDER=anthropic MODEL=claude-sonnet-4-5 PY=\"$UVA_ABS\" ./probes/302_wallclock_interleaved.sh"; fi
 
 # the PINNED verus binary: VERUS if set, else ~/.local/opt/verus-<pin>/verus, else whatever is on PATH
@@ -160,13 +168,7 @@ if want 10; then log 10 "live L2 replay, 1,000 haiku sessions (per-model L2 stat
 
 if want 11; then log 11 "pilot replication WITH op-records on claude-sonnet-4-5 (Table 4/7 Claude panel)"
   need_key ANTHROPIC_API_KEY
-  PILOT="$(ls probes/*_autogen_pilot.py | head -1)"
-  # python packages that lived beside the pilot (baselines/, ...) were filed under results/ by 00_migrate_monorepo.sh
-  # as if they were data; the pilot imports them, so they belong beside it under probes/
-  for d in results/*/; do
-    [ -f "$d/__init__.py" ] || continue; pkg="$(basename "$d")"
-    [ -e "probes/$pkg" ] || run "mv results/$pkg probes/$pkg && echo '  moved python package $pkg: results/ -> probes/'"
-  done
+  PILOT="$(ls probes/*_autogen_pilot.py | head -1)"; pilot_packages
   # resume the newest *-claude run if one exists (a cell with 100 traces is not rerun; delete a cell to redo it)
   if [ -z "${STAMP:-}" ]; then prev="$(ls -d results/runs/*-claude 2>/dev/null | sort | tail -1)"; fi
   STAMP="${STAMP:-${prev:+$(basename "$prev")}}"; STAMP="${STAMP:-$(date -u +%Y%m%dT%H%MZ)-claude}"; RUN="results/runs/$STAMP"
