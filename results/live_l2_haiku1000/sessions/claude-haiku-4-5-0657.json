@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0657",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 808,
+  "result_value": 1436,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Nightly sync finished but three tenants show stale dashboards.",
+  "plan": "Check replication lag on the database for those three tenants and restart failed cache invalidation jobs if queued tasks are stuck.",
+  "result": "Checked replication lag on three tenants; restarted stuck cache invalidation jobs.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1253,
+    "executor": 921,
+    "supervisor": 716,
+    "verified_hold": 716
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

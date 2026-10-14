@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0803",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 660,
+  "result_value": 1751,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Search returns results for deleted documents.",
+  "plan": "Investigate search index not properly invalidating entries when documents are deleted; likely a cache or index synchronization bug.",
+  "result": "Analyzed search index invalidation logic; found stale cache entries persisting after document deletion.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1067,
+    "executor": 942,
+    "supervisor": 663,
+    "verified_hold": 664
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

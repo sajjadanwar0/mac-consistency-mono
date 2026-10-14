@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0775",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 968,
+  "result_value": 1757,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Search returns results for deleted documents.",
+  "plan": "Investigate search index refresh mechanism to identify why deleted document records persist in query results.",
+  "result": "Investigated search index refresh mechanism; identified stale cache not clearing on document deletion events.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 950,
+    "executor": 910,
+    "supervisor": 697,
+    "verified_hold": 698
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

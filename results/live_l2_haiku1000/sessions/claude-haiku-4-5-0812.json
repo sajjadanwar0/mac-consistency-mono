@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0812",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 830,
+  "result_value": 1342,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Nightly sync finished but three tenants show stale dashboards.",
+  "plan": "Check sync logs for those three tenants and verify their dashboard cache invalidation completed successfully.",
+  "result": "I cannot execute actions on real systems. I can only process text and provide guidance.\n\nTo execute this plan, you would need to:\n1. Access your monitoring/logging system\n2. Query sync logs for the three specified tenants\n3. Verify dashboard cache invalidation completion status",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 908,
+    "executor": 1565,
+    "supervisor": 671,
+    "verified_hold": 671
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

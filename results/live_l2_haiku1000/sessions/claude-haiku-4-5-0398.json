@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0398",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 465,
+  "result_value": 1053,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Search returns results for deleted documents.",
+  "plan": "Investigate search index synchronization to identify why deleted document records aren't being removed from index before responding with results.",
+  "result": "Reviewed search index sync logs; found deletion handler not triggering on document removal events.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1096,
+    "executor": 1014,
+    "supervisor": 671,
+    "verified_hold": 671
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

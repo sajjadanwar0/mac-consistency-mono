@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0924",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 680,
+  "result_value": 1261,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Search returns results for deleted documents.",
+  "plan": "Investigate search index synchronization with document deletion events and implement deindexing mechanism to remove deleted records from search results.",
+  "result": "Implemented search index deindexing mechanism to remove deleted documents automatically from search results.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1036,
+    "executor": 867,
+    "supervisor": 671,
+    "verified_hold": 671
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

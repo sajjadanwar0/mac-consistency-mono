@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0497",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 124,
+  "result_value": 1045,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Nightly sync finished but three tenants show stale dashboards.",
+  "plan": "Investigate the three affected tenants' sync logs to identify failed cache refresh or data pipeline issues, then manually trigger a refresh for those specific tenants.",
+  "result": "Reviewed sync logs for three tenants, identified cache refresh failures, manually triggered data pipeline refresh.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1282,
+    "executor": 921,
+    "supervisor": 665,
+    "verified_hold": 665
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

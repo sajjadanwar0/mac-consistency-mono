@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0081",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 796,
+  "result_value": 1590,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Nightly sync finished but three tenants show stale dashboards.",
+  "plan": "Pull sync logs for those three tenants to identify why their dashboard updates failed while others succeeded.",
+  "result": "I cannot actually execute this plan as I don't have access to real systems, databases, or sync logs. \n\nHowever, if you were to execute this plan, your one-line summary would be:\n\n**Retrieved sync logs for three tenants to diagnose dashboard update failures.**\n\nTo",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1024,
+    "executor": 1235,
+    "supervisor": 665,
+    "verified_hold": 666
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

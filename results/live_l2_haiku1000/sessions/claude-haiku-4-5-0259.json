@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0259",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 821,
+  "result_value": 1088,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Search returns results for deleted documents.",
+  "plan": "Investigate and fix the search indexing logic to ensure deleted documents are properly removed from the search index or filtered from results.",
+  "result": "Reviewed search indexing logic, added document deletion cascade to index, implemented soft-delete filtering.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1363,
+    "executor": 963,
+    "supervisor": 822,
+    "verified_hold": 823
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

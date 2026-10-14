@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0470",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 832,
+  "result_value": 1277,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Search returns results for deleted documents.",
+  "plan": "Investigate search index synchronization with document deletion process to identify why deleted documents remain queryable.",
+  "result": "Investigated search index synchronization; found deletion events not triggering index purge operations.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1024,
+    "executor": 1025,
+    "supervisor": 716,
+    "verified_hold": 717
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

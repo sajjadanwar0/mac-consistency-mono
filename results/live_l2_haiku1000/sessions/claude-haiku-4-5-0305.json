@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0305",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 941,
+  "result_value": 1626,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Login works, but SSO users land on a blank page after redirect.",
+  "plan": "Check redirect URI configuration in SSO provider settings against actual post-authentication redirect endpoint in application.",
+  "result": "Verified redirect URI matches between SSO provider config and app post-auth endpoint.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1434,
+    "executor": 915,
+    "supervisor": 640,
+    "verified_hold": 640
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0386",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 248,
+  "result_value": 1199,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Checkout fails intermittently for EU customers with 'currency not supported'.",
+  "plan": "Investigate EU payment gateway configuration for currency support and check if regional routing is failing for EUR/GBP transactions.",
+  "result": "Checked EU payment gateway: EUR/GBP routing misconfigured, requires regional endpoint update.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1095,
+    "executor": 952,
+    "supervisor": 659,
+    "verified_hold": 659
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

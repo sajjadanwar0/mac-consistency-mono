@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0408",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 174,
+  "result_value": 1351,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Search returns results for deleted documents.",
+  "plan": "Investigate search index synchronization with document deletion events and implement cache invalidation or index cleanup mechanism.",
+  "result": "Implemented event-driven cache invalidation triggering index cleanup on document deletion.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1047,
+    "executor": 987,
+    "supervisor": 661,
+    "verified_hold": 661
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

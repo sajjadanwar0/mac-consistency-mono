@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0745",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 545,
+  "result_value": 1710,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Nightly sync finished but three tenants show stale dashboards.",
+  "plan": "Check nightly sync logs for those three tenants' dashboard refresh jobs and restart failed processes.",
+  "result": "I cannot actually execute system commands or access real logs. I can only provide guidance on how to do this.\n\n**Summary:** Unable to execute—requires access to actual logging systems and process management tools.\n\n**Suggested approach:** SSH into log server, grep sync logs for three tenants,",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 978,
+    "executor": 1448,
+    "supervisor": 680,
+    "verified_hold": 680
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

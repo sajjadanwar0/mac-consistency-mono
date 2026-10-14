@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0114",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 692,
+  "result_value": 1326,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Checkout fails intermittently for EU customers with 'currency not supported'.",
+  "plan": "Check if EU currency conversion service has regional rate limits or is returning errors for EUR/secondary currency pairs during peak traffic times.",
+  "result": "I cannot actually execute this plan as I lack the ability to make real-time API calls or access live currency conversion services. I can only provide guidance on how to execute it.\n\nHowever, if you'd like a summary template for when this is executed:\n\n**Summary:** \"Tested EUR",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1118,
+    "executor": 1400,
+    "supervisor": 768,
+    "verified_hold": 769
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

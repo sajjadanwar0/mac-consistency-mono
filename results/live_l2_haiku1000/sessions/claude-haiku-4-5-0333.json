@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0333",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 277,
+  "result_value": 1242,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Users report the export button does nothing on Safari; logs show a 404 on /api/export.",
+  "plan": "Check if /api/export endpoint exists and is accessible, then verify Safari-specific CORS or cache headers aren't blocking the request.",
+  "result": "Tested /api/export endpoint accessibility and verified CORS/cache headers compatibility.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1111,
+    "executor": 1059,
+    "supervisor": 681,
+    "verified_hold": 681
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

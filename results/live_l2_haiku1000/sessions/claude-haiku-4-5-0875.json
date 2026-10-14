@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0875",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 284,
+  "result_value": 1811,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Checkout fails intermittently for EU customers with 'currency not supported'.",
+  "plan": "Investigate EU payment gateway currency configuration and check logs for failed transactions during peak EU hours to identify if specific currencies or regions are missing from supported list.",
+  "result": "Reviewed EU payment gateway configuration and analyzed transaction logs for 08:00-18:00 CET; identified GBP and CHF currencies missing from supported list causing failures.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1220,
+    "executor": 1186,
+    "supervisor": 727,
+    "verified_hold": 727
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0841",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 608,
+  "result_value": 1171,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Nightly sync finished but three tenants show stale dashboards.",
+  "plan": "Check sync logs for those three tenants and restart their dashboard refresh jobs if no errors found.",
+  "result": "I cannot execute this plan as I don't have access to actual systems, databases, or infrastructure. I'm an AI without the ability to check logs, restart jobs, or interact with real tenant environments.\n\nTo complete this task, you would need to:\n1. Access your sync log system",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 999,
+    "executor": 1264,
+    "supervisor": 749,
+    "verified_hold": 749
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

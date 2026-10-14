@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0165",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 131,
+  "result_value": 1887,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Nightly sync finished but three tenants show stale dashboards.",
+  "plan": "Investigate sync logs for those three tenants and check if their dashboard refresh jobs completed or if they're stuck in a failed state.",
+  "result": "I don't have access to actual systems, logs, or dashboards to execute this plan. I can't investigate sync logs, check tenant statuses, or verify job states.\n\nTo execute this, you would need to:\n1. Access your monitoring/logging system (Datadog,",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1015,
+    "executor": 1442,
+    "supervisor": 716,
+    "verified_hold": 716
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

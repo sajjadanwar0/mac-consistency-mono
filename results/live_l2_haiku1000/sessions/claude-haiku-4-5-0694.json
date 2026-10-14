@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0694",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 435,
+  "result_value": 1246,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Nightly sync finished but three tenants show stale dashboards.",
+  "plan": "Check nightly sync logs for errors on those three tenants and verify their cache invalidation completed successfully.",
+  "result": "I don't have the ability to actually execute this action since I can't access your systems, logs, or infrastructure. \n\nTo properly execute this plan, you would need to:\n- SSH into your log servers or use your logging platform (ELK, Splunk, etc.)",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1011,
+    "executor": 1313,
+    "supervisor": 696,
+    "verified_hold": 697
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

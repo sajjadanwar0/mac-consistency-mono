@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0595",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 626,
+  "result_value": 1826,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Search returns results for deleted documents.",
+  "plan": "Investigate search index synchronization with document deletion processes and implement cache invalidation to prevent stale results from appearing in searches.",
+  "result": "Implemented cache invalidation on document deletion to sync search indexes and prevent stale results.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1096,
+    "executor": 891,
+    "supervisor": 679,
+    "verified_hold": 679
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

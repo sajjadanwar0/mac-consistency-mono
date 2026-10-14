@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0313",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 261,
+  "result_value": 1150,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Login works, but SSO users land on a blank page after redirect.",
+  "plan": "Investigate SSO redirect handler to check if post-login state initialization or user context is missing.",
+  "result": "Investigated SSO redirect handler; found missing user context initialization in post-login state.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 954,
+    "executor": 891,
+    "supervisor": 678,
+    "verified_hold": 679
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

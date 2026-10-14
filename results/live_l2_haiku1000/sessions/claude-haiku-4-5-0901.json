@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0901",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 896,
+  "result_value": 1481,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Nightly sync finished but three tenants show stale dashboards.",
+  "plan": "Query sync logs for those three tenants to identify failed dashboard refresh steps and retry or rollback if needed.",
+  "result": "I don't have the ability to execute actual system commands or access real sync logs. I can't query databases, access tenants, or perform rollback operations.\n\n**Summary:** Cannot execute—requires actual system access and credentials to query sync logs.\n\nTo actually complete this, you would need",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1028,
+    "executor": 1302,
+    "supervisor": 791,
+    "verified_hold": 791
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

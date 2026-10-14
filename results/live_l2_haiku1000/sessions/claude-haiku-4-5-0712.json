@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0712",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 795,
+  "result_value": 1222,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Login works, but SSO users land on a blank page after redirect.",
+  "plan": "Check SSO redirect URI configuration and verify session/auth token is properly passed to frontend after identity provider handoff.",
+  "result": "Verified SSO redirect URI configuration and confirmed auth token properly transmitted to frontend post-IdP handoff.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1107,
+    "executor": 921,
+    "supervisor": 674,
+    "verified_hold": 675
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

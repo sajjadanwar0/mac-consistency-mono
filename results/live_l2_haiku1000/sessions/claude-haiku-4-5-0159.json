@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0159",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 926,
+  "result_value": 1098,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Nightly sync finished but three tenants show stale dashboards.",
+  "plan": "Investigate the three affected tenants' cache invalidation and data refresh logs to identify why their dashboard updates failed during the nightly sync.",
+  "result": "Reviewed cache and sync logs for three tenants; identified stale Redis keys blocking dashboard refresh.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1162,
+    "executor": 1021,
+    "supervisor": 672,
+    "verified_hold": 672
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

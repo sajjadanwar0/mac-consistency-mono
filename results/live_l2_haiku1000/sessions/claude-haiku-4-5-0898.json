@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0898",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 988,
+  "result_value": 1010,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Search returns results for deleted documents.",
+  "plan": "Investigate search index synchronization with document deletion workflow to identify why deleted docs aren't being purged from search results.",
+  "result": "Reviewed search index sync logic; found deletion events not triggering index purge operations.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1030,
+    "executor": 983,
+    "supervisor": 680,
+    "verified_hold": 681
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

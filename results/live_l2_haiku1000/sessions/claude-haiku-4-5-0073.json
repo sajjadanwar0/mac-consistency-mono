@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0073",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 900,
+  "result_value": 1776,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Nightly sync finished but three tenants show stale dashboards.",
+  "plan": "Investigate sync logs for those three tenants and check if their cache invalidation jobs completed or if there's a data refresh lag.",
+  "result": "Investigated sync logs for three tenants; cache invalidation jobs completed successfully, no data refresh lag detected.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1071,
+    "executor": 915,
+    "supervisor": 813,
+    "verified_hold": 813
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

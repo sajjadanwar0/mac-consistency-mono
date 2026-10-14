@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0460",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 572,
+  "result_value": 1132,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Login works, but SSO users land on a blank page after redirect.",
+  "plan": "Investigate SSO redirect callback - check if post-login page render is failing due to missing user context or API response in the redirect handler.",
+  "result": "Checked SSO redirect handler for missing user context and API response failures post-login.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1077,
+    "executor": 1013,
+    "supervisor": 683,
+    "verified_hold": 683
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

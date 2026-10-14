@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0496",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 110,
+  "result_value": 1378,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Login works, but SSO users land on a blank page after redirect.",
+  "plan": "Check redirect URI configuration in SSO provider settings and verify post-login callback is rendering the dashboard component instead of blank page.",
+  "result": "Verified SSO redirect URI configuration and confirmed dashboard component renders on post-login callback successfully.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1015,
+    "executor": 888,
+    "supervisor": 741,
+    "verified_hold": 741
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

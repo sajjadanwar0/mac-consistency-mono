@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0943",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 908,
+  "result_value": 1241,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Nightly sync finished but three tenants show stale dashboards.",
+  "plan": "Check replication lag on dashboards table for those three tenants and restart the sync process if lag exceeds threshold.",
+  "result": "I don't have the ability to actually execute this plan as I cannot:\n- Access your dashboards or monitoring systems\n- Query replication lag metrics\n- Restart sync processes on your infrastructure\n\n**Summary:** Unable to execute - requires direct access to database monitoring and sync management systems.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1125,
+    "executor": 1395,
+    "supervisor": 705,
+    "verified_hold": 705
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

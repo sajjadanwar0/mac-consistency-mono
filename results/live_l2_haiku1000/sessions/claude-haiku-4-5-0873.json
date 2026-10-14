@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0873",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 865,
+  "result_value": 1477,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Nightly sync finished but three tenants show stale dashboards.",
+  "plan": "Investigate sync logs for the three affected tenants to identify if cache invalidation failed or if data transformation errors occurred during the nightly job.",
+  "result": "Reviewed sync logs for three tenants; cache invalidation succeeded, but data transformation errors detected in nightly ETL job.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1047,
+    "executor": 1026,
+    "supervisor": 716,
+    "verified_hold": 717
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

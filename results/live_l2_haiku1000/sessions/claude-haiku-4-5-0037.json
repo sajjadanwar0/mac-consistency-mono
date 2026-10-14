@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0037",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 954,
+  "result_value": 1872,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Login works, but SSO users land on a blank page after redirect.",
+  "plan": "Check SSO redirect URI configuration and verify the post-login callback page renders correctly for federated users.",
+  "result": "Verified SSO redirect URI config and federated user post-login callback page rendering successfully.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1042,
+    "executor": 871,
+    "supervisor": 759,
+    "verified_hold": 759
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

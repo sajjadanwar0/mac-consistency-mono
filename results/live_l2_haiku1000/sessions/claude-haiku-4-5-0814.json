@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0814",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 508,
+  "result_value": 1709,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Nightly sync finished but three tenants show stale dashboards.",
+  "plan": "Investigate sync logs for those three tenant IDs to identify if data extraction, transformation, or dashboard refresh stages failed.",
+  "result": "I cannot actually execute this plan as I don't have access to sync logs, databases, or your system infrastructure. However, if you execute it, here's a one-line summary template:\n\n**\"Reviewed sync logs for three tenants; identified stage failures in [extraction/transformation/",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1121,
+    "executor": 1283,
+    "supervisor": 687,
+    "verified_hold": 687
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

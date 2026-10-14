@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0224",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 406,
+  "result_value": 1821,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Search returns results for deleted documents.",
+  "plan": "Investigate search index for stale entries and implement document deletion handler to remove indexed content.",
+  "result": "Scanned index for stale entries; implemented deletion handler for indexed documents.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1023,
+    "executor": 921,
+    "supervisor": 665,
+    "verified_hold": 665
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

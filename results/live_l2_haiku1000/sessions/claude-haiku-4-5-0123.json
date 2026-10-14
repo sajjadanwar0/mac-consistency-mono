@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0123",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 176,
+  "result_value": 1426,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Search returns results for deleted documents.",
+  "plan": "Investigate search index synchronization with document deletion lifecycle and implement soft-delete flagging or index purging mechanism.",
+  "result": "Implemented soft-delete flagging system with asynchronous index purging mechanism for document lifecycle management.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1056,
+    "executor": 943,
+    "supervisor": 670,
+    "verified_hold": 670
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

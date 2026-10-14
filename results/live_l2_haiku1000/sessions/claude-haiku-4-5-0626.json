@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0626",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 781,
+  "result_value": 1417,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Search returns results for deleted documents.",
+  "plan": "Investigate search index sync mechanism to identify why deleted document records aren't being removed from search results.",
+  "result": "Investigated search index sync mechanism and found deleted documents persist due to missing purge logic in index cleanup.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1101,
+    "executor": 1016,
+    "supervisor": 723,
+    "verified_hold": 724
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

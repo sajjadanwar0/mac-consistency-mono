@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0435",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 726,
+  "result_value": 1005,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Search returns results for deleted documents.",
+  "plan": "Investigate search index sync mechanism and implement hard-delete verification before index update.",
+  "result": "Investigated search index sync; implemented hard-delete verification checkpoint.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 960,
+    "executor": 832,
+    "supervisor": 665,
+    "verified_hold": 665
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

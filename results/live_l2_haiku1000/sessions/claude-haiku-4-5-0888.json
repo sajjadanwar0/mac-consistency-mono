@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0888",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 936,
+  "result_value": 1789,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Search returns results for deleted documents.",
+  "plan": "Investigate search index sync mechanism to identify why deleted documents aren't being removed from search results, then implement cache invalidation or index cleanup process.",
+  "result": "Identified stale cache causing deleted docs to persist; implemented TTL-based cache invalidation strategy.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1096,
+    "executor": 1059,
+    "supervisor": 716,
+    "verified_hold": 717
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

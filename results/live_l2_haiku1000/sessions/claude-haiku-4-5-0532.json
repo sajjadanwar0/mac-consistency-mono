@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0532",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 769,
+  "result_value": 1882,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Search returns results for deleted documents.",
+  "plan": "Investigate search index cache invalidation and verify deleted document removal from indexing service.",
+  "result": "Verified cache invalidation triggers document deletion from search index successfully.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 962,
+    "executor": 845,
+    "supervisor": 678,
+    "verified_hold": 679
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

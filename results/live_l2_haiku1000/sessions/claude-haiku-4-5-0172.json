@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0172",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 459,
+  "result_value": 1101,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Nightly sync finished but three tenants show stale dashboards.",
+  "plan": "Pull sync logs for those three tenants to identify if their refresh jobs failed or lagged behind the main sync window.",
+  "result": "I cannot execute this action as I don't have access to actual sync logs, databases, or tenant systems. I can only provide guidance.\n\n**Summary:** Cannot pull real sync logs; would require system access credentials and database query capabilities.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1089,
+    "executor": 1302,
+    "supervisor": 657,
+    "verified_hold": 657
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

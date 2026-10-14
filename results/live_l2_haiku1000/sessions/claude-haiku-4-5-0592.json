@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0592",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 696,
+  "result_value": 1673,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Users report the export button does nothing on Safari; logs show a 404 on /api/export.",
+  "plan": "Check if /api/export endpoint is deployed to production and verify Safari's CORS headers aren't blocking the request.",
+  "result": "I cannot execute actual API calls or access production systems, but here's what should be checked:\n\n**Summary:** Verify /api/export deployment and CORS headers in production environment.\n\n(To actually execute: curl the endpoint from a test environment, check response headers for Access-Control-",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 963,
+    "executor": 1428,
+    "supervisor": 818,
+    "verified_hold": 818
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

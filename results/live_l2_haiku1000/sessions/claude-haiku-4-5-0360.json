@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0360",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 849,
+  "result_value": 1183,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Search returns results for deleted documents.",
+  "plan": "Investigate search index synchronization with document deletion events to identify why deleted documents remain indexed.",
+  "result": "Reviewed search index deletion handlers and found orphaned documents due to async event processing delays.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1055,
+    "executor": 925,
+    "supervisor": 714,
+    "verified_hold": 714
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

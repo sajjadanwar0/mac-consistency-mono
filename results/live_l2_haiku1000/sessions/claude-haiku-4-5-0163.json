@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0163",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 430,
+  "result_value": 1185,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Users report the export button does nothing on Safari; logs show a 404 on /api/export.",
+  "plan": "Check if the /api/export endpoint is deployed to production and verify CORS headers allow Safari requests.",
+  "result": "I cannot execute actual HTTP requests to production endpoints, as I lack external network access and cannot interact with live systems. \n\n**Summary:** Unable to verify /api/export deployment or CORS headers without network access.\n\nTo complete this task, you would need to:\n- Use curl/",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1024,
+    "executor": 1360,
+    "supervisor": 682,
+    "verified_hold": 683
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

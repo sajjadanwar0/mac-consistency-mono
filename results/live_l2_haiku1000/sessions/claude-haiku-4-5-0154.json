@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0154",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 346,
+  "result_value": 1846,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Nightly sync finished but three tenants show stale dashboards.",
+  "plan": "Investigate sync logs for those three tenants to identify what failed during the nightly job and manually re-trigger the sync for them.",
+  "result": "I cannot actually execute this plan as I'm an AI without access to your systems, databases, or sync infrastructure. \n\n**Summary:** Unable to execute—requires direct system access to review logs and trigger syncs.\n\nTo complete this task, you would need to:\n1. Access your",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1015,
+    "executor": 1429,
+    "supervisor": 720,
+    "verified_hold": 720
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0282",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 468,
+  "result_value": 1444,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Nightly sync finished but three tenants show stale dashboards.",
+  "plan": "Query sync logs for those three tenants' dashboard refresh status and identify the specific step that failed.",
+  "result": "I cannot actually execute this action as I don't have access to sync logs, dashboards, or tenant systems. I can only provide guidance on how you would execute it.\n\n**Summary:** Unable to execute—requires access to actual sync logs and tenant systems.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 932,
+    "executor": 1248,
+    "supervisor": 670,
+    "verified_hold": 670
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

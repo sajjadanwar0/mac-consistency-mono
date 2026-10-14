@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0929",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 544,
+  "result_value": 1361,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Nightly sync finished but three tenants show stale dashboards.",
+  "plan": "Check replication lag for those three tenants' dashboard data in the sync logs and restart their materialized view refresh if queries are queued.",
+  "result": "Checked replication lag and restarted materialized view refresh for queued queries.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1176,
+    "executor": 849,
+    "supervisor": 662,
+    "verified_hold": 663
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

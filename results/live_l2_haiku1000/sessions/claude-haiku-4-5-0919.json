@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0919",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 734,
+  "result_value": 1381,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Search returns results for deleted documents.",
+  "plan": "Investigate search indexing service to identify why deletion events aren't removing entries from the search index, then implement index cleanup.",
+  "result": "Investigated search indexing service; found stale deletion handler—implemented cleanup mechanism and purge logic.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1101,
+    "executor": 1154,
+    "supervisor": 719,
+    "verified_hold": 720
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

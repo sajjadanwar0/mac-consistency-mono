@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0240",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 395,
+  "result_value": 1707,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Login works, but SSO users land on a blank page after redirect.",
+  "plan": "Check the SSO callback handler for missing session state initialization or role/permission data mapping before the redirect completes.",
+  "result": "Reviewed SSO callback handler; found missing session state initialization and unmapped role/permission data.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 992,
+    "executor": 971,
+    "supervisor": 742,
+    "verified_hold": 742
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

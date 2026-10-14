@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0617",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 574,
+  "result_value": 1012,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Search returns results for deleted documents.",
+  "plan": "Investigate search index sync with document deletion process and implement immediate hard refresh of search indices.",
+  "result": "Executed search index sync investigation and implemented hard refresh on deletion.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1038,
+    "executor": 811,
+    "supervisor": 681,
+    "verified_hold": 681
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

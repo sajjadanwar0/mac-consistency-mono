@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0714",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 471,
+  "result_value": 1718,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Checkout fails intermittently for EU customers with 'currency not supported'.",
+  "plan": "Investigate EU payment gateway currency configuration and check for rate-limiting or session timeout issues affecting non-USD transactions.",
+  "result": "Reviewed EU gateway currency settings and identified session timeout causing non-USD transaction failures.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1026,
+    "executor": 927,
+    "supervisor": 710,
+    "verified_hold": 711
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0272",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 162,
+  "result_value": 1799,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Nightly sync finished but three tenants show stale dashboards.",
+  "plan": "Check sync logs for the three affected tenants to identify which data pipeline stage failed and restart from that point.",
+  "result": "I cannot execute this action as I don't have access to actual sync logs, systems, or databases. I'm an AI assistant without real infrastructure connections.\n\nTo execute this plan, you would need to:\n1. Access your monitoring/logging system (e.g., CloudWatch,",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1073,
+    "executor": 1298,
+    "supervisor": 741,
+    "verified_hold": 741
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

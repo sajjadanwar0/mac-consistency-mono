@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0267",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 772,
+  "result_value": 1423,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Search returns results for deleted documents.",
+  "plan": "Investigate search index to identify why deleted document records remain indexed and implement cache invalidation or index cleanup process.",
+  "result": "Investigated search index structure, identified stale document cache, implemented TTL-based invalidation cleanup.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1090,
+    "executor": 938,
+    "supervisor": 693,
+    "verified_hold": 694
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

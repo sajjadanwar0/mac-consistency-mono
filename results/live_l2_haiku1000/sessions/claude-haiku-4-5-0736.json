@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0736",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 381,
+  "result_value": 1817,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Nightly sync finished but three tenants show stale dashboards.",
+  "plan": "Investigate which tenants have stale dashboards and check the sync logs for failures or incomplete data transfers for those specific accounts.",
+  "result": "Identified 3 tenants with stale dashboards; sync logs show failed data transfers requiring reprocessing.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1028,
+    "executor": 1018,
+    "supervisor": 677,
+    "verified_hold": 677
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

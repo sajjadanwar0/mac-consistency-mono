@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0981",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 699,
+  "result_value": 1651,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Login works, but SSO users land on a blank page after redirect.",
+  "plan": "Investigate SSO redirect handler for missing page load logic or failed state initialization after authentication callback.",
+  "result": "Debugged SSO redirect handler; found missing state validation in post-authentication callback logic.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1030,
+    "executor": 1059,
+    "supervisor": 675,
+    "verified_hold": 676
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

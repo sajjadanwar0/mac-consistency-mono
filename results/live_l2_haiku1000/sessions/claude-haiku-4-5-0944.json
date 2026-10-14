@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0944",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 749,
+  "result_value": 1548,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Nightly sync finished but three tenants show stale dashboards.",
+  "plan": "Investigate sync logs for those three tenants to identify if they failed during the nightly job and rerun if needed.",
+  "result": "I cannot execute this plan as I'm an AI without access to actual systems, databases, or sync logs. I can only provide guidance on how to complete this task yourself.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1073,
+    "executor": 1024,
+    "supervisor": 650,
+    "verified_hold": 651
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

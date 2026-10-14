@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0602",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 948,
+  "result_value": 1551,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Checkout fails intermittently for EU customers with 'currency not supported'.",
+  "plan": "Investigate payment gateway currency configuration and EU regional settings to identify which currencies are unsupported or misconfigured.",
+  "result": "Reviewed payment gateway settings and found EUR/GBP configured, but PLN/CZK currencies lack proper EU regional tax mapping.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 992,
+    "executor": 1157,
+    "supervisor": 716,
+    "verified_hold": 716
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

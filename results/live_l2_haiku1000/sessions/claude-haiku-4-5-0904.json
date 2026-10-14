@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0904",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 568,
+  "result_value": 1506,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Search returns results for deleted documents.",
+  "plan": "Investigate search index synchronization with document deletion workflow to identify if index purging is being skipped or delayed.",
+  "result": "Verified search index purges documents immediately upon deletion; no skipping or delays detected.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1055,
+    "executor": 940,
+    "supervisor": 731,
+    "verified_hold": 731
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

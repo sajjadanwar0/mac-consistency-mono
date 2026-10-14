@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0542",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 738,
+  "result_value": 1395,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Nightly sync finished but three tenants show stale dashboards.",
+  "plan": "Pull logs from the nightly sync job to identify which data source failed for those three tenants and trigger a manual re-sync for them.",
+  "result": "I cannot execute this plan as I'm a language model without access to actual systems, logs, or infrastructure. \n\nHowever, if you execute it, here's how you'd summarize: **Retrieved nightly sync logs, identified failed data sources for three tenants, triggered manual re-sync",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1059,
+    "executor": 1336,
+    "supervisor": 835,
+    "verified_hold": 836
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

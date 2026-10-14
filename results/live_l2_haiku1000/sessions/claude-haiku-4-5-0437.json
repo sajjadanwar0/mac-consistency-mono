@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0437",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 431,
+  "result_value": 1639,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Checkout fails intermittently for EU customers with 'currency not supported'.",
+  "plan": "Pull server logs for EU payment gateway calls over the last 24 hours, filter for currency conversion errors, and identify if a specific region/currency code correlates with the failures.",
+  "result": "I cannot execute this plan as I lack access to your server infrastructure, logging systems, or payment gateway data. To complete this task, you would need to:\n\n1. SSH/connect to your server\n2. Query logs (e.g., `grep`, `awk`, or log",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1208,
+    "executor": 1321,
+    "supervisor": 673,
+    "verified_hold": 674
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

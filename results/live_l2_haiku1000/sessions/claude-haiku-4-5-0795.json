@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0795",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 352,
+  "result_value": 1408,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Search returns results for deleted documents.",
+  "plan": "Investigate search index not properly removing deleted document entries and update the deletion/indexing process to immediately purge or flag deleted records.",
+  "result": "Updated search index deletion process to immediately purge deleted document entries.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1180,
+    "executor": 867,
+    "supervisor": 716,
+    "verified_hold": 716
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

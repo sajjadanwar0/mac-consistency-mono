@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0676",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 222,
+  "result_value": 1118,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Nightly sync finished but three tenants show stale dashboards.",
+  "plan": "Check sync logs for errors on those three tenants and re-run their sync jobs, then verify dashboard data refreshed successfully.",
+  "result": "I cannot execute this plan as I'm an AI without access to actual systems, databases, or dashboards. I can only provide guidance on how to execute it.\n\nTo summarize what you'd need to do: Check sync logs, rerun sync jobs for three tenants, verify dashboard refresh",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1054,
+    "executor": 1196,
+    "supervisor": 687,
+    "verified_hold": 688
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

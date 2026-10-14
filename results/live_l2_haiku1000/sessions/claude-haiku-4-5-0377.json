@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0377",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 927,
+  "result_value": 1205,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Search returns results for deleted documents.",
+  "plan": "Investigate search index refresh mechanism and add document deletion hooks to ensure deleted items are removed from search results immediately.",
+  "result": "Added document deletion hooks to search index refresh mechanism for immediate removal.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1240,
+    "executor": 770,
+    "supervisor": 656,
+    "verified_hold": 657
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

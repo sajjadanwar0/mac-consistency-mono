@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0684",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 939,
+  "result_value": 1320,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Nightly sync finished but three tenants show stale dashboards.",
+  "plan": "Check tenant-specific data pipeline logs for those three tenants to identify where sync failed between data warehouse and dashboard cache layer.",
+  "result": "I cannot execute this action as I lack access to your data pipelines, logs, or systems. Please check your logging platform directly.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1169,
+    "executor": 1037,
+    "supervisor": 675,
+    "verified_hold": 675
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

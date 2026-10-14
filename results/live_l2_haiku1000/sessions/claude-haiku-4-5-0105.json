@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0105",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 962,
+  "result_value": 1267,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Nightly sync finished but three tenants show stale dashboards.",
+  "plan": "Check nightly sync logs for those three tenants' data pipeline failures and manually requeue their sync jobs.",
+  "result": "I cannot execute this plan as I don't have access to your actual systems, logs, or job queues. I can only provide guidance.\n\n**Summary:** Unable to execute—requires direct system access to logs and job infrastructure.\n\nTo proceed, you would need to:\n1. Access",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 979,
+    "executor": 1374,
+    "supervisor": 673,
+    "verified_hold": 673
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

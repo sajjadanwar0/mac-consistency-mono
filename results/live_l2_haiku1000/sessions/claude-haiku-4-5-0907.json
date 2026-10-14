@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0907",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 732,
+  "result_value": 1177,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Search returns results for deleted documents.",
+  "plan": "Investigate why deletion flag isn't checked in search query filtering, then add/fix the deleted_at or is_deleted condition in search results.",
+  "result": "Added `WHERE deleted_at IS NULL` filter to search query, preventing deleted records from appearing in results.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1210,
+    "executor": 950,
+    "supervisor": 682,
+    "verified_hold": 682
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

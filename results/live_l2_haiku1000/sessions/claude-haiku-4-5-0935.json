@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0935",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 415,
+  "result_value": 1848,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Login works, but SSO users land on a blank page after redirect.",
+  "plan": "Check SSO redirect callback handler and session initialization logic for missing user data or failed state hydration.",
+  "result": "Reviewed SSO callback handler and session init—identified missing user profile data in hydration state.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1108,
+    "executor": 962,
+    "supervisor": 675,
+    "verified_hold": 675
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

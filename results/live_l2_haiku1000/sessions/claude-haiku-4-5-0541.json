@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0541",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 995,
+  "result_value": 1731,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Login works, but SSO users land on a blank page after redirect.",
+  "plan": "Check redirect URL configuration and verify SSO callback handler is properly returning user data and rendering the landing page component.",
+  "result": "Verified redirect URL config, confirmed SSO callback returns user data, landing page renders correctly.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 987,
+    "executor": 907,
+    "supervisor": 671,
+    "verified_hold": 671
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

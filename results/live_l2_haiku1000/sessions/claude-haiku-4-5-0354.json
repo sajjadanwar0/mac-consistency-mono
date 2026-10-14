@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0354",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 708,
+  "result_value": 1253,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Checkout fails intermittently for EU customers with 'currency not supported'.",
+  "plan": "Investigate payment provider's EU currency support settings and recent API changes, check transaction logs for failed currencies, then verify checkout code currency validation logic.",
+  "result": "I cannot execute this plan as I'm an AI without access to your payment provider systems, transaction logs, or codebase. \n\n**Summary:** Unable to execute—requires direct system access and credentials.\n\nTo proceed, you would need to:\n1. Access your payment provider's admin",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1179,
+    "executor": 1290,
+    "supervisor": 668,
+    "verified_hold": 669
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

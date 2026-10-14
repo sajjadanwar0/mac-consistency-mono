@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0467",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 624,
+  "result_value": 1272,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Search returns results for deleted documents.",
+  "plan": "Investigate search index sync mechanism to identify why deleted documents aren't being removed from search results.",
+  "result": "Reviewed search index sync logs; found TTL expiration disabled on deleted document records.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 950,
+    "executor": 967,
+    "supervisor": 768,
+    "verified_hold": 768
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

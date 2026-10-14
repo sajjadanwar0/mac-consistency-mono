@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0014",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 787,
+  "result_value": 1512,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Search returns results for deleted documents.",
+  "plan": "Investigate search index sync process and implement document deletion cascade to remove entries from search indices.",
+  "result": "Audited search index sync; implemented cascade deletion logic for search entries.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1048,
+    "executor": 954,
+    "supervisor": 648,
+    "verified_hold": 649
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

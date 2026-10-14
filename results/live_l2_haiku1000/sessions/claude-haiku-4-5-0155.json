@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0155",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 178,
+  "result_value": 1521,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Search returns results for deleted documents.",
+  "plan": "Investigate search index sync with document deletion logic and add filtering to exclude deleted documents from results.",
+  "result": "Investigated sync logic, identified deleted doc leak, added exclusion filter.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1125,
+    "executor": 891,
+    "supervisor": 712,
+    "verified_hold": 712
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

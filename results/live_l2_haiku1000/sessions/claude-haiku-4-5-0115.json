@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0115",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 975,
+  "result_value": 1373,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Nightly sync finished but three tenants show stale dashboards.",
+  "plan": "Check if the ETL process failed for those three tenants specifically, and manually trigger a re-sync or investigate the data pipeline logs for errors.",
+  "result": "Checked ETL logs for three tenants; found pipeline timeout errors, manually retriggered sync.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1229,
+    "executor": 929,
+    "supervisor": 649,
+    "verified_hold": 650
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

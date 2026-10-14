@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0106",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 909,
+  "result_value": 1075,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Search returns results for deleted documents.",
+  "plan": "Investigate and fix search index cleanup process to prevent deleted documents from appearing in results.",
+  "result": "Reviewed search index cleanup, identified stale document retention issue, implemented periodic purge process.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1061,
+    "executor": 1030,
+    "supervisor": 669,
+    "verified_hold": 670
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0125",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 271,
+  "result_value": 1606,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Search returns results for deleted documents.",
+  "plan": "Investigate search index sync mechanism to identify why deleted documents aren't being removed from the search index and implement a purge/re-index process.",
+  "result": "Diagnosed stale index entries; implemented changelog-based purge and full re-index trigger.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1166,
+    "executor": 947,
+    "supervisor": 792,
+    "verified_hold": 792
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

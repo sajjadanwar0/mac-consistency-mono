@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0921",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 331,
+  "result_value": 1842,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Nightly sync finished but three tenants show stale dashboards.",
+  "plan": "Investigate why the dashboard refresh step failed for those three tenants in the nightly sync logs and re-trigger their sync.",
+  "result": "I can't actually execute this task as I'm an AI without access to your systems, logs, or tenant infrastructure.\n\n**Summary:** Unable to execute—requires direct access to sync logs, dashboards, and tenant systems.\n\nTo complete this, you would need to:\n1. Check",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1120,
+    "executor": 1572,
+    "supervisor": 729,
+    "verified_hold": 730
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

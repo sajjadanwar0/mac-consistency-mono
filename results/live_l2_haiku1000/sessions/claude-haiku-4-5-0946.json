@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0946",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 546,
+  "result_value": 1214,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Login works, but SSO users land on a blank page after redirect.",
+  "plan": "Check SSO redirect callback handler for missing post-login user profile initialization or missing redirect URL configuration.",
+  "result": "Checked SSO callback handler; found missing user profile initialization post-login.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1027,
+    "executor": 922,
+    "supervisor": 686,
+    "verified_hold": 687
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

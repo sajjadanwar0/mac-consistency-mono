@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0752",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 437,
+  "result_value": 1411,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Nightly sync finished but three tenants show stale dashboards.",
+  "plan": "Query sync logs for the three affected tenants to identify which specific data sources or APIs failed during the nightly run.",
+  "result": "Queried sync logs for three affected tenants; identified failed APIs and data sources from nightly run.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1103,
+    "executor": 876,
+    "supervisor": 760,
+    "verified_hold": 761
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

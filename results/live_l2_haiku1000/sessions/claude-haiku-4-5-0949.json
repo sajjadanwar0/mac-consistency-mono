@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0949",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 907,
+  "result_value": 1844,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Nightly sync finished but three tenants show stale dashboards.",
+  "plan": "Investigate sync logs for the three tenant IDs to identify if they failed silently during the nightly job or if dashboard cache refresh was skipped.",
+  "result": "Reviewed sync logs for three tenant IDs; found silent failures in nightly job, cache refresh skipped.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1186,
+    "executor": 940,
+    "supervisor": 724,
+    "verified_hold": 725
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

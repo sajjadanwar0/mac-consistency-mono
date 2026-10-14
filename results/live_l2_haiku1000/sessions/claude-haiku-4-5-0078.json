@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0078",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 595,
+  "result_value": 1249,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Search returns results for deleted documents.",
+  "plan": "Investigate search index synchronization with document deletion operations to identify and fix the lag causing deleted documents to appear in results.",
+  "result": "Analyzed search index deletion lag; implemented immediate cache invalidation and batch index cleanup to remove stale document references.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1062,
+    "executor": 1046,
+    "supervisor": 675,
+    "verified_hold": 675
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

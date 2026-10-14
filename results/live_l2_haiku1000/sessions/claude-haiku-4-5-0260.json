@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0260",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 160,
+  "result_value": 1506,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Nightly sync finished but three tenants show stale dashboards.",
+  "plan": "Investigate the three affected tenants' sync logs to identify why their dashboard cache wasn't refreshed while others completed successfully.",
+  "result": "Reviewed sync logs for three tenants; found cache refresh failed due to expired API credentials.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1319,
+    "executor": 1125,
+    "supervisor": 856,
+    "verified_hold": 856
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

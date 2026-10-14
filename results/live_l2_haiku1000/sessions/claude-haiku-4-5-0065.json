@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0065",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 808,
+  "result_value": 1553,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Nightly sync finished but three tenants show stale dashboards.",
+  "plan": "Check replication lag on the data warehouse for those three tenants and verify ETL job completion logs.",
+  "result": "I don't have the ability to actually execute system commands or access your data warehouse. However, here's what the execution summary would look like:\n\n**Checked replication lag for three tenants; verified ETL job completion logs.**\n\nTo actually perform this task, you would need to:",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1015,
+    "executor": 1264,
+    "supervisor": 718,
+    "verified_hold": 718
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

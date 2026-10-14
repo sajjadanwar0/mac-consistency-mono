@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0293",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 549,
+  "result_value": 1544,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Nightly sync finished but three tenants show stale dashboards.",
+  "plan": "Investigate the three affected tenants' data refresh jobs in the sync logs to identify if their updates failed or were skipped.",
+  "result": "I don't have access to sync logs or tenant data systems to execute this investigation. Unable to complete task.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1068,
+    "executor": 950,
+    "supervisor": 659,
+    "verified_hold": 660
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

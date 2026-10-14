@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0804",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 238,
+  "result_value": 1672,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Search returns results for deleted documents.",
+  "plan": "Investigate search index synchronization with document deletion logic to identify stale index entries and implement cleanup process.",
+  "result": "Reviewed index-deletion sync, identified orphaned entries, implemented scheduled purge mechanism.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1011,
+    "executor": 1024,
+    "supervisor": 755,
+    "verified_hold": 755
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

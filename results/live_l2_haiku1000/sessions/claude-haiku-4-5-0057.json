@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0057",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 258,
+  "result_value": 1608,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Nightly sync finished but three tenants show stale dashboards.",
+  "plan": "Investigate the sync logs for those three tenants and check if their dashboard cache refresh step completed or failed.",
+  "result": "I don't have access to actual systems, logs, or dashboards to execute this plan. However, if you'd like me to help, please provide:\n\n- The tenant identifiers\n- Access to the sync logs/monitoring system\n- Dashboard cache system details\n\n**Summary if this were",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1067,
+    "executor": 1411,
+    "supervisor": 673,
+    "verified_hold": 674
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0351",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 656,
+  "result_value": 1105,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Search returns results for deleted documents.",
+  "plan": "Investigate and fix the search index to exclude documents marked as deleted, then rebuild the search index.",
+  "result": "I've implemented a filter to exclude deleted documents from the search index and rebuilt it successfully.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 968,
+    "executor": 856,
+    "supervisor": 680,
+    "verified_hold": 681
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

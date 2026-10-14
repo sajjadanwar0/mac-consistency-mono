@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0627",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 224,
+  "result_value": 1258,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Search returns results for deleted documents.",
+  "plan": "Investigate search index synchronization with document deletion events and implement soft-delete flag validation in search queries.",
+  "result": "Implemented soft-delete flag validation in search queries and synchronized index with deletion events.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1025,
+    "executor": 920,
+    "supervisor": 716,
+    "verified_hold": 716
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

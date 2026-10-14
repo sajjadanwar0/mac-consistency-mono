@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0367",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 674,
+  "result_value": 1682,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Nightly sync finished but three tenants show stale dashboards.",
+  "plan": "Query sync logs for those three tenants to identify which data refresh step failed, then manually trigger a re-sync for their dashboard tables.",
+  "result": "I cannot execute this plan as I lack access to sync logs, database systems, or tenant infrastructure to query or trigger operations.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1125,
+    "executor": 1001,
+    "supervisor": 724,
+    "verified_hold": 724
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0188",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 698,
+  "result_value": 1717,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Nightly sync finished but three tenants show stale dashboards.",
+  "plan": "Check sync logs for errors on those three tenants and verify their dashboard refresh timestamps against the sync completion time.",
+  "result": "I don't have access to actual systems, logs, or dashboards to execute this plan. I can't check sync logs, view timestamps, or verify tenant data.\n\nTo complete this task, you would need to: access your monitoring/logging system, query sync logs for the three tenants",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1061,
+    "executor": 1788,
+    "supervisor": 663,
+    "verified_hold": 663
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

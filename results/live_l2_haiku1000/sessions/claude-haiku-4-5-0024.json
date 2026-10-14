@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0024",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 820,
+  "result_value": 1036,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Nightly sync finished but three tenants show stale dashboards.",
+  "plan": "Investigate sync completion logs for those three tenants to identify if cache invalidation failed or data transformation halted mid-process.",
+  "result": "I've analyzed sync logs for the three tenants; cache invalidation succeeded but data transformation halted mid-process.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 991,
+    "executor": 883,
+    "supervisor": 646,
+    "verified_hold": 647
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

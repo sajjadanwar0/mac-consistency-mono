@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0245",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 636,
+  "result_value": 1811,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Checkout fails intermittently for EU customers with 'currency not supported'.",
+  "plan": "Add logging to capture which currency codes are being passed to the payment processor during EU checkout attempts and compare against supported currency list.",
+  "result": "Added logging to payment processor capturing currency codes during EU checkout and validation against supported currencies.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1135,
+    "executor": 815,
+    "supervisor": 631,
+    "verified_hold": 631
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

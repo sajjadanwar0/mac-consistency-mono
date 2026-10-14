@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0265",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 717,
+  "result_value": 1530,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Nightly sync finished but three tenants show stale dashboards.",
+  "plan": "Investigate sync job logs for those three tenants and check if data transformation or cache invalidation failed during the nightly run.",
+  "result": "I cannot execute this action as I lack access to sync job logs, tenant systems, or infrastructure monitoring tools. This requires actual system access.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1056,
+    "executor": 1076,
+    "supervisor": 710,
+    "verified_hold": 710
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

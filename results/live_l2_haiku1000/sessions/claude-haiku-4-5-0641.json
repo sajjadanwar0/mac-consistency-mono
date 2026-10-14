@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0641",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 510,
+  "result_value": 1220,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Nightly sync finished but three tenants show stale dashboards.",
+  "plan": "Check sync logs for those three tenants to identify where the data pipeline failed, then manually re-run their sync jobs.",
+  "result": "I cannot actually execute this plan as I don't have access to sync logs, databases, or job management systems. I can only provide guidance on how to do it.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1089,
+    "executor": 1080,
+    "supervisor": 716,
+    "verified_hold": 717
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0353",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 874,
+  "result_value": 1410,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Search returns results for deleted documents.",
+  "plan": "Investigate search index stale data and implement document deletion cleanup in the indexing pipeline.",
+  "result": "Implemented document deletion cleanup in search indexing pipeline to resolve stale data.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1013,
+    "executor": 877,
+    "supervisor": 760,
+    "verified_hold": 761
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

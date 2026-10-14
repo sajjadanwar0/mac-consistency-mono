@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0235",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 553,
+  "result_value": 1583,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Search returns results for deleted documents.",
+  "plan": "Investigate search index synchronization with document deletion workflow to identify stale cache or indexing lag.",
+  "result": "Investigated search index sync with deletions; found 2-hour replication lag in cache invalidation.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1007,
+    "executor": 1017,
+    "supervisor": 722,
+    "verified_hold": 723
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

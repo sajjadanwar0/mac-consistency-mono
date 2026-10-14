@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0916",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 690,
+  "result_value": 1045,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Search returns results for deleted documents.",
+  "plan": "Investigate search index synchronization and implement hard delete verification in search backend, then add tests for deleted document filtering.",
+  "result": "Investigated search index sync and implemented hard delete verification with comprehensive tests.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1146,
+    "executor": 835,
+    "supervisor": 732,
+    "verified_hold": 733
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

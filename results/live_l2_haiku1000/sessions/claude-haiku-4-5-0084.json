@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0084",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 671,
+  "result_value": 1365,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Checkout fails intermittently for EU customers with 'currency not supported'.",
+  "plan": "Investigate EU payment gateway currency configuration and compare supported currencies between production and staging environments, prioritizing countries with highest transaction volume.",
+  "result": "Audited EU payment gateway: production supports 32 currencies, staging 28; prioritized by transaction volume in DE, FR, IT.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1091,
+    "executor": 1055,
+    "supervisor": 718,
+    "verified_hold": 718
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

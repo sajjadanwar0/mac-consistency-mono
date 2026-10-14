@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0863",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 299,
+  "result_value": 1541,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Nightly sync finished but three tenants show stale dashboards.",
+  "plan": "Check nightly sync logs for errors on those three tenants and verify their dashboard cache invalidation completed successfully.",
+  "result": "I don't have the ability to access your systems, logs, or dashboards. I'm an AI without access to external infrastructure, databases, or monitoring tools.\n\nTo execute this plan, you would need to:\n1. Access your log management system (e.g., ELK",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1076,
+    "executor": 1230,
+    "supervisor": 676,
+    "verified_hold": 677
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

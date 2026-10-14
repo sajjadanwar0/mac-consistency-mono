@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0316",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 906,
+  "result_value": 1830,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Search returns results for deleted documents.",
+  "plan": "Investigate search index cleanup logic and add document deletion handler to remove indexed entries when documents are deleted.",
+  "result": "Implemented document deletion handler with index cleanup logic to remove entries on delete.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1021,
+    "executor": 921,
+    "supervisor": 729,
+    "verified_hold": 729
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

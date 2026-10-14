@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0884",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 119,
+  "result_value": 1589,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Search returns results for deleted documents.",
+  "plan": "Investigate search index synchronization with document deletion operations to identify and fix the stale document references being returned.",
+  "result": "Analyzed search index deletion logic and removed stale document reference caching layer.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1018,
+    "executor": 933,
+    "supervisor": 753,
+    "verified_hold": 753
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

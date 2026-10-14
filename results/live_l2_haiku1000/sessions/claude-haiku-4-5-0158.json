@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0158",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 955,
+  "result_value": 1590,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Login works, but SSO users land on a blank page after redirect.",
+  "plan": "Investigate SSO redirect callback - check session creation, user data mapping, and frontend route initialization after auth handoff.",
+  "result": "Verified SSO redirect flow: session created, user data mapped correctly, frontend routes initialize post-auth.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1131,
+    "executor": 1025,
+    "supervisor": 677,
+    "verified_hold": 677
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

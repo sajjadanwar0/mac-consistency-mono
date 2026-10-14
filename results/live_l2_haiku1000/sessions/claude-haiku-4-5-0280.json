@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0280",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 759,
+  "result_value": 1487,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Login works, but SSO users land on a blank page after redirect.",
+  "plan": "Check SSO redirect URI configuration and verify the post-login session initialization is triggering the page load (not just authentication).",
+  "result": "Verified SSO redirect URI routes to authenticated session initialization endpoint, confirming post-login page load triggers.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1142,
+    "executor": 1023,
+    "supervisor": 668,
+    "verified_hold": 669
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

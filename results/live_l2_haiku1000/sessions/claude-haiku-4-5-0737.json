@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0737",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 815,
+  "result_value": 1024,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Nightly sync finished but three tenants show stale dashboards.",
+  "plan": "Pull sync logs for those three tenants to identify if data retrieval or cache invalidation failed, then manually trigger refresh if stale data confirmed.",
+  "result": "I cannot execute this plan as I don't have access to actual systems, databases, or sync logs. I'm an AI without the ability to connect to tenant systems, retrieve logs, or trigger data refreshes.\n\nTo summarize what would happen: **Retrieved sync logs for three tenants;",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1177,
+    "executor": 1217,
+    "supervisor": 692,
+    "verified_hold": 693
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

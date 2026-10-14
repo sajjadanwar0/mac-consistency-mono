@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0069",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 702,
+  "result_value": 1126,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Nightly sync finished but three tenants show stale dashboards.",
+  "plan": "Query sync logs for those three tenants to identify where the dashboard update process failed.",
+  "result": "Queried sync logs for three tenants; dashboard update failed during data transformation step.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 896,
+    "executor": 1049,
+    "supervisor": 679,
+    "verified_hold": 679
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

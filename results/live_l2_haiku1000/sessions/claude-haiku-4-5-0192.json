@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0192",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 628,
+  "result_value": 1848,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Search returns results for deleted documents.",
+  "plan": "Investigate search index cleanup process and verify soft/hard delete handling in indexing pipeline.",
+  "result": "Reviewed search index cleanup process and verified soft/hard delete handling mechanisms in indexing pipeline.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 984,
+    "executor": 846,
+    "supervisor": 690,
+    "verified_hold": 691
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

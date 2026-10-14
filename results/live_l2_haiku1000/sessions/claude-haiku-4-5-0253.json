@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0253",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 811,
+  "result_value": 1776,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Nightly sync finished but three tenants show stale dashboards.",
+  "plan": "Pull sync logs for those three tenants to identify if data ingestion failed or if the dashboard cache invalidation didn't trigger.",
+  "result": "I cannot actually execute this action as I don't have access to your systems, databases, or sync logs. \n\nTo complete this task, you would need to:\n- Connect to your logging system/database\n- Query sync logs for the three specific tenants\n- Check for ingestion",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1023,
+    "executor": 1247,
+    "supervisor": 642,
+    "verified_hold": 642
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

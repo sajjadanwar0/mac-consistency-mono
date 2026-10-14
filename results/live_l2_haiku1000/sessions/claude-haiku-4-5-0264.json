@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0264",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 720,
+  "result_value": 1639,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Checkout fails intermittently for EU customers with 'currency not supported'.",
+  "plan": "Check EU payment gateway configuration and verify currency support settings for each region's transaction processor.",
+  "result": "Verified EU payment gateway configs and currency support across regional processors.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 972,
+    "executor": 971,
+    "supervisor": 689,
+    "verified_hold": 690
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

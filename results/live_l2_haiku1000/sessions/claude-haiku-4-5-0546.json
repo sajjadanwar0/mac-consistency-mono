@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0546",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 748,
+  "result_value": 1394,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Checkout fails intermittently for EU customers with 'currency not supported'.",
+  "plan": "Check if currency conversion service has regional rate limits or failover issues affecting EU transactions.",
+  "result": "Checked currency service documentation and EU transaction logs; found regional rate limits active, failover to secondary provider working.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1284,
+    "executor": 1100,
+    "supervisor": 680,
+    "verified_hold": 680
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

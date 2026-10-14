@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0778",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 908,
+  "result_value": 1158,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Search returns results for deleted documents.",
+  "plan": "Investigate search index synchronization with document deletion events to identify if deletions are being properly propagated to the search index.",
+  "result": "Checked search index sync logs and confirmed document deletions are being propagated correctly.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1121,
+    "executor": 966,
+    "supervisor": 681,
+    "verified_hold": 681
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

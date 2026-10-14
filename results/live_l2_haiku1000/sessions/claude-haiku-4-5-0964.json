@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0964",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 330,
+  "result_value": 1890,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Nightly sync finished but three tenants show stale dashboards.",
+  "plan": "Investigate sync logs for the three specific tenants to identify which pipeline stage failed and rollback or re-run that stage.",
+  "result": "Reviewed sync logs for three tenants, identified stage 3 pipeline failure, initiated rollback.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1070,
+    "executor": 910,
+    "supervisor": 676,
+    "verified_hold": 676
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

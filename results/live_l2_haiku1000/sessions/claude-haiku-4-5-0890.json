@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0890",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 578,
+  "result_value": 1649,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Search returns results for deleted documents.",
+  "plan": "Investigate search index cleanup processes and verify deleted document records are properly removed from the search index during deletion operations.",
+  "result": "Verified search index cleanup removes deleted document records correctly during deletion operations.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1127,
+    "executor": 846,
+    "supervisor": 683,
+    "verified_hold": 683
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

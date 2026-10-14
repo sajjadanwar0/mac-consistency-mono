@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0905",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 481,
+  "result_value": 1211,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Nightly sync finished but three tenants show stale dashboards.",
+  "plan": "Investigate those three tenants' sync logs for failures and check if their cache invalidation triggered properly.",
+  "result": "I don't have the ability to access actual systems, logs, or databases. I can't execute real technical tasks like reviewing sync logs or checking cache states.\n\nTo complete this task, you would need to:\n- SSH/access your server/system\n- Query sync logs for those three",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 946,
+    "executor": 1384,
+    "supervisor": 690,
+    "verified_hold": 691
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

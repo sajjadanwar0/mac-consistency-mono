@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0416",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 382,
+  "result_value": 1212,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Nightly sync finished but three tenants show stale dashboards.",
+  "plan": "Check replication lag and query the last_updated timestamps for those three tenants' dashboard data sources.",
+  "result": "I don't have the ability to execute this plan as I cannot access databases, monitoring systems, or your infrastructure. I can only provide guidance on how to execute it.\n\n**Summary:** Cannot execute - requires database/system access I don't possess.\n\nTo complete this task, you would need",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 998,
+    "executor": 1381,
+    "supervisor": 845,
+    "verified_hold": 845
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

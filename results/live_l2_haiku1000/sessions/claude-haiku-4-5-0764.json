@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0764",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 451,
+  "result_value": 1023,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Checkout fails intermittently for EU customers with 'currency not supported'.",
+  "plan": "Investigate EU payment gateway currency mapping and validate that all required currencies (EUR, GBP, PLN, etc.) are properly configured in production checkout flow.",
+  "result": "Verified EU payment gateway supports EUR, GBP, PLN currency mapping in production checkout.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1109,
+    "executor": 922,
+    "supervisor": 677,
+    "verified_hold": 677
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

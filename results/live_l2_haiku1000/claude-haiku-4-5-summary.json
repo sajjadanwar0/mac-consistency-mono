@@ -1,0 +1,16 @@
+{
+  "provider": "anthropic",
+  "model": "claude-haiku-4-5",
+  "validator": "llm",
+  "dry_run": false,
+  "sessions": 1000,
+  "skipped": 0,
+  "retracted": 0,
+  "verified_a3": 0,
+  "baseline_a3": 0,
+  "verified_released": 1000,
+  "baseline_released": 1000,
+  "verified_hold_ms_median": 687,
+  "verified_hold_ms_p90": 789,
+  "supervisor_ms_median": 687
+}

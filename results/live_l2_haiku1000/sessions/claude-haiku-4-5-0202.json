@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0202",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 557,
+  "result_value": 1336,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Search returns results for deleted documents.",
+  "plan": "Investigate search index sync logic to identify why deleted document records persist in query results.",
+  "result": "Reviewed search index sync logic; found cascade delete not triggering index removal for deleted documents.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 934,
+    "executor": 984,
+    "supervisor": 688,
+    "verified_hold": 688
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

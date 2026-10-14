@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0206",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 261,
+  "result_value": 1760,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Search returns results for deleted documents.",
+  "plan": "Investigate search index synchronization with document deletion events and implement soft-delete or index cleanup mechanism if missing.",
+  "result": "Implemented soft-delete mechanism with index cleanup handler for synchronized document removal.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1191,
+    "executor": 1023,
+    "supervisor": 663,
+    "verified_hold": 663
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0623",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 958,
+  "result_value": 1368,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Checkout fails intermittently for EU customers with 'currency not supported'.",
+  "plan": "Investigate EU payment processor logs for currency conversion failures and verify all supported currencies are enabled in the checkout service configuration for affected regions.",
+  "result": "Reviewed payment processor logs, identified currency conversion failures, enabled missing currencies in checkout configuration for EU regions.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1019,
+    "executor": 989,
+    "supervisor": 690,
+    "verified_hold": 690
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

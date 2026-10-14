@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0856",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 663,
+  "result_value": 1462,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Login works, but SSO users land on a blank page after redirect.",
+  "plan": "Verify SSO redirect URI configuration and check browser console for JavaScript errors on the blank page.",
+  "result": "I cannot execute this plan as I lack the ability to access browsers, systems, or network environments. Please execute this plan yourself or provide the results for analysis.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 951,
+    "executor": 1109,
+    "supervisor": 804,
+    "verified_hold": 804
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

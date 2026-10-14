@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0598",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 629,
+  "result_value": 1766,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Nightly sync finished but three tenants show stale dashboards.",
+  "plan": "Check sync logs for those three tenants and verify cache invalidation triggered after data load completion.",
+  "result": "I cannot actually execute system commands or access sync logs and cache systems. I can only provide guidance on how to perform this task.\n\n**Summary:** Unable to execute; requires direct system access to logs and cache monitoring tools.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 943,
+    "executor": 1191,
+    "supervisor": 694,
+    "verified_hold": 695
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

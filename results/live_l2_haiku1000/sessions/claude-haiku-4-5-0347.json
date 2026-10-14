@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0347",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 608,
+  "result_value": 1427,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Search returns results for deleted documents.",
+  "plan": "Investigate search index synchronization with document deletion operations and implement deletion triggers to update the search index in real-time.",
+  "result": "Implemented deletion triggers to synchronously update search indexes when documents are removed.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1047,
+    "executor": 1015,
+    "supervisor": 804,
+    "verified_hold": 805
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

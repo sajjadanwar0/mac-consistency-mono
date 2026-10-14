@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0404",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 656,
+  "result_value": 1241,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Search returns results for deleted documents.",
+  "plan": "Investigate search index synchronization with the document deletion process and add filtering to exclude soft-deleted documents from query results.",
+  "result": "Implemented soft-delete filtering in search index and query results layer.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1068,
+    "executor": 857,
+    "supervisor": 735,
+    "verified_hold": 735
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

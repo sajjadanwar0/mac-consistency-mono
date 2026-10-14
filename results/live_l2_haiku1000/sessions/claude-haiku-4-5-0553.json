@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0553",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 358,
+  "result_value": 1620,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Nightly sync finished but three tenants show stale dashboards.",
+  "plan": "Investigate sync logs for those three tenants to identify if the data pipeline failed partway through or if cache invalidation didn't trigger.",
+  "result": "I cannot actually execute system commands or access real sync logs. I can only provide guidance on how you would investigate this issue yourself.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1040,
+    "executor": 983,
+    "supervisor": 731,
+    "verified_hold": 731
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

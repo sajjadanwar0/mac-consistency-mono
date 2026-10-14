@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0819",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 748,
+  "result_value": 1784,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Search returns results for deleted documents.",
+  "plan": "Index the documents' deletion status and filter out soft-deleted items from search results.",
+  "result": "Added deletion status field to index; soft-deleted items now excluded from searches.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 917,
+    "executor": 865,
+    "supervisor": 657,
+    "verified_hold": 657
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

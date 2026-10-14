@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0599",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 737,
+  "result_value": 1141,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Search returns results for deleted documents.",
+  "plan": "Investigate search index synchronization with document deletion events to identify and fix the lag or missing cascading delete logic.",
+  "result": "Investigated search index sync; found cascading delete logic missing in deletion event handler.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1094,
+    "executor": 951,
+    "supervisor": 711,
+    "verified_hold": 711
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0729",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 747,
+  "result_value": 1025,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Search returns results for deleted documents.",
+  "plan": "Investigate search index for stale document references and implement cache invalidation/reindexing on document deletion.",
+  "result": "Implemented cache invalidation and automatic reindexing on document deletion events.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1040,
+    "executor": 855,
+    "supervisor": 671,
+    "verified_hold": 671
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

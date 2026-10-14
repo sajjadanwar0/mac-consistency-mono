@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0164",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 133,
+  "result_value": 1797,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Checkout fails intermittently for EU customers with 'currency not supported'.",
+  "plan": "Investigate EU payment gateway configuration for missing/disabled currency codes and implement fallback currency handling.",
+  "result": "Reviewed EU payment gateway config; implemented EUR fallback for disabled currencies.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 912,
+    "executor": 867,
+    "supervisor": 680,
+    "verified_hold": 680
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

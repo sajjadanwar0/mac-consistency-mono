@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0433",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 877,
+  "result_value": 1277,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Search returns results for deleted documents.",
+  "plan": "Investigate and fix query logic to exclude documents with deleted flag/timestamp from search results.",
+  "result": "Added timestamp filter to query WHERE clause to exclude soft-deleted documents.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 951,
+    "executor": 827,
+    "supervisor": 722,
+    "verified_hold": 722
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

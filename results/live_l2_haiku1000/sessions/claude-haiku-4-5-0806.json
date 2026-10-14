@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0806",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 358,
+  "result_value": 1507,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Login works, but SSO users land on a blank page after redirect.",
+  "plan": "Check redirect URL handling in SSO callback middleware—likely missing user data hydration or frontend route definition after authentication completes.",
+  "result": "Verified SSO callback middleware: confirmed missing user data hydration step; added frontend route redirect post-authentication.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1081,
+    "executor": 1251,
+    "supervisor": 678,
+    "verified_hold": 679
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

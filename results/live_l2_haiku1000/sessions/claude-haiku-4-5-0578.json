@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0578",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 335,
+  "result_value": 1854,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Nightly sync finished but three tenants show stale dashboards.",
+  "plan": "Investigate the three affected tenants' sync logs to identify if the data pipeline failed, got stuck, or if their dashboard cache needs manual refresh.",
+  "result": "I don't have access to actual systems, logs, or tenant data to execute this plan. I can't retrieve sync logs, check pipeline status, or access dashboards.\n\n**Summary:** Cannot execute—requires direct system access to review sync logs and pipeline status.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1181,
+    "executor": 1332,
+    "supervisor": 681,
+    "verified_hold": 681
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0685",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 365,
+  "result_value": 1786,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Nightly sync finished but three tenants show stale dashboards.",
+  "plan": "Check sync logs for failures on those three tenants and restart their dashboard refresh jobs.",
+  "result": "I don't have actual system access to check logs or restart jobs. I'm an AI assistant without the ability to execute real infrastructure commands. \n\nTo complete this task, you would need to:\n1. Access your sync log system/monitoring tool\n2. Query logs for the three ten",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 988,
+    "executor": 1190,
+    "supervisor": 667,
+    "verified_hold": 667
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

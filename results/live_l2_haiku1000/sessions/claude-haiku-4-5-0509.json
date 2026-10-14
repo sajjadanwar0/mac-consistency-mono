@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0509",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 136,
+  "result_value": 1445,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Nightly sync finished but three tenants show stale dashboards.",
+  "plan": "Investigate sync logs for those three tenants to identify which sync step failed and restart the sync job for affected tenants only.",
+  "result": "Reviewed sync logs for three tenants, identified failed steps, restarted affected sync jobs.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1117,
+    "executor": 1024,
+    "supervisor": 700,
+    "verified_hold": 701
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

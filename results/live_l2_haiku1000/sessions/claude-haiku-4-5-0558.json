@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0558",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 335,
+  "result_value": 1177,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Nightly sync finished but three tenants show stale dashboards.",
+  "plan": "Pull sync logs for those three tenants and check if their data transforms completed or failed silently.",
+  "result": "I cannot execute this plan as I don't have access to sync logs, database systems, or tenant infrastructure. I'm a text-based AI without system access.\n\n**Summary:** Unable to execute - requires actual system access to retrieve logs.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1044,
+    "executor": 1209,
+    "supervisor": 682,
+    "verified_hold": 682
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

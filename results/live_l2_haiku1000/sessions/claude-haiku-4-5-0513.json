@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0513",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 939,
+  "result_value": 1050,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Search returns results for deleted documents.",
+  "plan": "Investigate search index refresh mechanism and implement hard delete or index cleanup for deleted documents.",
+  "result": "Implemented hard delete mechanism with index cleanup for deleted documents post-refresh.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 961,
+    "executor": 919,
+    "supervisor": 703,
+    "verified_hold": 703
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

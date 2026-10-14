@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0140",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 450,
+  "result_value": 1685,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Nightly sync finished but three tenants show stale dashboards.",
+  "plan": "Investigate sync logs for those three tenants to identify which data sources failed or were skipped during the nightly run.",
+  "result": "I cannot execute this action as I lack access to sync logs, tenant systems, or infrastructure. Please provide the logs or access credentials needed.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 976,
+    "executor": 1113,
+    "supervisor": 792,
+    "verified_hold": 792
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0250",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 877,
+  "result_value": 1365,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Nightly sync finished but three tenants show stale dashboards.",
+  "plan": "Check sync logs for those three tenants to identify failed dashboard refresh steps or data pipeline breakpoints.",
+  "result": "I don't have access to actual sync logs or system infrastructure to execute this task. I'm an AI without access to databases, monitoring systems, or tenant data. To complete this, you would need to:\n\n1. Access your logging system (Splunk, ELK, DataD",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 1020,
+    "executor": 1286,
+    "supervisor": 667,
+    "verified_hold": 668
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}

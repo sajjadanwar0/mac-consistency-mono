@@ -1,0 +1,31 @@
+{
+  "id": "claude-haiku-4-5-0320",
+  "model": "claude-haiku-4-5",
+  "plan_cell": 1,
+  "result_cell": 2,
+  "plan_value": 408,
+  "result_value": 1206,
+  "retracted": false,
+  "provider": "anthropic",
+  "validator": "llm",
+  "ticket": "Search returns results for deleted documents.",
+  "plan": "Investigate search index to identify and remove entries for deleted documents, then run full reindex if needed.",
+  "result": "Searched index, removed 47 deleted document entries, ran full reindex successfully.",
+  "supervisor_verdict": "KEEP",
+  "timing_ms": {
+    "planner": 994,
+    "executor": 931,
+    "supervisor": 672,
+    "verified_hold": 672
+  },
+  "verified": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": true
+  },
+  "baseline": {
+    "a3": false,
+    "executor_released": true,
+    "held_before_verdict": false
+  }
+}
