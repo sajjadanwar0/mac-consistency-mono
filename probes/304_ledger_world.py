@@ -330,10 +330,27 @@ def main() -> int:
             ev = [threading.Event() for _ in range(3)]; consumer_state: dict[str, Any] = {}
             ga, gb, consumer = build(store, ev, mode, k, revise_of[k], ledger, world, srng, consumer_state)
             out: dict[str, Any] = {}
-            ta = threading.Thread(target=lambda: out.__setitem__("a", ga.invoke({"session": k, "mode": mode})))
-            tb = threading.Thread(target=lambda: out.__setitem__("b", gb.invoke({"session": k})))
-            tc = threading.Thread(target=consumer)
+            errors: list[BaseException] = []
+            def guarded(fn):
+                # a thread that dies (a provider error after every retry, a bug) sets every event so that the peers
+                # blocked on it return, and records the error; the run then stops with it instead of hanging forever
+                def go():
+                    try:
+                        fn()
+                    except BaseException as ex:  # noqa: BLE001
+                        errors.append(ex)
+                        for e in ev:
+                            e.set()
+                return go
+            ta = threading.Thread(target=guarded(lambda: out.__setitem__("a", ga.invoke({"session": k, "mode": mode}))))
+            tb = threading.Thread(target=guarded(lambda: out.__setitem__("b", gb.invoke({"session": k}))))
+            tc = threading.Thread(target=guarded(consumer))
             ta.start(); tb.start(); tc.start(); ta.join(); tb.join(); tc.join()
+            if errors or "a" not in out or "b" not in out:
+                rec.close()
+                raise SystemExit(f"session {k} ({mode}) failed: {errors[0]!r}; the receipt {a.out} was not written -- "
+                                 f"re-run this model (the runner redoes a model whose receipt is missing)" if errors else
+                                 f"session {k} ({mode}): an agent thread returned nothing; receipt not written")
             # let the ledger finish any compensation that the last revision triggered (it runs in the date agent's thread)
             h = rec.records[first:]
             final = store.get(TRIP_NS, "date").value["date"]

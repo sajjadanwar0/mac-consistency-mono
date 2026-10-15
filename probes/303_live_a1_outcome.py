@@ -415,9 +415,24 @@ def main() -> int:
         ev = [threading.Event() for _ in range(3)]
         ga, gb = build(store, ev, mode, off, revise, ledger, vb)
         out: dict[str, Any] = {}
-        ta = threading.Thread(target=lambda: out.__setitem__("a", ga.invoke({"session": k, "mode": mode})))
-        tb = threading.Thread(target=lambda: out.__setitem__("b", gb.invoke({"session": k})))
+        errors: list[BaseException] = []
+        def guarded(fn):
+            # a thread that dies sets every event so that its peer returns; the run stops with the error (no hang)
+            def go():
+                try:
+                    fn()
+                except BaseException as ex:  # noqa: BLE001
+                    errors.append(ex)
+                    for e in ev:
+                        e.set()
+            return go
+        ta = threading.Thread(target=guarded(lambda: out.__setitem__("a", ga.invoke({"session": k, "mode": mode}))))
+        tb = threading.Thread(target=guarded(lambda: out.__setitem__("b", gb.invoke({"session": k}))))
         ta.start(); tb.start(); ta.join(); tb.join()
+        if errors or "a" not in out or "b" not in out:
+            if vb is not None: vb.close()
+            raise SystemExit(f"session {k} ({mode}): agent thread failed: {errors[0]!r}" if errors else
+                             f"session {k} ({mode}): an agent thread returned nothing")
         h = run_rec.records[first:]
         wit = H.a1_witnesses(h)
         final = store.get(TRIP_NS, "date").value["date"]

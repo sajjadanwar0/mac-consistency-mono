@@ -225,21 +225,38 @@ class ModelClient:
         else:
             raise ValueError(f"unknown provider {provider}")
 
+    # a provider call is retried on any exception and on a 200 that carries no choices (DeepSeek answered the
+    # 2026-10-15 probe-304 rerun with `choices: null`, which the previous code dereferenced -- the agent thread died
+    # and the session hung on an Event nobody would set); after the last attempt the error is raised, never swallowed
+    RETRIES = 6
+    BACKOFF_S = 2.0
+
     def complete(self, system: str, user: str, max_tokens: int = 96,
                  mock_reply: str | None = None, mock_latency: float | None = None) -> str:
         if self.provider == "mock":
             time.sleep(self.mock_latency if mock_latency is None else mock_latency)
             return mock_reply or ""
-        if self.provider in ("openai", "vllm"):
-            r = self.client.chat.completions.create(
-                model=self.model, max_tokens=max_tokens, temperature=0.7,
-                messages=[{"role": "system", "content": system},
-                          {"role": "user", "content": user}])
-            return (r.choices[0].message.content or "").strip()
-        r = self.client.messages.create(
-            model=self.model, max_tokens=max_tokens, system=system,
-            messages=[{"role": "user", "content": user}])
-        return (r.content[0].text if r.content else "").strip()
+        last: BaseException | None = None
+        for attempt in range(self.RETRIES):
+            try:
+                if self.provider in ("openai", "vllm"):
+                    r = self.client.chat.completions.create(
+                        model=self.model, max_tokens=max_tokens, temperature=0.7,
+                        messages=[{"role": "system", "content": system},
+                                  {"role": "user", "content": user}])
+                    if not getattr(r, "choices", None) or r.choices[0].message is None:
+                        raise RuntimeError(f"{self.provider}/{self.model} returned no choices: "
+                                           f"{str(getattr(r, 'model_dump', lambda: r)())[:300]}")
+                    return (r.choices[0].message.content or "").strip()
+                r = self.client.messages.create(
+                    model=self.model, max_tokens=max_tokens, system=system,
+                    messages=[{"role": "user", "content": user}])
+                return (r.content[0].text if r.content else "").strip()
+            except Exception as ex:  # noqa: BLE001  -- rate limit, 5xx, connection reset, empty body: all retried (Ctrl-C is not)
+                last = ex
+                if attempt + 1 < self.RETRIES:
+                    time.sleep(self.BACKOFF_S ** attempt)
+        raise RuntimeError(f"model call failed after {self.RETRIES} attempts: {last!r}") from last
 
 
 ISO = re.compile(r"\b(\d{4}-\d{2}-\d{2})\b")
