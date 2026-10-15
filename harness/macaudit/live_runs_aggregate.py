@@ -18,14 +18,29 @@ METRICS = [("a1", "A1"), ("a7", "R"), ("booking_wrong", "wrong"), ("regeneration
 T975 = {1: 12.706, 2: 4.303, 3: 3.182, 4: 2.776, 5: 2.571, 6: 2.447, 7: 2.365, 8: 2.306, 9: 2.262, 10: 2.228}
 
 
+def binom_cdf(k, n, p):
+    from math import comb
+    return sum(comb(n, i) * p**i * (1 - p) ** (n - i) for i in range(0, k + 1))
+
+
 def cp(k, n, alpha=0.05):
-    try:
-        from scipy.stats import beta
-        lo = 0.0 if k == 0 else float(beta.ppf(alpha / 2, k, n - k + 1))
-        hi = 1.0 if k == n else float(beta.ppf(1 - alpha / 2, k + 1, n - k))
-        return lo, hi
-    except Exception:
-        return (0.0 if k == 0 else k / n - 1.96 * math.sqrt(k / n * (1 - k / n) / n), 1.0 if k == n else k / n + 1.96 * math.sqrt(k / n * (1 - k / n) / n))
+    """Clopper-Pearson exact interval, by bisection on the binomial CDF.  (Until 2026-10-14 this fell back to a
+    Wald interval when scipy was absent and still printed it under 'exact CI': the first uploaded tools/live_runs.log
+    shows [-0.3, 1.6]% for 2/300 and [0.0, 0.0]% for 0/300, which no exact interval can produce; the exact values are
+    [0.1, 2.4]% and [0.0, 1.2]%.  The paper never quoted that column; it takes its intervals from claims_from_results.py.)"""
+    if n == 0:
+        return (0.0, 1.0)
+    def solve(f, lo, hi):
+        for _ in range(60):
+            mid = (lo + hi) / 2
+            if f(mid):
+                lo = mid
+            else:
+                hi = mid
+        return (lo + hi) / 2
+    lo = 0.0 if k == 0 else solve(lambda p: 1 - binom_cdf(k - 1, n, p) <= alpha / 2, 0.0, 1.0)
+    hi = 1.0 if k == n else solve(lambda p: binom_cdf(k, n, p) > alpha / 2, 0.0, 1.0)
+    return (lo, hi)
 
 
 def main() -> int:

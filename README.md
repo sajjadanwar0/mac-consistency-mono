@@ -78,6 +78,10 @@ harness/macaudit/        gates: rescore_cells.py (Def-1 rescoring of every cell)
 probes/                  numbered probes (101..); `make setup` resolves their envs
 results/                 committed evidence, one directory per campaign:
                          runs/ (AutoGen pilot, 3 stamped runs), live_a1_*/ (LangGraph live),
+                         live_a1_outcome/ (probe 303: four arms, offset sweep, three
+                         interleaved runs), ledger_world/ (probe 304, the ledger in a
+                         world; ledger_world_v1_latest_conf/ archives the first run's
+                         compensator, --compensator latest), a6_real_latency/,
                          live_l2/, langgraph_a6_*/, hc_*/ (contention sweep), traces/,
                          production_traces/, mast_oprecords/, pilot_tokens*/, l2_measure.json,
                          l4_measure.json, verus/count.json
@@ -86,9 +90,11 @@ docs/decisions/          decision records (what each "round" changed and why)
 docs/legacy/             the three pre-merge READMEs, kept verbatim for the record
 ```
 
-The repository carries no paper sources by design (the `.tex` lives with the
-submission); `claims_gate.py --scan path/to/paper` checks it against
-`CLAIMS.json` from outside.
+`paper/` holds the manuscript sources (`main.tex`, `supplement.tex`, both
+self-contained); every receipt-derived number in them is a macro that
+`harness/macaudit/claims_from_results.py` regenerates from `results/`
+(`paper/claims_results.tex`, inlined into both files), and `claims_gate.py`
+fails when the inlined block is stale or the two files disagree.
 
 ## Prerequisites
 

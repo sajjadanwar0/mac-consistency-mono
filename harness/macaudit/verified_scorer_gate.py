@@ -111,11 +111,24 @@ def main() -> int:
 
     # (1) the pilot cells the manuscript asserts (results/expected.json)
     exp = json.load(open(os.path.join(a.root, "expected.json")))
+    asserted = set()
     for stamp, run in exp.get("runs", {}).items():
         for cell, want in run.get("cells", {}).items():
             files = sorted(glob.glob(os.path.join(a.root, "runs", stamp, cell, "*.jsonl")))
             if files:
+                asserted.add((stamp, cell))
                 score_files(f"runs/{stamp}/{cell}", files, want.get("a1"))
+    # (1b) every other pilot cell under results/runs/ (e.g. the Claude op-record replication, whose counts the
+    # manuscript does not assert yet): scored and reported, the verified/Definition-1 agreement still gated
+    for cell_dir in sorted(glob.glob(os.path.join(a.root, "runs", "*", "*-*"))):
+        if not os.path.isdir(cell_dir) or os.path.basename(cell_dir).startswith((".", "tokens-")):
+            continue
+        stamp, cell = os.path.basename(os.path.dirname(cell_dir)), os.path.basename(cell_dir)
+        if (stamp, cell) in asserted:
+            continue
+        files = sorted(glob.glob(os.path.join(cell_dir, "*.jsonl")))
+        if files:
+            score_files(f"runs/{stamp}/{cell}", files, None)
     # (2) the September live study: per-session files
     for m in sorted(glob.glob(os.path.join(a.root, "live_a1_*"))):
         if os.path.basename(m) in ("live_a1_mock", "live_a1_outcome"):

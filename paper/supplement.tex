@@ -215,20 +215,20 @@
 \newcommand{\LiveVerifiedOutcome}{\textbf{[probe 303 -{}-modes verified: pending]}}
 
 % --- hypothesis gates (VERIFIED-HERE: harness/macaudit/hypothesis_gates.py --tex, over every committed record) ---
-\newcommand{\HypRecords}{36{,}036}     % hypothesis_gates.py over results/ on 2026-10-14: 25,637 September + 9,649 probe 303 + 750 Claude op-record pilot
-\newcommand{\HypTraces}{10{,}488}      % 6,588 + 3,600 + 300
+\newcommand{\HypRecords}{56{,}079}     % hypothesis_gates.py over results/ on 2026-10-14 (tools/hypothesis_gates.log): September + probe 303 (sequential, sweep, three interleaved runs) + probe 304 + Claude op-record pilot
+\newcommand{\HypTraces}{15{,}891}
 \newcommand{\HypSameAgentOverlaps}{0}
 \newcommand{\HypReadBeforeCommitViolations}{0}
-\newcommand{\HypCampaigns}{16}
-\newcommand{\HypValueUniqueCampaigns}{10}
+\newcommand{\HypCampaigns}{18}
+\newcommand{\HypValueUniqueCampaigns}{12}
 \newcommand{\HypCollisionCells}{126}
 \newcommand{\HypCollisionTraces}{105}
 \newcommand{\HypLiveLtwoSessions}{600}
 \newcommand{\HypLiveLtwoCollisions}{0}
-\newcommand{\HypAOneWitnesses}{710}    % 292 + 418
+\newcommand{\HypAOneWitnesses}{1{,}299}
 \newcommand{\HypRestored}{0}
-\newcommand{\HypBookings}{4{,}500}      % 900 + 3,600
-\newcommand{\HypBasisRecovered}{4{,}500}
+\newcommand{\HypBookings}{9{,}000}
+\newcommand{\HypBasisRecovered}{9{,}000}
 % two-value safety half of lattice16 on the CURRENT model (lattice16_v2.sh); filled in by finalize
 \newcommand{\LatticeVtwoOutcome}{all $32$ safety runs \textsc{safe}, $2.4$--$17.3$M states}
 \newcommand{\LiveLtwoHaikuThousand}{$0/1{,}000$ retractions; hold of kept effects median $687$\,ms, p90 $789$\,ms}   % results/live_l2_haiku1000.log, seed 20261013, 2026-10-14
@@ -251,8 +251,8 @@
 \newcommand{\RunFisherValidatedHaiku}{0.335}\newcommand{\RunFisherVanillaHaiku}{0.593}
 \newcommand{\ArmPinnedValidatedHaiku}{1.10}\newcommand{\ArmPinnedVerifiedHaiku}{1.10}
 % hypothesis gates H5/H6 (hypothesis_gates.py --tex, 2026-10-14)
-\newcommand{\HypExternalEffects}{4{,}500}\newcommand{\HypDuplicateEffects}{0}\newcommand{\HypInterruptEmissions}{2}
-\newcommand{\HypObservedRecords}{0}\newcommand{\HypUndeclaredReads}{0}
+\newcommand{\HypExternalEffects}{9{,}900}\newcommand{\HypDuplicateEffects}{0}\newcommand{\HypInterruptEmissions}{2}
+\newcommand{\HypObservedRecords}{5{,}400}\newcommand{\HypUndeclaredReads}{0}
 % predicate D (formal/tla/Duplication.tla; check_duplication.sh, TLC 1.8.0, one worker; log committed as formal/tla/tlc.Duplication.log)
 \newcommand{\DupAvailable}{1}\newcommand{\DupWitnessDepth}{5}\newcommand{\DupDivergentDepth}{6}\newcommand{\DupDedupStates}{1{,}714}
 % the verified detector in the scoring path (run_experiments.sh --only 14: tools/verified_scorer.json) -- pending until run
@@ -262,7 +262,8 @@
 \newcommand{\ToolNodeVerifiedBaselineSqlite}{--}\newcommand{\ToolNodeVerifiedBaselineHttp}{--}
 % replicated, interleaved live arms (--only 17) and the ledger in a world (--only 18) -- pending until run
 \newcommand{\LiveRunsAvailable}{0}\newcommand{\LedgerWorldAvailable}{0}
-\newcommand{\LedgerWorldRevisions}{2}\newcommand{\LedgerWorldPCancelFail}{0.1}\newcommand{\LedgerWorldPRebookFail}{0.1}\newcommand{\LedgerWorldConsumerMaxMs}{1500}   % protocol defaults of probe 304; claims_results.tex overrides from the receipt
+\newcommand{\LedgerWorldRevisions}{2}\newcommand{\LedgerWorldPCancelFail}{0.1}\newcommand{\LedgerWorldPRebookFail}{0.1}\newcommand{\LedgerWorldConsumerMaxMs}{1500}\newcommand{\LedgerWorldCompensator}{--}\newcommand{\LedgerWorldFirstAvailable}{0}   % protocol defaults of probe 304; claims_results.tex overrides from the receipt
+\newcommand{\PilotClaudeAvailable}{0}   % the Claude pilot cells scored by the verified detector (step 14 after step 11); claims_results.tex overrides
 \newcommand{\Pending}[1]{\textbf{[pending: #1]}}   % release_tag.sh refuses to tag while any \Pending survives in the PDF text
 
 % ============================================================================
@@ -329,13 +330,485 @@
 \providecommand{\SweepDeepseekValidatedOXZZ}{0/52/52}
 \providecommand{\SweepDeepseekValidatedOOXZZ}{0/42/42}
 \renewcommand{\OffsetCurveAvailable}{1}
+% --- probe 303 --interleave --runs (results/live_a1_outcome/*_arms150i.run*.json): replicated Table 3 rows ---
+\renewcommand{\LiveRunsAvailable}{1}
+\providecommand{\LiveRunsDeepseek}{3}
+\providecommand{\RunsDeepseekVanillaAOne}{40/28/45 ($113/300$ [32.2, 43.4])}
+\providecommand{\RunsDeepseekVanillaAOnePooled}{113/300}
+\providecommand{\RunsDeepseekVanillaAOneRuns}{40/28/45}
+\providecommand{\RunsDeepseekVanillaAOneShort}{40/28/45 ($113/300$)}
+\providecommand{\RunsDeepseekVanillaAOnePct}{37.7}
+\providecommand{\RunsDeepseekVanillaAOneCI}{[32.2, 43.4]}
+\providecommand{\RunsDeepseekVanillaR}{60/72/55 ($187/300$ [56.6, 67.8])}
+\providecommand{\RunsDeepseekVanillaRPooled}{187/300}
+\providecommand{\RunsDeepseekVanillaRRuns}{60/72/55}
+\providecommand{\RunsDeepseekVanillaRShort}{60/72/55 ($187/300$)}
+\providecommand{\RunsDeepseekVanillaRPct}{62.3}
+\providecommand{\RunsDeepseekVanillaRCI}{[56.6, 67.8]}
+\providecommand{\RunsDeepseekVanillaWrong}{100/100/100 ($300/300$ [98.8, 100.0])}
+\providecommand{\RunsDeepseekVanillaWrongPooled}{300/300}
+\providecommand{\RunsDeepseekVanillaWrongRuns}{100/100/100}
+\providecommand{\RunsDeepseekVanillaWrongShort}{100/100/100 ($300/300$)}
+\providecommand{\RunsDeepseekVanillaWrongPct}{100.0}
+\providecommand{\RunsDeepseekVanillaWrongCI}{[98.8, 100.0]}
+\providecommand{\RunsDeepseekVanillaRegen}{0/0/0}
+\providecommand{\RunsDeepseekVanillaLagAfter}{60/72/55}
+\providecommand{\RunsDeepseekValidatedAOne}{0/0/0 ($0/300$ [0.0, 1.2])}
+\providecommand{\RunsDeepseekValidatedAOnePooled}{0/300}
+\providecommand{\RunsDeepseekValidatedAOneRuns}{0/0/0}
+\providecommand{\RunsDeepseekValidatedAOneShort}{0/0/0 ($0/300$)}
+\providecommand{\RunsDeepseekValidatedAOnePct}{0.0}
+\providecommand{\RunsDeepseekValidatedAOneCI}{[0.0, 1.2]}
+\providecommand{\RunsDeepseekValidatedR}{54/73/58 ($185/300$ [55.9, 67.2])}
+\providecommand{\RunsDeepseekValidatedRPooled}{185/300}
+\providecommand{\RunsDeepseekValidatedRRuns}{54/73/58}
+\providecommand{\RunsDeepseekValidatedRShort}{54/73/58 ($185/300$)}
+\providecommand{\RunsDeepseekValidatedRPct}{61.7}
+\providecommand{\RunsDeepseekValidatedRCI}{[55.9, 67.2]}
+\providecommand{\RunsDeepseekValidatedWrong}{54/73/58 ($185/300$ [55.9, 67.2])}
+\providecommand{\RunsDeepseekValidatedWrongPooled}{185/300}
+\providecommand{\RunsDeepseekValidatedWrongRuns}{54/73/58}
+\providecommand{\RunsDeepseekValidatedWrongShort}{54/73/58 ($185/300$)}
+\providecommand{\RunsDeepseekValidatedWrongPct}{61.7}
+\providecommand{\RunsDeepseekValidatedWrongCI}{[55.9, 67.2]}
+\providecommand{\RunsDeepseekValidatedRegen}{46/27/42}
+\providecommand{\RunsDeepseekValidatedLagAfter}{54/73/58}
+\providecommand{\RunsDeepseekVerifiedAOne}{0/0/0 ($0/300$ [0.0, 1.2])}
+\providecommand{\RunsDeepseekVerifiedAOnePooled}{0/300}
+\providecommand{\RunsDeepseekVerifiedAOneRuns}{0/0/0}
+\providecommand{\RunsDeepseekVerifiedAOneShort}{0/0/0 ($0/300$)}
+\providecommand{\RunsDeepseekVerifiedAOnePct}{0.0}
+\providecommand{\RunsDeepseekVerifiedAOneCI}{[0.0, 1.2]}
+\providecommand{\RunsDeepseekVerifiedR}{67/67/60 ($194/300$ [59.0, 70.1])}
+\providecommand{\RunsDeepseekVerifiedRPooled}{194/300}
+\providecommand{\RunsDeepseekVerifiedRRuns}{67/67/60}
+\providecommand{\RunsDeepseekVerifiedRShort}{67/67/60 ($194/300$)}
+\providecommand{\RunsDeepseekVerifiedRPct}{64.7}
+\providecommand{\RunsDeepseekVerifiedRCI}{[59.0, 70.1]}
+\providecommand{\RunsDeepseekVerifiedWrong}{67/67/60 ($194/300$ [59.0, 70.1])}
+\providecommand{\RunsDeepseekVerifiedWrongPooled}{194/300}
+\providecommand{\RunsDeepseekVerifiedWrongRuns}{67/67/60}
+\providecommand{\RunsDeepseekVerifiedWrongShort}{67/67/60 ($194/300$)}
+\providecommand{\RunsDeepseekVerifiedWrongPct}{64.7}
+\providecommand{\RunsDeepseekVerifiedWrongCI}{[59.0, 70.1]}
+\providecommand{\RunsDeepseekVerifiedRegen}{33/33/40}
+\providecommand{\RunsDeepseekVerifiedLagAfter}{67/67/60}
+\providecommand{\RunsDeepseekLedgerAOne}{0/0/0 ($0/300$ [0.0, 1.2])}
+\providecommand{\RunsDeepseekLedgerAOnePooled}{0/300}
+\providecommand{\RunsDeepseekLedgerAOneRuns}{0/0/0}
+\providecommand{\RunsDeepseekLedgerAOneShort}{0/0/0 ($0/300$)}
+\providecommand{\RunsDeepseekLedgerAOnePct}{0.0}
+\providecommand{\RunsDeepseekLedgerAOneCI}{[0.0, 1.2]}
+\providecommand{\RunsDeepseekLedgerR}{0/0/0 ($0/300$ [0.0, 1.2])}
+\providecommand{\RunsDeepseekLedgerRPooled}{0/300}
+\providecommand{\RunsDeepseekLedgerRRuns}{0/0/0}
+\providecommand{\RunsDeepseekLedgerRShort}{0/0/0 ($0/300$)}
+\providecommand{\RunsDeepseekLedgerRPct}{0.0}
+\providecommand{\RunsDeepseekLedgerRCI}{[0.0, 1.2]}
+\providecommand{\RunsDeepseekLedgerWrong}{0/0/0 ($0/300$ [0.0, 1.2])}
+\providecommand{\RunsDeepseekLedgerWrongPooled}{0/300}
+\providecommand{\RunsDeepseekLedgerWrongRuns}{0/0/0}
+\providecommand{\RunsDeepseekLedgerWrongShort}{0/0/0 ($0/300$)}
+\providecommand{\RunsDeepseekLedgerWrongPct}{0.0}
+\providecommand{\RunsDeepseekLedgerWrongCI}{[0.0, 1.2]}
+\providecommand{\RunsDeepseekLedgerRegen}{35/35/41}
+\providecommand{\RunsDeepseekLedgerLagAfter}{65/65/59}
+\providecommand{\RunsDeepseekLedgerVerifiedAOne}{0/0/0 ($0/300$ [0.0, 1.2])}
+\providecommand{\RunsDeepseekLedgerVerifiedAOnePooled}{0/300}
+\providecommand{\RunsDeepseekLedgerVerifiedAOneRuns}{0/0/0}
+\providecommand{\RunsDeepseekLedgerVerifiedAOneShort}{0/0/0 ($0/300$)}
+\providecommand{\RunsDeepseekLedgerVerifiedAOnePct}{0.0}
+\providecommand{\RunsDeepseekLedgerVerifiedAOneCI}{[0.0, 1.2]}
+\providecommand{\RunsDeepseekLedgerVerifiedR}{0/0/0 ($0/300$ [0.0, 1.2])}
+\providecommand{\RunsDeepseekLedgerVerifiedRPooled}{0/300}
+\providecommand{\RunsDeepseekLedgerVerifiedRRuns}{0/0/0}
+\providecommand{\RunsDeepseekLedgerVerifiedRShort}{0/0/0 ($0/300$)}
+\providecommand{\RunsDeepseekLedgerVerifiedRPct}{0.0}
+\providecommand{\RunsDeepseekLedgerVerifiedRCI}{[0.0, 1.2]}
+\providecommand{\RunsDeepseekLedgerVerifiedWrong}{0/0/0 ($0/300$ [0.0, 1.2])}
+\providecommand{\RunsDeepseekLedgerVerifiedWrongPooled}{0/300}
+\providecommand{\RunsDeepseekLedgerVerifiedWrongRuns}{0/0/0}
+\providecommand{\RunsDeepseekLedgerVerifiedWrongShort}{0/0/0 ($0/300$)}
+\providecommand{\RunsDeepseekLedgerVerifiedWrongPct}{0.0}
+\providecommand{\RunsDeepseekLedgerVerifiedWrongCI}{[0.0, 1.2]}
+\providecommand{\RunsDeepseekLedgerVerifiedRegen}{36/34/35}
+\providecommand{\RunsDeepseekLedgerVerifiedLagAfter}{64/66/65}
+\providecommand{\RunsFisherDeepseek}{=0.498}
+\providecommand{\RunsPairedDiscordantDeepseek}{58 vs.\ 67}
+\providecommand{\RunsMcNemarDeepseek}{=0.474}
+\providecommand{\RunsDiffDeepseek}{-3.0}
+\providecommand{\RunsDiffCIDeepseek}{[-10.3, +4.3]}
+\providecommand{\RunsVsSeqDeepseekVanillaAOne}{=0.197}
+\providecommand{\RunsVsSeqDeepseekValidatedR}{=0.905}
+\providecommand{\RunsVsSeqDeepseekVerifiedR}{=0.032}
+\providecommand{\LiveRunsGpt}{3}
+\providecommand{\RunsGptVanillaAOne}{62/58/60 ($180/300$ [54.2, 65.6])}
+\providecommand{\RunsGptVanillaAOnePooled}{180/300}
+\providecommand{\RunsGptVanillaAOneRuns}{62/58/60}
+\providecommand{\RunsGptVanillaAOneShort}{62/58/60 ($180/300$)}
+\providecommand{\RunsGptVanillaAOnePct}{60.0}
+\providecommand{\RunsGptVanillaAOneCI}{[54.2, 65.6]}
+\providecommand{\RunsGptVanillaR}{38/42/40 ($120/300$ [34.4, 45.8])}
+\providecommand{\RunsGptVanillaRPooled}{120/300}
+\providecommand{\RunsGptVanillaRRuns}{38/42/40}
+\providecommand{\RunsGptVanillaRShort}{38/42/40 ($120/300$)}
+\providecommand{\RunsGptVanillaRPct}{40.0}
+\providecommand{\RunsGptVanillaRCI}{[34.4, 45.8]}
+\providecommand{\RunsGptVanillaWrong}{100/100/100 ($300/300$ [98.8, 100.0])}
+\providecommand{\RunsGptVanillaWrongPooled}{300/300}
+\providecommand{\RunsGptVanillaWrongRuns}{100/100/100}
+\providecommand{\RunsGptVanillaWrongShort}{100/100/100 ($300/300$)}
+\providecommand{\RunsGptVanillaWrongPct}{100.0}
+\providecommand{\RunsGptVanillaWrongCI}{[98.8, 100.0]}
+\providecommand{\RunsGptVanillaRegen}{0/0/0}
+\providecommand{\RunsGptVanillaLagAfter}{38/42/40}
+\providecommand{\RunsGptValidatedAOne}{0/0/0 ($0/300$ [0.0, 1.2])}
+\providecommand{\RunsGptValidatedAOnePooled}{0/300}
+\providecommand{\RunsGptValidatedAOneRuns}{0/0/0}
+\providecommand{\RunsGptValidatedAOneShort}{0/0/0 ($0/300$)}
+\providecommand{\RunsGptValidatedAOnePct}{0.0}
+\providecommand{\RunsGptValidatedAOneCI}{[0.0, 1.2]}
+\providecommand{\RunsGptValidatedR}{30/36/43 ($109/300$ [30.9, 42.1])}
+\providecommand{\RunsGptValidatedRPooled}{109/300}
+\providecommand{\RunsGptValidatedRRuns}{30/36/43}
+\providecommand{\RunsGptValidatedRShort}{30/36/43 ($109/300$)}
+\providecommand{\RunsGptValidatedRPct}{36.3}
+\providecommand{\RunsGptValidatedRCI}{[30.9, 42.1]}
+\providecommand{\RunsGptValidatedWrong}{30/36/43 ($109/300$ [30.9, 42.1])}
+\providecommand{\RunsGptValidatedWrongPooled}{109/300}
+\providecommand{\RunsGptValidatedWrongRuns}{30/36/43}
+\providecommand{\RunsGptValidatedWrongShort}{30/36/43 ($109/300$)}
+\providecommand{\RunsGptValidatedWrongPct}{36.3}
+\providecommand{\RunsGptValidatedWrongCI}{[30.9, 42.1]}
+\providecommand{\RunsGptValidatedRegen}{70/64/57}
+\providecommand{\RunsGptValidatedLagAfter}{30/36/43}
+\providecommand{\RunsGptVerifiedAOne}{0/0/0 ($0/300$ [0.0, 1.2])}
+\providecommand{\RunsGptVerifiedAOnePooled}{0/300}
+\providecommand{\RunsGptVerifiedAOneRuns}{0/0/0}
+\providecommand{\RunsGptVerifiedAOneShort}{0/0/0 ($0/300$)}
+\providecommand{\RunsGptVerifiedAOnePct}{0.0}
+\providecommand{\RunsGptVerifiedAOneCI}{[0.0, 1.2]}
+\providecommand{\RunsGptVerifiedR}{28/34/42 ($104/300$ [29.3, 40.3])}
+\providecommand{\RunsGptVerifiedRPooled}{104/300}
+\providecommand{\RunsGptVerifiedRRuns}{28/34/42}
+\providecommand{\RunsGptVerifiedRShort}{28/34/42 ($104/300$)}
+\providecommand{\RunsGptVerifiedRPct}{34.7}
+\providecommand{\RunsGptVerifiedRCI}{[29.3, 40.3]}
+\providecommand{\RunsGptVerifiedWrong}{28/34/42 ($104/300$ [29.3, 40.3])}
+\providecommand{\RunsGptVerifiedWrongPooled}{104/300}
+\providecommand{\RunsGptVerifiedWrongRuns}{28/34/42}
+\providecommand{\RunsGptVerifiedWrongShort}{28/34/42 ($104/300$)}
+\providecommand{\RunsGptVerifiedWrongPct}{34.7}
+\providecommand{\RunsGptVerifiedWrongCI}{[29.3, 40.3]}
+\providecommand{\RunsGptVerifiedRegen}{72/66/58}
+\providecommand{\RunsGptVerifiedLagAfter}{28/34/42}
+\providecommand{\RunsGptLedgerAOne}{0/0/0 ($0/300$ [0.0, 1.2])}
+\providecommand{\RunsGptLedgerAOnePooled}{0/300}
+\providecommand{\RunsGptLedgerAOneRuns}{0/0/0}
+\providecommand{\RunsGptLedgerAOneShort}{0/0/0 ($0/300$)}
+\providecommand{\RunsGptLedgerAOnePct}{0.0}
+\providecommand{\RunsGptLedgerAOneCI}{[0.0, 1.2]}
+\providecommand{\RunsGptLedgerR}{0/0/0 ($0/300$ [0.0, 1.2])}
+\providecommand{\RunsGptLedgerRPooled}{0/300}
+\providecommand{\RunsGptLedgerRRuns}{0/0/0}
+\providecommand{\RunsGptLedgerRShort}{0/0/0 ($0/300$)}
+\providecommand{\RunsGptLedgerRPct}{0.0}
+\providecommand{\RunsGptLedgerRCI}{[0.0, 1.2]}
+\providecommand{\RunsGptLedgerWrong}{0/0/0 ($0/300$ [0.0, 1.2])}
+\providecommand{\RunsGptLedgerWrongPooled}{0/300}
+\providecommand{\RunsGptLedgerWrongRuns}{0/0/0}
+\providecommand{\RunsGptLedgerWrongShort}{0/0/0 ($0/300$)}
+\providecommand{\RunsGptLedgerWrongPct}{0.0}
+\providecommand{\RunsGptLedgerWrongCI}{[0.0, 1.2]}
+\providecommand{\RunsGptLedgerRegen}{70/60/61}
+\providecommand{\RunsGptLedgerLagAfter}{30/40/39}
+\providecommand{\RunsGptLedgerVerifiedAOne}{0/0/0 ($0/300$ [0.0, 1.2])}
+\providecommand{\RunsGptLedgerVerifiedAOnePooled}{0/300}
+\providecommand{\RunsGptLedgerVerifiedAOneRuns}{0/0/0}
+\providecommand{\RunsGptLedgerVerifiedAOneShort}{0/0/0 ($0/300$)}
+\providecommand{\RunsGptLedgerVerifiedAOnePct}{0.0}
+\providecommand{\RunsGptLedgerVerifiedAOneCI}{[0.0, 1.2]}
+\providecommand{\RunsGptLedgerVerifiedR}{0/0/0 ($0/300$ [0.0, 1.2])}
+\providecommand{\RunsGptLedgerVerifiedRPooled}{0/300}
+\providecommand{\RunsGptLedgerVerifiedRRuns}{0/0/0}
+\providecommand{\RunsGptLedgerVerifiedRShort}{0/0/0 ($0/300$)}
+\providecommand{\RunsGptLedgerVerifiedRPct}{0.0}
+\providecommand{\RunsGptLedgerVerifiedRCI}{[0.0, 1.2]}
+\providecommand{\RunsGptLedgerVerifiedWrong}{0/0/0 ($0/300$ [0.0, 1.2])}
+\providecommand{\RunsGptLedgerVerifiedWrongPooled}{0/300}
+\providecommand{\RunsGptLedgerVerifiedWrongRuns}{0/0/0}
+\providecommand{\RunsGptLedgerVerifiedWrongShort}{0/0/0 ($0/300$)}
+\providecommand{\RunsGptLedgerVerifiedWrongPct}{0.0}
+\providecommand{\RunsGptLedgerVerifiedWrongCI}{[0.0, 1.2]}
+\providecommand{\RunsGptLedgerVerifiedRegen}{63/60/65}
+\providecommand{\RunsGptLedgerVerifiedLagAfter}{37/40/35}
+\providecommand{\RunsFisherGpt}{=0.733}
+\providecommand{\RunsPairedDiscordantGpt}{72 vs.\ 67}
+\providecommand{\RunsMcNemarGpt}{=0.735}
+\providecommand{\RunsDiffGpt}{+1.7}
+\providecommand{\RunsDiffCIGpt}{[-6.0, +9.4]}
+\providecommand{\RunsVsSeqGptVanillaAOne}{=0.007}
+\providecommand{\RunsVsSeqGptValidatedR}{=0.013}
+\providecommand{\RunsVsSeqGptVerifiedR}{=0.004}
+\providecommand{\LiveRunsHaiku}{3}
+\providecommand{\RunsHaikuVanillaAOne}{98/100/98 ($296/300$ [96.6, 99.6])}
+\providecommand{\RunsHaikuVanillaAOnePooled}{296/300}
+\providecommand{\RunsHaikuVanillaAOneRuns}{98/100/98}
+\providecommand{\RunsHaikuVanillaAOneShort}{98/100/98 ($296/300$)}
+\providecommand{\RunsHaikuVanillaAOnePct}{98.7}
+\providecommand{\RunsHaikuVanillaAOneCI}{[96.6, 99.6]}
+\providecommand{\RunsHaikuVanillaR}{2/0/2 ($4/300$ [0.4, 3.4])}
+\providecommand{\RunsHaikuVanillaRPooled}{4/300}
+\providecommand{\RunsHaikuVanillaRRuns}{2/0/2}
+\providecommand{\RunsHaikuVanillaRShort}{2/0/2 ($4/300$)}
+\providecommand{\RunsHaikuVanillaRPct}{1.3}
+\providecommand{\RunsHaikuVanillaRCI}{[0.4, 3.4]}
+\providecommand{\RunsHaikuVanillaWrong}{100/100/100 ($300/300$ [98.8, 100.0])}
+\providecommand{\RunsHaikuVanillaWrongPooled}{300/300}
+\providecommand{\RunsHaikuVanillaWrongRuns}{100/100/100}
+\providecommand{\RunsHaikuVanillaWrongShort}{100/100/100 ($300/300$)}
+\providecommand{\RunsHaikuVanillaWrongPct}{100.0}
+\providecommand{\RunsHaikuVanillaWrongCI}{[98.8, 100.0]}
+\providecommand{\RunsHaikuVanillaRegen}{0/0/0}
+\providecommand{\RunsHaikuVanillaLagAfter}{2/0/2}
+\providecommand{\RunsHaikuValidatedAOne}{0/0/0 ($0/300$ [0.0, 1.2])}
+\providecommand{\RunsHaikuValidatedAOnePooled}{0/300}
+\providecommand{\RunsHaikuValidatedAOneRuns}{0/0/0}
+\providecommand{\RunsHaikuValidatedAOneShort}{0/0/0 ($0/300$)}
+\providecommand{\RunsHaikuValidatedAOnePct}{0.0}
+\providecommand{\RunsHaikuValidatedAOneCI}{[0.0, 1.2]}
+\providecommand{\RunsHaikuValidatedR}{3/1/3 ($7/300$ [0.9, 4.7])}
+\providecommand{\RunsHaikuValidatedRPooled}{7/300}
+\providecommand{\RunsHaikuValidatedRRuns}{3/1/3}
+\providecommand{\RunsHaikuValidatedRShort}{3/1/3 ($7/300$)}
+\providecommand{\RunsHaikuValidatedRPct}{2.3}
+\providecommand{\RunsHaikuValidatedRCI}{[0.9, 4.7]}
+\providecommand{\RunsHaikuValidatedWrong}{3/1/3 ($7/300$ [0.9, 4.7])}
+\providecommand{\RunsHaikuValidatedWrongPooled}{7/300}
+\providecommand{\RunsHaikuValidatedWrongRuns}{3/1/3}
+\providecommand{\RunsHaikuValidatedWrongShort}{3/1/3 ($7/300$)}
+\providecommand{\RunsHaikuValidatedWrongPct}{2.3}
+\providecommand{\RunsHaikuValidatedWrongCI}{[0.9, 4.7]}
+\providecommand{\RunsHaikuValidatedRegen}{97/99/97}
+\providecommand{\RunsHaikuValidatedLagAfter}{3/1/3}
+\providecommand{\RunsHaikuVerifiedAOne}{0/0/0 ($0/300$ [0.0, 1.2])}
+\providecommand{\RunsHaikuVerifiedAOnePooled}{0/300}
+\providecommand{\RunsHaikuVerifiedAOneRuns}{0/0/0}
+\providecommand{\RunsHaikuVerifiedAOneShort}{0/0/0 ($0/300$)}
+\providecommand{\RunsHaikuVerifiedAOnePct}{0.0}
+\providecommand{\RunsHaikuVerifiedAOneCI}{[0.0, 1.2]}
+\providecommand{\RunsHaikuVerifiedR}{0/1/1 ($2/300$ [0.1, 2.4])}
+\providecommand{\RunsHaikuVerifiedRPooled}{2/300}
+\providecommand{\RunsHaikuVerifiedRRuns}{0/1/1}
+\providecommand{\RunsHaikuVerifiedRShort}{0/1/1 ($2/300$)}
+\providecommand{\RunsHaikuVerifiedRPct}{0.7}
+\providecommand{\RunsHaikuVerifiedRCI}{[0.1, 2.4]}
+\providecommand{\RunsHaikuVerifiedWrong}{0/1/1 ($2/300$ [0.1, 2.4])}
+\providecommand{\RunsHaikuVerifiedWrongPooled}{2/300}
+\providecommand{\RunsHaikuVerifiedWrongRuns}{0/1/1}
+\providecommand{\RunsHaikuVerifiedWrongShort}{0/1/1 ($2/300$)}
+\providecommand{\RunsHaikuVerifiedWrongPct}{0.7}
+\providecommand{\RunsHaikuVerifiedWrongCI}{[0.1, 2.4]}
+\providecommand{\RunsHaikuVerifiedRegen}{100/99/99}
+\providecommand{\RunsHaikuVerifiedLagAfter}{0/1/1}
+\providecommand{\RunsHaikuLedgerAOne}{0/0/0 ($0/300$ [0.0, 1.2])}
+\providecommand{\RunsHaikuLedgerAOnePooled}{0/300}
+\providecommand{\RunsHaikuLedgerAOneRuns}{0/0/0}
+\providecommand{\RunsHaikuLedgerAOneShort}{0/0/0 ($0/300$)}
+\providecommand{\RunsHaikuLedgerAOnePct}{0.0}
+\providecommand{\RunsHaikuLedgerAOneCI}{[0.0, 1.2]}
+\providecommand{\RunsHaikuLedgerR}{0/0/0 ($0/300$ [0.0, 1.2])}
+\providecommand{\RunsHaikuLedgerRPooled}{0/300}
+\providecommand{\RunsHaikuLedgerRRuns}{0/0/0}
+\providecommand{\RunsHaikuLedgerRShort}{0/0/0 ($0/300$)}
+\providecommand{\RunsHaikuLedgerRPct}{0.0}
+\providecommand{\RunsHaikuLedgerRCI}{[0.0, 1.2]}
+\providecommand{\RunsHaikuLedgerWrong}{0/0/0 ($0/300$ [0.0, 1.2])}
+\providecommand{\RunsHaikuLedgerWrongPooled}{0/300}
+\providecommand{\RunsHaikuLedgerWrongRuns}{0/0/0}
+\providecommand{\RunsHaikuLedgerWrongShort}{0/0/0 ($0/300$)}
+\providecommand{\RunsHaikuLedgerWrongPct}{0.0}
+\providecommand{\RunsHaikuLedgerWrongCI}{[0.0, 1.2]}
+\providecommand{\RunsHaikuLedgerRegen}{100/99/97}
+\providecommand{\RunsHaikuLedgerLagAfter}{0/1/3}
+\providecommand{\RunsHaikuLedgerVerifiedAOne}{0/0/0 ($0/300$ [0.0, 1.2])}
+\providecommand{\RunsHaikuLedgerVerifiedAOnePooled}{0/300}
+\providecommand{\RunsHaikuLedgerVerifiedAOneRuns}{0/0/0}
+\providecommand{\RunsHaikuLedgerVerifiedAOneShort}{0/0/0 ($0/300$)}
+\providecommand{\RunsHaikuLedgerVerifiedAOnePct}{0.0}
+\providecommand{\RunsHaikuLedgerVerifiedAOneCI}{[0.0, 1.2]}
+\providecommand{\RunsHaikuLedgerVerifiedR}{0/0/0 ($0/300$ [0.0, 1.2])}
+\providecommand{\RunsHaikuLedgerVerifiedRPooled}{0/300}
+\providecommand{\RunsHaikuLedgerVerifiedRRuns}{0/0/0}
+\providecommand{\RunsHaikuLedgerVerifiedRShort}{0/0/0 ($0/300$)}
+\providecommand{\RunsHaikuLedgerVerifiedRPct}{0.0}
+\providecommand{\RunsHaikuLedgerVerifiedRCI}{[0.0, 1.2]}
+\providecommand{\RunsHaikuLedgerVerifiedWrong}{0/0/0 ($0/300$ [0.0, 1.2])}
+\providecommand{\RunsHaikuLedgerVerifiedWrongPooled}{0/300}
+\providecommand{\RunsHaikuLedgerVerifiedWrongRuns}{0/0/0}
+\providecommand{\RunsHaikuLedgerVerifiedWrongShort}{0/0/0 ($0/300$)}
+\providecommand{\RunsHaikuLedgerVerifiedWrongPct}{0.0}
+\providecommand{\RunsHaikuLedgerVerifiedWrongCI}{[0.0, 1.2]}
+\providecommand{\RunsHaikuLedgerVerifiedRegen}{99/96/95}
+\providecommand{\RunsHaikuLedgerVerifiedLagAfter}{1/4/5}
+\providecommand{\RunsFisherHaiku}{=0.176}
+\providecommand{\RunsPairedDiscordantHaiku}{7 vs.\ 2}
+\providecommand{\RunsMcNemarHaiku}{=0.180}
+\providecommand{\RunsDiffHaiku}{+1.7}
+\providecommand{\RunsDiffCIHaiku}{[-0.3, +3.6]}
+\providecommand{\RunsVsSeqHaikuVanillaAOne}{=0.018}
+\providecommand{\RunsVsSeqHaikuValidatedR}{<0.001}
+\providecommand{\RunsVsSeqHaikuVerifiedR}{=0.261}
+% --- probe 304 (ledger_world): the ledger with a consumer, a cancellation step and a fallible compensator ---
+\renewcommand{\LedgerWorldAvailable}{1}
+\renewcommand{\LedgerWorldRevisions}{2}
+\renewcommand{\LedgerWorldPCancelFail}{0.1}
+\renewcommand{\LedgerWorldPRebookFail}{0.1}
+\renewcommand{\LedgerWorldConsumerMaxMs}{1500}
+\renewcommand{\LedgerWorldCompensator}{latest}
+\providecommand{\LWHaikuValidatedR}{98}
+\providecommand{\LWHaikuValidatedStoreWrong}{98}
+\providecommand{\LWHaikuValidatedWorldWrong}{98}
+\providecommand{\LWHaikuValidatedWorldNone}{0}
+\providecommand{\LWHaikuValidatedDouble}{0}
+\providecommand{\LWHaikuValidatedConsumerStale}{98}
+\providecommand{\LWHaikuValidatedConsumerNone}{0}
+\providecommand{\LWHaikuValidatedRetries}{0}
+\providecommand{\LWHaikuValidatedObl}{0/0/0}
+\providecommand{\LWHaikuValidatedN}{100}
+\providecommand{\LWHaikuValidatedCleanSessions}{100}
+\providecommand{\LWHaikuValidatedCleanRight}{2}
+\providecommand{\LWHaikuValidatedCleanWrong}{98}
+\providecommand{\LWHaikuLedgerR}{0}
+\providecommand{\LWHaikuLedgerStoreWrong}{7}
+\providecommand{\LWHaikuLedgerWorldWrong}{12}
+\providecommand{\LWHaikuLedgerWorldNone}{6}
+\providecommand{\LWHaikuLedgerDouble}{11}
+\providecommand{\LWHaikuLedgerConsumerStale}{42}
+\providecommand{\LWHaikuLedgerConsumerNone}{53}
+\providecommand{\LWHaikuLedgerRetries}{2}
+\providecommand{\LWHaikuLedgerObl}{101/84/17}
+\providecommand{\LWHaikuLedgerN}{100}
+\providecommand{\LWHaikuLedgerCleanSessions}{83}
+\providecommand{\LWHaikuLedgerCleanRight}{82}
+\providecommand{\LWHaikuLedgerCleanWrong}{1}
+\providecommand{\LWHaikuLedgerNoRollbackR}{0}
+\providecommand{\LWHaikuLedgerNoRollbackStoreWrong}{11}
+\providecommand{\LWHaikuLedgerNoRollbackWorldWrong}{99}
+\providecommand{\LWHaikuLedgerNoRollbackWorldNone}{0}
+\providecommand{\LWHaikuLedgerNoRollbackDouble}{88}
+\providecommand{\LWHaikuLedgerNoRollbackConsumerStale}{99}
+\providecommand{\LWHaikuLedgerNoRollbackConsumerNone}{0}
+\providecommand{\LWHaikuLedgerNoRollbackRetries}{1}
+\providecommand{\LWHaikuLedgerNoRollbackObl}{100/89/11}
+\providecommand{\LWHaikuLedgerNoRollbackN}{100}
+\providecommand{\LWHaikuLedgerNoRollbackCleanSessions}{89}
+\providecommand{\LWHaikuLedgerNoRollbackCleanRight}{1}
+\providecommand{\LWHaikuLedgerNoRollbackCleanWrong}{88}
+\providecommand{\LWDeepseekValidatedR}{99}
+\providecommand{\LWDeepseekValidatedStoreWrong}{99}
+\providecommand{\LWDeepseekValidatedWorldWrong}{99}
+\providecommand{\LWDeepseekValidatedWorldNone}{0}
+\providecommand{\LWDeepseekValidatedDouble}{0}
+\providecommand{\LWDeepseekValidatedConsumerStale}{99}
+\providecommand{\LWDeepseekValidatedConsumerNone}{0}
+\providecommand{\LWDeepseekValidatedRetries}{0}
+\providecommand{\LWDeepseekValidatedObl}{0/0/0}
+\providecommand{\LWDeepseekValidatedN}{100}
+\providecommand{\LWDeepseekValidatedCleanSessions}{100}
+\providecommand{\LWDeepseekValidatedCleanRight}{1}
+\providecommand{\LWDeepseekValidatedCleanWrong}{99}
+\providecommand{\LWDeepseekLedgerR}{0}
+\providecommand{\LWDeepseekLedgerStoreWrong}{14}
+\providecommand{\LWDeepseekLedgerWorldWrong}{16}
+\providecommand{\LWDeepseekLedgerWorldNone}{12}
+\providecommand{\LWDeepseekLedgerDouble}{14}
+\providecommand{\LWDeepseekLedgerConsumerStale}{49}
+\providecommand{\LWDeepseekLedgerConsumerNone}{50}
+\providecommand{\LWDeepseekLedgerRetries}{13}
+\providecommand{\LWDeepseekLedgerObl}{150/130/20}
+\providecommand{\LWDeepseekLedgerN}{100}
+\providecommand{\LWDeepseekLedgerCleanSessions}{80}
+\providecommand{\LWDeepseekLedgerCleanRight}{70}
+\providecommand{\LWDeepseekLedgerCleanWrong}{10}
+\providecommand{\LWDeepseekLedgerNoRollbackR}{0}
+\providecommand{\LWDeepseekLedgerNoRollbackStoreWrong}{7}
+\providecommand{\LWDeepseekLedgerNoRollbackWorldWrong}{99}
+\providecommand{\LWDeepseekLedgerNoRollbackWorldNone}{0}
+\providecommand{\LWDeepseekLedgerNoRollbackDouble}{96}
+\providecommand{\LWDeepseekLedgerNoRollbackConsumerStale}{99}
+\providecommand{\LWDeepseekLedgerNoRollbackConsumerNone}{0}
+\providecommand{\LWDeepseekLedgerNoRollbackRetries}{9}
+\providecommand{\LWDeepseekLedgerNoRollbackObl}{154/147/7}
+\providecommand{\LWDeepseekLedgerNoRollbackN}{100}
+\providecommand{\LWDeepseekLedgerNoRollbackCleanSessions}{93}
+\providecommand{\LWDeepseekLedgerNoRollbackCleanRight}{1}
+\providecommand{\LWDeepseekLedgerNoRollbackCleanWrong}{92}
+\providecommand{\LWGptValidatedR}{100}
+\providecommand{\LWGptValidatedStoreWrong}{100}
+\providecommand{\LWGptValidatedWorldWrong}{100}
+\providecommand{\LWGptValidatedWorldNone}{0}
+\providecommand{\LWGptValidatedDouble}{0}
+\providecommand{\LWGptValidatedConsumerStale}{100}
+\providecommand{\LWGptValidatedConsumerNone}{0}
+\providecommand{\LWGptValidatedRetries}{0}
+\providecommand{\LWGptValidatedObl}{0/0/0}
+\providecommand{\LWGptValidatedN}{100}
+\providecommand{\LWGptValidatedCleanSessions}{100}
+\providecommand{\LWGptValidatedCleanRight}{0}
+\providecommand{\LWGptValidatedCleanWrong}{100}
+\providecommand{\LWGptLedgerR}{0}
+\providecommand{\LWGptLedgerStoreWrong}{11}
+\providecommand{\LWGptLedgerWorldWrong}{16}
+\providecommand{\LWGptLedgerWorldNone}{9}
+\providecommand{\LWGptLedgerDouble}{14}
+\providecommand{\LWGptLedgerConsumerStale}{46}
+\providecommand{\LWGptLedgerConsumerNone}{52}
+\providecommand{\LWGptLedgerRetries}{10}
+\providecommand{\LWGptLedgerObl}{150/126/24}
+\providecommand{\LWGptLedgerN}{100}
+\providecommand{\LWGptLedgerCleanSessions}{76}
+\providecommand{\LWGptLedgerCleanRight}{71}
+\providecommand{\LWGptLedgerCleanWrong}{5}
+\providecommand{\LWGptLedgerNoRollbackR}{0}
+\providecommand{\LWGptLedgerNoRollbackStoreWrong}{9}
+\providecommand{\LWGptLedgerNoRollbackWorldWrong}{99}
+\providecommand{\LWGptLedgerNoRollbackWorldNone}{0}
+\providecommand{\LWGptLedgerNoRollbackDouble}{94}
+\providecommand{\LWGptLedgerNoRollbackConsumerStale}{99}
+\providecommand{\LWGptLedgerNoRollbackConsumerNone}{0}
+\providecommand{\LWGptLedgerNoRollbackRetries}{7}
+\providecommand{\LWGptLedgerNoRollbackObl}{152/143/9}
+\providecommand{\LWGptLedgerNoRollbackN}{100}
+\providecommand{\LWGptLedgerNoRollbackCleanSessions}{91}
+\providecommand{\LWGptLedgerNoRollbackCleanRight}{1}
+\providecommand{\LWGptLedgerNoRollbackCleanWrong}{90}
+% --- probe 301 (results/a6_real_latency/sqlite.jsonl) ---
+\renewcommand{\ToolNodeRealSqlite}{$126/165$}
+% --- probe 301 --l3-server (results/a6_real_latency/sqlite_verified.jsonl) ---
+\renewcommand{\ToolNodeVerifiedSqlite}{$0/165$}
+\renewcommand{\ToolNodeVerifiedBaselineSqlite}{$119/165$}
+\renewcommand{\ToolNodeVerifiedAvailable}{1}
+% --- probe 301 (results/a6_real_latency/http.jsonl) ---
+\renewcommand{\ToolNodeRealHttp}{$112/165$}
+% --- probe 301 --l3-server (results/a6_real_latency/http_verified.jsonl) ---
+\renewcommand{\ToolNodeVerifiedHttp}{$0/165$}
+\renewcommand{\ToolNodeVerifiedBaselineHttp}{$113/165$}
+\renewcommand{\ToolNodeVerifiedAvailable}{1}
 % --- verus ledger (results/verus/lib_l5_ledger.verus.log) ---
 \renewcommand{\LfiveVerus}{7 obligations, 0 errors}
 \renewcommand{\LfiveVerusStatus}{verified in Verus (7 obligations, 0 errors)}
 \renewcommand{\LfiveVerusIntro}{verified (7 obligations)}
-% --- merged from b4fca224-paper_receipts_summary.json (receipts absent in this checkout) ---
-\renewcommand{\ToolNodeRealSqlite}{$126/165$}
-\renewcommand{\ToolNodeRealHttp}{$112/165$}
+% --- verified_scorer_gate (./tools/verified_scorer.json) ---
+\renewcommand{\VerifiedScorerCells}{63}
+\renewcommand{\VerifiedScorerTraces}{1{,}500}
+\renewcommand{\VerifiedScorerProblems}{4818}
+% verified_scorer_gate reports 4818 problem(s) over 63 cell(s): the paper's cell stays PENDING
+% --- check_duplication.sh (./formal/tla/tlc.Duplication.log) ---
+\renewcommand{\DupWitnessDepth}{5}
+\renewcommand{\DupDivergentDepth}{6}
+\renewcommand{\DupDedupStates}{1{,}714}
+\renewcommand{\DupAvailable}{1}
 % a regenerated claims_results.tex beside this file (run_experiments.sh step 13) overrides the block above
 \IfFileExists{claims_results.tex}{\input{claims_results.tex}}{}
 
@@ -370,7 +843,7 @@
 \renewcommand{\thetable}{S\arabic{table}}
 \renewcommand{\thefigure}{S\arabic{figure}}
 
-\title{Online Appendix to:\\ Isolation Is Not the Harm: Mechanized Anomaly Predicates, Verified Disciplines, and the Residue They Leave in Multi-Agent LLM Systems}
+\title{Online Appendix to:\\ What Commit-Time Isolation Leaves Behind: Mechanized Anomaly Predicates, Verified Disciplines, and the Residue in Multi-Agent LLM Systems}
 \author{Sajjad Khan}
 \markboth{Supplementary Material}{}
 \maketitle
@@ -384,12 +857,15 @@ its S-number from the main text; the surrounding analysis, findings, and
 interpretation remain in the main paper. Appendices~G--S hold material moved out of the main paper for length; it is the main paper's own text, with its cross-references rewritten to point into the main paper or into this appendix. The full reproducibility artifact
 accompanies this appendix: \texttt{verus\_count.sh} regenerates the obligation
 totals against the working tree, and \texttt{check\_tables.sh} rescores every
-published cell of the main paper's Tables~3, 4 and 6 with an implementation of
+published cell of the main paper's Table~3 and of the pilot table of Appendix~M with an implementation of
 Definition~1 independent of the Verus-verified detector, failing non-zero on any
 disagreement. Appendix~W holds the predicate $D$ and its TLC log, the
-arm-timing analysis of Table~3, the replicated interleaved runs, the
-ledger-in-a-world protocol and table, the verified-scorer receipt, and the
-census table moved out of the main text.
+arm-timing analysis of Table~3, the replicated interleaved runs with their
+exact intervals and Fisher tests, the ledger-in-a-world protocol, its first
+run's table and the account of what the world check caught in that run's
+compensator, the verified-scorer receipt, and the census table moved out of
+the main text; the AutoGen pilot table and the \texttt{ToolNode} table of
+earlier versions sit in Appendices~M and~P.
 
 
 \section*{Appendix A: Concurrent-semantics lift --- full development}
@@ -720,7 +1196,7 @@ behaviors of the main paper: vanilla edit-review produces an $A_1$ witness;
 pessimistic locking blocks at \texttt{begin} and produces a clean trace;
 snapshot isolation aborts on validation when committing writes; default-SI
 misses the no-write stale-read pattern---the silent residual of $5\,\%$ on
-edit-review and $8\,\%$ on triage reported in the main paper's Table~4---and SSI
+edit-review and $8\,\%$ on triage reported in the pilot table of Appendix~M---and SSI
 mode closes it.
 
 \medskip
@@ -873,7 +1349,7 @@ usage callbacks across 900 sessions (100 per cell). Pricing: \$2.50/M input,
 \$10.00/M output. 95\,\% bootstrap CIs (1{,}000 resamples). Cost in
 milli-dollars. \textbf{These are per-session costs.} The three runtimes do not
 complete the same work in a session, so the main paper re-prices them per
-\emph{sound} committed operation in its Finding~6; read that table alongside
+\emph{sound} committed operation in its Table~6 (\S\,6.7); read that table alongside
 this one.}
 \label{tab:s1}
 \small
@@ -1971,6 +2447,29 @@ these runs.
 
 \section*{Appendix M: Synthetic pilot; cost Findings 1--5 and the inference-cost sweep}
 
+\begin{table}[t]  % moved from the main text (2026-10-14): Table S-M1
+\centering
+\caption{AutoGen pilot (moved from the main text), \A1 firing rate by runtime and workload (run
+\texttt{\CostRun}, $n{=}100$ per cell). \emph{Complete \& clean}: sessions
+with no \A1 witness in which every role that commits in the unguarded cell
+also commits here.}
+\label{tab:pilot-s}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{@{}lccc@{}}
+\toprule
+Runtime & edit-review & plan-execute & triage \\
+\midrule
+Vanilla & 100\% [96.4, 100] & 0\% [0, 3.6] & 48\% [37.9, 58.2] \\
+Pessimistic locking & 0\% [0, 3.6] & 0\% [0, 3.6] & 0\% [0, 3.6] \\
+Snapshot isolation (default-SI) & \PilotSiEditResidual\% [1.6, 11.3] & 0\% [0, 3.6] & \PilotSiTriageResidual\% [3.5, 15.2] \\
+\midrule
+Complete \& clean, vanilla / pess. / SI & 0 / 1 / 0 & 99 / 100 / 99 & 52 / 3 / 45 \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
 \subsection*{Workload}
 The pilot uses seven synthetic but reproducible task scenarios
 designed to surface specific points in the lattice:
@@ -2033,12 +2532,12 @@ domain. Plan-execute is
 measurement. Two further independent runs of the same protocol give edit-review
 100/100 and 100/100, plan-execute 0/100 and 0/100, and triage 52/100 and
 48/100; these are \texttt{20260913T0128Z} and the vanilla column of the
-Table~4 of the main paper run \texttt{20260913T0150Z}, both committed
+pilot table (this appendix) run \texttt{20260913T0150Z}, both committed
 with their traces; pooled over the three runs, triage is
 $142/300$ [41.6, 53.2].
 
-Table~4 of the main paper reports the level distribution. Three
-findings.
+The pilot table at the head of this appendix reports the level distribution.
+Three findings.
 
 First, the edit-review rate of 100\% confirms that under
 round-robin scheduling with both agents required to read the same
@@ -2107,8 +2606,8 @@ is new.
 \paragraph{Pessimistic locking eliminates $A_1$ in every cell, by
 dropping the contested operation.}
 The pessimistic-locking runtime drops every conflicting operation
-silently (Appendix~M), and every cell of
-Table~4 of the main paper shows zero $A_1$ instances---because in
+silently (Appendix~M), and every pessimistic cell of
+the pilot table shows zero $A_1$ instances---because in
 edit-review the reviewer's operation is gone in 99 of 100 sessions and in
 triage one of three agents' operations is gone in 97 of 100 (Table~4 of the
 main paper, \emph{complete \& clean}: $3$). The
@@ -2167,7 +2666,7 @@ is not separable from the unguarded runtime's.}
 The SSI mean sits within sampling noise of vanilla in every cell: CIs overlap
 on edit-review (3.11 vs 3.13), plan-execute (1.95 vs 1.93), and triage (3.13
 vs 3.23). This is a statement about a per-session denominator, which credits a
-discipline for work it declined to do; Finding~6 re-prices the same run per
+discipline for work it declined to do; Table~6 of the main paper re-prices the same run per
 sound committed operation, and the parity does not survive. An earlier version
 cited here a paired ${\sim}8\%$ overhead on plan-execute. That figure comes
 from the study of Appendix~O, whose aborts are injected at a fixed
@@ -2175,7 +2674,7 @@ probability; the real store never aborts on plan-execute, so the figure prices
 the injection and not the discipline, and we no longer cite it as a cost of
 snapshot isolation. The $A_1$-prevention
 rate of the pilot's default-SI store is 95\%, 100\%, and 92\%
-respectively (Table~4 of the main paper); the SSI mode of the Rust
+respectively (the pilot table of this appendix); the SSI mode of the Rust
 runtime (Section~5.2 of the main paper), which validates read-only commits,
 is the mechanism the cost figures should be read against. The classical cost asymmetry that
 motivates serializable snapshot isolation in the database setting
@@ -2242,11 +2741,21 @@ the placeholder; nothing in the pipeline can then overlap. Since 2026-10-14
 the pilot hands the reporter a concrete bug drawn by scenario id from a
 fixed list of $25$ (\texttt{probes/103\_autogen\_pilot.py}, \texttt{SEEDED\_BUGS};
 \texttt{-{}-no-seeded-tickets} restores the old protocol) and writes a
-\texttt{protocol.json} beside each cell; the Sonnet triage cells are rerun
-under it (runner step 11) and the gpt-4o campaign, which predates the change,
-is reported as run and labeled. The guarded cells of the Sonnet rerun did
-not execute in the September attempt (an import path broken by the
-repository migration, since fixed in the runner) and are rerun with it. All $750$ records pass the H0/H1 gates
+\texttt{protocol.json} beside each cell; the gpt-4o campaign, which
+predates the change, is reported as run and labeled. The Sonnet triage
+vanilla cell was rerun under the seeded protocol on 2026-10-14 (runner step
+11): $100/100$ sessions produced three or more events and none carries the
+placeholder ticket, so the cell is no longer void; its \A1 rate is scored by
+the verified detector of runner step 14 (\texttt{verified\_scorer\_gate.py}
+now scores every cell under \texttt{results/runs/}) and is
+\Pending{runner steps 11/14}. The six guarded Sonnet cells (pessimistic and
+snapshot isolation on three workloads) did not execute in that attempt: the
+runtimes import the \texttt{baselines} package, filed under
+\texttt{results/} by the repository migration as a namespace package, which
+the runner's locator (which looked for an \texttt{\_\_init\_\_.py}) never
+found; the pilot now locates the package itself and the runner puts its
+parent on \texttt{PYTHONPATH}, and the cells are rerun with step 11. All
+$750$ committed Sonnet records pass the H0/H1 gates
 (\texttt{hypothesis\_gates}: $0$ overlaps, $0$ read-after-commit).
 
 
@@ -2532,7 +3041,7 @@ relative to a fresh generation. The conclusion is correspondingly narrow: at
 injected abort rates of up to $0.47$ per session, retry imposes no wall-clock
 cost separable from inference noise at $n=30$. Whether the stores' \emph{real}
 abort rates on these workloads fall in that range is answered by
-Table~3 and Table~4 of the main paper, not here, and on edit-review they
+Table~3 of the main paper and the pilot table of Appendix~M, not here, and on edit-review they
 do not: the reviewer's commit is refused in $95$--$99\%$ of sessions.
 
 \medskip
@@ -2639,6 +3148,31 @@ triage & SI & 11.62 & 11.23 & 4.00 & +4.2\% [+0.1, +8.5], $p_{\mathrm{Holm}}=0.1
 \end{table*}
 
 \section*{Appendix P: $L_2$ measurement, \texttt{ToolNode} and cost-metric notes}
+
+\begin{table}[t]  % moved from the main text (2026-10-14)
+\centering
+\caption{Model-emitted batches through LangGraph's released \texttt{ToolNode}
+(\texttt{langgraph} 1.2.5), $30$ turns per backbone, natural prompt. Tool
+latency modeled. \emph{Transcript}: turns in which the returned
+\texttt{ToolMessage} list preserved issuance order although effects committed
+out of order.}
+\label{tab:toolnode-s}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Backbone & batched & full pipeline (5) & \A6, default & \A6, $L_3$ \\
+\midrule
+gpt-4o-mini & \ToolNodeGptBatched/30 & \ToolNodeGptFull{} (\ToolNodeGptFull{} reordered) & \ToolNodeGptReordered/\ToolNodeGptBatched & 0/\ToolNodeGptBatched \\
+Llama-3.2 & \ToolNodeLlamaBatched/30 & 0 & \ToolNodeLlamaReordered/\ToolNodeLlamaBatched & 0/\ToolNodeLlamaBatched \\
+claude-haiku-4-5 & 0/30 & 0 & --- & --- \\
+\midrule
+\multicolumn{5}{@{}l}{Transcript preserved issuance order in \ToolNodeBatchedTurns/\ToolNodeBatchedTurns{} batched turns; \ToolNodeReorderings{} of them had committed out of order.}\\
+\bottomrule
+\end{tabular}}
+\end{table}
+
 
 \begin{table}[t]
 \centering
@@ -2905,7 +3439,7 @@ wall-clock study on the real stores is outstanding. The token-cost finding shoul
 as ``no order-of-magnitude token-cost asymmetry'' rather
 than ``no runtime-cost asymmetry.''
 Second, snapshot isolation's residual $A_1$ rates of 5\% in
-edit-review and 8\% in triage (Table~4 of the main paper) reflect
+edit-review and 8\% in triage (the pilot table of Appendix~M) reflect
 read-only operations that bypass SI validation; these are
 \emph{silent}---they succeed from the runtime's perspective
 and consume tokens normally---but produce stale outputs.
@@ -2919,7 +3453,7 @@ in the cost metric.''
 \noindent\textbf{Cross-model cost comparison is confounded.}
 Pricing, tokenization density, tool-call serialization, and retry budgets
 differ between gpt-4o and Claude, so the magnitude difference in
-pessimistic overhead ($1.6\times$ vs.\ $2.3\times$) cannot be attributed
+pessimistic overhead ($1.6\times$ vs.\ $2.2\times$) cannot be attributed
 to runtime strategy alone; we make only the within-model claims of Section~6.7 of the main paper.
 
 The operational model itself --- single shared key-value store,
@@ -3225,6 +3759,28 @@ snapshot admits the stale-generation window (Section~6.1 of the main paper).
 
 
 \section*{Appendix R: Extended related work}
+
+\begin{table}[t]  % moved from the main text (2026-10-14)
+\centering
+\caption{Each cataloged predicate of the main paper, its classical original, and what the agent
+regime changes. $A_4$ (split view) needs replication and is outside the
+single-store model.}
+\label{tab:classical-s}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}p{1.55cm}p{2.75cm}p{3.85cm}@{}}
+\toprule
+Predicate & Classical condition & What the port changes \\
+\midrule
+$A_1$ stale generation & failed backward validation~\cite{KungRobinson1981OCC}; its absence is commit-order read consistency (Thm.~1 of the main paper) & the read phase is an inference call: unbounded, unlocked, not cheaply re-validated \\
+$A_2$ phantom tool & dangling capability reference~\cite{Miller2006Robust} & the registry is mutable state with no relational analogue; the call reaches whatever is live at dispatch \\
+$A_3$ causal cascade & recoverability, externalization in the role of commit~\cite{BernsteinHadzilacosGoodman1987} & effects are irreversible, so the dependent must be \emph{held}, not aborted after the fact \\
+$A_6$ effect reordering & order preservation of external effects (2PC, write buffering) & a batch the model declared parallelizable is dispatched concurrently; completion order is the commit order \\
+$R$ (residue, main paper \S\,3.6; not an anomaly) & view maintenance~\cite{GuptaMumick1995ViewMaint}, with the view outside the system; why-provenance~\cite{BunemanEtAl2001Why} for the basis & the effect is irreversible and its basis is revisable, so the window after commit never closes; only an obligation can be guaranteed (the remark of main paper \S\,3.6) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 
 Viotti and Vukoli\'c~\cite{ViottiVukolic2016Consistency} provide the canonical taxonomy
 of non-transactional consistency models in distributed storage;
@@ -3658,7 +4214,7 @@ predicate (\texttt{Anomalies.tla}), the Verus \texttt{spec} restatement
 (\texttt{lib\_detector\_equivalence.rs::a1\_witness}) against which
 \texttt{detect\_a1} is proved sound and complete, and the Rust scorer
 (\texttt{rust-analyser/src/anomalies.rs}) that produced the main paper's
-Tables~3, 4 and 7. They differ in two conjuncts. The Verus \texttt{OpRecord}
+Table~3, the pilot table of Appendix~M and the $L_2$ table of Appendix~P. They differ in two conjuncts. The Verus \texttt{OpRecord}
 has no agent field, so its predicate omits $h[i].\fld{agent}\neq
 h[j].\fld{agent}$, and it returns ``no witness'' when either value is absent
 (\texttt{(Some, Some) => r != w, \_ => false}); the Rust scorer also omits
@@ -3691,7 +4247,7 @@ runs/20260913T0150Z vanilla (three workloads) & 300 & 100 / 0 / 48 & same & same
 runs/20260913T0150Z pessimistic (three workloads) & 300 & 0 / 0 / 0 & same & same \\
 runs/20260913T0150Z snapshot isolation (three workloads) & 300 & 5 / 0 / 8 & same & same \\
 runs/20260913T0128Z vanilla (three workloads) & 300 & 100 / 0 / 52 & same & same \\
-runs/20261014T0253Z-claude edit-review / plan-execute / triage (vanilla; triage void) & 300 & 100 / 0 / 0 & same & same \\
+runs/20261014T0253Z-claude edit-review / plan-execute / triage (vanilla; triage rerun under seeded tickets, its $A_1$ pending the verified scorer) & 300 & 100 / 0 / -- & same & same \\
 live\_a1 gpt-4o-mini: vanilla / validated / sequential / superstep & 400 & 60 / 0 / 0 / 42 & same & same \\
 live\_a1 claude-haiku-4-5: vanilla / validated / sequential / superstep & 400 & 91 / 0 / 0 / 72 & same & same \\
 live\_a1 Llama-3.2: vanilla / validated / sequential / superstep & 400 & 1 / 0 / 0 / 26 & same & same \\
@@ -3800,8 +4356,8 @@ state on each side of the flag. It verifies under the pinned build
 (\texttt{verus-version.txt}): \LfiveVerus. It is
 counted as scaffolding and not as a lattice point: the executable ledger of
 the live study is harness code, so the correspondence between these bytes
-and the measurement is weaker than at $L_1$, $L_2$ and $L_4$ (main paper
-Table~2). With it, \texttt{verus\_count.sh} reports \VerusCurated{} curated
+and the measurement is weaker than at $L_1$, $L_2$, $L_3$ and $L_4$ (main
+paper Table~2). With it, \texttt{verus\_count.sh} reports \VerusCurated{} curated
 and \VerusFull{} full distinct obligations (Appendix~S).
 
 \smallskip\noindent\textbf{Exhaustive runs with $G_7$.} At the lattice
@@ -3856,20 +4412,26 @@ October run (main paper Table~3) the ledger arm's outcome is
 probe-303 trace (a trace is one seed-to-booking run; the offset sweep
 appends every offset's run of a session to one file, each opening with its
 own seed record) and compares $A_1$, $R$ and \emph{booking $\neq$ final}
-with the cell the probe wrote: $36/36$ cells agree (three families $\times$
-four arms at $150$\,ms, plus three $\times$ two modes $\times$ four
-offsets). Under the ledger arm the records carry no $\fld{obligation}$
-field; the ledger registers the obligation by firing the compensator, so the
-scorer reads an obligation off the later compensation record on the same
-effect cell---the probe's own count and the independent one agree on $R=0$
+with the cell the probe wrote: $81/81$ cells agree (three families $\times$
+four arms at $150$\,ms, three $\times$ two modes $\times$ four offsets, and
+three $\times$ five arms $\times$ three interleaved runs). Under the ledger
+arm of the October sequential run the records carry no $\fld{obligation}$
+field; that run's ledger registered the obligation by firing the
+compensator, so the scorer reads an obligation off the later compensation
+record on the same effect cell (the interleaved runs and probe 304 emit an
+explicit obligation record at the superseding put, which the scorer reads
+directly)---the probe's own count and the independent one agree on $R=0$
 in all three ledger cells. After a discharge the harness ledger re-arms the
 entry with the compensated basis, so a further revision would register a
 further obligation; this workload revises once per session, and that path is
-not exercised by Table~3. \texttt{hypothesis\_gates.py} on the same $9{,}649$
-records ($3{,}600$ traces): H0 and H1 hold ($0$ violations), value-unique
+not exercised by Table~3 (the two-revision protocol of probe 304 exercises it).
+\texttt{hypothesis\_gates.py} on the October sequential and sweep receipts alone
+($9{,}649$ records, $3{,}600$ traces): H0 and H1 hold ($0$ violations), value-unique
 writes hold, $418$ \A1 witnesses, none overwrite-restore, basis recovered for
-$3{,}600/3{,}600$ bookings; the totals in the main paper add these to the
-September campaigns. (An earlier version of the gate split a sweep file by
+$3{,}600/3{,}600$ bookings; with the three interleaved runs the probe-303 campaign
+holds $8{,}100$ traces, $24{,}387$ records and $1{,}007$ witnesses, and the totals
+in the main paper (\HypTraces{} traces, \HypRecords{} records) add the September
+campaigns, probe 304 and the Claude pilot. (An earlier version of the gate split a sweep file by
 session only, merging the four offset runs of a session into one trace and
 reporting $1{,}014$ spurious same-agent overlaps; the trace delimiter is now
 the seed record, and the probe tags every record with its offset.)
@@ -3910,7 +4472,7 @@ deepseek-chat & vanilla & \SweepDeepseekVanillaOZ & \SweepDeepseekVanillaOOXZ & 
 \toprule
 System & Consistency model (history property) & Read validation before release & Tool validity at dispatch & External effects & Formal verification & Implementation correspondence & Evaluation; cost \\
 \midrule
-This paper & four named anomalies; CORC (Thm.~1); residue $R$ & $L_1$ at commit; validated-at-dispatch $L_4$ & id and signature ($L_4$) & held until causal basis externalized ($L_2$); sequenced ($L_3$); obligation ledger for $R$ & TLC (bounded), TLAPS (Thm.~1), Verus (detectors, $L_1$--$L_4$) & bytes at $L_1$ (pilot, verified arm), $L_2$, $L_4$; port at $L_3$ & controlled races, synthetic cascades, pilot; per sound committed op \\
+This paper & four named anomalies; CORC (Thm.~1); residue $R$ & $L_1$ at commit; validated-at-dispatch $L_4$ & id and signature ($L_4$) & held until causal basis externalized ($L_2$); sequenced ($L_3$); obligation ledger for $R$ & TLC (bounded), TLAPS (Thm.~1), Verus (detectors, $L_1$--$L_4$) & bytes at $L_1$ (pilot, verified arm), $L_2$, $L_3$ (replay via \texttt{l3\_server}), $L_4$ & controlled races, synthetic cascades, pilot; per sound committed op \\
 MemTX~\cite{LiEtAl2026MemTX} & two invariants (belief commit) & staged writes under SI & --- & gated on current belief; cascading repair on retraction & bounded enumeration (5.5M states) & not stated & five backbones; per session \\
 CoAgent~\cite{LyuEtAl2026CoAgent} & advisory protocol & notify-and-repair & --- & --- & --- & --- & model-judged repair ($5\%$ failure); lock/OCC cost \\
 STORM~\cite{LiuEtAl2026STORM} & per-file read validation & yes ($L_1$-like) & --- & --- & --- & --- & file workloads \\
@@ -4031,10 +4593,67 @@ seeded order with \texttt{order.tsv} as the receipt.
 \ifnum\LiveRunsAvailable=1
 Runner step 17 (probe 303 \texttt{-{}-interleave -{}-runs 3}, seeds
 $20261015$--$20261017$, five arms: vanilla, validated, verified, ledger,
-ledger-verified) produced the per-run counts of the main paper's replicated
-table; \texttt{harness/macaudit/live\_runs\_aggregate.py} prints every run's
+ledger-verified; \texttt{order.tsv} beside each run is the receipt of the
+seeded per-session arm order) produced \cref{tab:liveruns-s};
+\texttt{harness/macaudit/live\_runs\_aggregate.py} prints every run's
 value, the mean, the range, a $t$-interval over runs and the pooled exact
-interval (\texttt{tools/live\_runs.log}).
+interval (\texttt{tools/live\_runs.log}), and
+\texttt{claims\_from\_results.py} folds the per-run counts, the pooled
+Clopper--Pearson intervals and the Fisher tests into the paper's macros.
+Fisher's exact test (two-sided) of the pooled residue between the two
+$L_1$ arms: haiku $\RunsHaikuValidatedRPooled$ vs.\
+$\RunsHaikuVerifiedRPooled$, $p\RunsFisherHaiku$; gpt-4o-mini
+$\RunsGptValidatedRPooled$ vs.\ $\RunsGptVerifiedRPooled$,
+$p\RunsFisherGpt$; deepseek-chat $\RunsDeepseekValidatedRPooled$ vs.\
+$\RunsDeepseekVerifiedRPooled$, $p\RunsFisherDeepseek$. The same test
+between the sequential-block run of Table~3 and the pooled interleaved runs:
+vanilla $A_1$ $p\RunsVsSeqHaikuVanillaAOne$ (haiku),
+$p\RunsVsSeqGptVanillaAOne$ (gpt-4o-mini),
+$p\RunsVsSeqDeepseekVanillaAOne$ (deepseek-chat); validated residue
+$p\RunsVsSeqHaikuValidatedR$, $p\RunsVsSeqGptValidatedR$,
+$p\RunsVsSeqDeepseekValidatedR$; verified residue
+$p\RunsVsSeqHaikuVerifiedR$, $p\RunsVsSeqGptVerifiedR$,
+$p\RunsVsSeqDeepseekVerifiedR$. The probe records every model call's
+fallback flag; in the $6{,}846$ model-driven records of the three
+interleaved runs and the two October runs it is \texttt{false} on every one
+(no session fell back to a local generator). A note on the uploaded
+\texttt{tools/live\_runs.log} of 2026-10-14: its ``exact CI'' column was
+computed by a Wald fallback when SciPy was absent (it prints $[-0.3, 1.6]\%$
+for $2/300$ and $[0.0, 0.0]\%$ for $0/300$, which no exact interval
+produces); the script now computes Clopper--Pearson by bisection, and the
+paper's intervals come from \texttt{claims\_from\_results.py}, which never
+used that column.
+
+\begin{table*}[t]
+\centering\footnotesize
+\caption{Replicated, interleaved live study (probe 303, three runs of $100$ sessions per arm and family at the $150$\,ms offset): per-run values, pooled count and exact 95\% interval. \emph{after}: revising sessions whose revision landed after the flight agent's final commit (wall-clock stamp), per run. \emph{regen.}: discarded generations per run.}
+\label{tab:liveruns-s}
+\setlength{\tabcolsep}{4pt}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}llllll@{}}
+\toprule
+Model & Arm & $A_1$ & $R$ & booking $\neq$ final & after / regen. \\
+\midrule
+\multirow{5}{*}{haiku} & vanilla & \RunsHaikuVanillaAOne & \RunsHaikuVanillaR & \RunsHaikuVanillaWrong & \RunsHaikuVanillaLagAfter{} / \RunsHaikuVanillaRegen \\
+ & validated & \RunsHaikuValidatedAOne & \RunsHaikuValidatedR & \RunsHaikuValidatedWrong & \RunsHaikuValidatedLagAfter{} / \RunsHaikuValidatedRegen \\
+ & verified & \RunsHaikuVerifiedAOne & \RunsHaikuVerifiedR & \RunsHaikuVerifiedWrong & \RunsHaikuVerifiedLagAfter{} / \RunsHaikuVerifiedRegen \\
+ & ledger & \RunsHaikuLedgerAOne & \RunsHaikuLedgerR & \RunsHaikuLedgerWrong & \RunsHaikuLedgerLagAfter{} / \RunsHaikuLedgerRegen \\
+ & ledger-verified & \RunsHaikuLedgerVerifiedAOne & \RunsHaikuLedgerVerifiedR & \RunsHaikuLedgerVerifiedWrong & \RunsHaikuLedgerVerifiedLagAfter{} / \RunsHaikuLedgerVerifiedRegen \\
+\midrule
+\multirow{5}{*}{gpt-4o-mini} & vanilla & \RunsGptVanillaAOne & \RunsGptVanillaR & \RunsGptVanillaWrong & \RunsGptVanillaLagAfter{} / \RunsGptVanillaRegen \\
+ & validated & \RunsGptValidatedAOne & \RunsGptValidatedR & \RunsGptValidatedWrong & \RunsGptValidatedLagAfter{} / \RunsGptValidatedRegen \\
+ & verified & \RunsGptVerifiedAOne & \RunsGptVerifiedR & \RunsGptVerifiedWrong & \RunsGptVerifiedLagAfter{} / \RunsGptVerifiedRegen \\
+ & ledger & \RunsGptLedgerAOne & \RunsGptLedgerR & \RunsGptLedgerWrong & \RunsGptLedgerLagAfter{} / \RunsGptLedgerRegen \\
+ & ledger-verified & \RunsGptLedgerVerifiedAOne & \RunsGptLedgerVerifiedR & \RunsGptLedgerVerifiedWrong & \RunsGptLedgerVerifiedLagAfter{} / \RunsGptLedgerVerifiedRegen \\
+\midrule
+\multirow{5}{*}{deepseek-chat} & vanilla & \RunsDeepseekVanillaAOne & \RunsDeepseekVanillaR & \RunsDeepseekVanillaWrong & \RunsDeepseekVanillaLagAfter{} / \RunsDeepseekVanillaRegen \\
+ & validated & \RunsDeepseekValidatedAOne & \RunsDeepseekValidatedR & \RunsDeepseekValidatedWrong & \RunsDeepseekValidatedLagAfter{} / \RunsDeepseekValidatedRegen \\
+ & verified & \RunsDeepseekVerifiedAOne & \RunsDeepseekVerifiedR & \RunsDeepseekVerifiedWrong & \RunsDeepseekVerifiedLagAfter{} / \RunsDeepseekVerifiedRegen \\
+ & ledger & \RunsDeepseekLedgerAOne & \RunsDeepseekLedgerR & \RunsDeepseekLedgerWrong & \RunsDeepseekLedgerLagAfter{} / \RunsDeepseekLedgerRegen \\
+ & ledger-verified & \RunsDeepseekLedgerVerifiedAOne & \RunsDeepseekLedgerVerifiedR & \RunsDeepseekLedgerVerifiedWrong & \RunsDeepseekLedgerVerifiedLagAfter{} / \RunsDeepseekLedgerVerifiedRegen \\
+\bottomrule
+\end{tabular}}
+\end{table*}
 \else
 \Pending{runner step 17: probe 303 \texttt{-{}-interleave -{}-runs 3}, five arms including the ledger over the verified store, on haiku, gpt-4o-mini and deepseek-chat; aggregated by \texttt{live\_runs\_aggregate.py}}.
 \fi
@@ -4063,12 +4682,39 @@ rebooking was refused), \emph{consumer stale} (the consumer acted on a date
 that is not the final one), \emph{consumer none}, and the obligations
 registered / discharged / left open.
 \ifnum\LedgerWorldAvailable=1
-The main paper's Table~\ref{tab:ledgerworld-s} is reproduced here with the
-additional columns.
+\Cref{tab:ledgerworld-s} is the main paper's table with every column. Two
+numbers per ledger cell are the ones the store cannot show: the sessions
+whose every obligation the ledger reports discharged (\emph{clean}:
+\LWHaikuLedgerCleanSessions, \LWGptLedgerCleanSessions,
+\LWDeepseekLedgerCleanSessions{} of $100$ on haiku, gpt-4o-mini and
+deepseek-chat) and, among them, the sessions whose world nevertheless holds
+a booking other than exactly the final one (\LWHaikuLedgerCleanWrong,
+\LWGptLedgerCleanWrong, \LWDeepseekLedgerCleanWrong); retries of an open
+obligation at the second supersession: \LWHaikuLedgerRetries,
+\LWGptLedgerRetries, \LWDeepseekLedgerRetries. The compensator of this run
+(\texttt{-{}-compensator \LedgerWorldCompensator}) kept one confirmation per
+effect and drafted the replacement text by a model call between the
+cancellation and the rebooking. The world check exposed both choices: after
+a refused cancellation the retry cancelled the latest confirmation---the
+replacement---and left the original booking active while reporting the
+obligation discharged (the per-session world log of such a session shows
+active bookings $\{$seed date, final date$\}$ with \texttt{obl=1/1}); and
+the model call inside the cancel-to-rebook window is the \emph{consumer
+none} column. The probe's default compensator (\texttt{-{}-compensator
+all}) drafts the replacement first, cancels every active confirmation the
+effect created, rebooks, and discharges only if every cancellation and the
+rebooking succeeded; a retry re-cancels every still-active stale
+confirmation. In mock-model runs with injected failure rates of $0.5$ it
+reports discharge while the world is wrong in $0$ of $40$ ledger sessions
+where \texttt{latest} does so in $2$ of $40$. Runner step 18 archives this
+run's receipts under \texttt{results/ledger\_world\_v1\_latest\_conf/} and
+reruns the three families under \texttt{all}; the rerun replaces the cells
+of the main paper's \S\,6.2 (\Pending{runner step 18 rerun}).
 \begin{table*}[t]
 \centering\footnotesize
-\caption{The ledger in a world, $n{=}100$ sessions per arm per family (probe 304; \LedgerWorldRevisions{} revisions per session).}
+\caption{The ledger in a world, $n{=}100$ sessions per arm per family (probe 304, compensator \texttt{\LedgerWorldCompensator}; \LedgerWorldRevisions{} revisions per session; cancellation and rebooking refused with probability \LedgerWorldPCancelFail/\LedgerWorldPRebookFail; consumer delay uniform $0$--\LedgerWorldConsumerMaxMs\,ms).}
 \label{tab:ledgerworld-s}
+\resizebox{\textwidth}{!}{%
 \begin{tabular}{@{}llrrrrrrrr@{}}
 \toprule
 Model & Arm & $R$ & store$\neq$ & world wrong & none & double & cons.\ stale & cons.\ none & obl.\ reg/disch/open \\
@@ -4083,7 +4729,7 @@ deepseek-chat & $L_1$ & \LWDeepseekValidatedR & \LWDeepseekValidatedStoreWrong &
  & ledger & \LWDeepseekLedgerR & \LWDeepseekLedgerStoreWrong & \LWDeepseekLedgerWorldWrong & \LWDeepseekLedgerWorldNone & \LWDeepseekLedgerDouble & \LWDeepseekLedgerConsumerStale & \LWDeepseekLedgerConsumerNone & \LWDeepseekLedgerObl \\
  & no cancel & \LWDeepseekLedgerNoRollbackR & \LWDeepseekLedgerNoRollbackStoreWrong & \LWDeepseekLedgerNoRollbackWorldWrong & \LWDeepseekLedgerNoRollbackWorldNone & \LWDeepseekLedgerNoRollbackDouble & \LWDeepseekLedgerNoRollbackConsumerStale & \LWDeepseekLedgerNoRollbackConsumerNone & \LWDeepseekLedgerNoRollbackObl \\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 \end{table*}
 \else
 \Pending{runner step 18: probe 304 on haiku, gpt-4o-mini and deepseek-chat; the table of the main paper's \S\,6.2 and the extended one here are generated from its receipt}.
@@ -4092,7 +4738,7 @@ deepseek-chat & $L_1$ & \LWDeepseekValidatedR & \LWDeepseekValidatedStoreWrong &
 \medskip
 \noindent\textbf{W.5 The verified detector in the scoring path.}
 \texttt{crates/runtime/src/detect\_a1\_exec.rs} is byte-identical to
-\texttt{crates/verus-detector/src/lib\_detect\_a1\_exec.rs}
+\texttt{crates/verus-detector/}\allowbreak\texttt{src/lib\_detect\_a1\_exec.rs}
 (\texttt{harness/macaudit/verified\_bytes\_gate.sh} checks the identity of
 every measured verified file: $L_1$ SI and pessimistic stores, $L_2$, $L_3$,
 $L_4$, and the \A1 detector). \texttt{detect\_a1\_verified.rs} (the trust-base
@@ -4107,7 +4753,17 @@ every probe-303 trace, comparing with the manuscript's counts and an
 independent Definition-1 implementation. \ifnum\VerifiedScorerAvailable=1
 Receipt (\texttt{tools/verified\_scorer.json}): \VerifiedScorerCells{} cells,
 \VerifiedScorerTraces{} traces, \VerifiedScorerProblems{} problems.\else
-\Pending{runner step 14 (\texttt{cargo build --release -p mac-analyser}; the gate writes \texttt{tools/verified\_scorer.json})}.\fi
+The gate's first run (2026-10-14; \texttt{cargo build} succeeded, the bytes
+gate passed on all six measured files) rejected every trace: the analyser's
+record reader declared \texttt{agent\_id} as a serde alias of
+\texttt{agent}, and every probe-303 record carries both keys with the same
+value, which serde reports as ``duplicate field \texttt{agent}''. The reader
+now reconciles the two keys explicitly (equal values accepted, different
+values an error, neither an error; five unit tests), and the fold
+(\texttt{claims\_from\_results.py}) marks the cell available only when the
+gate reports zero problems---the first receipt, with $4{,}818$ problems, had
+been folded as available, which this version corrects.
+\Pending{runner step 14 rerun (\texttt{cargo build --release -p mac-analyser}; the gate writes \texttt{tools/verified\_scorer.json})}.\fi
 Likewise the $L_3$ replay: \texttt{examples/l3\_server.rs} exposes the
 verified sequencer over JSON lines; probe 301 \texttt{-{}-l3-server} dispatches
 each recorded batch concurrently through the released \texttt{ToolNode} and
@@ -4668,6 +5324,22 @@ E.~Y. Chang and L.~Geng, ``{SagaLLM}: Context management, validation, and
 B.~Mohammadi, N.~Potamitis, L.~Klein, A.~Arora, and L.~Bindschaedler, ``Atomix:
   Timely, transactional tool use for reliable agentic workflows,'' \emph{arXiv
   preprint arXiv:2602.14849}, 2026 (preprint).
+
+\bibitem{Miller2006Robust}
+M.~S. Miller, ``Robust composition: Towards a unified approach to access
+  control and concurrency control,'' Ph.D. dissertation, Johns Hopkins
+  University, 2006.
+
+\bibitem{BernsteinHadzilacosGoodman1987}
+P.~A. Bernstein, V.~Hadzilacos, and N.~Goodman, \emph{Concurrency Control and
+  Recovery in Database Systems}.\hskip 1em plus 0.5em minus 0.4em\relax
+  Addison-Wesley, 1987.
+
+\bibitem{GuptaMumick1995ViewMaint}
+A.~Gupta and I.~S. Mumick, ``Maintenance of materialized views: Problems, techniques, and applications,'' \emph{IEEE Data Eng. Bull.}, vol.~18, no.~2, pp. 3--18, 1995.
+
+\bibitem{BunemanEtAl2001Why}
+P.~Buneman, S.~Khanna, and W.-C. Tan, ``Why and where: A characterization of data provenance,'' in \emph{Proc. ICDT}, 2001, pp. 316--330.
 
 \end{thebibliography}
 

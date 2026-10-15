@@ -74,6 +74,11 @@ run() { if [ "$DRY" = 1 ]; then echo "  would run: $*"; else echo "  + $*"; eval
 need_key() { [ -n "${!1:-}" ] && return 0; [ "$DRY" = 1 ] && { echo "  (needs $1)"; return 0; }; echo "  FAIL: $1 is not set (export it, then re-run this step)" >&2; FAILED+=("$1 unset"); return 1; }
 mkdir -p results/live_a1_outcome results/a6_real_latency results/verus tools
 export PYTHONPATH="$PWD/probes/_modules${PYTHONPATH:+:$PYTHONPATH}"   # renumbered probes import each other by original name (absolute: probe 302 cds into probes/)
+# the pilot's pessimistic / snapshot_isolation runtimes are `baselines.runtimes.*`: a namespace package (no __init__.py)
+# that the migration filed under results/; it imports only when its PARENT directory is on sys.path (2026-10-14: the
+# six Claude pessimistic/SI cells failed with ModuleNotFoundError for want of this; the pilot now also locates it itself)
+BASELINES_DIR="$(find . \( -path ./.venv -o -path '*/.venv' -o -path '*/target' -o -path ./.git \) -prune -o -type d -name baselines -print 2>/dev/null | head -1)"
+[ -n "$BASELINES_DIR" ] && export PYTHONPATH="$(cd "$(dirname "$BASELINES_DIR")" && pwd)${PYTHONPATH:+:$PYTHONPATH}"
 # python packages that lived beside the pilot (baselines/ ...) were filed under results/ by 00_migrate_monorepo.sh
 # as if they were data; the pilot imports them, so they belong beside it under probes/ (steps 5, 6, 11 need them)
 pilot_packages() {
@@ -81,7 +86,7 @@ pilot_packages() {
   # installed in the env: find the package directory wherever the migration filed it and move it beside the probes
   local pilot pkg src
   pilot="$(ls probes/*_autogen_pilot.py 2>/dev/null | head -1)"; [ -n "$pilot" ] || return 0
-  for pkg in $(grep -ohE '^(from|import) [A-Za-z_][A-Za-z0-9_]*' "$pilot" | awk '{print $2}' | sort -u); do
+  for pkg in $(grep -ohE '^\s*(from|import) [A-Za-z_][A-Za-z0-9_]*' "$pilot" | awk '{print $2}' | sort -u); do
     [ -e "probes/$pkg" ] || [ -e "probes/$pkg.py" ] || [ -e "probes/_modules/$pkg.py" ] && continue
     src="$(find . \( -path ./.venv -o -path '*/.venv' -o -path '*/target' -o -path ./.git -o -path ./probes \) -prune -o -type d -name "$pkg" -print 2>/dev/null | head -1)"
     if [ -n "$src" ] && [ -f "$src/__init__.py" ]; then
@@ -135,6 +140,7 @@ if want 5; then log 5 "probe 302: interleaved wall-clock rerun, gpt-4o, N=60 (fi
 
 if want 6; then log 6 "probe 302: interleaved wall-clock rerun, claude-sonnet-4-5, N=100"
   need_key ANTHROPIC_API_KEY; pilot_packages
+  delivered probes/103_autogen_pilot.py _locate_baselines "the baselines locator" || true
   st="$(ls -d results/runs/*-interleaved-claude-sonnet-4-5 2>/dev/null | sort | tail -1)"; st="${st:+$(basename "$st")}"; st="${st:-$(date -u +%Y%m%dT%H%MZ)-interleaved-claude-sonnet-4-5}"
   run "N=100 PROVIDER=anthropic MODEL=claude-sonnet-4-5 STAMP=$st PY=\"$UVA_ABS\" ./probes/302_wallclock_interleaved.sh"; fi
 
@@ -195,6 +201,7 @@ if want 10; then log 10 "live L2 replay, 1,000 haiku sessions (per-model L2 stat
 
 if want 11; then log 11 "pilot replication WITH op-records on claude-sonnet-4-5 (Table 4/7 Claude panel)"
   need_key ANTHROPIC_API_KEY
+  delivered probes/103_autogen_pilot.py _locate_baselines "the baselines locator" || true
   PILOT="$(ls probes/*_autogen_pilot.py | head -1)"; pilot_packages
   # resume the newest *-claude run if one exists (a cell with 100 traces is not rerun; delete a cell to redo it)
   if [ -z "${STAMP:-}" ]; then prev="$(ls -d results/runs/*-claude 2>/dev/null | sort | tail -1)"; fi
@@ -229,7 +236,9 @@ if s2 != s: open(p, "w").write(s2); print(f"  rewrote the Verus count line in {p
 PY
   fi
   run "python3 harness/macaudit/claims_from_results.py --root results --paper paper | tail -4"
-  if [ -f paper/main.tex ] && have pdflatex; then
+  # the PDFs are built by the author from the uploaded receipts; this machine only folds receipts and runs gates.
+  # BUILD_PDF=1 opts in to a local pdflatex pass (never part of the default run order).
+  if [ "${BUILD_PDF:-0}" = 1 ] && [ -f paper/main.tex ] && have pdflatex; then
     run "(cd paper && pdflatex -interaction=nonstopmode main.tex >/dev/null && pdflatex -interaction=nonstopmode main.tex | grep -E 'Output written')"
   fi
   run "./reproduce.sh --data-only || true"
@@ -245,11 +254,21 @@ UPLOAD these to the chat and the paper is regenerated from them:
 EOF
 fi
 
+# the delivered files of 2026-10-14/15 must be in place before these steps mean anything: a step that runs on the
+# previous version of a file reproduces the previous failure (the 2026-10-15 receipts: the mv block had not been run)
+delivered() { # delivered <file> <marker> <what>
+  if ! grep -q -- "$2" "$1" 2>/dev/null; then
+    echo "  FAIL: $1 is not the delivered version ($3 missing) -- run the mv block from the chat (MOVE_COMMANDS_2.txt), then re-run" >&2
+    FAILED+=("$1 not updated"); return 1
+  fi
+}
 if want 14; then log 14 "cargo: the analyser scores A1 with the VERIFIED detector; l3_server; the two bytes gates"
+  delivered crates/analyser/src/oprecord.rs normalize_agent_key "the agent/agent_id reader fix" || true
   run "bash harness/macaudit/verified_bytes_gate.sh"
   run "cargo build --release -p mac-analyser 2>&1 | tail -3"
   run "cargo build --release --manifest-path crates/runtime/Cargo.toml --example l3_server 2>&1 | tail -3"
-  run "cargo test --release -p agent-consistency-runtime detect_a1_verified 2>&1 | tail -5"
+  run "cargo test --release -p agent-consistency-runtime --lib detect_a1_verified 2>&1 | grep -E '^test |test result'"
+  run "cargo test --release -p mac-analyser 2>&1 | grep -E '^test |test result'"
   AN="$( { ls target/release/analyser crates/analyser/target/release/analyser 2>/dev/null || true; } | head -1)"
   run "python3 harness/macaudit/verified_scorer_gate.py --analyser ${AN:-target/release/analyser} --root results --out tools/verified_scorer.json 2>&1 | tee tools/verified_scorer.log | tail -8"; fi
 
@@ -279,11 +298,22 @@ if want 17; then log 17 "probe 303 --interleave --runs 3: five arms per session,
 
 if want 18; then log 18 "probe 304: the ledger in a world (consumer, cancellation, fallible compensator, two revisions)"
   need_key ANTHROPIC_API_KEY; need_key OPENAI_API_KEY; need_key DEEPSEEK_API_KEY
+  delivered probes/304_ledger_world.py "--compensator" "the --compensator switch" || true
   mkdir -p results/ledger_world
+  # a receipt without a "compensator" field is the FIRST run (2026-10-14, compensator `latest`: one tracked confirmation,
+  # model call between cancel and rebook); the world check caught both flaws, so those receipts are archived -- never
+  # deleted: the paper cites them -- and the cell is re-run with the corrected compensator (--compensator all, the default)
+  for f in results/ledger_world/*.json; do
+    [ -f "$f" ] || continue
+    if ! grep -q '"compensator"' "$f"; then
+      mkdir -p results/ledger_world_v1_latest_conf
+      run "mv '$f' results/ledger_world_v1_latest_conf/ && { [ -f '${f%.json}.records.jsonl' ] && mv '${f%.json}.records.jsonl' results/ledger_world_v1_latest_conf/ || true; } && echo '  archived first-run receipt $(basename "$f") (compensator latest)'"
+    fi
+  done
   for spec in "$P_HAIKU" "$P_4OMINI" "$P_DEEPSEEK"; do set -- $spec; prov=$1; model=$2; shift 2
     out="results/ledger_world/${model}.json"
     if [ -f "$out" ] && [ "$FORCE" = 0 ]; then echo "  $out exists, skipping"; continue; fi
-    run "$UVG probes/304_ledger_world.py --provider $prov --model $model $* --n 100 --p-revise 1.0 --offset-ms 150 --revisions 2 --second-gap-ms 800 --modes validated,ledger,ledger_norollback --p-cancel-fail 0.1 --p-rebook-fail 0.1 --consumer-max-ms 1500 --seed 20261014 --out $out"
+    run "$UVG probes/304_ledger_world.py --provider $prov --model $model $* --n 100 --p-revise 1.0 --offset-ms 150 --revisions 2 --second-gap-ms 800 --modes validated,ledger,ledger_norollback --p-cancel-fail 0.1 --p-rebook-fail 0.1 --consumer-max-ms 1500 --seed 20261014 --compensator all --out $out"
   done; fi
 
 if want 19; then log 19 "receipt-derived analyses: arm timing, replicated runs, hypothesis gates (then re-run 13)"

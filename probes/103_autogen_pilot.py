@@ -44,6 +44,33 @@ if "--runtime" in _sys.argv:
     if _idx + 1 < len(_sys.argv):
         _runtime = _sys.argv[_idx + 1]
 
+
+def _locate_baselines() -> None:
+    """The pessimistic and snapshot-isolation runtimes live in the `baselines` package, which sat
+    beside this pilot in its original repository and was filed under results/ by the monorepo
+    migration (it has no __init__.py, so it is a namespace package: importable only when its
+    PARENT directory is on sys.path).  Put that parent on sys.path if the package is not already
+    importable -- the 2026-10-14 Claude replication lost its six pessimistic/SI cells to
+    `ModuleNotFoundError: No module named 'baselines'` for want of this."""
+    import importlib.util as _ilu
+    from pathlib import Path as _P
+    if _ilu.find_spec("baselines") is not None:
+        return
+    here = _P(__file__).resolve().parent
+    candidates = [here, here.parent, here.parent / "results"]
+    try:
+        candidates += [p for p in sorted(here.parent.iterdir()) if p.is_dir() and p.name not in (".git", ".venv", "target")]
+    except OSError:
+        pass
+    for base in candidates:
+        if (base / "baselines" / "runtimes" / "pessimistic.py").is_file():
+            _sys.path.insert(0, str(base))
+            return
+
+
+if _runtime in ("pessimistic", "snapshot_isolation"):
+    _locate_baselines()
+
 if _runtime == "pessimistic":
     from baselines.runtimes.pessimistic import (
         make_scenario_pessimistic as make_scenario,

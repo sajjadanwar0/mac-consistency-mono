@@ -21,7 +21,7 @@ Nothing is overridden for a receipt that is absent, so the paper keeps printing
 [pending] for exactly the runs that have not happened.
 """
 from __future__ import annotations
-import argparse, glob, json, os, random, statistics, sys
+import argparse, glob, json, os, random, re, statistics, sys
 from collections import defaultdict
 
 MODEL_KEY = {"gpt-4o-mini": "Gpt", "claude-haiku-4-5": "Haiku", "llama3.2": "Llama", "llama-3.2": "Llama",
@@ -31,6 +31,45 @@ SUMMARY = {}   # everything the paper needs, written to results/paper_receipts_s
 
 def tex_num(x):
     return f"{x:,}".replace(",", "{,}")
+
+
+def binom_cdf(k, n, p):
+    from math import comb
+    return sum(comb(n, i) * p**i * (1 - p) ** (n - i) for i in range(0, k + 1))
+
+
+def clopper_pearson(k, n, alpha=0.05):
+    """exact two-sided binomial interval by bisection on the binomial CDF (no scipy: the user's machine has none)"""
+    if n == 0:
+        return (0.0, 1.0)
+    def solve(f, lo, hi):
+        for _ in range(60):
+            mid = (lo + hi) / 2
+            if f(mid):
+                lo = mid
+            else:
+                hi = mid
+        return (lo + hi) / 2
+    lo = 0.0 if k == 0 else solve(lambda p: 1 - binom_cdf(k - 1, n, p) <= alpha / 2, 0.0, 1.0)
+    hi = 1.0 if k == n else solve(lambda p: binom_cdf(k, n, p) > alpha / 2, 0.0, 1.0)
+    return (lo, hi)
+
+
+def fmt_p(p):
+    """a p-value WITH its relation, so the paper writes $p\\RunsFisherHaiku$ and never prints p=<0.001"""
+    return "<0.001" if p < 0.001 else f"={p:.3f}"
+
+
+def fisher_two_sided(a, b, c, d):
+    """exact two-sided p for the 2x2 table [[a, b], [c, d]] (same routine as arm_timing.py)"""
+    from math import comb
+    n = a + b + c + d
+    r1, c1 = a + b, a + c
+    def p_of(x):
+        return comb(r1, x) * comb(n - r1, c1 - x) / comb(n, c1)
+    p_obs = p_of(a)
+    lo, hi = max(0, c1 - (n - r1)), min(r1, c1)
+    return min(1.0, sum(p_of(x) for x in range(lo, hi + 1) if p_of(x) <= p_obs * (1 + 1e-12)))
 
 
 def offname(o):
@@ -268,49 +307,119 @@ def probe303_runs(root, out):
                 if key == "regenerations":
                     out.append(f"\\providecommand{{\\Runs{mk}{mname}{label}}}{{{'/'.join(map(str, vals))}}}")
                 else:
-                    try:
-                        from scipy.stats import beta
-                        lo = 0.0 if pooled == 0 else float(beta.ppf(0.025, pooled, N - pooled + 1)); hi = 1.0 if pooled == N else float(beta.ppf(0.975, pooled + 1, N - pooled))
-                        ci = f" [{100*lo:.1f}, {100*hi:.1f}]"
-                    except Exception:
-                        ci = ""
+                    lo, hi = clopper_pearson(pooled, N)
+                    ci = f" [{100*lo:.1f}, {100*hi:.1f}]"
                     out.append(f"\\providecommand{{\\Runs{mk}{mname}{label}}}{{{'/'.join(map(str, vals))} (${pooled}/{N}${ci})}}")
+                    out.append(f"\\providecommand{{\\Runs{mk}{mname}{label}Pooled}}{{{pooled}/{N}}}")
+                    out.append(f"\\providecommand{{\\Runs{mk}{mname}{label}Runs}}{{{'/'.join(map(str, vals))}}}")
+                    out.append(f"\\providecommand{{\\Runs{mk}{mname}{label}Short}}{{{'/'.join(map(str, vals))} (${pooled}/{N}$)}}")
+                    out.append(f"\\providecommand{{\\Runs{mk}{mname}{label}Pct}}{{{100*pooled/N:.1f}}}")
+                    out.append(f"\\providecommand{{\\Runs{mk}{mname}{label}CI}}{{[{100*lo:.1f}, {100*hi:.1f}]}}")
             lag = [by_run[r].get("revision_lag_ms", {}).get("after_commit") for r in sorted(by_run)]
             if all(x is not None for x in lag):
                 out.append(f"\\providecommand{{\\Runs{mk}{mname}LagAfter}}{{{'/'.join(map(str, lag))}}}")
             SUMMARY.setdefault("probe303_runs", {})[f"{mk}|{mode}"] = {k: [by_run[r][k] for r in sorted(by_run)] for k in ("a1", "a7", "booking_wrong", "regenerations")}
             SUMMARY["probe303_runs"][f"{mk}|{mode}"]["lag_after_commit"] = lag
             SUMMARY["probe303_runs"][f"{mk}|{mode}"]["interleaved"] = [d.get("interleaved") for d in ds]
+        # the attributable comparison the sequential-block run could not make: validated vs verified residue, pooled over
+        # the interleaved runs (Fisher exact, two-sided), and vanilla A1 between the sequential run and the pooled interleaved runs
+        if "validated" in cells and "verified" in cells:
+            N = n * len(cells["validated"])
+            rv = sum(c["a7"] for c in cells["validated"].values()); rf = sum(c["a7"] for c in cells["verified"].values())
+            p = fisher_two_sided(rv, N - rv, rf, N - rf)
+            out.append(f"\\providecommand{{\\RunsFisher{mk}}}{{{fmt_p(p)}}}")
+            SUMMARY["probe303_runs"][f"{mk}|fisher_validated_vs_verified_R"] = {"validated": rv, "verified": rf, "N": N, "p": p}
+        # the paired test the interleaved design supports: per (run, session) the validated and verified arms ran the
+        # same session back to back, so the residue is compared within session (McNemar, exact binomial on the
+        # discordant pairs) with a paired-proportion Wald interval on the difference, in percentage points
+        if "validated" in cells and "verified" in cells:
+            b = c = npairs = 0
+            for r in sorted(cells["validated"]):
+                if r not in cells["verified"]:
+                    continue
+                sv = {x["session"]: x for x in cells["validated"][r].get("sessions", [])}
+                sf = {x["session"]: x for x in cells["verified"][r].get("sessions", [])}
+                for k in sv:
+                    if k in sf:
+                        npairs += 1
+                        if sv[k]["a7"] and not sf[k]["a7"]:
+                            b += 1
+                        if sf[k]["a7"] and not sv[k]["a7"]:
+                            c += 1
+            if npairs:
+                from math import comb, sqrt
+                nd = b + c
+                if nd == 0:
+                    pm = 1.0
+                else:
+                    pk = comb(nd, b) / 2 ** nd
+                    pm = min(1.0, sum(comb(nd, i) / 2 ** nd for i in range(nd + 1) if comb(nd, i) / 2 ** nd <= pk * (1 + 1e-12)))
+                d = (b - c) / npairs
+                se = sqrt(max(nd - (b - c) ** 2 / npairs, 0.0)) / npairs
+                lo, hi = d - 1.96 * se, d + 1.96 * se
+                out.append(f"\\providecommand{{\\RunsPairedDiscordant{mk}}}{{{b} vs.\\ {c}}}")
+                out.append(f"\\providecommand{{\\RunsMcNemar{mk}}}{{{fmt_p(pm)}}}")
+                out.append(f"\\providecommand{{\\RunsDiff{mk}}}{{{100*d:+.1f}}}")
+                out.append(f"\\providecommand{{\\RunsDiffCI{mk}}}{{[{100*lo:+.1f}, {100*hi:+.1f}]}}")
+                SUMMARY["probe303_runs"][f"{mk}|paired_validated_vs_verified_R"] = {"pairs": npairs, "validated_only": b, "verified_only": c, "mcnemar_p": pm, "diff_pp": 100 * d, "diff_ci_pp": [100 * lo, 100 * hi]}
+        # the run, not the arm: the sequential-block run of the same protocol (Table 3) against the pooled interleaved runs
+        seq = SUMMARY.get("probe303_arms150", {})
+        for mode, key, label in (("vanilla", "a1", "VanillaAOne"), ("validated", "a7", "ValidatedR"), ("verified", "a7", "VerifiedR")):
+            sc = seq.get(f"{mk}|{mode}|150")
+            if sc and mode in cells:
+                N = n * len(cells[mode]); pooled = sum(c[key] for c in cells[mode].values())
+                p = fisher_two_sided(sc[key], sc["n"] - sc[key], pooled, N - pooled)
+                out.append(f"\\providecommand{{\\RunsVsSeq{mk}{label}}}{{{fmt_p(p)}}}")
+                SUMMARY["probe303_runs"][f"{mk}|{mode}|sequential_vs_interleaved_{key}"] = {"sequential": f"{sc[key]}/{sc['n']}", "interleaved": f"{pooled}/{N}", "p": p}
 
 
 def probe304(root, out):
-    """the ledger in a world (results/ledger_world/<model>.json)"""
-    found = False
-    for fp in sorted(glob.glob(os.path.join(root, "ledger_world", "*.json"))):
-        try:
-            d = json.load(open(fp))
-        except Exception:
-            continue
-        mk = MODEL_KEY.get(d.get("model", ""), None)
-        if not mk:
-            continue
-        if not found:
-            out.append("% --- probe 304 (results/ledger_world): the ledger with a consumer, a cancellation step and a fallible compensator ---")
-            out.append("\\renewcommand{\\LedgerWorldAvailable}{1}")
-            out.append(f"\\renewcommand{{\\LedgerWorldRevisions}}{{{d.get('revisions')}}}")
-            out.append(f"\\renewcommand{{\\LedgerWorldPCancelFail}}{{{d.get('p_cancel_fail')}}}")
-            out.append(f"\\renewcommand{{\\LedgerWorldPRebookFail}}{{{d.get('p_rebook_fail')}}}")
-            out.append(f"\\renewcommand{{\\LedgerWorldConsumerMaxMs}}{{{d.get('consumer_max_ms')}}}")
-            found = True
-        for c in d.get("cells", []):
-            mname = {"validated": "Validated", "ledger": "Ledger", "ledger_norollback": "LedgerNoRollback"}.get(c["mode"], c["mode"].title().replace("_", ""))
-            n = c["n"]
-            for key, label in (("a7", "R"), ("store_wrong", "StoreWrong"), ("world_wrong_sessions", "WorldWrong"), ("world_none", "WorldNone"),
-                               ("double_booked", "Double"), ("consumer_saw_stale", "ConsumerStale"), ("consumer_saw_none", "ConsumerNone")):
-                out.append(f"\\providecommand{{\\LW{mk}{mname}{label}}}{{{c.get(key, 0)}}}")
-            out.append(f"\\providecommand{{\\LW{mk}{mname}Obl}}{{{c.get('obligations_registered', 0)}/{c.get('obligations_discharged', 0)}/{c.get('obligations_failed', 0)}}}")
-            out.append(f"\\providecommand{{\\LW{mk}{mname}N}}{{{n}}}")
-            SUMMARY.setdefault("probe304", {})[f"{mk}|{c['mode']}"] = {k: v for k, v in c.items() if k != "sessions"}
+    """the ledger in a world (results/ledger_world/<model>.json: the current compensator, --compensator all).
+    The first run's receipts (compensator `latest`, 2026-10-14) are archived by the runner under
+    results/ledger_world_v1_latest_conf/ and folded as \\LWfirst<Model><Mode><Metric>, so the paper can
+    cite what the world check caught in that compensator without re-typing a number."""
+    def fold(subdir, prefix, header, avail_macro):
+        found = False; comp = None
+        for fp in sorted(glob.glob(os.path.join(root, subdir, "*.json"))):
+            try:
+                d = json.load(open(fp))
+            except Exception:
+                continue
+            mk = MODEL_KEY.get(d.get("model", ""), None)
+            if not mk or "cells" not in d:
+                continue
+            if not found:
+                out.append(f"% --- probe 304 ({subdir}): {header} ---")
+                out.append(f"\\renewcommand{{\\{avail_macro}}}{{1}}")
+                if prefix == "LW":
+                    out.append(f"\\renewcommand{{\\LedgerWorldRevisions}}{{{d.get('revisions')}}}")
+                    out.append(f"\\renewcommand{{\\LedgerWorldPCancelFail}}{{{d.get('p_cancel_fail')}}}")
+                    out.append(f"\\renewcommand{{\\LedgerWorldPRebookFail}}{{{d.get('p_rebook_fail')}}}")
+                    out.append(f"\\renewcommand{{\\LedgerWorldConsumerMaxMs}}{{{d.get('consumer_max_ms')}}}")
+                    out.append(f"\\renewcommand{{\\LedgerWorldCompensator}}{{{d.get('compensator', 'latest')}}}")
+                found = True
+            comp = d.get("compensator", "latest")
+            for c in d.get("cells", []):
+                mname = {"validated": "Validated", "ledger": "Ledger", "ledger_norollback": "LedgerNoRollback"}.get(c["mode"], c["mode"].title().replace("_", ""))
+                n = c["n"]
+                for key, label in (("a7", "R"), ("store_wrong", "StoreWrong"), ("world_wrong_sessions", "WorldWrong"), ("world_none", "WorldNone"),
+                                   ("double_booked", "Double"), ("consumer_saw_stale", "ConsumerStale"), ("consumer_saw_none", "ConsumerNone"),
+                                   ("obligation_retries", "Retries")):
+                    out.append(f"\\providecommand{{\\{prefix}{mk}{mname}{label}}}{{{c.get(key, 0)}}}")
+                out.append(f"\\providecommand{{\\{prefix}{mk}{mname}Obl}}{{{c.get('obligations_registered', 0)}/{c.get('obligations_discharged', 0)}/{c.get('obligations_failed', 0)}}}")
+                out.append(f"\\providecommand{{\\{prefix}{mk}{mname}N}}{{{n}}}")
+                # the testable ledger claim: every obligation discharged => the world holds exactly the final booking
+                sess = c.get("sessions", [])
+                clean = [x for x in sess if x.get("obligations_failed", 0) == 0]
+                clean_right = sum(1 for x in clean if x.get("world_active") == [x.get("final")])
+                out.append(f"\\providecommand{{\\{prefix}{mk}{mname}CleanSessions}}{{{len(clean)}}}")
+                out.append(f"\\providecommand{{\\{prefix}{mk}{mname}CleanRight}}{{{clean_right}}}")
+                out.append(f"\\providecommand{{\\{prefix}{mk}{mname}CleanWrong}}{{{len(clean) - clean_right}}}")
+                SUMMARY.setdefault("probe304" if prefix == "LW" else "probe304_first_run", {})[f"{mk}|{c['mode']}"] = dict(
+                    {k: v for k, v in c.items() if k != "sessions"}, compensator=comp, clean_sessions=len(clean), clean_right=clean_right)
+        return found
+    fold("ledger_world", "LW", "the ledger with a consumer, a cancellation step and a fallible compensator", "LedgerWorldAvailable")
+    fold("ledger_world_v1_latest_conf", "LWfirst", "FIRST RUN, compensator `latest` (one tracked confirmation): archived receipts", "LedgerWorldFirstAvailable")
 
 
 def gates(root, out):
@@ -323,8 +432,28 @@ def gates(root, out):
             out.append(f"\\renewcommand{{\\VerifiedScorerCells}}{{{len(cells)}}}")
             out.append(f"\\renewcommand{{\\VerifiedScorerTraces}}{{{tex_num(sum(c['n'] for c in cells.values()))}}}")
             out.append(f"\\renewcommand{{\\VerifiedScorerProblems}}{{{len(probs)}}}")
-            out.append("\\renewcommand{\\VerifiedScorerAvailable}{1}")
-            SUMMARY["verified_scorer"] = {"cells": len(cells), "traces": sum(c["n"] for c in cells.values()), "problems": probs}
+            # the cell is AVAILABLE only when the gate passed: a receipt with problems (an analyser that could not
+            # parse the records, or a verified/port disagreement) must leave the paper's cell pending, never fill it
+            if cells and not probs:
+                out.append("\\renewcommand{\\VerifiedScorerAvailable}{1}")
+            else:
+                out.append(f"% verified_scorer_gate reports {len(probs)} problem(s) over {len(cells)} cell(s): the paper's cell stays PENDING")
+            SUMMARY["verified_scorer"] = {"cells": len(cells), "traces": sum(c["n"] for c in cells.values()), "problems": probs,
+                                          "passed": bool(cells) and not probs}
+            # the Claude op-record replication's cells (not asserted in results/expected.json): verified-detector counts
+            # as macros \VSClaude<Workload><Runtime>, e.g. \VSClaudeTriageVanilla = "48/100"; AVAILABLE only with a passing gate
+            if cells and not probs:
+                for name, c in cells.items():
+                    m = re.match(r"runs/[^/]*-claude/([a-z-]+)-(vanilla|pessimistic|snapshot_isolation)$", name)
+                    if m:
+                        wl = m.group(1).title().replace("-", ""); rt = {"vanilla": "Vanilla", "pessimistic": "Pess", "snapshot_isolation": "SI"}[m.group(2)]
+                        out.append(f"\\providecommand{{\\VSClaude{wl}{rt}}}{{{c['a1_verified']}/{c['n']}}}")
+                        SUMMARY.setdefault("pilot_claude_verified", {})[f"{m.group(1)}|{m.group(2)}"] = {"a1": c["a1_verified"], "n": c["n"]}
+                if SUMMARY.get("pilot_claude_verified"):
+                    for wl in ("EditReview", "PlanExecute", "Triage"):
+                        for rt in ("Vanilla", "Pess", "SI"):
+                            out.append(f"\\providecommand{{\\VSClaude{wl}{rt}}}{{--}}")   # a cell not run yet prints as --
+                    out.append("\\renewcommand{\\PilotClaudeAvailable}{1}")
         except Exception:
             pass
     tl = os.path.join(os.path.dirname(root.rstrip("/")) or ".", "formal", "tla", "tlc.Duplication.log")

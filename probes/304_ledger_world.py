@@ -32,6 +32,21 @@ and books the new date), and ledger_norollback (the compensator books the new
 date WITHOUT cancelling the old one -- the behaviour of probe 303's compensator,
 seen from the world).
 
+Compensator (--compensator):
+  latest  the compensator of the first run (2026-10-14, receipts archived under
+          results/ledger_world_v1_latest_conf/): it tracked ONE confirmation per
+          effect, and generated the replacement text BETWEEN the cancellation and
+          the rebooking.  Two consequences the world check caught: after a failed
+          cancellation a retry cancelled the latest confirmation only, so the
+          original booking stayed active while the ledger reported the obligation
+          discharged; and the cancel-to-rebook window contained a model call, so a
+          consumer reading in it saw no booking at all.  Kept so that the first
+          run's receipts stay reproducible.
+  all     (default) the compensator generates the replacement first, then cancels
+          EVERY active confirmation the effect created, then rebooks; the
+          obligation is discharged only if every cancellation and the rebooking
+          succeeded, and a retry re-attempts every still-active stale confirmation.
+
     uv run --project envs/langgraph-1.2.0 python probes/304_ledger_world.py \\
         --provider anthropic --model claude-haiku-4-5 --n 100 --offset-ms 150 \\
         --modes validated,ledger,ledger_norollback --revisions 2 \\
@@ -139,6 +154,8 @@ def main() -> int:
     ap.add_argument("--modes", default="validated,ledger,ledger_norollback")
     ap.add_argument("--p-cancel-fail", type=float, default=0.1); ap.add_argument("--p-rebook-fail", type=float, default=0.1)
     ap.add_argument("--consumer-max-ms", type=int, default=1500, help="the consumer reads the world a uniform(0, this) ms after the first release")
+    ap.add_argument("--compensator", choices=("latest", "all"), default="all",
+                    help="latest: the first run's compensator (one tracked confirmation, model call between cancel and rebook); all: cancel every active stale confirmation, replacement generated first (default)")
     ap.add_argument("--interleave", action="store_true", default=True)
     ap.add_argument("--out", default="results/ledger_world/out.json")
     ap.add_argument("--mock-latency", type=float, default=None, help="mock provider only: the flight agent's generation latency (s)")
@@ -163,7 +180,8 @@ def main() -> int:
         uses_ledger = mode in ("ledger", "ledger_norollback")
         wall0 = time.perf_counter()
         def ms(w): return round((w - wall0) * 1000.0, 2)
-        confs: dict[str, int | None] = {}        # booking key -> active confirmation in the world
+        confs: dict[str, int | None] = {}        # booking key -> latest confirmation in the world (--compensator latest)
+        confs_all: dict[str, set[int]] = {}      # booking key -> every active confirmation the effect created (--compensator all)
 
         def flight_node(state, runtime):
             s = runtime.store; regenerations = 0
@@ -184,6 +202,7 @@ def main() -> int:
                 key = f"booking-{k}"
                 conf = world.book(k, seen)                                            # the irreversible effect, released at commit
                 confs[key] = conf
+                confs_all[key] = {conf} if conf is not None else set()
                 s.put(BOOK_NS, key, {"date_used": seen, "text": text}); _, t_write, w_write = s.last_stamp()
                 rec.emit(agent="flight_agent", read_set=[DATE_CELL], read_values={DATE_CELL: seen}, read_time=t_read,
                          write_set=[f"trip/bookings/{key}"], write_values={f"trip/bookings/{key}": seen},
@@ -193,28 +212,57 @@ def main() -> int:
                          observed_read_set=(s.reads_snapshot() if hasattr(s, "reads_snapshot") else None))
                 first_release.set()
                 if uses_ledger and ledger is not None:
-                    def compensate(new_date, _key=key):
-                        old_conf = confs.get(_key); cancelled = None
-                        if mode == "ledger":                                          # withdraw the stale effect first
-                            cancelled = world.cancel(old_conf) if old_conf is not None else False
-                        text2 = client.complete("You are a flight-booking agent. Draft a ONE-sentence flight reservation "
-                                                "request. Include the trip date verbatim in ISO format (YYYY-MM-DD).",
-                                                f"Trip date: {new_date}. Route: LHR to ISB, economy, one passenger. "
-                                                f"This REPLACES an earlier reservation.",
-                                                mock_reply=f"Please reserve one economy seat LHR-ISB for {new_date} (replaces earlier).")
-                        new_conf = world.book(k, new_date, kind="rebooking")
-                        ok = new_conf is not None and (cancelled is not False or mode == "ledger_norollback")
-                        if new_conf is not None:
-                            confs[_key] = new_conf
+                    def generate_replacement(new_date):
+                        return client.complete("You are a flight-booking agent. Draft a ONE-sentence flight reservation "
+                                               "request. Include the trip date verbatim in ISO format (YYYY-MM-DD).",
+                                               f"Trip date: {new_date}. Route: LHR to ISB, economy, one passenger. "
+                                               f"This REPLACES an earlier reservation.",
+                                               mock_reply=f"Please reserve one economy seat LHR-ISB for {new_date} (replaces earlier).")
+
+                    def emit_compensation(_key, new_date, text2, new_conf, cancelled):
                         s.put(BOOK_NS, _key, {"date_used": new_date if new_conf is not None else s.get(BOOK_NS, _key).value["date_used"], "text": text2})
                         _, t_w2, w_w2 = s.last_stamp()
                         rec.emit(agent="compensator", read_set=[DATE_CELL], read_values={DATE_CELL: new_date},
                                  read_time=t_w2 - 1 if t_w2 > 0 else 0, write_set=[f"trip/bookings/{_key}"],
                                  write_values={f"trip/bookings/{_key}": new_date if new_conf is not None else "FAILED"}, write_time=t_w2,
                                  experiment="ledger-world", mode=mode, session=k, compensation=True, offset_ms=a.offset_ms,
-                                 booking_text=text2, wall_commit_ms=ms(w_w2), cancel_ok=cancelled, rebook_ok=new_conf is not None)
+                                 booking_text=text2, wall_commit_ms=ms(w_w2), cancel_ok=cancelled, rebook_ok=new_conf is not None,
+                                 compensator=a.compensator)
+
+                    def compensate_latest(new_date, _key=key):
+                        # the first run's compensator: ONE tracked confirmation; the model call sits between cancel and rebook
+                        old_conf = confs.get(_key); cancelled = None
+                        if mode == "ledger":                                          # withdraw the stale effect first
+                            cancelled = world.cancel(old_conf) if old_conf is not None else False
+                        text2 = generate_replacement(new_date)
+                        new_conf = world.book(k, new_date, kind="rebooking")
+                        ok = new_conf is not None and (cancelled is not False or mode == "ledger_norollback")
+                        if new_conf is not None:
+                            confs[_key] = new_conf
+                        emit_compensation(_key, new_date, text2, new_conf, cancelled)
                         if not ok:
                             raise RuntimeError("compensation failed")                  # the ledger keeps the obligation open
+
+                    def compensate_all(new_date, _key=key):
+                        # replacement first (no world mutation yet), then cancel EVERY active stale confirmation, then rebook
+                        text2 = generate_replacement(new_date)
+                        cancelled: list[bool] = []
+                        if mode == "ledger":
+                            for c in sorted(confs_all.get(_key, set())):
+                                ok_c = world.cancel(c)
+                                cancelled.append(ok_c)
+                                if ok_c:
+                                    confs_all[_key].discard(c)
+                        new_conf = world.book(k, new_date, kind="rebooking")
+                        if new_conf is not None:
+                            confs[_key] = new_conf; confs_all.setdefault(_key, set()).add(new_conf)
+                        all_cancelled = all(cancelled) if mode == "ledger" else True
+                        ok = new_conf is not None and all_cancelled
+                        emit_compensation(_key, new_date, text2, new_conf, (all(cancelled) if cancelled else None) if mode == "ledger" else None)
+                        if not ok:
+                            raise RuntimeError("compensation failed")                  # the ledger keeps the obligation open; a retry re-cancels every active stale confirmation
+
+                    compensate = compensate_all if a.compensator == "all" else compensate_latest
                     ledger.register(key, {DATE_CELL: seen}, compensate)
                     cur_item = s.get(TRIP_NS, "date"); cur2 = cur_item.value["date"] if cur_item else NULL
                     if cur2 != seen:
@@ -311,7 +359,7 @@ def main() -> int:
                   f"obl={ledger.registered if ledger else 0}/{ledger.discharged if ledger else 0}")
     result = {"provider": a.provider, "model": a.model, "n": a.n, "p_revise": a.p_revise, "seed": a.seed, "offset_ms": a.offset_ms,
               "revisions": a.revisions, "p_cancel_fail": a.p_cancel_fail, "p_rebook_fail": a.p_rebook_fail,
-              "consumer_max_ms": a.consumer_max_ms, "interleaved": bool(a.interleave), "cells": []}
+              "consumer_max_ms": a.consumer_max_ms, "interleaved": bool(a.interleave), "compensator": a.compensator, "cells": []}
     for mode, sessions in cells.items():
         n = len(sessions)
         cell = {"mode": mode, "n": n, "revised": sum(s["revise"] for s in sessions),
