@@ -1,7 +1,12 @@
 // =====================================================================
-// Verus proof (DRAFT, not yet run through verus in this audit -- the sandbox
-// has no Verus; run `verus --crate-type=lib src/lib_l5_ledger.rs` under the
-// pinned build and fix trigger/assert details before counting it):
+// Verus proof, verified under the pinned build (results/verus/lib_l5_ledger.verus.log:
+// "7 verified, 0 errors"; `verus --crate-type=lib src/lib_l5_ledger.rs`).  The
+// 2026-10-14 header called this a draft the sandbox could not run; the author's
+// machine ran it, and the receipt is committed.  This is a MODEL: the executable
+// ledger the live study measures is harness code (probes/303, probes/304), which
+// registers the obligation in the superseding writer's thread after its put, not
+// atomically with it; the paper's Section 5.5 says so, and counts these
+// obligations as scaffolding.
 //
 //   L_5 safety for a BASIS LEDGER that prevents A_7 (superseded-basis effect)
 //   under arbitrary interleaving of effect registration, writes and releases.
@@ -22,8 +27,8 @@
 // its obligation at release.  The ledger never refuses a step.  What it
 // guarantees is exactly inv_l5: no externalized effect has a stale basis
 // without an obligation -- bounded-delay (here: zero-delay) registration,
-// which Theorem 2 of the main paper argues is the strongest post-commit
-// guarantee an irreversible effect admits.  How an obligation is discharged
+// which the open-world remark of the main paper's Section 3.6 argues is the
+// strongest post-commit guarantee an irreversible effect admits.  How an obligation is discharged
 // (rebook, cancel, ask a human) is outside the model.
 //
 // Modeled on lib_l4_safety.rs.  NULL is the value 0 (a modeling convention

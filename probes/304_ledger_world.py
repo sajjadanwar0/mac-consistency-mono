@@ -87,7 +87,9 @@ class FallibleLedger:
         with self.lock:
             self.effects[key] = {"basis": dict(basis), "compensate": compensate, "obligation": False, "discharged": False}
 
-    def superseded(self, cell, new_value):
+    def mark(self, cell, new_value):
+        """REGISTRATION ONLY (called inside the store lock by the atomic ledgered store): flag, or count a retry of an
+        obligation still open; no callback, no model call"""
         todo = []
         with self.lock:
             for key, e in self.effects.items():
@@ -97,9 +99,12 @@ class FallibleLedger:
                     else:
                         self.retries += 1            # an OPEN obligation (earlier compensation failed) is retried
                     todo.append((key, e))
+        return todo
+
+    def discharge(self, todo, cell, new_value, t=None):
         for key, e in todo:
             if self.on_register is not None:          # the registration record, before any compensation attempt
-                self.on_register(key, cell, new_value)
+                self.on_register(key, cell, new_value, t=t)
             try:
                 e["compensate"](new_value)
             except Exception as ex:  # noqa: BLE001  -- the world refused: the obligation stays open
@@ -111,6 +116,9 @@ class FallibleLedger:
                 e["discharged"] = True; self.discharged += 1
                 e["basis"][cell] = new_value       # re-arm: the replacement is a fresh effect with a current basis
                 e["obligation"] = False
+
+    def superseded(self, cell, new_value):
+        self.discharge(self.mark(cell, new_value), cell, new_value)
 
 
 class World:
@@ -157,10 +165,14 @@ def main() -> int:
     ap.add_argument("--compensator", choices=("latest", "all"), default="all",
                     help="latest: the first run's compensator (one tracked confirmation, model call between cancel and rebook); all: cancel every active stale confirmation, replacement generated first (default)")
     ap.add_argument("--interleave", action="store_true", default=True)
+    ap.add_argument("--registration", choices=("atomic", "after"), default="atomic",
+                    help="atomic: the ledger flags the obligation inside the store lock, with the superseding write (default, "
+                         "2026-10-16); after: the 2026-10-14/15 receipts' behaviour, registration after the put returned")
     ap.add_argument("--out", default="results/ledger_world/out.json")
     ap.add_argument("--mock-latency", type=float, default=None, help="mock provider only: the flight agent's generation latency (s)")
     a = ap.parse_args()
     P = load_probe_303(); H = P.load_paper_harness()
+    P.LEDGER_REGISTRATION = a.registration
     from langgraph.graph import StateGraph, START, END
 
     client = H.ModelClient(a.provider, a.model, base_url=a.base_url) if a.base_url else H.ModelClient(a.provider, a.model)
@@ -317,9 +329,9 @@ def main() -> int:
             srng = random.Random(a.seed * 7_919 + k)                     # the same world luck for every arm of a session
             world = World(srng, a.p_cancel_fail, a.p_rebook_fail)
             clock = H.Clock(); first = len(rec.records)
-            def on_register(key, cell, new_value, _k=k, _mode=mode):
+            def on_register(key, cell, new_value, _k=k, _mode=mode, t=None):
                 rec.emit(agent="ledger", read_set=[], read_values={}, read_time=0, write_set=[], write_values={},
-                         write_time=clock.now(), experiment="ledger-world", mode=_mode, session=_k, offset_ms=a.offset_ms,
+                         write_time=(t if t is not None else clock.now()), experiment="ledger-world", mode=_mode, session=_k, offset_ms=a.offset_ms,
                          obligation_for=f"trip/bookings/booking-{_k}", superseded_cell=cell, superseding_value=new_value)
             ledger = FallibleLedger(P.BasisLedger, on_register) if mode in ("ledger", "ledger_norollback") else None
             store = P.observed_store(H, clock, ledger)
@@ -376,7 +388,8 @@ def main() -> int:
                   f"obl={ledger.registered if ledger else 0}/{ledger.discharged if ledger else 0}")
     result = {"provider": a.provider, "model": a.model, "n": a.n, "p_revise": a.p_revise, "seed": a.seed, "offset_ms": a.offset_ms,
               "revisions": a.revisions, "p_cancel_fail": a.p_cancel_fail, "p_rebook_fail": a.p_rebook_fail,
-              "consumer_max_ms": a.consumer_max_ms, "interleaved": bool(a.interleave), "compensator": a.compensator, "cells": []}
+              "consumer_max_ms": a.consumer_max_ms, "interleaved": bool(a.interleave), "compensator": a.compensator,
+              "registration": a.registration, "cells": []}
     for mode, sessions in cells.items():
         n = len(sessions)
         cell = {"mode": mode, "n": n, "revised": sum(s["revise"] for s in sessions),

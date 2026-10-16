@@ -369,6 +369,10 @@ async def main() -> None:
                         help="model name; defaults are gpt-4o / claude-3-5-sonnet-20241022 / llama3.2:latest")
     parser.add_argument("--no-seeded-tickets", action="store_true",
                         help="triage: do NOT hand the reporter a concrete bug (the pre-2026-10-14 protocol of run 20260913T0150Z)")
+    parser.add_argument("--scenario-offset", type=int, default=0,
+                        help="first scenario id; a one-session call (probes/302_wallclock_interleaved.sh, --n 1) passes its "
+                             "session index so that the trace, the token sidecar and the seeded ticket are numbered by session "
+                             "(the 2026-10-14 interleaved runs used 0 for every session: one ticket, sidecars named -0000)")
     args = parser.parse_args()
     global SEEDED_TICKETS
     SEEDED_TICKETS = not args.no_seeded_tickets
@@ -385,13 +389,14 @@ async def main() -> None:
     print(f"provider={args.provider}  model={model_name}  workload={args.workload}  runtime={_runtime}  n={args.n}  seeded_tickets={SEEDED_TICKETS}")
     import json as _json
     (output / "protocol.json").write_text(_json.dumps({"seeded_tickets": SEEDED_TICKETS, "provider": args.provider, "model": model_name,
-                                                        "workload": args.workload, "runtime": _runtime, "n": args.n, "seed": args.seed}, indent=1))
+                                                        "workload": args.workload, "runtime": _runtime, "n": args.n, "seed": args.seed,
+                                                        "scenario_offset": args.scenario_offset}, indent=1))
     print(f"traces  -> {output.resolve()}")
     print(f"tokens  -> {tokens_output.resolve()}")
     print()
 
     yields = {"empty": 0, "1_event": 0, "2_events": 0, "3plus_events": 0}
-    for i in range(args.n):
+    for i in range(args.scenario_offset, args.scenario_offset + args.n):
         out = await run_one(i, output, args.provider, model_name, args.workload, tokens_output)
         n_events = sum(1 for _ in out.read_text().splitlines() if _.strip())
         if n_events == 0:   yields["empty"] += 1

@@ -192,7 +192,7 @@
 \newcommand{\LfiveVerusStatus}{verified in Verus (7 obligations, 0 errors)}
 \newcommand{\LfiveVerusIntro}{verified (7 obligations)}
 \newcommand{\LfiveLiveOutcome}{\textbf{[probe 303 -{}-modes ledger: pending]}}
-% per-cell defaults for the verified / ledger rows of Table 3 ("--" = pending); claims_results.tex overrides
+% per-cell defaults for the verified / ledger rows of Table 2 ("--" = pending); claims_results.tex overrides
 \newcommand{\Pend}{--}
 \newcommand{\LiveVerifiedGptAOne}{\Pend}\newcommand{\LiveVerifiedGptR}{\Pend}\newcommand{\LiveVerifiedGptWrong}{\Pend}\newcommand{\LiveVerifiedGptRegen}{\Pend}
 \newcommand{\LiveVerifiedHaikuAOne}{\Pend}\newcommand{\LiveVerifiedHaikuR}{\Pend}\newcommand{\LiveVerifiedHaikuWrong}{\Pend}\newcommand{\LiveVerifiedHaikuRegen}{\Pend}
@@ -210,17 +210,25 @@
 \newcommand{\WallclockPairedClaudeTriagePess}{\Pend}\newcommand{\WallclockPairedClaudeTriageSI}{\Pend}
 \newcommand{\WallclockPairedClaudeEditReviewPess}{\Pend}\newcommand{\WallclockPairedClaudeEditReviewSI}{\Pend}
 \newcommand{\WallclockPairedClaudePlanExecutePess}{\Pend}\newcommand{\WallclockPairedClaudePlanExecuteSI}{\Pend}
+% the completion-stamp estimate (order.tsv, 1 s resolution): the wall-clock receipt of an interleaved run whose token sidecars were lost
+\newcommand{\WallclockStampGptAvailable}{0}\newcommand{\WallclockStampClaudeAvailable}{0}
+\newcommand{\WallclockStampGptTriagePess}{\Pend}\newcommand{\WallclockStampGptTriageSI}{\Pend}
+\newcommand{\WallclockStampGptEditReviewPess}{\Pend}\newcommand{\WallclockStampGptEditReviewSI}{\Pend}
+\newcommand{\WallclockStampGptPlanExecutePess}{\Pend}\newcommand{\WallclockStampGptPlanExecuteSI}{\Pend}
+\newcommand{\WallclockStampClaudeTriagePess}{\Pend}\newcommand{\WallclockStampClaudeTriageSI}{\Pend}
+\newcommand{\WallclockStampClaudeEditReviewPess}{\Pend}\newcommand{\WallclockStampClaudeEditReviewSI}{\Pend}
+\newcommand{\WallclockStampClaudePlanExecutePess}{\Pend}\newcommand{\WallclockStampClaudePlanExecuteSI}{\Pend}
 \newcommand{\OffsetCurveAvailable}{0}
 \newcommand{\LatticeThirtyTwoOutcome}{All \LatticeThirtyTwoRuns{} runs match their expectation (0 mismatches); the exhaustive runs range over 1{,}803{,}848--9{,}688{,}601 distinct states, and the sixty-four commit-time cells with $G_7$ off return the verdicts of \texttt{lattice16.sh} one for one.}
 \newcommand{\LiveVerifiedOutcome}{\textbf{[probe 303 -{}-modes verified: pending]}}
 
 % --- hypothesis gates (VERIFIED-HERE: harness/macaudit/hypothesis_gates.py --tex, over every committed record) ---
-\newcommand{\HypRecords}{56{,}079}     % hypothesis_gates.py over results/ on 2026-10-14 (tools/hypothesis_gates.log): September + probe 303 (sequential, sweep, three interleaved runs) + probe 304 + Claude op-record pilot
-\newcommand{\HypTraces}{15{,}891}
+\newcommand{\HypRecords}{64{,}408}     % hypothesis_gates.py over results/ on 2026-10-15 (tools/hypothesis_gates.log): September + probe 303 (sequential, sweep, three interleaved runs) + probe 304 (both runs) + Claude op-record pilot (nine cells) + interleaved Claude wall-clock run
+\newcommand{\HypTraces}{18{,}288}
 \newcommand{\HypSameAgentOverlaps}{0}
 \newcommand{\HypReadBeforeCommitViolations}{0}
-\newcommand{\HypCampaigns}{18}
-\newcommand{\HypValueUniqueCampaigns}{12}
+\newcommand{\HypCampaigns}{19}
+\newcommand{\HypValueUniqueCampaigns}{13}
 \newcommand{\HypCollisionCells}{126}
 \newcommand{\HypCollisionTraces}{105}
 \newcommand{\HypLiveLtwoSessions}{600}
@@ -250,9 +258,18 @@
 \newcommand{\RunFisherValidatedGpt}{0.022}\newcommand{\RunFisherVanillaGpt}{0.033}
 \newcommand{\RunFisherValidatedHaiku}{0.335}\newcommand{\RunFisherVanillaHaiku}{0.593}
 \newcommand{\ArmPinnedValidatedHaiku}{1.10}\newcommand{\ArmPinnedVerifiedHaiku}{1.10}
-% hypothesis gates H5/H6 (hypothesis_gates.py --tex, 2026-10-14)
-\newcommand{\HypExternalEffects}{9{,}900}\newcommand{\HypDuplicateEffects}{0}\newcommand{\HypInterruptEmissions}{2}
-\newcommand{\HypObservedRecords}{5{,}400}\newcommand{\HypUndeclaredReads}{0}
+% hypothesis gates H5/H6 (hypothesis_gates.py --tex, 2026-10-15)
+\newcommand{\HypExternalEffects}{10{,}800}\newcommand{\HypDuplicateEffects}{0}\newcommand{\HypInterruptEmissions}{2}
+\newcommand{\HypObservedRecords}{6{,}300}\newcommand{\HypUndeclaredReads}{0}
+% hypothesis gate H7 (the store axiom, ReadsReflectMemory, on every declared read of the store-instrumented campaigns; the
+% four campaigns converted from transcripts and tool logs are reported, not gated): hypothesis_gates.py over the committed
+% receipts held on 2026-10-15 (the runner's step 19 re-derives them over the full tree)
+\newcommand{\HypStoreAxiomReads}{29{,}005}\newcommand{\HypStoreAxiomTraces}{14{,}266}\newcommand{\HypStoreAxiomViolations}{0}
+\newcommand{\HypStoreAxiomConvertedReads}{6{,}448}\newcommand{\HypStoreAxiomConvertedCampaigns}{4}
+% the NoA1 half of the lattice at the bounds where the supersession witness is reachable (formal/tla/lattice16_a1_maxops3.sh)
+% formal/tla/lattice16_a1_maxops3_c1_results.json (2026-10-15, TLC 1.8.0, two workers): 16 NoA1 points + the witness-class pair
+\newcommand{\LatticeAOneMaxOpsThreeShort}{all $16$ runs match (the $8$ $G_1$ points safe over $3.0$--$10.2$M states; the supersession class, a non-\textsc{null} stale read, reached without $G_1$ in $18{,}242$ states and excluded with it)}
+\newcommand{\LatticeAOneMaxOpsThreeAvailable}{1}\newcommand{\LatticeAOneMaxOpsThreeOutcome}{all 16 runs match their expectation (0 mismatches): the 8 $G_1$ points are safe exhaustively over 3{,}023{,}203--10{,}232{,}149 distinct states (depth 12), the 8 points without $G_1$ reach \A1 within 462--1{,}163 states, and the supersession class itself (a non-\textsc{null} stale read) is reached without $G_1$ (witness in 18{,}242 states) and excluded with it (safe, 3{,}886{,}087 states).}
 % predicate D (formal/tla/Duplication.tla; check_duplication.sh, TLC 1.8.0, one worker; log committed as formal/tla/tlc.Duplication.log)
 \newcommand{\DupAvailable}{1}\newcommand{\DupWitnessDepth}{5}\newcommand{\DupDivergentDepth}{6}\newcommand{\DupDedupStates}{1{,}714}
 % the verified detector in the scoring path (run_experiments.sh --only 14: tools/verified_scorer.json) -- pending until run
@@ -263,6 +280,7 @@
 % replicated, interleaved live arms (--only 17) and the ledger in a world (--only 18) -- pending until run
 \newcommand{\LiveRunsAvailable}{0}\newcommand{\LedgerWorldAvailable}{0}
 \newcommand{\LedgerWorldRevisions}{2}\newcommand{\LedgerWorldPCancelFail}{0.1}\newcommand{\LedgerWorldPRebookFail}{0.1}\newcommand{\LedgerWorldConsumerMaxMs}{1500}\newcommand{\LedgerWorldCompensator}{--}\newcommand{\LedgerWorldFirstAvailable}{0}   % protocol defaults of probe 304; claims_results.tex overrides from the receipt
+\newcommand{\LedgerWorldAtomicAvailable}{0}\newcommand{\LedgerWorldWideAvailable}{0}   % runner step 21 (atomic registration; 5 s consumer window)
 \newcommand{\PilotClaudeAvailable}{0}   % the Claude pilot cells scored by the verified detector (step 14 after step 11); claims_results.tex overrides
 \newcommand{\Pending}[1]{\textbf{[pending: #1]}}   % release_tag.sh refuses to tag while any \Pending survives in the PDF text
 
@@ -270,7 +288,7 @@
 % claims_results.tex (2026-10-14): the receipt overrides generated by harness/macaudit/claims_from_results.py
 % ============================================================================
 % generated by harness/macaudit/claims_from_results.py -- do not edit; re-run the probes instead
-% --- probe 303 (results/live_a1_outcome; *_arms150.json -> Table 3, *_sweep.json -> offset curve) ---
+% --- probe 303 (results/live_a1_outcome; *_arms150.json -> the live table (Table 2), *_sweep.json -> offset curve) ---
 \renewcommand{\LiveVanillaDeepseekAOne}{$45/100$ [35.0, 55.3]}
 \renewcommand{\LiveVanillaDeepseekR}{$55$}
 \renewcommand{\LiveVanillaDeepseekWrong}{$100/100$ [96.4, 100.0]}
@@ -330,7 +348,7 @@
 \providecommand{\SweepDeepseekValidatedOXZZ}{0/52/52}
 \providecommand{\SweepDeepseekValidatedOOXZZ}{0/42/42}
 \renewcommand{\OffsetCurveAvailable}{1}
-% --- probe 303 --interleave --runs (results/live_a1_outcome/*_arms150i.run*.json): replicated Table 3 rows ---
+% --- probe 303 --interleave --runs (results/live_a1_outcome/*_arms150i.run*.json): the replicated-runs table (Table 3) ---
 \renewcommand{\LiveRunsAvailable}{1}
 \providecommand{\LiveRunsDeepseek}{3}
 \providecommand{\RunsDeepseekVanillaAOne}{40/28/45 ($113/300$ [32.2, 43.4])}
@@ -437,7 +455,10 @@
 \providecommand{\RunsPairedDiscordantDeepseek}{58 vs.\ 67}
 \providecommand{\RunsMcNemarDeepseek}{=0.474}
 \providecommand{\RunsDiffDeepseek}{-3.0}
-\providecommand{\RunsDiffCIDeepseek}{[-10.3, +4.3]}
+\providecommand{\RunsDiffCIDeepseek}{[-10.2, +4.3]}
+\providecommand{\RunsHeteroDeepseekVanillaAOne}{=0.039}
+\providecommand{\RunsHeteroDeepseekValidatedR}{=0.014}
+\providecommand{\RunsHeteroDeepseekVerifiedR}{=0.489}
 \providecommand{\RunsVsSeqDeepseekVanillaAOne}{=0.197}
 \providecommand{\RunsVsSeqDeepseekValidatedR}{=0.905}
 \providecommand{\RunsVsSeqDeepseekVerifiedR}{=0.032}
@@ -546,7 +567,10 @@
 \providecommand{\RunsPairedDiscordantGpt}{72 vs.\ 67}
 \providecommand{\RunsMcNemarGpt}{=0.735}
 \providecommand{\RunsDiffGpt}{+1.7}
-\providecommand{\RunsDiffCIGpt}{[-6.0, +9.4]}
+\providecommand{\RunsDiffCIGpt}{[-6.0, +9.3]}
+\providecommand{\RunsHeteroGptVanillaAOne}{=0.846}
+\providecommand{\RunsHeteroGptValidatedR}{=0.160}
+\providecommand{\RunsHeteroGptVerifiedR}{=0.113}
 \providecommand{\RunsVsSeqGptVanillaAOne}{=0.007}
 \providecommand{\RunsVsSeqGptValidatedR}{=0.013}
 \providecommand{\RunsVsSeqGptVerifiedR}{=0.004}
@@ -655,7 +679,10 @@
 \providecommand{\RunsPairedDiscordantHaiku}{7 vs.\ 2}
 \providecommand{\RunsMcNemarHaiku}{=0.180}
 \providecommand{\RunsDiffHaiku}{+1.7}
-\providecommand{\RunsDiffCIHaiku}{[-0.3, +3.6]}
+\providecommand{\RunsDiffCIHaiku}{[-0.5, +4.1]}
+\providecommand{\RunsHeteroHaikuVanillaAOne}{=0.363}
+\providecommand{\RunsHeteroHaikuValidatedR}{=0.557}
+\providecommand{\RunsHeteroHaikuVerifiedR}{=0.604}
 \providecommand{\RunsVsSeqHaikuVanillaAOne}{=0.018}
 \providecommand{\RunsVsSeqHaikuValidatedR}{<0.001}
 \providecommand{\RunsVsSeqHaikuVerifiedR}{=0.261}
@@ -665,7 +692,7 @@
 \renewcommand{\LedgerWorldPCancelFail}{0.1}
 \renewcommand{\LedgerWorldPRebookFail}{0.1}
 \renewcommand{\LedgerWorldConsumerMaxMs}{1500}
-\renewcommand{\LedgerWorldCompensator}{latest}
+\renewcommand{\LedgerWorldCompensator}{all}
 \providecommand{\LWHaikuValidatedR}{98}
 \providecommand{\LWHaikuValidatedStoreWrong}{98}
 \providecommand{\LWHaikuValidatedWorldWrong}{98}
@@ -679,71 +706,139 @@
 \providecommand{\LWHaikuValidatedCleanSessions}{100}
 \providecommand{\LWHaikuValidatedCleanRight}{2}
 \providecommand{\LWHaikuValidatedCleanWrong}{98}
+\providecommand{\LWHaikuValidatedOpenSessions}{0}
+\providecommand{\LWHaikuValidatedOpenWrong}{0}
+\providecommand{\LWHaikuValidatedOpenRight}{0}
+\providecommand{\LWHaikuValidatedFailDouble}{0}
+\providecommand{\LWHaikuValidatedFailNone}{0}
+\providecommand{\LWHaikuValidatedFailStaleOnly}{98}
+\providecommand{\LWHaikuValidatedOneObligation}{0}
+\providecommand{\LWHaikuValidatedTwoObligations}{0}
+\providecommand{\LWHaikuValidatedNoObligation}{100}
 \providecommand{\LWHaikuLedgerR}{0}
-\providecommand{\LWHaikuLedgerStoreWrong}{7}
+\providecommand{\LWHaikuLedgerStoreWrong}{6}
 \providecommand{\LWHaikuLedgerWorldWrong}{12}
 \providecommand{\LWHaikuLedgerWorldNone}{6}
-\providecommand{\LWHaikuLedgerDouble}{11}
-\providecommand{\LWHaikuLedgerConsumerStale}{42}
-\providecommand{\LWHaikuLedgerConsumerNone}{53}
-\providecommand{\LWHaikuLedgerRetries}{2}
-\providecommand{\LWHaikuLedgerObl}{101/84/17}
+\providecommand{\LWHaikuLedgerDouble}{12}
+\providecommand{\LWHaikuLedgerConsumerStale}{100}
+\providecommand{\LWHaikuLedgerConsumerNone}{0}
+\providecommand{\LWHaikuLedgerRetries}{0}
+\providecommand{\LWHaikuLedgerObl}{101/83/18}
 \providecommand{\LWHaikuLedgerN}{100}
-\providecommand{\LWHaikuLedgerCleanSessions}{83}
+\providecommand{\LWHaikuLedgerCleanSessions}{82}
 \providecommand{\LWHaikuLedgerCleanRight}{82}
-\providecommand{\LWHaikuLedgerCleanWrong}{1}
+\providecommand{\LWHaikuLedgerCleanWrong}{0}
+\providecommand{\LWHaikuLedgerOpenSessions}{18}
+\providecommand{\LWHaikuLedgerOpenWrong}{18}
+\providecommand{\LWHaikuLedgerOpenRight}{0}
+\providecommand{\LWHaikuLedgerFailDouble}{12}
+\providecommand{\LWHaikuLedgerFailNone}{6}
+\providecommand{\LWHaikuLedgerFailStaleOnly}{0}
+\providecommand{\LWHaikuLedgerOneObligation}{99}
+\providecommand{\LWHaikuLedgerTwoObligations}{1}
+\providecommand{\LWHaikuLedgerNoObligation}{0}
+\providecommand{\LWHaikuLedgerConsumerStaleBeforeRevision}{28}
+\providecommand{\LWHaikuLedgerConsumerStaleBeforeCompensation}{72}
+\providecommand{\LWHaikuLedgerConsumerStaleAfterCompensation}{0}
+\providecommand{\LWHaikuLedgerBothRevisionsAfterCommit}{1}
+\providecommand{\LWHaikuLedgerFirstRevisionMedianS}{0.9}
+\providecommand{\LWHaikuLedgerCompLatencyMedianS}{1.5}
+\providecommand{\LWHaikuLedgerCompLatencyPNinetyS}{1.7}
 \providecommand{\LWHaikuLedgerNoRollbackR}{0}
 \providecommand{\LWHaikuLedgerNoRollbackStoreWrong}{11}
-\providecommand{\LWHaikuLedgerNoRollbackWorldWrong}{99}
+\providecommand{\LWHaikuLedgerNoRollbackWorldWrong}{100}
 \providecommand{\LWHaikuLedgerNoRollbackWorldNone}{0}
-\providecommand{\LWHaikuLedgerNoRollbackDouble}{88}
-\providecommand{\LWHaikuLedgerNoRollbackConsumerStale}{99}
+\providecommand{\LWHaikuLedgerNoRollbackDouble}{89}
+\providecommand{\LWHaikuLedgerNoRollbackConsumerStale}{100}
 \providecommand{\LWHaikuLedgerNoRollbackConsumerNone}{0}
 \providecommand{\LWHaikuLedgerNoRollbackRetries}{1}
-\providecommand{\LWHaikuLedgerNoRollbackObl}{100/89/11}
+\providecommand{\LWHaikuLedgerNoRollbackObl}{101/90/11}
 \providecommand{\LWHaikuLedgerNoRollbackN}{100}
 \providecommand{\LWHaikuLedgerNoRollbackCleanSessions}{89}
-\providecommand{\LWHaikuLedgerNoRollbackCleanRight}{1}
-\providecommand{\LWHaikuLedgerNoRollbackCleanWrong}{88}
-\providecommand{\LWDeepseekValidatedR}{99}
-\providecommand{\LWDeepseekValidatedStoreWrong}{99}
-\providecommand{\LWDeepseekValidatedWorldWrong}{99}
+\providecommand{\LWHaikuLedgerNoRollbackCleanRight}{0}
+\providecommand{\LWHaikuLedgerNoRollbackCleanWrong}{89}
+\providecommand{\LWHaikuLedgerNoRollbackOpenSessions}{11}
+\providecommand{\LWHaikuLedgerNoRollbackOpenWrong}{11}
+\providecommand{\LWHaikuLedgerNoRollbackOpenRight}{0}
+\providecommand{\LWHaikuLedgerNoRollbackFailDouble}{89}
+\providecommand{\LWHaikuLedgerNoRollbackFailNone}{0}
+\providecommand{\LWHaikuLedgerNoRollbackFailStaleOnly}{11}
+\providecommand{\LWHaikuLedgerNoRollbackOneObligation}{99}
+\providecommand{\LWHaikuLedgerNoRollbackTwoObligations}{1}
+\providecommand{\LWHaikuLedgerNoRollbackNoObligation}{0}
+\providecommand{\LWDeepseekValidatedR}{92}
+\providecommand{\LWDeepseekValidatedStoreWrong}{92}
+\providecommand{\LWDeepseekValidatedWorldWrong}{92}
 \providecommand{\LWDeepseekValidatedWorldNone}{0}
 \providecommand{\LWDeepseekValidatedDouble}{0}
-\providecommand{\LWDeepseekValidatedConsumerStale}{99}
+\providecommand{\LWDeepseekValidatedConsumerStale}{92}
 \providecommand{\LWDeepseekValidatedConsumerNone}{0}
 \providecommand{\LWDeepseekValidatedRetries}{0}
 \providecommand{\LWDeepseekValidatedObl}{0/0/0}
 \providecommand{\LWDeepseekValidatedN}{100}
 \providecommand{\LWDeepseekValidatedCleanSessions}{100}
-\providecommand{\LWDeepseekValidatedCleanRight}{1}
-\providecommand{\LWDeepseekValidatedCleanWrong}{99}
+\providecommand{\LWDeepseekValidatedCleanRight}{8}
+\providecommand{\LWDeepseekValidatedCleanWrong}{92}
+\providecommand{\LWDeepseekValidatedOpenSessions}{0}
+\providecommand{\LWDeepseekValidatedOpenWrong}{0}
+\providecommand{\LWDeepseekValidatedOpenRight}{0}
+\providecommand{\LWDeepseekValidatedFailDouble}{0}
+\providecommand{\LWDeepseekValidatedFailNone}{0}
+\providecommand{\LWDeepseekValidatedFailStaleOnly}{92}
+\providecommand{\LWDeepseekValidatedOneObligation}{0}
+\providecommand{\LWDeepseekValidatedTwoObligations}{0}
+\providecommand{\LWDeepseekValidatedNoObligation}{100}
 \providecommand{\LWDeepseekLedgerR}{0}
-\providecommand{\LWDeepseekLedgerStoreWrong}{14}
-\providecommand{\LWDeepseekLedgerWorldWrong}{16}
-\providecommand{\LWDeepseekLedgerWorldNone}{12}
-\providecommand{\LWDeepseekLedgerDouble}{14}
-\providecommand{\LWDeepseekLedgerConsumerStale}{49}
-\providecommand{\LWDeepseekLedgerConsumerNone}{50}
-\providecommand{\LWDeepseekLedgerRetries}{13}
-\providecommand{\LWDeepseekLedgerObl}{150/130/20}
+\providecommand{\LWDeepseekLedgerStoreWrong}{10}
+\providecommand{\LWDeepseekLedgerWorldWrong}{4}
+\providecommand{\LWDeepseekLedgerWorldNone}{8}
+\providecommand{\LWDeepseekLedgerDouble}{2}
+\providecommand{\LWDeepseekLedgerConsumerStale}{93}
+\providecommand{\LWDeepseekLedgerConsumerNone}{0}
+\providecommand{\LWDeepseekLedgerRetries}{16}
+\providecommand{\LWDeepseekLedgerObl}{142/130/12}
 \providecommand{\LWDeepseekLedgerN}{100}
-\providecommand{\LWDeepseekLedgerCleanSessions}{80}
-\providecommand{\LWDeepseekLedgerCleanRight}{70}
-\providecommand{\LWDeepseekLedgerCleanWrong}{10}
+\providecommand{\LWDeepseekLedgerCleanSessions}{88}
+\providecommand{\LWDeepseekLedgerCleanRight}{88}
+\providecommand{\LWDeepseekLedgerCleanWrong}{0}
+\providecommand{\LWDeepseekLedgerOpenSessions}{12}
+\providecommand{\LWDeepseekLedgerOpenWrong}{12}
+\providecommand{\LWDeepseekLedgerOpenRight}{0}
+\providecommand{\LWDeepseekLedgerFailDouble}{2}
+\providecommand{\LWDeepseekLedgerFailNone}{8}
+\providecommand{\LWDeepseekLedgerFailStaleOnly}{2}
+\providecommand{\LWDeepseekLedgerOneObligation}{44}
+\providecommand{\LWDeepseekLedgerTwoObligations}{49}
+\providecommand{\LWDeepseekLedgerNoObligation}{7}
+\providecommand{\LWDeepseekLedgerConsumerStaleBeforeRevision}{34}
+\providecommand{\LWDeepseekLedgerConsumerStaleBeforeCompensation}{44}
+\providecommand{\LWDeepseekLedgerConsumerStaleAfterCompensation}{15}
+\providecommand{\LWDeepseekLedgerBothRevisionsAfterCommit}{65}
+\providecommand{\LWDeepseekLedgerFirstRevisionMedianS}{1.0}
+\providecommand{\LWDeepseekLedgerCompLatencyMedianS}{1.4}
+\providecommand{\LWDeepseekLedgerCompLatencyPNinetyS}{4.6}
 \providecommand{\LWDeepseekLedgerNoRollbackR}{0}
-\providecommand{\LWDeepseekLedgerNoRollbackStoreWrong}{7}
-\providecommand{\LWDeepseekLedgerNoRollbackWorldWrong}{99}
+\providecommand{\LWDeepseekLedgerNoRollbackStoreWrong}{5}
+\providecommand{\LWDeepseekLedgerNoRollbackWorldWrong}{90}
 \providecommand{\LWDeepseekLedgerNoRollbackWorldNone}{0}
-\providecommand{\LWDeepseekLedgerNoRollbackDouble}{96}
-\providecommand{\LWDeepseekLedgerNoRollbackConsumerStale}{99}
+\providecommand{\LWDeepseekLedgerNoRollbackDouble}{87}
+\providecommand{\LWDeepseekLedgerNoRollbackConsumerStale}{90}
 \providecommand{\LWDeepseekLedgerNoRollbackConsumerNone}{0}
-\providecommand{\LWDeepseekLedgerNoRollbackRetries}{9}
-\providecommand{\LWDeepseekLedgerNoRollbackObl}{154/147/7}
+\providecommand{\LWDeepseekLedgerNoRollbackRetries}{8}
+\providecommand{\LWDeepseekLedgerNoRollbackObl}{139/134/5}
 \providecommand{\LWDeepseekLedgerNoRollbackN}{100}
-\providecommand{\LWDeepseekLedgerNoRollbackCleanSessions}{93}
-\providecommand{\LWDeepseekLedgerNoRollbackCleanRight}{1}
-\providecommand{\LWDeepseekLedgerNoRollbackCleanWrong}{92}
+\providecommand{\LWDeepseekLedgerNoRollbackCleanSessions}{95}
+\providecommand{\LWDeepseekLedgerNoRollbackCleanRight}{10}
+\providecommand{\LWDeepseekLedgerNoRollbackCleanWrong}{85}
+\providecommand{\LWDeepseekLedgerNoRollbackOpenSessions}{5}
+\providecommand{\LWDeepseekLedgerNoRollbackOpenWrong}{5}
+\providecommand{\LWDeepseekLedgerNoRollbackOpenRight}{0}
+\providecommand{\LWDeepseekLedgerNoRollbackFailDouble}{87}
+\providecommand{\LWDeepseekLedgerNoRollbackFailNone}{0}
+\providecommand{\LWDeepseekLedgerNoRollbackFailStaleOnly}{3}
+\providecommand{\LWDeepseekLedgerNoRollbackOneObligation}{41}
+\providecommand{\LWDeepseekLedgerNoRollbackTwoObligations}{49}
+\providecommand{\LWDeepseekLedgerNoRollbackNoObligation}{10}
 \providecommand{\LWGptValidatedR}{100}
 \providecommand{\LWGptValidatedStoreWrong}{100}
 \providecommand{\LWGptValidatedWorldWrong}{100}
@@ -757,32 +852,293 @@
 \providecommand{\LWGptValidatedCleanSessions}{100}
 \providecommand{\LWGptValidatedCleanRight}{0}
 \providecommand{\LWGptValidatedCleanWrong}{100}
+\providecommand{\LWGptValidatedOpenSessions}{0}
+\providecommand{\LWGptValidatedOpenWrong}{0}
+\providecommand{\LWGptValidatedOpenRight}{0}
+\providecommand{\LWGptValidatedFailDouble}{0}
+\providecommand{\LWGptValidatedFailNone}{0}
+\providecommand{\LWGptValidatedFailStaleOnly}{100}
+\providecommand{\LWGptValidatedOneObligation}{0}
+\providecommand{\LWGptValidatedTwoObligations}{0}
+\providecommand{\LWGptValidatedNoObligation}{100}
 \providecommand{\LWGptLedgerR}{0}
-\providecommand{\LWGptLedgerStoreWrong}{11}
-\providecommand{\LWGptLedgerWorldWrong}{16}
-\providecommand{\LWGptLedgerWorldNone}{9}
-\providecommand{\LWGptLedgerDouble}{14}
-\providecommand{\LWGptLedgerConsumerStale}{46}
-\providecommand{\LWGptLedgerConsumerNone}{52}
-\providecommand{\LWGptLedgerRetries}{10}
-\providecommand{\LWGptLedgerObl}{150/126/24}
+\providecommand{\LWGptLedgerStoreWrong}{7}
+\providecommand{\LWGptLedgerWorldWrong}{12}
+\providecommand{\LWGptLedgerWorldNone}{7}
+\providecommand{\LWGptLedgerDouble}{12}
+\providecommand{\LWGptLedgerConsumerStale}{96}
+\providecommand{\LWGptLedgerConsumerNone}{1}
+\providecommand{\LWGptLedgerRetries}{7}
+\providecommand{\LWGptLedgerObl}{130/111/19}
 \providecommand{\LWGptLedgerN}{100}
-\providecommand{\LWGptLedgerCleanSessions}{76}
-\providecommand{\LWGptLedgerCleanRight}{71}
-\providecommand{\LWGptLedgerCleanWrong}{5}
+\providecommand{\LWGptLedgerCleanSessions}{81}
+\providecommand{\LWGptLedgerCleanRight}{81}
+\providecommand{\LWGptLedgerCleanWrong}{0}
+\providecommand{\LWGptLedgerOpenSessions}{19}
+\providecommand{\LWGptLedgerOpenWrong}{19}
+\providecommand{\LWGptLedgerOpenRight}{0}
+\providecommand{\LWGptLedgerFailDouble}{12}
+\providecommand{\LWGptLedgerFailNone}{7}
+\providecommand{\LWGptLedgerFailStaleOnly}{0}
+\providecommand{\LWGptLedgerOneObligation}{64}
+\providecommand{\LWGptLedgerTwoObligations}{33}
+\providecommand{\LWGptLedgerNoObligation}{3}
+\providecommand{\LWGptLedgerConsumerStaleBeforeRevision}{34}
+\providecommand{\LWGptLedgerConsumerStaleBeforeCompensation}{51}
+\providecommand{\LWGptLedgerConsumerStaleAfterCompensation}{11}
+\providecommand{\LWGptLedgerBothRevisionsAfterCommit}{40}
+\providecommand{\LWGptLedgerFirstRevisionMedianS}{0.9}
+\providecommand{\LWGptLedgerCompLatencyMedianS}{1.4}
+\providecommand{\LWGptLedgerCompLatencyPNinetyS}{1.8}
 \providecommand{\LWGptLedgerNoRollbackR}{0}
-\providecommand{\LWGptLedgerNoRollbackStoreWrong}{9}
-\providecommand{\LWGptLedgerNoRollbackWorldWrong}{99}
+\providecommand{\LWGptLedgerNoRollbackStoreWrong}{10}
+\providecommand{\LWGptLedgerNoRollbackWorldWrong}{97}
 \providecommand{\LWGptLedgerNoRollbackWorldNone}{0}
-\providecommand{\LWGptLedgerNoRollbackDouble}{94}
-\providecommand{\LWGptLedgerNoRollbackConsumerStale}{99}
+\providecommand{\LWGptLedgerNoRollbackDouble}{90}
+\providecommand{\LWGptLedgerNoRollbackConsumerStale}{97}
 \providecommand{\LWGptLedgerNoRollbackConsumerNone}{0}
-\providecommand{\LWGptLedgerNoRollbackRetries}{7}
-\providecommand{\LWGptLedgerNoRollbackObl}{152/143/9}
+\providecommand{\LWGptLedgerNoRollbackRetries}{5}
+\providecommand{\LWGptLedgerNoRollbackObl}{136/126/10}
 \providecommand{\LWGptLedgerNoRollbackN}{100}
-\providecommand{\LWGptLedgerNoRollbackCleanSessions}{91}
-\providecommand{\LWGptLedgerNoRollbackCleanRight}{1}
-\providecommand{\LWGptLedgerNoRollbackCleanWrong}{90}
+\providecommand{\LWGptLedgerNoRollbackCleanSessions}{90}
+\providecommand{\LWGptLedgerNoRollbackCleanRight}{3}
+\providecommand{\LWGptLedgerNoRollbackCleanWrong}{87}
+\providecommand{\LWGptLedgerNoRollbackOpenSessions}{10}
+\providecommand{\LWGptLedgerNoRollbackOpenWrong}{10}
+\providecommand{\LWGptLedgerNoRollbackOpenRight}{0}
+\providecommand{\LWGptLedgerNoRollbackFailDouble}{90}
+\providecommand{\LWGptLedgerNoRollbackFailNone}{0}
+\providecommand{\LWGptLedgerNoRollbackFailStaleOnly}{7}
+\providecommand{\LWGptLedgerNoRollbackOneObligation}{58}
+\providecommand{\LWGptLedgerNoRollbackTwoObligations}{39}
+\providecommand{\LWGptLedgerNoRollbackNoObligation}{3}
+\providecommand{\LWLedgerAgree}{300/300}
+\providecommand{\LWLedgerDisagree}{0}
+\providecommand{\LWLedgerDisagreeCI}{[0.0, 1.2]}
+% --- probe 304 (ledger_world_v1_latest_conf): FIRST RUN, compensator `latest` (one tracked confirmation): archived receipts ---
+\renewcommand{\LedgerWorldFirstAvailable}{1}
+\providecommand{\LWfirstHaikuValidatedR}{98}
+\providecommand{\LWfirstHaikuValidatedStoreWrong}{98}
+\providecommand{\LWfirstHaikuValidatedWorldWrong}{98}
+\providecommand{\LWfirstHaikuValidatedWorldNone}{0}
+\providecommand{\LWfirstHaikuValidatedDouble}{0}
+\providecommand{\LWfirstHaikuValidatedConsumerStale}{98}
+\providecommand{\LWfirstHaikuValidatedConsumerNone}{0}
+\providecommand{\LWfirstHaikuValidatedRetries}{0}
+\providecommand{\LWfirstHaikuValidatedObl}{0/0/0}
+\providecommand{\LWfirstHaikuValidatedN}{100}
+\providecommand{\LWfirstHaikuValidatedCleanSessions}{100}
+\providecommand{\LWfirstHaikuValidatedCleanRight}{2}
+\providecommand{\LWfirstHaikuValidatedCleanWrong}{98}
+\providecommand{\LWfirstHaikuValidatedOpenSessions}{0}
+\providecommand{\LWfirstHaikuValidatedOpenWrong}{0}
+\providecommand{\LWfirstHaikuValidatedOpenRight}{0}
+\providecommand{\LWfirstHaikuValidatedFailDouble}{0}
+\providecommand{\LWfirstHaikuValidatedFailNone}{0}
+\providecommand{\LWfirstHaikuValidatedFailStaleOnly}{98}
+\providecommand{\LWfirstHaikuValidatedOneObligation}{0}
+\providecommand{\LWfirstHaikuValidatedTwoObligations}{0}
+\providecommand{\LWfirstHaikuValidatedNoObligation}{100}
+\providecommand{\LWfirstHaikuLedgerR}{0}
+\providecommand{\LWfirstHaikuLedgerStoreWrong}{7}
+\providecommand{\LWfirstHaikuLedgerWorldWrong}{12}
+\providecommand{\LWfirstHaikuLedgerWorldNone}{6}
+\providecommand{\LWfirstHaikuLedgerDouble}{11}
+\providecommand{\LWfirstHaikuLedgerConsumerStale}{42}
+\providecommand{\LWfirstHaikuLedgerConsumerNone}{53}
+\providecommand{\LWfirstHaikuLedgerRetries}{2}
+\providecommand{\LWfirstHaikuLedgerObl}{101/84/17}
+\providecommand{\LWfirstHaikuLedgerN}{100}
+\providecommand{\LWfirstHaikuLedgerCleanSessions}{83}
+\providecommand{\LWfirstHaikuLedgerCleanRight}{82}
+\providecommand{\LWfirstHaikuLedgerCleanWrong}{1}
+\providecommand{\LWfirstHaikuLedgerOpenSessions}{17}
+\providecommand{\LWfirstHaikuLedgerOpenWrong}{17}
+\providecommand{\LWfirstHaikuLedgerOpenRight}{0}
+\providecommand{\LWfirstHaikuLedgerFailDouble}{11}
+\providecommand{\LWfirstHaikuLedgerFailNone}{6}
+\providecommand{\LWfirstHaikuLedgerFailStaleOnly}{1}
+\providecommand{\LWfirstHaikuLedgerOneObligation}{99}
+\providecommand{\LWfirstHaikuLedgerTwoObligations}{1}
+\providecommand{\LWfirstHaikuLedgerNoObligation}{0}
+\providecommand{\LWfirstHaikuLedgerConsumerStaleBeforeRevision}{32}
+\providecommand{\LWfirstHaikuLedgerConsumerStaleBeforeCompensation}{10}
+\providecommand{\LWfirstHaikuLedgerConsumerStaleAfterCompensation}{0}
+\providecommand{\LWfirstHaikuLedgerBothRevisionsAfterCommit}{3}
+\providecommand{\LWfirstHaikuLedgerFirstRevisionMedianS}{0.9}
+\providecommand{\LWfirstHaikuLedgerCompLatencyMedianS}{1.5}
+\providecommand{\LWfirstHaikuLedgerCompLatencyPNinetyS}{1.7}
+\providecommand{\LWfirstHaikuLedgerNoRollbackR}{0}
+\providecommand{\LWfirstHaikuLedgerNoRollbackStoreWrong}{11}
+\providecommand{\LWfirstHaikuLedgerNoRollbackWorldWrong}{99}
+\providecommand{\LWfirstHaikuLedgerNoRollbackWorldNone}{0}
+\providecommand{\LWfirstHaikuLedgerNoRollbackDouble}{88}
+\providecommand{\LWfirstHaikuLedgerNoRollbackConsumerStale}{99}
+\providecommand{\LWfirstHaikuLedgerNoRollbackConsumerNone}{0}
+\providecommand{\LWfirstHaikuLedgerNoRollbackRetries}{1}
+\providecommand{\LWfirstHaikuLedgerNoRollbackObl}{100/89/11}
+\providecommand{\LWfirstHaikuLedgerNoRollbackN}{100}
+\providecommand{\LWfirstHaikuLedgerNoRollbackCleanSessions}{89}
+\providecommand{\LWfirstHaikuLedgerNoRollbackCleanRight}{1}
+\providecommand{\LWfirstHaikuLedgerNoRollbackCleanWrong}{88}
+\providecommand{\LWfirstHaikuLedgerNoRollbackOpenSessions}{11}
+\providecommand{\LWfirstHaikuLedgerNoRollbackOpenWrong}{11}
+\providecommand{\LWfirstHaikuLedgerNoRollbackOpenRight}{0}
+\providecommand{\LWfirstHaikuLedgerNoRollbackFailDouble}{88}
+\providecommand{\LWfirstHaikuLedgerNoRollbackFailNone}{0}
+\providecommand{\LWfirstHaikuLedgerNoRollbackFailStaleOnly}{11}
+\providecommand{\LWfirstHaikuLedgerNoRollbackOneObligation}{98}
+\providecommand{\LWfirstHaikuLedgerNoRollbackTwoObligations}{1}
+\providecommand{\LWfirstHaikuLedgerNoRollbackNoObligation}{1}
+\providecommand{\LWfirstDeepseekValidatedR}{99}
+\providecommand{\LWfirstDeepseekValidatedStoreWrong}{99}
+\providecommand{\LWfirstDeepseekValidatedWorldWrong}{99}
+\providecommand{\LWfirstDeepseekValidatedWorldNone}{0}
+\providecommand{\LWfirstDeepseekValidatedDouble}{0}
+\providecommand{\LWfirstDeepseekValidatedConsumerStale}{99}
+\providecommand{\LWfirstDeepseekValidatedConsumerNone}{0}
+\providecommand{\LWfirstDeepseekValidatedRetries}{0}
+\providecommand{\LWfirstDeepseekValidatedObl}{0/0/0}
+\providecommand{\LWfirstDeepseekValidatedN}{100}
+\providecommand{\LWfirstDeepseekValidatedCleanSessions}{100}
+\providecommand{\LWfirstDeepseekValidatedCleanRight}{1}
+\providecommand{\LWfirstDeepseekValidatedCleanWrong}{99}
+\providecommand{\LWfirstDeepseekValidatedOpenSessions}{0}
+\providecommand{\LWfirstDeepseekValidatedOpenWrong}{0}
+\providecommand{\LWfirstDeepseekValidatedOpenRight}{0}
+\providecommand{\LWfirstDeepseekValidatedFailDouble}{0}
+\providecommand{\LWfirstDeepseekValidatedFailNone}{0}
+\providecommand{\LWfirstDeepseekValidatedFailStaleOnly}{99}
+\providecommand{\LWfirstDeepseekValidatedOneObligation}{0}
+\providecommand{\LWfirstDeepseekValidatedTwoObligations}{0}
+\providecommand{\LWfirstDeepseekValidatedNoObligation}{100}
+\providecommand{\LWfirstDeepseekLedgerR}{0}
+\providecommand{\LWfirstDeepseekLedgerStoreWrong}{14}
+\providecommand{\LWfirstDeepseekLedgerWorldWrong}{16}
+\providecommand{\LWfirstDeepseekLedgerWorldNone}{12}
+\providecommand{\LWfirstDeepseekLedgerDouble}{14}
+\providecommand{\LWfirstDeepseekLedgerConsumerStale}{49}
+\providecommand{\LWfirstDeepseekLedgerConsumerNone}{50}
+\providecommand{\LWfirstDeepseekLedgerRetries}{13}
+\providecommand{\LWfirstDeepseekLedgerObl}{150/130/20}
+\providecommand{\LWfirstDeepseekLedgerN}{100}
+\providecommand{\LWfirstDeepseekLedgerCleanSessions}{80}
+\providecommand{\LWfirstDeepseekLedgerCleanRight}{70}
+\providecommand{\LWfirstDeepseekLedgerCleanWrong}{10}
+\providecommand{\LWfirstDeepseekLedgerOpenSessions}{20}
+\providecommand{\LWfirstDeepseekLedgerOpenWrong}{18}
+\providecommand{\LWfirstDeepseekLedgerOpenRight}{2}
+\providecommand{\LWfirstDeepseekLedgerFailDouble}{14}
+\providecommand{\LWfirstDeepseekLedgerFailNone}{12}
+\providecommand{\LWfirstDeepseekLedgerFailStaleOnly}{2}
+\providecommand{\LWfirstDeepseekLedgerOneObligation}{50}
+\providecommand{\LWfirstDeepseekLedgerTwoObligations}{50}
+\providecommand{\LWfirstDeepseekLedgerNoObligation}{0}
+\providecommand{\LWfirstDeepseekLedgerConsumerStaleBeforeRevision}{30}
+\providecommand{\LWfirstDeepseekLedgerConsumerStaleBeforeCompensation}{9}
+\providecommand{\LWfirstDeepseekLedgerConsumerStaleAfterCompensation}{10}
+\providecommand{\LWfirstDeepseekLedgerBothRevisionsAfterCommit}{63}
+\providecommand{\LWfirstDeepseekLedgerFirstRevisionMedianS}{1.2}
+\providecommand{\LWfirstDeepseekLedgerCompLatencyMedianS}{1.4}
+\providecommand{\LWfirstDeepseekLedgerCompLatencyPNinetyS}{1.9}
+\providecommand{\LWfirstDeepseekLedgerNoRollbackR}{0}
+\providecommand{\LWfirstDeepseekLedgerNoRollbackStoreWrong}{7}
+\providecommand{\LWfirstDeepseekLedgerNoRollbackWorldWrong}{99}
+\providecommand{\LWfirstDeepseekLedgerNoRollbackWorldNone}{0}
+\providecommand{\LWfirstDeepseekLedgerNoRollbackDouble}{96}
+\providecommand{\LWfirstDeepseekLedgerNoRollbackConsumerStale}{99}
+\providecommand{\LWfirstDeepseekLedgerNoRollbackConsumerNone}{0}
+\providecommand{\LWfirstDeepseekLedgerNoRollbackRetries}{9}
+\providecommand{\LWfirstDeepseekLedgerNoRollbackObl}{154/147/7}
+\providecommand{\LWfirstDeepseekLedgerNoRollbackN}{100}
+\providecommand{\LWfirstDeepseekLedgerNoRollbackCleanSessions}{93}
+\providecommand{\LWfirstDeepseekLedgerNoRollbackCleanRight}{1}
+\providecommand{\LWfirstDeepseekLedgerNoRollbackCleanWrong}{92}
+\providecommand{\LWfirstDeepseekLedgerNoRollbackOpenSessions}{7}
+\providecommand{\LWfirstDeepseekLedgerNoRollbackOpenWrong}{7}
+\providecommand{\LWfirstDeepseekLedgerNoRollbackOpenRight}{0}
+\providecommand{\LWfirstDeepseekLedgerNoRollbackFailDouble}{96}
+\providecommand{\LWfirstDeepseekLedgerNoRollbackFailNone}{0}
+\providecommand{\LWfirstDeepseekLedgerNoRollbackFailStaleOnly}{3}
+\providecommand{\LWfirstDeepseekLedgerNoRollbackOneObligation}{44}
+\providecommand{\LWfirstDeepseekLedgerNoRollbackTwoObligations}{55}
+\providecommand{\LWfirstDeepseekLedgerNoRollbackNoObligation}{1}
+\providecommand{\LWfirstGptValidatedR}{100}
+\providecommand{\LWfirstGptValidatedStoreWrong}{100}
+\providecommand{\LWfirstGptValidatedWorldWrong}{100}
+\providecommand{\LWfirstGptValidatedWorldNone}{0}
+\providecommand{\LWfirstGptValidatedDouble}{0}
+\providecommand{\LWfirstGptValidatedConsumerStale}{100}
+\providecommand{\LWfirstGptValidatedConsumerNone}{0}
+\providecommand{\LWfirstGptValidatedRetries}{0}
+\providecommand{\LWfirstGptValidatedObl}{0/0/0}
+\providecommand{\LWfirstGptValidatedN}{100}
+\providecommand{\LWfirstGptValidatedCleanSessions}{100}
+\providecommand{\LWfirstGptValidatedCleanRight}{0}
+\providecommand{\LWfirstGptValidatedCleanWrong}{100}
+\providecommand{\LWfirstGptValidatedOpenSessions}{0}
+\providecommand{\LWfirstGptValidatedOpenWrong}{0}
+\providecommand{\LWfirstGptValidatedOpenRight}{0}
+\providecommand{\LWfirstGptValidatedFailDouble}{0}
+\providecommand{\LWfirstGptValidatedFailNone}{0}
+\providecommand{\LWfirstGptValidatedFailStaleOnly}{100}
+\providecommand{\LWfirstGptValidatedOneObligation}{0}
+\providecommand{\LWfirstGptValidatedTwoObligations}{0}
+\providecommand{\LWfirstGptValidatedNoObligation}{100}
+\providecommand{\LWfirstGptLedgerR}{0}
+\providecommand{\LWfirstGptLedgerStoreWrong}{11}
+\providecommand{\LWfirstGptLedgerWorldWrong}{16}
+\providecommand{\LWfirstGptLedgerWorldNone}{9}
+\providecommand{\LWfirstGptLedgerDouble}{14}
+\providecommand{\LWfirstGptLedgerConsumerStale}{46}
+\providecommand{\LWfirstGptLedgerConsumerNone}{52}
+\providecommand{\LWfirstGptLedgerRetries}{10}
+\providecommand{\LWfirstGptLedgerObl}{150/126/24}
+\providecommand{\LWfirstGptLedgerN}{100}
+\providecommand{\LWfirstGptLedgerCleanSessions}{76}
+\providecommand{\LWfirstGptLedgerCleanRight}{71}
+\providecommand{\LWfirstGptLedgerCleanWrong}{5}
+\providecommand{\LWfirstGptLedgerOpenSessions}{24}
+\providecommand{\LWfirstGptLedgerOpenWrong}{20}
+\providecommand{\LWfirstGptLedgerOpenRight}{4}
+\providecommand{\LWfirstGptLedgerFailDouble}{14}
+\providecommand{\LWfirstGptLedgerFailNone}{9}
+\providecommand{\LWfirstGptLedgerFailStaleOnly}{2}
+\providecommand{\LWfirstGptLedgerOneObligation}{50}
+\providecommand{\LWfirstGptLedgerTwoObligations}{50}
+\providecommand{\LWfirstGptLedgerNoObligation}{0}
+\providecommand{\LWfirstGptLedgerConsumerStaleBeforeRevision}{26}
+\providecommand{\LWfirstGptLedgerConsumerStaleBeforeCompensation}{7}
+\providecommand{\LWfirstGptLedgerConsumerStaleAfterCompensation}{13}
+\providecommand{\LWfirstGptLedgerBothRevisionsAfterCommit}{60}
+\providecommand{\LWfirstGptLedgerFirstRevisionMedianS}{1.0}
+\providecommand{\LWfirstGptLedgerCompLatencyMedianS}{1.3}
+\providecommand{\LWfirstGptLedgerCompLatencyPNinetyS}{1.8}
+\providecommand{\LWfirstGptLedgerNoRollbackR}{0}
+\providecommand{\LWfirstGptLedgerNoRollbackStoreWrong}{9}
+\providecommand{\LWfirstGptLedgerNoRollbackWorldWrong}{99}
+\providecommand{\LWfirstGptLedgerNoRollbackWorldNone}{0}
+\providecommand{\LWfirstGptLedgerNoRollbackDouble}{94}
+\providecommand{\LWfirstGptLedgerNoRollbackConsumerStale}{99}
+\providecommand{\LWfirstGptLedgerNoRollbackConsumerNone}{0}
+\providecommand{\LWfirstGptLedgerNoRollbackRetries}{7}
+\providecommand{\LWfirstGptLedgerNoRollbackObl}{152/143/9}
+\providecommand{\LWfirstGptLedgerNoRollbackN}{100}
+\providecommand{\LWfirstGptLedgerNoRollbackCleanSessions}{91}
+\providecommand{\LWfirstGptLedgerNoRollbackCleanRight}{1}
+\providecommand{\LWfirstGptLedgerNoRollbackCleanWrong}{90}
+\providecommand{\LWfirstGptLedgerNoRollbackOpenSessions}{9}
+\providecommand{\LWfirstGptLedgerNoRollbackOpenWrong}{9}
+\providecommand{\LWfirstGptLedgerNoRollbackOpenRight}{0}
+\providecommand{\LWfirstGptLedgerNoRollbackFailDouble}{94}
+\providecommand{\LWfirstGptLedgerNoRollbackFailNone}{0}
+\providecommand{\LWfirstGptLedgerNoRollbackFailStaleOnly}{5}
+\providecommand{\LWfirstGptLedgerNoRollbackOneObligation}{46}
+\providecommand{\LWfirstGptLedgerNoRollbackTwoObligations}{53}
+\providecommand{\LWfirstGptLedgerNoRollbackNoObligation}{1}
+\providecommand{\LWfirstLedgerAgree}{278/300}
+\providecommand{\LWfirstLedgerDisagree}{22}
+\providecommand{\LWfirstLedgerDisagreeCI}{[4.7, 10.9]}
 % --- probe 301 (results/a6_real_latency/sqlite.jsonl) ---
 \renewcommand{\ToolNodeRealSqlite}{$126/165$}
 % --- probe 301 --l3-server (results/a6_real_latency/sqlite_verified.jsonl) ---
@@ -800,10 +1156,21 @@
 \renewcommand{\LfiveVerusStatus}{verified in Verus (7 obligations, 0 errors)}
 \renewcommand{\LfiveVerusIntro}{verified (7 obligations)}
 % --- verified_scorer_gate (./tools/verified_scorer.json) ---
-\renewcommand{\VerifiedScorerCells}{63}
-\renewcommand{\VerifiedScorerTraces}{1{,}500}
-\renewcommand{\VerifiedScorerProblems}{4818}
-% verified_scorer_gate reports 4818 problem(s) over 63 cell(s): the paper's cell stays PENDING
+\renewcommand{\VerifiedScorerCells}{114}
+\renewcommand{\VerifiedScorerTraces}{11{,}103}
+\renewcommand{\VerifiedScorerProblems}{0}
+\renewcommand{\VerifiedScorerAvailable}{1}
+% Claude op-record replication (runs/*-claude), scored by the verified detector; -- = cell not scored yet
+\providecommand{\VSClaudeEditReviewVanilla}{100/100}
+\providecommand{\VSClaudeEditReviewPess}{--}
+\providecommand{\VSClaudeEditReviewSI}{--}
+\providecommand{\VSClaudePlanExecuteVanilla}{0/100}
+\providecommand{\VSClaudePlanExecutePess}{--}
+\providecommand{\VSClaudePlanExecuteSI}{--}
+\providecommand{\VSClaudeTriageVanilla}{0/100}
+\providecommand{\VSClaudeTriagePess}{--}
+\providecommand{\VSClaudeTriageSI}{--}
+\renewcommand{\PilotClaudeAvailable}{1}
 % --- check_duplication.sh (./formal/tla/tlc.Duplication.log) ---
 \renewcommand{\DupWitnessDepth}{5}
 \renewcommand{\DupDivergentDepth}{6}
@@ -857,10 +1224,10 @@ its S-number from the main text; the surrounding analysis, findings, and
 interpretation remain in the main paper. Appendices~G--S hold material moved out of the main paper for length; it is the main paper's own text, with its cross-references rewritten to point into the main paper or into this appendix. The full reproducibility artifact
 accompanies this appendix: \texttt{verus\_count.sh} regenerates the obligation
 totals against the working tree, and \texttt{check\_tables.sh} rescores every
-published cell of the main paper's Table~3 and of the pilot table of Appendix~M with an implementation of
+published cell of the main paper's Table~2 and of the pilot table of Appendix~M with an implementation of
 Definition~1 independent of the Verus-verified detector, failing non-zero on any
 disagreement. Appendix~W holds the predicate $D$ and its TLC log, the
-arm-timing analysis of Table~3, the replicated interleaved runs with their
+arm-timing analysis of Table~2, the replicated interleaved runs with their
 exact intervals and Fisher tests, the ledger-in-a-world protocol, its first
 run's table and the account of what the world check caught in that run's
 compensator, the verified-scorer receipt, and the census table moved out of
@@ -1138,7 +1505,7 @@ shared-mutable-cell designs run concurrently. The value-conflicting measurement
 is the live study of the main paper's Section~6.1, where the window is real.
 
 \medskip
-\noindent\textbf{Superseded as a prevalence instrument.} The main paper's Section~6.9 replaces this bound with a static census of public repositories, which recovers per-node write sets from source rather than asking the framework for them: $407$ graph sites in $98$ sampled repositories, none with a confirmed co-scheduled reader and writer of a last-value channel.
+\noindent\textbf{Superseded as a prevalence instrument.} The main paper's Section~6.7 replaces this bound with a static census of public repositories, which recovers per-node write sets from source rather than asking the framework for them: $407$ graph sites in $98$ sampled repositories, none with a confirmed co-scheduled reader and writer of a last-value channel.
 
 \section*{Appendix D: Locating contemporary runtimes on the chain --- full
 placements}
@@ -1338,7 +1705,7 @@ therefore describe the result as a same-agent exclusion lemma, which is what it
 is, rather than as a bound on executions.
 
 \medskip
-\noindent\textbf{A third result: $A_1$-freedom implies commit-order read consistency (the main paper's Theorem~1).} \texttt{CommitOrder.tla} proves the main paper's Theorem~1 in TLAPS ($60$ obligations, no omitted step; \texttt{tlapm --toolbox 0 0 CommitOrder.tla}, log \texttt{formal/tla/tlaps.CommitOrder.log}, 2026-10-14: ``All 60 obligations proved''): under the store axiom, read-before-commit and per-agent non-overlap, a history with no \textsc{StaleGeneration} witness is serializable in commit order. \texttt{check\_commitorder.sh} runs fifteen TLC claims that pin down what the statement says: it holds over all $35{,}659$ histories of length at most three, is not vacuous, fails when either droppable hypothesis is removed, its relational definitions equal \texttt{Memory.tla}'s \texttt{CHOOSE}-based helper and a literal serial replay, its converse fails (a value overwritten and then restored), \textsc{StaleGeneration} also fires on a history serializable in another order, and its three hypotheses are invariants of \texttt{Memory.tla} over $2{,}961{,}434$ reachable states. The shared definitions are byte-identical across the proof module and the two TLC harnesses, and the round's script diffs them, so TLC cannot silently check other definitions than the ones TLAPS proved about.
+\noindent\textbf{A third result: $A_1$-freedom implies commit-order read consistency (the main paper's Theorem~1).} \texttt{CommitOrder.tla} proves the main paper's Theorem~1 in TLAPS ($60$ obligations, no omitted step; \texttt{tlapm --toolbox 0 0 CommitOrder.tla}, log \texttt{formal/tla/tlaps.CommitOrder.log}, 2026-10-14: ``All 60 obligations proved''): under the store axiom, read-before-commit and per-agent non-overlap, a history with no \textsc{StaleGeneration} witness is commit-order read consistent (Definition~2 of the main paper: every read equals the latest committed value at its own commit point, a value-level statement on reads; the module header's phrase ``serializable in commit order'' is its shorthand for exactly that, as the header's next paragraph states, not conflict-based serializability). \texttt{check\_commitorder.sh} runs fifteen TLC claims that pin down what the statement says: it holds over all $35{,}659$ histories of length at most three, is not vacuous, fails when either droppable hypothesis is removed, its relational definitions equal \texttt{Memory.tla}'s \texttt{CHOOSE}-based helper and a literal serial replay, its converse fails (a value overwritten and then restored), \textsc{StaleGeneration} also fires on a history serializable in another order, and its three hypotheses are invariants of \texttt{Memory.tla} over $2{,}961{,}434$ reachable states. The shared definitions are byte-identical across the proof module and the two TLC harnesses, and the round's script diffs them, so TLC cannot silently check other definitions than the ones TLAPS proved about.
 
 \section*{Raw experimental and benchmarking tables}
 
@@ -1349,7 +1716,7 @@ usage callbacks across 900 sessions (100 per cell). Pricing: \$2.50/M input,
 \$10.00/M output. 95\,\% bootstrap CIs (1{,}000 resamples). Cost in
 milli-dollars. \textbf{These are per-session costs.} The three runtimes do not
 complete the same work in a session, so the main paper re-prices them per
-\emph{sound} committed operation in its Table~6 (\S\,6.7); read that table alongside
+\emph{sound} committed operation in its Table~5 (\S\,6.6); read that table alongside
 this one.}
 \label{tab:s1}
 \small
@@ -1718,7 +2085,7 @@ state-to-trace projection (Theorem $L_2$j); 7 for the LangGraph reducer-channel 
 (Appendix~Q); 5 for the joint-composition root
 (\texttt{lib\_consistency\_lattice.rs}, beyond its three re-included component modules, Section~5.6 of the main paper); 7 for the exec-mode $L_3$
 sequencer (\texttt{lib\_l3\_exec.rs}); 11 for the exec-mode $L_4$
-dispatcher (\texttt{lib\_l4\_exec.rs}, Section~6.6 of the main paper); 18 for the
+dispatcher (\texttt{lib\_l4\_exec.rs}, Section~6.5 of the main paper); 18 for the
 concurrent SI store over the verified reader--writer lock
 (\texttt{lib\_si\_concurrent.rs}); and 31 for the concurrent pessimistic
 store over the same lock (\texttt{lib\_pess\_concurrent.rs}), both in
@@ -1960,7 +2327,7 @@ two single runs differ---as an earlier version had it---the quantity is
 positive even at $v_{\textit{stale}} = v_{\textit{fresh}}$, and the bridge
 below is false. It is left uninterpreted at the specification level and
 estimated operationally by re-running the prompt under each value;
-Section~6.8 of the main paper carries out the population-level
+Section~6.1 of the main paper carries out the population-level
 counterpart of that estimate for a categorical decision (the decision changes
 in $75\%$ of flagged mismatches). The probabilistic $A_1$ predicate at
 threshold $\theta \ge 0$ leaves the structural conjuncts unchanged and replaces
@@ -1981,7 +2348,7 @@ $A_1^{\textit{det}}(t) \Rightarrow A_1^{\textit{prob}}(t,\theta)$ fails,
 because traces exist where the recorded strings differ and the decision
 distribution does not. The deterministic detector is a sound
 \emph{candidate-anomaly screen}---every probabilistically real event is in the
-audit set---and it over-reports by the factor Section~6.8 of the main paper measures.
+audit set---and it over-reports by the factor Section~6.1 of the main paper measures.
 
 Estimating the quantity from $k$ re-prompts needs a concentration bound, and
 the relevant one is classical, not open: for the mean of $k$ independent
@@ -2415,8 +2782,21 @@ $\mathit{MaxOps}=2$ caps at two. We had previously attributed the limitation
 to the value domain alone; the table shows that is wrong, and the
 sixteen-point matrix is bounded on the witness side by
 $\mathit{MaxOps}$. The safety side, which is what realizability
-asserts, is unaffected: all $32$ safety runs hold at
-$\mathit{Values}=\{v_1,v_2\}$ as reported above.
+asserts, is affected too, in what it covers: the $32$ safety runs at
+$\mathit{Values}=\{v_1,v_2\}$ hold at $\mathit{MaxOps}=2$, where the
+non-null-read class is unreachable, so they establish that $G_1$ excludes the
+cold-start class and nothing about the class the live study's witnesses
+belong to. \ifnum\LatticeAOneMaxOpsThreeAvailable=1 The sixteen \textsc{NoA1}
+points were therefore rerun at $\mathit{MaxOps}=3$, $\mathit{Values}=\{v_1,v_2\}$
+and $\mathit{Cells}=\{c_1\}$---the supersession witness needs one cell (seed
+write, superseding write, reader's commit), and the one-cell universe closes
+exhaustively where the two-cell one did not in $25$ minutes on two cores at
+$72$M distinct states (\texttt{lattice16\_a1\_maxops3.sh}; the two-cell
+attempt's log is committed beside the results):
+\LatticeAOneMaxOpsThreeOutcome{} The verdict covers the one-cell universe;
+the two-cell universe at that depth awaits a longer run.\else The sixteen
+\textsc{NoA1} points at $\mathit{MaxOps}=3$, $\mathit{Values}=\{v_1,v_2\}$
+are \Pending{formal/tla/lattice16\_a1\_maxops3.sh}.\fi
 
 \medskip
 \noindent\textbf{Interaction, characterized.}
@@ -2429,7 +2809,7 @@ check confirms this on every one of the $2^4$ combinations rather than on
 the single three-way composition of Section~5.6 of the main paper. The interaction
 that does exist is at the cost level: a guard prevents by refusing a
 commit, a refused commit is a lost generation, and the lost generations are
-the abort-rate envelope of Section~6.7 of the main paper. Whether one guard's
+the abort-rate envelope of Section~6.6 of the main paper. Whether one guard's
 refusals raise another's---sequencing lengthens the window in which
 validation can fail---is a cost measurement, not a safety question, and is
 the empirical follow-up.
@@ -2609,8 +2989,8 @@ The pessimistic-locking runtime drops every conflicting operation
 silently (Appendix~M), and every pessimistic cell of
 the pilot table shows zero $A_1$ instances---because in
 edit-review the reviewer's operation is gone in 99 of 100 sessions and in
-triage one of three agents' operations is gone in 97 of 100 (Table~4 of the
-main paper, \emph{complete \& clean}: $3$). The
+triage one of three agents' operations is gone in 97 of 100 (the pilot table of Appendix~M,
+\emph{complete \& clean}: $3$). The
 mechanism is stronger than SI's because the lock is acquired \emph{before}
 the operation reads, and a failed acquisition drops the operation without
 invoking the LLM beyond the agent's planning phase; what it prevents is
@@ -2619,7 +2999,7 @@ It is the right mechanism only where a dropped contribution is
 acceptable and a wasted inference is not; where the contribution must
 survive, the $L_1$ discipline that keeps it is validation with retry (SSI,
 Section~5.2 of the main paper), whose cost is the re-spent generation of
-Section~6.7 of the main paper.
+Section~6.6 of the main paper.
 
 \paragraph{Cost of prevention.}
 Both disciplines drop a substantial fraction of operations under
@@ -2657,7 +3037,7 @@ per-session token counts from the client \texttt{usage} callbacks, which
 the original pilot did not capture (character-derived estimates
 underestimate cost by ignoring history growth and intermediate tool-call
 exchanges). We measure token-level cost at LLM scale in
-Section~6.7 of the main paper.
+Section~6.6 of the main paper.
 
 
 \medskip
@@ -2666,7 +3046,7 @@ is not separable from the unguarded runtime's.}
 The SSI mean sits within sampling noise of vanilla in every cell: CIs overlap
 on edit-review (3.11 vs 3.13), plan-execute (1.95 vs 1.93), and triage (3.13
 vs 3.23). This is a statement about a per-session denominator, which credits a
-discipline for work it declined to do; Table~6 of the main paper re-prices the same run per
+discipline for work it declined to do; Table~5 of the main paper re-prices the same run per
 sound committed operation, and the parity does not survive. An earlier version
 cited here a paired ${\sim}8\%$ overhead on plan-execute. That figure comes
 from the study of Appendix~O, whose aborts are injected at a fixed
@@ -2745,18 +3125,41 @@ fixed list of $25$ (\texttt{probes/103\_autogen\_pilot.py}, \texttt{SEEDED\_BUGS
 predates the change, is reported as run and labeled. The Sonnet triage
 vanilla cell was rerun under the seeded protocol on 2026-10-14 (runner step
 11): $100/100$ sessions produced three or more events and none carries the
-placeholder ticket, so the cell is no longer void; its \A1 rate is scored by
+placeholder ticket, so the cell is no longer void. \ifnum\PilotClaudeAvailable=1
+Scored by the verified detector (runner step 14,
+\texttt{verified\_scorer\_gate.py} scores every cell under
+\texttt{results/runs/}; receipt of 2026-10-15), the Sonnet vanilla cells fire
+\A1 in \VSClaudeEditReviewVanilla{} (edit-review), \VSClaudePlanExecuteVanilla{}
+(plan-execute) and \VSClaudeTriageVanilla{} (triage, seeded tickets)
+sessions. The triage zero has no established cause: the gpt-4o triage cell
+($48/100$) differs from it in family \emph{and} in protocol (unseeded
+tickets), so the two are not a comparison; the records add only that no cell
+is written twice in any of the $900$ Sonnet traces of this run
+(\texttt{hypothesis\_gates}, H2), which by itself excludes no \A1 shape
+(edit-review fires with one write per cell). Whether the seeded ticket
+shortens the reporter's turn enough to close the overlap, or Sonnet orders
+the roles differently, would need the seeded protocol run on gpt-4o, which is
+not planned; the cell is reported as a number, not as a difference. The six guarded Sonnet cells
+(pessimistic and snapshot isolation on three workloads) ran on 2026-10-15
+after a first attempt failed to import the \texttt{baselines} package (filed
+under \texttt{results/} by the repository migration as a namespace package;
+the pilot now locates it and the runner puts its parent on
+\texttt{PYTHONPATH}): all $900$ Sonnet traces pass the H0/H1 gates
+(\texttt{hypothesis\_gates}: $0$ overlaps, $0$ read-after-commit). Their \A1
+verdicts (\VSClaudeEditReviewPess{} / \VSClaudePlanExecutePess{} /
+\VSClaudeTriagePess{} pessimistic; \VSClaudeEditReviewSI{} /
+\VSClaudePlanExecuteSI{} / \VSClaudeTriageSI{} snapshot isolation) await the
+next pass of the verified scorer, which ran before the cells existed:
+\Pending{runner step 14 after 11}.\else Its \A1 rate is scored by
 the verified detector of runner step 14 (\texttt{verified\_scorer\_gate.py}
 now scores every cell under \texttt{results/runs/}) and is
 \Pending{runner steps 11/14}. The six guarded Sonnet cells (pessimistic and
-snapshot isolation on three workloads) did not execute in that attempt: the
-runtimes import the \texttt{baselines} package, filed under
+snapshot isolation on three workloads) did not execute in the first attempt:
+the runtimes import the \texttt{baselines} package, filed under
 \texttt{results/} by the repository migration as a namespace package, which
-the runner's locator (which looked for an \texttt{\_\_init\_\_.py}) never
-found; the pilot now locates the package itself and the runner puts its
-parent on \texttt{PYTHONPATH}, and the cells are rerun with step 11. All
-$750$ committed Sonnet records pass the H0/H1 gates
-(\texttt{hypothesis\_gates}: $0$ overlaps, $0$ read-after-commit).
+the runner's locator never found; the pilot now locates the package itself
+and the runner puts its parent on \texttt{PYTHONPATH}, and the cells are
+rerun with step 11.\fi
 
 
 \medskip
@@ -2781,7 +3184,7 @@ vanilla, a 2$\times$ latency penalty matching the cost penalty.
 The magnitude difference is not explainable from these data alone
 (candidate mechanisms: retry budgets, client-side tool serialization,
 tokenization density); the qualitative conclusion stands on both
-providers---bounded, $\leq$1.6$\times$ (gpt-4o) to $\leq$2.3$\times$
+providers---bounded, $\leq$1.6$\times$ (gpt-4o) to $\leq$2.2$\times$
 (Claude), never order-of-magnitude.
 
 \medskip
@@ -2972,7 +3375,7 @@ firings a runtime \emph{acts} on, not which the verified detector
 
 \subsection*{Within-model wall-clock study (injected aborts)}
 
-The token-instrumented cost study of Section~6.7 of the main paper
+The token-instrumented cost study of Section~6.6 of the main paper
 reports relative overhead within each provider but invites the
 objection that any comparison \emph{across} providers conflates
 runtime overhead with tokenization, pricing, and serialization
@@ -3041,7 +3444,7 @@ relative to a fresh generation. The conclusion is correspondingly narrow: at
 injected abort rates of up to $0.47$ per session, retry imposes no wall-clock
 cost separable from inference noise at $n=30$. Whether the stores' \emph{real}
 abort rates on these workloads fall in that range is answered by
-Table~3 of the main paper and the pilot table of Appendix~M, not here, and on edit-review they
+Table~2 of the main paper and the pilot table of Appendix~M, not here, and on edit-review they
 do not: the reviewer's commit is refused in $95$--$99\%$ of sessions.
 
 \medskip
@@ -3098,7 +3501,7 @@ their wall-clock price is below the resolution of an $n{=}30$ design.
 
 
 \medskip
-\noindent\textbf{The real-store wall-clock cells the main paper quotes (Section~6.7).}
+\noindent\textbf{The real-store wall-clock cells the main paper quotes (Section~6.6).}
 Every wall-clock figure of the main paper's cost section is read off this
 table, regenerated by \texttt{harness/macaudit/wallclock\_table.py} from the
 receipt \texttt{results/python\_loose/realstore\_wallclock.json}
@@ -3147,6 +3550,41 @@ triage & SI & 11.62 & 11.23 & 4.00 & +4.2\% [+0.1, +8.5], $p_{\mathrm{Holm}}=0.1
 \end{tabular}}
 \end{table*}
 
+\medskip
+\noindent\textbf{The interleaved rerun (probe 302) and what became of its receipt.}
+\texttt{probes/302\_wallclock\_interleaved.sh} runs one session at a time and
+cycles the three runtimes per session in a seeded random order, so provider
+drift hits all arms alike and the per-session paired difference is the
+estimand; it writes the trace, the token/wall-clock sidecar and
+\texttt{order.tsv} (session, workload, runtime, completion stamp).
+Run \texttt{20261014T1417Z-interleaved-claude-sonnet-4-5} (Claude Sonnet~4.5,
+$900$ sessions, runner step 6) completed on 2026-10-15; its $900$ traces pass
+the H0/H1 gates. Its wall-clock sidecars, however, were lost to a defect in
+the script: every one-session call of the pilot numbered its session $0$, so
+every sidecar was named \texttt{<wl>-<rt>-0000.tokens.jsonl} and the move into
+the cell's sidecar directory overwrote the previous session's file---one
+survivor per cell, the last session's. (The same numbering gave every triage
+session of that run the same seeded ticket, which matters for an \A1 reading
+of its cells and not for wall-clock.) The script now names the sidecar by
+session and passes the session index to the pilot
+(\texttt{-{}-scenario-offset}); the run itself is not repeated. What remains
+of its timing is \texttt{order.tsv}: the completion stamp of every
+cell-session at $1$\,s resolution, whose consecutive differences are the
+wall-clock of each cell-session \emph{including} an interpreter start-up
+that every arm pays alike. The fold (\texttt{claims\_from\_results.py})
+computes the paired per-session overheads from these stamps as a separate,
+labelled estimate (\texttt{WallclockStamp}, bootstrap 95\% CI over the paired
+relative differences) whenever the file is present beside the run.
+\ifnum\WallclockStampClaudeAvailable=1 On this run: edit-review pessimistic
+\WallclockStampClaudeEditReviewPess, SI \WallclockStampClaudeEditReviewSI;
+plan-execute (the control, on which no runtime aborts) pessimistic
+\WallclockStampClaudePlanExecutePess, SI \WallclockStampClaudePlanExecuteSI;
+triage pessimistic \WallclockStampClaudeTriagePess, SI
+\WallclockStampClaudeTriageSI. The control's interval is the resolution of
+the estimate; a cell is read against it, not against zero.\else The stamp
+file of this run has not been folded yet: \Pending{order.tsv of the Claude
+interleaved run}.\fi
+
 \section*{Appendix P: $L_2$ measurement, \texttt{ToolNode} and cost-metric notes}
 
 \begin{table}[t]  % moved from the main text (2026-10-14)
@@ -3177,7 +3615,7 @@ claude-haiku-4-5 & 0/30 & 0 & --- & --- \\
 \begin{table}[t]
 \centering
 \caption{The $L_2$ measurement on $1{,}000$ seeded schedules per depth
-(\texttt{examples/l2\_measure.rs}; main paper, Section~6.3). Every figure is
+(\texttt{examples/l2\_measure.rs}; main paper, Section~6.4). Every figure is
 decided by the schedule and the store; none is an estimate. Exposed effects:
 count (scenarios).}
 \label{tab:l2}
@@ -3238,7 +3676,7 @@ We state the shape of that evidence rather than let the pooled figure carry it.
 contribute four events between them, so a per-model statement for them would rest on
 $n=3$ and $n=1$. We make the pooled statement and no per-model one, and raising
 the API models' $n$ would mean engineering the supervisor prompt toward
-retraction---which would make the rate an artifact of our design, the objection Section~6.10 of the main paper already concedes elsewhere. The prevention is
+retraction---which would make the rate an artifact of our design, the objection Section~6.8 of the main paper already concedes elsewhere. The prevention is
 structural: the executor depends on the planner because it read the plan cell,
 and output commit holds the executor's effect until the plan's review is
 decided, so a retracted plan takes its held dependent with it before anything
@@ -3422,7 +3860,7 @@ about the execution, and we do not offer it as prevention.
 
 \medskip
 \noindent\textbf{Cost-metric limitations and silent failures.}
-The cost analysis of Section~6.7 of the main paper reports
+The cost analysis of Section~6.6 of the main paper reports
 per-session token counts, the metric the LLM providers
 expose through usage callbacks. This is an incomplete
 proxy for the cost-asymmetry argument in two specific ways.
@@ -3454,7 +3892,7 @@ in the cost metric.''
 Pricing, tokenization density, tool-call serialization, and retry budgets
 differ between gpt-4o and Claude, so the magnitude difference in
 pessimistic overhead ($1.6\times$ vs.\ $2.2\times$) cannot be attributed
-to runtime strategy alone; we make only the within-model claims of Section~6.7 of the main paper.
+to runtime strategy alone; we make only the within-model claims of Section~6.6 of the main paper.
 
 The operational model itself --- single shared key-value store,
 discrete monotonic clock, in-process agents --- abstracts away
@@ -3493,10 +3931,10 @@ exactly that quarter, Section~6.4 of the main paper); the live driver holds
 every dependent until the verdict, the opposite extreme (the $1{,}000$-session
 haiku run of Appendix~P: hold median $687$\,ms). The curve between the two
 points is unmeasured. (b)~\emph{Wall-clock on the real stores} is measured
-(Section~6.7 of the main paper; the table in Appendix~O) with a run-order
+(Section~6.6 of the main paper; the table in Appendix~O) with a run-order
 confound bounded by a null band, not removed; the injected-abort study of
 Appendix~O is the within-model complement. (c)~\emph{A denominator under the
-precondition} is the census of Section~6.9 of the main paper, with its
+precondition} is the census of Section~6.7 of the main paper, with its
 sampling frame and classifier limits stated; it bounds a structural
 precondition in public code and is not a prevalence estimate.
 
@@ -3641,7 +4079,7 @@ support, including that agreeing the consistency discipline \emph{across
 components} is the hard part.
 
 \paragraph{Formalized: the reducer fix as a verified lost-update-freedom theorem.}
-The placements of Section~6.9 of the main paper are informal, but the mechanism
+The placements of Section~6.7 of the main paper are informal, but the mechanism
 deer-flow \#3123 exercises we discharge formally. A core Verus model of
 LangGraph's per-superstep channel update, parameterized by the reducer, proves
 (machine-checked) that the additive channel's value equals the initial value
@@ -3702,7 +4140,7 @@ superstep pinning leaves it open. The discriminating property is whether a
 read is retaken, not how long the interval is.
 
 \smallskip
-\noindent\textbf{Four mechanisms, one open.} Taken with Section~6.9 of the main paper's CrewAI probe and the AutoGen contrast below, the
+\noindent\textbf{Four mechanisms, one open.} Taken with Section~6.7 of the main paper's CrewAI probe and the AutoGen contrast below, the
 deployed systems we have examined close the window in four distinct ways and
 leave it open in one. Letta re-renders the shared block into each agent's
 context at every generation step. LangGraph's \texttt{interrupt} re-executes
@@ -3818,7 +4256,7 @@ cost-asymmetry assumption (Section~2 of the main paper): an aborted
 transaction costs microseconds in STM and seconds-to-minutes in the
 agent setting, which one would expect to invert the favored strategy from optimistic to
 pessimistic. Our measurements do not bear that expectation out
-(Section~6.7 of the main paper): a re-spent generation costs about one generation,
+(Section~6.6 of the main paper): a re-spent generation costs about one generation,
 validation carries no fixed overhead, and pessimistic locking pays instead in
 dropped contributions and serialized critical sections. Multi-version concurrency
 control~\citep{BernsteinGoodman1983MVCC} solves a related problem
@@ -3960,7 +4398,13 @@ Schallhart~\citep{BauerLeuckerSchallhart2011} characterize
 \emph{monitorability}---which LTL/TLTL properties can be soundly decided
 from finite prefixes---and give the standard three-valued
 ($\top/\bot/?$) semantics for online monitoring. Two consequences bear
-on our detector. First, the anomalies we monitor are finitary
+on our detector. The database analogue of a trace monitor is the black-box
+isolation checker: after Cobra and Elle, Viper~\citep{ZhangEtAl2023Viper},
+PolySI~\citep{HuangEtAl2023PolySI} and Plume~\citep{LiuEtAl2024Plume} decide
+snapshot isolation and the weak levels over database histories, complete for
+their level and far more capable than ours, which decides a constant-size
+existential predicate and is verified against it. First, the anomalies we
+monitor are finitary
 predicates over a completed operation history (a non-repeatable read,
 an aborted predecessor in a causal closure), so they are monitorable in
 the strong sense---decidable from the trace---which is why the Verus
@@ -3968,7 +4412,7 @@ soundness-and-completeness result of Section~5.1 of the main paper is
 achievable at all, rather than merely a sound one-sided alarm. Second,
 the RV literature's distinction between detecting a violation and
 establishing operational impact is exactly the gap our
-operational-materiality study (Section~6.8 of the main paper)
+operational-materiality study (Section~6.1 of the main paper)
 addresses empirically. What our detector adds over generic RV is that
 the monitor itself is mechanically verified against its specification;
 most deployed RV tools are unverified monitor implementations. The
@@ -4097,7 +4541,7 @@ run in opposite directions and the paper is stronger for stating both.
 
 \emph{Their premise is one our measurements independently support.} CoAgent's
 case against classical concurrency control is that abort-and-retry destroys
-the work rather than merely delaying it. Section~6.7 of the main paper reaches the
+the work rather than merely delaying it. Section~6.6 of the main paper reaches the
 same conclusion from a verified runtime and a different measurement: scored on
 the joint outcome, pessimistic locking on edit-review is clean in $100$ of
 $100$ sessions and complete in $1$, and default-SI on triage is
@@ -4116,10 +4560,10 @@ no residual to measure. The two positions are not rivals so much as opposite
 answers to one question---whether the judgment that a conflict matters should
 be made by the agent or by the runtime---and the answers have different
 failure modes: an advisory protocol degrades with model quality, a verified
-gate degrades with the fidelity of its specification, which Section~6.10 of the main paper enumerates. We take the honest comparison to be that
+gate degrades with the fidelity of its specification, which Section~6.8 of the main paper enumerates. We take the honest comparison to be that
 CoAgent buys concurrency at the price of a model-shaped hole in its proof,
 and the lattice buys a closed proof at the price of refusing work that
-Section~6.7 of the main paper now quantifies.
+Section~6.6 of the main paper now quantifies.
 
 
 \subsection*{Duplicated external effects and checkpoint--restore}
@@ -4130,7 +4574,10 @@ problem~\citep{StromYemini1985Optimistic,ElnozahyEtAl2002Rollback}: a
 system may publish an external effect only when it can guarantee it will
 not republish it after recovery. Classical rollback-recovery discharges
 this with identity-keyed duplicate suppression, which is sound because
-piecewise determinism makes the replayed effect identical to the original.
+piecewise determinism makes the replayed effect identical to the original;
+Helland's account of idempotence as the service-side half of that
+contract~\citep{Helland2012Idempotence} is what the idempotency key of
+Section~3.7 implements.
 Agent runtimes break that premise from two independent directions.
 ACRFence~\citep{ZhengEtAl2026ACRFence} documents the first: surveying
 twelve frameworks it finds tool-call side-effect issues pervasive and
@@ -4178,7 +4625,10 @@ verifies a concurrent crash-safe mail server in Coq;
 GoJournal~\citep{ChajedEtAl2021GoJournal} builds a verified concurrent
 journaling system on Perennial~2.0 and reports finding a serious concurrency
 bug that the system's unit tests had not, which is the argument for
-mechanization in one sentence. Closest to our open obligation is
+mechanization in one sentence; GoTxn and DaisyNFS~\citep{ChajedEtAl2022DaisyNFS}
+verify a concurrent, crash-safe transaction system and a file system over it
+by sequential reasoning, the nearest verified relative of a transactional
+store with an abstract-machine specification. Closest to our open obligation is
 Argosy~\citep{ChajedEtAl2019Argosy}, which verifies \emph{layered} storage
 systems by recovery refinement: exactly the shape of the
 concrete-store-to-abstract-machine step Section~5.2 of the main paper
@@ -4197,9 +4647,9 @@ used some thirty-seven times more often than transactions, and that a
 measurable fraction of them fail to hold under concurrency precisely because
 the store is not told about them. An agent framework is the same
 arrangement at one further remove: the invariants live in prompts and
-reducers, the store sees uninterpreted channel writes, and Section~6.5 of the main paper measures one consequence. What is different is that
+reducers, the store sees uninterpreted channel writes, and Sections~6.1 and 6.5 of the main paper measure consequences. What is different is that
 the agent case has no ORM-shaped seam at which a database could be told; the
-footprint is not merely undeclared but, as Section~6.9 of the main paper
+footprint is not merely undeclared but, as Section~6.7 of the main paper
 records for LangGraph, not statically derivable at all. Read that way, the
 present work is an attempt to give the feral case a specification it can be
 checked against.
@@ -4214,7 +4664,7 @@ predicate (\texttt{Anomalies.tla}), the Verus \texttt{spec} restatement
 (\texttt{lib\_detector\_equivalence.rs::a1\_witness}) against which
 \texttt{detect\_a1} is proved sound and complete, and the Rust scorer
 (\texttt{rust-analyser/src/anomalies.rs}) that produced the main paper's
-Table~3, the pilot table of Appendix~M and the $L_2$ table of Appendix~P. They differ in two conjuncts. The Verus \texttt{OpRecord}
+Table~2, the pilot table of Appendix~M and the $L_2$ table of Appendix~P. They differ in two conjuncts. The Verus \texttt{OpRecord}
 has no agent field, so its predicate omits $h[i].\fld{agent}\neq
 h[j].\fld{agent}$, and it returns ``no witness'' when either value is absent
 (\texttt{(Some, Some) => r != w, \_ => false}); the Rust scorer also omits
@@ -4267,14 +4717,14 @@ probe 303, sweep, deepseek-chat validated & 400 & 0 / 0 / 0 / 0 & same & same \\
 \end{table*}
 
 \medskip
-\noindent\textbf{The outcome rescoring.} The main paper's Table~3 reads the
+\noindent\textbf{The outcome rescoring.} The main paper's Table~2 reads the
 booking's date and the trip date at the end of every live session off the
 store. The earlier form of that table reported a ``material'' column
 computed as $A_1 \wedge (\textit{date\_used}\in\textit{text}) \wedge
 (\textit{final}\notin\textit{text})$, i.e.\ conditioned on the predicate,
 which cannot exceed the firing count by construction. The outcome column is
 \texttt{harness/macaudit/outcome\_rescore.py}, which reproduces every cell
-of Table~3 from \texttt{results.json} and emits the \LaTeX{} body with
+of Table~2 from \texttt{results.json} and emits the \LaTeX{} body with
 \texttt{--tex}. Under $L_1$ the booking disagrees with the final trip date in
 $34$, $7$ and $100$ of $100$ sessions on the three families; in every such
 session the revision landed after the commit (the committed record carries
@@ -4357,7 +4807,7 @@ state on each side of the flag. It verifies under the pinned build
 counted as scaffolding and not as a lattice point: the executable ledger of
 the live study is harness code, so the correspondence between these bytes
 and the measurement is weaker than at $L_1$, $L_2$, $L_3$ and $L_4$ (main
-paper Table~2). With it, \texttt{verus\_count.sh} reports \VerusCurated{} curated
+paper Table~1). With it, \texttt{verus\_count.sh} reports \VerusCurated{} curated
 and \VerusFull{} full distinct obligations (Appendix~S).
 
 \smallskip\noindent\textbf{Exhaustive runs with $G_7$.} At the lattice
@@ -4388,7 +4838,7 @@ verdicts as expected, with the same distinct-state counts
 
 \smallskip\noindent\textbf{Appendix T$'$: $A_7$ by argument provenance on the
 live records.} \texttt{harness/macaudit/a7\_rescore.py} scores every
-committed live session (Table~3 of the main paper) under Definition~6 with
+committed live session (Table~2 of the main paper) under Definition~6 with
 the basis recovered from the records alone: for the booking record $i$ (a
 write to \texttt{trip/bookings/*}), $\fld{basis}(i)=\{(c,\rv_i[c]) : c\in
 \fld{read\_set}_i,\ \rv_i[c]\ \text{appears in the effect's arguments}\}$,
@@ -4407,7 +4857,7 @@ rebooking compensator that issues a replacement booking when an obligation
 is registered; the scorer reads its $\fld{obligation}$ and
 $\fld{compensation}$ fields, so a correct ledger yields $R=0$ by
 construction and the outcome column measures the compensator. In the
-October run (main paper Table~3) the ledger arm's outcome is
+October run (main paper Table~2) the ledger arm's outcome is
 \LfiveLiveOutcome{}. \texttt{a7\_rescore.py -{}-check} now also scores every
 probe-303 trace (a trace is one seed-to-booking run; the offset sweep
 appends every offset's run of a session to one file, each opening with its
@@ -4424,7 +4874,7 @@ directly)---the probe's own count and the independent one agree on $R=0$
 in all three ledger cells. After a discharge the harness ledger re-arms the
 entry with the compensated basis, so a further revision would register a
 further obligation; this workload revises once per session, and that path is
-not exercised by Table~3 (the two-revision protocol of probe 304 exercises it).
+not exercised by Table~2 (the two-revision protocol of probe 304 exercises it).
 \texttt{hypothesis\_gates.py} on the October sequential and sweep receipts alone
 ($9{,}649$ records, $3{,}600$ traces): H0 and H1 hold ($0$ violations), value-unique
 writes hold, $418$ \A1 witnesses, none overwrite-restore, basis recovered for
@@ -4544,7 +4994,7 @@ records \HypInterruptEmissions{} emissions of the one pre-gate effect, with
 divergent arguments.
 
 \medskip
-\noindent\textbf{W.2 Are the arms of Table~3 the same race?}
+\noindent\textbf{W.2 Are the arms of Table~2 the same race?}
 \texttt{harness/macaudit/arm\_timing.py} reads the October four-arm receipts
 and the September records and prints, per family and arm, the flight
 agent's pinned-interval distribution, the residue, and Fisher's exact test
@@ -4552,7 +5002,12 @@ between arms of one run and between runs of one arm. The arms were
 executed as sequential blocks of $100$ sessions (probe 303 looped modes, then
 sessions), so a provider-latency drift between blocks moves where the
 revision lands relative to the commit without any change of discipline.
-\Cref{tab:armtiming} is the script's output on the committed receipts.
+\Cref{tab:armtiming} is the script's output on the committed receipts. For the
+September run (the vanilla, validated and sequential rows of the main paper's
+live table) the pinned read-to-commit interval, in seconds (mean; max), was
+gpt-4o-mini $\LiveGptPinnedMean$; $\LiveGptPinnedMax$, haiku
+$\LiveHaikuPinnedMean$; $\LiveHaikuPinnedMax$, Llama $\LiveLlamaPinnedMean$;
+$\LiveLlamaPinnedMax$.
 
 \begin{table*}[t]
 \centering\footnotesize
@@ -4606,15 +5061,32 @@ $\RunsHaikuVerifiedRPooled$, $p\RunsFisherHaiku$; gpt-4o-mini
 $\RunsGptValidatedRPooled$ vs.\ $\RunsGptVerifiedRPooled$,
 $p\RunsFisherGpt$; deepseek-chat $\RunsDeepseekValidatedRPooled$ vs.\
 $\RunsDeepseekVerifiedRPooled$, $p\RunsFisherDeepseek$. The same test
-between the sequential-block run of Table~3 and the pooled interleaved runs:
+between the sequential-block run of Table~2 and the pooled interleaved runs:
 vanilla $A_1$ $p\RunsVsSeqHaikuVanillaAOne$ (haiku),
 $p\RunsVsSeqGptVanillaAOne$ (gpt-4o-mini),
 $p\RunsVsSeqDeepseekVanillaAOne$ (deepseek-chat); validated residue
 $p\RunsVsSeqHaikuValidatedR$, $p\RunsVsSeqGptValidatedR$,
 $p\RunsVsSeqDeepseekValidatedR$; verified residue
 $p\RunsVsSeqHaikuVerifiedR$, $p\RunsVsSeqGptVerifiedR$,
-$p\RunsVsSeqDeepseekVerifiedR$. The probe records every model call's
-fallback flag; in the $6{,}846$ model-driven records of the three
+$p\RunsVsSeqDeepseekVerifiedR$. These contrasts differ in run date, seeds
+and design at once and the $p$-values are nominal (about twenty tests are
+reported in this appendix and the main text's \S\,6.1), so they bound the
+drift between runs without attributing it. The paired comparison of the two
+$L_1$ arms within a session (main text, \S\,6.1) uses McNemar's exact test on
+the discordant pairs and Newcombe's method-10 interval (Wilson-based) for the
+paired difference; the Wald interval used before 2026-10-15 is not
+appropriate at nine discordant pairs (it gave $[-0.3, +3.6]$ points on
+haiku against Newcombe's $\RunsDiffCIHaiku$). The pooled Clopper--Pearson
+intervals of \cref{tab:liveruns-s} treat the $300$ sessions of an arm as one
+sample; a $\chi^2$ test of homogeneity across the three runs (2 df) rejects
+that on deepseek-chat alone---validated residue $p\RunsHeteroDeepseekValidatedR$,
+vanilla $A_1$ $p\RunsHeteroDeepseekVanillaAOne$, verified residue
+$p\RunsHeteroDeepseekVerifiedR$; haiku $p\RunsHeteroHaikuValidatedR$,
+$p\RunsHeteroHaikuVanillaAOne$, $p\RunsHeteroHaikuVerifiedR$; gpt-4o-mini
+$p\RunsHeteroGptValidatedR$, $p\RunsHeteroGptVanillaAOne$,
+$p\RunsHeteroGptVerifiedR$---so on that family the $t$-interval over runs in
+\texttt{tools/live\_runs.log} is the one to read. The probe records every
+model call's fallback flag; in the $6{,}846$ model-driven records of the three
 interleaved runs and the two October runs it is \texttt{false} on every one
 (no session fell back to a local generator). A note on the uploaded
 \texttt{tools/live\_runs.log} of 2026-10-14: its ``exact CI'' column was
@@ -4626,7 +5098,7 @@ used that column.
 
 \begin{table*}[t]
 \centering\footnotesize
-\caption{Replicated, interleaved live study (probe 303, three runs of $100$ sessions per arm and family at the $150$\,ms offset): per-run values, pooled count and exact 95\% interval. \emph{after}: revising sessions whose revision landed after the flight agent's final commit (wall-clock stamp), per run. \emph{regen.}: discarded generations per run.}
+\caption{Replicated, interleaved live study (probe 303, three runs of $100$ sessions per arm and family at the $150$\,ms offset): per-run values, pooled count and exact 95\% interval. \emph{after}: revising sessions whose revision landed after the flight agent's final commit (wall-clock stamp), per run; it equals $R$ in the validated and verified arms and the obligations registered in the ledger arms, whose $R$ is $0$ by construction. \emph{regen.}: discarded generations per run.}
 \label{tab:liveruns-s}
 \setlength{\tabcolsep}{4pt}
 \resizebox{\textwidth}{!}{%
@@ -4666,73 +5138,212 @@ application-layer $L_1$ and the basis ledger of probe 303 and adds: a
 active until \texttt{cancel(conf)} succeeds; a \emph{consumer} thread that
 reads the active bookings a uniform $0$--\LedgerWorldConsumerMaxMs{}\,ms
 after the first release and records what it acted on; two revisions per
-revising session ($150$\,ms and $+800$\,ms after the flight agent's read);
-and a world that refuses a cancellation or a rebooking with probability
+revising session, the first $150$\,ms after the flight agent's read and the
+second $800$\,ms after the first put \emph{returns}; and a world that
+refuses a cancellation or a rebooking with probability
 \LedgerWorldPCancelFail{} / \LedgerWorldPRebookFail{}, after which the
 obligation stays registered and open and is retried at the next
-supersession. Arms: \emph{validated} ($L_1$, no ledger), \emph{ledger}
-(cancel the stale booking, then rebook), \emph{ledger\_norollback} (rebook
-without cancelling, the compensator of Table~3 seen from the world). Every
-arm of a session shares the session's seed and world luck, and the arms are
-interleaved. Scored per session: $A_1$ and $R$ on the records (\texttt{a7\_fires}),
+supersession---and only then: the executable ledger has no retry loop of its
+own. The ledger is notified from the store's \texttt{put}, after the write
+and outside the store lock, in the superseding writer's thread, and the
+compensation (its model call included) runs there before the put returns:
+in the ledger arms a revision that lands after the booking's commit therefore
+delays the next revision by the compensation's latency, and the superseding
+writer pays that stall. Arms: \emph{validated} ($L_1$, no ledger),
+\emph{ledger} (cancel the stale booking(s), then rebook),
+\emph{ledger\_norollback} (rebook without cancelling, the compensator of
+Table~2 seen from the world). Every arm of a session shares the session's seed
+and world luck, and the arms are interleaved. Scored per session: $A_1$ and $R$ on the records (\texttt{a7\_fires}),
 \emph{store $\neq$ final}, and in the world at the end: \emph{world wrong}
 (an active booking whose date is not the final date), \emph{double} (two
 active bookings), \emph{none} (no active booking: a cancel succeeded and the
 rebooking was refused), \emph{consumer stale} (the consumer acted on a date
-that is not the final one), \emph{consumer none}, and the obligations
-registered / discharged / left open.
+that is not the final one), \emph{consumer none}, the obligations
+registered / discharged / left open, and two derived counts: \emph{clean}
+sessions (every obligation reported discharged) and, among them, those whose
+world holds exactly the final booking (\emph{right}); symmetrically, the
+sessions with an open obligation whose world is indeed not $[\text{final}]$.
+
+\smallskip\noindent\emph{Registration.} The runs tabulated here registered the
+obligation just after the superseding put returned. As of 2026-10-16 the
+ledgered store flags the obligation inside the store lock, in the critical
+section of the write (\texttt{--registration atomic}, the default; the
+registration record carries the put's stamp), and runner step 21 reruns the
+probe so and, for the ledger arm, with a $5$\,s consumer
+window.\ifnum\LedgerWorldAtomicAvailable=1{} Under atomic registration report
+and world agree in \LWatomicLedgerAgree{} ledger sessions; clean and right
+\LWatomicHaikuLedgerCleanRight/\LWatomicHaikuLedgerCleanSessions,
+\LWatomicGptLedgerCleanRight/\LWatomicGptLedgerCleanSessions,
+\LWatomicDeepseekLedgerCleanRight/\LWatomicDeepseekLedgerCleanSessions;
+consumer stale \LWatomicHaikuLedgerConsumerStale, \LWatomicGptLedgerConsumerStale,
+\LWatomicDeepseekLedgerConsumerStale.\fi\ifnum\LedgerWorldWideAvailable=1{} With
+the $5$\,s window the consumer acts on the stale booking in
+\LWwideHaikuLedgerConsumerStale, \LWwideGptLedgerConsumerStale,
+\LWwideDeepseekLedgerConsumerStale{} of $100$.\fi
+
+\smallskip\noindent\emph{Two compensators.} The probe has run twice on the
+three families with the same seeds. The first run (2026-10-14, now
+\texttt{-{}-compensator latest}, receipts archived under
+\texttt{results/ledger\_world\_v1\_latest\_conf/}) kept one confirmation per
+effect and drafted the replacement text by a model call \emph{between} the
+cancellation and the rebooking; its receipts predate the
+\texttt{-{}-compensator} switch and carry no compensator field, so their
+identity rests on the probe's code at the time (the repository's history) and
+on the directory the runner archived them to, not on a field in the receipt. The second (2026-10-15,
+\texttt{-{}-compensator \LedgerWorldCompensator}, the default; receipts under
+\texttt{results/ledger\_world/}) drafts the replacement first, cancels every
+active confirmation the effect created, rebooks, and discharges the
+obligation only if every cancellation and the rebooking succeeded; a retry
+re-cancels every still-active stale confirmation. The main paper's \S\,6.2
+reports the second run; both are tabulated here.
 \ifnum\LedgerWorldAvailable=1
-\Cref{tab:ledgerworld-s} is the main paper's table with every column. Two
-numbers per ledger cell are the ones the store cannot show: the sessions
-whose every obligation the ledger reports discharged (\emph{clean}:
-\LWHaikuLedgerCleanSessions, \LWGptLedgerCleanSessions,
-\LWDeepseekLedgerCleanSessions{} of $100$ on haiku, gpt-4o-mini and
-deepseek-chat) and, among them, the sessions whose world nevertheless holds
-a booking other than exactly the final one (\LWHaikuLedgerCleanWrong,
-\LWGptLedgerCleanWrong, \LWDeepseekLedgerCleanWrong); retries of an open
-obligation at the second supersession: \LWHaikuLedgerRetries,
-\LWGptLedgerRetries, \LWDeepseekLedgerRetries. The compensator of this run
-(\texttt{-{}-compensator \LedgerWorldCompensator}) kept one confirmation per
-effect and drafted the replacement text by a model call between the
-cancellation and the rebooking. The world check exposed both choices: after
-a refused cancellation the retry cancelled the latest confirmation---the
-replacement---and left the original booking active while reporting the
-obligation discharged (the per-session world log of such a session shows
-active bookings $\{$seed date, final date$\}$ with \texttt{obl=1/1}); and
-the model call inside the cancel-to-rebook window is the \emph{consumer
-none} column. The probe's default compensator (\texttt{-{}-compensator
-all}) drafts the replacement first, cancels every active confirmation the
-effect created, rebooks, and discharges only if every cancellation and the
-rebooking succeeded; a retry re-cancels every still-active stale
-confirmation. In mock-model runs with injected failure rates of $0.5$ it
-reports discharge while the world is wrong in $0$ of $40$ ledger sessions
-where \texttt{latest} does so in $2$ of $40$. Runner step 18 archives this
-run's receipts under \texttt{results/ledger\_world\_v1\_latest\_conf/} and
-reruns the three families under \texttt{all}; the rerun replaces the cells
-of the main paper's \S\,6.2 (\Pending{runner step 18 rerun}).
+\Cref{tab:ledgerworld-s} is the second run with every column. The ledger
+arm's obligations: haiku \LWHaikuLedgerObl{} (registered / discharged /
+open), gpt-4o-mini \LWGptLedgerObl, deepseek-chat \LWDeepseekLedgerObl; retries
+at the second supersession \LWHaikuLedgerRetries, \LWGptLedgerRetries,
+\LWDeepseekLedgerRetries. The records explain the spread: on haiku the first
+revision (committed a median \LWHaikuLedgerFirstRevisionMedianS\,s after the
+flight agent's read, the date agent's model call included) lands inside the
+flight agent's first generation and is caught by the $L_1$ re-read, and the
+second lands after the regenerated commit, so \LWHaikuLedgerOneObligation{} of
+$100$ sessions register exactly one obligation (both revisions after the
+commit in \LWHaikuLedgerBothRevisionsAfterCommit) and nothing arrives to retry
+an open one; on deepseek-chat the flight agent's generation and the date
+agent's reply are both slow enough that both revisions land after the commit
+in \LWDeepseekLedgerBothRevisionsAfterCommit{} of $100$ sessions, of which
+\LWDeepseekLedgerTwoObligations{} register two obligations and
+\LWDeepseekLedgerRetries{} retry one the first compensation left open (a
+supersession that finds an obligation open is counted as a retry, not a
+registration; gpt-4o-mini: \LWGptLedgerBothRevisionsAfterCommit{},
+\LWGptLedgerTwoObligations{} and \LWGptLedgerRetries). Sessions in which both
+revisions landed before the commit register no obligation at all
+(\LWHaikuLedgerNoObligation, \LWGptLedgerNoObligation,
+\LWDeepseekLedgerNoObligation) and are clean and right trivially. Clean
+sessions and clean-and-right:
+\LWHaikuLedgerCleanSessions/\LWHaikuLedgerCleanRight,
+\LWGptLedgerCleanSessions/\LWGptLedgerCleanRight,
+\LWDeepseekLedgerCleanSessions/\LWDeepseekLedgerCleanRight{} (clean but wrong:
+\LWHaikuLedgerCleanWrong, \LWGptLedgerCleanWrong, \LWDeepseekLedgerCleanWrong);
+open-obligation sessions whose world is not $[\text{final}]$:
+\LWHaikuLedgerOpenWrong/\LWHaikuLedgerOpenSessions,
+\LWGptLedgerOpenWrong/\LWGptLedgerOpenSessions,
+\LWDeepseekLedgerOpenWrong/\LWDeepseekLedgerOpenSessions. Report and world
+therefore agree in \LWLedgerAgree{} ledger sessions (exact 95\% interval on
+the disagreement rate \LWLedgerDisagreeCI\%). The failure shapes, from the
+per-session world logs: a refused cancellation with a successful rebooking
+leaves the stale and the final booking both active (\emph{double};
+\LWHaikuLedgerFailDouble, \LWGptLedgerFailDouble{} and
+\LWDeepseekLedgerFailDouble{} sessions); a refused rebooking leaves none
+(\LWHaikuLedgerFailNone, \LWGptLedgerFailNone, \LWDeepseekLedgerFailNone); a
+refused cancellation \emph{and} a refused rebooking leave the stale booking
+alone (\LWHaikuLedgerFailStaleOnly, \LWGptLedgerFailStaleOnly,
+\LWDeepseekLedgerFailStaleOnly). Every one of these is reported as an open
+obligation. In the
+\emph{no cancel} arm the obligation is ``discharged'' by the rebooking alone,
+so its clean sessions are almost all double-booked
+(\LWHaikuLedgerNoRollbackCleanRight/\LWHaikuLedgerNoRollbackCleanSessions,
+\LWGptLedgerNoRollbackCleanRight/\LWGptLedgerNoRollbackCleanSessions,
+\LWDeepseekLedgerNoRollbackCleanRight/\LWDeepseekLedgerNoRollbackCleanSessions{}
+right): a discharged obligation means what its compensator makes it mean.
+The consumer: \emph{stale} (it acted on a booking the session's final date
+contradicts) in \LWHaikuLedgerConsumerStale, \LWGptLedgerConsumerStale,
+\LWDeepseekLedgerConsumerStale{} sessions, as many as under $L_1$ alone, and
+\emph{none} in \LWHaikuLedgerConsumerNone, \LWGptLedgerConsumerNone,
+\LWDeepseekLedgerConsumerNone. Splitting the stale reads by what had happened
+when the consumer read (its \texttt{at\_ms} against the date agent's and the
+compensator's commit stamps): \LWHaikuLedgerConsumerStaleBeforeRevision,
+\LWGptLedgerConsumerStaleBeforeRevision,
+\LWDeepseekLedgerConsumerStaleBeforeRevision{} read before any post-commit
+revision had landed---the booking was current at that moment and no
+compensator could have changed what the consumer saw;
+\LWHaikuLedgerConsumerStaleBeforeCompensation,
+\LWGptLedgerConsumerStaleBeforeCompensation,
+\LWDeepseekLedgerConsumerStaleBeforeCompensation{} read after a revision and
+before the compensation had completed---the window of the compensation's
+model call (from the booking's commit to the compensation record: median
+\LWHaikuLedgerCompLatencyMedianS, \LWGptLedgerCompLatencyMedianS,
+\LWDeepseekLedgerCompLatencyMedianS\,s; p90 \LWHaikuLedgerCompLatencyPNinetyS,
+\LWGptLedgerCompLatencyPNinetyS, \LWDeepseekLedgerCompLatencyPNinetyS\,s,
+which includes waiting for the revision to land); and
+\LWHaikuLedgerConsumerStaleAfterCompensation,
+\LWGptLedgerConsumerStaleAfterCompensation,
+\LWDeepseekLedgerConsumerStaleAfterCompensation{} read after a completed
+compensation whose date a later revision then superseded. The column is the
+harness's $1.5$\,s window read against a compensation that cannot complete
+before the revision it answers has landed; it is a parameter of the probe
+seen from the other side, and we did not sweep it.
 \begin{table*}[t]
 \centering\footnotesize
-\caption{The ledger in a world, $n{=}100$ sessions per arm per family (probe 304, compensator \texttt{\LedgerWorldCompensator}; \LedgerWorldRevisions{} revisions per session; cancellation and rebooking refused with probability \LedgerWorldPCancelFail/\LedgerWorldPRebookFail; consumer delay uniform $0$--\LedgerWorldConsumerMaxMs\,ms).}
+\caption{The ledger in a world, second run (probe 304, compensator \texttt{\LedgerWorldCompensator}), $n{=}100$ sessions per arm per family; \LedgerWorldRevisions{} revisions per session; cancellation and rebooking refused with probability \LedgerWorldPCancelFail/\LedgerWorldPRebookFail; consumer delay uniform $0$--\LedgerWorldConsumerMaxMs\,ms. ``right/clean'': sessions with every obligation reported discharged in which the world holds exactly the final booking, over the clean sessions.}
 \label{tab:ledgerworld-s}
 \resizebox{\textwidth}{!}{%
-\begin{tabular}{@{}llrrrrrrrr@{}}
+\begin{tabular}{@{}llrrrrrrrrr@{}}
 \toprule
-Model & Arm & $R$ & store$\neq$ & world wrong & none & double & cons.\ stale & cons.\ none & obl.\ reg/disch/open \\
+Model & Arm & $R$ & store$\neq$ & world wrong & none & double & cons.\ stale & cons.\ none & obl.\ reg/disch/open & right/clean \\
 \midrule
-haiku & $L_1$ & \LWHaikuValidatedR & \LWHaikuValidatedStoreWrong & \LWHaikuValidatedWorldWrong & \LWHaikuValidatedWorldNone & \LWHaikuValidatedDouble & \LWHaikuValidatedConsumerStale & \LWHaikuValidatedConsumerNone & \LWHaikuValidatedObl \\
- & ledger & \LWHaikuLedgerR & \LWHaikuLedgerStoreWrong & \LWHaikuLedgerWorldWrong & \LWHaikuLedgerWorldNone & \LWHaikuLedgerDouble & \LWHaikuLedgerConsumerStale & \LWHaikuLedgerConsumerNone & \LWHaikuLedgerObl \\
- & no cancel & \LWHaikuLedgerNoRollbackR & \LWHaikuLedgerNoRollbackStoreWrong & \LWHaikuLedgerNoRollbackWorldWrong & \LWHaikuLedgerNoRollbackWorldNone & \LWHaikuLedgerNoRollbackDouble & \LWHaikuLedgerNoRollbackConsumerStale & \LWHaikuLedgerNoRollbackConsumerNone & \LWHaikuLedgerNoRollbackObl \\
-gpt-4o-mini & $L_1$ & \LWGptValidatedR & \LWGptValidatedStoreWrong & \LWGptValidatedWorldWrong & \LWGptValidatedWorldNone & \LWGptValidatedDouble & \LWGptValidatedConsumerStale & \LWGptValidatedConsumerNone & \LWGptValidatedObl \\
- & ledger & \LWGptLedgerR & \LWGptLedgerStoreWrong & \LWGptLedgerWorldWrong & \LWGptLedgerWorldNone & \LWGptLedgerDouble & \LWGptLedgerConsumerStale & \LWGptLedgerConsumerNone & \LWGptLedgerObl \\
- & no cancel & \LWGptLedgerNoRollbackR & \LWGptLedgerNoRollbackStoreWrong & \LWGptLedgerNoRollbackWorldWrong & \LWGptLedgerNoRollbackWorldNone & \LWGptLedgerNoRollbackDouble & \LWGptLedgerNoRollbackConsumerStale & \LWGptLedgerNoRollbackConsumerNone & \LWGptLedgerNoRollbackObl \\
-deepseek-chat & $L_1$ & \LWDeepseekValidatedR & \LWDeepseekValidatedStoreWrong & \LWDeepseekValidatedWorldWrong & \LWDeepseekValidatedWorldNone & \LWDeepseekValidatedDouble & \LWDeepseekValidatedConsumerStale & \LWDeepseekValidatedConsumerNone & \LWDeepseekValidatedObl \\
- & ledger & \LWDeepseekLedgerR & \LWDeepseekLedgerStoreWrong & \LWDeepseekLedgerWorldWrong & \LWDeepseekLedgerWorldNone & \LWDeepseekLedgerDouble & \LWDeepseekLedgerConsumerStale & \LWDeepseekLedgerConsumerNone & \LWDeepseekLedgerObl \\
- & no cancel & \LWDeepseekLedgerNoRollbackR & \LWDeepseekLedgerNoRollbackStoreWrong & \LWDeepseekLedgerNoRollbackWorldWrong & \LWDeepseekLedgerNoRollbackWorldNone & \LWDeepseekLedgerNoRollbackDouble & \LWDeepseekLedgerNoRollbackConsumerStale & \LWDeepseekLedgerNoRollbackConsumerNone & \LWDeepseekLedgerNoRollbackObl \\
+haiku & $L_1$ & \LWHaikuValidatedR & \LWHaikuValidatedStoreWrong & \LWHaikuValidatedWorldWrong & \LWHaikuValidatedWorldNone & \LWHaikuValidatedDouble & \LWHaikuValidatedConsumerStale & \LWHaikuValidatedConsumerNone & \LWHaikuValidatedObl & -- \\
+ & ledger & \LWHaikuLedgerR & \LWHaikuLedgerStoreWrong & \LWHaikuLedgerWorldWrong & \LWHaikuLedgerWorldNone & \LWHaikuLedgerDouble & \LWHaikuLedgerConsumerStale & \LWHaikuLedgerConsumerNone & \LWHaikuLedgerObl & \LWHaikuLedgerCleanRight/\LWHaikuLedgerCleanSessions \\
+ & no cancel & \LWHaikuLedgerNoRollbackR & \LWHaikuLedgerNoRollbackStoreWrong & \LWHaikuLedgerNoRollbackWorldWrong & \LWHaikuLedgerNoRollbackWorldNone & \LWHaikuLedgerNoRollbackDouble & \LWHaikuLedgerNoRollbackConsumerStale & \LWHaikuLedgerNoRollbackConsumerNone & \LWHaikuLedgerNoRollbackObl & \LWHaikuLedgerNoRollbackCleanRight/\LWHaikuLedgerNoRollbackCleanSessions \\
+gpt-4o-mini & $L_1$ & \LWGptValidatedR & \LWGptValidatedStoreWrong & \LWGptValidatedWorldWrong & \LWGptValidatedWorldNone & \LWGptValidatedDouble & \LWGptValidatedConsumerStale & \LWGptValidatedConsumerNone & \LWGptValidatedObl & -- \\
+ & ledger & \LWGptLedgerR & \LWGptLedgerStoreWrong & \LWGptLedgerWorldWrong & \LWGptLedgerWorldNone & \LWGptLedgerDouble & \LWGptLedgerConsumerStale & \LWGptLedgerConsumerNone & \LWGptLedgerObl & \LWGptLedgerCleanRight/\LWGptLedgerCleanSessions \\
+ & no cancel & \LWGptLedgerNoRollbackR & \LWGptLedgerNoRollbackStoreWrong & \LWGptLedgerNoRollbackWorldWrong & \LWGptLedgerNoRollbackWorldNone & \LWGptLedgerNoRollbackDouble & \LWGptLedgerNoRollbackConsumerStale & \LWGptLedgerNoRollbackConsumerNone & \LWGptLedgerNoRollbackObl & \LWGptLedgerNoRollbackCleanRight/\LWGptLedgerNoRollbackCleanSessions \\
+deepseek-chat & $L_1$ & \LWDeepseekValidatedR & \LWDeepseekValidatedStoreWrong & \LWDeepseekValidatedWorldWrong & \LWDeepseekValidatedWorldNone & \LWDeepseekValidatedDouble & \LWDeepseekValidatedConsumerStale & \LWDeepseekValidatedConsumerNone & \LWDeepseekValidatedObl & -- \\
+ & ledger & \LWDeepseekLedgerR & \LWDeepseekLedgerStoreWrong & \LWDeepseekLedgerWorldWrong & \LWDeepseekLedgerWorldNone & \LWDeepseekLedgerDouble & \LWDeepseekLedgerConsumerStale & \LWDeepseekLedgerConsumerNone & \LWDeepseekLedgerObl & \LWDeepseekLedgerCleanRight/\LWDeepseekLedgerCleanSessions \\
+ & no cancel & \LWDeepseekLedgerNoRollbackR & \LWDeepseekLedgerNoRollbackStoreWrong & \LWDeepseekLedgerNoRollbackWorldWrong & \LWDeepseekLedgerNoRollbackWorldNone & \LWDeepseekLedgerNoRollbackDouble & \LWDeepseekLedgerNoRollbackConsumerStale & \LWDeepseekLedgerNoRollbackConsumerNone & \LWDeepseekLedgerNoRollbackObl & \LWDeepseekLedgerNoRollbackCleanRight/\LWDeepseekLedgerNoRollbackCleanSessions \\
 \bottomrule
 \end{tabular}}
 \end{table*}
 \else
 \Pending{runner step 18: probe 304 on haiku, gpt-4o-mini and deepseek-chat; the table of the main paper's \S\,6.2 and the extended one here are generated from its receipt}.
+\fi
+\ifnum\LedgerWorldFirstAvailable=1
+\smallskip\noindent\emph{The first run, and what the world check caught.}
+\Cref{tab:ledgerworld-first-s} is the first run (compensator
+\texttt{latest}). $R=0$ in all $300$ ledger sessions here too, and the world
+shows what the records cannot: among the sessions it called clean
+(\LWfirstHaikuLedgerCleanSessions, \LWfirstGptLedgerCleanSessions,
+\LWfirstDeepseekLedgerCleanSessions{} of $100$) the world held a booking other
+than exactly the final one in \LWfirstHaikuLedgerCleanWrong,
+\LWfirstGptLedgerCleanWrong{} and \LWfirstDeepseekLedgerCleanWrong---after a
+refused cancellation the retry cancelled the \emph{latest} confirmation, the
+replacement, left the original active and reported the obligation discharged
+(the per-session world log shows active bookings $\{$seed date, final
+date$\}$ with \texttt{obl=1/1})---and among the sessions it reported open
+(\LWfirstHaikuLedgerOpenSessions, \LWfirstGptLedgerOpenSessions,
+\LWfirstDeepseekLedgerOpenSessions) the world was in fact right in
+\LWfirstHaikuLedgerOpenRight, \LWfirstGptLedgerOpenRight{} and
+\LWfirstDeepseekLedgerOpenRight. Report and world agreed in
+\LWfirstLedgerAgree{} sessions (disagreement rate \LWfirstLedgerDisagreeCI\%),
+against \LWLedgerAgree{} under the corrected compensator. The model call
+inside the cancel-to-rebook window is its \emph{consumer none} column
+(\LWfirstHaikuLedgerConsumerNone, \LWfirstGptLedgerConsumerNone,
+\LWfirstDeepseekLedgerConsumerNone{} of $100$, against
+\LWHaikuLedgerConsumerNone, \LWGptLedgerConsumerNone,
+\LWDeepseekLedgerConsumerNone{} once the replacement is drafted before the
+world is touched). In mock-model runs with injected failure rates of $0.5$
+the corrected compensator reports discharge while the world is wrong in $0$
+of $40$ ledger sessions where \texttt{latest} does so in $2$ of $40$.
+\begin{table*}[t]
+\centering\footnotesize
+\caption{The ledger in a world, first run (probe 304, compensator \texttt{latest}: one tracked confirmation, replacement drafted between cancellation and rebooking), same protocol and seeds as \cref{tab:ledgerworld-s}. ``right/clean'' as above; the clean-but-wrong sessions are the ones the world check caught.}
+\label{tab:ledgerworld-first-s}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}llrrrrrrrrr@{}}
+\toprule
+Model & Arm & $R$ & store$\neq$ & world wrong & none & double & cons.\ stale & cons.\ none & obl.\ reg/disch/open & right/clean \\
+\midrule
+haiku & $L_1$ & \LWfirstHaikuValidatedR & \LWfirstHaikuValidatedStoreWrong & \LWfirstHaikuValidatedWorldWrong & \LWfirstHaikuValidatedWorldNone & \LWfirstHaikuValidatedDouble & \LWfirstHaikuValidatedConsumerStale & \LWfirstHaikuValidatedConsumerNone & \LWfirstHaikuValidatedObl & -- \\
+ & ledger & \LWfirstHaikuLedgerR & \LWfirstHaikuLedgerStoreWrong & \LWfirstHaikuLedgerWorldWrong & \LWfirstHaikuLedgerWorldNone & \LWfirstHaikuLedgerDouble & \LWfirstHaikuLedgerConsumerStale & \LWfirstHaikuLedgerConsumerNone & \LWfirstHaikuLedgerObl & \LWfirstHaikuLedgerCleanRight/\LWfirstHaikuLedgerCleanSessions \\
+ & no cancel & \LWfirstHaikuLedgerNoRollbackR & \LWfirstHaikuLedgerNoRollbackStoreWrong & \LWfirstHaikuLedgerNoRollbackWorldWrong & \LWfirstHaikuLedgerNoRollbackWorldNone & \LWfirstHaikuLedgerNoRollbackDouble & \LWfirstHaikuLedgerNoRollbackConsumerStale & \LWfirstHaikuLedgerNoRollbackConsumerNone & \LWfirstHaikuLedgerNoRollbackObl & \LWfirstHaikuLedgerNoRollbackCleanRight/\LWfirstHaikuLedgerNoRollbackCleanSessions \\
+gpt-4o-mini & $L_1$ & \LWfirstGptValidatedR & \LWfirstGptValidatedStoreWrong & \LWfirstGptValidatedWorldWrong & \LWfirstGptValidatedWorldNone & \LWfirstGptValidatedDouble & \LWfirstGptValidatedConsumerStale & \LWfirstGptValidatedConsumerNone & \LWfirstGptValidatedObl & -- \\
+ & ledger & \LWfirstGptLedgerR & \LWfirstGptLedgerStoreWrong & \LWfirstGptLedgerWorldWrong & \LWfirstGptLedgerWorldNone & \LWfirstGptLedgerDouble & \LWfirstGptLedgerConsumerStale & \LWfirstGptLedgerConsumerNone & \LWfirstGptLedgerObl & \LWfirstGptLedgerCleanRight/\LWfirstGptLedgerCleanSessions \\
+ & no cancel & \LWfirstGptLedgerNoRollbackR & \LWfirstGptLedgerNoRollbackStoreWrong & \LWfirstGptLedgerNoRollbackWorldWrong & \LWfirstGptLedgerNoRollbackWorldNone & \LWfirstGptLedgerNoRollbackDouble & \LWfirstGptLedgerNoRollbackConsumerStale & \LWfirstGptLedgerNoRollbackConsumerNone & \LWfirstGptLedgerNoRollbackObl & \LWfirstGptLedgerNoRollbackCleanRight/\LWfirstGptLedgerNoRollbackCleanSessions \\
+deepseek-chat & $L_1$ & \LWfirstDeepseekValidatedR & \LWfirstDeepseekValidatedStoreWrong & \LWfirstDeepseekValidatedWorldWrong & \LWfirstDeepseekValidatedWorldNone & \LWfirstDeepseekValidatedDouble & \LWfirstDeepseekValidatedConsumerStale & \LWfirstDeepseekValidatedConsumerNone & \LWfirstDeepseekValidatedObl & -- \\
+ & ledger & \LWfirstDeepseekLedgerR & \LWfirstDeepseekLedgerStoreWrong & \LWfirstDeepseekLedgerWorldWrong & \LWfirstDeepseekLedgerWorldNone & \LWfirstDeepseekLedgerDouble & \LWfirstDeepseekLedgerConsumerStale & \LWfirstDeepseekLedgerConsumerNone & \LWfirstDeepseekLedgerObl & \LWfirstDeepseekLedgerCleanRight/\LWfirstDeepseekLedgerCleanSessions \\
+ & no cancel & \LWfirstDeepseekLedgerNoRollbackR & \LWfirstDeepseekLedgerNoRollbackStoreWrong & \LWfirstDeepseekLedgerNoRollbackWorldWrong & \LWfirstDeepseekLedgerNoRollbackWorldNone & \LWfirstDeepseekLedgerNoRollbackDouble & \LWfirstDeepseekLedgerNoRollbackConsumerStale & \LWfirstDeepseekLedgerNoRollbackConsumerNone & \LWfirstDeepseekLedgerNoRollbackObl & \LWfirstDeepseekLedgerNoRollbackCleanRight/\LWfirstDeepseekLedgerNoRollbackCleanSessions \\
+\bottomrule
+\end{tabular}}
+\end{table*}
 \fi
 
 \medskip
@@ -4751,8 +5362,23 @@ where the two disagree; \texttt{verified\_scorer\_gate.py} runs the binary over
 every cell of \texttt{results/expected.json}, the September live sessions and
 every probe-303 trace, comparing with the manuscript's counts and an
 independent Definition-1 implementation. \ifnum\VerifiedScorerAvailable=1
-Receipt (\texttt{tools/verified\_scorer.json}): \VerifiedScorerCells{} cells,
-\VerifiedScorerTraces{} traces, \VerifiedScorerProblems{} problems.\else
+Receipt (\texttt{tools/verified\_scorer.json}, 2026-10-15):
+\VerifiedScorerCells{} cells, \VerifiedScorerTraces{} traces,
+\VerifiedScorerProblems{} problems; every cell's verified count equals the
+Definition-1 Python count and, where asserted, the manuscript's (three of the
+cells are the one-trace stubs the interleaved Claude run held at the time of
+the pass; they are rescored at $100$ traces by its next pass). The gate's
+first run (2026-10-14) had rejected every trace: the analyser's record reader
+declared \texttt{agent\_id} as a serde alias of \texttt{agent}, and every
+probe-303 record carries both keys with the same value, which serde reports
+as ``duplicate field \texttt{agent}''; the reader now reconciles the two keys
+explicitly (equal values accepted, different values an error, neither an
+error; five unit tests), and the fold marks the cell available only when the
+gate reports zero problems---the first receipt, with $4{,}818$ problems, had
+been folded as available. The cells of the Claude op-record replication
+(\texttt{runs/*-claude}) are scored by the same gate: the three vanilla cells
+are in this receipt (\S\,M); the pessimistic and snapshot-isolation cells
+were produced after it ran and await the next pass of step 14.\else
 The gate's first run (2026-10-14; \texttt{cargo build} succeeded, the bytes
 gate passed on all six measured files) rejected every trace: the analyser's
 record reader declared \texttt{agent\_id} as a serde alias of
@@ -4845,7 +5471,7 @@ File (\texttt{verus-detector/src/}) & Verified & Distinct & Bears \\
 \texttt{lib\_a4\_split\_view.rs}                 & 9  & 9 & S: the $A_4$ model, outside the lattice \\
 \texttt{lib\_concurrent\_semantics.rs}           & 9  & 9 & L: the lock discipline's lift \\
 \texttt{lib\_consistency\_lattice.rs}            & 53 & 5 & L: the product's non-interference (48 re-included) \\
-\texttt{lib\_default\_si.rs}                     & 9  & 9 & L: default-SI safety (Table~4's residual) \\
+\texttt{lib\_default\_si.rs}                     & 9  & 9 & L: default-SI safety (the pilot's SI residual, \S\,6.3) \\
 \texttt{lib\_detect\_a1\_exec.rs}$\dagger$       & 9  & --- & helper by the curation; the scorer's $A_1$ verdict since 2026-10-14 \\
 \texttt{lib\_detector\_equivalence.rs}           & 24 & 24 & L: the four detectors \\
 \texttt{lib\_l2\_exec.rs}                        & 73 & 40 & L: the measured $L_2$ bytes (33 re-included) \\
@@ -5341,6 +5967,20 @@ A.~Gupta and I.~S. Mumick, ``Maintenance of materialized views: Problems, techni
 \bibitem{BunemanEtAl2001Why}
 P.~Buneman, S.~Khanna, and W.-C. Tan, ``Why and where: A characterization of data provenance,'' in \emph{Proc. ICDT}, 2001, pp. 316--330.
 
+\bibitem{Helland2012Idempotence} P.~Helland, ``Idempotence is not a medical
+condition,'' \emph{Communications of the ACM}, vol.~55, no.~5, pp. 56--65,
+2012.
+\bibitem{ZhangEtAl2023Viper} J.~Zhang, Y.~Ji, S.~Mu, and C.~Tan, ``Viper: A
+fast snapshot isolation checker,'' in \emph{EuroSys}, 2023, pp. 654--671.
+\bibitem{HuangEtAl2023PolySI} K.~Huang, S.~Liu, Z.~Chen, H.~Wei, D.~Basin,
+H.~Li, and A.~Pan, ``Efficient black-box checking of snapshot isolation in
+databases,'' \emph{PVLDB}, vol.~16, no.~6, pp. 1264--1276, 2023.
+\bibitem{LiuEtAl2024Plume} S.~Liu, L.~Gu, H.~Wei, and D.~Basin, ``Plume:
+Efficient and complete black-box checking of weak isolation levels,''
+\emph{Proc. ACM Program. Lang.}, vol.~8, no.~OOPSLA2, 2024.
+\bibitem{ChajedEtAl2022DaisyNFS} T.~Chajed, J.~Tassarotti, M.~Theng, M.~F.
+Kaashoek, and N.~Zeldovich, ``Verifying the DaisyNFS concurrent and crash-safe
+file system with sequential reasoning,'' in \emph{OSDI}, 2022, pp. 447--463.
 \end{thebibliography}
 
 \end{document}

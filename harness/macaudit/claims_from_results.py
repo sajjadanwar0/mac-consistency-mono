@@ -11,7 +11,7 @@ Receipts understood:
   results/live_a1_outcome/*.json        probe 303 (A1 sweep; verified and ledger arms)
   results/live_a1_outcome/*_arms150i.run<r>.json
                                         probe 303 --interleave --runs R (2026-10-14): replicated,
-                                        interleaved arms incl. ledger_verified -> Table 3 (replicated rows)
+                                        interleaved arms incl. ledger_verified -> Table 3 (the replicated runs)
   results/ledger_world/*.json           probe 304 (the ledger in a world: consumer, cancellation, failures)
   results/a6_real_latency/*.jsonl       probe 301 (ToolNode replay against real effects; l3_verified arm)
   results/runs/*-interleaved/           probe 302 (interleaved wall-clock rerun; token sidecars)
@@ -55,6 +55,65 @@ def clopper_pearson(k, n, alpha=0.05):
     return (lo, hi)
 
 
+def wilson(k, n, z=1.959964):
+    """Wilson score interval for k/n"""
+    if n == 0:
+        return 0.0, 0.0
+    p = k / n; q = z * z / n
+    centre = (p + q / 2) / (1 + q); half = z * ((p * (1 - p) / n + q / (4 * n)) ** 0.5) / (1 + q)
+    return max(0.0, centre - half), min(1.0, centre + half)
+
+
+def newcombe_paired(a, b, c, d, z=1.959964):
+    """Newcombe (1998, Stat. Med. 17:2635), method 10: confidence interval for p1 - p2 from paired binary data with
+    cell counts a (both), b (first only), c (second only), d (neither); p1 = (a+b)/n, p2 = (a+c)/n"""
+    n = a + b + c + d
+    if n == 0:
+        return 0.0, 0.0
+    p1, p2 = (a + b) / n, (a + c) / n
+    l1, u1 = wilson(a + b, n, z); l2, u2 = wilson(a + c, n, z)
+    den = (a + b) * (c + d) * (a + c) * (b + d)
+    phi = (a * d - b * c) / den ** 0.5 if den > 0 else 0.0
+    delta = p1 - p2
+    lo = delta - ((p1 - l1) ** 2 - 2 * phi * (p1 - l1) * (u2 - p2) + (u2 - p2) ** 2) ** 0.5
+    hi = delta + ((u1 - p1) ** 2 - 2 * phi * (u1 - p1) * (p2 - l2) + (p2 - l2) ** 2) ** 0.5
+    return lo, hi
+
+
+def chi2_homogeneity(counts, n):
+    """chi-square test that k binomial samples (counts of n each) share one rate; returns (chi2, p) with k-1 df
+    (p via the chi-square survival function for small df, computed by the regularized gamma series)"""
+    k = len(counts); tot = sum(counts)
+    if k < 2 or tot == 0 or tot == k * n:
+        return 0.0, 1.0
+    p_hat = tot / (k * n)
+    chi2 = sum((c - n * p_hat) ** 2 / (n * p_hat * (1 - p_hat)) for c in counts)
+    df = k - 1
+    import math
+    # survival function of chi-square(df): Q(df/2, chi2/2) via the series/continued fraction of the regularized gamma
+    a, x = df / 2.0, chi2 / 2.0
+    if x <= 0:
+        return chi2, 1.0
+    if x < a + 1:   # series for P(a,x)
+        term = 1.0 / a; total = term; ap = a
+        for _ in range(500):
+            ap += 1; term *= x / ap; total += term
+            if abs(term) < abs(total) * 1e-14:
+                break
+        P = total * math.exp(-x + a * math.log(x) - math.lgamma(a)); Q = 1.0 - P
+    else:          # continued fraction for Q(a,x) (Lentz)
+        b0 = x + 1.0 - a; C = 1.0 / 1e-300; D = 1.0 / b0; h = D
+        for i in range(1, 500):
+            an = -i * (i - a); b0 += 2.0
+            D = an * D + b0; D = 1e-300 if abs(D) < 1e-300 else D
+            C = b0 + an / C; C = 1e-300 if abs(C) < 1e-300 else C
+            D = 1.0 / D; de = D * C; h *= de
+            if abs(de - 1.0) < 1e-14:
+                break
+        Q = math.exp(-x + a * math.log(x) - math.lgamma(a)) * h
+    return chi2, max(0.0, min(1.0, Q))
+
+
 def fmt_p(p):
     """a p-value WITH its relation, so the paper writes $p\\RunsFisherHaiku$ and never prints p=<0.001"""
     return "<0.001" if p < 0.001 else f"={p:.3f}"
@@ -83,7 +142,7 @@ def ci_str(c, key):
 
 
 def probe303(root, out, fig):
-    """Table 3 rows come from the four-arm run (<model>_arms150.json, p_revise 1.0); the offset curve from the
+    """The live table (Table 2) rows come from the four-arm run (<model>_arms150.json, p_revise 1.0); the offset curve from the
     sweep (<model>_sweep.json, p_revise 0.5).  The two are kept apart: a 150 ms sweep cell is a different run
     from the 150 ms arms cell and never overwrites it.  R is the probe's a7 field, which a7_rescore.py --check
     re-derives independently from the records (every cell must agree or the gate fails)."""
@@ -103,7 +162,7 @@ def probe303(root, out, fig):
             dest[(mk, c["mode"], int(c["offset_ms"]))] = c
     if not arms and not sweep:
         return
-    out.append("% --- probe 303 (results/live_a1_outcome; *_arms150.json -> Table 3, *_sweep.json -> offset curve) ---")
+    out.append("% --- probe 303 (results/live_a1_outcome; *_arms150.json -> the live table (Table 2), *_sweep.json -> offset curve) ---")
     strip = lambda c: {kk: vv for kk, vv in c.items() if kk != "sessions"}
     SUMMARY["probe303_arms150"] = {f"{k[0]}|{k[1]}|{k[2]}": strip(c) for k, c in arms.items()}
     SUMMARY["probe303_sweep"] = {f"{k[0]}|{k[1]}|{k[2]}": strip(c) for k, c in sweep.items()}
@@ -208,50 +267,93 @@ def probe301(root, out):
                 SUMMARY.setdefault("probe301", {})[backend + "_verified"] = {"replays": nv, "baseline_a6": vbase, "l3_verified_a6": vreord}
 
 
+def _paired_overheads(sess, out, mk, run, model, tag, boot, rng, note=""):
+    r"""sess: (workload, runtime) -> session idx -> wall ms. Emits \Wallclock<tag><mk><Workload><Pess|SI> for every cell with
+    at least five paired sessions (per-session relative difference to the vanilla arm, mean and bootstrap 95% CI)."""
+    emitted = 0
+    for wl in sorted({k[0] for k in sess}):
+        base = sess.get((wl, "vanilla"), {})
+        for rt in ("pessimistic", "snapshot_isolation"):
+            arm = sess.get((wl, rt), {})
+            common = sorted(set(base) & set(arm))
+            diffs = [(arm[i] - base[i]) / base[i] * 100 for i in common if base[i] > 0]
+            if len(diffs) < 5:
+                continue
+            mean = statistics.fmean(diffs)
+            bs = []
+            for _ in range(boot):
+                smp = [diffs[rng.randrange(len(diffs))] for _ in diffs]
+                bs.append(statistics.fmean(smp))
+            bs.sort(); lo, hi = bs[int(0.025 * boot)], bs[int(0.975 * boot) - 1]
+            key = {"pessimistic": "Pess", "snapshot_isolation": "SI"}[rt]
+            wlk = "".join(p.capitalize() for p in wl.split("-"))
+            if emitted == 0:
+                out.append(f"% --- probe 302 ({run}; model {model}; {tag or 'sidecars'}){note} ---")
+            emitted += 1
+            out.append(f"\\renewcommand{{\\Wallclock{tag}{mk}{wlk}{key}}}{{${mean:+.1f}\\%$ [{lo:+.1f}, {hi:+.1f}], $n={len(diffs)}$}}")
+            SUMMARY.setdefault("probe302" + ("_" + tag.lower() if tag else ""), {}).setdefault(os.path.basename(run), {"model": model})[f"{wl}/{rt}"] = \
+                {"mean_pct": mean, "ci95": [lo, hi], "n": len(diffs)}
+    if emitted:   # a stub run (fewer than five paired sessions in every cell) sets nothing
+        out.append(f"\\renewcommand{{\\Wallclock{tag}{mk}Available}}{{1}}")
+    return emitted
+
+
 def probe302(root, out, boot=2000, seed=1):
+    r"""step 5/6 receipts: results/runs/*-interleaved*/.  Two receipts of the per-session wall-clock:
+    (a) the token sidecars tokens-<wl>-<rt>/*.tokens.jsonl (wall_clock_ms summed per session; the session is the file's
+        index session-NNNN when the file is named so, else the session_id's suffix) -> \WallclockPaired<Model>...;
+    (b) order.tsv (the runner's completion stamp per (session, workload, runtime), 1 s resolution): the wall-clock of a
+        cell-session is the gap to the previous stamp, which includes the interpreter start-up that every arm pays alike
+        -> \WallclockStamp<Model>...  This is the ONLY wall-clock receipt of the 2026-10-14 interleaved runs, whose
+        sidecars were overwritten by the run script (one survivor per cell, see probes/302_wallclock_interleaved.sh)."""
     runs = sorted(glob.glob(os.path.join(root, "runs", "*-interleaved*")))
     if not runs:
         return
     rng = random.Random(seed)
     for run in runs:
-        sess = defaultdict(lambda: defaultdict(float))   # (workload, runtime) -> session idx -> wall ms
         model = None
+        mf = os.path.join(run, "manifest.json")
+        if os.path.exists(mf):
+            try:
+                model = json.load(open(mf)).get("model")
+            except Exception:
+                pass
+        # (a) sidecars
+        sess = defaultdict(lambda: defaultdict(float))   # (workload, runtime) -> session idx -> wall ms
         for fp in glob.glob(os.path.join(run, "tokens-*", "*.tokens.jsonl")):
+            fm = re.search(r"session-(\d{4})\.tokens\.jsonl$", os.path.basename(fp))
             for line in open(fp):
                 line = line.strip()
                 if not line:
                     continue
                 r = json.loads(line)
                 model = model or r.get("model")
-                idx = r["session_id"].rsplit("-", 1)[-1]
+                idx = fm.group(1) if fm else r["session_id"].rsplit("-", 1)[-1]
                 sess[(r["workload"], r["runtime"])][idx] += float(r.get("wall_clock_ms", 0))
-        if not sess:
-            continue
         mk = "Claude" if (model or "").startswith("claude") else "Gpt"
-        emitted = 0
-        for wl in sorted({k[0] for k in sess}):
-            base = sess.get((wl, "vanilla"), {})
-            for rt in ("pessimistic", "snapshot_isolation"):
-                arm = sess.get((wl, rt), {})
-                common = sorted(set(base) & set(arm))
-                if len(common) < 5:
+        n_side = _paired_overheads(sess, out, mk, run, model, "Paired", boot, rng) if sess else 0
+        # (b) completion stamps
+        ot = os.path.join(run, "order.tsv")
+        if os.path.exists(ot):
+            import datetime as _dt
+            rows = []
+            for line in open(ot):
+                parts = line.rstrip("\n").split("\t")
+                if len(parts) != 4:
                     continue
-                diffs = [(arm[i] - base[i]) / base[i] * 100 for i in common if base[i] > 0]
-                mean = statistics.fmean(diffs)
-                bs = []
-                for _ in range(boot):
-                    smp = [diffs[rng.randrange(len(diffs))] for _ in diffs]
-                    bs.append(statistics.fmean(smp))
-                bs.sort(); lo, hi = bs[int(0.025 * boot)], bs[int(0.975 * boot) - 1]
-                key = {"pessimistic": "Pess", "snapshot_isolation": "SI"}[rt]
-                wlk = "".join(p.capitalize() for p in wl.split("-"))
-                if emitted == 0:
-                    out.append(f"% --- probe 302 ({run}; model {model}) ---")
-                emitted += 1
-                out.append(f"\\renewcommand{{\\WallclockPaired{mk}{wlk}{key}}}{{${mean:+.1f}\\%$ [{lo:+.1f}, {hi:+.1f}], $n={len(diffs)}$}}")
-                SUMMARY.setdefault("probe302", {}).setdefault(os.path.basename(run), {"model": model})[f"{wl}/{rt}"] = {"mean_pct": mean, "ci95": [lo, hi], "n": len(diffs)}
-        if emitted:   # a stub run (fewer than five paired sessions in every cell) sets nothing
-            out.append(f"\\renewcommand{{\\WallclockPaired{mk}Available}}{{1}}")
+                try:
+                    k, wl, rt, ts = int(parts[0]), parts[1], parts[2], _dt.datetime.strptime(parts[3], "%Y-%m-%dT%H:%M:%SZ")
+                except ValueError:
+                    continue
+                rows.append((k, wl, rt, ts))
+            stamps = defaultdict(dict)
+            for (k, wl, rt, ts), prev in zip(rows[1:], rows):   # the first row has no predecessor and is dropped
+                gap = (ts - prev[3]).total_seconds() * 1000.0
+                if gap > 0:
+                    stamps[(wl, rt)][f"{k:04d}"] = gap
+            if stamps:
+                sidecars = f"; sidecars folded: {'yes' if n_side else 'no'}"
+                _paired_overheads(stamps, out, mk, run, model, "Stamp", boot, rng, note=f"; order.tsv completion stamps, 1 s resolution{sidecars}")
 
 
 def verus(root, out):
@@ -267,7 +369,6 @@ def verus(root, out):
             pass
     fp = os.path.join(root, "verus", "lib_l5_ledger.verus.log")
     if os.path.exists(fp):
-        import re
         m = re.search(r"(\d+) verified, (\d+) errors", open(fp, errors="replace").read())
         if m and m.group(2) == "0":
             out.append(f"% --- verus ledger ({fp}) ---")
@@ -278,7 +379,6 @@ def verus(root, out):
 
 def probe303_runs(root, out):
     """replicated, interleaved arms: <model>_arms150i.run<r>.json -> per-cell per-run values and pooled counts"""
-    import re
     runs = defaultdict(list)
     for fp in sorted(glob.glob(os.path.join(root, "live_a1_outcome", "*_arms150i.run*.json"))):
         try:
@@ -289,7 +389,7 @@ def probe303_runs(root, out):
     runs.pop(None, None)
     if not runs:
         return
-    out.append("% --- probe 303 --interleave --runs (results/live_a1_outcome/*_arms150i.run*.json): replicated Table 3 rows ---")
+    out.append("% --- probe 303 --interleave --runs (results/live_a1_outcome/*_arms150i.run*.json): the replicated-runs table (Table 3) ---")
     out.append("\\renewcommand{\\LiveRunsAvailable}{1}")
     for mk, ds in sorted(runs.items()):
         ds.sort(key=lambda d: d.get("run", 0)); R = len(ds); n = ds[0]["n"]
@@ -331,9 +431,10 @@ def probe303_runs(root, out):
             SUMMARY["probe303_runs"][f"{mk}|fisher_validated_vs_verified_R"] = {"validated": rv, "verified": rf, "N": N, "p": p}
         # the paired test the interleaved design supports: per (run, session) the validated and verified arms ran the
         # same session back to back, so the residue is compared within session (McNemar, exact binomial on the
-        # discordant pairs) with a paired-proportion Wald interval on the difference, in percentage points
+        # discordant pairs) with Newcombe's (1998, method 10) interval on the paired difference, in percentage points
+        # (the Wald interval used before 2026-10-15 is not appropriate at nine discordant pairs)
         if "validated" in cells and "verified" in cells:
-            b = c = npairs = 0
+            b = c = npairs = a_both = 0
             for r in sorted(cells["validated"]):
                 if r not in cells["verified"]:
                     continue
@@ -346,6 +447,8 @@ def probe303_runs(root, out):
                             b += 1
                         if sf[k]["a7"] and not sv[k]["a7"]:
                             c += 1
+                        if sv[k]["a7"] and sf[k]["a7"]:
+                            a_both += 1
             if npairs:
                 from math import comb, sqrt
                 nd = b + c
@@ -355,14 +458,21 @@ def probe303_runs(root, out):
                     pk = comb(nd, b) / 2 ** nd
                     pm = min(1.0, sum(comb(nd, i) / 2 ** nd for i in range(nd + 1) if comb(nd, i) / 2 ** nd <= pk * (1 + 1e-12)))
                 d = (b - c) / npairs
-                se = sqrt(max(nd - (b - c) ** 2 / npairs, 0.0)) / npairs
-                lo, hi = d - 1.96 * se, d + 1.96 * se
+                lo, hi = newcombe_paired(a_both, b, c, npairs - a_both - b - c)
                 out.append(f"\\providecommand{{\\RunsPairedDiscordant{mk}}}{{{b} vs.\\ {c}}}")
                 out.append(f"\\providecommand{{\\RunsMcNemar{mk}}}{{{fmt_p(pm)}}}")
                 out.append(f"\\providecommand{{\\RunsDiff{mk}}}{{{100*d:+.1f}}}")
                 out.append(f"\\providecommand{{\\RunsDiffCI{mk}}}{{[{100*lo:+.1f}, {100*hi:+.1f}]}}")
                 SUMMARY["probe303_runs"][f"{mk}|paired_validated_vs_verified_R"] = {"pairs": npairs, "validated_only": b, "verified_only": c, "mcnemar_p": pm, "diff_pp": 100 * d, "diff_ci_pp": [100 * lo, 100 * hi]}
-        # the run, not the arm: the sequential-block run of the same protocol (Table 3) against the pooled interleaved runs
+        # are the three runs of one arm exchangeable?  chi-square homogeneity of the per-run counts (2 df); the pooled
+        # Clopper-Pearson intervals above treat the 300 sessions as one sample, which this test qualifies
+        for mode, key, label in (("vanilla", "a1", "VanillaAOne"), ("validated", "a7", "ValidatedR"), ("verified", "a7", "VerifiedR")):
+            if mode in cells and len(cells[mode]) >= 2:
+                per_run = [c[key] for _, c in sorted(cells[mode].items())]
+                chi2, ph = chi2_homogeneity(per_run, n)
+                out.append(f"\\providecommand{{\\RunsHetero{mk}{label}}}{{{fmt_p(ph)}}}")
+                SUMMARY["probe303_runs"][f"{mk}|{mode}|run_homogeneity_{key}"] = {"per_run": per_run, "chi2": chi2, "p": ph}
+        # the run, not the arm: the sequential-block run of the same protocol (the live table) against the pooled interleaved runs
         seq = SUMMARY.get("probe303_arms150", {})
         for mode, key, label in (("vanilla", "a1", "VanillaAOne"), ("validated", "a7", "ValidatedR"), ("verified", "a7", "VerifiedR")):
             sc = seq.get(f"{mk}|{mode}|150")
@@ -415,11 +525,97 @@ def probe304(root, out):
                 out.append(f"\\providecommand{{\\{prefix}{mk}{mname}CleanSessions}}{{{len(clean)}}}")
                 out.append(f"\\providecommand{{\\{prefix}{mk}{mname}CleanRight}}{{{clean_right}}}")
                 out.append(f"\\providecommand{{\\{prefix}{mk}{mname}CleanWrong}}{{{len(clean) - clean_right}}}")
+                # the converse: an obligation the ledger reports OPEN, and the world is indeed not [final]
+                open_ = [x for x in sess if x.get("obligations_failed", 0) > 0]
+                open_wrong = sum(1 for x in open_ if x.get("world_active") != [x.get("final")])
+                out.append(f"\\providecommand{{\\{prefix}{mk}{mname}OpenSessions}}{{{len(open_)}}}")
+                out.append(f"\\providecommand{{\\{prefix}{mk}{mname}OpenWrong}}{{{open_wrong}}}")
+                out.append(f"\\providecommand{{\\{prefix}{mk}{mname}OpenRight}}{{{len(open_) - open_wrong}}}")
+                # the shape of the world at the end of a non-clean session, from the per-session world log
+                dbl = sum(1 for x in sess if x.get("double_booked") and x.get("world_wrong"))
+                none_ = sum(1 for x in sess if x.get("world_none"))
+                stale_only = sum(1 for x in sess if x.get("world_wrong") and not x.get("double_booked") and not x.get("world_none"))
+                out.append(f"\\providecommand{{\\{prefix}{mk}{mname}FailDouble}}{{{dbl}}}")
+                out.append(f"\\providecommand{{\\{prefix}{mk}{mname}FailNone}}{{{none_}}}")
+                out.append(f"\\providecommand{{\\{prefix}{mk}{mname}FailStaleOnly}}{{{stale_only}}}")
+                one_obl = sum(1 for x in sess if x.get("obligations_registered", 0) == 1)
+                two_obl = sum(1 for x in sess if x.get("obligations_registered", 0) >= 2)
+                out.append(f"\\providecommand{{\\{prefix}{mk}{mname}OneObligation}}{{{one_obl}}}")
+                out.append(f"\\providecommand{{\\{prefix}{mk}{mname}TwoObligations}}{{{two_obl}}}")
+                out.append(f"\\providecommand{{\\{prefix}{mk}{mname}NoObligation}}{{{n - one_obl - two_obl}}}")
+                if c["mode"] == "ledger":
+                    agree[prefix][0] += clean_right + open_wrong; agree[prefix][1] += n
+                    # timing from the records beside the receipt: when the revisions landed relative to the booking's
+                    # commit, and how long the compensation took (model call included)
+                    rp = fp[:-5] + ".records.jsonl"
+                    if os.path.exists(rp):
+                        by = defaultdict(list)
+                        for line in open(rp):
+                            line = line.strip()
+                            if not line:
+                                continue
+                            r = json.loads(line)
+                            if r.get("mode") == "ledger":
+                                by[r.get("session")].append(r)
+                        both_after = 0; first_rev = []; comp_lat = []
+                        cons = {x["session"]: x for x in sess}
+                        c_before = c_between = c_after = 0     # the stale consumer reads, by what had happened when they read
+                        for k_, rs in by.items():
+                            fl = [r for r in rs if r.get("agent") == "flight_agent" and r.get("wall_commit_ms") is not None]
+                            da = sorted(r["wall_commit_ms"] for r in rs if r.get("agent") == "date_agent" and r.get("wall_commit_ms") is not None)
+                            co = sorted(r["wall_commit_ms"] for r in rs if r.get("agent") == "compensator" and r.get("wall_commit_ms") is not None)
+                            if not fl or not da:
+                                continue
+                            commit = fl[-1]["wall_commit_ms"]
+                            if all(t > commit for t in da):
+                                both_after += 1
+                            first_rev.append(da[0])
+                            if co:
+                                comp_lat.append(co[0] - commit)
+                            x = cons.get(k_)
+                            if x and x.get("consumer_saw_stale") and x.get("consumer", {}).get("at_ms") is not None:
+                                at = x["consumer"]["at_ms"]
+                                landed = [t for t in da if commit < t <= at]      # post-commit revisions that had landed when it read
+                                done = [t for t in co if t <= at]                 # compensations that had completed when it read
+                                if not landed:
+                                    c_before += 1
+                                elif not done:
+                                    c_between += 1
+                                else:
+                                    c_after += 1
+                        out.append(f"\\providecommand{{\\{prefix}{mk}{mname}ConsumerStaleBeforeRevision}}{{{c_before}}}")
+                        out.append(f"\\providecommand{{\\{prefix}{mk}{mname}ConsumerStaleBeforeCompensation}}{{{c_between}}}")
+                        out.append(f"\\providecommand{{\\{prefix}{mk}{mname}ConsumerStaleAfterCompensation}}{{{c_after}}}")
+                        def q(v, f):
+                            v = sorted(v); return v[min(len(v) - 1, int(f * len(v)))] if v else float("nan")
+                        out.append(f"\\providecommand{{\\{prefix}{mk}{mname}BothRevisionsAfterCommit}}{{{both_after}}}")
+                        out.append(f"\\providecommand{{\\{prefix}{mk}{mname}FirstRevisionMedianS}}{{{q(first_rev, 0.5) / 1000:.1f}}}")
+                        out.append(f"\\providecommand{{\\{prefix}{mk}{mname}CompLatencyMedianS}}{{{q(comp_lat, 0.5) / 1000:.1f}}}")
+                        out.append(f"\\providecommand{{\\{prefix}{mk}{mname}CompLatencyPNinetyS}}{{{q(comp_lat, 0.9) / 1000:.1f}}}")
+                        SUMMARY.setdefault("probe304" if prefix == "LW" else "probe304_first_run", {}).setdefault("timing", {})[mk] = {
+                            "both_revisions_after_commit": both_after, "first_revision_median_ms": q(first_rev, 0.5),
+                            "compensation_latency_median_ms": q(comp_lat, 0.5), "compensation_latency_p90_ms": q(comp_lat, 0.9),
+                            "consumer_stale_before_revision": c_before, "consumer_stale_before_compensation": c_between,
+                            "consumer_stale_after_compensation": c_after}
                 SUMMARY.setdefault("probe304" if prefix == "LW" else "probe304_first_run", {})[f"{mk}|{c['mode']}"] = dict(
-                    {k: v for k, v in c.items() if k != "sessions"}, compensator=comp, clean_sessions=len(clean), clean_right=clean_right)
+                    {k: v for k, v in c.items() if k != "sessions"}, compensator=comp, clean_sessions=len(clean), clean_right=clean_right,
+                    open_sessions=len(open_), open_wrong=open_wrong)
+        if found and agree[prefix][1]:
+            # report/world agreement over the ledger arm of every family: (discharged and right) + (open and wrong), of n
+            k, n = agree[prefix]; lo, hi = clopper_pearson(n - k, n)
+            out.append(f"\\providecommand{{\\{prefix}LedgerAgree}}{{{k}/{n}}}")
+            out.append(f"\\providecommand{{\\{prefix}LedgerDisagree}}{{{n - k}}}")
+            out.append(f"\\providecommand{{\\{prefix}LedgerDisagreeCI}}{{[{100 * lo:.1f}, {100 * hi:.1f}]}}")
+            SUMMARY.setdefault("probe304" if prefix == "LW" else "probe304_first_run", {})["ledger_report_world_agreement"] = \
+                {"agree": k, "n": n, "disagree_ci95_pct": [100 * lo, 100 * hi]}
         return found
+    agree = {"LW": [0, 0], "LWfirst": [0, 0], "LWatomic": [0, 0], "LWwide": [0, 0]}
     fold("ledger_world", "LW", "the ledger with a consumer, a cancellation step and a fallible compensator", "LedgerWorldAvailable")
     fold("ledger_world_v1_latest_conf", "LWfirst", "FIRST RUN, compensator `latest` (one tracked confirmation): archived receipts", "LedgerWorldFirstAvailable")
+    # 2026-10-16 (runner step 21): the same protocol with the obligation registered ATOMICALLY with the superseding write,
+    # and the ledger arm alone with a 5 s consumer window
+    fold("ledger_world_atomic", "LWatomic", "ATOMIC registration (--registration atomic)", "LedgerWorldAtomicAvailable")
+    fold("ledger_world_window5000", "LWwide", "ledger arm, consumer window 0-5000 ms", "LedgerWorldWideAvailable")
 
 
 def gates(root, out):
@@ -443,23 +639,26 @@ def gates(root, out):
             # the Claude op-record replication's cells (not asserted in results/expected.json): verified-detector counts
             # as macros \VSClaude<Workload><Runtime>, e.g. \VSClaudeTriageVanilla = "48/100"; AVAILABLE only with a passing gate
             if cells and not probs:
+                vs_cells = {(wl, rt): "--" for wl in ("EditReview", "PlanExecute", "Triage") for rt in ("Vanilla", "Pess", "SI")}
                 for name, c in cells.items():
                     m = re.match(r"runs/[^/]*-claude/([a-z-]+)-(vanilla|pessimistic|snapshot_isolation)$", name)
                     if m:
                         wl = m.group(1).title().replace("-", ""); rt = {"vanilla": "Vanilla", "pessimistic": "Pess", "snapshot_isolation": "SI"}[m.group(2)]
-                        out.append(f"\\providecommand{{\\VSClaude{wl}{rt}}}{{{c['a1_verified']}/{c['n']}}}")
+                        vs_cells[(wl, rt)] = f"{c['a1_verified']}/{c['n']}"
                         SUMMARY.setdefault("pilot_claude_verified", {})[f"{m.group(1)}|{m.group(2)}"] = {"a1": c["a1_verified"], "n": c["n"]}
                 if SUMMARY.get("pilot_claude_verified"):
-                    for wl in ("EditReview", "PlanExecute", "Triage"):
-                        for rt in ("Vanilla", "Pess", "SI"):
-                            out.append(f"\\providecommand{{\\VSClaude{wl}{rt}}}{{--}}")   # a cell not run yet prints as --
+                    out.append("% Claude op-record replication (runs/*-claude), scored by the verified detector; -- = cell not scored yet")
+                    for (wl, rt), val in vs_cells.items():
+                        out.append(f"\\providecommand{{\\VSClaude{wl}{rt}}}{{{val}}}")
                     out.append("\\renewcommand{\\PilotClaudeAvailable}{1}")
-        except Exception:
-            pass
+        except Exception as ex:  # noqa: BLE001
+            # never silent: a fold that drops a receipt must say so (a shadowed `re` import dropped the Claude pilot
+            # macros of the 2026-10-15 fold without a word)
+            print(f"warning: verified_scorer receipt {vs} could not be folded: {ex!r}", file=sys.stderr)
+            out.append(f"% verified_scorer receipt NOT folded: {ex!r}")
     tl = os.path.join(os.path.dirname(root.rstrip("/")) or ".", "formal", "tla", "tlc.Duplication.log")
     if os.path.exists(tl):
         txt = open(tl, errors="replace").read()
-        import re
         st = re.findall(r"(VIOLATED|SAFE)\s+\(expected (VIOLATED|SAFE)\s*\)\s+([0-9,]+) distinct states found; witness depth (\d+)", txt)
         if len(st) == 3 and all(a == b for a, b, _, _ in st):
             out.append(f"% --- check_duplication.sh ({tl}) ---")

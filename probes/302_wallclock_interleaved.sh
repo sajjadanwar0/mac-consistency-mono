@@ -64,10 +64,17 @@ for ((k = 0; k < N; k++)); do
       stage="$RUN/.stage-$wl-$rt-$k"; rm -rf "$stage"
       if ls "$cell"/*"-$(printf '%04d' "$k")".jsonl >/dev/null 2>&1; then continue; fi
       ( cd "$(dirname "$PILOT")" && $PY "$(basename "$PILOT")" --provider "$PROVIDER" --model "$MODEL" \
-          --workload "$wl" --runtime "$rt" --n 1 --seed $((SEED + k)) \
+          --workload "$wl" --runtime "$rt" --n 1 --seed $((SEED + k)) --scenario-offset "$k" \
           --output "$stage" --tokens-output "$stage-tokens" ) || { echo "FAIL: $wl/$rt/$k" >&2; exit 1; }
       f="$(ls "$stage"/*.jsonl | head -1)"; mv "$f" "$cell/session-$(printf '%04d' "$k").jsonl"
-      mkdir -p "$RUN/tokens-$wl-$rt"; mv "$stage-tokens"/* "$RUN/tokens-$wl-$rt/" 2>/dev/null || true
+      # the sidecar is named by SESSION. Before 2026-10-15 every one-session call wrote <wl>-<rt>-0000.tokens.jsonl and the
+      # mv below overwrote the previous session's sidecar: the 2026-10-14 interleaved runs kept ONE sidecar per cell (the
+      # last session's), so their wall-clock receipt is order.tsv (completion stamps, 1 s resolution), folded by
+      # harness/macaudit/claims_from_results.py as the stamp-based estimate.
+      mkdir -p "$RUN/tokens-$wl-$rt"
+      for tf in "$stage-tokens"/*.tokens.jsonl; do
+        [ -f "$tf" ] && mv "$tf" "$RUN/tokens-$wl-$rt/session-$(printf '%04d' "$k").tokens.jsonl"
+      done
       rm -rf "$stage" "$stage-tokens"
       printf '%d\t%s\t%s\t%s\n' "$k" "$wl" "$rt" "$(date -u +%FT%TZ)" >> "$RUN/order.tsv"
     done

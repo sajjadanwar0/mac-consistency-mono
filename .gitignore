@@ -13,6 +13,7 @@ states/
 *_TTrace_*.bin
 formal/tla/lattice16_runs/
 formal/tla/lattice16_maxops3_runs/
+formal/tla/lattice16_a1_maxops3_c*_runs/
 formal/tla/lattice16_quick/
 formal/tla/mo3/
 formal/tla/co_*.log

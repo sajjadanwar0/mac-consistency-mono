@@ -61,7 +61,8 @@ crates/analyser/         the scorer: its A1 verdict is the VERIFIED exec detecto
                          beside it as a cross-check (--strict fails on disagreement);
                          A2/A3/A6 remain ports gated against the Verus specs
 formal/tla/              Memory/Anomalies/Guarded/CommitOrder .tla, the MC_* models,
-                         lattice16.sh + committed matrices, check_*.sh verdict scripts;
+                         lattice16.sh + committed matrices (lattice16_a1_maxops3.sh: the
+                         NoA1 half at MaxOps=3, two values, one cell), check_*.sh scripts;
                          Guarded5.tla + mkcfg5.py + lattice32.sh (A7 / G7 basis ledger,
                          the 32-point matrix, 160 runs)
 formal/weakmem/          GenMC RC11 litmus check of the lock discipline
@@ -80,8 +81,9 @@ results/                 committed evidence, one directory per campaign:
                          runs/ (AutoGen pilot, 3 stamped runs), live_a1_*/ (LangGraph live),
                          live_a1_outcome/ (probe 303: four arms, offset sweep, three
                          interleaved runs), ledger_world/ (probe 304, the ledger in a
-                         world; ledger_world_v1_latest_conf/ archives the first run's
-                         compensator, --compensator latest), a6_real_latency/,
+                         world, compensator `all`, 2026-10-15; ledger_world_v1_latest_conf/
+                         is the first run, compensator `latest`, 2026-10-14; both carry
+                         per-session world logs and records), a6_real_latency/,
                          live_l2/, langgraph_a6_*/, hc_*/ (contention sweep), traces/,
                          production_traces/, mast_oprecords/, pilot_tokens*/, l2_measure.json,
                          l4_measure.json, verus/count.json

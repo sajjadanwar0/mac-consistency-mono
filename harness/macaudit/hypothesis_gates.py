@@ -192,6 +192,48 @@ def h6_coverage(rs):
     return tot, und
 
 
+# traces converted from third-party transcripts or tool logs: MAST transcripts (mast_oprecords), the production
+# code-review traces (production_traces: a cell such as run_python:0 is a tool channel whose write is the request and
+# whose read is the response), the racy demo (oprecords) and the synthetic detector fixtures (traces, with deliberate
+# ghost values).  Their initial state is not in the trace and their channels are not store cells, so the store axiom
+# is REPORTED on them and not gated; H0/H1 (structural) are gated on them like everywhere else.
+CONVERTED = {"production_traces", "mast_oprecords", "oprecords", "traces"}
+
+
+def h7_store_axiom(rs):
+    """the store axiom of CommitOrder.tla (ReadsReflectMemory), on the records: a declared read of c returns the
+    value of the latest write to c with write_time <= read_time, or NULL when there is none.  Returns
+    (reads checked, disagreements with a recorded prior write, non-NULL reads of a cell with no recorded prior write).
+    A trace is one session: the latest write is sought among that session's records (seed writes included,
+    registration and compensation records excluded, as they are not operations)."""
+    writes = defaultdict(list)             # cell -> [(write_time, value)]
+    for r in rs:
+        if r.get("obligation_for"):
+            continue
+        for c in r.get("write_set", []):
+            if c in r.get("write_values", {}):
+                writes[c].append((r["write_time"], r["write_values"][c]))
+    for c in writes:
+        writes[c].sort(key=lambda t: t[0])
+    checked = bad = unrecorded = 0
+    for r in rs:
+        rv = r.get("read_values")
+        if not isinstance(rv, dict) or r.get("seed") or r.get("obligation_for") or r.get("compensation"):
+            continue
+        for c in r.get("read_set", []):
+            if c not in rv:
+                continue
+            checked += 1
+            visible = [(t, v) for t, v in writes.get(c, []) if t <= r["read_time"]]
+            got = rv[c]
+            if visible:
+                if str(got) != str(visible[-1][1]):
+                    bad += 1
+            elif not (got is None or str(got) == "NULL"):
+                unrecorded += 1
+    return checked, bad, unrecorded
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--root", default="results"); ap.add_argument("--check", action="store_true"); ap.add_argument("--tex", action="store_true")
@@ -199,7 +241,8 @@ def main() -> int:
     ap.add_argument("--include-mock", action="store_true", help="count *mock* campaigns (excluded from the paper's totals by default)")
     a = ap.parse_args()
     per = defaultdict(lambda: {"traces": 0, "records": 0, "h0": 0, "h1": 0, "h2_multi": 0, "h2_coll": 0, "h2_traces_with_coll": 0,
-                               "a1": 0, "restored": 0, "book": 0, "recall": 0, "ext": 0, "dup": 0, "obs": 0, "und": 0})
+                               "a1": 0, "restored": 0, "book": 0, "recall": 0, "ext": 0, "dup": 0, "obs": 0, "und": 0,
+                               "h7_reads": 0, "h7_bad": 0, "h7_unrec": 0, "h7_traces": 0})
     for fp, rs in traces(a.root):
         c = campaign(fp, a.root)
         if "mock" in c and not a.include_mock:
@@ -214,6 +257,7 @@ def main() -> int:
             t, r2 = h4_recall(rs); d["book"] += t; d["recall"] += r2
         e, k = h5_duplicates(rs); d["ext"] += e; d["dup"] += k
         o, u = h6_coverage(rs); d["obs"] += o; d["und"] += u
+        n7, b7, u7 = h7_store_axiom(rs); d["h7_reads"] += n7; d["h7_bad"] += b7; d["h7_unrec"] += u7; d["h7_traces"] += (1 if n7 else 0)
     # the live L2 replay: the one live campaign the A3 residue detector scores; one plan cell and one
     # result cell per session, so value-uniqueness is the question whether the two values differ
     l2n = l2bad = 0
@@ -246,6 +290,12 @@ def main() -> int:
         except Exception:
             pass
     print(f"H6: {tot['und']} undeclared store reads over {tot['obs']} records that carry an observed read set (0 records = no run has carried it yet)")
+    inst = {c: d for c, d in per.items() if c not in CONVERTED}; conv = {c: d for c, d in per.items() if c in CONVERTED}
+    h7 = {k: sum(d[k] for d in inst.values()) for k in ("h7_reads", "h7_bad", "h7_unrec", "h7_traces")} if inst else {"h7_reads": 0, "h7_bad": 0, "h7_unrec": 0, "h7_traces": 0}
+    h7c = {k: sum(d[k] for d in conv.values()) for k in ("h7_reads", "h7_bad", "h7_unrec")} if conv else {"h7_reads": 0, "h7_bad": 0, "h7_unrec": 0}
+    print(f"H7 (store axiom, ReadsReflectMemory) on the store-instrumented campaigns: {h7['h7_bad']} declared reads disagree with the latest "
+          f"visible write and {h7['h7_unrec']} read a never-written cell as non-NULL, over {h7['h7_reads']} declared reads in {h7['h7_traces']} traces; "
+          f"converted campaigns {sorted(conv)}: {h7c['h7_reads']} reads, {h7c['h7_bad']} disagree, {h7c['h7_unrec']} unrecorded (tool channels and transcripts: reported, not gated)")
     print(f"H5: {tot['dup']} external effect keys emitted twice over {tot['ext']} externalized effects in the committed records"
           + (f"; the interrupt probe emitted the pre-gate effect {ip_before} times (arguments diverge: {ip_div})" if ip_before is not None else ""))
     if a.tex:
@@ -270,8 +320,13 @@ def main() -> int:
         print(f"\\newcommand{{\\HypUndeclaredReads}}{{{tot['und']}}}")
         if ip_before is not None:
             print(f"\\newcommand{{\\HypInterruptEmissions}}{{{ip_before}}}")
-    if a.check and (tot["h1"] or tot["h0"]):
-        print("FAIL: Theorem 1's hypotheses do not hold on this data (H0 read-before-commit or H1 per-agent non-overlap violated)"); return 1
+        print(f"\\newcommand{{\\HypStoreAxiomReads}}{{{h7['h7_reads']:,}}}".replace(",", "{,}"))
+        print(f"\\newcommand{{\\HypStoreAxiomTraces}}{{{h7['h7_traces']:,}}}".replace(",", "{,}"))
+        print(f"\\newcommand{{\\HypStoreAxiomViolations}}{{{h7['h7_bad'] + h7['h7_unrec']}}}")
+        print(f"\\newcommand{{\\HypStoreAxiomConvertedReads}}{{{h7c['h7_reads']:,}}}".replace(",", "{,}"))
+        print(f"\\newcommand{{\\HypStoreAxiomConvertedCampaigns}}{{{len(conv)}}}")
+    if a.check and (tot["h1"] or tot["h0"] or h7["h7_bad"] or h7["h7_unrec"]):
+        print("FAIL: Theorem 1's hypotheses do not hold on this data (H0 read-before-commit, H1 per-agent non-overlap or H7 store axiom violated)"); return 1
     return 0
 
 

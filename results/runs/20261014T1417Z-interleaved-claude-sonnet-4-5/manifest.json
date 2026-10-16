@@ -1,0 +1,2 @@
+{"provenance": "captured", "design": "interleaved-per-session", "provider": "anthropic", "model": "claude-sonnet-4-5",
+ "n": 100, "seed": 42, "stamp": "20261014T1417Z-interleaved-claude-sonnet-4-5", "pilot_git_sha": "27d2dcf652b2b064813559bb8f3a052365230260"}

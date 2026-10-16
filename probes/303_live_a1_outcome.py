@@ -101,24 +101,36 @@ class BasisLedger:
         with self.lock:
             self.effects[key] = {"basis": dict(basis), "compensate": compensate, "obligation": False, "discharged": False}
 
-    def superseded(self, cell, new_value):
-        """called by the store after a put to `cell`: register + discharge obligations"""
+    def mark(self, cell, new_value):
+        """REGISTRATION ONLY: set the obligation flag of every effect whose basis the write supersedes and return them.
+        No callback, no model call: the ledgered store calls this INSIDE the store lock, in the same critical section as
+        the superseding write, so the registration is atomic with it (the Verus model's write step)."""
         todo = []
         with self.lock:
             for key, e in self.effects.items():
                 if cell in e["basis"] and e["basis"][cell] != new_value and not e["obligation"]:
                     e["obligation"] = True; self.registered += 1; todo.append((key, e))
-        for key, e in todo:               # the registration record first, then discharge outside the lock
+        return todo
+
+    def discharge(self, todo, cell, new_value, t=None):
+        """the registration RECORD (stamped with the superseding put's stamp t) and the compensation, outside the lock"""
+        for key, e in todo:
             if self.on_register is not None:
-                self.on_register(key, cell, new_value)
+                self.on_register(key, cell, new_value, t=t)
             e["compensate"](new_value)
             with self.lock:
                 e["discharged"] = True; self.discharged += 1
                 e["basis"][cell] = new_value   # the compensated effect's basis is now current ...
                 e["obligation"] = False        # ... and it is a fresh effect: a further revision owes a further obligation
-                                               # (the per-record flag in Guarded5.tla stays set; the replacement booking is
-                                               # its own record with its own flag -- this workload revises once, so the
-                                               # path is not exercised by Table 3)
+
+    def superseded(self, cell, new_value):
+        """the pre-2026-10-16 path (registration after the put returned): mark, then discharge"""
+        self.discharge(self.mark(cell, new_value), cell, new_value)
+
+
+# 2026-10-16: the executed ledger registers ATOMICALLY with the superseding write (inside the store's lock), as the
+# Verus model does. "after" reproduces the receipts of 2026-10-14/15, in which registration followed the put.
+LEDGER_REGISTRATION = "atomic"
 
 
 def observed_store(H, clock, ledger=None):
@@ -142,13 +154,30 @@ def observed_store(H, clock, ledger=None):
 
 
 def ledgered_store(H, clock, ledger):
-    """subclass the paper's InstrumentedStore so that put() notifies the ledger"""
+    """subclass the paper's InstrumentedStore so that put() notifies the ledger.
+    LEDGER_REGISTRATION == "atomic": the old value is read, the new one installed, the clock stamped AND the obligations
+    flagged in ONE critical section of the store lock; the registration record and the compensation follow outside it.
+    LEDGER_REGISTRATION == "after": the 2026-10-14/15 behaviour (put, release the lock, then notify the ledger)."""
     class LedgeredStore(H.InstrumentedStore):
         def put(self, namespace, key, value, *args, **kwargs):
+            cell = "/".join(namespace) + "/" + key
+            if LEDGER_REGISTRATION == "atomic" and cell == H.DATE_CELL:
+                with self.clock.lock:
+                    old = super(H.InstrumentedStore, self).get(namespace, key)        # InMemoryStore.get: not a node read
+                    super(H.InstrumentedStore, self).put(namespace, key, value, *args, **kwargs)
+                    self.clock.t += 1; t = self.clock.t
+                    new = value["date"]
+                    todo = ledger.mark(cell, new) if (old is None or old.value.get("date") != new) else []
+                self.local.last = ("put", t, time.perf_counter())
+                self.log.append({"op": "put", "ns": "/".join(namespace), "key": key, "t": t})
+                saved = self.local.last          # the compensator runs in this thread and must not clobber the caller's stamp
+                if todo:
+                    ledger.discharge(todo, cell, new, t=t)
+                self.local.last = saved
+                return None
             old = H.InstrumentedStore.get(self, namespace, key)   # the hook's own read: not a node read (H6)
             r = super().put(namespace, key, value, *args, **kwargs)
-            saved = self.local.last          # the caller's own put stamp: the compensator
-            cell = "/".join(namespace) + "/" + key   # runs in this thread and must not clobber it
+            saved = self.local.last
             if cell == H.DATE_CELL:
                 new = value["date"]
                 if old is None or old.value.get("date") != new:
@@ -397,9 +426,9 @@ def main() -> int:
     def run_session(mode, off, k, revise, run_rec):
         """one session of one arm; returns the per-session receipt entry"""
         clock = H.Clock(); first = len(run_rec.records)
-        def on_register(key, cell, new_value, _k=k, _mode=mode, _off=off):
+        def on_register(key, cell, new_value, _k=k, _mode=mode, _off=off, t=None):
             run_rec.emit(agent="ledger", read_set=[], read_values={}, read_time=0, write_set=[], write_values={},
-                         write_time=clock.now(), experiment="store-outcome", mode=_mode, session=_k, offset_ms=_off,
+                         write_time=(t if t is not None else clock.now()), experiment="store-outcome", mode=_mode, session=_k, offset_ms=_off,
                          obligation_for=f"trip/bookings/{key}", superseded_cell=cell, superseding_value=new_value)
         ledger = BasisLedger(on_register) if mode in ("ledger", "ledger_verified") else None
         store = observed_store(H, clock, ledger)

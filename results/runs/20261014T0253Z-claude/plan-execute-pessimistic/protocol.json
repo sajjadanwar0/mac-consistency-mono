@@ -1,0 +1,9 @@
+{
+ "seeded_tickets": true,
+ "provider": "anthropic",
+ "model": "claude-sonnet-4-5",
+ "workload": "plan-execute",
+ "runtime": "pessimistic",
+ "n": 100,
+ "seed": 42
+}

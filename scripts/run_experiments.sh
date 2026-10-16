@@ -51,6 +51,9 @@
 #        on the same three families                                                      deepseek ~$0.3
 #  19    arm_timing + live_runs_aggregate + hypothesis_gates --tex      python3          $0             2 min
 #        (claims_results.tex gets the new macros; then run 13 again)
+#  20    TLC: NoA1 lattice points at MaxOps=3, two values, one cell     java             $0             ~10 min
+#  21    probe 304 again: ATOMIC ledger registration (3 arms x 3        Claude, OpenAI,  haiku ~$2,     ~2.5 h
+#        families) + the ledger arm with a 5 s consumer window           DeepSeek         4o-mini ~$0.5, deepseek ~$0.5
 #  Claude-side reruns that existed before: 6 (probe 302 on sonnet, ~$15-25) and 11 (the pilot replication
 #  with op-records; its triage cells are void and must be DELETED and rerun with the seeded-ticket reporter).
 set -uo pipefail   # not -e: a failing step is recorded and the next step still runs (summary at the end)
@@ -72,6 +75,16 @@ have() { command -v "$1" >/dev/null 2>&1; }
 FAILED=()
 run() { if [ "$DRY" = 1 ]; then echo "  would run: $*"; else echo "  + $*"; eval "$@" || { echo "  FAIL (exit $?): $*" >&2; FAILED+=("$*"); return 1; }; fi; }
 need_key() { [ -n "${!1:-}" ] && return 0; [ "$DRY" = 1 ] && { echo "  (needs $1)"; return 0; }; echo "  FAIL: $1 is not set (export it, then re-run this step)" >&2; FAILED+=("$1 unset"); return 1; }
+# the delivered files of 2026-10-14/15 must be in place before a step means anything: a step that runs on the previous
+# version of a file reproduces the previous failure (2026-10-15: the mv block had not been run). Defined HERE, with the
+# other helpers: bash resolves a function at call time, and the 2026-10-15 log shows "delivered: command not found" at
+# steps 11 and 6 because the definition sat below their call sites.
+delivered() { # delivered <file> <marker> <what>
+  if ! grep -q -- "$2" "$1" 2>/dev/null; then
+    echo "  FAIL: $1 is not the delivered version ($3 missing) -- run the mv block from the chat, then re-run" >&2
+    FAILED+=("$1 not updated"); return 1
+  fi
+}
 mkdir -p results/live_a1_outcome results/a6_real_latency results/verus tools
 export PYTHONPATH="$PWD/probes/_modules${PYTHONPATH:+:$PYTHONPATH}"   # renumbered probes import each other by original name (absolute: probe 302 cds into probes/)
 # the pilot's pessimistic / snapshot_isolation runtimes are `baselines.runtimes.*`: a namespace package (no __init__.py)
@@ -251,17 +264,14 @@ UPLOAD these to the chat and the paper is regenerated from them:
   results/verus/lib_l5_ledger.verus.log        (if step 7 ran and it is not already inside the summary)
   results/live_l2_haiku1000.log                (if step 10 ran)
   tools/rescore_cells.log  or the last 30 lines of step 11's output   (if step 11 ran)
+  results/runs/*-interleaved*/order.tsv            (if step 5/6 ran: the completion stamps, the wall-clock receipt of a run whose sidecars were lost)
+  formal/tla/lattice16_a1_maxops3_c1_results.json  (if step 20 ran: the NoA1 matrix at MaxOps=3)
+  results/ledger_world_atomic/  results/ledger_world_window5000/   (if step 21 ran: zip-free -- upload the six .json files)
+NOTE: step 14 (the verified scorer) scores the cells that exist when it runs. If steps 11 or 6 produced cells after
+      step 14 (the 2026-10-15 order was 14, 18, 11, 6), re-run:  ./scripts/run_experiments.sh --only 14 19
 EOF
 fi
 
-# the delivered files of 2026-10-14/15 must be in place before these steps mean anything: a step that runs on the
-# previous version of a file reproduces the previous failure (the 2026-10-15 receipts: the mv block had not been run)
-delivered() { # delivered <file> <marker> <what>
-  if ! grep -q -- "$2" "$1" 2>/dev/null; then
-    echo "  FAIL: $1 is not the delivered version ($3 missing) -- run the mv block from the chat (MOVE_COMMANDS_2.txt), then re-run" >&2
-    FAILED+=("$1 not updated"); return 1
-  fi
-}
 if want 14; then log 14 "cargo: the analyser scores A1 with the VERIFIED detector; l3_server; the two bytes gates"
   delivered crates/analyser/src/oprecord.rs normalize_agent_key "the agent/agent_id reader fix" || true
   run "bash harness/macaudit/verified_bytes_gate.sh"
@@ -287,6 +297,11 @@ if want 16; then log 16 "TLC: Duplication.tla (predicate D: witness, divergent w
   J="${TLA_TOOLS:-$ROOT/tools/tla2tools.jar}"
   [ -f "$J" ] || run "curl -sSL -o $J https://github.com/tlaplus/tlaplus/releases/download/v1.8.0/tla2tools.jar"
   run "(cd formal/tla && ./check_duplication.sh $J 2>&1 | grep -v JAVA_TOOL_OPTIONS | tee tlc.Duplication.log | tail -4)"; fi
+
+if want 20; then log 20 "TLC: the sixteen NoA1 lattice points at MaxOps=3, two values, one cell (where the supersession witness is reachable; no key)"
+  J="${TLA_TOOLS:-$ROOT/tools/tla2tools.jar}"
+  [ -f "$J" ] || run "curl -sSL -o $J https://github.com/tlaplus/tlaplus/releases/download/v1.8.0/tla2tools.jar"
+  run "(cd formal/tla && CELLS=1 TLA_TOOLS=$J ./lattice16_a1_maxops3.sh 2>&1 | grep -v JAVA_TOOL_OPTIONS | tail -18)"; fi
 
 if want 17; then log 17 "probe 303 --interleave --runs 3: five arms per session, three families (Table 3 replicated rows)"
   need_key ANTHROPIC_API_KEY; need_key OPENAI_API_KEY; need_key DEEPSEEK_API_KEY
@@ -314,6 +329,20 @@ if want 18; then log 18 "probe 304: the ledger in a world (consumer, cancellatio
     out="results/ledger_world/${model}.json"
     if [ -f "$out" ] && [ "$FORCE" = 0 ]; then echo "  $out exists, skipping"; continue; fi
     run "$UVG probes/304_ledger_world.py --provider $prov --model $model $* --n 100 --p-revise 1.0 --offset-ms 150 --revisions 2 --second-gap-ms 800 --modes validated,ledger,ledger_norollback --p-cancel-fail 0.1 --p-rebook-fail 0.1 --consumer-max-ms 1500 --seed 20261014 --compensator all --out $out"
+  done; fi
+
+if want 21; then log 21 "probe 304 with ATOMIC ledger registration (three families) + a 5 s consumer window (ledger arm)"
+  need_key ANTHROPIC_API_KEY; need_key OPENAI_API_KEY; need_key DEEPSEEK_API_KEY
+  delivered probes/304_ledger_world.py "--registration" "the atomic-registration switch" || true
+  delivered probes/303_live_a1_outcome.py "LEDGER_REGISTRATION" "the atomic ledgered store" || true
+  mkdir -p results/ledger_world_atomic results/ledger_world_window5000
+  for spec in "$P_HAIKU" "$P_4OMINI" "$P_DEEPSEEK"; do set -- $spec; prov=$1; model=$2; shift 2
+    out="results/ledger_world_atomic/${model}.json"
+    if [ -f "$out" ] && [ "$FORCE" = 0 ]; then echo "  $out exists, skipping"
+    else run "$UVG probes/304_ledger_world.py --provider $prov --model $model $* --n 100 --p-revise 1.0 --offset-ms 150 --revisions 2 --second-gap-ms 800 --modes validated,ledger,ledger_norollback --p-cancel-fail 0.1 --p-rebook-fail 0.1 --consumer-max-ms 1500 --seed 20261014 --compensator all --registration atomic --out $out"; fi
+    out="results/ledger_world_window5000/${model}.json"
+    if [ -f "$out" ] && [ "$FORCE" = 0 ]; then echo "  $out exists, skipping"
+    else run "$UVG probes/304_ledger_world.py --provider $prov --model $model $* --n 100 --p-revise 1.0 --offset-ms 150 --revisions 2 --second-gap-ms 800 --modes ledger --p-cancel-fail 0.1 --p-rebook-fail 0.1 --consumer-max-ms 5000 --seed 20261014 --compensator all --registration atomic --out $out"; fi
   done; fi
 
 if want 19; then log 19 "receipt-derived analyses: arm timing, replicated runs, hypothesis gates (then re-run 13)"
