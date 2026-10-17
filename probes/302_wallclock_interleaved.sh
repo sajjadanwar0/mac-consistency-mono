@@ -48,6 +48,10 @@ ARMS_STR="${ARMS:-vanilla pessimistic snapshot_isolation}"
 read -r -a ARMS_ARR <<< "$ARMS_STR"
 WORKLOADS_STR="${WORKLOADS:-edit-review plan-execute triage}"
 read -r -a WORKLOADS <<< "$WORKLOADS_STR"
+# REFUSAL_ADDRESSED=1 (2026-10-17, runner step 24): the pilot's REFUSED result names the refused agent and tells the
+# others it is not theirs (--refusal-addressed); the group chat shows every tool result to every agent, and in the
+# step-22 run the unaddressed text made the unrefused agent repeat its last step. Recorded in each cell's protocol.json.
+REFUSAL_ADDRESSED="${REFUSAL_ADDRESSED:-0}"
 
 # seeded per-session permutation of the arms
 order_for() { # order_for <session> -> the arms, one per line, in this session's seeded order
@@ -74,6 +78,7 @@ for ((k = 0; k < N; k++)); do
       ( cd "$(dirname "$PILOT")" && $PY "$(basename "$PILOT")" --provider "$PROVIDER" --model "$MODEL" \
           --workload "$wl" --runtime "$rt" --n 1 --seed $((SEED + k)) --scenario-offset "$k" \
           ${policy:+--on-abort "$policy"} \
+          $([ "$REFUSAL_ADDRESSED" = 1 ] && echo --refusal-addressed) \
           --output "$stage" --tokens-output "$stage-tokens" ) || { echo "FAIL: $wl/$armdir/$k" >&2; exit 1; }
       f="$(ls "$stage"/*-trace-*.jsonl | head -1)"; mv "$f" "$cell/session-$(printf '%04d' "$k").jsonl"
       # the pilot's per-session refusal record (2026-10-17): appended to the cell's refusals.jsonl
@@ -95,7 +100,7 @@ done
 
 cat > "$RUN/manifest.json" <<EOF
 {"provenance": "captured", "design": "interleaved-per-session", "provider": "$PROVIDER", "model": "$MODEL",
- "n": $N, "seed": $SEED, "stamp": "$STAMP", "arms": "$ARMS_STR", "workloads": "$WORKLOADS_STR",
+ "n": $N, "seed": $SEED, "stamp": "$STAMP", "arms": "$ARMS_STR", "workloads": "$WORKLOADS_STR", "refusal_addressed": $REFUSAL_ADDRESSED,
  "pilot_git_sha": "$(git -C "$ROOT" rev-parse HEAD 2>/dev/null || echo unknown)"}
 EOF
 echo "done: $RUN  (score with: $PY probes/*_realstore_metrics.py --check after adding the stamp to RUNS)"

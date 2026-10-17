@@ -14,8 +14,8 @@ This is the artifact referenced in §6 as the principal Rust deliverable, plus
 the L₂ measurement and session replay for §5 (executable L₂ runtime).
 
 **Companion repositories.** The TLA+/TLC/TLAPS specifications and proofs are in
-`mac-consistency`; the full Verus development (all proof files, 371 curated /
-392 full obligations, including the `lib_l2_safety.rs` / `lib_l*_exec.rs` /
+`mac-consistency`; the full Verus development (all proof files, 160 curated /
+181 full obligations, including the `lib_l2_safety.rs` / `lib_l*_exec.rs` /
 refinement proofs) is in `mac-consistency-pilot/verus-detector/`. This crate
 carries Verus source that plain cargo compiles with the proofs erased: the two
 helpers that back SI validation (`verified_si.rs`, `lib_si_validate_exec.rs`)

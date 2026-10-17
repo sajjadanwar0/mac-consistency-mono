@@ -332,6 +332,28 @@ def probe302(root, out, boot=2000, seed=1):
                 sess[(r["workload"], r["runtime"])][idx] += float(r.get("wall_clock_ms", 0))
         mk = "Claude" if (model or "").startswith("claude") else "Gpt"
         n_side = _paired_overheads(sess, out, mk, run, model, "Paired", boot, rng) if sess else 0
+        # (a') the writer role's committed write per cell (editor->doc, triager->priority, planner->plan), from the records:
+        # the control the refusal study (step 22) is read against -- under the pre-2026-10-17 tools a refused read surfaced
+        # as an exception text and the unrefused editor still wrote (100/100 under locking in 20261014T1417Z)
+        WRITER = {"edit-review": ("editor", "doc"), "triage": ("triager", "priority"), "plan-execute": ("planner", "plan")}
+        wrote_any = False
+        for cell in sorted(glob.glob(os.path.join(run, "*-*"))):
+            base = os.path.basename(cell)
+            m = re.match(r"^(edit-review|plan-execute|triage)-(vanilla|pessimistic|snapshot_isolation)$", base)
+            if not m or not os.path.isdir(cell):
+                continue
+            wl, rt = m.group(1), m.group(2)
+            role, cellname = WRITER[wl]
+            tot = 0; hit = 0
+            for fp in glob.glob(os.path.join(cell, "session-*.jsonl")):
+                recs = [json.loads(l) for l in open(fp) if l.strip()]
+                tot += 1; hit += int(any(r.get("agent") == role and cellname in (r.get("write_set") or []) for r in recs))
+            if tot:
+                if not wrote_any:
+                    out.append(f"% --- probe 302 ({run}; model {model}): the writer role's committed write per cell, from the records ---"); wrote_any = True
+                W = "".join(p_.capitalize() for p_ in wl.split("-")); A = {"vanilla": "Vanilla", "pessimistic": "Pess", "snapshot_isolation": "SI"}[rt]
+                out.append(f"\\providecommand{{\\Interleaved{mk}{W}{A}WriterCommits}}{{{hit}/{tot}}}")
+                SUMMARY.setdefault("probe302_writer_commits", {}).setdefault(os.path.basename(run), {})[f"{wl}/{rt}"] = {"sessions": tot, "writer_commit_sessions": hit}
         # (b) completion stamps
         ot = os.path.join(run, "order.tsv")
         if os.path.exists(ot):
@@ -373,15 +395,35 @@ def probe302_refusal(root, out, boot=2000, seed=1):
            "snapshot_isolation-drop": "SIDrop", "snapshot_isolation-retry": "SIRetry",
            "pessimistic": "Pess", "snapshot_isolation": "SI"}
     for run in runs:
-        model = None
+        model = None; addressed = None
         mf = os.path.join(run, "manifest.json")
         if os.path.exists(mf):
             try:
-                model = json.load(open(mf)).get("model")
+                mj = json.load(open(mf)); model = mj.get("model")
+                if "refusal_addressed" in mj:
+                    addressed = bool(int(mj["refusal_addressed"]))
             except Exception:
                 pass
-        mk = "Claude" if (model or "").startswith("claude") else "Gpt"
+        # the protocol of the REFUSED text (2026-10-17 evening): unaddressed (step 22; the group chat shows it to every
+        # agent) or addressed to the refused agent (step 24, the control). Read from the cells' protocol.json when the
+        # manifest predates the switch; the two protocols fold under different macro keys and are never mixed.
+        protos = set()
+        for pj in glob.glob(os.path.join(run, "*", "protocol.json")):
+            try:
+                protos.add(bool(json.load(open(pj)).get("refusal_addressed", False)))
+            except Exception:
+                pass
+        if addressed is None and protos:
+            addressed = (protos == {True})
+        if len(protos) > 1:
+            print(f"warning: {run} mixes addressed and unaddressed REFUSED protocols across cells; not folded", file=sys.stderr)
+            continue
+        mk = ("Claude" if (model or "").startswith("claude") else "Gpt") + ("Addr" if addressed else "")
         wall = defaultdict(dict); calls = defaultdict(dict); refused = defaultdict(dict); commits = defaultdict(dict)
+        writer = defaultdict(dict)       # sessions in which the workload's writer role committed its write (editor->doc; triager->priority)
+        wrecs = defaultdict(dict)        # records per session committed by that role (6.00 under locking in the step-22 run: one read-only record per turn)
+        longcalls = defaultdict(dict)    # edit-review only: model calls whose completion is at least 70 tokens (a write_state call; a read is 55, DONE 5)
+        WRITER = {"edit-review": ("editor", "doc"), "triage": ("triager", "priority"), "plan-execute": ("planner", "plan")}
         for cell in sorted(glob.glob(os.path.join(run, "*-*"))):
             base = os.path.basename(cell)
             if base.startswith("tokens-") or not os.path.isdir(cell):
@@ -392,7 +434,11 @@ def probe302_refusal(root, out, boot=2000, seed=1):
             wl, arm = m.group(1), m.group(2)
             for fp in glob.glob(os.path.join(cell, "session-*.jsonl")):
                 idx = re.search(r"session-(\d{4})\.jsonl$", fp).group(1)
-                commits[(wl, arm)][idx] = sum(1 for l in open(fp) if l.strip())
+                recs = [json.loads(l) for l in open(fp) if l.strip()]
+                commits[(wl, arm)][idx] = len(recs)
+                role, cellname = WRITER.get(wl, (None, None))
+                writer[(wl, arm)][idx] = int(any(r.get("agent") == role and cellname in (r.get("write_set") or []) for r in recs))
+                wrecs[(wl, arm)][idx] = sum(1 for r in recs if r.get("agent") == role)
             rf = os.path.join(cell, "refusals.jsonl")
             if os.path.exists(rf):
                 for line in open(rf):
@@ -410,11 +456,15 @@ def probe302_refusal(root, out, boot=2000, seed=1):
                         continue
                     r = json.loads(line); w += float(r.get("wall_clock_ms", 0)); k += 1
                     model = model or r.get("model")
+                    if wl == "edit-review" and int(r.get("completion_tokens", 0) or 0) >= 70:
+                        longcalls[(wl, arm)][idx] = longcalls[(wl, arm)].get(idx, 0) + 1
                 wall[(wl, arm)][idx] = w; calls[(wl, arm)][idx] = float(k)
+                longcalls[(wl, arm)].setdefault(idx, 0)
         if not commits:
             continue
-        out.append(f"% --- probe 302 refusal-price study ({run}; model {model}): what a refused operation costs when the model is told ---")
+        out.append(f"% --- probe 302 refusal-price study ({run}; model {model}; REFUSED text {'addressed to the refused agent' if addressed else 'unaddressed (broadcast by the group chat)'}): what a refused operation costs when the model is told ---")
         out.append(f"\\renewcommand{{\\Refusal{mk}Available}}{{1}}")
+        out.append(f"\\providecommand{{\\Refusal{mk}Run}}{{{os.path.basename(run)}}}")
         def wlk(wl): return "".join(p.capitalize() for p in wl.split("-"))
         def mean(d): return statistics.fmean(d.values()) if d else float("nan")
         for (wl, arm) in sorted(commits):
@@ -428,10 +478,20 @@ def probe302_refusal(root, out, boot=2000, seed=1):
                 rr = refused[(wl, arm)]
                 out.append(f"\\providecommand{{\\Refusal{mk}{W}{a}Refused}}{{{mean(rr):.2f}}}")
                 out.append(f"\\providecommand{{\\Refusal{mk}{W}{a}RefusedSessions}}{{{sum(1 for v in rr.values() if v > 0)}/{len(rr)}}}")
-            SUMMARY.setdefault("probe302_refusal", {}).setdefault(os.path.basename(run), {"model": model})[f"{wl}/{arm}"] = {
+            if writer.get((wl, arm)):
+                ww = writer[(wl, arm)]
+                out.append(f"\\providecommand{{\\Refusal{mk}{W}{a}WriterCommits}}{{{sum(ww.values())}/{len(ww)}}}")
+                out.append(f"\\providecommand{{\\Refusal{mk}{W}{a}WriterRecords}}{{{mean(wrecs[(wl, arm)]):.2f}}}")
+            if wl == "edit-review" and calls.get((wl, arm)):
+                lc = longcalls[(wl, arm)]
+                out.append(f"\\providecommand{{\\Refusal{mk}{W}{a}WriteLengthCalls}}{{{sum(lc.values()):,}}}".replace(",", "{,}"))
+                out.append(f"\\providecommand{{\\Refusal{mk}{W}{a}TotalCalls}}{{{int(sum(calls[(wl, arm)].values())):,}}}".replace(",", "{,}"))
+            SUMMARY.setdefault("probe302_refusal", {}).setdefault(os.path.basename(run), {"model": model, "refusal_addressed": bool(addressed)})[f"{wl}/{arm}"] = {
                 "n": n, "commits_mean": mean(commits[(wl, arm)]), "calls_mean": mean(calls.get((wl, arm), {})) if calls.get((wl, arm)) else None,
                 "wall_ms_mean": mean(wall.get((wl, arm), {})) if wall.get((wl, arm)) else None,
-                "refused_mean": mean(refused.get((wl, arm), {})) if refused.get((wl, arm)) else None}
+                "refused_mean": mean(refused.get((wl, arm), {})) if refused.get((wl, arm)) else None,
+                "writer_commit_sessions": sum(writer.get((wl, arm), {}).values()) if writer.get((wl, arm)) else None,
+                "write_length_calls": sum(longcalls.get((wl, arm), {}).values()) if wl == "edit-review" and calls.get((wl, arm)) else None}
             # paired against the vanilla arm of the same workload (same sessions, same seeds, interleaved)
             if arm != "vanilla":
                 for metric, store, label in (("wall", wall, "Wall"), ("calls", calls, "Calls")):
@@ -448,15 +508,30 @@ def probe302_refusal(root, out, boot=2000, seed=1):
                     SUMMARY["probe302_refusal"][os.path.basename(run)][f"{wl}/{arm}"][f"{metric}_overhead_pct"] = {"mean": mu, "ci95": [lo, hi], "n": len(diffs)}
 
 
+def _pinned_count(d) -> bool:
+    """a count.json is a receipt only when it names the Verus build that produced it, that build is the pin, both totals
+    are present and the ledger file verified with 0 errors (2026-10-17: a run under a May build rewrote count.json with
+    160/181 and an error log; a count without `verus_version` is the old runner's and cannot be attributed to the pin)"""
+    try:
+        ver = d.get("verus_version"); pin = d.get("pin")
+        return bool(ver) and bool(pin) and ver == pin and bool(d.get("curated_total")) and bool(d.get("full_total")) \
+            and (d.get("ledger") or {}).get("errors") == 0
+    except Exception:
+        return False
+
+
 def verus(root, out):
     """step 7 receipts: results/verus/count.json (curated/full distinct totals under the pinned build) and the ledger log"""
     fp = os.path.join(root, "verus", "count.json")
     if os.path.exists(fp):
         try:
             d = json.load(open(fp))
-            out.append(f"% --- verus ({fp}) ---")
-            out.append(f"\\renewcommand{{\\VerusCurated}}{{{d['curated_total']}}}")
-            out.append(f"\\renewcommand{{\\VerusFull}}{{{d['full_total']}}}")
+            if not _pinned_count(d):
+                print(f"warning: {fp} is not a complete count under the pinned build (version={d.get('verus_version')!r}, pin={d.get('pin')!r}, ledger={d.get('ledger')}); \\VerusCurated/\\VerusFull keep their defaults", file=sys.stderr)
+            else:
+                out.append(f"% --- verus ({fp}) ---")
+                out.append(f"\\renewcommand{{\\VerusCurated}}{{{d['curated_total']}}}")
+                out.append(f"\\renewcommand{{\\VerusFull}}{{{d['full_total']}}}")
         except Exception:
             pass
     fp = os.path.join(root, "verus", "lib_l5_exec.verus.log")
@@ -795,10 +870,13 @@ def probe304(root, out):
     # the receipts must come from the BUILT server (ledger == "exec", receipt not a stand-in, and -- when step 14 recorded
     # it -- the server's sha256 equal to results/verus/l5_server.sha256); otherwise the directory is not folded at all
     exec_ok = True; shas = set()
-    recorded = None
+    recorded = set()          # every sha256 step 14 ever recorded for the built server (one line per build)
     rp = os.path.join(root, "verus", "l5_server.sha256")
     if os.path.exists(rp):
-        recorded = open(rp).read().split()[0].strip() if open(rp).read().strip() else None
+        for line in open(rp):
+            parts = line.split()
+            if parts and len(parts[0]) == 64:
+                recorded.add(parts[0])
     for fp in glob.glob(os.path.join(root, "ledger_world_exec", "*.json")):
         try:
             d = json.load(open(fp))
@@ -808,8 +886,8 @@ def probe304(root, out):
         if d.get("ledger") != "exec" or r.get("standin") or not r.get("server_sha256"):
             print(f"warning: {fp}: not a run of the built l5_server (ledger={d.get('ledger')!r}, standin={r.get('standin')!r}); ledger_world_exec NOT folded", file=sys.stderr)
             exec_ok = False
-        elif recorded and r.get("server_sha256") != recorded:
-            print(f"warning: {fp}: server sha256 {r.get('server_sha256')[:16]} != results/verus/l5_server.sha256 {recorded[:16]}; ledger_world_exec NOT folded", file=sys.stderr)
+        elif recorded and r.get("server_sha256") not in recorded:
+            print(f"warning: {fp}: server sha256 {r.get('server_sha256')[:16]} is not one step 14 recorded in results/verus/l5_server.sha256; ledger_world_exec NOT folded", file=sys.stderr)
             exec_ok = False
         else:
             shas.add(r.get("server_sha256"))
@@ -876,9 +954,16 @@ def from_summary(fp, out):
     except Exception:
         return
     have = {ln.split("}")[0] for ln in out if ln.startswith("\\renewcommand")}
+    # the Verus totals ride along only when the summary's count.json is a complete count under the pinned build: the
+    # 2026-10-17 summary carried 160/181 from a run under the wrong toolchain (its count.json had no verus_version)
+    skip = set()
+    if not _pinned_count(d.get("verus/count.json") or {}):
+        skip = {"\\renewcommand{\\VerusCurated", "\\renewcommand{\\VerusFull"}
+        if any(ln.split("}")[0] in skip for ln in d.get("macros", [])):
+            print(f"warning: {fp} carries Verus totals from a count that is not a pinned, complete receipt; not merged", file=sys.stderr)
     added = 0
     for ln in d.get("macros", []):
-        if ln.startswith("\\renewcommand") and ln.split("}")[0] not in have:
+        if ln.startswith("\\renewcommand") and ln.split("}")[0] not in have and ln.split("}")[0] not in skip:
             if added == 0:
                 out.append(f"% --- merged from {os.path.basename(fp)} (receipts absent in this checkout) ---")
             out.append(ln); added += 1

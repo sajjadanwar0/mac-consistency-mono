@@ -1,0 +1,3 @@
+{"provenance": "captured", "design": "interleaved-per-session", "provider": "anthropic", "model": "claude-sonnet-4-5",
+ "n": 100, "seed": 42, "stamp": "20261017T0753Z-refusal-claude-sonnet-4-5", "arms": "vanilla pessimistic:drop pessimistic:retry snapshot_isolation:drop snapshot_isolation:retry", "workloads": "edit-review triage",
+ "pilot_git_sha": "5ecffbe1830f0ce560a2eabd6ae4526af22d915a"}

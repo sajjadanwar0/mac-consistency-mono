@@ -308,3 +308,113 @@ mirror the preconditions (the Rust bridge checks them; Python propagates). The V
 no definite parse or proof failure found by inspection against the files that verify under the
 pinned build; two places named where step 7 might ask for a hint (an explicit assertion after the
 `set` in `mark`; the `r.0@` tuple-view idiom), both cheap to add if it does.
+
+## Sixth round (2026-10-17, evening): step 7/14/19/22/23 receipts — paper v7.4
+
+Receipts folded (run log of `--only 7,14,19`, then `--only 23`, then `--only 22`;
+`results/paper_receipts_summary.json`, `tools/verified_scorer.{log,json}`, `tools/hypothesis_gates.log`,
+`results/ledger_world_exec/`, `results/runs/20261017T0753Z-refusal-claude-sonnet-4-5/`):
+
+**Step 7 ran under the WRONG Verus.** `~/bin/verus-pinned` on the author's machine is a
+0.2026.05.03 build, not the pinned 0.2026.09.13.671956e. Under it every file of the crate
+"failed", including the files that have verified for months, the counts came out 160/181, and the
+runner's regeneration block then REWROTE `CLAIMS.json`, `crates/runtime/README.md`,
+`results/verus/count.json` and overwrote `results/verus/lib_l5_ledger.verus.log` with errors. Fixes:
+step 7 now reads `verus --version`, hard-stops when it differs from `VERUS_PIN` (printing the
+`export VERUS=$HOME/.local/opt/verus-<pin>/verus` line) and never runs the rewrite when a count log
+says INCOMPLETE or mismatched; `count.json` carries `verus_version` and the fold ignores a
+`count.json` whose version is not the pin (the 371/392 preamble defaults stand). The four files
+must be restored on the author's machine with `git checkout --` before the rerun. The three
+genuine errors in `lib_l5_exec.rs` were the May build's demand that a postcondition on `&mut self`
+name `old(self)`/`final(self)`; every ensures of the mutable methods now uses `final(self)` (loop
+invariants keep bare `self`). The file's verification under the pinned build remains the one
+pending marker in main.pdf (§5.5) and in the limitations' pending list.
+
+**Step 14** (2026-10-17): 126 cells through the verified detector, 0 problems; the Sonnet guarded
+cells are now scored (0/100, 0/100, 0/100 pessimistic; 50/100, 0/100, 0/100 default SI) and the
+stale "await the next pass" sentence in supplement §M was replaced by the numbers. The built
+`l5_server`'s SHA-256 (`f141b709…`) was recorded to `results/verus/l5_server.sha256`.
+
+**Step 19**: the fold ran before the gate this time (fixed last round); gates log of 2026-10-16
+vintage reproduced (71,714 records / 19,488 traces; H7 scope 13 published campaigns, 0 converted).
+
+**Step 23** (exec ledger, three families, atomic registration, server sha matches step 14's
+record, not a stand-in): folded as `\LWexec*`; world wrong / none / consumer-stale / clean ranges
+and 300/300 report–world agreement in §5.5 and §S, stated as "bytes with the proofs erased by
+cargo; a receipt that the bookkeeping reproduces the harness ledger's, not a verification".
+
+**Step 22** (refusal-price study, Sonnet, N=100, five arms × edit-review and triage): folded as
+`\RefusalClaude*`. Mechanism read from the records and `refusals.jsonl`: on Sonnet the triager and
+the engineer commit READ-ONLY operations in 100/100 sessions (they never write a priority or
+resolution; gpt-4o did in 41 and 45 of 100), so under pessimistic locking the triager's read holds
+the ticket lock across its turns and the reporter and engineer are refused every turn in between
+(8.47 refusals per session; 15.01 calls against 4.00, wall-clock +297.8%; retry 16.98 calls,
++332.7%); on edit-review the editor's lock refuses the reviewer 5 times per session (11.00 calls
+against 5.00, +104.2%) and the editor's own write never commits (0/100) — the records do not settle
+why (AutoGen dispatches a turn's tool calls concurrently and the pilot does not serialize an agent's
+own begin/commit pair; stated as unsettled in §O, with the serializing pilot named as the missing
+control); default SI refuses only the reviewer's overwritten read set (44/100 sessions, +19.7% /
++52.0%) and nobody on triage. Abstract and C4 carry the one-line consequence ("a lock held across a
+model's turns costs 2–4× in calls on the contended workloads"). Both the refusal run and the exec
+run postdate this round's step 14/19 passes; the supplement says so (no A1 verdict is taken from
+either; the next `--only 7,14,19` pass gates them, the scope gate naming `runs/*-refusal-*`).
+
+Page budget: main.pdf at 16 pages with 0 overfull boxes after abbreviating five bibliography venue
+strings (IEEE Data Eng. Bull., Int. J. Softw. Tools Technol. Transf., Commun. ACM, Proc. VLDB
+Endow., the Weikum–Vossen subtitle); the rule holds that cuts after the last float (`tab:cost`) are
+the only ones that move the page count.
+
+### Independent numbers audit of v7.4 (same evening) and what it changed — paper v7.5
+
+61 hand-typed or macro figures checked against the raw receipts; 57 passed. The three failures and
+what the fix uncovered:
+
+1. **"41 and 45 of 100 for gpt-4o"** (triager priority / engineer resolution, run 20260913T0150Z,
+   triage-vanilla) was wrong: the records give 44 and 41 (45 is the SI cell's triager count).
+   Fixed in §6.3 and §M. **"priority written in 28/100 sessions"** (§M) had no definition that
+   reproduces it; the records give 49/100 (triager 44, reporter 13). Fixed with the definition.
+2. **"the Sonnet reviewer writes its review in 47–48 of 100 sessions"** cited the scored run, whose
+   unguarded cell gives 50/100; 48 and 47 are the interleaved and refusal runs. Fixed (50; 47–48 in
+   the two later runs). The auditor also found that the fold mirror's copy of run
+   20261014T0253Z-claude holds only the three vanilla cells and its triage-vanilla is the VOID
+   unseeded cell, so the main text's "triager and engineer commit read-only records in 100/100
+   sessions" was asserted of a cell whose traces are not in the mirror. Now stated of the six cells
+   whose records were inspected (interleaved vanilla/SI/pess, refusal vanilla/SI-drop/SI-retry; 600
+   sessions; fold macros `\Interleaved…WriterCommits`, `\Refusal…WriterCommits`), with the scored
+   cell's verified-scorer verdict beside them. The user should upload `results/runs/20261014T0253Z-claude/`
+   in full (seeded triage-vanilla and the six guarded cells) so the mirror is complete.
+3. **The editor's lost write under locking (0/100) was NOT a runtime self-race.** The sidecars show
+   that every one of the 1,100 completions of each pessimistic edit-review arm is 55 tokens long —
+   the length of a `read_state` call (a `write_state` call is 76–97, `DONE` 5 in the unguarded arm,
+   where 147 of 500 completions have a write's length) — so the editor never attempted its write:
+   it repeated its first step in each of its six turns, re-acquiring the lock that refused the
+   reviewer. The only difference in its context from the unguarded arm is the reviewer's REFUSED
+   tool result, which AutoGen's group chat delivers to every participant and which named no agent.
+   Two controls on record agree: under SI the editor repeated a step of its own in every one of the
+   44 refused sessions (28 blind rewrites of doc, 16 re-reads; 1.44 editor records per session vs
+   1.00), and in the 2026-10-14 interleaved run, whose tools surfaced the refusal as a KeyError
+   text, the locked editor wrote in 100/100 sessions. The supplement's self-race hypothesis was
+   replaced by this; the abstract and C4 now say the 2–4× price is partly the chat's broadcast of
+   the refusal; §6.6 says the price measured is that of a refusal in a chat that broadcasts tool
+   results, AutoGen's default, not of the lock alone. Fix, not label: the REFUSED text is now a
+   protocol parameter (`--refusal-addressed`: names the refused agent, tells the others it is not
+   theirs; recorded in protocol.json and refusals.jsonl), probe 302 takes `REFUSAL_ADDRESSED=1`,
+   runner step 24 runs the addressed arms (vanilla, pessimistic:drop, pessimistic:retry, SI:drop;
+   edit-review + triage; N=100; ~$10), and the fold keys the two protocols under different macros
+   (`\RefusalClaude…` vs `\RefusalAddrClaude…`, never mixed; `\RefusalAddrClaudeAvailable`).
+   The paper carries a second pending marker for it.
+
+Also found while fixing: (a) the uploaded `paper_receipts_summary.json` carried
+`\renewcommand{\VerusCurated}{160}` / `\VerusFull{181}` from the wrong-toolchain step 7, and the
+fold's `--from-summary` path merged them into the regenerated claims block (the delivered v7.4
+files did not carry them only because the block had been inspected) — `from_summary` now refuses
+the Verus totals unless the summary's count.json is a complete count under the pin, and `verus()`
+requires `verus_version == pin` (a count without the field is the old runner's and is not folded);
+(b) the Claude cost replication (the +109.5% triage cell, `results/pilot_tokens_claude/`) is dated
+2026-05-11 in every sidecar and the paper had called it "September" — redated to May 2026 in §6.5,
+§6.6 and §M; (c) the supplement said the interleaved Claude run "refuses the reviewer in 99/100"
+(gpt-4o's figure) — in that run no reviewer record exists in 100/100; (d) "the triager's operation
+is a read with no write" under locking is 89/100 (drop) and 99/100 (retry) in the refusal run —
+stated with the counts; (e) the §M placeholder quote is one of several phrasings — said so.
+Trimmed to hold 16 pages: the τ-bench sentence and the Retro sentence (with their bibitems), the
+conclusion's opening restatement, one transition, one limitation sentence restating prevalence.

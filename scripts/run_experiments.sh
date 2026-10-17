@@ -61,6 +61,11 @@
 #  23    probe 304 with the ledger's BOOKKEEPING in the verified bytes  Claude, OpenAI,  haiku ~$2,     ~2.5 h
 #        (lib_l5_exec.rs behind l5_server; --ledger exec), atomic,     DeepSeek,        4o-mini ~$0.5,
 #        three families -> results/ledger_world_exec/                  cargo, verus (7) deepseek ~$0.5
+#  24    probe 302 refusal-price CONTROL on claude-sonnet-4-5: the       Claude           ~$10           ~1.5 h
+#        REFUSED result addressed to the refused agent (the step-22
+#        text was broadcast unaddressed and the unrefused agent
+#        repeated its last step); vanilla / pessimistic:drop /
+#        pessimistic:retry / SI:drop, edit-review + triage, N=100
 #  Claude-side reruns that existed before: 6 (probe 302 on sonnet, ~$15-25) and 11 (the pilot replication
 #  with op-records; its triage cells are void and must be DELETED and rerun with the seeded-ticket reporter).
 set -uo pipefail   # not -e: a failing step is recorded and the next step still runs (summary at the end)
@@ -169,8 +174,17 @@ PIN="$(grep -oE '^verus\s*=\s*\S+' crates/verus-detector/verus-version.txt 2>/de
 if [ -z "${VERUS:-}" ] && [ -n "$PIN" ] && [ -x "$HOME/.local/opt/verus-$PIN/verus" ]; then export VERUS="$HOME/.local/opt/verus-$PIN/verus"; fi
 export VERUS="${VERUS:-verus}"
 if want 7; then log 7 "Verus: the ledger model, then the pinned counts, then the README line and CLAIMS.json"
-  echo "  using $VERUS ($($VERUS --version 2>/dev/null | grep -oE 'Version: *\S+' || echo '?'); pin $PIN)"
-  if have "$VERUS" || [ -x "$VERUS" ]; then
+  VVER="$($VERUS --version 2>/dev/null | grep -oE 'Version: *\S+' | sed 's/Version: *//')"; export VVER_FOR_COUNT="$VVER"
+  echo "  using $VERUS (version ${VVER:-?}; pin $PIN)"
+  # 2026-10-17: the step ran once with a May build found on PATH (VERUS=~/bin/verus-pinned, 0.2026.05.03): every file
+  # "failed", the counts came out 160/181 and the python block below rewrote CLAIMS.json, crates/runtime/README.md and
+  # results/verus/count.json with them. A version that does not match the pin is a HARD STOP, before anything is written.
+  if [ -n "$PIN" ] && [ -n "$VVER" ] && [ "$VVER" != "$PIN" ]; then
+    echo "  FAIL: $VERUS is Verus $VVER, the pin is $PIN. Nothing was run or written. Fix with:"
+    echo "        export VERUS=\$HOME/.local/opt/verus-$PIN/verus     # then: ./scripts/run_experiments.sh --only 7"
+    echo "        (if that path does not exist, install the pinned build there first; a stale VERUS in your shell profile overrides the pin)"
+    FAILED+=("verus version $VVER != pin $PIN")
+  elif have "$VERUS" || [ -x "$VERUS" ]; then
     run "(cd crates/verus-detector && $VERUS --crate-type=lib src/lib_l5_ledger.rs 2>&1 | tee ../../results/verus/lib_l5_ledger.verus.log)"
     # 2026-10-17: the EXEC ledger (bookkeeping behind examples/l5_server.rs, probes/304 --ledger exec); zero errors required,
     # the count is reported (pinned at "?" until this run). A failure here is a proof defect in lib_l5_exec.rs: upload the log.
@@ -182,14 +196,17 @@ if want 7; then log 7 "Verus: the ledger model, then the pinned counts, then the
     fi
     run "VDET_DIR=\$PWD/crates/verus-detector bash harness/macaudit/verus_count.sh 2>&1 | tee tools/verus_count_curated.log | tail -25"
     run "VDET_DIR=\$PWD/crates/verus-detector bash harness/macaudit/verus_count.sh --full 2>&1 | tee tools/verus_count_full.log | tail -25"
-    if [ "$DRY" = 0 ]; then python3 - <<'PY'
+    # the counts are folded into CLAIMS.json / README / count.json ONLY when both count runs were complete (no file failed
+    # to verify, no version mismatch); a partial count must never overwrite the pinned totals
+    if [ "$DRY" = 0 ] && ! grep -q "INCOMPLETE\|does not match the pin" tools/verus_count_curated.log tools/verus_count_full.log; then python3 - <<'PY'
 import json, re, os
 def tot(fp):
     m = re.search(r"DISTINCT obligation total\s+(\d+)", open(fp).read()); return int(m.group(1)) if m else None
 cur, full = tot("tools/verus_count_curated.log"), tot("tools/verus_count_full.log")
 led = open("results/verus/lib_l5_ledger.verus.log").read()
 m = re.search(r"(\d+) verified, (\d+) errors", led); ledger = {"verified": int(m.group(1)), "errors": int(m.group(2))} if m else {"verified": None, "errors": None, "note": "no summary line; see the log"}
-json.dump({"curated_total": cur, "full_total": full, "ledger": ledger, "pin": "0.2026.09.13.671956e"}, open("results/verus/count.json", "w"), indent=1)
+json.dump({"curated_total": cur, "full_total": full, "ledger": ledger, "pin": "0.2026.09.13.671956e",
+           "verus_version": os.environ.get("VVER_FOR_COUNT", "")}, open("results/verus/count.json", "w"), indent=1)
 print("verus: curated", cur, "full", full, "ledger", ledger)
 # README line that the claims gate flags
 p = "crates/runtime/README.md"
@@ -201,7 +218,7 @@ if os.path.exists("CLAIMS.json") and cur and full:
     c = json.load(open("CLAIMS.json")); c.setdefault("verus", {}); c["verus"]["curated_total"] = cur; c["verus"]["full_total"] = full
     json.dump(c, open("CLAIMS.json", "w"), indent=1); print("updated CLAIMS.json verus totals")
 PY
-    fi
+    else echo "  counts NOT folded into CLAIMS.json / README / count.json: a count run was incomplete or the version did not match the pin"; fi
   else echo "  verus not on PATH: install the build pinned in crates/verus-detector/verus-version.txt"; fi; fi
 
 if want 8; then log 8 "TLAPS: CommitOrder.tla"
@@ -290,7 +307,7 @@ if want 14; then log 14 "cargo: the analyser scores A1 with the VERIFIED detecto
   run "cargo build --release --manifest-path crates/runtime/Cargo.toml --example l3_server 2>&1 | tail -3"
   run "cargo build --release --manifest-path crates/runtime/Cargo.toml --example l5_server 2>&1 | tail -3"
   # the fold refuses ledger_world_exec receipts whose server sha256 is not this one (a stand-in cannot pass as the bytes)
-  run "mkdir -p results/verus && sha256sum target/release/examples/l5_server | tee results/verus/l5_server.sha256"
+  run "mkdir -p results/verus && touch results/verus/l5_server.sha256 && sha=\$(sha256sum target/release/examples/l5_server | cut -d' ' -f1) && (grep -q \"\$sha\" results/verus/l5_server.sha256 || echo \"\$sha  target/release/examples/l5_server  \$(date -u +%FT%TZ)\" >> results/verus/l5_server.sha256) && tail -3 results/verus/l5_server.sha256"
   run "cargo test --release -p agent-consistency-runtime --lib detect_a1_verified 2>&1 | grep -E '^test |test result'"
   run "cargo test --release -p mac-analyser 2>&1 | grep -E '^test |test result'"
   AN="$( { ls target/release/analyser crates/analyser/target/release/analyser 2>/dev/null || true; } | head -1)"
@@ -366,6 +383,14 @@ if want 22; then log 22 "probe 302 refusal-price study on claude-sonnet-4-5: van
   st="$(ls -d results/runs/*-refusal-claude-sonnet-4-5 2>/dev/null | sort | tail -1)"; st="${st:+$(basename "$st")}"; st="${st:-$(date -u +%Y%m%dT%H%MZ)-refusal-claude-sonnet-4-5}"
   run "ARMS=\"vanilla pessimistic:drop pessimistic:retry snapshot_isolation:drop snapshot_isolation:retry\" WORKLOADS=\"edit-review triage\" N=100 PROVIDER=anthropic MODEL=claude-sonnet-4-5 STAMP=$st PY=\"$UVA_ABS\" ./probes/302_wallclock_interleaved.sh"
   echo "  UPLOAD after this step: the whole directory results/runs/$st (zip it) -- the fold reads its sidecars, refusals.jsonl and order.tsv"; fi
+
+if want 24; then log 24 "probe 302 refusal-price CONTROL on claude-sonnet-4-5: REFUSED addressed to the refused agent; vanilla / pessimistic:drop / pessimistic:retry / SI:drop, edit-review + triage, N=100"
+  need_key ANTHROPIC_API_KEY; pilot_packages
+  delivered probes/103_autogen_pilot.py "REFUSAL_ADDRESSED" "the addressed REFUSED text (--refusal-addressed)" || true
+  delivered probes/302_wallclock_interleaved.sh "REFUSAL_ADDRESSED" "the REFUSAL_ADDRESSED switch" || true
+  st="$(ls -d results/runs/*-refusal-addressed-claude-sonnet-4-5 2>/dev/null | sort | tail -1)"; st="${st:+$(basename "$st")}"; st="${st:-$(date -u +%Y%m%dT%H%MZ)-refusal-addressed-claude-sonnet-4-5}"
+  run "REFUSAL_ADDRESSED=1 ARMS=\"vanilla pessimistic:drop pessimistic:retry snapshot_isolation:drop\" WORKLOADS=\"edit-review triage\" N=100 PROVIDER=anthropic MODEL=claude-sonnet-4-5 STAMP=$st PY=\"$UVA_ABS\" ./probes/302_wallclock_interleaved.sh"
+  echo "  UPLOAD after this step: the whole directory results/runs/$st (zip it) -- the fold reads its sidecars, refusals.jsonl, protocol.json and order.tsv"; fi
 
 if want 23; then log 23 "probe 304 with the ledger's bookkeeping in the VERIFIED bytes (--ledger exec; l5_server), atomic registration, three families"
   need_key ANTHROPIC_API_KEY; need_key OPENAI_API_KEY; need_key DEEPSEEK_API_KEY

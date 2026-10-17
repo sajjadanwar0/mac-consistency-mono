@@ -132,7 +132,7 @@ impl L5Ledger {
     pub fn register_effect(&mut self, cell: usize, basis: usize) -> (id: usize)
         ensures
             id == old(self).effects@.len(),
-            self.effects@ == old(self).effects@.push(EffectRec { cell, basis, obligation: false, attempts: 0 }),
+            final(self).effects@ == old(self).effects@.push(EffectRec { cell, basis, obligation: false, attempts: 0 }),
     {
         let id = self.effects.len();
         self.effects.push(EffectRec { cell, basis, obligation: false, attempts: 0 });
@@ -146,14 +146,14 @@ impl L5Ledger {
     /// failed; this supersession retries it).  No field but `obligation` moves.
     pub fn mark(&mut self, cell: usize, v: usize) -> (r: (Vec<usize>, Vec<usize>))
         ensures
-            self.effects@.len() == old(self).effects@.len(),
-            forall|j: int| #![trigger self.effects@[j]]
-                0 <= j < self.effects@.len() ==>
-                    keeps_effect(old(self).effects@, self.effects@, j)
-                    && obliged_after(old(self).effects@, self.effects@, j, cell, v),
-            covered(self.effects@, cell, v),
-            forall|k: int| 0 <= k < r.0@.len() ==> ((#[trigger] r.0@[k]) as int) < self.effects@.len(),
-            forall|k: int| 0 <= k < r.1@.len() ==> ((#[trigger] r.1@[k]) as int) < self.effects@.len(),
+            final(self).effects@.len() == old(self).effects@.len(),
+            forall|j: int| #![trigger final(self).effects@[j]]
+                0 <= j < final(self).effects@.len() ==>
+                    keeps_effect(old(self).effects@, final(self).effects@, j)
+                    && obliged_after(old(self).effects@, final(self).effects@, j, cell, v),
+            covered(final(self).effects@, cell, v),
+            forall|k: int| 0 <= k < r.0@.len() ==> ((#[trigger] r.0@[k]) as int) < final(self).effects@.len(),
+            forall|k: int| 0 <= k < r.1@.len() ==> ((#[trigger] r.1@[k]) as int) < final(self).effects@.len(),
     {
         let mut fresh: Vec<usize> = Vec::new();
         let mut retried: Vec<usize> = Vec::new();
@@ -209,14 +209,14 @@ impl L5Ledger {
             i < old(self).effects@.len(),
             old(self).effects@[i as int].attempts < usize::MAX,
         ensures
-            self.effects@.len() == old(self).effects@.len(),
-            forall|j: int| #![trigger self.effects@[j]]
-                0 <= j < self.effects@.len() && j != i as int ==> self.effects@[j] == old(self).effects@[j],
-            self.effects@[i as int].cell == old(self).effects@[i as int].cell,
-            self.effects@[i as int].attempts == old(self).effects@[i as int].attempts + 1,
-            ok ==> self.effects@[i as int].basis == v && !self.effects@[i as int].obligation,
-            !ok ==> self.effects@[i as int].basis == old(self).effects@[i as int].basis
-                    && self.effects@[i as int].obligation == old(self).effects@[i as int].obligation,
+            final(self).effects@.len() == old(self).effects@.len(),
+            forall|j: int| #![trigger final(self).effects@[j]]
+                0 <= j < final(self).effects@.len() && j != i as int ==> final(self).effects@[j] == old(self).effects@[j],
+            final(self).effects@[i as int].cell == old(self).effects@[i as int].cell,
+            final(self).effects@[i as int].attempts == old(self).effects@[i as int].attempts + 1,
+            ok ==> final(self).effects@[i as int].basis == v && !final(self).effects@[i as int].obligation,
+            !ok ==> final(self).effects@[i as int].basis == old(self).effects@[i as int].basis
+                    && final(self).effects@[i as int].obligation == old(self).effects@[i as int].obligation,
     {
         let c = self.effects[i].cell;
         let b = self.effects[i].basis;

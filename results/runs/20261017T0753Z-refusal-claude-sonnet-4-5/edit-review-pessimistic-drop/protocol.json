@@ -1,0 +1,12 @@
+{
+ "seeded_tickets": true,
+ "provider": "anthropic",
+ "model": "claude-sonnet-4-5",
+ "workload": "edit-review",
+ "runtime": "pessimistic",
+ "n": 1,
+ "seed": 42,
+ "scenario_offset": 0,
+ "on_abort": "drop",
+ "truthful_tools": true
+}

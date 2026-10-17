@@ -1,1 +1,35 @@
-verification results:: 7 verified, 0 errors
+error[E0425]: cannot find value `group_map_lemmas` in module `vstd::map`
+  --> src/lib_l5_ledger.rs:48:27
+   |
+48 | broadcast use {vstd::map::group_map_lemmas, vstd::set::group_set_lemmas};
+   |                           ^^^^^^^^^^^^^^^^
+   |
+  --> vstd/map.rs:315:0
+  ::: vstd/map.rs:326:1
+   |
+   = note: similarly named function `group_map_axioms` defined here
+help: a function with a similar name exists
+   |
+48 - broadcast use {vstd::map::group_map_lemmas, vstd::set::group_set_lemmas};
+48 + broadcast use {vstd::map::group_map_axioms, vstd::set::group_set_lemmas};
+   |
+
+error[E0425]: cannot find value `group_set_lemmas` in module `vstd::set`
+  --> src/lib_l5_ledger.rs:48:56
+   |
+48 | broadcast use {vstd::map::group_map_lemmas, vstd::set::group_set_lemmas};
+   |                                                        ^^^^^^^^^^^^^^^^
+   |
+  --> vstd/set.rs:999:0
+  ::: vstd/set.rs:1027:1
+   |
+   = note: similarly named function `group_set_axioms` defined here
+help: a function with a similar name exists
+   |
+48 - broadcast use {vstd::map::group_map_lemmas, vstd::set::group_set_lemmas};
+48 + broadcast use {vstd::map::group_map_lemmas, vstd::set::group_set_axioms};
+   |
+
+error: aborting due to 2 previous errors
+
+For more information about this error, try `rustc --explain E0425`.

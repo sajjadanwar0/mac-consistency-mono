@@ -89,7 +89,9 @@ results/                 committed evidence, one directory per campaign:
                          ledger_world_exec/ the run with the ledger's bookkeeping in the
                          verified bytes, runner step 23; all carry per-session world logs
                          and records), runs/*-refusal-*/ (probe 302 with the pilot's
-                         tools telling the model REFUSED, five arms, runner step 22),
+                         tools telling the model REFUSED, five arms, runner step 22;
+                         runs/*-refusal-addressed-*/ its control with the REFUSED text
+                         addressed to the refused agent, runner step 24),
                          a6_real_latency/,
                          live_l2/, langgraph_a6_*/, hc_*/ (contention sweep), traces/,
                          production_traces/, mast_oprecords/, pilot_tokens*/, l2_measure.json,

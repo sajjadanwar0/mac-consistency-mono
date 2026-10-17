@@ -175,6 +175,13 @@ def _check_api_key(provider: str) -> None:
 # refusals.jsonl; the runs tabulated before this date were taken with the old tools and are reported as run.
 ON_ABORT = "drop"            # --on-abort: "drop" tells the truth and gives no instruction; "retry" asks for a redo
 REFUSALS: dict = {}          # {agent: refused operations} for the session in flight (cleared per session)
+# AutoGen's group chat shows every tool result to every participant. In run 20261017T0753Z (step 22) the unaddressed
+# REFUSED text below made the agent that was NOT refused repeat its own last step (edit-review: the editor re-read
+# in each of its turns and never issued its write; snapshot isolation: the editor rewrote after the reviewer's
+# refusal), so the measured price mixes the discipline's refusal with the chat's broadcast of it. --refusal-addressed
+# names the refused agent in the text and tells the others it is not theirs; recorded in protocol.json and
+# refusals.jsonl ("refusal_addressed"), so the two protocols fold under different macros (runner step 24).
+REFUSAL_ADDRESSED = False
 
 
 def _aborts(agent) -> int:
@@ -187,6 +194,13 @@ def _refused(agent, what: str, count: bool = True) -> str:
     if count:
         REFUSALS.setdefault(agent.agent_id, 0)
         REFUSALS[agent.agent_id] += 1
+    if REFUSAL_ADDRESSED:
+        me = agent.agent_id
+        msg = (f"REFUSED for {me}: the runtime did not {what} -- another agent holds a lock on, or has concurrently "
+               f"written, a cell {me} depends on. {me}'s operation was NOT applied; no other agent's operation is affected.")
+        if ON_ABORT == "retry":
+            msg += f" {me}: call read_state again, then write_state again."
+        return msg
     msg = f"REFUSED: the runtime did not {what} -- another agent holds a lock on, or has concurrently written, a cell you depend on."
     if ON_ABORT == "retry":
         msg += " Your operation was NOT applied. Call read_state again, then write_state again."
@@ -396,6 +410,7 @@ async def run_one(scenario_id: int,
     recorder.close()
     with (output_dir / "refusals.jsonl").open("a") as fh:
         fh.write(json.dumps({"session": scenario_id, "runtime": _runtime, "workload": workload, "on_abort": ON_ABORT,
+                             "refusal_addressed": REFUSAL_ADDRESSED,
                              "refusals": dict(REFUSALS), "aborts": _aborts(next(iter(iagents.values())))}) + "\n")   # one shared recorder
     REFUSALS.clear()
     return out
@@ -421,14 +436,19 @@ async def main() -> None:
                         help="what the model is told when the runtime refuses its operation: 'drop' = REFUSED, not applied, no "
                              "instruction (default); 'retry' = REFUSED plus an instruction to read and write again. Before "
                              "2026-10-17 the tools said COMMITTED regardless (see make_tools); recorded in protocol.json")
+    parser.add_argument("--refusal-addressed", action="store_true",
+                        help="the REFUSED tool result names the refused agent and tells the others it is not theirs (the group "
+                             "chat shows every tool result to every agent; run 20261017T0753Z used the unaddressed text and the "
+                             "unrefused agent repeated its last step). Recorded in protocol.json and refusals.jsonl")
     parser.add_argument("--scenario-offset", type=int, default=0,
                         help="first scenario id; a one-session call (probes/302_wallclock_interleaved.sh, --n 1) passes its "
                              "session index so that the trace, the token sidecar and the seeded ticket are numbered by session "
                              "(the 2026-10-14 interleaved runs used 0 for every session: one ticket, sidecars named -0000)")
     args = parser.parse_args()
-    global SEEDED_TICKETS, ON_ABORT
+    global SEEDED_TICKETS, ON_ABORT, REFUSAL_ADDRESSED
     SEEDED_TICKETS = not args.no_seeded_tickets
     ON_ABORT = args.on_abort
+    REFUSAL_ADDRESSED = bool(args.refusal_addressed)
 
     model_name = args.model or DEFAULT_MODEL[args.provider]
     _check_api_key(args.provider)
@@ -444,6 +464,7 @@ async def main() -> None:
     (output / "protocol.json").write_text(_json.dumps({"seeded_tickets": SEEDED_TICKETS, "provider": args.provider, "model": model_name,
                                                         "workload": args.workload, "runtime": _runtime, "n": args.n, "seed": args.seed,
                                                         "scenario_offset": args.scenario_offset, "on_abort": ON_ABORT,
+                                                        "refusal_addressed": REFUSAL_ADDRESSED,
                                                         "truthful_tools": True}, indent=1))
     print(f"traces  -> {output.resolve()}")
     print(f"tokens  -> {tokens_output.resolve()}")

@@ -285,6 +285,7 @@
 % study (step 22), and the H7 scope gate (hypothesis_gates.py: published cells drawn from store-instrumented campaigns only)
 \newcommand{\LfiveExecAvailable}{0}\newcommand{\LfiveExecVerus}{?}\newcommand{\LedgerWorldExecAvailable}{0}
 \newcommand{\RefusalClaudeAvailable}{0}\newcommand{\RefusalGptAvailable}{0}
+\newcommand{\RefusalAddrClaudeAvailable}{0}\newcommand{\RefusalAddrGptAvailable}{0}   % step 24: the REFUSED text addressed to the refused agent (the step-22 text was broadcast unaddressed)
 % derived from tools/hypothesis_gates.log (2026-10-16) per-campaign table: records/traces of the 17 store-instrumented campaigns
 % = totals minus mast_oprecords (9,137/1,010), oprecords (600/200), production_traces (4,169/600), traces (1,469/700);
 % the published campaigns: results/expected.json's six (three pilot runs, three live_a1 families) + live_a1_outcome, the four
@@ -2309,19 +2310,498 @@
 \providecommand{\LWwideLedgerAgree}{300/300}
 \providecommand{\LWwideLedgerDisagree}{0}
 \providecommand{\LWwideLedgerDisagreeCI}{[0.0, 1.2]}
-% --- probe 301 (results/a6_real_latency/sqlite.jsonl) ---
+% --- probe 304 (ledger_world_exec): bookkeeping in the VERIFIED bytes (--ledger exec) ---
+\renewcommand{\LedgerWorldExecAvailable}{1}
+\providecommand{\LWexecRegistration}{atomic}
+\providecommand{\LWexecHaikuValidatedR}{99}
+\providecommand{\LWexecHaikuValidatedStoreWrong}{99}
+\providecommand{\LWexecHaikuValidatedWorldWrong}{99}
+\providecommand{\LWexecHaikuValidatedWorldNone}{0}
+\providecommand{\LWexecHaikuValidatedDouble}{0}
+\providecommand{\LWexecHaikuValidatedConsumerStale}{99}
+\providecommand{\LWexecHaikuValidatedConsumerNone}{0}
+\providecommand{\LWexecHaikuValidatedRetries}{0}
+\providecommand{\LWexecHaikuValidatedObl}{0/0/0}
+\providecommand{\LWexecHaikuValidatedN}{100}
+\providecommand{\LWexecHaikuValidatedCleanSessions}{100}
+\providecommand{\LWexecHaikuValidatedCleanRight}{1}
+\providecommand{\LWexecHaikuValidatedCleanWrong}{99}
+\providecommand{\LWexecHaikuValidatedCleanVacuous}{100}
+\providecommand{\LWexecHaikuValidatedOpenSessions}{0}
+\providecommand{\LWexecHaikuValidatedOpenWrong}{0}
+\providecommand{\LWexecHaikuValidatedOpenRight}{0}
+\providecommand{\LWexecHaikuValidatedFailDouble}{0}
+\providecommand{\LWexecHaikuValidatedFailNone}{0}
+\providecommand{\LWexecHaikuValidatedFailStaleOnly}{99}
+\providecommand{\LWexecHaikuValidatedOneObligation}{0}
+\providecommand{\LWexecHaikuValidatedTwoObligations}{0}
+\providecommand{\LWexecHaikuValidatedNoObligation}{100}
+\providecommand{\LWexecHaikuLedgerR}{0}
+\providecommand{\LWexecHaikuLedgerStoreWrong}{6}
+\providecommand{\LWexecHaikuLedgerWorldWrong}{12}
+\providecommand{\LWexecHaikuLedgerWorldNone}{6}
+\providecommand{\LWexecHaikuLedgerDouble}{12}
+\providecommand{\LWexecHaikuLedgerConsumerStale}{97}
+\providecommand{\LWexecHaikuLedgerConsumerNone}{0}
+\providecommand{\LWexecHaikuLedgerRetries}{0}
+\providecommand{\LWexecHaikuLedgerObl}{99/81/18}
+\providecommand{\LWexecHaikuLedgerN}{100}
+\providecommand{\LWexecHaikuLedgerCleanSessions}{82}
+\providecommand{\LWexecHaikuLedgerCleanRight}{82}
+\providecommand{\LWexecHaikuLedgerCleanWrong}{0}
+\providecommand{\LWexecHaikuLedgerCleanVacuous}{1}
+\providecommand{\LWexecHaikuLedgerOpenSessions}{18}
+\providecommand{\LWexecHaikuLedgerOpenWrong}{18}
+\providecommand{\LWexecHaikuLedgerOpenRight}{0}
+\providecommand{\LWexecHaikuLedgerFailDouble}{12}
+\providecommand{\LWexecHaikuLedgerFailNone}{6}
+\providecommand{\LWexecHaikuLedgerFailStaleOnly}{0}
+\providecommand{\LWexecHaikuLedgerOneObligation}{99}
+\providecommand{\LWexecHaikuLedgerTwoObligations}{0}
+\providecommand{\LWexecHaikuLedgerNoObligation}{1}
+\providecommand{\LWexecHaikuLedgerConsumerStaleBeforeRevision}{29}
+\providecommand{\LWexecHaikuLedgerConsumerStaleInsideCompensation}{68}
+\providecommand{\LWexecHaikuLedgerConsumerStaleRefusedCancel}{0}
+\providecommand{\LWexecHaikuLedgerConsumerStaleCurrentThenSuperseded}{0}
+\providecommand{\LWexecHaikuLedgerConsumerStaleOther}{0}
+\providecommand{\LWexecHaikuLedgerBothRevisionsAfterCommit}{0}
+\providecommand{\LWexecHaikuLedgerFirstRevisionMedianS}{0.9}
+\providecommand{\LWexecHaikuLedgerCompLatencyMedianS}{1.1}
+\providecommand{\LWexecHaikuLedgerCompLatencyPNinetyS}{1.2}
+\providecommand{\LWexecHaikuLedgerBookingToCompensationMedianS}{1.5}
+\providecommand{\LWexecHaikuLedgerBookingToCompensationPNinetyS}{1.6}
+\providecommand{\LWexecHaikuLedgerNoRollbackR}{0}
+\providecommand{\LWexecHaikuLedgerNoRollbackStoreWrong}{12}
+\providecommand{\LWexecHaikuLedgerNoRollbackWorldWrong}{99}
+\providecommand{\LWexecHaikuLedgerNoRollbackWorldNone}{0}
+\providecommand{\LWexecHaikuLedgerNoRollbackDouble}{87}
+\providecommand{\LWexecHaikuLedgerNoRollbackConsumerStale}{99}
+\providecommand{\LWexecHaikuLedgerNoRollbackConsumerNone}{0}
+\providecommand{\LWexecHaikuLedgerNoRollbackRetries}{1}
+\providecommand{\LWexecHaikuLedgerNoRollbackObl}{104/93/12}
+\providecommand{\LWexecHaikuLedgerNoRollbackN}{100}
+\providecommand{\LWexecHaikuLedgerNoRollbackCleanSessions}{88}
+\providecommand{\LWexecHaikuLedgerNoRollbackCleanRight}{1}
+\providecommand{\LWexecHaikuLedgerNoRollbackCleanWrong}{87}
+\providecommand{\LWexecHaikuLedgerNoRollbackCleanVacuous}{1}
+\providecommand{\LWexecHaikuLedgerNoRollbackOpenSessions}{12}
+\providecommand{\LWexecHaikuLedgerNoRollbackOpenWrong}{12}
+\providecommand{\LWexecHaikuLedgerNoRollbackOpenRight}{0}
+\providecommand{\LWexecHaikuLedgerNoRollbackFailDouble}{87}
+\providecommand{\LWexecHaikuLedgerNoRollbackFailNone}{0}
+\providecommand{\LWexecHaikuLedgerNoRollbackFailStaleOnly}{12}
+\providecommand{\LWexecHaikuLedgerNoRollbackOneObligation}{94}
+\providecommand{\LWexecHaikuLedgerNoRollbackTwoObligations}{5}
+\providecommand{\LWexecHaikuLedgerNoRollbackNoObligation}{1}
+\providecommand{\LWexecDeepseekValidatedR}{99}
+\providecommand{\LWexecDeepseekValidatedStoreWrong}{99}
+\providecommand{\LWexecDeepseekValidatedWorldWrong}{99}
+\providecommand{\LWexecDeepseekValidatedWorldNone}{0}
+\providecommand{\LWexecDeepseekValidatedDouble}{0}
+\providecommand{\LWexecDeepseekValidatedConsumerStale}{99}
+\providecommand{\LWexecDeepseekValidatedConsumerNone}{0}
+\providecommand{\LWexecDeepseekValidatedRetries}{0}
+\providecommand{\LWexecDeepseekValidatedObl}{0/0/0}
+\providecommand{\LWexecDeepseekValidatedN}{100}
+\providecommand{\LWexecDeepseekValidatedCleanSessions}{100}
+\providecommand{\LWexecDeepseekValidatedCleanRight}{1}
+\providecommand{\LWexecDeepseekValidatedCleanWrong}{99}
+\providecommand{\LWexecDeepseekValidatedCleanVacuous}{100}
+\providecommand{\LWexecDeepseekValidatedOpenSessions}{0}
+\providecommand{\LWexecDeepseekValidatedOpenWrong}{0}
+\providecommand{\LWexecDeepseekValidatedOpenRight}{0}
+\providecommand{\LWexecDeepseekValidatedFailDouble}{0}
+\providecommand{\LWexecDeepseekValidatedFailNone}{0}
+\providecommand{\LWexecDeepseekValidatedFailStaleOnly}{99}
+\providecommand{\LWexecDeepseekValidatedOneObligation}{0}
+\providecommand{\LWexecDeepseekValidatedTwoObligations}{0}
+\providecommand{\LWexecDeepseekValidatedNoObligation}{100}
+\providecommand{\LWexecDeepseekLedgerR}{0}
+\providecommand{\LWexecDeepseekLedgerStoreWrong}{10}
+\providecommand{\LWexecDeepseekLedgerWorldWrong}{6}
+\providecommand{\LWexecDeepseekLedgerWorldNone}{9}
+\providecommand{\LWexecDeepseekLedgerDouble}{5}
+\providecommand{\LWexecDeepseekLedgerConsumerStale}{98}
+\providecommand{\LWexecDeepseekLedgerConsumerNone}{0}
+\providecommand{\LWexecDeepseekLedgerRetries}{16}
+\providecommand{\LWexecDeepseekLedgerObl}{144/133/15}
+\providecommand{\LWexecDeepseekLedgerN}{100}
+\providecommand{\LWexecDeepseekLedgerCleanSessions}{85}
+\providecommand{\LWexecDeepseekLedgerCleanRight}{85}
+\providecommand{\LWexecDeepseekLedgerCleanWrong}{0}
+\providecommand{\LWexecDeepseekLedgerCleanVacuous}{1}
+\providecommand{\LWexecDeepseekLedgerOpenSessions}{15}
+\providecommand{\LWexecDeepseekLedgerOpenWrong}{15}
+\providecommand{\LWexecDeepseekLedgerOpenRight}{0}
+\providecommand{\LWexecDeepseekLedgerFailDouble}{5}
+\providecommand{\LWexecDeepseekLedgerFailNone}{9}
+\providecommand{\LWexecDeepseekLedgerFailStaleOnly}{1}
+\providecommand{\LWexecDeepseekLedgerOneObligation}{54}
+\providecommand{\LWexecDeepseekLedgerTwoObligations}{45}
+\providecommand{\LWexecDeepseekLedgerNoObligation}{1}
+\providecommand{\LWexecDeepseekLedgerConsumerStaleBeforeRevision}{27}
+\providecommand{\LWexecDeepseekLedgerConsumerStaleInsideCompensation}{66}
+\providecommand{\LWexecDeepseekLedgerConsumerStaleRefusedCancel}{1}
+\providecommand{\LWexecDeepseekLedgerConsumerStaleCurrentThenSuperseded}{4}
+\providecommand{\LWexecDeepseekLedgerConsumerStaleOther}{0}
+\providecommand{\LWexecDeepseekLedgerBothRevisionsAfterCommit}{57}
+\providecommand{\LWexecDeepseekLedgerFirstRevisionMedianS}{1.2}
+\providecommand{\LWexecDeepseekLedgerCompLatencyMedianS}{1.1}
+\providecommand{\LWexecDeepseekLedgerCompLatencyPNinetyS}{1.3}
+\providecommand{\LWexecDeepseekLedgerBookingToCompensationMedianS}{1.5}
+\providecommand{\LWexecDeepseekLedgerBookingToCompensationPNinetyS}{1.9}
+\providecommand{\LWexecDeepseekLedgerNoRollbackR}{0}
+\providecommand{\LWexecDeepseekLedgerNoRollbackStoreWrong}{5}
+\providecommand{\LWexecDeepseekLedgerNoRollbackWorldWrong}{100}
+\providecommand{\LWexecDeepseekLedgerNoRollbackWorldNone}{0}
+\providecommand{\LWexecDeepseekLedgerNoRollbackDouble}{97}
+\providecommand{\LWexecDeepseekLedgerNoRollbackConsumerStale}{100}
+\providecommand{\LWexecDeepseekLedgerNoRollbackConsumerNone}{0}
+\providecommand{\LWexecDeepseekLedgerNoRollbackRetries}{9}
+\providecommand{\LWexecDeepseekLedgerNoRollbackObl}{149/144/5}
+\providecommand{\LWexecDeepseekLedgerNoRollbackN}{100}
+\providecommand{\LWexecDeepseekLedgerNoRollbackCleanSessions}{95}
+\providecommand{\LWexecDeepseekLedgerNoRollbackCleanRight}{0}
+\providecommand{\LWexecDeepseekLedgerNoRollbackCleanWrong}{95}
+\providecommand{\LWexecDeepseekLedgerNoRollbackCleanVacuous}{0}
+\providecommand{\LWexecDeepseekLedgerNoRollbackOpenSessions}{5}
+\providecommand{\LWexecDeepseekLedgerNoRollbackOpenWrong}{5}
+\providecommand{\LWexecDeepseekLedgerNoRollbackOpenRight}{0}
+\providecommand{\LWexecDeepseekLedgerNoRollbackFailDouble}{97}
+\providecommand{\LWexecDeepseekLedgerNoRollbackFailNone}{0}
+\providecommand{\LWexecDeepseekLedgerNoRollbackFailStaleOnly}{3}
+\providecommand{\LWexecDeepseekLedgerNoRollbackOneObligation}{51}
+\providecommand{\LWexecDeepseekLedgerNoRollbackTwoObligations}{49}
+\providecommand{\LWexecDeepseekLedgerNoRollbackNoObligation}{0}
+\providecommand{\LWexecGptValidatedR}{100}
+\providecommand{\LWexecGptValidatedStoreWrong}{100}
+\providecommand{\LWexecGptValidatedWorldWrong}{100}
+\providecommand{\LWexecGptValidatedWorldNone}{0}
+\providecommand{\LWexecGptValidatedDouble}{0}
+\providecommand{\LWexecGptValidatedConsumerStale}{100}
+\providecommand{\LWexecGptValidatedConsumerNone}{0}
+\providecommand{\LWexecGptValidatedRetries}{0}
+\providecommand{\LWexecGptValidatedObl}{0/0/0}
+\providecommand{\LWexecGptValidatedN}{100}
+\providecommand{\LWexecGptValidatedCleanSessions}{100}
+\providecommand{\LWexecGptValidatedCleanRight}{0}
+\providecommand{\LWexecGptValidatedCleanWrong}{100}
+\providecommand{\LWexecGptValidatedCleanVacuous}{100}
+\providecommand{\LWexecGptValidatedOpenSessions}{0}
+\providecommand{\LWexecGptValidatedOpenWrong}{0}
+\providecommand{\LWexecGptValidatedOpenRight}{0}
+\providecommand{\LWexecGptValidatedFailDouble}{0}
+\providecommand{\LWexecGptValidatedFailNone}{0}
+\providecommand{\LWexecGptValidatedFailStaleOnly}{100}
+\providecommand{\LWexecGptValidatedOneObligation}{0}
+\providecommand{\LWexecGptValidatedTwoObligations}{0}
+\providecommand{\LWexecGptValidatedNoObligation}{100}
+\providecommand{\LWexecGptLedgerR}{0}
+\providecommand{\LWexecGptLedgerStoreWrong}{11}
+\providecommand{\LWexecGptLedgerWorldWrong}{11}
+\providecommand{\LWexecGptLedgerWorldNone}{10}
+\providecommand{\LWexecGptLedgerDouble}{10}
+\providecommand{\LWexecGptLedgerConsumerStale}{97}
+\providecommand{\LWexecGptLedgerConsumerNone}{3}
+\providecommand{\LWexecGptLedgerRetries}{14}
+\providecommand{\LWexecGptLedgerObl}{148/131/21}
+\providecommand{\LWexecGptLedgerN}{100}
+\providecommand{\LWexecGptLedgerCleanSessions}{79}
+\providecommand{\LWexecGptLedgerCleanRight}{79}
+\providecommand{\LWexecGptLedgerCleanWrong}{0}
+\providecommand{\LWexecGptLedgerCleanVacuous}{0}
+\providecommand{\LWexecGptLedgerOpenSessions}{21}
+\providecommand{\LWexecGptLedgerOpenWrong}{21}
+\providecommand{\LWexecGptLedgerOpenRight}{0}
+\providecommand{\LWexecGptLedgerFailDouble}{10}
+\providecommand{\LWexecGptLedgerFailNone}{10}
+\providecommand{\LWexecGptLedgerFailStaleOnly}{1}
+\providecommand{\LWexecGptLedgerOneObligation}{52}
+\providecommand{\LWexecGptLedgerTwoObligations}{48}
+\providecommand{\LWexecGptLedgerNoObligation}{0}
+\providecommand{\LWexecGptLedgerConsumerStaleBeforeRevision}{25}
+\providecommand{\LWexecGptLedgerConsumerStaleInsideCompensation}{56}
+\providecommand{\LWexecGptLedgerConsumerStaleRefusedCancel}{3}
+\providecommand{\LWexecGptLedgerConsumerStaleCurrentThenSuperseded}{13}
+\providecommand{\LWexecGptLedgerConsumerStaleOther}{0}
+\providecommand{\LWexecGptLedgerBothRevisionsAfterCommit}{56}
+\providecommand{\LWexecGptLedgerFirstRevisionMedianS}{0.8}
+\providecommand{\LWexecGptLedgerCompLatencyMedianS}{0.9}
+\providecommand{\LWexecGptLedgerCompLatencyPNinetyS}{1.1}
+\providecommand{\LWexecGptLedgerBookingToCompensationMedianS}{1.1}
+\providecommand{\LWexecGptLedgerBookingToCompensationPNinetyS}{1.6}
+\providecommand{\LWexecGptLedgerNoRollbackR}{0}
+\providecommand{\LWexecGptLedgerNoRollbackStoreWrong}{8}
+\providecommand{\LWexecGptLedgerNoRollbackWorldWrong}{100}
+\providecommand{\LWexecGptLedgerNoRollbackWorldNone}{0}
+\providecommand{\LWexecGptLedgerNoRollbackDouble}{95}
+\providecommand{\LWexecGptLedgerNoRollbackConsumerStale}{100}
+\providecommand{\LWexecGptLedgerNoRollbackConsumerNone}{0}
+\providecommand{\LWexecGptLedgerNoRollbackRetries}{14}
+\providecommand{\LWexecGptLedgerNoRollbackObl}{157/156/8}
+\providecommand{\LWexecGptLedgerNoRollbackN}{100}
+\providecommand{\LWexecGptLedgerNoRollbackCleanSessions}{92}
+\providecommand{\LWexecGptLedgerNoRollbackCleanRight}{0}
+\providecommand{\LWexecGptLedgerNoRollbackCleanWrong}{92}
+\providecommand{\LWexecGptLedgerNoRollbackCleanVacuous}{0}
+\providecommand{\LWexecGptLedgerNoRollbackOpenSessions}{8}
+\providecommand{\LWexecGptLedgerNoRollbackOpenWrong}{8}
+\providecommand{\LWexecGptLedgerNoRollbackOpenRight}{0}
+\providecommand{\LWexecGptLedgerNoRollbackFailDouble}{95}
+\providecommand{\LWexecGptLedgerNoRollbackFailNone}{0}
+\providecommand{\LWexecGptLedgerNoRollbackFailStaleOnly}{5}
+\providecommand{\LWexecGptLedgerNoRollbackOneObligation}{43}
+\providecommand{\LWexecGptLedgerNoRollbackTwoObligations}{57}
+\providecommand{\LWexecGptLedgerNoRollbackNoObligation}{0}
+\providecommand{\LWexecLedgerBookingToCompensationMedianSLo}{1.1}
+\providecommand{\LWexecLedgerBookingToCompensationMedianSHi}{1.5}
+\providecommand{\LWexecLedgerBookingToCompensationMedianSRange}{1.1--1.5}
+\providecommand{\LWexecLedgerBookingToCompensationPNinetySLo}{1.6}
+\providecommand{\LWexecLedgerBookingToCompensationPNinetySHi}{1.9}
+\providecommand{\LWexecLedgerBookingToCompensationPNinetySRange}{1.6--1.9}
+\providecommand{\LWexecLedgerBothRevisionsAfterCommitLo}{0}
+\providecommand{\LWexecLedgerBothRevisionsAfterCommitHi}{57}
+\providecommand{\LWexecLedgerBothRevisionsAfterCommitRange}{0--57}
+\providecommand{\LWexecLedgerCleanRightLo}{79}
+\providecommand{\LWexecLedgerCleanRightHi}{85}
+\providecommand{\LWexecLedgerCleanRightRange}{79--85}
+\providecommand{\LWexecLedgerCleanSessionsLo}{79}
+\providecommand{\LWexecLedgerCleanSessionsHi}{85}
+\providecommand{\LWexecLedgerCleanSessionsRange}{79--85}
+\providecommand{\LWexecLedgerCleanVacuousLo}{0}
+\providecommand{\LWexecLedgerCleanVacuousHi}{1}
+\providecommand{\LWexecLedgerCleanVacuousRange}{0--1}
+\providecommand{\LWexecLedgerCleanWrongLo}{0}
+\providecommand{\LWexecLedgerCleanWrongHi}{0}
+\providecommand{\LWexecLedgerCleanWrongRange}{0}
+\providecommand{\LWexecLedgerCompLatencyMedianSLo}{0.9}
+\providecommand{\LWexecLedgerCompLatencyMedianSHi}{1.1}
+\providecommand{\LWexecLedgerCompLatencyMedianSRange}{0.9--1.1}
+\providecommand{\LWexecLedgerCompLatencyPNinetySLo}{1.1}
+\providecommand{\LWexecLedgerCompLatencyPNinetySHi}{1.3}
+\providecommand{\LWexecLedgerCompLatencyPNinetySRange}{1.1--1.3}
+\providecommand{\LWexecLedgerConsumerNoneLo}{0}
+\providecommand{\LWexecLedgerConsumerNoneHi}{3}
+\providecommand{\LWexecLedgerConsumerNoneRange}{0--3}
+\providecommand{\LWexecLedgerConsumerStaleLo}{97}
+\providecommand{\LWexecLedgerConsumerStaleHi}{98}
+\providecommand{\LWexecLedgerConsumerStaleRange}{97--98}
+\providecommand{\LWexecLedgerConsumerStaleBeforeRevisionLo}{25}
+\providecommand{\LWexecLedgerConsumerStaleBeforeRevisionHi}{29}
+\providecommand{\LWexecLedgerConsumerStaleBeforeRevisionRange}{25--29}
+\providecommand{\LWexecLedgerConsumerStaleCurrentThenSupersededLo}{0}
+\providecommand{\LWexecLedgerConsumerStaleCurrentThenSupersededHi}{13}
+\providecommand{\LWexecLedgerConsumerStaleCurrentThenSupersededRange}{0--13}
+\providecommand{\LWexecLedgerConsumerStaleInsideCompensationLo}{56}
+\providecommand{\LWexecLedgerConsumerStaleInsideCompensationHi}{68}
+\providecommand{\LWexecLedgerConsumerStaleInsideCompensationRange}{56--68}
+\providecommand{\LWexecLedgerConsumerStaleOtherLo}{0}
+\providecommand{\LWexecLedgerConsumerStaleOtherHi}{0}
+\providecommand{\LWexecLedgerConsumerStaleOtherRange}{0}
+\providecommand{\LWexecLedgerConsumerStaleRefusedCancelLo}{0}
+\providecommand{\LWexecLedgerConsumerStaleRefusedCancelHi}{3}
+\providecommand{\LWexecLedgerConsumerStaleRefusedCancelRange}{0--3}
+\providecommand{\LWexecLedgerDoubleLo}{5}
+\providecommand{\LWexecLedgerDoubleHi}{12}
+\providecommand{\LWexecLedgerDoubleRange}{5--12}
+\providecommand{\LWexecLedgerFailDoubleLo}{5}
+\providecommand{\LWexecLedgerFailDoubleHi}{12}
+\providecommand{\LWexecLedgerFailDoubleRange}{5--12}
+\providecommand{\LWexecLedgerFailNoneLo}{6}
+\providecommand{\LWexecLedgerFailNoneHi}{10}
+\providecommand{\LWexecLedgerFailNoneRange}{6--10}
+\providecommand{\LWexecLedgerFailStaleOnlyLo}{0}
+\providecommand{\LWexecLedgerFailStaleOnlyHi}{1}
+\providecommand{\LWexecLedgerFailStaleOnlyRange}{0--1}
+\providecommand{\LWexecLedgerFirstRevisionMedianSLo}{0.8}
+\providecommand{\LWexecLedgerFirstRevisionMedianSHi}{1.2}
+\providecommand{\LWexecLedgerFirstRevisionMedianSRange}{0.8--1.2}
+\providecommand{\LWexecLedgerNoObligationLo}{0}
+\providecommand{\LWexecLedgerNoObligationHi}{1}
+\providecommand{\LWexecLedgerNoObligationRange}{0--1}
+\providecommand{\LWexecLedgerOneObligationLo}{52}
+\providecommand{\LWexecLedgerOneObligationHi}{99}
+\providecommand{\LWexecLedgerOneObligationRange}{52--99}
+\providecommand{\LWexecLedgerOpenRightLo}{0}
+\providecommand{\LWexecLedgerOpenRightHi}{0}
+\providecommand{\LWexecLedgerOpenRightRange}{0}
+\providecommand{\LWexecLedgerOpenSessionsLo}{15}
+\providecommand{\LWexecLedgerOpenSessionsHi}{21}
+\providecommand{\LWexecLedgerOpenSessionsRange}{15--21}
+\providecommand{\LWexecLedgerOpenWrongLo}{15}
+\providecommand{\LWexecLedgerOpenWrongHi}{21}
+\providecommand{\LWexecLedgerOpenWrongRange}{15--21}
+\providecommand{\LWexecLedgerRLo}{0}
+\providecommand{\LWexecLedgerRHi}{0}
+\providecommand{\LWexecLedgerRRange}{0}
+\providecommand{\LWexecLedgerRetriesLo}{0}
+\providecommand{\LWexecLedgerRetriesHi}{16}
+\providecommand{\LWexecLedgerRetriesRange}{0--16}
+\providecommand{\LWexecLedgerStoreWrongLo}{6}
+\providecommand{\LWexecLedgerStoreWrongHi}{11}
+\providecommand{\LWexecLedgerStoreWrongRange}{6--11}
+\providecommand{\LWexecLedgerTwoObligationsLo}{0}
+\providecommand{\LWexecLedgerTwoObligationsHi}{48}
+\providecommand{\LWexecLedgerTwoObligationsRange}{0--48}
+\providecommand{\LWexecLedgerWorldNoneLo}{6}
+\providecommand{\LWexecLedgerWorldNoneHi}{10}
+\providecommand{\LWexecLedgerWorldNoneRange}{6--10}
+\providecommand{\LWexecLedgerWorldWrongLo}{6}
+\providecommand{\LWexecLedgerWorldWrongHi}{12}
+\providecommand{\LWexecLedgerWorldWrongRange}{6--12}
+\providecommand{\LWexecLedgerNoRollbackCleanRightLo}{0}
+\providecommand{\LWexecLedgerNoRollbackCleanRightHi}{1}
+\providecommand{\LWexecLedgerNoRollbackCleanRightRange}{0--1}
+\providecommand{\LWexecLedgerNoRollbackCleanSessionsLo}{88}
+\providecommand{\LWexecLedgerNoRollbackCleanSessionsHi}{95}
+\providecommand{\LWexecLedgerNoRollbackCleanSessionsRange}{88--95}
+\providecommand{\LWexecLedgerNoRollbackCleanVacuousLo}{0}
+\providecommand{\LWexecLedgerNoRollbackCleanVacuousHi}{1}
+\providecommand{\LWexecLedgerNoRollbackCleanVacuousRange}{0--1}
+\providecommand{\LWexecLedgerNoRollbackCleanWrongLo}{87}
+\providecommand{\LWexecLedgerNoRollbackCleanWrongHi}{95}
+\providecommand{\LWexecLedgerNoRollbackCleanWrongRange}{87--95}
+\providecommand{\LWexecLedgerNoRollbackConsumerNoneLo}{0}
+\providecommand{\LWexecLedgerNoRollbackConsumerNoneHi}{0}
+\providecommand{\LWexecLedgerNoRollbackConsumerNoneRange}{0}
+\providecommand{\LWexecLedgerNoRollbackConsumerStaleLo}{99}
+\providecommand{\LWexecLedgerNoRollbackConsumerStaleHi}{100}
+\providecommand{\LWexecLedgerNoRollbackConsumerStaleRange}{99--100}
+\providecommand{\LWexecLedgerNoRollbackDoubleLo}{87}
+\providecommand{\LWexecLedgerNoRollbackDoubleHi}{97}
+\providecommand{\LWexecLedgerNoRollbackDoubleRange}{87--97}
+\providecommand{\LWexecLedgerNoRollbackFailDoubleLo}{87}
+\providecommand{\LWexecLedgerNoRollbackFailDoubleHi}{97}
+\providecommand{\LWexecLedgerNoRollbackFailDoubleRange}{87--97}
+\providecommand{\LWexecLedgerNoRollbackFailNoneLo}{0}
+\providecommand{\LWexecLedgerNoRollbackFailNoneHi}{0}
+\providecommand{\LWexecLedgerNoRollbackFailNoneRange}{0}
+\providecommand{\LWexecLedgerNoRollbackFailStaleOnlyLo}{3}
+\providecommand{\LWexecLedgerNoRollbackFailStaleOnlyHi}{12}
+\providecommand{\LWexecLedgerNoRollbackFailStaleOnlyRange}{3--12}
+\providecommand{\LWexecLedgerNoRollbackNoObligationLo}{0}
+\providecommand{\LWexecLedgerNoRollbackNoObligationHi}{1}
+\providecommand{\LWexecLedgerNoRollbackNoObligationRange}{0--1}
+\providecommand{\LWexecLedgerNoRollbackOneObligationLo}{43}
+\providecommand{\LWexecLedgerNoRollbackOneObligationHi}{94}
+\providecommand{\LWexecLedgerNoRollbackOneObligationRange}{43--94}
+\providecommand{\LWexecLedgerNoRollbackOpenRightLo}{0}
+\providecommand{\LWexecLedgerNoRollbackOpenRightHi}{0}
+\providecommand{\LWexecLedgerNoRollbackOpenRightRange}{0}
+\providecommand{\LWexecLedgerNoRollbackOpenSessionsLo}{5}
+\providecommand{\LWexecLedgerNoRollbackOpenSessionsHi}{12}
+\providecommand{\LWexecLedgerNoRollbackOpenSessionsRange}{5--12}
+\providecommand{\LWexecLedgerNoRollbackOpenWrongLo}{5}
+\providecommand{\LWexecLedgerNoRollbackOpenWrongHi}{12}
+\providecommand{\LWexecLedgerNoRollbackOpenWrongRange}{5--12}
+\providecommand{\LWexecLedgerNoRollbackRLo}{0}
+\providecommand{\LWexecLedgerNoRollbackRHi}{0}
+\providecommand{\LWexecLedgerNoRollbackRRange}{0}
+\providecommand{\LWexecLedgerNoRollbackRetriesLo}{1}
+\providecommand{\LWexecLedgerNoRollbackRetriesHi}{14}
+\providecommand{\LWexecLedgerNoRollbackRetriesRange}{1--14}
+\providecommand{\LWexecLedgerNoRollbackStoreWrongLo}{5}
+\providecommand{\LWexecLedgerNoRollbackStoreWrongHi}{12}
+\providecommand{\LWexecLedgerNoRollbackStoreWrongRange}{5--12}
+\providecommand{\LWexecLedgerNoRollbackTwoObligationsLo}{5}
+\providecommand{\LWexecLedgerNoRollbackTwoObligationsHi}{57}
+\providecommand{\LWexecLedgerNoRollbackTwoObligationsRange}{5--57}
+\providecommand{\LWexecLedgerNoRollbackWorldNoneLo}{0}
+\providecommand{\LWexecLedgerNoRollbackWorldNoneHi}{0}
+\providecommand{\LWexecLedgerNoRollbackWorldNoneRange}{0}
+\providecommand{\LWexecLedgerNoRollbackWorldWrongLo}{99}
+\providecommand{\LWexecLedgerNoRollbackWorldWrongHi}{100}
+\providecommand{\LWexecLedgerNoRollbackWorldWrongRange}{99--100}
+\providecommand{\LWexecValidatedCleanRightLo}{0}
+\providecommand{\LWexecValidatedCleanRightHi}{1}
+\providecommand{\LWexecValidatedCleanRightRange}{0--1}
+\providecommand{\LWexecValidatedCleanSessionsLo}{100}
+\providecommand{\LWexecValidatedCleanSessionsHi}{100}
+\providecommand{\LWexecValidatedCleanSessionsRange}{100}
+\providecommand{\LWexecValidatedCleanVacuousLo}{100}
+\providecommand{\LWexecValidatedCleanVacuousHi}{100}
+\providecommand{\LWexecValidatedCleanVacuousRange}{100}
+\providecommand{\LWexecValidatedCleanWrongLo}{99}
+\providecommand{\LWexecValidatedCleanWrongHi}{100}
+\providecommand{\LWexecValidatedCleanWrongRange}{99--100}
+\providecommand{\LWexecValidatedConsumerNoneLo}{0}
+\providecommand{\LWexecValidatedConsumerNoneHi}{0}
+\providecommand{\LWexecValidatedConsumerNoneRange}{0}
+\providecommand{\LWexecValidatedConsumerStaleLo}{99}
+\providecommand{\LWexecValidatedConsumerStaleHi}{100}
+\providecommand{\LWexecValidatedConsumerStaleRange}{99--100}
+\providecommand{\LWexecValidatedDoubleLo}{0}
+\providecommand{\LWexecValidatedDoubleHi}{0}
+\providecommand{\LWexecValidatedDoubleRange}{0}
+\providecommand{\LWexecValidatedFailDoubleLo}{0}
+\providecommand{\LWexecValidatedFailDoubleHi}{0}
+\providecommand{\LWexecValidatedFailDoubleRange}{0}
+\providecommand{\LWexecValidatedFailNoneLo}{0}
+\providecommand{\LWexecValidatedFailNoneHi}{0}
+\providecommand{\LWexecValidatedFailNoneRange}{0}
+\providecommand{\LWexecValidatedFailStaleOnlyLo}{99}
+\providecommand{\LWexecValidatedFailStaleOnlyHi}{100}
+\providecommand{\LWexecValidatedFailStaleOnlyRange}{99--100}
+\providecommand{\LWexecValidatedNoObligationLo}{100}
+\providecommand{\LWexecValidatedNoObligationHi}{100}
+\providecommand{\LWexecValidatedNoObligationRange}{100}
+\providecommand{\LWexecValidatedOneObligationLo}{0}
+\providecommand{\LWexecValidatedOneObligationHi}{0}
+\providecommand{\LWexecValidatedOneObligationRange}{0}
+\providecommand{\LWexecValidatedOpenRightLo}{0}
+\providecommand{\LWexecValidatedOpenRightHi}{0}
+\providecommand{\LWexecValidatedOpenRightRange}{0}
+\providecommand{\LWexecValidatedOpenSessionsLo}{0}
+\providecommand{\LWexecValidatedOpenSessionsHi}{0}
+\providecommand{\LWexecValidatedOpenSessionsRange}{0}
+\providecommand{\LWexecValidatedOpenWrongLo}{0}
+\providecommand{\LWexecValidatedOpenWrongHi}{0}
+\providecommand{\LWexecValidatedOpenWrongRange}{0}
+\providecommand{\LWexecValidatedRLo}{99}
+\providecommand{\LWexecValidatedRHi}{100}
+\providecommand{\LWexecValidatedRRange}{99--100}
+\providecommand{\LWexecValidatedRetriesLo}{0}
+\providecommand{\LWexecValidatedRetriesHi}{0}
+\providecommand{\LWexecValidatedRetriesRange}{0}
+\providecommand{\LWexecValidatedStoreWrongLo}{99}
+\providecommand{\LWexecValidatedStoreWrongHi}{100}
+\providecommand{\LWexecValidatedStoreWrongRange}{99--100}
+\providecommand{\LWexecValidatedTwoObligationsLo}{0}
+\providecommand{\LWexecValidatedTwoObligationsHi}{0}
+\providecommand{\LWexecValidatedTwoObligationsRange}{0}
+\providecommand{\LWexecValidatedWorldNoneLo}{0}
+\providecommand{\LWexecValidatedWorldNoneHi}{0}
+\providecommand{\LWexecValidatedWorldNoneRange}{0}
+\providecommand{\LWexecValidatedWorldWrongLo}{99}
+\providecommand{\LWexecValidatedWorldWrongHi}{100}
+\providecommand{\LWexecValidatedWorldWrongRange}{99--100}
+\providecommand{\LWexecLedgerAgree}{300/300}
+\providecommand{\LWexecLedgerDisagree}{0}
+\providecommand{\LWexecLedgerDisagreeCI}{[0.0, 1.2]}
+\providecommand{\LWexecServerSha}{f141b709aaaa0040}
+% --- probe 301 (/tmp/claude-0/-home-claude/37127f59-98ee-511c-9a78-827474030281/scratchpad/fold/results/a6_real_latency/sqlite.jsonl) ---
 \renewcommand{\ToolNodeRealSqlite}{$126/165$}
-% --- probe 301 --l3-server (results/a6_real_latency/sqlite_verified.jsonl) ---
+% --- probe 301 --l3-server (/tmp/claude-0/-home-claude/37127f59-98ee-511c-9a78-827474030281/scratchpad/fold/results/a6_real_latency/sqlite_verified.jsonl) ---
 \renewcommand{\ToolNodeVerifiedSqlite}{$0/165$}
 \renewcommand{\ToolNodeVerifiedBaselineSqlite}{$119/165$}
 \renewcommand{\ToolNodeVerifiedAvailable}{1}
-% --- probe 301 (results/a6_real_latency/http.jsonl) ---
+% --- probe 301 (/tmp/claude-0/-home-claude/37127f59-98ee-511c-9a78-827474030281/scratchpad/fold/results/a6_real_latency/http.jsonl) ---
 \renewcommand{\ToolNodeRealHttp}{$112/165$}
-% --- probe 301 --l3-server (results/a6_real_latency/http_verified.jsonl) ---
+% --- probe 301 --l3-server (/tmp/claude-0/-home-claude/37127f59-98ee-511c-9a78-827474030281/scratchpad/fold/results/a6_real_latency/http_verified.jsonl) ---
 \renewcommand{\ToolNodeVerifiedHttp}{$0/165$}
 \renewcommand{\ToolNodeVerifiedBaselineHttp}{$113/165$}
 \renewcommand{\ToolNodeVerifiedAvailable}{1}
-% --- probe 302 (results/runs/20261014T1417Z-interleaved-claude-sonnet-4-5; model claude-sonnet-4-5; Stamp); order.tsv completion stamps, 1 s resolution; sidecars folded: no ---
+% --- probe 302 (/tmp/claude-0/-home-claude/37127f59-98ee-511c-9a78-827474030281/scratchpad/fold/results/runs/20261014T1417Z-interleaved-claude-sonnet-4-5; model claude-sonnet-4-5): the writer role's committed write per cell, from the records ---
+\providecommand{\InterleavedClaudeEditReviewPessWriterCommits}{100/100}
+\providecommand{\InterleavedClaudeEditReviewSIWriterCommits}{100/100}
+\providecommand{\InterleavedClaudeEditReviewVanillaWriterCommits}{100/100}
+\providecommand{\InterleavedClaudePlanExecutePessWriterCommits}{100/100}
+\providecommand{\InterleavedClaudePlanExecuteSIWriterCommits}{100/100}
+\providecommand{\InterleavedClaudePlanExecuteVanillaWriterCommits}{100/100}
+\providecommand{\InterleavedClaudeTriagePessWriterCommits}{0/100}
+\providecommand{\InterleavedClaudeTriageSIWriterCommits}{0/100}
+\providecommand{\InterleavedClaudeTriageVanillaWriterCommits}{0/100}
+% --- probe 302 (/tmp/claude-0/-home-claude/37127f59-98ee-511c-9a78-827474030281/scratchpad/fold/results/runs/20261014T1417Z-interleaved-claude-sonnet-4-5; model claude-sonnet-4-5; Stamp); order.tsv completion stamps, 1 s resolution; sidecars folded: no ---
 \renewcommand{\WallclockStampClaudeEditReviewPess}{$+5.3\%$ [+2.0, +8.4], $n=99$}
 \renewcommand{\WallclockStampClaudeEditReviewSI}{$+2.4\%$ [-1.2, +6.4], $n=99$}
 \renewcommand{\WallclockStampClaudePlanExecutePess}{$-0.5\%$ [-3.5, +2.5], $n=99$}
@@ -2329,27 +2809,136 @@
 \renewcommand{\WallclockStampClaudeTriagePess}{$+1.3\%$ [-1.1, +3.7], $n=99$}
 \renewcommand{\WallclockStampClaudeTriageSI}{$+1.3\%$ [-2.1, +5.9], $n=99$}
 \renewcommand{\WallclockStampClaudeAvailable}{1}
-% --- verus ledger (results/verus/lib_l5_ledger.verus.log) ---
+% --- probe 302 refusal-price study (/tmp/claude-0/-home-claude/37127f59-98ee-511c-9a78-827474030281/scratchpad/fold/results/runs/20261017T0753Z-refusal-claude-sonnet-4-5; model claude-sonnet-4-5; REFUSED text unaddressed (broadcast by the group chat)): what a refused operation costs when the model is told ---
+\renewcommand{\RefusalClaudeAvailable}{1}
+\providecommand{\RefusalClaudeRun}{20261017T0753Z-refusal-claude-sonnet-4-5}
+\providecommand{\RefusalClaudeEditReviewPessDropN}{100}
+\providecommand{\RefusalClaudeEditReviewPessDropCommits}{6.00}
+\providecommand{\RefusalClaudeEditReviewPessDropCalls}{11.00}
+\providecommand{\RefusalClaudeEditReviewPessDropWallS}{16.7}
+\providecommand{\RefusalClaudeEditReviewPessDropRefused}{5.00}
+\providecommand{\RefusalClaudeEditReviewPessDropRefusedSessions}{100/100}
+\providecommand{\RefusalClaudeEditReviewPessDropWriterCommits}{0/100}
+\providecommand{\RefusalClaudeEditReviewPessDropWriterRecords}{6.00}
+\providecommand{\RefusalClaudeEditReviewPessDropWriteLengthCalls}{0}
+\providecommand{\RefusalClaudeEditReviewPessDropTotalCalls}{1{,}100}
+\providecommand{\RefusalClaudeEditReviewPessDropWallOverhead}{$+104.2\%$ [+99.8, +108.7], $n=100$}
+\providecommand{\RefusalClaudeEditReviewPessDropCallsOverhead}{$+120.0\%$ [+120.0, +120.0], $n=100$}
+\providecommand{\RefusalClaudeEditReviewPessRetryN}{100}
+\providecommand{\RefusalClaudeEditReviewPessRetryCommits}{6.00}
+\providecommand{\RefusalClaudeEditReviewPessRetryCalls}{11.00}
+\providecommand{\RefusalClaudeEditReviewPessRetryWallS}{17.2}
+\providecommand{\RefusalClaudeEditReviewPessRetryRefused}{5.00}
+\providecommand{\RefusalClaudeEditReviewPessRetryRefusedSessions}{100/100}
+\providecommand{\RefusalClaudeEditReviewPessRetryWriterCommits}{0/100}
+\providecommand{\RefusalClaudeEditReviewPessRetryWriterRecords}{6.00}
+\providecommand{\RefusalClaudeEditReviewPessRetryWriteLengthCalls}{0}
+\providecommand{\RefusalClaudeEditReviewPessRetryTotalCalls}{1{,}100}
+\providecommand{\RefusalClaudeEditReviewPessRetryWallOverhead}{$+110.5\%$ [+99.4, +128.5], $n=100$}
+\providecommand{\RefusalClaudeEditReviewPessRetryCallsOverhead}{$+120.0\%$ [+120.0, +120.0], $n=100$}
+\providecommand{\RefusalClaudeEditReviewSIDropN}{100}
+\providecommand{\RefusalClaudeEditReviewSIDropCommits}{3.00}
+\providecommand{\RefusalClaudeEditReviewSIDropCalls}{5.88}
+\providecommand{\RefusalClaudeEditReviewSIDropWallS}{9.9}
+\providecommand{\RefusalClaudeEditReviewSIDropRefused}{0.44}
+\providecommand{\RefusalClaudeEditReviewSIDropRefusedSessions}{44/100}
+\providecommand{\RefusalClaudeEditReviewSIDropWriterCommits}{100/100}
+\providecommand{\RefusalClaudeEditReviewSIDropWriterRecords}{1.44}
+\providecommand{\RefusalClaudeEditReviewSIDropWriteLengthCalls}{197}
+\providecommand{\RefusalClaudeEditReviewSIDropTotalCalls}{588}
+\providecommand{\RefusalClaudeEditReviewSIDropWallOverhead}{$+19.7\%$ [+13.8, +25.7], $n=100$}
+\providecommand{\RefusalClaudeEditReviewSIDropCallsOverhead}{$+17.6\%$ [+13.6, +21.6], $n=100$}
+\providecommand{\RefusalClaudeEditReviewSIRetryN}{100}
+\providecommand{\RefusalClaudeEditReviewSIRetryCommits}{3.42}
+\providecommand{\RefusalClaudeEditReviewSIRetryCalls}{7.52}
+\providecommand{\RefusalClaudeEditReviewSIRetryWallS}{12.4}
+\providecommand{\RefusalClaudeEditReviewSIRetryRefused}{0.84}
+\providecommand{\RefusalClaudeEditReviewSIRetryRefusedSessions}{42/100}
+\providecommand{\RefusalClaudeEditReviewSIRetryWriterCommits}{100/100}
+\providecommand{\RefusalClaudeEditReviewSIRetryWriterRecords}{1.84}
+\providecommand{\RefusalClaudeEditReviewSIRetryWriteLengthCalls}{268}
+\providecommand{\RefusalClaudeEditReviewSIRetryTotalCalls}{752}
+\providecommand{\RefusalClaudeEditReviewSIRetryWallOverhead}{$+52.0\%$ [+38.3, +66.1], $n=100$}
+\providecommand{\RefusalClaudeEditReviewSIRetryCallsOverhead}{$+50.4\%$ [+38.4, +62.4], $n=100$}
+\providecommand{\RefusalClaudeEditReviewVanillaN}{100}
+\providecommand{\RefusalClaudeEditReviewVanillaCommits}{2.53}
+\providecommand{\RefusalClaudeEditReviewVanillaCalls}{5.00}
+\providecommand{\RefusalClaudeEditReviewVanillaWallS}{8.3}
+\providecommand{\RefusalClaudeEditReviewVanillaRefused}{0.00}
+\providecommand{\RefusalClaudeEditReviewVanillaRefusedSessions}{0/100}
+\providecommand{\RefusalClaudeEditReviewVanillaWriterCommits}{100/100}
+\providecommand{\RefusalClaudeEditReviewVanillaWriterRecords}{1.00}
+\providecommand{\RefusalClaudeEditReviewVanillaWriteLengthCalls}{147}
+\providecommand{\RefusalClaudeEditReviewVanillaTotalCalls}{500}
+\providecommand{\RefusalClaudeTriagePessDropN}{100}
+\providecommand{\RefusalClaudeTriagePessDropCommits}{6.07}
+\providecommand{\RefusalClaudeTriagePessDropCalls}{15.01}
+\providecommand{\RefusalClaudeTriagePessDropWallS}{25.3}
+\providecommand{\RefusalClaudeTriagePessDropRefused}{8.47}
+\providecommand{\RefusalClaudeTriagePessDropRefusedSessions}{100/100}
+\providecommand{\RefusalClaudeTriagePessDropWriterCommits}{11/100}
+\providecommand{\RefusalClaudeTriagePessDropWriterRecords}{4.97}
+\providecommand{\RefusalClaudeTriagePessDropWallOverhead}{$+297.8\%$ [+278.4, +315.4], $n=100$}
+\providecommand{\RefusalClaudeTriagePessDropCallsOverhead}{$+275.2\%$ [+257.2, +292.2], $n=100$}
+\providecommand{\RefusalClaudeTriagePessRetryN}{100}
+\providecommand{\RefusalClaudeTriagePessRetryCommits}{6.97}
+\providecommand{\RefusalClaudeTriagePessRetryCalls}{16.98}
+\providecommand{\RefusalClaudeTriagePessRetryWallS}{27.5}
+\providecommand{\RefusalClaudeTriagePessRetryRefused}{9.89}
+\providecommand{\RefusalClaudeTriagePessRetryRefusedSessions}{100/100}
+\providecommand{\RefusalClaudeTriagePessRetryWriterCommits}{1/100}
+\providecommand{\RefusalClaudeTriagePessRetryWriterRecords}{5.97}
+\providecommand{\RefusalClaudeTriagePessRetryWallOverhead}{$+332.7\%$ [+324.8, +340.4], $n=100$}
+\providecommand{\RefusalClaudeTriagePessRetryCallsOverhead}{$+324.5\%$ [+323.8, +325.0], $n=100$}
+\providecommand{\RefusalClaudeTriageSIDropN}{100}
+\providecommand{\RefusalClaudeTriageSIDropCommits}{3.00}
+\providecommand{\RefusalClaudeTriageSIDropCalls}{4.00}
+\providecommand{\RefusalClaudeTriageSIDropWallS}{6.5}
+\providecommand{\RefusalClaudeTriageSIDropRefused}{0.00}
+\providecommand{\RefusalClaudeTriageSIDropRefusedSessions}{0/100}
+\providecommand{\RefusalClaudeTriageSIDropWriterCommits}{0/100}
+\providecommand{\RefusalClaudeTriageSIDropWriterRecords}{1.00}
+\providecommand{\RefusalClaudeTriageSIDropWallOverhead}{$+2.4\%$ [-0.2, +5.9], $n=100$}
+\providecommand{\RefusalClaudeTriageSIDropCallsOverhead}{$+0.0\%$ [+0.0, +0.0], $n=100$}
+\providecommand{\RefusalClaudeTriageSIRetryN}{100}
+\providecommand{\RefusalClaudeTriageSIRetryCommits}{3.00}
+\providecommand{\RefusalClaudeTriageSIRetryCalls}{4.00}
+\providecommand{\RefusalClaudeTriageSIRetryWallS}{6.5}
+\providecommand{\RefusalClaudeTriageSIRetryRefused}{0.00}
+\providecommand{\RefusalClaudeTriageSIRetryRefusedSessions}{0/100}
+\providecommand{\RefusalClaudeTriageSIRetryWriterCommits}{0/100}
+\providecommand{\RefusalClaudeTriageSIRetryWriterRecords}{1.00}
+\providecommand{\RefusalClaudeTriageSIRetryWallOverhead}{$+1.4\%$ [-1.2, +4.4], $n=100$}
+\providecommand{\RefusalClaudeTriageSIRetryCallsOverhead}{$+0.0\%$ [+0.0, +0.0], $n=100$}
+\providecommand{\RefusalClaudeTriageVanillaN}{100}
+\providecommand{\RefusalClaudeTriageVanillaCommits}{3.00}
+\providecommand{\RefusalClaudeTriageVanillaCalls}{4.00}
+\providecommand{\RefusalClaudeTriageVanillaWallS}{6.4}
+\providecommand{\RefusalClaudeTriageVanillaRefused}{0.00}
+\providecommand{\RefusalClaudeTriageVanillaRefusedSessions}{0/100}
+\providecommand{\RefusalClaudeTriageVanillaWriterCommits}{0/100}
+\providecommand{\RefusalClaudeTriageVanillaWriterRecords}{1.00}
+% --- verus ledger (/tmp/claude-0/-home-claude/37127f59-98ee-511c-9a78-827474030281/scratchpad/fold/results/verus/lib_l5_ledger.verus.log) ---
 \renewcommand{\LfiveVerus}{7 obligations, 0 errors}
 \renewcommand{\LfiveVerusStatus}{verified in Verus (7 obligations, 0 errors)}
 \renewcommand{\LfiveVerusIntro}{verified (7 obligations)}
-% --- verified_scorer_gate (./tools/verified_scorer.json) ---
-\renewcommand{\VerifiedScorerCells}{114}
-\renewcommand{\VerifiedScorerTraces}{11{,}103}
+% --- verified_scorer_gate (/tmp/claude-0/-home-claude/37127f59-98ee-511c-9a78-827474030281/scratchpad/fold/tools/verified_scorer.json) ---
+\renewcommand{\VerifiedScorerCells}{126}
+\renewcommand{\VerifiedScorerTraces}{12{,}600}
 \renewcommand{\VerifiedScorerProblems}{0}
 \renewcommand{\VerifiedScorerAvailable}{1}
 % Claude op-record replication (runs/*-claude), scored by the verified detector; -- = cell not scored yet
 \providecommand{\VSClaudeEditReviewVanilla}{100/100}
-\providecommand{\VSClaudeEditReviewPess}{--}
-\providecommand{\VSClaudeEditReviewSI}{--}
+\providecommand{\VSClaudeEditReviewPess}{0/100}
+\providecommand{\VSClaudeEditReviewSI}{50/100}
 \providecommand{\VSClaudePlanExecuteVanilla}{0/100}
-\providecommand{\VSClaudePlanExecutePess}{--}
-\providecommand{\VSClaudePlanExecuteSI}{--}
+\providecommand{\VSClaudePlanExecutePess}{0/100}
+\providecommand{\VSClaudePlanExecuteSI}{0/100}
 \providecommand{\VSClaudeTriageVanilla}{0/100}
-\providecommand{\VSClaudeTriagePess}{--}
-\providecommand{\VSClaudeTriageSI}{--}
+\providecommand{\VSClaudeTriagePess}{0/100}
+\providecommand{\VSClaudeTriageSI}{0/100}
 \renewcommand{\PilotClaudeAvailable}{1}
-% --- check_duplication.sh (./formal/tla/tlc.Duplication.log) ---
+% --- check_duplication.sh (/tmp/claude-0/-home-claude/37127f59-98ee-511c-9a78-827474030281/scratchpad/fold/formal/tla/tlc.Duplication.log) ---
 \renewcommand{\DupWitnessDepth}{5}
 \renewcommand{\DupDivergentDepth}{6}
 \renewcommand{\DupDedupStates}{1{,}714}
@@ -4025,10 +4614,33 @@ to \texttt{protocol.json} and, per session, to \texttt{refusals.jsonl} (the
 refused operations per agent and the runtime's abort count). Every cell
 tabulated in this appendix and in the main text was run with the old tools
 and is reported as run; runner step 22 is the paired study under the new ones
-(Appendix~O). Where the main text's $+109.5\%$ (September, Claude, triage)
-went is visible in that run's sidecars (\texttt{results/pilot\_tokens\_claude/}):
+(Appendix~O). The records of the Sonnet runs also settle why its triage cell
+cannot fire: in the six unguarded and snapshot-isolation triage cells on
+record here ($600$ sessions: the 2026-10-14 interleaved run's vanilla, SI and
+pessimistic cells, \InterleavedClaudeTriageVanillaWriterCommits{} /
+\InterleavedClaudeTriageSIWriterCommits{} /
+\InterleavedClaudeTriagePessWriterCommits{} sessions with a triager
+\texttt{priority} write, and the refusal study's vanilla, SI/drop and SI/retry
+arms, \RefusalClaudeTriageVanillaWriterCommits{} /
+\RefusalClaudeTriageSIDropWriterCommits{} /
+\RefusalClaudeTriageSIRetryWriterCommits) the triager commits a read-only
+record (read \texttt{ticket}, no write) and the engineer likewise (read
+\texttt{ticket}, \texttt{priority}; a \texttt{resolution} write in $0$ of the
+$600$), where gpt-4o's September triager wrote \texttt{priority} in $44/100$
+and its engineer \texttt{resolution} in $41/100$ (run
+\texttt{20260913T0150Z}, vanilla); the only writer on Sonnet is the reporter,
+whose write precedes every read. These six cells are the ones whose records
+were inspected for this paragraph; the scored run's own seeded triage cell
+(\texttt{20261014T0253Z-claude}) carries the same verdict ($0/100$) under the
+verified scorer. The Sonnet reviewer writes
+\texttt{review} in $50/100$ sessions of the scored run's unguarded cell,
+$48/100$ in the interleaved run and $47/100$ in the refusal study's, and
+otherwise commits read-only, which is the no-write bypass behind its
+default-SI residual of $50/100$ (gpt-4o: $5/100$). Where the main text's $+109.5\%$ (the Claude triage cell of the May 2026
+cost replication, run 2026-05-11) went is visible in that run's sidecars
+(\texttt{results/pilot\_tokens\_claude/}):
 the three agents' first calls ($696$-token protocol prompts, the same
-three-step protocol as October's $732$ with the seeded ticket) and then
+three-step protocol as the interleaved run's $732$ with the seeded ticket) and then
 further rounds of the round-robin chat---$7$ calls in $68$ of $100$ sessions,
 $9$ in $15$, $17$ in $6$, $8$, $10$ and $12$ in one each, and $4$ (as
 vanilla) in $8$---against $4$ in every vanilla session, where the reporter
@@ -4036,13 +4648,13 @@ closes the second round with \texttt{DONE}. (The sidecars carry no agent
 identity; the attribution of calls to agents and rounds follows from
 AutoGen's one model call per turn under \texttt{reflect\_on\_tool\_use=False}.) The October interleaved run's pessimistic triage sessions
 made $4$ calls (the one surviving sidecar; the $1$\,s stamps admit no more),
-with the engineer dropped in $100/100$ (the September Claude run's records
-are not in the archive, only its sidecars; its gpt-4o counterpart dropped a
-role in $97/100$). Both runs
+with the engineer dropped in $100/100$ (the May Claude run's records are
+not in the archive, only its sidecars; its gpt-4o counterpart dropped a role
+in $97/100$). Both runs
 used the old tools, so the refused agent was told \texttt{COMMITTED} (or saw
 a \texttt{KeyError} text from a refused read) in both; the receipts do not
-establish why the September chats went on for further rounds and the October
-ones stopped. What they establish is that the price of pessimistic locking
+establish why the May chats went on for further rounds and the October ones
+stopped. What they establish is that the price of pessimistic locking
 in this pilot is paid in chat rounds after the refusal, not in the refused
 agent's own retries, and that the pilot never told the agent what happened;
 the $+109.5\%$ and the $+1.3\%$ are two values of a parameter the pilot
@@ -4314,9 +4926,10 @@ order-of-magnitude in measured cost.
 To probe whether the gpt-4o findings reflect properties of the
 runtime model or of one specific model family, we replicated
 the full 900-session protocol against Anthropic's
-\texttt{claude-sonnet-4-5-20250929}, identical workloads and
-identical instrumentation. Table~S2 (this appendix) reports the
-per-session cost. Claude pricing at the time of the run is
+\texttt{claude-sonnet-4-5-20250929} (run of 2026-05-11; its sidecars under
+\texttt{results/pilot\_tokens\_claude/} are the receipt, its operation
+records were not archived), identical workloads and identical
+instrumentation. Table~S2 (this appendix) reports the per-session cost. Claude pricing at the time of the run is
 \$3.00/M input tokens, \$15.00/M output tokens.
 
 \smallskip
@@ -4330,11 +4943,14 @@ overlap, as on gpt-4o), plan-execute $0/100$ (the sequential control).
 Per session the vanilla cells cost $4{,}315$ and $2{,}504$ tokens
 ($\$0.0162$, $\$0.0094$; $8.3$\,s and $4.8$\,s) against $1{,}016$ and $620$
 tokens on gpt-4o, in the same number of calls. The triage cell is \emph{void}: in $100/100$
-sessions the reporter wrote a ticket reading ``no bug description provided''
-and the triager and engineer wrote nothing, so no operation of the pipeline
+sessions the reporter wrote a ticket saying that no bug description was
+provided (``No bug description provided by user'' and variants of it) and the
+triager and engineer wrote nothing, so no operation of the pipeline
 could overlap a write; the same harness delivered the ticket text to
 gpt-4o's reporter (run \texttt{20260913T0150Z}: $17$ distinct trace shapes,
-\texttt{priority} written in $28/100$ sessions). The cause is in the
+\texttt{priority} written in $49/100$ sessions---by the triager in $44$, by
+the reporter in $13$---and \texttt{resolution} by the engineer in $41$). The
+cause is in the
 workload, not the adapter: the reporter's system prompt instructs it to write
 ``\texttt{\{'ticket': '<one-sentence bug description>'\}}'' and never
 supplies a bug, so gpt-4o fabricates one and Sonnet declines to and writes
@@ -4349,7 +4965,7 @@ vanilla cell was rerun under the seeded protocol on 2026-10-14 (runner step
 placeholder ticket, so the cell is no longer void. \ifnum\PilotClaudeAvailable=1
 Scored by the verified detector (runner step 14,
 \texttt{verified\_scorer\_gate.py} scores every cell under
-\texttt{results/runs/}; receipt of 2026-10-15), the Sonnet vanilla cells fire
+\texttt{results/runs/}; receipts of 2026-10-15 and 2026-10-17), the Sonnet vanilla cells fire
 \A1 in \VSClaudeEditReviewVanilla{} (edit-review), \VSClaudePlanExecuteVanilla{}
 (plan-execute) and \VSClaudeTriageVanilla{} (triage, seeded tickets)
 sessions. The triage zero has no established cause: the gpt-4o triage cell
@@ -4367,11 +4983,14 @@ under \texttt{results/} by the repository migration as a namespace package;
 the pilot now locates it and the runner puts its parent on
 \texttt{PYTHONPATH}): all $900$ Sonnet traces pass the H0/H1 gates
 (\texttt{hypothesis\_gates}: $0$ overlaps, $0$ read-after-commit). Their \A1
-verdicts (\VSClaudeEditReviewPess{} / \VSClaudePlanExecutePess{} /
-\VSClaudeTriagePess{} pessimistic; \VSClaudeEditReviewSI{} /
-\VSClaudePlanExecuteSI{} / \VSClaudeTriageSI{} snapshot isolation) await the
-next pass of the verified scorer, which ran before the cells existed:
-\Pending{runner step 14 after 11}.\else Its \A1 rate is scored by
+verdicts under the verified scorer's pass of 2026-10-17
+(\texttt{tools/verified\_scorer.json}, $126$ cells, $0$ problems) are
+\VSClaudeEditReviewPess{} / \VSClaudePlanExecutePess{} /
+\VSClaudeTriagePess{} pessimistic and \VSClaudeEditReviewSI{} /
+\VSClaudePlanExecuteSI{} / \VSClaudeTriageSI{} snapshot isolation; the main
+text reads them against the records (the triager and engineer commit
+read-only operations in every Sonnet session, and the reviewer writes its
+review in about half, the no-write bypass default SI never validates).\else Its \A1 rate is scored by
 the verified detector of runner step 14 (\texttt{verified\_scorer\_gate.py}
 now scores every cell under \texttt{results/runs/}) and is
 \Pending{runner steps 11/14}. The six guarded Sonnet cells (pessimistic and
@@ -4803,9 +5422,10 @@ plan-execute (the control, on which no runtime aborts) pessimistic
 triage pessimistic \WallclockStampClaudeTriagePess, SI
 \WallclockStampClaudeTriageSI. The control's interval is the resolution of
 the estimate; a cell is read against it, not against zero. Edit-review
-pessimistic is the one cell whose interval clears zero: that runtime refuses
-the reviewer's operation in $99/100$ edit-review sessions (\S\,M), so the cell
-prices the abort path, at $1$\,s resolution over sessions of about $10$\,s.
+pessimistic is the one cell whose interval clears zero: in this run no
+reviewer record exists in any of the $100$ edit-review sessions (the gpt-4o
+figure is $99/100$, \S\,M), so the cell prices the abort path, at $1$\,s
+resolution over sessions of about $10$\,s.
 \ifnum\RefusalClaudeAvailable=1 \emph{The refusal-price study (runner step
 22, 2026-10-17).} With the pilot's tools telling the model \texttt{REFUSED}
 (\S\,M), five arms interleaved per session on Claude Sonnet~4.5, edit-review
@@ -4853,7 +5473,60 @@ CI). Edit-review: vanilla \RefusalClaudeEditReviewVanillaCalls{} calls,
 \RefusalClaudeTriageSIRetryRefused{} refused, wall
 \RefusalClaudeTriageSIRetryWallOverhead. The sidecars of this run are per
 session (the 2026-10-15 naming), so these are sidecar wall-clocks, not
-stamps.\fi
+stamps. Mechanism, from the records, \texttt{refusals.jsonl} and the sidecars. Under
+locking the Sonnet triager's operation is a read with no write (above; in this
+run it wrote a priority in \RefusalClaudeTriagePessDropWriterCommits{} drop
+and \RefusalClaudeTriagePessRetryWriterCommits{} retry sessions, none
+unguarded or under SI), so its lock on \texttt{ticket} is held from its
+\texttt{read\_state} until its next turn commits the read-only operation and
+re-acquires; the reporter (writing \texttt{ticket}) and the engineer (reading
+it) are refused on every turn in between---\RefusalClaudeTriagePessDropRefused{}
+refused operations per session, split almost evenly between the two---and the
+chat runs on (\RefusalClaudeTriagePessDropCalls{} calls against
+\RefusalClaudeTriageVanillaCalls; the triager commits
+\RefusalClaudeTriagePessDropWriterRecords{} records per session against
+$1.00$, all but its $11$ priority writes read-only). On edit-review the editor's lock on \texttt{doc} refuses the
+reviewer five times per session, and the editor's own \texttt{doc} write never
+commits (\RefusalClaudeEditReviewPessDropWriterCommits{} sessions; its records
+are \RefusalClaudeEditReviewPessDropWriterRecords{} read-only commits per
+session, against one read-and-write record in
+\RefusalClaudeEditReviewVanillaWriterCommits{} unguarded sessions). The
+sidecars settle why: every one of the arm's
+\RefusalClaudeEditReviewPessDropTotalCalls{} completions (both policies) is
+$55$ tokens long, the length of a \texttt{read\_state} call---a
+\texttt{write\_state} call is $76$--$97$ tokens and \texttt{DONE} $5$ in the
+unguarded arm, where \RefusalClaudeEditReviewVanillaWriteLengthCalls{} of
+\RefusalClaudeEditReviewVanillaTotalCalls{} completions have a write's
+length---so the editor never attempted its write; it repeated its first step
+in each of its six turns. The only difference in the editor's context from the
+unguarded arm is the reviewer's \texttt{REFUSED} tool result, which AutoGen's
+group chat delivers to every participant and which named no agent (``Your
+operation was NOT applied''). Two controls on record agree: under snapshot
+isolation the reviewer's commit is refused after the editor has written, and
+in every refused session the editor then repeated a step of its own
+(\RefusalClaudeEditReviewSIDropWriterRecords{} editor records per session
+under drop, \RefusalClaudeEditReviewSIRetryWriterRecords{} under retry,
+against $1.00$: a second, blind \texttt{doc} write in $28$ of the $44$
+drop sessions and a re-read in $16$); and in the interleaved run of
+2026-10-14, whose tools surfaced the reviewer's refused read as a
+\texttt{KeyError} text instead, the locked editor wrote in
+\InterleavedClaudeEditReviewPessWriterCommits{} sessions. The price measured
+here is therefore the price of a refusal in a chat that broadcasts tool
+results, the framework's default, not of the discipline alone: the
+\texttt{REFUSED} text is now a protocol parameter
+(\texttt{-{}-refusal-addressed} names the refused agent and tells the others
+it is not theirs; \texttt{protocol.json} records which text ran) and the
+addressed arms are runner step 24 (\texttt{runs/*-refusal-addressed-*}, folded
+as \texttt{\textbackslash RefusalAddrClaude...}), \Pending{runner step 24}.
+Snapshot isolation refuses only a commit whose read set was overwritten,
+which on these workloads is the reviewer's in
+\RefusalClaudeEditReviewSIDropRefusedSessions{} sessions and nobody's on
+triage. The committed-record counts per session (\emph{commits}) rise under
+locking because every retried read-only operation commits a record of its
+own. The campaign ran after this round's verified-scorer and hypothesis-gate
+passes (runner steps 14 and 19 preceded 22), so no \A1 verdict is taken from
+it and it is outside the gate counts above until the next pass, whose scope
+gate names \texttt{runs/*-refusal-*} as published.\fi
 
 \texttt{order.tsv} holds $897$ of the $900$ stamps---session $0$'s three
 vanilla stamps are absent, hence $n=99$---and at $1$\,s resolution over
@@ -6886,7 +7559,25 @@ the bridge, the interning, the store hook that decides when \texttt{mark} is
 called and holds the lock, and the compensator. \ifnum\LfiveExecAvailable=1
 Verified on the pinned build: \LfiveExecVerus.\else Its verification on the
 pinned build is runner step 7; until that receipt the file is a port and
-contributes to neither total above.\fi
+contributes to neither total above. The first attempt (2026-10-17) ran under
+a May 2026 Verus found on the author's PATH instead of the pinned September
+build: every file of the crate ``failed'' there, including the long-verified
+ones, and the exec file's three errors were the mutable-reference
+postcondition form that build requires (\texttt{final(self)}, now used); the
+runner now stops before writing anything when the Verus version is not the
+pin.\fi\ifnum\LedgerWorldExecAvailable=1{} The world study's rerun on these
+bytes (runner step 23, server SHA-256 \texttt{\LWexecServerSha}, three
+families, atomic registration): world wrong \LWexecLedgerWorldWrongRange,
+none \LWexecLedgerWorldNoneRange, consumer stale
+\LWexecLedgerConsumerStaleRange, clean sessions
+\LWexecLedgerCleanSessionsRange, report/world agreement
+\LWexecLedgerAgree; in every session the server's own open set equalled the
+Python shadow's (the bridge raises otherwise). The run exercises the bytes
+as compiled by cargo with the proofs erased; it is a receipt that the
+bookkeeping decided by those bytes reproduces the harness ledger's, not a
+verification. Like the refusal study, the campaign postdates this round's
+hypothesis-gate pass (step 19 preceded 23); the next pass gates it as a
+published campaign.\fi
 
 \emph{Totals.} The full distinct total is $473 - 81 = 392$. The four
 $\dagger$ helper files contribute $9 + 5 + 3 + 4 = 21$ obligations to the raw
