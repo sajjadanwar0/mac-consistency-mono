@@ -40,15 +40,21 @@ case "$PROVIDER" in
   anthropic) [ -n "${ANTHROPIC_API_KEY:-}" ] || { echo "FAIL: ANTHROPIC_API_KEY unset" >&2; exit 1; };;
 esac
 RUN="$ROOT/results/runs/$STAMP"; mkdir -p "$RUN"
-RUNTIMES=(vanilla pessimistic snapshot_isolation)
-WORKLOADS=(edit-review plan-execute triage)
+# ARMS: space-separated "<runtime>" or "<runtime>:<on-abort policy>" (2026-10-17). A policy arm passes --on-abort to the
+# pilot and is stored under <workload>-<runtime>-<policy>/; the three plain arms keep their old directory names, so the
+# default run is unchanged. Example (runner step 22, the refusal-price study):
+#   ARMS="vanilla pessimistic:drop pessimistic:retry snapshot_isolation:drop snapshot_isolation:retry" WORKLOADS="edit-review triage"
+ARMS_STR="${ARMS:-vanilla pessimistic snapshot_isolation}"
+read -r -a ARMS_ARR <<< "$ARMS_STR"
+WORKLOADS_STR="${WORKLOADS:-edit-review plan-execute triage}"
+read -r -a WORKLOADS <<< "$WORKLOADS_STR"
 
-# seeded per-session permutation of the three runtimes
-order_for() { # order_for <session> -> three runtimes, one per line
-  $PY - "$1" "$SEED" <<'PY'
+# seeded per-session permutation of the arms
+order_for() { # order_for <session> -> the arms, one per line, in this session's seeded order
+  $PY - "$1" "$SEED" "${ARMS_ARR[@]}" <<'PY'
 import random, sys
 k, seed = int(sys.argv[1]), int(sys.argv[2])
-r = ["vanilla", "pessimistic", "snapshot_isolation"]
+r = list(sys.argv[3:])
 random.Random(seed * 1_000_003 + k).shuffle(r)
 print("\n".join(r))
 PY
@@ -56,34 +62,41 @@ PY
 
 : > "$RUN/order.tsv"
 for ((k = 0; k < N; k++)); do
-  while IFS= read -r rt; do
+  while IFS= read -r arm; do
+    rt="${arm%%:*}"; policy=""; [ "$arm" != "$rt" ] && policy="${arm#*:}"
+    armdir="$rt"; [ -n "$policy" ] && armdir="$rt-$policy"
     for wl in "${WORKLOADS[@]}"; do
-      cell="$RUN/$wl-$rt"; mkdir -p "$cell"
+      cell="$RUN/$wl-$armdir"; mkdir -p "$cell"
       # autogen_pilot writes N sessions per call; we ask for ONE session with seed+k
       # into a per-session staging dir, then move it into the cell as session k.
-      stage="$RUN/.stage-$wl-$rt-$k"; rm -rf "$stage"
-      if ls "$cell"/*"-$(printf '%04d' "$k")".jsonl >/dev/null 2>&1; then continue; fi
+      stage="$RUN/.stage-$wl-$armdir-$k"; rm -rf "$stage"
+      if ls "$cell"/session-"$(printf '%04d' "$k")".jsonl >/dev/null 2>&1; then continue; fi
       ( cd "$(dirname "$PILOT")" && $PY "$(basename "$PILOT")" --provider "$PROVIDER" --model "$MODEL" \
           --workload "$wl" --runtime "$rt" --n 1 --seed $((SEED + k)) --scenario-offset "$k" \
-          --output "$stage" --tokens-output "$stage-tokens" ) || { echo "FAIL: $wl/$rt/$k" >&2; exit 1; }
-      f="$(ls "$stage"/*.jsonl | head -1)"; mv "$f" "$cell/session-$(printf '%04d' "$k").jsonl"
+          ${policy:+--on-abort "$policy"} \
+          --output "$stage" --tokens-output "$stage-tokens" ) || { echo "FAIL: $wl/$armdir/$k" >&2; exit 1; }
+      f="$(ls "$stage"/*-trace-*.jsonl | head -1)"; mv "$f" "$cell/session-$(printf '%04d' "$k").jsonl"
+      # the pilot's per-session refusal record (2026-10-17): appended to the cell's refusals.jsonl
+      [ -f "$stage/refusals.jsonl" ] && cat "$stage/refusals.jsonl" >> "$cell/refusals.jsonl"
+      [ -f "$stage/protocol.json" ] && [ ! -f "$cell/protocol.json" ] && cp "$stage/protocol.json" "$cell/protocol.json"
       # the sidecar is named by SESSION. Before 2026-10-15 every one-session call wrote <wl>-<rt>-0000.tokens.jsonl and the
       # mv below overwrote the previous session's sidecar: the 2026-10-14 interleaved runs kept ONE sidecar per cell (the
       # last session's), so their wall-clock receipt is order.tsv (completion stamps, 1 s resolution), folded by
       # harness/macaudit/claims_from_results.py as the stamp-based estimate.
-      mkdir -p "$RUN/tokens-$wl-$rt"
+      mkdir -p "$RUN/tokens-$wl-$armdir"
       for tf in "$stage-tokens"/*.tokens.jsonl; do
-        [ -f "$tf" ] && mv "$tf" "$RUN/tokens-$wl-$rt/session-$(printf '%04d' "$k").tokens.jsonl"
+        [ -f "$tf" ] && mv "$tf" "$RUN/tokens-$wl-$armdir/session-$(printf '%04d' "$k").tokens.jsonl"
       done
       rm -rf "$stage" "$stage-tokens"
-      printf '%d\t%s\t%s\t%s\n' "$k" "$wl" "$rt" "$(date -u +%FT%TZ)" >> "$RUN/order.tsv"
+      printf '%d\t%s\t%s\t%s\n' "$k" "$wl" "$armdir" "$(date -u +%FT%TZ)" >> "$RUN/order.tsv"
     done
   done < <(order_for "$k")
 done
 
 cat > "$RUN/manifest.json" <<EOF
 {"provenance": "captured", "design": "interleaved-per-session", "provider": "$PROVIDER", "model": "$MODEL",
- "n": $N, "seed": $SEED, "stamp": "$STAMP", "pilot_git_sha": "$(git -C "$ROOT" rev-parse HEAD 2>/dev/null || echo unknown)"}
+ "n": $N, "seed": $SEED, "stamp": "$STAMP", "arms": "$ARMS_STR", "workloads": "$WORKLOADS_STR",
+ "pilot_git_sha": "$(git -C "$ROOT" rev-parse HEAD 2>/dev/null || echo unknown)"}
 EOF
 echo "done: $RUN  (score with: $PY probes/*_realstore_metrics.py --check after adding the stamp to RUNS)"
 echo "then: $PY harness/macaudit/rescore_cells.py --root results   # add the new cells to results/expected.json first"

@@ -16,6 +16,7 @@ pairs=(
   "$V/lib_pess_concurrent.rs  $R/pess_concurrent.rs  L1 pessimistic store on the verified lock (31)"
   "$V/lib_detect_a1_exec.rs   $R/detect_a1_exec.rs   A1 detector, exec mode (9) -- the scorer's A1 verdict"
   "$V/lib_l3_exec.rs          $R/l3_exec.rs          L3 sequencer, exec mode (7) -- behind examples/l3_server.rs"
+  "$V/lib_l5_exec.rs          $R/l5_exec.rs          L5 basis ledger, exec mode (?) -- behind examples/l5_server.rs (probes/304 --ledger exec)"
 )
 bad=0
 for p in "${pairs[@]}"; do

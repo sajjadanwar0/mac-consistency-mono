@@ -168,11 +168,23 @@ def main() -> int:
     ap.add_argument("--registration", choices=("atomic", "after"), default="atomic",
                     help="atomic: the ledger flags the obligation inside the store lock, with the superseding write (default, "
                          "2026-10-16); after: the 2026-10-14/15 receipts' behaviour, registration after the put returned")
+    ap.add_argument("--ledger", choices=("harness", "exec"), default="harness",
+                    help="harness: probe 303's BasisLedger in Python (every run before 2026-10-17); exec: the bookkeeping in the "
+                         "VERIFIED bytes (crates/runtime/src/l5_exec.rs == crates/verus-detector/src/lib_l5_exec.rs) behind "
+                         "target/release/examples/l5_server (cargo build --release --example l5_server; or L5_SERVER=path)")
     ap.add_argument("--out", default="results/ledger_world/out.json")
     ap.add_argument("--mock-latency", type=float, default=None, help="mock provider only: the flight agent's generation latency (s)")
     a = ap.parse_args()
     P = load_probe_303(); H = P.load_paper_harness()
     P.LEDGER_REGISTRATION = a.registration
+    exec_ledger_mod = None; l5_server = None
+    if a.ledger == "exec":
+        spec = importlib.util.spec_from_file_location("exec_ledger", os.path.join(os.path.dirname(os.path.abspath(__file__)), "_modules", "exec_ledger.py"))
+        exec_ledger_mod = importlib.util.module_from_spec(spec); spec.loader.exec_module(exec_ledger_mod)  # type: ignore[union-attr]
+        l5_server = exec_ledger_mod.find_server(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
+        if not l5_server:
+            raise SystemExit("--ledger exec: target/release/examples/l5_server not found (cargo build --release --manifest-path crates/runtime/Cargo.toml --example l5_server)")
+        print(f"ledger bookkeeping: verified bytes behind {l5_server}")
     from langgraph.graph import StateGraph, START, END
 
     client = H.ModelClient(a.provider, a.model, base_url=a.base_url) if a.base_url else H.ModelClient(a.provider, a.model)
@@ -333,7 +345,10 @@ def main() -> int:
                 rec.emit(agent="ledger", read_set=[], read_values={}, read_time=0, write_set=[], write_values={},
                          write_time=(t if t is not None else clock.now()), experiment="ledger-world", mode=_mode, session=_k, offset_ms=a.offset_ms,
                          obligation_for=f"trip/bookings/booking-{_k}", superseded_cell=cell, superseding_value=new_value)
-            ledger = FallibleLedger(P.BasisLedger, on_register) if mode in ("ledger", "ledger_norollback") else None
+            if mode in ("ledger", "ledger_norollback"):
+                ledger = exec_ledger_mod.ExecLedger(l5_server, on_register) if a.ledger == "exec" else FallibleLedger(P.BasisLedger, on_register)
+            else:
+                ledger = None
             store = P.observed_store(H, clock, ledger)
             store.put(TRIP_NS, "date", {"date": "2026-06-14"}); _, t_seed, _ = store.last_stamp()
             rec.emit(agent="seed", read_set=[], read_values={}, read_time=0, write_set=[DATE_CELL],
@@ -360,6 +375,8 @@ def main() -> int:
             ta.start(); tb.start(); tc.start(); ta.join(); tb.join(); tc.join()
             if errors or "a" not in out or "b" not in out:
                 rec.close()
+                if ledger is not None and hasattr(ledger, "close"):
+                    ledger.close()                       # the l5_server child, if any, goes with the session
                 raise SystemExit(f"session {k} ({mode}) failed: {errors[0]!r}; the receipt {a.out} was not written -- "
                                  f"re-run this model (the runner redoes a model whose receipt is missing)" if errors else
                                  f"session {k} ({mode}): an agent thread returned nothing; receipt not written")
@@ -386,10 +403,32 @@ def main() -> int:
                 "world_log": world.log})
             print(f"session {k:3d} {mode:17s} final={final} active={[b['date'] for b in active]} consumer_saw={consumer_state.get('saw')} "
                   f"obl={ledger.registered if ledger else 0}/{ledger.discharged if ledger else 0}")
+            if ledger is not None and hasattr(ledger, "open_ids"):
+                # the verified ledger's own report of what is open must equal the shadow's count (the receipt records both)
+                try:
+                    open_ids = ledger.open_ids()
+                    cells[mode][-1]["exec_ledger_open"] = len(open_ids)
+                    if len(open_ids) != obl_failed:
+                        raise RuntimeError(f"exec ledger reports {len(open_ids)} open obligations, the shadow {obl_failed}")
+                finally:
+                    ledger.close()
     result = {"provider": a.provider, "model": a.model, "n": a.n, "p_revise": a.p_revise, "seed": a.seed, "offset_ms": a.offset_ms,
               "revisions": a.revisions, "p_cancel_fail": a.p_cancel_fail, "p_rebook_fail": a.p_rebook_fail,
               "consumer_max_ms": a.consumer_max_ms, "interleaved": bool(a.interleave), "compensator": a.compensator,
-              "registration": a.registration, "cells": []}
+              "registration": a.registration, "ledger": a.ledger, "cells": []}
+    if a.ledger == "exec":
+        import hashlib as _hl
+        with open(l5_server, "rb") as fh:
+            head = fh.read(4); fh.seek(0); sha = _hl.sha256(fh.read()).hexdigest()
+        # the receipt says what actually answered the bridge: the built l5_server (an ELF/Mach-O binary named l5_server)
+        # or a stand-in (a script used to exercise the bridge where cargo cannot build); the fold treats a stand-in run
+        # as NOT the verified bytes
+        standin = os.path.basename(l5_server) != "l5_server" or head not in (b"\x7fELF", b"\xcf\xfa\xed\xfe", b"\xce\xfa\xed\xfe", b"MZ\x90\x00")
+        result["ledger_receipt"] = {"server": os.path.relpath(l5_server), "server_sha256": sha, "standin": standin,
+                                    "verified_source": None if standin else "crates/verus-detector/src/lib_l5_exec.rs",
+                                    "runtime_copy": None if standin else "crates/runtime/src/l5_exec.rs"}
+        if standin:
+            print(f"WARNING: {l5_server} is not the built l5_server binary: this run exercises the bridge, not the verified bytes (receipt: standin=true)")
     for mode, sessions in cells.items():
         n = len(sessions)
         cell = {"mode": mode, "n": n, "revised": sum(s["revise"] for s in sessions),

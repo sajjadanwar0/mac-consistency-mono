@@ -118,3 +118,193 @@ run's `order.tsv` for the stamp-based wall-clock cell (folded by step 19 once th
 the markers: the two-cell NoA1 universe at MaxOps = 3 (a longer TLC run), and the open items the audit left as
 design choices rather than defects — a world that is not an in-process mock, a sweep of the consumer window, an
 executable ledger that registers under the store lock (which would need the probe-303/304 ledger arms rerun).
+
+---
+
+## Fourth round (2026-10-16, evening): step 14/21 receipts folded — paper v7.2
+
+Uploaded: `paper_receipts_summary.json` (turned out to be the 2026-10-15 fold, byte-identical:
+step 19 did **not** re-run the fold — fixed below), `hypothesis_gates.log` (21 campaigns,
+71,714 records, H7 0/35,069), the Claude interleaved run directory (900 cell-sessions,
+`order.tsv`, one surviving sidecar per cell), `ledger_world_atomic/` and
+`ledger_world_window5000/` (receipts carry `registration=atomic`, `compensator=all`,
+seed 20261014). NOT uploaded: `tools/verified_scorer.json` / `.log` (the run log shows
+"126 cells scored by the verified detector; 0 problem(s)", up from 114, but the per-cell
+receipt is on the author's machine) — the Claude pess/SI cells therefore stay `[pending:
+runner step 14 after 11]`, the one marker left in both PDFs.
+
+Folded here from the raw receipts (sandbox mirror of `results/`), independently recomputed
+from the per-session logs (every Table-4 column matched; wall-clock means matched the fold
+to the first decimal; registration stamps: 839/839 ledger records in the atomic run and
+786/786 in the after-put run carry a date_agent put's write_time — the stamp does NOT
+distinguish the two designs; atomicity is a property of the code path, recorded by the
+receipt's `registration` field, not demonstrated by the records).
+
+What the new receipts say:
+- Atomic registration moved nothing within the intervals (ledger arm, min–max over the
+  three families, after-put → atomic: world wrong 4–12 → 10–15, double 2–12 → 8–13, none
+  6–8 → 7–11, consumer stale 93–100 → 98–99, report/world agreement 300/300 → 300/300). The
+  window it closes is the microseconds between write and registration call; the consumer
+  reads over 1.5 s; the compensation takes 1.1–1.5 s (median). The paper says so and claims
+  no improvement; Table 4 is now the atomic run (the shipped design), the after-put run is
+  supplement Table S19 as the control.
+- 5 s consumer window: consumer stale 51–67 of 100 (vs 98–99 at 1.5 s); split before
+  revision / before compensation / after a compensation a later revision superseded
+  = 9–10 / 23–32 / 10–34; world columns unchanged; agreement 300/300.
+- Wall-clock from stamps (Claude Sonnet 4.5, 99 paired sessions per cell): triage pess
+  +1.3% [-1.1,+3.7], SI +1.3% [-2.1,+5.9]; plan-execute (control) −0.5% [-3.5,+2.5],
+  +2.1% [-1.6,+6.1]; edit-review pess +5.3% [+2.0,+8.4] (the one cell clearing zero),
+  SI +2.4% [-1.2,+6.4]. Reconciled with the September +109.5%: in this run the pessimistic
+  arm dropped the engineer in 100/100 triage sessions (records) but made no extra model
+  calls (surviving sidecar: 4, as vanilla; the stamps admit no more), where the September
+  refusals were retried at 7.75 calls/session. Cause of the retry difference not established
+  from receipts; the paper says exactly that.
+
+Fixes this round:
+- `scripts/run_experiments.sh`: step 19 now runs `claims_from_results.py` before the claims
+  gate (root cause of the stale summary), and prints the upload list including
+  `tools/verified_scorer.json`.
+- `harness/macaudit/claims_from_results.py`: probe-304 fold writes the atomic and 5 s runs
+  under their own summary keys (`probe304_atomic`, `probe304_window5000`; they were being
+  filed under `probe304_first_run`), records the receipt's `registration` field
+  (`\LW*Registration`), warns if an atomic-run receipt says otherwise, and emits
+  `\<prefix><Arm><Metric>{Lo,Hi,Range}` = min–max over the families for every integer and
+  timing column, so the prose never depends on a hand-ordered pair of per-model macros
+  (two such pairs had inverted: "1.5–1.4 s", "4–12" vs "10–15" orderings).
+- Paper: §6.2 rewritten onto the atomic run with Range macros; "Two controls" sentence
+  (after-put run; 5 s window); §5.5 conditional resolved; C4 cites the atomic agreement;
+  C6/(ii) says atomic registration is free and closes a window the measurements could not
+  see; wall-clock paragraph carries the stamp cells and the 109.5%-vs-1.3% reconciliation;
+  threats updated; supplement W.4 Registration paragraph rewritten with the after-put →
+  atomic comparison and the 5 s split; §O names the one non-null cell and records the
+  independent recomputation; Table S19 caption says "after-put registration".
+- main.pdf 16 pages, 0 overfull; supplement 37 pages (10 pre-existing overfull boxes);
+  inlined macro blocks identical in both files and to `paper/claims_results.tex`;
+  claims gate 0 mismatching figures.
+
+Still pending: `tools/verified_scorer.json` + `.log` (fills the six Claude pess/SI cells;
+no API cost: `./scripts/run_experiments.sh --only 14` already ran, just upload the files).
+
+### Independent audit of v7.2 (same evening) and what it changed
+
+A second, isolated pass re-derived every Table-4 cell, every prose range, the two control
+runs and the six stamp overheads from the raw receipts (all reproduced) and found six
+should-fix items in the prose, all fixed before delivery:
+1. The three-way consumer split ("before revision / before compensation / after
+   compensation") was a landed/done test that could not support the causal gloss put on its
+   third bucket ("after a compensation a further revision then superseded"). Haiku session 50
+   of the atomic run is a counter-example (cancel refused at 3668 ms, consumer at 3683 ms saw
+   both dates, no later revision). The fold now places each stale read in four exhaustive
+   buckets, asserting the sum: no revision landed / inside the latest landed revision's
+   compensation (matched by compensator.read_time == the put's write_time) / stale booking
+   left by a refused cancellation (world log) / then-current booking later superseded.
+   Atomic run: 18–31 / 60–74 / 1–2 / 1–10; 5 s window: 9–10 / 31–33 / 6–9 / 1–18. The
+   supplement's sentence "the third share is not a failure of the compensation" is gone.
+2. "The compensation itself takes 1.1–1.5 s" was booking-commit → first compensation record.
+   `CompLatency*` is now compensator record − the revision it answers (1.0–1.2 s median);
+   the old quantity is `BookingToCompensation*` (1.1–1.5 s) and is labelled as such.
+3. "The window atomic registration closes is microseconds" — no receipt measures it (ledger
+   records carry logical stamps only). Now: "closed by the code, unmeasured".
+4. The after-put run was presented as "the control that shows what the change did and did
+   not move"; it is a null by construction (the probe injects no fault, and no consumer read,
+   in the gap) and an unpaired, different-day run. Now said so; "world columns unchanged"
+   (5 s vs 1.5 s) → "within noise" with the numbers.
+5. W.4's protocol paragraph still described after-put notification in the present tense one
+   paragraph above the sentence retiring it. Fixed.
+6. "Clean" sessions include 0–1 that registered nothing (vacuous); the main text now says so
+   (`\LW*CleanVacuous`).
+Nits also taken: 897 of 900 stamps (session 0's vanilla stamps absent → n=99), 1 s ticks ≈
+one tenth of a 7–11 s session so +5.3% is a one-tick median, the 61 s gap in edit-review SI
+(session 54), "one surviving sidecar" (n=1), the dropped-engineer count labelled as a trace
+shape read without the detector, "in 97 of 100".
+
+---
+
+## Fifth round (2026-10-17): fixing what the review labelled — paper v7.3
+
+The author's instruction: fix the gaps and failure points, do not label them. What was fixed, with
+what receipt, and what remains open and why:
+
+**Proof gap: the store axiom (H7) and the converted campaigns.** The converted campaigns
+(mast_oprecords, oprecords, production_traces, traces; 3,289 of 6,448 reads disagree with the
+latest visible write) supply NO published cell: results/expected.json's six campaigns are the three
+pilot runs and the three live_a1 families, all store-instrumented. This is now a GATE, not a
+remark: `hypothesis_gates.py --check` fails if any published cell's campaign is converted, prints
+the instrumented totals (`\HypInstrumentedRecords/Traces`, `\HypPublishedCampaigns`,
+`\HypPublishedConvertedCampaigns`), and the Reach paragraph says every A1 verdict in the paper is
+taken on records the theorem's hypotheses were checked on. Preamble defaults for the new macros
+are derived from the 2026-10-16 gates log's per-campaign table (71,714 − 15,375 records; 19,488 −
+2,510 traces); step 19 re-derives them.
+
+**Proof gap: the executable ledger was harness Python.** Added `crates/verus-detector/src/
+lib_l5_exec.rs` (exec-mode L5 on the lib_l3_exec pattern: `register_effect`, `mark` — proved
+total: after it no effect with a superseded basis is without an obligation, every other field kept,
+the obligation bit exactly what it was or what this write set — `report`, `open_flags`,
+`thm_covered_no_residue`, non-vacuity lemma), byte-identical `crates/runtime/src/l5_exec.rs`,
+`examples/l5_server.rs` (JSON lines, mirrors l3_server, checks the verified preconditions),
+`probes/_modules/exec_ledger.py` (the bridge: interning, shadow cross-check, raises on
+disagreement), `probes/304_ledger_world.py --ledger exec` (receipt field `ledger`, server sha256,
+per-session cross-check of the server's open set against the shadow), runner step 7 verifies the
+file (zero errors required), step 14 builds the server, step 23 reruns the world study on it;
+fold prefix `LWexec`, `\LfiveExecVerus`, `\LfiveExecAvailable`, `\LedgerWorldExecAvailable`;
+paper §5.5, Table 1 row, limitations and supplement S conditional on those receipts (until then:
+"a port", with no pending marker). Verus is not in the sandbox: the proof is written against the
+idioms of the files that verify under the pinned build, reviewed by a second pass, and will be
+checked by step 7 on the author's machine; a mock run of probe 304 over a Python twin of the server
+agreed with the harness ledger session by session on the same seeds. Still a port until step 7.
+
+**Proof gap: the refinement of the two concurrent stores.** Not fixed; it is a proof that does not
+exist yet (bounded simulation is the evidence). Stated as open, as before.
+
+**Failure point: the pending Claude pessimistic/SI cells.** Needs `tools/verified_scorer.json` from
+the author's machine (step 14 already produced it there); nothing else can fill it.
+
+**Failure point: +109.5% vs +1.3%.** The receipts (results/pilot_tokens_claude/, the September
+Claude sidecars) show the September price was paid in further round-robin chat rounds after the
+refusal (7 calls in 68/100 sessions, 9 in 15, up to 17; vanilla 4 in every session), with the same
+696-token protocol prompts (October: 732, the seeded ticket), and both runs' tools told the refused
+agent COMMITTED — a pilot defect: `read_state` raised KeyError on a refused begin and `write_state`
+answered COMMITTED for a dropped commit (pessimistic and SI alike). Fixed: the tools return REFUSED
+("your operation was NOT applied") under a recorded policy `--on-abort drop|retry`, counted per
+session in refusals.jsonl; probe 302 takes `ARMS="... pessimistic:drop pessimistic:retry ..."`;
+runner step 22 is the paired five-arm study on Sonnet (edit-review + triage, N=100, ~$15–20);
+fold `probe302_refusal` → `\Refusal<Model>...`; paper §6.3/§6.6 and supplement M/O conditional.
+The earlier draft's "free-form 116-token prompts" explanation was WRONG (that was the gpt-4o
+September run) and was removed before delivery.
+
+**Failure point: preprints in related work.** Counted from the bibliography: 20 of the 2026
+agent-side works are arXiv-only; said so in §7.2, with "no claim of ours rests on their results".
+
+**Failure point: "races we opened".** §6.1 now says what the 0 ms point is: the harness imposes
+the order (the date agent is released at the flight agent's read) and no delay; the models'
+latencies decide where the revision lands (probe 303: `flight_read_done.wait(); sleep(offset)`).
+A production prevalence measurement is the only real fix and needs a deployment; not available.
+
+Also: bibliography venue strings abbreviated (IEEE style) to hold 16 pages; related work and
+limitations tightened; one conclusion sentence that restated the abstract removed.
+
+### Independent audit of the v7.3 additions (same morning) and what it changed
+
+Blockers found and fixed before delivery: `examples/l5_server.rs` began with an outer attribute
+before inner doc comments (E0753; step 14 would have failed, so step 23 too) — removed; the
+supplement's "mock runs agree" sentence attributed a test of a hand-written Python twin of the
+server to the verified bytes — now says exactly that, and the receipt design was closed: probe 304
+records whether the server was the built binary (`standin`, by name and magic bytes) and its
+SHA-256, step 14 records the built binary's SHA-256 to results/verus/l5_server.sha256, and the fold
+refuses to fold a ledger_world_exec receipt that is a stand-in or whose hash differs. Should-fixes
+taken: the pilot's `aborts` was summed over agents sharing one recorder (now one count), and a
+refused pessimistic read followed by its write counted two refusals (now one per refused
+operation); the September enumeration omitted the 8 four-call sessions and now lists them, with
+the note that the sidecars carry no agent identity (attribution follows AutoGen's one call per
+turn); the Reach sentence's "6 that do / any table" was an undercount and an overreach — the gate
+now covers every campaign the tables are folded from (13 on the 2026-10-16 log; expected.json's
+six plus live_a1_outcome, the ledger_world runs and the Claude pilot/interleaved runs) and the
+sentence says "no rate of this paper's tables"; the preamble's gate defaults were a 2026-10-15
+vintage beside 2026-10-16 instrumented totals — all moved to the 10-16 log; `lib_l5_exec.rs` is
+kept out of `verus_count.sh`'s totals (NEVER_COUNT) so the pinned 371/392 and claims_gate.py stay
+reconciled until a deliberate renumbering; §S says "specified, and proved once step 7's receipt
+lands"; `ledger.close()` on every path of probe 304; the bridge docstring no longer claims to
+mirror the preconditions (the Rust bridge checks them; Python propagates). The Verus file itself:
+no definite parse or proof failure found by inspection against the files that verify under the
+pinned build; two places named where step 7 might ask for a hint (an explicit assertion after the
+`set` in `mark`; the `r.0@` tuple-view idiom), both cheap to add if it does.

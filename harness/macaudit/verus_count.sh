@@ -126,6 +126,9 @@ TEXTUAL_REINCLUSION=(
 # summary for them and counting them would mark the run INCOMPLETE.
 NEVER_COUNT=(
   "verified_a1.rs"                 # exec/test file, no proof obligations
+  "lib_l5_exec.rs"                 # 2026-10-17: the exec ledger; verified and counted SEPARATELY (results/verus/lib_l5_exec.verus.log,
+                                   # the paper's \LfiveExecVerus) so the pinned 371/392 totals and claims_gate.py stay reconciled;
+                                   # move it into the totals, and renumber the paper and CLAIMS.json, in one deliberate step
 )
 
 # Files to EXCLUDE from the CURATED total only (they DO verify, but are not

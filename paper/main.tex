@@ -189,12 +189,12 @@
 \newcommand{\LiveVerifiedOutcome}{\textbf{[probe 303 -{}-modes verified: pending]}}
 
 % --- hypothesis gates (VERIFIED-HERE: harness/macaudit/hypothesis_gates.py --tex, over every committed record) ---
-\newcommand{\HypRecords}{64{,}408}     % hypothesis_gates.py over results/ on 2026-10-15 (tools/hypothesis_gates.log): September + probe 303 (sequential, sweep, three interleaved runs) + probe 304 (both runs) + Claude op-record pilot (nine cells) + interleaved Claude wall-clock run
-\newcommand{\HypTraces}{18{,}288}
+\newcommand{\HypRecords}{71{,}714}     % hypothesis_gates.py over results/ on 2026-10-16 (tools/hypothesis_gates.log, 21 campaigns incl. ledger_world_atomic / _window5000): September + probe 303 (sequential, sweep, three interleaved runs) + probe 304 (both runs) + Claude op-record pilot (nine cells) + interleaved Claude wall-clock run
+\newcommand{\HypTraces}{19{,}488}
 \newcommand{\HypSameAgentOverlaps}{0}
 \newcommand{\HypReadBeforeCommitViolations}{0}
-\newcommand{\HypCampaigns}{19}
-\newcommand{\HypValueUniqueCampaigns}{13}
+\newcommand{\HypCampaigns}{21}
+\newcommand{\HypValueUniqueCampaigns}{15}
 \newcommand{\HypCollisionCells}{126}
 \newcommand{\HypCollisionTraces}{105}
 \newcommand{\HypLiveLtwoSessions}{600}
@@ -225,12 +225,12 @@
 \newcommand{\RunFisherValidatedHaiku}{0.335}\newcommand{\RunFisherVanillaHaiku}{0.593}
 \newcommand{\ArmPinnedValidatedHaiku}{1.10}\newcommand{\ArmPinnedVerifiedHaiku}{1.10}
 % hypothesis gates H5/H6 (hypothesis_gates.py --tex, 2026-10-15)
-\newcommand{\HypExternalEffects}{10{,}800}\newcommand{\HypDuplicateEffects}{0}\newcommand{\HypInterruptEmissions}{2}
-\newcommand{\HypObservedRecords}{6{,}300}\newcommand{\HypUndeclaredReads}{0}
+\newcommand{\HypExternalEffects}{12{,}000}\newcommand{\HypDuplicateEffects}{0}\newcommand{\HypInterruptEmissions}{2}
+\newcommand{\HypObservedRecords}{7{,}500}\newcommand{\HypUndeclaredReads}{0}
 % hypothesis gate H7 (the store axiom, ReadsReflectMemory, on every declared read of the store-instrumented campaigns; the
 % four campaigns converted from transcripts and tool logs are reported, not gated): hypothesis_gates.py over the committed
 % receipts held on 2026-10-15 (the runner's step 19 re-derives them over the full tree)
-\newcommand{\HypStoreAxiomReads}{29{,}005}\newcommand{\HypStoreAxiomTraces}{14{,}266}\newcommand{\HypStoreAxiomViolations}{0}
+\newcommand{\HypStoreAxiomReads}{35{,}069}\newcommand{\HypStoreAxiomTraces}{16{,}966}\newcommand{\HypStoreAxiomViolations}{0}
 \newcommand{\HypStoreAxiomConvertedReads}{6{,}448}\newcommand{\HypStoreAxiomConvertedCampaigns}{4}
 % the NoA1 half of the lattice at the bounds where the supersession witness is reachable (formal/tla/lattice16_a1_maxops3.sh)
 % formal/tla/lattice16_a1_maxops3_c1_results.json (2026-10-15, TLC 1.8.0, two workers): 16 NoA1 points + the witness-class pair
@@ -247,6 +247,16 @@
 \newcommand{\LiveRunsAvailable}{0}\newcommand{\LedgerWorldAvailable}{0}
 \newcommand{\LedgerWorldRevisions}{2}\newcommand{\LedgerWorldPCancelFail}{0.1}\newcommand{\LedgerWorldPRebookFail}{0.1}\newcommand{\LedgerWorldConsumerMaxMs}{1500}\newcommand{\LedgerWorldCompensator}{--}\newcommand{\LedgerWorldFirstAvailable}{0}   % protocol defaults of probe 304; claims_results.tex overrides from the receipt
 \newcommand{\LedgerWorldAtomicAvailable}{0}\newcommand{\LedgerWorldWideAvailable}{0}   % runner step 21 (atomic registration; 5 s consumer window)
+% 2026-10-17: the executable ledger's bookkeeping in verified bytes (lib_l5_exec.rs; runner steps 7/14/23), the refusal-price
+% study (step 22), and the H7 scope gate (hypothesis_gates.py: published cells drawn from store-instrumented campaigns only)
+\newcommand{\LfiveExecAvailable}{0}\newcommand{\LfiveExecVerus}{?}\newcommand{\LedgerWorldExecAvailable}{0}
+\newcommand{\RefusalClaudeAvailable}{0}\newcommand{\RefusalGptAvailable}{0}
+% derived from tools/hypothesis_gates.log (2026-10-16) per-campaign table: records/traces of the 17 store-instrumented campaigns
+% = totals minus mast_oprecords (9,137/1,010), oprecords (600/200), production_traces (4,169/600), traces (1,469/700);
+% the published campaigns: results/expected.json's six (three pilot runs, three live_a1 families) + live_a1_outcome, the four
+% ledger_world* runs and the two Claude pilot/interleaved runs of the 2026-10-16 log = 13, none converted (hypothesis_gates.py)
+\newcommand{\HypInstrumentedRecords}{56{,}339}\newcommand{\HypInstrumentedTraces}{16{,}978}
+\newcommand{\HypPublishedCampaigns}{13}\newcommand{\HypPublishedConvertedCampaigns}{0}
 \newcommand{\PilotClaudeAvailable}{0}   % the Claude pilot cells scored by the verified detector (step 14 after step 11); claims_results.tex overrides
 \newcommand{\Pending}[1]{\textbf{[pending: #1]}}   % release_tag.sh refuses to tag while any \Pending survives in the PDF text
 
@@ -659,6 +669,7 @@
 \renewcommand{\LedgerWorldPRebookFail}{0.1}
 \renewcommand{\LedgerWorldConsumerMaxMs}{1500}
 \renewcommand{\LedgerWorldCompensator}{all}
+\providecommand{\LWRegistration}{after (predates the field)}
 \providecommand{\LWHaikuValidatedR}{98}
 \providecommand{\LWHaikuValidatedStoreWrong}{98}
 \providecommand{\LWHaikuValidatedWorldWrong}{98}
@@ -672,6 +683,7 @@
 \providecommand{\LWHaikuValidatedCleanSessions}{100}
 \providecommand{\LWHaikuValidatedCleanRight}{2}
 \providecommand{\LWHaikuValidatedCleanWrong}{98}
+\providecommand{\LWHaikuValidatedCleanVacuous}{100}
 \providecommand{\LWHaikuValidatedOpenSessions}{0}
 \providecommand{\LWHaikuValidatedOpenWrong}{0}
 \providecommand{\LWHaikuValidatedOpenRight}{0}
@@ -694,6 +706,7 @@
 \providecommand{\LWHaikuLedgerCleanSessions}{82}
 \providecommand{\LWHaikuLedgerCleanRight}{82}
 \providecommand{\LWHaikuLedgerCleanWrong}{0}
+\providecommand{\LWHaikuLedgerCleanVacuous}{0}
 \providecommand{\LWHaikuLedgerOpenSessions}{18}
 \providecommand{\LWHaikuLedgerOpenWrong}{18}
 \providecommand{\LWHaikuLedgerOpenRight}{0}
@@ -704,12 +717,16 @@
 \providecommand{\LWHaikuLedgerTwoObligations}{1}
 \providecommand{\LWHaikuLedgerNoObligation}{0}
 \providecommand{\LWHaikuLedgerConsumerStaleBeforeRevision}{28}
-\providecommand{\LWHaikuLedgerConsumerStaleBeforeCompensation}{72}
-\providecommand{\LWHaikuLedgerConsumerStaleAfterCompensation}{0}
+\providecommand{\LWHaikuLedgerConsumerStaleInsideCompensation}{72}
+\providecommand{\LWHaikuLedgerConsumerStaleRefusedCancel}{0}
+\providecommand{\LWHaikuLedgerConsumerStaleCurrentThenSuperseded}{0}
+\providecommand{\LWHaikuLedgerConsumerStaleOther}{0}
 \providecommand{\LWHaikuLedgerBothRevisionsAfterCommit}{1}
 \providecommand{\LWHaikuLedgerFirstRevisionMedianS}{0.9}
-\providecommand{\LWHaikuLedgerCompLatencyMedianS}{1.5}
-\providecommand{\LWHaikuLedgerCompLatencyPNinetyS}{1.7}
+\providecommand{\LWHaikuLedgerCompLatencyMedianS}{1.1}
+\providecommand{\LWHaikuLedgerCompLatencyPNinetyS}{1.2}
+\providecommand{\LWHaikuLedgerBookingToCompensationMedianS}{1.5}
+\providecommand{\LWHaikuLedgerBookingToCompensationPNinetyS}{1.7}
 \providecommand{\LWHaikuLedgerNoRollbackR}{0}
 \providecommand{\LWHaikuLedgerNoRollbackStoreWrong}{11}
 \providecommand{\LWHaikuLedgerNoRollbackWorldWrong}{100}
@@ -723,6 +740,7 @@
 \providecommand{\LWHaikuLedgerNoRollbackCleanSessions}{89}
 \providecommand{\LWHaikuLedgerNoRollbackCleanRight}{0}
 \providecommand{\LWHaikuLedgerNoRollbackCleanWrong}{89}
+\providecommand{\LWHaikuLedgerNoRollbackCleanVacuous}{0}
 \providecommand{\LWHaikuLedgerNoRollbackOpenSessions}{11}
 \providecommand{\LWHaikuLedgerNoRollbackOpenWrong}{11}
 \providecommand{\LWHaikuLedgerNoRollbackOpenRight}{0}
@@ -745,6 +763,7 @@
 \providecommand{\LWDeepseekValidatedCleanSessions}{100}
 \providecommand{\LWDeepseekValidatedCleanRight}{8}
 \providecommand{\LWDeepseekValidatedCleanWrong}{92}
+\providecommand{\LWDeepseekValidatedCleanVacuous}{100}
 \providecommand{\LWDeepseekValidatedOpenSessions}{0}
 \providecommand{\LWDeepseekValidatedOpenWrong}{0}
 \providecommand{\LWDeepseekValidatedOpenRight}{0}
@@ -767,6 +786,7 @@
 \providecommand{\LWDeepseekLedgerCleanSessions}{88}
 \providecommand{\LWDeepseekLedgerCleanRight}{88}
 \providecommand{\LWDeepseekLedgerCleanWrong}{0}
+\providecommand{\LWDeepseekLedgerCleanVacuous}{7}
 \providecommand{\LWDeepseekLedgerOpenSessions}{12}
 \providecommand{\LWDeepseekLedgerOpenWrong}{12}
 \providecommand{\LWDeepseekLedgerOpenRight}{0}
@@ -777,12 +797,16 @@
 \providecommand{\LWDeepseekLedgerTwoObligations}{49}
 \providecommand{\LWDeepseekLedgerNoObligation}{7}
 \providecommand{\LWDeepseekLedgerConsumerStaleBeforeRevision}{34}
-\providecommand{\LWDeepseekLedgerConsumerStaleBeforeCompensation}{44}
-\providecommand{\LWDeepseekLedgerConsumerStaleAfterCompensation}{15}
+\providecommand{\LWDeepseekLedgerConsumerStaleInsideCompensation}{44}
+\providecommand{\LWDeepseekLedgerConsumerStaleRefusedCancel}{3}
+\providecommand{\LWDeepseekLedgerConsumerStaleCurrentThenSuperseded}{12}
+\providecommand{\LWDeepseekLedgerConsumerStaleOther}{0}
 \providecommand{\LWDeepseekLedgerBothRevisionsAfterCommit}{65}
 \providecommand{\LWDeepseekLedgerFirstRevisionMedianS}{1.0}
-\providecommand{\LWDeepseekLedgerCompLatencyMedianS}{1.4}
-\providecommand{\LWDeepseekLedgerCompLatencyPNinetyS}{4.6}
+\providecommand{\LWDeepseekLedgerCompLatencyMedianS}{0.9}
+\providecommand{\LWDeepseekLedgerCompLatencyPNinetyS}{3.8}
+\providecommand{\LWDeepseekLedgerBookingToCompensationMedianS}{1.4}
+\providecommand{\LWDeepseekLedgerBookingToCompensationPNinetyS}{4.6}
 \providecommand{\LWDeepseekLedgerNoRollbackR}{0}
 \providecommand{\LWDeepseekLedgerNoRollbackStoreWrong}{5}
 \providecommand{\LWDeepseekLedgerNoRollbackWorldWrong}{90}
@@ -796,6 +820,7 @@
 \providecommand{\LWDeepseekLedgerNoRollbackCleanSessions}{95}
 \providecommand{\LWDeepseekLedgerNoRollbackCleanRight}{10}
 \providecommand{\LWDeepseekLedgerNoRollbackCleanWrong}{85}
+\providecommand{\LWDeepseekLedgerNoRollbackCleanVacuous}{10}
 \providecommand{\LWDeepseekLedgerNoRollbackOpenSessions}{5}
 \providecommand{\LWDeepseekLedgerNoRollbackOpenWrong}{5}
 \providecommand{\LWDeepseekLedgerNoRollbackOpenRight}{0}
@@ -818,6 +843,7 @@
 \providecommand{\LWGptValidatedCleanSessions}{100}
 \providecommand{\LWGptValidatedCleanRight}{0}
 \providecommand{\LWGptValidatedCleanWrong}{100}
+\providecommand{\LWGptValidatedCleanVacuous}{100}
 \providecommand{\LWGptValidatedOpenSessions}{0}
 \providecommand{\LWGptValidatedOpenWrong}{0}
 \providecommand{\LWGptValidatedOpenRight}{0}
@@ -840,6 +866,7 @@
 \providecommand{\LWGptLedgerCleanSessions}{81}
 \providecommand{\LWGptLedgerCleanRight}{81}
 \providecommand{\LWGptLedgerCleanWrong}{0}
+\providecommand{\LWGptLedgerCleanVacuous}{3}
 \providecommand{\LWGptLedgerOpenSessions}{19}
 \providecommand{\LWGptLedgerOpenWrong}{19}
 \providecommand{\LWGptLedgerOpenRight}{0}
@@ -850,12 +877,16 @@
 \providecommand{\LWGptLedgerTwoObligations}{33}
 \providecommand{\LWGptLedgerNoObligation}{3}
 \providecommand{\LWGptLedgerConsumerStaleBeforeRevision}{34}
-\providecommand{\LWGptLedgerConsumerStaleBeforeCompensation}{51}
-\providecommand{\LWGptLedgerConsumerStaleAfterCompensation}{11}
+\providecommand{\LWGptLedgerConsumerStaleInsideCompensation}{51}
+\providecommand{\LWGptLedgerConsumerStaleRefusedCancel}{2}
+\providecommand{\LWGptLedgerConsumerStaleCurrentThenSuperseded}{9}
+\providecommand{\LWGptLedgerConsumerStaleOther}{0}
 \providecommand{\LWGptLedgerBothRevisionsAfterCommit}{40}
 \providecommand{\LWGptLedgerFirstRevisionMedianS}{0.9}
-\providecommand{\LWGptLedgerCompLatencyMedianS}{1.4}
-\providecommand{\LWGptLedgerCompLatencyPNinetyS}{1.8}
+\providecommand{\LWGptLedgerCompLatencyMedianS}{1.0}
+\providecommand{\LWGptLedgerCompLatencyPNinetyS}{1.1}
+\providecommand{\LWGptLedgerBookingToCompensationMedianS}{1.4}
+\providecommand{\LWGptLedgerBookingToCompensationPNinetyS}{1.8}
 \providecommand{\LWGptLedgerNoRollbackR}{0}
 \providecommand{\LWGptLedgerNoRollbackStoreWrong}{10}
 \providecommand{\LWGptLedgerNoRollbackWorldWrong}{97}
@@ -869,6 +900,7 @@
 \providecommand{\LWGptLedgerNoRollbackCleanSessions}{90}
 \providecommand{\LWGptLedgerNoRollbackCleanRight}{3}
 \providecommand{\LWGptLedgerNoRollbackCleanWrong}{87}
+\providecommand{\LWGptLedgerNoRollbackCleanVacuous}{3}
 \providecommand{\LWGptLedgerNoRollbackOpenSessions}{10}
 \providecommand{\LWGptLedgerNoRollbackOpenWrong}{10}
 \providecommand{\LWGptLedgerNoRollbackOpenRight}{0}
@@ -878,11 +910,234 @@
 \providecommand{\LWGptLedgerNoRollbackOneObligation}{58}
 \providecommand{\LWGptLedgerNoRollbackTwoObligations}{39}
 \providecommand{\LWGptLedgerNoRollbackNoObligation}{3}
+\providecommand{\LWLedgerBookingToCompensationMedianSLo}{1.4}
+\providecommand{\LWLedgerBookingToCompensationMedianSHi}{1.5}
+\providecommand{\LWLedgerBookingToCompensationMedianSRange}{1.4--1.5}
+\providecommand{\LWLedgerBookingToCompensationPNinetySLo}{1.7}
+\providecommand{\LWLedgerBookingToCompensationPNinetySHi}{4.6}
+\providecommand{\LWLedgerBookingToCompensationPNinetySRange}{1.7--4.6}
+\providecommand{\LWLedgerBothRevisionsAfterCommitLo}{1}
+\providecommand{\LWLedgerBothRevisionsAfterCommitHi}{65}
+\providecommand{\LWLedgerBothRevisionsAfterCommitRange}{1--65}
+\providecommand{\LWLedgerCleanRightLo}{81}
+\providecommand{\LWLedgerCleanRightHi}{88}
+\providecommand{\LWLedgerCleanRightRange}{81--88}
+\providecommand{\LWLedgerCleanSessionsLo}{81}
+\providecommand{\LWLedgerCleanSessionsHi}{88}
+\providecommand{\LWLedgerCleanSessionsRange}{81--88}
+\providecommand{\LWLedgerCleanVacuousLo}{0}
+\providecommand{\LWLedgerCleanVacuousHi}{7}
+\providecommand{\LWLedgerCleanVacuousRange}{0--7}
+\providecommand{\LWLedgerCleanWrongLo}{0}
+\providecommand{\LWLedgerCleanWrongHi}{0}
+\providecommand{\LWLedgerCleanWrongRange}{0}
+\providecommand{\LWLedgerCompLatencyMedianSLo}{0.9}
+\providecommand{\LWLedgerCompLatencyMedianSHi}{1.1}
+\providecommand{\LWLedgerCompLatencyMedianSRange}{0.9--1.1}
+\providecommand{\LWLedgerCompLatencyPNinetySLo}{1.1}
+\providecommand{\LWLedgerCompLatencyPNinetySHi}{3.8}
+\providecommand{\LWLedgerCompLatencyPNinetySRange}{1.1--3.8}
+\providecommand{\LWLedgerConsumerNoneLo}{0}
+\providecommand{\LWLedgerConsumerNoneHi}{1}
+\providecommand{\LWLedgerConsumerNoneRange}{0--1}
+\providecommand{\LWLedgerConsumerStaleLo}{93}
+\providecommand{\LWLedgerConsumerStaleHi}{100}
+\providecommand{\LWLedgerConsumerStaleRange}{93--100}
+\providecommand{\LWLedgerConsumerStaleBeforeRevisionLo}{28}
+\providecommand{\LWLedgerConsumerStaleBeforeRevisionHi}{34}
+\providecommand{\LWLedgerConsumerStaleBeforeRevisionRange}{28--34}
+\providecommand{\LWLedgerConsumerStaleCurrentThenSupersededLo}{0}
+\providecommand{\LWLedgerConsumerStaleCurrentThenSupersededHi}{12}
+\providecommand{\LWLedgerConsumerStaleCurrentThenSupersededRange}{0--12}
+\providecommand{\LWLedgerConsumerStaleInsideCompensationLo}{44}
+\providecommand{\LWLedgerConsumerStaleInsideCompensationHi}{72}
+\providecommand{\LWLedgerConsumerStaleInsideCompensationRange}{44--72}
+\providecommand{\LWLedgerConsumerStaleOtherLo}{0}
+\providecommand{\LWLedgerConsumerStaleOtherHi}{0}
+\providecommand{\LWLedgerConsumerStaleOtherRange}{0}
+\providecommand{\LWLedgerConsumerStaleRefusedCancelLo}{0}
+\providecommand{\LWLedgerConsumerStaleRefusedCancelHi}{3}
+\providecommand{\LWLedgerConsumerStaleRefusedCancelRange}{0--3}
+\providecommand{\LWLedgerDoubleLo}{2}
+\providecommand{\LWLedgerDoubleHi}{12}
+\providecommand{\LWLedgerDoubleRange}{2--12}
+\providecommand{\LWLedgerFailDoubleLo}{2}
+\providecommand{\LWLedgerFailDoubleHi}{12}
+\providecommand{\LWLedgerFailDoubleRange}{2--12}
+\providecommand{\LWLedgerFailNoneLo}{6}
+\providecommand{\LWLedgerFailNoneHi}{8}
+\providecommand{\LWLedgerFailNoneRange}{6--8}
+\providecommand{\LWLedgerFailStaleOnlyLo}{0}
+\providecommand{\LWLedgerFailStaleOnlyHi}{2}
+\providecommand{\LWLedgerFailStaleOnlyRange}{0--2}
+\providecommand{\LWLedgerFirstRevisionMedianSLo}{0.9}
+\providecommand{\LWLedgerFirstRevisionMedianSHi}{1.0}
+\providecommand{\LWLedgerFirstRevisionMedianSRange}{0.9--1.0}
+\providecommand{\LWLedgerNoObligationLo}{0}
+\providecommand{\LWLedgerNoObligationHi}{7}
+\providecommand{\LWLedgerNoObligationRange}{0--7}
+\providecommand{\LWLedgerOneObligationLo}{44}
+\providecommand{\LWLedgerOneObligationHi}{99}
+\providecommand{\LWLedgerOneObligationRange}{44--99}
+\providecommand{\LWLedgerOpenRightLo}{0}
+\providecommand{\LWLedgerOpenRightHi}{0}
+\providecommand{\LWLedgerOpenRightRange}{0}
+\providecommand{\LWLedgerOpenSessionsLo}{12}
+\providecommand{\LWLedgerOpenSessionsHi}{19}
+\providecommand{\LWLedgerOpenSessionsRange}{12--19}
+\providecommand{\LWLedgerOpenWrongLo}{12}
+\providecommand{\LWLedgerOpenWrongHi}{19}
+\providecommand{\LWLedgerOpenWrongRange}{12--19}
+\providecommand{\LWLedgerRLo}{0}
+\providecommand{\LWLedgerRHi}{0}
+\providecommand{\LWLedgerRRange}{0}
+\providecommand{\LWLedgerRetriesLo}{0}
+\providecommand{\LWLedgerRetriesHi}{16}
+\providecommand{\LWLedgerRetriesRange}{0--16}
+\providecommand{\LWLedgerStoreWrongLo}{6}
+\providecommand{\LWLedgerStoreWrongHi}{10}
+\providecommand{\LWLedgerStoreWrongRange}{6--10}
+\providecommand{\LWLedgerTwoObligationsLo}{1}
+\providecommand{\LWLedgerTwoObligationsHi}{49}
+\providecommand{\LWLedgerTwoObligationsRange}{1--49}
+\providecommand{\LWLedgerWorldNoneLo}{6}
+\providecommand{\LWLedgerWorldNoneHi}{8}
+\providecommand{\LWLedgerWorldNoneRange}{6--8}
+\providecommand{\LWLedgerWorldWrongLo}{4}
+\providecommand{\LWLedgerWorldWrongHi}{12}
+\providecommand{\LWLedgerWorldWrongRange}{4--12}
+\providecommand{\LWLedgerNoRollbackCleanRightLo}{0}
+\providecommand{\LWLedgerNoRollbackCleanRightHi}{10}
+\providecommand{\LWLedgerNoRollbackCleanRightRange}{0--10}
+\providecommand{\LWLedgerNoRollbackCleanSessionsLo}{89}
+\providecommand{\LWLedgerNoRollbackCleanSessionsHi}{95}
+\providecommand{\LWLedgerNoRollbackCleanSessionsRange}{89--95}
+\providecommand{\LWLedgerNoRollbackCleanVacuousLo}{0}
+\providecommand{\LWLedgerNoRollbackCleanVacuousHi}{10}
+\providecommand{\LWLedgerNoRollbackCleanVacuousRange}{0--10}
+\providecommand{\LWLedgerNoRollbackCleanWrongLo}{85}
+\providecommand{\LWLedgerNoRollbackCleanWrongHi}{89}
+\providecommand{\LWLedgerNoRollbackCleanWrongRange}{85--89}
+\providecommand{\LWLedgerNoRollbackConsumerNoneLo}{0}
+\providecommand{\LWLedgerNoRollbackConsumerNoneHi}{0}
+\providecommand{\LWLedgerNoRollbackConsumerNoneRange}{0}
+\providecommand{\LWLedgerNoRollbackConsumerStaleLo}{90}
+\providecommand{\LWLedgerNoRollbackConsumerStaleHi}{100}
+\providecommand{\LWLedgerNoRollbackConsumerStaleRange}{90--100}
+\providecommand{\LWLedgerNoRollbackDoubleLo}{87}
+\providecommand{\LWLedgerNoRollbackDoubleHi}{90}
+\providecommand{\LWLedgerNoRollbackDoubleRange}{87--90}
+\providecommand{\LWLedgerNoRollbackFailDoubleLo}{87}
+\providecommand{\LWLedgerNoRollbackFailDoubleHi}{90}
+\providecommand{\LWLedgerNoRollbackFailDoubleRange}{87--90}
+\providecommand{\LWLedgerNoRollbackFailNoneLo}{0}
+\providecommand{\LWLedgerNoRollbackFailNoneHi}{0}
+\providecommand{\LWLedgerNoRollbackFailNoneRange}{0}
+\providecommand{\LWLedgerNoRollbackFailStaleOnlyLo}{3}
+\providecommand{\LWLedgerNoRollbackFailStaleOnlyHi}{11}
+\providecommand{\LWLedgerNoRollbackFailStaleOnlyRange}{3--11}
+\providecommand{\LWLedgerNoRollbackNoObligationLo}{0}
+\providecommand{\LWLedgerNoRollbackNoObligationHi}{10}
+\providecommand{\LWLedgerNoRollbackNoObligationRange}{0--10}
+\providecommand{\LWLedgerNoRollbackOneObligationLo}{41}
+\providecommand{\LWLedgerNoRollbackOneObligationHi}{99}
+\providecommand{\LWLedgerNoRollbackOneObligationRange}{41--99}
+\providecommand{\LWLedgerNoRollbackOpenRightLo}{0}
+\providecommand{\LWLedgerNoRollbackOpenRightHi}{0}
+\providecommand{\LWLedgerNoRollbackOpenRightRange}{0}
+\providecommand{\LWLedgerNoRollbackOpenSessionsLo}{5}
+\providecommand{\LWLedgerNoRollbackOpenSessionsHi}{11}
+\providecommand{\LWLedgerNoRollbackOpenSessionsRange}{5--11}
+\providecommand{\LWLedgerNoRollbackOpenWrongLo}{5}
+\providecommand{\LWLedgerNoRollbackOpenWrongHi}{11}
+\providecommand{\LWLedgerNoRollbackOpenWrongRange}{5--11}
+\providecommand{\LWLedgerNoRollbackRLo}{0}
+\providecommand{\LWLedgerNoRollbackRHi}{0}
+\providecommand{\LWLedgerNoRollbackRRange}{0}
+\providecommand{\LWLedgerNoRollbackRetriesLo}{1}
+\providecommand{\LWLedgerNoRollbackRetriesHi}{8}
+\providecommand{\LWLedgerNoRollbackRetriesRange}{1--8}
+\providecommand{\LWLedgerNoRollbackStoreWrongLo}{5}
+\providecommand{\LWLedgerNoRollbackStoreWrongHi}{11}
+\providecommand{\LWLedgerNoRollbackStoreWrongRange}{5--11}
+\providecommand{\LWLedgerNoRollbackTwoObligationsLo}{1}
+\providecommand{\LWLedgerNoRollbackTwoObligationsHi}{49}
+\providecommand{\LWLedgerNoRollbackTwoObligationsRange}{1--49}
+\providecommand{\LWLedgerNoRollbackWorldNoneLo}{0}
+\providecommand{\LWLedgerNoRollbackWorldNoneHi}{0}
+\providecommand{\LWLedgerNoRollbackWorldNoneRange}{0}
+\providecommand{\LWLedgerNoRollbackWorldWrongLo}{90}
+\providecommand{\LWLedgerNoRollbackWorldWrongHi}{100}
+\providecommand{\LWLedgerNoRollbackWorldWrongRange}{90--100}
+\providecommand{\LWValidatedCleanRightLo}{0}
+\providecommand{\LWValidatedCleanRightHi}{8}
+\providecommand{\LWValidatedCleanRightRange}{0--8}
+\providecommand{\LWValidatedCleanSessionsLo}{100}
+\providecommand{\LWValidatedCleanSessionsHi}{100}
+\providecommand{\LWValidatedCleanSessionsRange}{100}
+\providecommand{\LWValidatedCleanVacuousLo}{100}
+\providecommand{\LWValidatedCleanVacuousHi}{100}
+\providecommand{\LWValidatedCleanVacuousRange}{100}
+\providecommand{\LWValidatedCleanWrongLo}{92}
+\providecommand{\LWValidatedCleanWrongHi}{100}
+\providecommand{\LWValidatedCleanWrongRange}{92--100}
+\providecommand{\LWValidatedConsumerNoneLo}{0}
+\providecommand{\LWValidatedConsumerNoneHi}{0}
+\providecommand{\LWValidatedConsumerNoneRange}{0}
+\providecommand{\LWValidatedConsumerStaleLo}{92}
+\providecommand{\LWValidatedConsumerStaleHi}{100}
+\providecommand{\LWValidatedConsumerStaleRange}{92--100}
+\providecommand{\LWValidatedDoubleLo}{0}
+\providecommand{\LWValidatedDoubleHi}{0}
+\providecommand{\LWValidatedDoubleRange}{0}
+\providecommand{\LWValidatedFailDoubleLo}{0}
+\providecommand{\LWValidatedFailDoubleHi}{0}
+\providecommand{\LWValidatedFailDoubleRange}{0}
+\providecommand{\LWValidatedFailNoneLo}{0}
+\providecommand{\LWValidatedFailNoneHi}{0}
+\providecommand{\LWValidatedFailNoneRange}{0}
+\providecommand{\LWValidatedFailStaleOnlyLo}{92}
+\providecommand{\LWValidatedFailStaleOnlyHi}{100}
+\providecommand{\LWValidatedFailStaleOnlyRange}{92--100}
+\providecommand{\LWValidatedNoObligationLo}{100}
+\providecommand{\LWValidatedNoObligationHi}{100}
+\providecommand{\LWValidatedNoObligationRange}{100}
+\providecommand{\LWValidatedOneObligationLo}{0}
+\providecommand{\LWValidatedOneObligationHi}{0}
+\providecommand{\LWValidatedOneObligationRange}{0}
+\providecommand{\LWValidatedOpenRightLo}{0}
+\providecommand{\LWValidatedOpenRightHi}{0}
+\providecommand{\LWValidatedOpenRightRange}{0}
+\providecommand{\LWValidatedOpenSessionsLo}{0}
+\providecommand{\LWValidatedOpenSessionsHi}{0}
+\providecommand{\LWValidatedOpenSessionsRange}{0}
+\providecommand{\LWValidatedOpenWrongLo}{0}
+\providecommand{\LWValidatedOpenWrongHi}{0}
+\providecommand{\LWValidatedOpenWrongRange}{0}
+\providecommand{\LWValidatedRLo}{92}
+\providecommand{\LWValidatedRHi}{100}
+\providecommand{\LWValidatedRRange}{92--100}
+\providecommand{\LWValidatedRetriesLo}{0}
+\providecommand{\LWValidatedRetriesHi}{0}
+\providecommand{\LWValidatedRetriesRange}{0}
+\providecommand{\LWValidatedStoreWrongLo}{92}
+\providecommand{\LWValidatedStoreWrongHi}{100}
+\providecommand{\LWValidatedStoreWrongRange}{92--100}
+\providecommand{\LWValidatedTwoObligationsLo}{0}
+\providecommand{\LWValidatedTwoObligationsHi}{0}
+\providecommand{\LWValidatedTwoObligationsRange}{0}
+\providecommand{\LWValidatedWorldNoneLo}{0}
+\providecommand{\LWValidatedWorldNoneHi}{0}
+\providecommand{\LWValidatedWorldNoneRange}{0}
+\providecommand{\LWValidatedWorldWrongLo}{92}
+\providecommand{\LWValidatedWorldWrongHi}{100}
+\providecommand{\LWValidatedWorldWrongRange}{92--100}
 \providecommand{\LWLedgerAgree}{300/300}
 \providecommand{\LWLedgerDisagree}{0}
 \providecommand{\LWLedgerDisagreeCI}{[0.0, 1.2]}
 % --- probe 304 (ledger_world_v1_latest_conf): FIRST RUN, compensator `latest` (one tracked confirmation): archived receipts ---
 \renewcommand{\LedgerWorldFirstAvailable}{1}
+\providecommand{\LWfirstRegistration}{after (predates the field)}
 \providecommand{\LWfirstHaikuValidatedR}{98}
 \providecommand{\LWfirstHaikuValidatedStoreWrong}{98}
 \providecommand{\LWfirstHaikuValidatedWorldWrong}{98}
@@ -896,6 +1151,7 @@
 \providecommand{\LWfirstHaikuValidatedCleanSessions}{100}
 \providecommand{\LWfirstHaikuValidatedCleanRight}{2}
 \providecommand{\LWfirstHaikuValidatedCleanWrong}{98}
+\providecommand{\LWfirstHaikuValidatedCleanVacuous}{100}
 \providecommand{\LWfirstHaikuValidatedOpenSessions}{0}
 \providecommand{\LWfirstHaikuValidatedOpenWrong}{0}
 \providecommand{\LWfirstHaikuValidatedOpenRight}{0}
@@ -918,6 +1174,7 @@
 \providecommand{\LWfirstHaikuLedgerCleanSessions}{83}
 \providecommand{\LWfirstHaikuLedgerCleanRight}{82}
 \providecommand{\LWfirstHaikuLedgerCleanWrong}{1}
+\providecommand{\LWfirstHaikuLedgerCleanVacuous}{0}
 \providecommand{\LWfirstHaikuLedgerOpenSessions}{17}
 \providecommand{\LWfirstHaikuLedgerOpenWrong}{17}
 \providecommand{\LWfirstHaikuLedgerOpenRight}{0}
@@ -928,12 +1185,16 @@
 \providecommand{\LWfirstHaikuLedgerTwoObligations}{1}
 \providecommand{\LWfirstHaikuLedgerNoObligation}{0}
 \providecommand{\LWfirstHaikuLedgerConsumerStaleBeforeRevision}{32}
-\providecommand{\LWfirstHaikuLedgerConsumerStaleBeforeCompensation}{10}
-\providecommand{\LWfirstHaikuLedgerConsumerStaleAfterCompensation}{0}
+\providecommand{\LWfirstHaikuLedgerConsumerStaleInsideCompensation}{10}
+\providecommand{\LWfirstHaikuLedgerConsumerStaleRefusedCancel}{0}
+\providecommand{\LWfirstHaikuLedgerConsumerStaleCurrentThenSuperseded}{0}
+\providecommand{\LWfirstHaikuLedgerConsumerStaleOther}{0}
 \providecommand{\LWfirstHaikuLedgerBothRevisionsAfterCommit}{3}
 \providecommand{\LWfirstHaikuLedgerFirstRevisionMedianS}{0.9}
-\providecommand{\LWfirstHaikuLedgerCompLatencyMedianS}{1.5}
-\providecommand{\LWfirstHaikuLedgerCompLatencyPNinetyS}{1.7}
+\providecommand{\LWfirstHaikuLedgerCompLatencyMedianS}{1.1}
+\providecommand{\LWfirstHaikuLedgerCompLatencyPNinetyS}{1.2}
+\providecommand{\LWfirstHaikuLedgerBookingToCompensationMedianS}{1.5}
+\providecommand{\LWfirstHaikuLedgerBookingToCompensationPNinetyS}{1.7}
 \providecommand{\LWfirstHaikuLedgerNoRollbackR}{0}
 \providecommand{\LWfirstHaikuLedgerNoRollbackStoreWrong}{11}
 \providecommand{\LWfirstHaikuLedgerNoRollbackWorldWrong}{99}
@@ -947,6 +1208,7 @@
 \providecommand{\LWfirstHaikuLedgerNoRollbackCleanSessions}{89}
 \providecommand{\LWfirstHaikuLedgerNoRollbackCleanRight}{1}
 \providecommand{\LWfirstHaikuLedgerNoRollbackCleanWrong}{88}
+\providecommand{\LWfirstHaikuLedgerNoRollbackCleanVacuous}{1}
 \providecommand{\LWfirstHaikuLedgerNoRollbackOpenSessions}{11}
 \providecommand{\LWfirstHaikuLedgerNoRollbackOpenWrong}{11}
 \providecommand{\LWfirstHaikuLedgerNoRollbackOpenRight}{0}
@@ -969,6 +1231,7 @@
 \providecommand{\LWfirstDeepseekValidatedCleanSessions}{100}
 \providecommand{\LWfirstDeepseekValidatedCleanRight}{1}
 \providecommand{\LWfirstDeepseekValidatedCleanWrong}{99}
+\providecommand{\LWfirstDeepseekValidatedCleanVacuous}{100}
 \providecommand{\LWfirstDeepseekValidatedOpenSessions}{0}
 \providecommand{\LWfirstDeepseekValidatedOpenWrong}{0}
 \providecommand{\LWfirstDeepseekValidatedOpenRight}{0}
@@ -991,6 +1254,7 @@
 \providecommand{\LWfirstDeepseekLedgerCleanSessions}{80}
 \providecommand{\LWfirstDeepseekLedgerCleanRight}{70}
 \providecommand{\LWfirstDeepseekLedgerCleanWrong}{10}
+\providecommand{\LWfirstDeepseekLedgerCleanVacuous}{0}
 \providecommand{\LWfirstDeepseekLedgerOpenSessions}{20}
 \providecommand{\LWfirstDeepseekLedgerOpenWrong}{18}
 \providecommand{\LWfirstDeepseekLedgerOpenRight}{2}
@@ -1001,12 +1265,16 @@
 \providecommand{\LWfirstDeepseekLedgerTwoObligations}{50}
 \providecommand{\LWfirstDeepseekLedgerNoObligation}{0}
 \providecommand{\LWfirstDeepseekLedgerConsumerStaleBeforeRevision}{30}
-\providecommand{\LWfirstDeepseekLedgerConsumerStaleBeforeCompensation}{9}
-\providecommand{\LWfirstDeepseekLedgerConsumerStaleAfterCompensation}{10}
+\providecommand{\LWfirstDeepseekLedgerConsumerStaleInsideCompensation}{9}
+\providecommand{\LWfirstDeepseekLedgerConsumerStaleRefusedCancel}{2}
+\providecommand{\LWfirstDeepseekLedgerConsumerStaleCurrentThenSuperseded}{8}
+\providecommand{\LWfirstDeepseekLedgerConsumerStaleOther}{0}
 \providecommand{\LWfirstDeepseekLedgerBothRevisionsAfterCommit}{63}
 \providecommand{\LWfirstDeepseekLedgerFirstRevisionMedianS}{1.2}
-\providecommand{\LWfirstDeepseekLedgerCompLatencyMedianS}{1.4}
-\providecommand{\LWfirstDeepseekLedgerCompLatencyPNinetyS}{1.9}
+\providecommand{\LWfirstDeepseekLedgerCompLatencyMedianS}{1.1}
+\providecommand{\LWfirstDeepseekLedgerCompLatencyPNinetyS}{1.3}
+\providecommand{\LWfirstDeepseekLedgerBookingToCompensationMedianS}{1.4}
+\providecommand{\LWfirstDeepseekLedgerBookingToCompensationPNinetyS}{1.9}
 \providecommand{\LWfirstDeepseekLedgerNoRollbackR}{0}
 \providecommand{\LWfirstDeepseekLedgerNoRollbackStoreWrong}{7}
 \providecommand{\LWfirstDeepseekLedgerNoRollbackWorldWrong}{99}
@@ -1020,6 +1288,7 @@
 \providecommand{\LWfirstDeepseekLedgerNoRollbackCleanSessions}{93}
 \providecommand{\LWfirstDeepseekLedgerNoRollbackCleanRight}{1}
 \providecommand{\LWfirstDeepseekLedgerNoRollbackCleanWrong}{92}
+\providecommand{\LWfirstDeepseekLedgerNoRollbackCleanVacuous}{1}
 \providecommand{\LWfirstDeepseekLedgerNoRollbackOpenSessions}{7}
 \providecommand{\LWfirstDeepseekLedgerNoRollbackOpenWrong}{7}
 \providecommand{\LWfirstDeepseekLedgerNoRollbackOpenRight}{0}
@@ -1042,6 +1311,7 @@
 \providecommand{\LWfirstGptValidatedCleanSessions}{100}
 \providecommand{\LWfirstGptValidatedCleanRight}{0}
 \providecommand{\LWfirstGptValidatedCleanWrong}{100}
+\providecommand{\LWfirstGptValidatedCleanVacuous}{100}
 \providecommand{\LWfirstGptValidatedOpenSessions}{0}
 \providecommand{\LWfirstGptValidatedOpenWrong}{0}
 \providecommand{\LWfirstGptValidatedOpenRight}{0}
@@ -1064,6 +1334,7 @@
 \providecommand{\LWfirstGptLedgerCleanSessions}{76}
 \providecommand{\LWfirstGptLedgerCleanRight}{71}
 \providecommand{\LWfirstGptLedgerCleanWrong}{5}
+\providecommand{\LWfirstGptLedgerCleanVacuous}{0}
 \providecommand{\LWfirstGptLedgerOpenSessions}{24}
 \providecommand{\LWfirstGptLedgerOpenWrong}{20}
 \providecommand{\LWfirstGptLedgerOpenRight}{4}
@@ -1074,12 +1345,16 @@
 \providecommand{\LWfirstGptLedgerTwoObligations}{50}
 \providecommand{\LWfirstGptLedgerNoObligation}{0}
 \providecommand{\LWfirstGptLedgerConsumerStaleBeforeRevision}{26}
-\providecommand{\LWfirstGptLedgerConsumerStaleBeforeCompensation}{7}
-\providecommand{\LWfirstGptLedgerConsumerStaleAfterCompensation}{13}
+\providecommand{\LWfirstGptLedgerConsumerStaleInsideCompensation}{7}
+\providecommand{\LWfirstGptLedgerConsumerStaleRefusedCancel}{2}
+\providecommand{\LWfirstGptLedgerConsumerStaleCurrentThenSuperseded}{11}
+\providecommand{\LWfirstGptLedgerConsumerStaleOther}{0}
 \providecommand{\LWfirstGptLedgerBothRevisionsAfterCommit}{60}
 \providecommand{\LWfirstGptLedgerFirstRevisionMedianS}{1.0}
-\providecommand{\LWfirstGptLedgerCompLatencyMedianS}{1.3}
-\providecommand{\LWfirstGptLedgerCompLatencyPNinetyS}{1.8}
+\providecommand{\LWfirstGptLedgerCompLatencyMedianS}{1.1}
+\providecommand{\LWfirstGptLedgerCompLatencyPNinetyS}{1.2}
+\providecommand{\LWfirstGptLedgerBookingToCompensationMedianS}{1.3}
+\providecommand{\LWfirstGptLedgerBookingToCompensationPNinetyS}{1.8}
 \providecommand{\LWfirstGptLedgerNoRollbackR}{0}
 \providecommand{\LWfirstGptLedgerNoRollbackStoreWrong}{9}
 \providecommand{\LWfirstGptLedgerNoRollbackWorldWrong}{99}
@@ -1093,6 +1368,7 @@
 \providecommand{\LWfirstGptLedgerNoRollbackCleanSessions}{91}
 \providecommand{\LWfirstGptLedgerNoRollbackCleanRight}{1}
 \providecommand{\LWfirstGptLedgerNoRollbackCleanWrong}{90}
+\providecommand{\LWfirstGptLedgerNoRollbackCleanVacuous}{1}
 \providecommand{\LWfirstGptLedgerNoRollbackOpenSessions}{9}
 \providecommand{\LWfirstGptLedgerNoRollbackOpenWrong}{9}
 \providecommand{\LWfirstGptLedgerNoRollbackOpenRight}{0}
@@ -1102,9 +1378,903 @@
 \providecommand{\LWfirstGptLedgerNoRollbackOneObligation}{46}
 \providecommand{\LWfirstGptLedgerNoRollbackTwoObligations}{53}
 \providecommand{\LWfirstGptLedgerNoRollbackNoObligation}{1}
+\providecommand{\LWfirstLedgerBookingToCompensationMedianSLo}{1.3}
+\providecommand{\LWfirstLedgerBookingToCompensationMedianSHi}{1.5}
+\providecommand{\LWfirstLedgerBookingToCompensationMedianSRange}{1.3--1.5}
+\providecommand{\LWfirstLedgerBookingToCompensationPNinetySLo}{1.7}
+\providecommand{\LWfirstLedgerBookingToCompensationPNinetySHi}{1.9}
+\providecommand{\LWfirstLedgerBookingToCompensationPNinetySRange}{1.7--1.9}
+\providecommand{\LWfirstLedgerBothRevisionsAfterCommitLo}{3}
+\providecommand{\LWfirstLedgerBothRevisionsAfterCommitHi}{63}
+\providecommand{\LWfirstLedgerBothRevisionsAfterCommitRange}{3--63}
+\providecommand{\LWfirstLedgerCleanRightLo}{70}
+\providecommand{\LWfirstLedgerCleanRightHi}{82}
+\providecommand{\LWfirstLedgerCleanRightRange}{70--82}
+\providecommand{\LWfirstLedgerCleanSessionsLo}{76}
+\providecommand{\LWfirstLedgerCleanSessionsHi}{83}
+\providecommand{\LWfirstLedgerCleanSessionsRange}{76--83}
+\providecommand{\LWfirstLedgerCleanVacuousLo}{0}
+\providecommand{\LWfirstLedgerCleanVacuousHi}{0}
+\providecommand{\LWfirstLedgerCleanVacuousRange}{0}
+\providecommand{\LWfirstLedgerCleanWrongLo}{1}
+\providecommand{\LWfirstLedgerCleanWrongHi}{10}
+\providecommand{\LWfirstLedgerCleanWrongRange}{1--10}
+\providecommand{\LWfirstLedgerCompLatencyMedianSLo}{1.1}
+\providecommand{\LWfirstLedgerCompLatencyMedianSHi}{1.1}
+\providecommand{\LWfirstLedgerCompLatencyMedianSRange}{1.1}
+\providecommand{\LWfirstLedgerCompLatencyPNinetySLo}{1.2}
+\providecommand{\LWfirstLedgerCompLatencyPNinetySHi}{1.3}
+\providecommand{\LWfirstLedgerCompLatencyPNinetySRange}{1.2--1.3}
+\providecommand{\LWfirstLedgerConsumerNoneLo}{50}
+\providecommand{\LWfirstLedgerConsumerNoneHi}{53}
+\providecommand{\LWfirstLedgerConsumerNoneRange}{50--53}
+\providecommand{\LWfirstLedgerConsumerStaleLo}{42}
+\providecommand{\LWfirstLedgerConsumerStaleHi}{49}
+\providecommand{\LWfirstLedgerConsumerStaleRange}{42--49}
+\providecommand{\LWfirstLedgerConsumerStaleBeforeRevisionLo}{26}
+\providecommand{\LWfirstLedgerConsumerStaleBeforeRevisionHi}{32}
+\providecommand{\LWfirstLedgerConsumerStaleBeforeRevisionRange}{26--32}
+\providecommand{\LWfirstLedgerConsumerStaleCurrentThenSupersededLo}{0}
+\providecommand{\LWfirstLedgerConsumerStaleCurrentThenSupersededHi}{11}
+\providecommand{\LWfirstLedgerConsumerStaleCurrentThenSupersededRange}{0--11}
+\providecommand{\LWfirstLedgerConsumerStaleInsideCompensationLo}{7}
+\providecommand{\LWfirstLedgerConsumerStaleInsideCompensationHi}{10}
+\providecommand{\LWfirstLedgerConsumerStaleInsideCompensationRange}{7--10}
+\providecommand{\LWfirstLedgerConsumerStaleOtherLo}{0}
+\providecommand{\LWfirstLedgerConsumerStaleOtherHi}{0}
+\providecommand{\LWfirstLedgerConsumerStaleOtherRange}{0}
+\providecommand{\LWfirstLedgerConsumerStaleRefusedCancelLo}{0}
+\providecommand{\LWfirstLedgerConsumerStaleRefusedCancelHi}{2}
+\providecommand{\LWfirstLedgerConsumerStaleRefusedCancelRange}{0--2}
+\providecommand{\LWfirstLedgerDoubleLo}{11}
+\providecommand{\LWfirstLedgerDoubleHi}{14}
+\providecommand{\LWfirstLedgerDoubleRange}{11--14}
+\providecommand{\LWfirstLedgerFailDoubleLo}{11}
+\providecommand{\LWfirstLedgerFailDoubleHi}{14}
+\providecommand{\LWfirstLedgerFailDoubleRange}{11--14}
+\providecommand{\LWfirstLedgerFailNoneLo}{6}
+\providecommand{\LWfirstLedgerFailNoneHi}{12}
+\providecommand{\LWfirstLedgerFailNoneRange}{6--12}
+\providecommand{\LWfirstLedgerFailStaleOnlyLo}{1}
+\providecommand{\LWfirstLedgerFailStaleOnlyHi}{2}
+\providecommand{\LWfirstLedgerFailStaleOnlyRange}{1--2}
+\providecommand{\LWfirstLedgerFirstRevisionMedianSLo}{0.9}
+\providecommand{\LWfirstLedgerFirstRevisionMedianSHi}{1.2}
+\providecommand{\LWfirstLedgerFirstRevisionMedianSRange}{0.9--1.2}
+\providecommand{\LWfirstLedgerNoObligationLo}{0}
+\providecommand{\LWfirstLedgerNoObligationHi}{0}
+\providecommand{\LWfirstLedgerNoObligationRange}{0}
+\providecommand{\LWfirstLedgerOneObligationLo}{50}
+\providecommand{\LWfirstLedgerOneObligationHi}{99}
+\providecommand{\LWfirstLedgerOneObligationRange}{50--99}
+\providecommand{\LWfirstLedgerOpenRightLo}{0}
+\providecommand{\LWfirstLedgerOpenRightHi}{4}
+\providecommand{\LWfirstLedgerOpenRightRange}{0--4}
+\providecommand{\LWfirstLedgerOpenSessionsLo}{17}
+\providecommand{\LWfirstLedgerOpenSessionsHi}{24}
+\providecommand{\LWfirstLedgerOpenSessionsRange}{17--24}
+\providecommand{\LWfirstLedgerOpenWrongLo}{17}
+\providecommand{\LWfirstLedgerOpenWrongHi}{20}
+\providecommand{\LWfirstLedgerOpenWrongRange}{17--20}
+\providecommand{\LWfirstLedgerRLo}{0}
+\providecommand{\LWfirstLedgerRHi}{0}
+\providecommand{\LWfirstLedgerRRange}{0}
+\providecommand{\LWfirstLedgerRetriesLo}{2}
+\providecommand{\LWfirstLedgerRetriesHi}{13}
+\providecommand{\LWfirstLedgerRetriesRange}{2--13}
+\providecommand{\LWfirstLedgerStoreWrongLo}{7}
+\providecommand{\LWfirstLedgerStoreWrongHi}{14}
+\providecommand{\LWfirstLedgerStoreWrongRange}{7--14}
+\providecommand{\LWfirstLedgerTwoObligationsLo}{1}
+\providecommand{\LWfirstLedgerTwoObligationsHi}{50}
+\providecommand{\LWfirstLedgerTwoObligationsRange}{1--50}
+\providecommand{\LWfirstLedgerWorldNoneLo}{6}
+\providecommand{\LWfirstLedgerWorldNoneHi}{12}
+\providecommand{\LWfirstLedgerWorldNoneRange}{6--12}
+\providecommand{\LWfirstLedgerWorldWrongLo}{12}
+\providecommand{\LWfirstLedgerWorldWrongHi}{16}
+\providecommand{\LWfirstLedgerWorldWrongRange}{12--16}
+\providecommand{\LWfirstLedgerNoRollbackCleanRightLo}{1}
+\providecommand{\LWfirstLedgerNoRollbackCleanRightHi}{1}
+\providecommand{\LWfirstLedgerNoRollbackCleanRightRange}{1}
+\providecommand{\LWfirstLedgerNoRollbackCleanSessionsLo}{89}
+\providecommand{\LWfirstLedgerNoRollbackCleanSessionsHi}{93}
+\providecommand{\LWfirstLedgerNoRollbackCleanSessionsRange}{89--93}
+\providecommand{\LWfirstLedgerNoRollbackCleanVacuousLo}{1}
+\providecommand{\LWfirstLedgerNoRollbackCleanVacuousHi}{1}
+\providecommand{\LWfirstLedgerNoRollbackCleanVacuousRange}{1}
+\providecommand{\LWfirstLedgerNoRollbackCleanWrongLo}{88}
+\providecommand{\LWfirstLedgerNoRollbackCleanWrongHi}{92}
+\providecommand{\LWfirstLedgerNoRollbackCleanWrongRange}{88--92}
+\providecommand{\LWfirstLedgerNoRollbackConsumerNoneLo}{0}
+\providecommand{\LWfirstLedgerNoRollbackConsumerNoneHi}{0}
+\providecommand{\LWfirstLedgerNoRollbackConsumerNoneRange}{0}
+\providecommand{\LWfirstLedgerNoRollbackConsumerStaleLo}{99}
+\providecommand{\LWfirstLedgerNoRollbackConsumerStaleHi}{99}
+\providecommand{\LWfirstLedgerNoRollbackConsumerStaleRange}{99}
+\providecommand{\LWfirstLedgerNoRollbackDoubleLo}{88}
+\providecommand{\LWfirstLedgerNoRollbackDoubleHi}{96}
+\providecommand{\LWfirstLedgerNoRollbackDoubleRange}{88--96}
+\providecommand{\LWfirstLedgerNoRollbackFailDoubleLo}{88}
+\providecommand{\LWfirstLedgerNoRollbackFailDoubleHi}{96}
+\providecommand{\LWfirstLedgerNoRollbackFailDoubleRange}{88--96}
+\providecommand{\LWfirstLedgerNoRollbackFailNoneLo}{0}
+\providecommand{\LWfirstLedgerNoRollbackFailNoneHi}{0}
+\providecommand{\LWfirstLedgerNoRollbackFailNoneRange}{0}
+\providecommand{\LWfirstLedgerNoRollbackFailStaleOnlyLo}{3}
+\providecommand{\LWfirstLedgerNoRollbackFailStaleOnlyHi}{11}
+\providecommand{\LWfirstLedgerNoRollbackFailStaleOnlyRange}{3--11}
+\providecommand{\LWfirstLedgerNoRollbackNoObligationLo}{1}
+\providecommand{\LWfirstLedgerNoRollbackNoObligationHi}{1}
+\providecommand{\LWfirstLedgerNoRollbackNoObligationRange}{1}
+\providecommand{\LWfirstLedgerNoRollbackOneObligationLo}{44}
+\providecommand{\LWfirstLedgerNoRollbackOneObligationHi}{98}
+\providecommand{\LWfirstLedgerNoRollbackOneObligationRange}{44--98}
+\providecommand{\LWfirstLedgerNoRollbackOpenRightLo}{0}
+\providecommand{\LWfirstLedgerNoRollbackOpenRightHi}{0}
+\providecommand{\LWfirstLedgerNoRollbackOpenRightRange}{0}
+\providecommand{\LWfirstLedgerNoRollbackOpenSessionsLo}{7}
+\providecommand{\LWfirstLedgerNoRollbackOpenSessionsHi}{11}
+\providecommand{\LWfirstLedgerNoRollbackOpenSessionsRange}{7--11}
+\providecommand{\LWfirstLedgerNoRollbackOpenWrongLo}{7}
+\providecommand{\LWfirstLedgerNoRollbackOpenWrongHi}{11}
+\providecommand{\LWfirstLedgerNoRollbackOpenWrongRange}{7--11}
+\providecommand{\LWfirstLedgerNoRollbackRLo}{0}
+\providecommand{\LWfirstLedgerNoRollbackRHi}{0}
+\providecommand{\LWfirstLedgerNoRollbackRRange}{0}
+\providecommand{\LWfirstLedgerNoRollbackRetriesLo}{1}
+\providecommand{\LWfirstLedgerNoRollbackRetriesHi}{9}
+\providecommand{\LWfirstLedgerNoRollbackRetriesRange}{1--9}
+\providecommand{\LWfirstLedgerNoRollbackStoreWrongLo}{7}
+\providecommand{\LWfirstLedgerNoRollbackStoreWrongHi}{11}
+\providecommand{\LWfirstLedgerNoRollbackStoreWrongRange}{7--11}
+\providecommand{\LWfirstLedgerNoRollbackTwoObligationsLo}{1}
+\providecommand{\LWfirstLedgerNoRollbackTwoObligationsHi}{55}
+\providecommand{\LWfirstLedgerNoRollbackTwoObligationsRange}{1--55}
+\providecommand{\LWfirstLedgerNoRollbackWorldNoneLo}{0}
+\providecommand{\LWfirstLedgerNoRollbackWorldNoneHi}{0}
+\providecommand{\LWfirstLedgerNoRollbackWorldNoneRange}{0}
+\providecommand{\LWfirstLedgerNoRollbackWorldWrongLo}{99}
+\providecommand{\LWfirstLedgerNoRollbackWorldWrongHi}{99}
+\providecommand{\LWfirstLedgerNoRollbackWorldWrongRange}{99}
+\providecommand{\LWfirstValidatedCleanRightLo}{0}
+\providecommand{\LWfirstValidatedCleanRightHi}{2}
+\providecommand{\LWfirstValidatedCleanRightRange}{0--2}
+\providecommand{\LWfirstValidatedCleanSessionsLo}{100}
+\providecommand{\LWfirstValidatedCleanSessionsHi}{100}
+\providecommand{\LWfirstValidatedCleanSessionsRange}{100}
+\providecommand{\LWfirstValidatedCleanVacuousLo}{100}
+\providecommand{\LWfirstValidatedCleanVacuousHi}{100}
+\providecommand{\LWfirstValidatedCleanVacuousRange}{100}
+\providecommand{\LWfirstValidatedCleanWrongLo}{98}
+\providecommand{\LWfirstValidatedCleanWrongHi}{100}
+\providecommand{\LWfirstValidatedCleanWrongRange}{98--100}
+\providecommand{\LWfirstValidatedConsumerNoneLo}{0}
+\providecommand{\LWfirstValidatedConsumerNoneHi}{0}
+\providecommand{\LWfirstValidatedConsumerNoneRange}{0}
+\providecommand{\LWfirstValidatedConsumerStaleLo}{98}
+\providecommand{\LWfirstValidatedConsumerStaleHi}{100}
+\providecommand{\LWfirstValidatedConsumerStaleRange}{98--100}
+\providecommand{\LWfirstValidatedDoubleLo}{0}
+\providecommand{\LWfirstValidatedDoubleHi}{0}
+\providecommand{\LWfirstValidatedDoubleRange}{0}
+\providecommand{\LWfirstValidatedFailDoubleLo}{0}
+\providecommand{\LWfirstValidatedFailDoubleHi}{0}
+\providecommand{\LWfirstValidatedFailDoubleRange}{0}
+\providecommand{\LWfirstValidatedFailNoneLo}{0}
+\providecommand{\LWfirstValidatedFailNoneHi}{0}
+\providecommand{\LWfirstValidatedFailNoneRange}{0}
+\providecommand{\LWfirstValidatedFailStaleOnlyLo}{98}
+\providecommand{\LWfirstValidatedFailStaleOnlyHi}{100}
+\providecommand{\LWfirstValidatedFailStaleOnlyRange}{98--100}
+\providecommand{\LWfirstValidatedNoObligationLo}{100}
+\providecommand{\LWfirstValidatedNoObligationHi}{100}
+\providecommand{\LWfirstValidatedNoObligationRange}{100}
+\providecommand{\LWfirstValidatedOneObligationLo}{0}
+\providecommand{\LWfirstValidatedOneObligationHi}{0}
+\providecommand{\LWfirstValidatedOneObligationRange}{0}
+\providecommand{\LWfirstValidatedOpenRightLo}{0}
+\providecommand{\LWfirstValidatedOpenRightHi}{0}
+\providecommand{\LWfirstValidatedOpenRightRange}{0}
+\providecommand{\LWfirstValidatedOpenSessionsLo}{0}
+\providecommand{\LWfirstValidatedOpenSessionsHi}{0}
+\providecommand{\LWfirstValidatedOpenSessionsRange}{0}
+\providecommand{\LWfirstValidatedOpenWrongLo}{0}
+\providecommand{\LWfirstValidatedOpenWrongHi}{0}
+\providecommand{\LWfirstValidatedOpenWrongRange}{0}
+\providecommand{\LWfirstValidatedRLo}{98}
+\providecommand{\LWfirstValidatedRHi}{100}
+\providecommand{\LWfirstValidatedRRange}{98--100}
+\providecommand{\LWfirstValidatedRetriesLo}{0}
+\providecommand{\LWfirstValidatedRetriesHi}{0}
+\providecommand{\LWfirstValidatedRetriesRange}{0}
+\providecommand{\LWfirstValidatedStoreWrongLo}{98}
+\providecommand{\LWfirstValidatedStoreWrongHi}{100}
+\providecommand{\LWfirstValidatedStoreWrongRange}{98--100}
+\providecommand{\LWfirstValidatedTwoObligationsLo}{0}
+\providecommand{\LWfirstValidatedTwoObligationsHi}{0}
+\providecommand{\LWfirstValidatedTwoObligationsRange}{0}
+\providecommand{\LWfirstValidatedWorldNoneLo}{0}
+\providecommand{\LWfirstValidatedWorldNoneHi}{0}
+\providecommand{\LWfirstValidatedWorldNoneRange}{0}
+\providecommand{\LWfirstValidatedWorldWrongLo}{98}
+\providecommand{\LWfirstValidatedWorldWrongHi}{100}
+\providecommand{\LWfirstValidatedWorldWrongRange}{98--100}
 \providecommand{\LWfirstLedgerAgree}{278/300}
 \providecommand{\LWfirstLedgerDisagree}{22}
 \providecommand{\LWfirstLedgerDisagreeCI}{[4.7, 10.9]}
+% --- probe 304 (ledger_world_atomic): ATOMIC registration (--registration atomic) ---
+\renewcommand{\LedgerWorldAtomicAvailable}{1}
+\providecommand{\LWatomicRegistration}{atomic}
+\providecommand{\LWatomicHaikuValidatedR}{99}
+\providecommand{\LWatomicHaikuValidatedStoreWrong}{99}
+\providecommand{\LWatomicHaikuValidatedWorldWrong}{99}
+\providecommand{\LWatomicHaikuValidatedWorldNone}{0}
+\providecommand{\LWatomicHaikuValidatedDouble}{0}
+\providecommand{\LWatomicHaikuValidatedConsumerStale}{99}
+\providecommand{\LWatomicHaikuValidatedConsumerNone}{0}
+\providecommand{\LWatomicHaikuValidatedRetries}{0}
+\providecommand{\LWatomicHaikuValidatedObl}{0/0/0}
+\providecommand{\LWatomicHaikuValidatedN}{100}
+\providecommand{\LWatomicHaikuValidatedCleanSessions}{100}
+\providecommand{\LWatomicHaikuValidatedCleanRight}{1}
+\providecommand{\LWatomicHaikuValidatedCleanWrong}{99}
+\providecommand{\LWatomicHaikuValidatedCleanVacuous}{100}
+\providecommand{\LWatomicHaikuValidatedOpenSessions}{0}
+\providecommand{\LWatomicHaikuValidatedOpenWrong}{0}
+\providecommand{\LWatomicHaikuValidatedOpenRight}{0}
+\providecommand{\LWatomicHaikuValidatedFailDouble}{0}
+\providecommand{\LWatomicHaikuValidatedFailNone}{0}
+\providecommand{\LWatomicHaikuValidatedFailStaleOnly}{99}
+\providecommand{\LWatomicHaikuValidatedOneObligation}{0}
+\providecommand{\LWatomicHaikuValidatedTwoObligations}{0}
+\providecommand{\LWatomicHaikuValidatedNoObligation}{100}
+\providecommand{\LWatomicHaikuLedgerR}{0}
+\providecommand{\LWatomicHaikuLedgerStoreWrong}{7}
+\providecommand{\LWatomicHaikuLedgerWorldWrong}{12}
+\providecommand{\LWatomicHaikuLedgerWorldNone}{7}
+\providecommand{\LWatomicHaikuLedgerDouble}{12}
+\providecommand{\LWatomicHaikuLedgerConsumerStale}{99}
+\providecommand{\LWatomicHaikuLedgerConsumerNone}{0}
+\providecommand{\LWatomicHaikuLedgerRetries}{0}
+\providecommand{\LWatomicHaikuLedgerObl}{103/84/19}
+\providecommand{\LWatomicHaikuLedgerN}{100}
+\providecommand{\LWatomicHaikuLedgerCleanSessions}{81}
+\providecommand{\LWatomicHaikuLedgerCleanRight}{81}
+\providecommand{\LWatomicHaikuLedgerCleanWrong}{0}
+\providecommand{\LWatomicHaikuLedgerCleanVacuous}{0}
+\providecommand{\LWatomicHaikuLedgerOpenSessions}{19}
+\providecommand{\LWatomicHaikuLedgerOpenWrong}{19}
+\providecommand{\LWatomicHaikuLedgerOpenRight}{0}
+\providecommand{\LWatomicHaikuLedgerFailDouble}{12}
+\providecommand{\LWatomicHaikuLedgerFailNone}{7}
+\providecommand{\LWatomicHaikuLedgerFailStaleOnly}{0}
+\providecommand{\LWatomicHaikuLedgerOneObligation}{97}
+\providecommand{\LWatomicHaikuLedgerTwoObligations}{3}
+\providecommand{\LWatomicHaikuLedgerNoObligation}{0}
+\providecommand{\LWatomicHaikuLedgerConsumerStaleBeforeRevision}{31}
+\providecommand{\LWatomicHaikuLedgerConsumerStaleInsideCompensation}{66}
+\providecommand{\LWatomicHaikuLedgerConsumerStaleRefusedCancel}{1}
+\providecommand{\LWatomicHaikuLedgerConsumerStaleCurrentThenSuperseded}{1}
+\providecommand{\LWatomicHaikuLedgerConsumerStaleOther}{0}
+\providecommand{\LWatomicHaikuLedgerBothRevisionsAfterCommit}{3}
+\providecommand{\LWatomicHaikuLedgerFirstRevisionMedianS}{1.0}
+\providecommand{\LWatomicHaikuLedgerCompLatencyMedianS}{1.2}
+\providecommand{\LWatomicHaikuLedgerCompLatencyPNinetyS}{1.3}
+\providecommand{\LWatomicHaikuLedgerBookingToCompensationMedianS}{1.5}
+\providecommand{\LWatomicHaikuLedgerBookingToCompensationPNinetyS}{1.7}
+\providecommand{\LWatomicHaikuLedgerNoRollbackR}{0}
+\providecommand{\LWatomicHaikuLedgerNoRollbackStoreWrong}{11}
+\providecommand{\LWatomicHaikuLedgerNoRollbackWorldWrong}{99}
+\providecommand{\LWatomicHaikuLedgerNoRollbackWorldNone}{0}
+\providecommand{\LWatomicHaikuLedgerNoRollbackDouble}{88}
+\providecommand{\LWatomicHaikuLedgerNoRollbackConsumerStale}{99}
+\providecommand{\LWatomicHaikuLedgerNoRollbackConsumerNone}{0}
+\providecommand{\LWatomicHaikuLedgerNoRollbackRetries}{1}
+\providecommand{\LWatomicHaikuLedgerNoRollbackObl}{103/92/11}
+\providecommand{\LWatomicHaikuLedgerNoRollbackN}{100}
+\providecommand{\LWatomicHaikuLedgerNoRollbackCleanSessions}{89}
+\providecommand{\LWatomicHaikuLedgerNoRollbackCleanRight}{1}
+\providecommand{\LWatomicHaikuLedgerNoRollbackCleanWrong}{88}
+\providecommand{\LWatomicHaikuLedgerNoRollbackCleanVacuous}{1}
+\providecommand{\LWatomicHaikuLedgerNoRollbackOpenSessions}{11}
+\providecommand{\LWatomicHaikuLedgerNoRollbackOpenWrong}{11}
+\providecommand{\LWatomicHaikuLedgerNoRollbackOpenRight}{0}
+\providecommand{\LWatomicHaikuLedgerNoRollbackFailDouble}{88}
+\providecommand{\LWatomicHaikuLedgerNoRollbackFailNone}{0}
+\providecommand{\LWatomicHaikuLedgerNoRollbackFailStaleOnly}{11}
+\providecommand{\LWatomicHaikuLedgerNoRollbackOneObligation}{95}
+\providecommand{\LWatomicHaikuLedgerNoRollbackTwoObligations}{4}
+\providecommand{\LWatomicHaikuLedgerNoRollbackNoObligation}{1}
+\providecommand{\LWatomicDeepseekValidatedR}{99}
+\providecommand{\LWatomicDeepseekValidatedStoreWrong}{99}
+\providecommand{\LWatomicDeepseekValidatedWorldWrong}{99}
+\providecommand{\LWatomicDeepseekValidatedWorldNone}{0}
+\providecommand{\LWatomicDeepseekValidatedDouble}{0}
+\providecommand{\LWatomicDeepseekValidatedConsumerStale}{99}
+\providecommand{\LWatomicDeepseekValidatedConsumerNone}{0}
+\providecommand{\LWatomicDeepseekValidatedRetries}{0}
+\providecommand{\LWatomicDeepseekValidatedObl}{0/0/0}
+\providecommand{\LWatomicDeepseekValidatedN}{100}
+\providecommand{\LWatomicDeepseekValidatedCleanSessions}{100}
+\providecommand{\LWatomicDeepseekValidatedCleanRight}{1}
+\providecommand{\LWatomicDeepseekValidatedCleanWrong}{99}
+\providecommand{\LWatomicDeepseekValidatedCleanVacuous}{100}
+\providecommand{\LWatomicDeepseekValidatedOpenSessions}{0}
+\providecommand{\LWatomicDeepseekValidatedOpenWrong}{0}
+\providecommand{\LWatomicDeepseekValidatedOpenRight}{0}
+\providecommand{\LWatomicDeepseekValidatedFailDouble}{0}
+\providecommand{\LWatomicDeepseekValidatedFailNone}{0}
+\providecommand{\LWatomicDeepseekValidatedFailStaleOnly}{99}
+\providecommand{\LWatomicDeepseekValidatedOneObligation}{0}
+\providecommand{\LWatomicDeepseekValidatedTwoObligations}{0}
+\providecommand{\LWatomicDeepseekValidatedNoObligation}{100}
+\providecommand{\LWatomicDeepseekLedgerR}{0}
+\providecommand{\LWatomicDeepseekLedgerStoreWrong}{13}
+\providecommand{\LWatomicDeepseekLedgerWorldWrong}{10}
+\providecommand{\LWatomicDeepseekLedgerWorldNone}{11}
+\providecommand{\LWatomicDeepseekLedgerDouble}{8}
+\providecommand{\LWatomicDeepseekLedgerConsumerStale}{98}
+\providecommand{\LWatomicDeepseekLedgerConsumerNone}{1}
+\providecommand{\LWatomicDeepseekLedgerRetries}{15}
+\providecommand{\LWatomicDeepseekLedgerObl}{161/140/21}
+\providecommand{\LWatomicDeepseekLedgerN}{100}
+\providecommand{\LWatomicDeepseekLedgerCleanSessions}{79}
+\providecommand{\LWatomicDeepseekLedgerCleanRight}{79}
+\providecommand{\LWatomicDeepseekLedgerCleanWrong}{0}
+\providecommand{\LWatomicDeepseekLedgerCleanVacuous}{1}
+\providecommand{\LWatomicDeepseekLedgerOpenSessions}{21}
+\providecommand{\LWatomicDeepseekLedgerOpenWrong}{21}
+\providecommand{\LWatomicDeepseekLedgerOpenRight}{0}
+\providecommand{\LWatomicDeepseekLedgerFailDouble}{8}
+\providecommand{\LWatomicDeepseekLedgerFailNone}{11}
+\providecommand{\LWatomicDeepseekLedgerFailStaleOnly}{2}
+\providecommand{\LWatomicDeepseekLedgerOneObligation}{37}
+\providecommand{\LWatomicDeepseekLedgerTwoObligations}{62}
+\providecommand{\LWatomicDeepseekLedgerNoObligation}{1}
+\providecommand{\LWatomicDeepseekLedgerConsumerStaleBeforeRevision}{18}
+\providecommand{\LWatomicDeepseekLedgerConsumerStaleInsideCompensation}{74}
+\providecommand{\LWatomicDeepseekLedgerConsumerStaleRefusedCancel}{1}
+\providecommand{\LWatomicDeepseekLedgerConsumerStaleCurrentThenSuperseded}{5}
+\providecommand{\LWatomicDeepseekLedgerConsumerStaleOther}{0}
+\providecommand{\LWatomicDeepseekLedgerBothRevisionsAfterCommit}{77}
+\providecommand{\LWatomicDeepseekLedgerFirstRevisionMedianS}{1.3}
+\providecommand{\LWatomicDeepseekLedgerCompLatencyMedianS}{1.2}
+\providecommand{\LWatomicDeepseekLedgerCompLatencyPNinetyS}{1.4}
+\providecommand{\LWatomicDeepseekLedgerBookingToCompensationMedianS}{1.4}
+\providecommand{\LWatomicDeepseekLedgerBookingToCompensationPNinetyS}{2.0}
+\providecommand{\LWatomicDeepseekLedgerNoRollbackR}{0}
+\providecommand{\LWatomicDeepseekLedgerNoRollbackStoreWrong}{9}
+\providecommand{\LWatomicDeepseekLedgerNoRollbackWorldWrong}{99}
+\providecommand{\LWatomicDeepseekLedgerNoRollbackWorldNone}{0}
+\providecommand{\LWatomicDeepseekLedgerNoRollbackDouble}{95}
+\providecommand{\LWatomicDeepseekLedgerNoRollbackConsumerStale}{99}
+\providecommand{\LWatomicDeepseekLedgerNoRollbackConsumerNone}{0}
+\providecommand{\LWatomicDeepseekLedgerNoRollbackRetries}{8}
+\providecommand{\LWatomicDeepseekLedgerNoRollbackObl}{155/146/9}
+\providecommand{\LWatomicDeepseekLedgerNoRollbackN}{100}
+\providecommand{\LWatomicDeepseekLedgerNoRollbackCleanSessions}{91}
+\providecommand{\LWatomicDeepseekLedgerNoRollbackCleanRight}{1}
+\providecommand{\LWatomicDeepseekLedgerNoRollbackCleanWrong}{90}
+\providecommand{\LWatomicDeepseekLedgerNoRollbackCleanVacuous}{1}
+\providecommand{\LWatomicDeepseekLedgerNoRollbackOpenSessions}{9}
+\providecommand{\LWatomicDeepseekLedgerNoRollbackOpenWrong}{9}
+\providecommand{\LWatomicDeepseekLedgerNoRollbackOpenRight}{0}
+\providecommand{\LWatomicDeepseekLedgerNoRollbackFailDouble}{95}
+\providecommand{\LWatomicDeepseekLedgerNoRollbackFailNone}{0}
+\providecommand{\LWatomicDeepseekLedgerNoRollbackFailStaleOnly}{4}
+\providecommand{\LWatomicDeepseekLedgerNoRollbackOneObligation}{43}
+\providecommand{\LWatomicDeepseekLedgerNoRollbackTwoObligations}{56}
+\providecommand{\LWatomicDeepseekLedgerNoRollbackNoObligation}{1}
+\providecommand{\LWatomicGptValidatedR}{97}
+\providecommand{\LWatomicGptValidatedStoreWrong}{97}
+\providecommand{\LWatomicGptValidatedWorldWrong}{97}
+\providecommand{\LWatomicGptValidatedWorldNone}{0}
+\providecommand{\LWatomicGptValidatedDouble}{0}
+\providecommand{\LWatomicGptValidatedConsumerStale}{97}
+\providecommand{\LWatomicGptValidatedConsumerNone}{0}
+\providecommand{\LWatomicGptValidatedRetries}{0}
+\providecommand{\LWatomicGptValidatedObl}{0/0/0}
+\providecommand{\LWatomicGptValidatedN}{100}
+\providecommand{\LWatomicGptValidatedCleanSessions}{100}
+\providecommand{\LWatomicGptValidatedCleanRight}{3}
+\providecommand{\LWatomicGptValidatedCleanWrong}{97}
+\providecommand{\LWatomicGptValidatedCleanVacuous}{100}
+\providecommand{\LWatomicGptValidatedOpenSessions}{0}
+\providecommand{\LWatomicGptValidatedOpenWrong}{0}
+\providecommand{\LWatomicGptValidatedOpenRight}{0}
+\providecommand{\LWatomicGptValidatedFailDouble}{0}
+\providecommand{\LWatomicGptValidatedFailNone}{0}
+\providecommand{\LWatomicGptValidatedFailStaleOnly}{97}
+\providecommand{\LWatomicGptValidatedOneObligation}{0}
+\providecommand{\LWatomicGptValidatedTwoObligations}{0}
+\providecommand{\LWatomicGptValidatedNoObligation}{100}
+\providecommand{\LWatomicGptLedgerR}{0}
+\providecommand{\LWatomicGptLedgerStoreWrong}{12}
+\providecommand{\LWatomicGptLedgerWorldWrong}{15}
+\providecommand{\LWatomicGptLedgerWorldNone}{10}
+\providecommand{\LWatomicGptLedgerDouble}{13}
+\providecommand{\LWatomicGptLedgerConsumerStale}{98}
+\providecommand{\LWatomicGptLedgerConsumerNone}{1}
+\providecommand{\LWatomicGptLedgerRetries}{7}
+\providecommand{\LWatomicGptLedgerObl}{148/123/25}
+\providecommand{\LWatomicGptLedgerN}{100}
+\providecommand{\LWatomicGptLedgerCleanSessions}{75}
+\providecommand{\LWatomicGptLedgerCleanRight}{75}
+\providecommand{\LWatomicGptLedgerCleanWrong}{0}
+\providecommand{\LWatomicGptLedgerCleanVacuous}{1}
+\providecommand{\LWatomicGptLedgerOpenSessions}{25}
+\providecommand{\LWatomicGptLedgerOpenWrong}{25}
+\providecommand{\LWatomicGptLedgerOpenRight}{0}
+\providecommand{\LWatomicGptLedgerFailDouble}{13}
+\providecommand{\LWatomicGptLedgerFailNone}{10}
+\providecommand{\LWatomicGptLedgerFailStaleOnly}{2}
+\providecommand{\LWatomicGptLedgerOneObligation}{50}
+\providecommand{\LWatomicGptLedgerTwoObligations}{49}
+\providecommand{\LWatomicGptLedgerNoObligation}{1}
+\providecommand{\LWatomicGptLedgerConsumerStaleBeforeRevision}{26}
+\providecommand{\LWatomicGptLedgerConsumerStaleInsideCompensation}{60}
+\providecommand{\LWatomicGptLedgerConsumerStaleRefusedCancel}{2}
+\providecommand{\LWatomicGptLedgerConsumerStaleCurrentThenSuperseded}{10}
+\providecommand{\LWatomicGptLedgerConsumerStaleOther}{0}
+\providecommand{\LWatomicGptLedgerBothRevisionsAfterCommit}{56}
+\providecommand{\LWatomicGptLedgerFirstRevisionMedianS}{0.9}
+\providecommand{\LWatomicGptLedgerCompLatencyMedianS}{1.0}
+\providecommand{\LWatomicGptLedgerCompLatencyPNinetyS}{1.2}
+\providecommand{\LWatomicGptLedgerBookingToCompensationMedianS}{1.1}
+\providecommand{\LWatomicGptLedgerBookingToCompensationPNinetyS}{1.7}
+\providecommand{\LWatomicGptLedgerNoRollbackR}{0}
+\providecommand{\LWatomicGptLedgerNoRollbackStoreWrong}{11}
+\providecommand{\LWatomicGptLedgerNoRollbackWorldWrong}{99}
+\providecommand{\LWatomicGptLedgerNoRollbackWorldNone}{0}
+\providecommand{\LWatomicGptLedgerNoRollbackDouble}{91}
+\providecommand{\LWatomicGptLedgerNoRollbackConsumerStale}{99}
+\providecommand{\LWatomicGptLedgerNoRollbackConsumerNone}{0}
+\providecommand{\LWatomicGptLedgerNoRollbackRetries}{3}
+\providecommand{\LWatomicGptLedgerNoRollbackObl}{135/124/11}
+\providecommand{\LWatomicGptLedgerNoRollbackN}{100}
+\providecommand{\LWatomicGptLedgerNoRollbackCleanSessions}{89}
+\providecommand{\LWatomicGptLedgerNoRollbackCleanRight}{1}
+\providecommand{\LWatomicGptLedgerNoRollbackCleanWrong}{88}
+\providecommand{\LWatomicGptLedgerNoRollbackCleanVacuous}{1}
+\providecommand{\LWatomicGptLedgerNoRollbackOpenSessions}{11}
+\providecommand{\LWatomicGptLedgerNoRollbackOpenWrong}{11}
+\providecommand{\LWatomicGptLedgerNoRollbackOpenRight}{0}
+\providecommand{\LWatomicGptLedgerNoRollbackFailDouble}{91}
+\providecommand{\LWatomicGptLedgerNoRollbackFailNone}{0}
+\providecommand{\LWatomicGptLedgerNoRollbackFailStaleOnly}{8}
+\providecommand{\LWatomicGptLedgerNoRollbackOneObligation}{63}
+\providecommand{\LWatomicGptLedgerNoRollbackTwoObligations}{36}
+\providecommand{\LWatomicGptLedgerNoRollbackNoObligation}{1}
+\providecommand{\LWatomicLedgerBookingToCompensationMedianSLo}{1.1}
+\providecommand{\LWatomicLedgerBookingToCompensationMedianSHi}{1.5}
+\providecommand{\LWatomicLedgerBookingToCompensationMedianSRange}{1.1--1.5}
+\providecommand{\LWatomicLedgerBookingToCompensationPNinetySLo}{1.7}
+\providecommand{\LWatomicLedgerBookingToCompensationPNinetySHi}{2.0}
+\providecommand{\LWatomicLedgerBookingToCompensationPNinetySRange}{1.7--2.0}
+\providecommand{\LWatomicLedgerBothRevisionsAfterCommitLo}{3}
+\providecommand{\LWatomicLedgerBothRevisionsAfterCommitHi}{77}
+\providecommand{\LWatomicLedgerBothRevisionsAfterCommitRange}{3--77}
+\providecommand{\LWatomicLedgerCleanRightLo}{75}
+\providecommand{\LWatomicLedgerCleanRightHi}{81}
+\providecommand{\LWatomicLedgerCleanRightRange}{75--81}
+\providecommand{\LWatomicLedgerCleanSessionsLo}{75}
+\providecommand{\LWatomicLedgerCleanSessionsHi}{81}
+\providecommand{\LWatomicLedgerCleanSessionsRange}{75--81}
+\providecommand{\LWatomicLedgerCleanVacuousLo}{0}
+\providecommand{\LWatomicLedgerCleanVacuousHi}{1}
+\providecommand{\LWatomicLedgerCleanVacuousRange}{0--1}
+\providecommand{\LWatomicLedgerCleanWrongLo}{0}
+\providecommand{\LWatomicLedgerCleanWrongHi}{0}
+\providecommand{\LWatomicLedgerCleanWrongRange}{0}
+\providecommand{\LWatomicLedgerCompLatencyMedianSLo}{1.0}
+\providecommand{\LWatomicLedgerCompLatencyMedianSHi}{1.2}
+\providecommand{\LWatomicLedgerCompLatencyMedianSRange}{1.0--1.2}
+\providecommand{\LWatomicLedgerCompLatencyPNinetySLo}{1.2}
+\providecommand{\LWatomicLedgerCompLatencyPNinetySHi}{1.4}
+\providecommand{\LWatomicLedgerCompLatencyPNinetySRange}{1.2--1.4}
+\providecommand{\LWatomicLedgerConsumerNoneLo}{0}
+\providecommand{\LWatomicLedgerConsumerNoneHi}{1}
+\providecommand{\LWatomicLedgerConsumerNoneRange}{0--1}
+\providecommand{\LWatomicLedgerConsumerStaleLo}{98}
+\providecommand{\LWatomicLedgerConsumerStaleHi}{99}
+\providecommand{\LWatomicLedgerConsumerStaleRange}{98--99}
+\providecommand{\LWatomicLedgerConsumerStaleBeforeRevisionLo}{18}
+\providecommand{\LWatomicLedgerConsumerStaleBeforeRevisionHi}{31}
+\providecommand{\LWatomicLedgerConsumerStaleBeforeRevisionRange}{18--31}
+\providecommand{\LWatomicLedgerConsumerStaleCurrentThenSupersededLo}{1}
+\providecommand{\LWatomicLedgerConsumerStaleCurrentThenSupersededHi}{10}
+\providecommand{\LWatomicLedgerConsumerStaleCurrentThenSupersededRange}{1--10}
+\providecommand{\LWatomicLedgerConsumerStaleInsideCompensationLo}{60}
+\providecommand{\LWatomicLedgerConsumerStaleInsideCompensationHi}{74}
+\providecommand{\LWatomicLedgerConsumerStaleInsideCompensationRange}{60--74}
+\providecommand{\LWatomicLedgerConsumerStaleOtherLo}{0}
+\providecommand{\LWatomicLedgerConsumerStaleOtherHi}{0}
+\providecommand{\LWatomicLedgerConsumerStaleOtherRange}{0}
+\providecommand{\LWatomicLedgerConsumerStaleRefusedCancelLo}{1}
+\providecommand{\LWatomicLedgerConsumerStaleRefusedCancelHi}{2}
+\providecommand{\LWatomicLedgerConsumerStaleRefusedCancelRange}{1--2}
+\providecommand{\LWatomicLedgerDoubleLo}{8}
+\providecommand{\LWatomicLedgerDoubleHi}{13}
+\providecommand{\LWatomicLedgerDoubleRange}{8--13}
+\providecommand{\LWatomicLedgerFailDoubleLo}{8}
+\providecommand{\LWatomicLedgerFailDoubleHi}{13}
+\providecommand{\LWatomicLedgerFailDoubleRange}{8--13}
+\providecommand{\LWatomicLedgerFailNoneLo}{7}
+\providecommand{\LWatomicLedgerFailNoneHi}{11}
+\providecommand{\LWatomicLedgerFailNoneRange}{7--11}
+\providecommand{\LWatomicLedgerFailStaleOnlyLo}{0}
+\providecommand{\LWatomicLedgerFailStaleOnlyHi}{2}
+\providecommand{\LWatomicLedgerFailStaleOnlyRange}{0--2}
+\providecommand{\LWatomicLedgerFirstRevisionMedianSLo}{0.9}
+\providecommand{\LWatomicLedgerFirstRevisionMedianSHi}{1.3}
+\providecommand{\LWatomicLedgerFirstRevisionMedianSRange}{0.9--1.3}
+\providecommand{\LWatomicLedgerNoObligationLo}{0}
+\providecommand{\LWatomicLedgerNoObligationHi}{1}
+\providecommand{\LWatomicLedgerNoObligationRange}{0--1}
+\providecommand{\LWatomicLedgerOneObligationLo}{37}
+\providecommand{\LWatomicLedgerOneObligationHi}{97}
+\providecommand{\LWatomicLedgerOneObligationRange}{37--97}
+\providecommand{\LWatomicLedgerOpenRightLo}{0}
+\providecommand{\LWatomicLedgerOpenRightHi}{0}
+\providecommand{\LWatomicLedgerOpenRightRange}{0}
+\providecommand{\LWatomicLedgerOpenSessionsLo}{19}
+\providecommand{\LWatomicLedgerOpenSessionsHi}{25}
+\providecommand{\LWatomicLedgerOpenSessionsRange}{19--25}
+\providecommand{\LWatomicLedgerOpenWrongLo}{19}
+\providecommand{\LWatomicLedgerOpenWrongHi}{25}
+\providecommand{\LWatomicLedgerOpenWrongRange}{19--25}
+\providecommand{\LWatomicLedgerRLo}{0}
+\providecommand{\LWatomicLedgerRHi}{0}
+\providecommand{\LWatomicLedgerRRange}{0}
+\providecommand{\LWatomicLedgerRetriesLo}{0}
+\providecommand{\LWatomicLedgerRetriesHi}{15}
+\providecommand{\LWatomicLedgerRetriesRange}{0--15}
+\providecommand{\LWatomicLedgerStoreWrongLo}{7}
+\providecommand{\LWatomicLedgerStoreWrongHi}{13}
+\providecommand{\LWatomicLedgerStoreWrongRange}{7--13}
+\providecommand{\LWatomicLedgerTwoObligationsLo}{3}
+\providecommand{\LWatomicLedgerTwoObligationsHi}{62}
+\providecommand{\LWatomicLedgerTwoObligationsRange}{3--62}
+\providecommand{\LWatomicLedgerWorldNoneLo}{7}
+\providecommand{\LWatomicLedgerWorldNoneHi}{11}
+\providecommand{\LWatomicLedgerWorldNoneRange}{7--11}
+\providecommand{\LWatomicLedgerWorldWrongLo}{10}
+\providecommand{\LWatomicLedgerWorldWrongHi}{15}
+\providecommand{\LWatomicLedgerWorldWrongRange}{10--15}
+\providecommand{\LWatomicLedgerNoRollbackCleanRightLo}{1}
+\providecommand{\LWatomicLedgerNoRollbackCleanRightHi}{1}
+\providecommand{\LWatomicLedgerNoRollbackCleanRightRange}{1}
+\providecommand{\LWatomicLedgerNoRollbackCleanSessionsLo}{89}
+\providecommand{\LWatomicLedgerNoRollbackCleanSessionsHi}{91}
+\providecommand{\LWatomicLedgerNoRollbackCleanSessionsRange}{89--91}
+\providecommand{\LWatomicLedgerNoRollbackCleanVacuousLo}{1}
+\providecommand{\LWatomicLedgerNoRollbackCleanVacuousHi}{1}
+\providecommand{\LWatomicLedgerNoRollbackCleanVacuousRange}{1}
+\providecommand{\LWatomicLedgerNoRollbackCleanWrongLo}{88}
+\providecommand{\LWatomicLedgerNoRollbackCleanWrongHi}{90}
+\providecommand{\LWatomicLedgerNoRollbackCleanWrongRange}{88--90}
+\providecommand{\LWatomicLedgerNoRollbackConsumerNoneLo}{0}
+\providecommand{\LWatomicLedgerNoRollbackConsumerNoneHi}{0}
+\providecommand{\LWatomicLedgerNoRollbackConsumerNoneRange}{0}
+\providecommand{\LWatomicLedgerNoRollbackConsumerStaleLo}{99}
+\providecommand{\LWatomicLedgerNoRollbackConsumerStaleHi}{99}
+\providecommand{\LWatomicLedgerNoRollbackConsumerStaleRange}{99}
+\providecommand{\LWatomicLedgerNoRollbackDoubleLo}{88}
+\providecommand{\LWatomicLedgerNoRollbackDoubleHi}{95}
+\providecommand{\LWatomicLedgerNoRollbackDoubleRange}{88--95}
+\providecommand{\LWatomicLedgerNoRollbackFailDoubleLo}{88}
+\providecommand{\LWatomicLedgerNoRollbackFailDoubleHi}{95}
+\providecommand{\LWatomicLedgerNoRollbackFailDoubleRange}{88--95}
+\providecommand{\LWatomicLedgerNoRollbackFailNoneLo}{0}
+\providecommand{\LWatomicLedgerNoRollbackFailNoneHi}{0}
+\providecommand{\LWatomicLedgerNoRollbackFailNoneRange}{0}
+\providecommand{\LWatomicLedgerNoRollbackFailStaleOnlyLo}{4}
+\providecommand{\LWatomicLedgerNoRollbackFailStaleOnlyHi}{11}
+\providecommand{\LWatomicLedgerNoRollbackFailStaleOnlyRange}{4--11}
+\providecommand{\LWatomicLedgerNoRollbackNoObligationLo}{1}
+\providecommand{\LWatomicLedgerNoRollbackNoObligationHi}{1}
+\providecommand{\LWatomicLedgerNoRollbackNoObligationRange}{1}
+\providecommand{\LWatomicLedgerNoRollbackOneObligationLo}{43}
+\providecommand{\LWatomicLedgerNoRollbackOneObligationHi}{95}
+\providecommand{\LWatomicLedgerNoRollbackOneObligationRange}{43--95}
+\providecommand{\LWatomicLedgerNoRollbackOpenRightLo}{0}
+\providecommand{\LWatomicLedgerNoRollbackOpenRightHi}{0}
+\providecommand{\LWatomicLedgerNoRollbackOpenRightRange}{0}
+\providecommand{\LWatomicLedgerNoRollbackOpenSessionsLo}{9}
+\providecommand{\LWatomicLedgerNoRollbackOpenSessionsHi}{11}
+\providecommand{\LWatomicLedgerNoRollbackOpenSessionsRange}{9--11}
+\providecommand{\LWatomicLedgerNoRollbackOpenWrongLo}{9}
+\providecommand{\LWatomicLedgerNoRollbackOpenWrongHi}{11}
+\providecommand{\LWatomicLedgerNoRollbackOpenWrongRange}{9--11}
+\providecommand{\LWatomicLedgerNoRollbackRLo}{0}
+\providecommand{\LWatomicLedgerNoRollbackRHi}{0}
+\providecommand{\LWatomicLedgerNoRollbackRRange}{0}
+\providecommand{\LWatomicLedgerNoRollbackRetriesLo}{1}
+\providecommand{\LWatomicLedgerNoRollbackRetriesHi}{8}
+\providecommand{\LWatomicLedgerNoRollbackRetriesRange}{1--8}
+\providecommand{\LWatomicLedgerNoRollbackStoreWrongLo}{9}
+\providecommand{\LWatomicLedgerNoRollbackStoreWrongHi}{11}
+\providecommand{\LWatomicLedgerNoRollbackStoreWrongRange}{9--11}
+\providecommand{\LWatomicLedgerNoRollbackTwoObligationsLo}{4}
+\providecommand{\LWatomicLedgerNoRollbackTwoObligationsHi}{56}
+\providecommand{\LWatomicLedgerNoRollbackTwoObligationsRange}{4--56}
+\providecommand{\LWatomicLedgerNoRollbackWorldNoneLo}{0}
+\providecommand{\LWatomicLedgerNoRollbackWorldNoneHi}{0}
+\providecommand{\LWatomicLedgerNoRollbackWorldNoneRange}{0}
+\providecommand{\LWatomicLedgerNoRollbackWorldWrongLo}{99}
+\providecommand{\LWatomicLedgerNoRollbackWorldWrongHi}{99}
+\providecommand{\LWatomicLedgerNoRollbackWorldWrongRange}{99}
+\providecommand{\LWatomicValidatedCleanRightLo}{1}
+\providecommand{\LWatomicValidatedCleanRightHi}{3}
+\providecommand{\LWatomicValidatedCleanRightRange}{1--3}
+\providecommand{\LWatomicValidatedCleanSessionsLo}{100}
+\providecommand{\LWatomicValidatedCleanSessionsHi}{100}
+\providecommand{\LWatomicValidatedCleanSessionsRange}{100}
+\providecommand{\LWatomicValidatedCleanVacuousLo}{100}
+\providecommand{\LWatomicValidatedCleanVacuousHi}{100}
+\providecommand{\LWatomicValidatedCleanVacuousRange}{100}
+\providecommand{\LWatomicValidatedCleanWrongLo}{97}
+\providecommand{\LWatomicValidatedCleanWrongHi}{99}
+\providecommand{\LWatomicValidatedCleanWrongRange}{97--99}
+\providecommand{\LWatomicValidatedConsumerNoneLo}{0}
+\providecommand{\LWatomicValidatedConsumerNoneHi}{0}
+\providecommand{\LWatomicValidatedConsumerNoneRange}{0}
+\providecommand{\LWatomicValidatedConsumerStaleLo}{97}
+\providecommand{\LWatomicValidatedConsumerStaleHi}{99}
+\providecommand{\LWatomicValidatedConsumerStaleRange}{97--99}
+\providecommand{\LWatomicValidatedDoubleLo}{0}
+\providecommand{\LWatomicValidatedDoubleHi}{0}
+\providecommand{\LWatomicValidatedDoubleRange}{0}
+\providecommand{\LWatomicValidatedFailDoubleLo}{0}
+\providecommand{\LWatomicValidatedFailDoubleHi}{0}
+\providecommand{\LWatomicValidatedFailDoubleRange}{0}
+\providecommand{\LWatomicValidatedFailNoneLo}{0}
+\providecommand{\LWatomicValidatedFailNoneHi}{0}
+\providecommand{\LWatomicValidatedFailNoneRange}{0}
+\providecommand{\LWatomicValidatedFailStaleOnlyLo}{97}
+\providecommand{\LWatomicValidatedFailStaleOnlyHi}{99}
+\providecommand{\LWatomicValidatedFailStaleOnlyRange}{97--99}
+\providecommand{\LWatomicValidatedNoObligationLo}{100}
+\providecommand{\LWatomicValidatedNoObligationHi}{100}
+\providecommand{\LWatomicValidatedNoObligationRange}{100}
+\providecommand{\LWatomicValidatedOneObligationLo}{0}
+\providecommand{\LWatomicValidatedOneObligationHi}{0}
+\providecommand{\LWatomicValidatedOneObligationRange}{0}
+\providecommand{\LWatomicValidatedOpenRightLo}{0}
+\providecommand{\LWatomicValidatedOpenRightHi}{0}
+\providecommand{\LWatomicValidatedOpenRightRange}{0}
+\providecommand{\LWatomicValidatedOpenSessionsLo}{0}
+\providecommand{\LWatomicValidatedOpenSessionsHi}{0}
+\providecommand{\LWatomicValidatedOpenSessionsRange}{0}
+\providecommand{\LWatomicValidatedOpenWrongLo}{0}
+\providecommand{\LWatomicValidatedOpenWrongHi}{0}
+\providecommand{\LWatomicValidatedOpenWrongRange}{0}
+\providecommand{\LWatomicValidatedRLo}{97}
+\providecommand{\LWatomicValidatedRHi}{99}
+\providecommand{\LWatomicValidatedRRange}{97--99}
+\providecommand{\LWatomicValidatedRetriesLo}{0}
+\providecommand{\LWatomicValidatedRetriesHi}{0}
+\providecommand{\LWatomicValidatedRetriesRange}{0}
+\providecommand{\LWatomicValidatedStoreWrongLo}{97}
+\providecommand{\LWatomicValidatedStoreWrongHi}{99}
+\providecommand{\LWatomicValidatedStoreWrongRange}{97--99}
+\providecommand{\LWatomicValidatedTwoObligationsLo}{0}
+\providecommand{\LWatomicValidatedTwoObligationsHi}{0}
+\providecommand{\LWatomicValidatedTwoObligationsRange}{0}
+\providecommand{\LWatomicValidatedWorldNoneLo}{0}
+\providecommand{\LWatomicValidatedWorldNoneHi}{0}
+\providecommand{\LWatomicValidatedWorldNoneRange}{0}
+\providecommand{\LWatomicValidatedWorldWrongLo}{97}
+\providecommand{\LWatomicValidatedWorldWrongHi}{99}
+\providecommand{\LWatomicValidatedWorldWrongRange}{97--99}
+\providecommand{\LWatomicLedgerAgree}{300/300}
+\providecommand{\LWatomicLedgerDisagree}{0}
+\providecommand{\LWatomicLedgerDisagreeCI}{[0.0, 1.2]}
+% --- probe 304 (ledger_world_window5000): ledger arm, consumer window 0-5000 ms ---
+\renewcommand{\LedgerWorldWideAvailable}{1}
+\providecommand{\LWwideRegistration}{atomic}
+\providecommand{\LWwideHaikuLedgerR}{0}
+\providecommand{\LWwideHaikuLedgerStoreWrong}{7}
+\providecommand{\LWwideHaikuLedgerWorldWrong}{12}
+\providecommand{\LWwideHaikuLedgerWorldNone}{7}
+\providecommand{\LWwideHaikuLedgerDouble}{12}
+\providecommand{\LWwideHaikuLedgerConsumerStale}{51}
+\providecommand{\LWwideHaikuLedgerConsumerNone}{4}
+\providecommand{\LWwideHaikuLedgerRetries}{1}
+\providecommand{\LWwideHaikuLedgerObl}{102/83/19}
+\providecommand{\LWwideHaikuLedgerN}{100}
+\providecommand{\LWwideHaikuLedgerCleanSessions}{81}
+\providecommand{\LWwideHaikuLedgerCleanRight}{81}
+\providecommand{\LWwideHaikuLedgerCleanWrong}{0}
+\providecommand{\LWwideHaikuLedgerCleanVacuous}{2}
+\providecommand{\LWwideHaikuLedgerOpenSessions}{19}
+\providecommand{\LWwideHaikuLedgerOpenWrong}{19}
+\providecommand{\LWwideHaikuLedgerOpenRight}{0}
+\providecommand{\LWwideHaikuLedgerFailDouble}{12}
+\providecommand{\LWwideHaikuLedgerFailNone}{7}
+\providecommand{\LWwideHaikuLedgerFailStaleOnly}{0}
+\providecommand{\LWwideHaikuLedgerOneObligation}{94}
+\providecommand{\LWwideHaikuLedgerTwoObligations}{4}
+\providecommand{\LWwideHaikuLedgerNoObligation}{2}
+\providecommand{\LWwideHaikuLedgerConsumerStaleBeforeRevision}{9}
+\providecommand{\LWwideHaikuLedgerConsumerStaleInsideCompensation}{33}
+\providecommand{\LWwideHaikuLedgerConsumerStaleRefusedCancel}{8}
+\providecommand{\LWwideHaikuLedgerConsumerStaleCurrentThenSuperseded}{1}
+\providecommand{\LWwideHaikuLedgerConsumerStaleOther}{0}
+\providecommand{\LWwideHaikuLedgerBothRevisionsAfterCommit}{5}
+\providecommand{\LWwideHaikuLedgerFirstRevisionMedianS}{1.0}
+\providecommand{\LWwideHaikuLedgerCompLatencyMedianS}{1.2}
+\providecommand{\LWwideHaikuLedgerCompLatencyPNinetyS}{1.3}
+\providecommand{\LWwideHaikuLedgerBookingToCompensationMedianS}{1.6}
+\providecommand{\LWwideHaikuLedgerBookingToCompensationPNinetyS}{1.7}
+\providecommand{\LWwideDeepseekLedgerR}{0}
+\providecommand{\LWwideDeepseekLedgerStoreWrong}{9}
+\providecommand{\LWwideDeepseekLedgerWorldWrong}{11}
+\providecommand{\LWwideDeepseekLedgerWorldNone}{9}
+\providecommand{\LWwideDeepseekLedgerDouble}{11}
+\providecommand{\LWwideDeepseekLedgerConsumerStale}{66}
+\providecommand{\LWwideDeepseekLedgerConsumerNone}{7}
+\providecommand{\LWwideDeepseekLedgerRetries}{12}
+\providecommand{\LWwideDeepseekLedgerObl}{154/134/20}
+\providecommand{\LWwideDeepseekLedgerN}{100}
+\providecommand{\LWwideDeepseekLedgerCleanSessions}{80}
+\providecommand{\LWwideDeepseekLedgerCleanRight}{80}
+\providecommand{\LWwideDeepseekLedgerCleanWrong}{0}
+\providecommand{\LWwideDeepseekLedgerCleanVacuous}{0}
+\providecommand{\LWwideDeepseekLedgerOpenSessions}{20}
+\providecommand{\LWwideDeepseekLedgerOpenWrong}{20}
+\providecommand{\LWwideDeepseekLedgerOpenRight}{0}
+\providecommand{\LWwideDeepseekLedgerFailDouble}{11}
+\providecommand{\LWwideDeepseekLedgerFailNone}{9}
+\providecommand{\LWwideDeepseekLedgerFailStaleOnly}{0}
+\providecommand{\LWwideDeepseekLedgerOneObligation}{46}
+\providecommand{\LWwideDeepseekLedgerTwoObligations}{54}
+\providecommand{\LWwideDeepseekLedgerNoObligation}{0}
+\providecommand{\LWwideDeepseekLedgerConsumerStaleBeforeRevision}{9}
+\providecommand{\LWwideDeepseekLedgerConsumerStaleInsideCompensation}{33}
+\providecommand{\LWwideDeepseekLedgerConsumerStaleRefusedCancel}{6}
+\providecommand{\LWwideDeepseekLedgerConsumerStaleCurrentThenSuperseded}{18}
+\providecommand{\LWwideDeepseekLedgerConsumerStaleOther}{0}
+\providecommand{\LWwideDeepseekLedgerBothRevisionsAfterCommit}{66}
+\providecommand{\LWwideDeepseekLedgerFirstRevisionMedianS}{1.2}
+\providecommand{\LWwideDeepseekLedgerCompLatencyMedianS}{1.1}
+\providecommand{\LWwideDeepseekLedgerCompLatencyPNinetyS}{1.3}
+\providecommand{\LWwideDeepseekLedgerBookingToCompensationMedianS}{1.4}
+\providecommand{\LWwideDeepseekLedgerBookingToCompensationPNinetyS}{2.0}
+\providecommand{\LWwideGptLedgerR}{0}
+\providecommand{\LWwideGptLedgerStoreWrong}{11}
+\providecommand{\LWwideGptLedgerWorldWrong}{11}
+\providecommand{\LWwideGptLedgerWorldNone}{10}
+\providecommand{\LWwideGptLedgerDouble}{10}
+\providecommand{\LWwideGptLedgerConsumerStale}{67}
+\providecommand{\LWwideGptLedgerConsumerNone}{5}
+\providecommand{\LWwideGptLedgerRetries}{7}
+\providecommand{\LWwideGptLedgerObl}{138/117/21}
+\providecommand{\LWwideGptLedgerN}{100}
+\providecommand{\LWwideGptLedgerCleanSessions}{79}
+\providecommand{\LWwideGptLedgerCleanRight}{79}
+\providecommand{\LWwideGptLedgerCleanWrong}{0}
+\providecommand{\LWwideGptLedgerCleanVacuous}{3}
+\providecommand{\LWwideGptLedgerOpenSessions}{21}
+\providecommand{\LWwideGptLedgerOpenWrong}{21}
+\providecommand{\LWwideGptLedgerOpenRight}{0}
+\providecommand{\LWwideGptLedgerFailDouble}{10}
+\providecommand{\LWwideGptLedgerFailNone}{10}
+\providecommand{\LWwideGptLedgerFailStaleOnly}{1}
+\providecommand{\LWwideGptLedgerOneObligation}{56}
+\providecommand{\LWwideGptLedgerTwoObligations}{41}
+\providecommand{\LWwideGptLedgerNoObligation}{3}
+\providecommand{\LWwideGptLedgerConsumerStaleBeforeRevision}{10}
+\providecommand{\LWwideGptLedgerConsumerStaleInsideCompensation}{31}
+\providecommand{\LWwideGptLedgerConsumerStaleRefusedCancel}{9}
+\providecommand{\LWwideGptLedgerConsumerStaleCurrentThenSuperseded}{17}
+\providecommand{\LWwideGptLedgerConsumerStaleOther}{0}
+\providecommand{\LWwideGptLedgerBothRevisionsAfterCommit}{48}
+\providecommand{\LWwideGptLedgerFirstRevisionMedianS}{0.9}
+\providecommand{\LWwideGptLedgerCompLatencyMedianS}{1.0}
+\providecommand{\LWwideGptLedgerCompLatencyPNinetyS}{1.2}
+\providecommand{\LWwideGptLedgerBookingToCompensationMedianS}{1.3}
+\providecommand{\LWwideGptLedgerBookingToCompensationPNinetyS}{1.7}
+\providecommand{\LWwideLedgerBookingToCompensationMedianSLo}{1.3}
+\providecommand{\LWwideLedgerBookingToCompensationMedianSHi}{1.6}
+\providecommand{\LWwideLedgerBookingToCompensationMedianSRange}{1.3--1.6}
+\providecommand{\LWwideLedgerBookingToCompensationPNinetySLo}{1.7}
+\providecommand{\LWwideLedgerBookingToCompensationPNinetySHi}{2.0}
+\providecommand{\LWwideLedgerBookingToCompensationPNinetySRange}{1.7--2.0}
+\providecommand{\LWwideLedgerBothRevisionsAfterCommitLo}{5}
+\providecommand{\LWwideLedgerBothRevisionsAfterCommitHi}{66}
+\providecommand{\LWwideLedgerBothRevisionsAfterCommitRange}{5--66}
+\providecommand{\LWwideLedgerCleanRightLo}{79}
+\providecommand{\LWwideLedgerCleanRightHi}{81}
+\providecommand{\LWwideLedgerCleanRightRange}{79--81}
+\providecommand{\LWwideLedgerCleanSessionsLo}{79}
+\providecommand{\LWwideLedgerCleanSessionsHi}{81}
+\providecommand{\LWwideLedgerCleanSessionsRange}{79--81}
+\providecommand{\LWwideLedgerCleanVacuousLo}{0}
+\providecommand{\LWwideLedgerCleanVacuousHi}{3}
+\providecommand{\LWwideLedgerCleanVacuousRange}{0--3}
+\providecommand{\LWwideLedgerCleanWrongLo}{0}
+\providecommand{\LWwideLedgerCleanWrongHi}{0}
+\providecommand{\LWwideLedgerCleanWrongRange}{0}
+\providecommand{\LWwideLedgerCompLatencyMedianSLo}{1.0}
+\providecommand{\LWwideLedgerCompLatencyMedianSHi}{1.2}
+\providecommand{\LWwideLedgerCompLatencyMedianSRange}{1.0--1.2}
+\providecommand{\LWwideLedgerCompLatencyPNinetySLo}{1.2}
+\providecommand{\LWwideLedgerCompLatencyPNinetySHi}{1.3}
+\providecommand{\LWwideLedgerCompLatencyPNinetySRange}{1.2--1.3}
+\providecommand{\LWwideLedgerConsumerNoneLo}{4}
+\providecommand{\LWwideLedgerConsumerNoneHi}{7}
+\providecommand{\LWwideLedgerConsumerNoneRange}{4--7}
+\providecommand{\LWwideLedgerConsumerStaleLo}{51}
+\providecommand{\LWwideLedgerConsumerStaleHi}{67}
+\providecommand{\LWwideLedgerConsumerStaleRange}{51--67}
+\providecommand{\LWwideLedgerConsumerStaleBeforeRevisionLo}{9}
+\providecommand{\LWwideLedgerConsumerStaleBeforeRevisionHi}{10}
+\providecommand{\LWwideLedgerConsumerStaleBeforeRevisionRange}{9--10}
+\providecommand{\LWwideLedgerConsumerStaleCurrentThenSupersededLo}{1}
+\providecommand{\LWwideLedgerConsumerStaleCurrentThenSupersededHi}{18}
+\providecommand{\LWwideLedgerConsumerStaleCurrentThenSupersededRange}{1--18}
+\providecommand{\LWwideLedgerConsumerStaleInsideCompensationLo}{31}
+\providecommand{\LWwideLedgerConsumerStaleInsideCompensationHi}{33}
+\providecommand{\LWwideLedgerConsumerStaleInsideCompensationRange}{31--33}
+\providecommand{\LWwideLedgerConsumerStaleOtherLo}{0}
+\providecommand{\LWwideLedgerConsumerStaleOtherHi}{0}
+\providecommand{\LWwideLedgerConsumerStaleOtherRange}{0}
+\providecommand{\LWwideLedgerConsumerStaleRefusedCancelLo}{6}
+\providecommand{\LWwideLedgerConsumerStaleRefusedCancelHi}{9}
+\providecommand{\LWwideLedgerConsumerStaleRefusedCancelRange}{6--9}
+\providecommand{\LWwideLedgerDoubleLo}{10}
+\providecommand{\LWwideLedgerDoubleHi}{12}
+\providecommand{\LWwideLedgerDoubleRange}{10--12}
+\providecommand{\LWwideLedgerFailDoubleLo}{10}
+\providecommand{\LWwideLedgerFailDoubleHi}{12}
+\providecommand{\LWwideLedgerFailDoubleRange}{10--12}
+\providecommand{\LWwideLedgerFailNoneLo}{7}
+\providecommand{\LWwideLedgerFailNoneHi}{10}
+\providecommand{\LWwideLedgerFailNoneRange}{7--10}
+\providecommand{\LWwideLedgerFailStaleOnlyLo}{0}
+\providecommand{\LWwideLedgerFailStaleOnlyHi}{1}
+\providecommand{\LWwideLedgerFailStaleOnlyRange}{0--1}
+\providecommand{\LWwideLedgerFirstRevisionMedianSLo}{0.9}
+\providecommand{\LWwideLedgerFirstRevisionMedianSHi}{1.2}
+\providecommand{\LWwideLedgerFirstRevisionMedianSRange}{0.9--1.2}
+\providecommand{\LWwideLedgerNoObligationLo}{0}
+\providecommand{\LWwideLedgerNoObligationHi}{3}
+\providecommand{\LWwideLedgerNoObligationRange}{0--3}
+\providecommand{\LWwideLedgerOneObligationLo}{46}
+\providecommand{\LWwideLedgerOneObligationHi}{94}
+\providecommand{\LWwideLedgerOneObligationRange}{46--94}
+\providecommand{\LWwideLedgerOpenRightLo}{0}
+\providecommand{\LWwideLedgerOpenRightHi}{0}
+\providecommand{\LWwideLedgerOpenRightRange}{0}
+\providecommand{\LWwideLedgerOpenSessionsLo}{19}
+\providecommand{\LWwideLedgerOpenSessionsHi}{21}
+\providecommand{\LWwideLedgerOpenSessionsRange}{19--21}
+\providecommand{\LWwideLedgerOpenWrongLo}{19}
+\providecommand{\LWwideLedgerOpenWrongHi}{21}
+\providecommand{\LWwideLedgerOpenWrongRange}{19--21}
+\providecommand{\LWwideLedgerRLo}{0}
+\providecommand{\LWwideLedgerRHi}{0}
+\providecommand{\LWwideLedgerRRange}{0}
+\providecommand{\LWwideLedgerRetriesLo}{1}
+\providecommand{\LWwideLedgerRetriesHi}{12}
+\providecommand{\LWwideLedgerRetriesRange}{1--12}
+\providecommand{\LWwideLedgerStoreWrongLo}{7}
+\providecommand{\LWwideLedgerStoreWrongHi}{11}
+\providecommand{\LWwideLedgerStoreWrongRange}{7--11}
+\providecommand{\LWwideLedgerTwoObligationsLo}{4}
+\providecommand{\LWwideLedgerTwoObligationsHi}{54}
+\providecommand{\LWwideLedgerTwoObligationsRange}{4--54}
+\providecommand{\LWwideLedgerWorldNoneLo}{7}
+\providecommand{\LWwideLedgerWorldNoneHi}{10}
+\providecommand{\LWwideLedgerWorldNoneRange}{7--10}
+\providecommand{\LWwideLedgerWorldWrongLo}{11}
+\providecommand{\LWwideLedgerWorldWrongHi}{12}
+\providecommand{\LWwideLedgerWorldWrongRange}{11--12}
+\providecommand{\LWwideLedgerAgree}{300/300}
+\providecommand{\LWwideLedgerDisagree}{0}
+\providecommand{\LWwideLedgerDisagreeCI}{[0.0, 1.2]}
 % --- probe 301 (results/a6_real_latency/sqlite.jsonl) ---
 \renewcommand{\ToolNodeRealSqlite}{$126/165$}
 % --- probe 301 --l3-server (results/a6_real_latency/sqlite_verified.jsonl) ---
@@ -1117,6 +2287,14 @@
 \renewcommand{\ToolNodeVerifiedHttp}{$0/165$}
 \renewcommand{\ToolNodeVerifiedBaselineHttp}{$113/165$}
 \renewcommand{\ToolNodeVerifiedAvailable}{1}
+% --- probe 302 (results/runs/20261014T1417Z-interleaved-claude-sonnet-4-5; model claude-sonnet-4-5; Stamp); order.tsv completion stamps, 1 s resolution; sidecars folded: no ---
+\renewcommand{\WallclockStampClaudeEditReviewPess}{$+5.3\%$ [+2.0, +8.4], $n=99$}
+\renewcommand{\WallclockStampClaudeEditReviewSI}{$+2.4\%$ [-1.2, +6.4], $n=99$}
+\renewcommand{\WallclockStampClaudePlanExecutePess}{$-0.5\%$ [-3.5, +2.5], $n=99$}
+\renewcommand{\WallclockStampClaudePlanExecuteSI}{$+2.1\%$ [-1.6, +6.1], $n=99$}
+\renewcommand{\WallclockStampClaudeTriagePess}{$+1.3\%$ [-1.1, +3.7], $n=99$}
+\renewcommand{\WallclockStampClaudeTriageSI}{$+1.3\%$ [-2.1, +5.9], $n=99$}
+\renewcommand{\WallclockStampClaudeAvailable}{1}
 % --- verus ledger (results/verus/lib_l5_ledger.verus.log) ---
 \renewcommand{\LfiveVerus}{7 obligations, 0 errors}
 \renewcommand{\LfiveVerusStatus}{verified in Verus (7 obligations, 0 errors)}
@@ -1220,14 +2398,13 @@ offset; swept in \cref{fig:offset}) and carry no prevalence reading.
 \CensusRepos{} public LangGraph repositories (\cref{sec:prevalence}) finds
 the structural precondition of the failure above---a reader and a writer of
 one last-value channel scheduled together---confirmed in none of
-\CensusSites{} graph sites, with eight unresolved. We take that at face
-value: public LangGraph code is mostly sequential, and four of five
-frameworks we probed close the window by construction. The regime studied
-is the one in which contention is designed in (parallel fan-out over a shared
-store, several agents acting for one user, a registry mutated while plans are
-in flight); the contribution is not that the anomalies are common but a
-catalog with mechanized definitions, disciplines priced per unit of sound
-work, and an account of what each leaves behind.
+\CensusSites{} graph sites, eight unresolved. We take that at face value:
+public LangGraph code is mostly sequential, and four of five frameworks we
+probed close the window by construction. The regime studied is the one in
+which contention is designed in (parallel fan-out over a shared store,
+several agents for one user, a registry mutated in flight); the contribution
+is not that the anomalies are common but mechanized definitions, disciplines
+priced per unit of sound work, and an account of what each leaves behind.
 
 \begin{figure}[t]
 \centering
@@ -1289,20 +2466,19 @@ counterpart: a failed backward validation~\cite{KungRobinson1981OCC}, a
 dangling capability reference, recoverability with externalization as the
 commit point~\cite{BernsteinHadzilacosGoodman1987}, and order preservation
 of external effects. \Cref{thm:corc} (TLAPS, \TlapsCommitOrder{}
-obligations) places \A1-freedom among the classical classes exactly, as a
+obligations) places \A1-freedom among the classical classes exactly, a
 conditional guarantee whose hypotheses (per-agent non-overlap,
 read-before-commit, faithful records) are stated, checked on every committed
 record, and violated by one deployed construct we name. Two predicates stand
 outside the catalog, each for a stated reason: the \emph{residue predicate}
 \Rp{}---an irreversible effect is out while ordinary later writes have revised
-the state it was derived from; not an anomaly, it fires in correct sequential
-executions, but the harm no commit-time discipline reaches, decided on the
-records by argument provenance, and on the live study \A1 and \Rp{} partition
-the outcome column (\cref{sec:residue})---and the \emph{duplication predicate}
-$D$---one node's irreversible effect is out twice, the shape a deployed
-resumption path produces, a property of the executor's replay semantics
-rather than of the window, stated with its witness and the guard that
-excludes it (\cref{sec:dup}).
+the state it was derived from; not an anomaly (it fires in correct sequential
+executions) but the harm no commit-time discipline reaches, decided on the
+records by argument provenance; on the live study \A1 and \Rp{} partition the
+outcome column (\cref{sec:residue})---and the \emph{duplication predicate}
+$D$---one node's irreversible effect out twice, the shape a deployed
+resumption path produces, a property of the executor's replay rather than of
+the window, with its witness and the guard that excludes it (\cref{sec:dup}).
 
 \smallskip\noindent\textbf{(C2) A lattice, realized at stated bounds}
 (\cref{sec:lattice}). The $2^4$ exclusion lattice is trivial; what is not is
@@ -1335,8 +2511,7 @@ model, verified decision procedure, verified bytes, unverified port, open) and
 names each correspondence between \TLA{} definition, Verus restatement,
 executed code and scorer, with its hypothesis and gate. Of \VerusCurated{}
 obligations, \VerusLoadBearing{} bear a deployed or measured artifact and
-\VerusScaffold{} are scaffolding (supplement \S\,S): an inventory, not a
-result.
+\VerusScaffold{} are scaffolding (supplement \S\,S).
 
 \smallskip\noindent\textbf{(C4) An evaluation scored on outcomes, not flags,
 with its own confounds measured} (\cref{sec:eval}). For each discipline we
@@ -1344,8 +2519,8 @@ report the anomaly it excludes, the harm that remains, and the price: on the
 live LangGraph study the $L_1$ residue is \Rp{} in $1$--$65\%$ of sessions
 per family and arm, in two implementations of $L_1$ between which three
 interleaved replications detect no difference; against a simulated world the
-ledger's report and the world agree in $\LWLedgerAgree$ sessions, where a first
-compensator had misreported $1$--$10\%$ (\cref{sec:ledger-world}); output
+ledger's report and the world agree in $\LWatomicLedgerAgree$ sessions, where a
+first compensator had misreported $1$--$10\%$ (\cref{sec:ledger-world}); output
 commit removes exposure exactly when the review precedes the release; per
 sound committed operation, snapshot isolation costs $+0.4$--$11.1\%$ and
 pessimistic locking up to $+97\%$ in tokens. Where the design limits what a
@@ -1525,9 +2700,12 @@ and \HypReadBeforeCommitViolations{} reads not before their commit in
 \HypRecords{} operation records over \HypTraces{} traces (ledger
 registration records are not operations), and \HypStoreAxiomViolations{}
 store-axiom violations over \HypStoreAxiomReads{} declared reads in the
-\HypStoreAxiomTraces{} traces that record their store (the
+\HypStoreAxiomTraces{} traces that record their store; the
 \HypStoreAxiomConvertedCampaigns{} campaigns converted from transcripts and
-tool logs read state their traces never recorded, outside the axiom's reach).
+tool logs are outside the axiom's reach and supply no rate of this paper's
+tables: the \HypPublishedCampaigns{} campaigns behind them are
+store-instrumented (\HypPublishedConvertedCampaigns{} converted; gated), so
+every \A1 verdict here is taken on records the hypotheses were checked on.
 A runtime can enforce non-overlap by refusing a second operation of an agent
 whose window is open. The converse shape is a false positive of $L_1$, priced
 in discarded generations; on the live records it occurs in \HypRestored{} of
@@ -1904,7 +3082,7 @@ $L_2$ output commit & Verus & Verus & \texttt{l2\_exec} (bytes) & \textbf{bytes}
 $L_3$ sequencing & Verus & Verus & \ifnum\ToolNodeVerifiedAvailable=1 \texttt{l3\_exec} (bytes, via \texttt{l3\_server})\else twin (inspection); \texttt{l3\_exec} behind a bridge \Pending{step 15}\fi & \ifnum\ToolNodeVerifiedAvailable=1\textbf{bytes}; bridge trusted (xiii)\else\textbf{port}\fi \\
 $L_4$ validation at dispatch & Verus & Verus & \texttt{l4\_exec} (bytes) & \textbf{bytes} \\
 \Rp{} on the live records & \cref{def:residue} & --- & \texttt{a7\_rescore} (Python) & \textbf{port}, unverified; independent of the outcome column; extractor coverage \HypBasisRecovered/\HypBookings{} (coverage, not recall) \\
-Basis ledger excludes \Rp{} & \TLA{} $G_7$; Verus model & TLC \LatticeThirtyTwoRuns{} runs; Verus \LfiveVerusIntro & probe 303/304 ledger arms (Python, over $L_1$) & \textbf{model} and \textbf{proof}; the executable ledger is a \textbf{port}; in a world its worth is the compensator's, measured (\cref{sec:ledger-world}) \\
+Basis ledger excludes \Rp{} & \TLA{} $G_7$; Verus model & TLC \LatticeThirtyTwoRuns{} runs; Verus \LfiveVerusIntro & probe 303/304 ledger arms (Python, over $L_1$)\ifnum\LedgerWorldExecAvailable=1; bookkeeping in \texttt{l5\_exec} (bytes, via \texttt{l5\_server})\fi & \textbf{model} and \textbf{proof}; the executable ledger is a \textbf{port}\ifnum\LfiveExecAvailable=1, its bookkeeping \textbf{bytes} (\LfiveExecVerus); hook, interning and compensator trusted\fi; in a world its worth is the compensator's, measured (\cref{sec:ledger-world}) \\
 $D$ (at-most-once) excluded by an idempotency key & \TLA{} & TLC: witness, exhaustive with the key & --- & \textbf{model}: bounded (\DupDedupStates{} states); on the records \HypDuplicateEffects/\HypExternalEffects{} duplicates (\texttt{hypothesis\_gates}, H5) \\
 \bottomrule
 \end{tabular}
@@ -2083,8 +3261,18 @@ bytes; it registers the obligation inside the store lock, in the critical
 section of the superseding write, and runs the compensation in that writer's
 thread after the lock is released\ifnum\LedgerWorldAtomicAvailable=1\else{}
 (the runs reported here predate atomic registration and registered just
-after the put; \cref{sec:ledger-world})\fi; an exec ledger on the $L_2$/$L_4$
-pattern is not in this version.
+after the put; \cref{sec:ledger-world})\fi. An exec ledger
+(\texttt{lib\_l5\_exec.rs}, supplement \S\,S) carries the bookkeeping
+alone---which effects a write obliges (total: no superseded basis without an
+obligation), what a compensator's verdict does, what is open---behind a JSON
+bridge; the store hook, the interning and the compensator stay in the trust
+base. \ifnum\LfiveExecAvailable=1 It is verified (\LfiveExecVerus) and
+compiled byte-identical into the runtime\ifnum\LedgerWorldExecAvailable=1;
+the ledger arm of \cref{sec:ledger-world} rerun on it gives world wrong
+\LWexecLedgerWorldWrongRange, none \LWexecLedgerWorldNoneRange, agreement
+$\LWexecLedgerAgree$---the same bookkeeping, the residue the world's\else;
+its world-study run is runner step 23\fi.\else Until runner step 7 verifies
+it, it is a port.\fi
 
 \subsection{Composition}
 \label{sec:composition}
@@ -2372,7 +3560,9 @@ ledger-verified & \RunsHaikuLedgerVerifiedRShort & \RunsGptLedgerVerifiedRShort 
 \smallskip\noindent\textbf{The offset sweep.} \Cref{fig:offset} varies the
 race instead of fixing it: the date agent starts $0$, $150$, $500$ or
 $1{,}500$\,ms after the flight agent's read and revises in about half the
-sessions ($p=0.5$), $n=100$ per point on the three API families. Without a
+sessions ($p=0.5$), $n=100$ per point on the three API families; at $0$\,ms
+the harness imposes only the order (the date agent is released at the flight
+agent's read), no delay: the models' latencies decide where the revision lands. Without a
 discipline \A1 fires in $39$--$46$ of $100$ sessions at $0$\,ms and in $0$ at
 $1{,}500$\,ms, where every revision lands after the commit, while the
 booking is wrong in every revised session at every offset ($44$--$51$).
@@ -2399,13 +3589,13 @@ $100$).
 The ledger arm's $0/300$ is a statement about the final store: the
 compensator overwrote the booking cell, nothing read the first booking
 before the compensation, the compensator could not fail, and the workload
-revised once. None of that is true of a world, so we measure the same
+revised once. None of that holds in a world, so we measure the same
 discipline against a simulated one (probe 304): the booking is an
 irreversible effect in an in-process service that stays active until
 cancelled; a \emph{consumer}---a downstream reader that sends the
 itinerary---reads the active bookings a uniform
 $0$--$\LedgerWorldConsumerMaxMs$\,ms after the first release (a harness
-parameter, like the quarter of late reviews in \cref{sec:l2-eval}); the date
+parameter); the date
 agent revises \emph{twice}, $150$\,ms after the flight agent's read and
 $800$\,ms after its first put returns; and the world refuses a cancellation
 or a rebooking with probability $\LedgerWorldPCancelFail$ each, in which case
@@ -2418,92 +3608,87 @@ agent's thread, so in the ledger arms that put returns only after the
 compensation's model call; and the same without the cancellation, the
 compensator of \cref{tab:live} seen from the world. Scored at session end
 \emph{in the world}: sessions with an active booking whose date is not the
-final one (\emph{world wrong}), with two (\emph{double}), with none
-(\emph{none}), whose consumer acted on a stale date (\emph{consumer stale}),
-and---the column no store can show---in which the ledger reports every
-obligation discharged \emph{and} the world holds exactly the final booking.
-\ifnum\LedgerWorldAvailable=1
-\Cref{tab:ledgerworld} is the result on three families. Under $L_1$ alone
-the second revision lands after the regenerated commit in
-$\LWDeepseekValidatedR$--$\LWGptValidatedR$ sessions, so \Rp{} fires, store
-and world are wrong, and the consumer acted on a stale date in the same
-sessions: with two revisions the residue of \cref{tab:live} is nearly total.
-The ledger registers an obligation in every session whose booking committed
-before a revision landed (all but $\LWHaikuLedgerNoObligation$, $\LWGptLedgerNoObligation$
-and $\LWDeepseekLedgerNoObligation$ of $100$) and \Rp{} is $0$ in all $300$
+final one (\emph{wrong}), with two (\emph{double}), with none (\emph{none}),
+whose consumer acted on a stale date (\emph{c.\,stale}), and---the column no
+store can show---in which the ledger reports every obligation discharged
+\emph{and} the world holds exactly the final booking.
+\ifnum\LedgerWorldAtomicAvailable=1
+\Cref{tab:ledgerworld} is the result on three families, the obligation
+registered inside the store lock (the shipped design; supplement \S\,W.4 has
+the after-put run and the first compensator). Under $L_1$ alone the second
+revision lands after the regenerated commit in \LWatomicValidatedRRange{}
+sessions of $100$, so \Rp{} fires, store and world are wrong, and the consumer
+acted on a stale date in the same sessions: with two revisions the residue of
+\cref{tab:live} is nearly total. The ledger registers an obligation in every session whose
+booking committed before a revision landed (all but
+\LWatomicLedgerNoObligationRange{} of $100$) and \Rp{} is $0$ in all $300$
 ledger sessions, by construction (the obligation record is what the predicate
 reads)---and that is where its guarantee ends. At session end the world holds
-a stale booking in
-$\LWDeepseekLedgerWorldWrong$--$\LWHaikuLedgerWorldWrong$ sessions per
-family (beside the new one in $\LWDeepseekLedgerDouble$--$\LWHaikuLedgerDouble$
-of them: the cancellation was refused) and no booking in
-$\LWHaikuLedgerWorldNone$--$\LWDeepseekLedgerWorldNone$ (the rebooking was
-refused). Those shares are the injected refusal rate of
+a stale booking in \LWatomicLedgerWorldWrongRange{} sessions per family
+(beside the new one in \LWatomicLedgerDoubleRange{} of them: the cancellation
+was refused) and no booking in \LWatomicLedgerWorldNoneRange{} (the rebooking
+was refused). Those shares are the injected refusal rate of
 $\LedgerWorldPCancelFail$ seen from the other side, less what a later
-supersession retried: an obligation is retried only then. On haiku the $L_1$
-check catches the first revision and only the second lands after the commit,
-one obligation per session (\LWHaikuLedgerOneObligation{} of $100$) and
-nothing to retry it ($\LWHaikuLedgerRetries$ retries); on deepseek-chat, whose
-date agent is slow enough that both revisions land after the commit
-(\LWDeepseekLedgerBothRevisionsAfterCommit{} of $100$),
-\LWDeepseekLedgerTwoObligations{} sessions register two obligations and the
-second revision retries what the first left open in
-$\LWDeepseekLedgerRetries$. The consumer, reading within $1.5$\,s of the first
-release, acted on a booking the final date contradicts in
-$\LWDeepseekLedgerConsumerStale$--$\LWHaikuLedgerConsumerStale$ sessions, as
-under $L_1$ alone: in
-$\LWHaikuLedgerConsumerStaleBeforeRevision$--$\LWGptLedgerConsumerStaleBeforeRevision$
-of them it read before any revision had landed (the booking was current; no
-compensator could have changed what it saw), in
-$\LWDeepseekLedgerConsumerStaleBeforeCompensation$--$\LWHaikuLedgerConsumerStaleBeforeCompensation$
-after the revision and before the compensation---the model call is that
-window---and in
-$\LWHaikuLedgerConsumerStaleAfterCompensation$--$\LWDeepseekLedgerConsumerStaleAfterCompensation$
-after a compensation a further revision then superseded; it found no booking
-in $\LWHaikuLedgerConsumerNone$--$\LWGptLedgerConsumerNone$, the cancellation
-and the rebooking now being adjacent. Without the cancellation the world is
-wrong in
-$\LWDeepseekLedgerNoRollbackWorldWrong$--$\LWHaikuLedgerNoRollbackWorldWrong$
-and double-booked in
-$\LWDeepseekLedgerNoRollbackDouble$--$\LWGptLedgerNoRollbackDouble$: a ledger
-that does not withdraw the effect moves nothing in the world.
+supersession retried: on haiku only the second revision lands after the
+commit in \LWatomicHaikuLedgerOneObligation{} of $100$ (one obligation,
+$\LWatomicHaikuLedgerRetries$ retries); on deepseek-chat both land after it
+in \LWatomicDeepseekLedgerBothRevisionsAfterCommit, two obligations in
+\LWatomicDeepseekLedgerTwoObligations, the second retrying what the first
+left open ($\LWatomicDeepseekLedgerRetries$ retries). The consumer, reading
+within $1.5$\,s of the first release, acted on a booking the final date
+contradicts in \LWatomicLedgerConsumerStaleRange{} sessions, as under $L_1$
+alone; its \texttt{at\_ms} against the records places those reads: in
+\LWatomicLedgerConsumerStaleBeforeRevisionRange{} no revision had landed
+(the booking was current); in
+\LWatomicLedgerConsumerStaleInsideCompensationRange{} the latest revision's
+compensation had not completed---its model call is that window; in
+\LWatomicLedgerConsumerStaleRefusedCancelRange{} the stale booking stood
+because the world had refused its cancellation (obligation open); in
+\LWatomicLedgerConsumerStaleCurrentThenSupersededRange{} the consumer saw
+the then-current booking, which a later revision replaced---a reader that has
+read cannot be corrected, only notified. Without the cancellation the world
+is wrong in \LWatomicLedgerNoRollbackWorldWrongRange{} of $100$ and
+double-booked in \LWatomicLedgerNoRollbackDoubleRange{}: a ledger that does
+not withdraw the effect moves nothing in the world.
 
 The last column is what the ledger is for. In the sessions whose every
-obligation it reports discharged ($\LWHaikuLedgerCleanSessions$,
-$\LWGptLedgerCleanSessions$ and $\LWDeepseekLedgerCleanSessions$ of $100$)
-the world holds exactly the final booking in $\LWHaikuLedgerCleanRight$,
-$\LWGptLedgerCleanRight$ and $\LWDeepseekLedgerCleanRight$, and in every
-session whose obligation it reports open ($\LWHaikuLedgerOpenSessions$,
-$\LWGptLedgerOpenSessions$, $\LWDeepseekLedgerOpenSessions$) the world is
-wrong or empty: report and world agree in $\LWLedgerAgree$ sessions. That is
-a property of this compensator, not of the ledger---what a correct
-compensator owes by construction, which the world check establishes and the
-records cannot---and the first run of the same probe shows the difference
-(supplement \S\,W.4): its compensator tracked
-one confirmation per effect and drafted the replacement by a model call
-\emph{between} the cancellation and the rebooking, so a retry after a refused
-cancellation cancelled the \emph{replacement}, left the original active and
-reported the obligation discharged---in $\LWfirstHaikuLedgerCleanWrong$,
-$\LWfirstGptLedgerCleanWrong$ and $\LWfirstDeepseekLedgerCleanWrong$ of the
-sessions it called clean, with the consumer finding no booking in about half
-of all sessions; report and world agreed in $\LWfirstLedgerAgree$. \Rp{} was
-$0$ in both runs: it cannot tell the two compensators apart; the world does,
-and the lesson is the one \cref{sec:residue} stated as a remark:
-what a registered obligation buys is exactly its compensator's truthfulness,
-an open obligation where the world refused. These runs registered the
-obligation just after the superseding put\ifnum\LedgerWorldAtomicAvailable=1 ;
-rerun with registration inside the store lock, report and world agree in
-$\LWatomicLedgerAgree$ ledger sessions and a consumer reading within
-$1.5$\,s acts on the stale booking in
-$\LWatomicDeepseekLedgerConsumerStale$--$\LWatomicHaikuLedgerConsumerStale$
-of $100$ (supplement \S\,W.4)\fi\ifnum\LedgerWorldWideAvailable=1 ; with
-the consumer reading up to $5$\,s after the first release, it acts on the
-stale booking in
-$\LWwideDeepseekLedgerConsumerStale$--$\LWwideHaikuLedgerConsumerStale$ of
-$100$, so the column measures the window, not the ledger\fi.
+obligation it reports discharged (\LWatomicLedgerCleanSessionsRange{} of
+$100$, of which \LWatomicLedgerCleanVacuousRange{} registered nothing) the
+world holds exactly the final booking in every one
+(\LWatomicLedgerCleanWrongRange{} exceptions), and in every session whose
+obligation it reports open (\LWatomicLedgerOpenSessionsRange{}) the world is
+wrong or empty (\LWatomicLedgerOpenRightRange{} exceptions): report and world agree in
+$\LWatomicLedgerAgree$ sessions. That is a property of this compensator, not
+of the ledger---what a correct compensator owes by construction, which the
+world check establishes and the records cannot---and the first run of the
+same probe shows the difference (supplement \S\,W.4): its compensator drafted
+the replacement by a model call \emph{between} the cancellation and the
+rebooking and tracked one confirmation per effect, so a retry after a refused
+cancellation cancelled the \emph{replacement} and reported the obligation
+discharged with the original still active---in
+$\LWfirstHaikuLedgerCleanWrong$, $\LWfirstGptLedgerCleanWrong$ and
+$\LWfirstDeepseekLedgerCleanWrong$ of the sessions it called clean; report
+and world agreed in $\LWfirstLedgerAgree$. \Rp{} was $0$ in both runs: it
+cannot tell the two compensators apart; the world does, and the lesson is the
+remark of \cref{sec:residue}: a registered obligation buys exactly its
+compensator's truthfulness. Two further runs bound the rest.
+\ifnum\LedgerWorldAvailable=1 With the obligation registered \emph{after}
+the put returned (the design until 2026-10-16; another day, unpaired): world
+wrong \LWLedgerWorldWrongRange{}, none \LWLedgerWorldNoneRange{}, consumer
+stale \LWLedgerConsumerStaleRange{}, agreement $\LWLedgerAgree$, every
+interval overlapping the atomic run's---a null by construction, since the
+probe injects no fault in that gap; it shows the change moved nothing else.
+The gap is closed by the code, unmeasured; the compensation it precedes takes
+\LWatomicLedgerCompLatencyMedianSRange{}\,s (median), and that is where the
+residue is. \fi\ifnum\LedgerWorldWideAvailable=1 With the consumer
+reading up to $5$\,s after the first release it acts on the stale booking in
+\LWwideLedgerConsumerStaleRange{} of $100$ (world wrong
+\LWwideLedgerWorldWrongRange, none \LWwideLedgerWorldNoneRange, within noise
+of the $1.5$\,s run; agreement $\LWwideLedgerAgree$): the column measures
+the reader's window against the compensation's latency, not the ledger.\fi
 \begin{table}[t]
 \centering
-\caption{The ledger in a simulated world (probe 304, compensator \texttt{\LedgerWorldCompensator}), $n{=}100$ sessions per arm per family, two revisions per session, cancellation and rebooking each refused with probability $\LedgerWorldPCancelFail$/$\LedgerWorldPRebookFail$, consumer delay uniform $0$--$\LedgerWorldConsumerMaxMs$\,ms; arms interleaved per session. Columns: \Rp{} on the records; store $\neq$ final; world wrong / double / none at session end; consumer acted on a stale date; obligations registered\,/\,discharged\,/\,left open; sessions with every obligation discharged in which the world holds exactly the final booking (right\,/\,discharged). The first run (compensator \texttt{latest}) is in supplement \S\,W.4.}
+\caption{The ledger in a simulated world (probe 304, compensator \texttt{\LedgerWorldCompensator}, obligation registered inside the store lock), $n{=}100$ sessions per arm per family, two revisions per session, cancellation and rebooking each refused with probability $\LedgerWorldPCancelFail$/$\LedgerWorldPRebookFail$, consumer delay uniform $0$--$\LedgerWorldConsumerMaxMs$\,ms; arms interleaved per session. Columns: \Rp{} on the records; store $\neq$ final; world wrong / double / none at session end; consumer acted on a stale date; obligations registered\,/\,discharged\,/\,left open; sessions with every obligation discharged in which the world holds exactly the final booking (right\,/\,discharged). The after-put registration run and the first compensator are in supplement \S\,W.4.}
 \label{tab:ledgerworld}
 \footnotesize
 \setlength{\tabcolsep}{3pt}
@@ -2512,22 +3697,22 @@ $100$, so the column measures the window, not the ledger\fi.
 \toprule
 Model & Arm & \Rp{} & store & wrong & double & none & c.\,stale & obl. & right/disch. \\
 \midrule
-\multirow{3}{*}{haiku} & $L_1$ & \LWHaikuValidatedR & \LWHaikuValidatedStoreWrong & \LWHaikuValidatedWorldWrong & \LWHaikuValidatedDouble & \LWHaikuValidatedWorldNone & \LWHaikuValidatedConsumerStale & \LWHaikuValidatedObl & -- \\
- & $L_1{+}\ell$, cancel & \LWHaikuLedgerR & \LWHaikuLedgerStoreWrong & \LWHaikuLedgerWorldWrong & \LWHaikuLedgerDouble & \LWHaikuLedgerWorldNone & \LWHaikuLedgerConsumerStale & \LWHaikuLedgerObl & \LWHaikuLedgerCleanRight/\LWHaikuLedgerCleanSessions \\
- & $L_1{+}\ell$, no cancel & \LWHaikuLedgerNoRollbackR & \LWHaikuLedgerNoRollbackStoreWrong & \LWHaikuLedgerNoRollbackWorldWrong & \LWHaikuLedgerNoRollbackDouble & \LWHaikuLedgerNoRollbackWorldNone & \LWHaikuLedgerNoRollbackConsumerStale & \LWHaikuLedgerNoRollbackObl & \LWHaikuLedgerNoRollbackCleanRight/\LWHaikuLedgerNoRollbackCleanSessions \\
+\multirow{3}{*}{haiku} & $L_1$ & \LWatomicHaikuValidatedR & \LWatomicHaikuValidatedStoreWrong & \LWatomicHaikuValidatedWorldWrong & \LWatomicHaikuValidatedDouble & \LWatomicHaikuValidatedWorldNone & \LWatomicHaikuValidatedConsumerStale & \LWatomicHaikuValidatedObl & -- \\
+ & $L_1{+}\ell$, cancel & \LWatomicHaikuLedgerR & \LWatomicHaikuLedgerStoreWrong & \LWatomicHaikuLedgerWorldWrong & \LWatomicHaikuLedgerDouble & \LWatomicHaikuLedgerWorldNone & \LWatomicHaikuLedgerConsumerStale & \LWatomicHaikuLedgerObl & \LWatomicHaikuLedgerCleanRight/\LWatomicHaikuLedgerCleanSessions \\
+ & $L_1{+}\ell$, no cancel & \LWatomicHaikuLedgerNoRollbackR & \LWatomicHaikuLedgerNoRollbackStoreWrong & \LWatomicHaikuLedgerNoRollbackWorldWrong & \LWatomicHaikuLedgerNoRollbackDouble & \LWatomicHaikuLedgerNoRollbackWorldNone & \LWatomicHaikuLedgerNoRollbackConsumerStale & \LWatomicHaikuLedgerNoRollbackObl & \LWatomicHaikuLedgerNoRollbackCleanRight/\LWatomicHaikuLedgerNoRollbackCleanSessions \\
 \midrule
-\multirow{3}{*}{gpt-4o-mini} & $L_1$ & \LWGptValidatedR & \LWGptValidatedStoreWrong & \LWGptValidatedWorldWrong & \LWGptValidatedDouble & \LWGptValidatedWorldNone & \LWGptValidatedConsumerStale & \LWGptValidatedObl & -- \\
- & $L_1{+}\ell$, cancel & \LWGptLedgerR & \LWGptLedgerStoreWrong & \LWGptLedgerWorldWrong & \LWGptLedgerDouble & \LWGptLedgerWorldNone & \LWGptLedgerConsumerStale & \LWGptLedgerObl & \LWGptLedgerCleanRight/\LWGptLedgerCleanSessions \\
- & $L_1{+}\ell$, no cancel & \LWGptLedgerNoRollbackR & \LWGptLedgerNoRollbackStoreWrong & \LWGptLedgerNoRollbackWorldWrong & \LWGptLedgerNoRollbackDouble & \LWGptLedgerNoRollbackWorldNone & \LWGptLedgerNoRollbackConsumerStale & \LWGptLedgerNoRollbackObl & \LWGptLedgerNoRollbackCleanRight/\LWGptLedgerNoRollbackCleanSessions \\
+\multirow{3}{*}{gpt-4o-mini} & $L_1$ & \LWatomicGptValidatedR & \LWatomicGptValidatedStoreWrong & \LWatomicGptValidatedWorldWrong & \LWatomicGptValidatedDouble & \LWatomicGptValidatedWorldNone & \LWatomicGptValidatedConsumerStale & \LWatomicGptValidatedObl & -- \\
+ & $L_1{+}\ell$, cancel & \LWatomicGptLedgerR & \LWatomicGptLedgerStoreWrong & \LWatomicGptLedgerWorldWrong & \LWatomicGptLedgerDouble & \LWatomicGptLedgerWorldNone & \LWatomicGptLedgerConsumerStale & \LWatomicGptLedgerObl & \LWatomicGptLedgerCleanRight/\LWatomicGptLedgerCleanSessions \\
+ & $L_1{+}\ell$, no cancel & \LWatomicGptLedgerNoRollbackR & \LWatomicGptLedgerNoRollbackStoreWrong & \LWatomicGptLedgerNoRollbackWorldWrong & \LWatomicGptLedgerNoRollbackDouble & \LWatomicGptLedgerNoRollbackWorldNone & \LWatomicGptLedgerNoRollbackConsumerStale & \LWatomicGptLedgerNoRollbackObl & \LWatomicGptLedgerNoRollbackCleanRight/\LWatomicGptLedgerNoRollbackCleanSessions \\
 \midrule
-\multirow{3}{*}{deepseek-chat} & $L_1$ & \LWDeepseekValidatedR & \LWDeepseekValidatedStoreWrong & \LWDeepseekValidatedWorldWrong & \LWDeepseekValidatedDouble & \LWDeepseekValidatedWorldNone & \LWDeepseekValidatedConsumerStale & \LWDeepseekValidatedObl & -- \\
- & $L_1{+}\ell$, cancel & \LWDeepseekLedgerR & \LWDeepseekLedgerStoreWrong & \LWDeepseekLedgerWorldWrong & \LWDeepseekLedgerDouble & \LWDeepseekLedgerWorldNone & \LWDeepseekLedgerConsumerStale & \LWDeepseekLedgerObl & \LWDeepseekLedgerCleanRight/\LWDeepseekLedgerCleanSessions \\
- & $L_1{+}\ell$, no cancel & \LWDeepseekLedgerNoRollbackR & \LWDeepseekLedgerNoRollbackStoreWrong & \LWDeepseekLedgerNoRollbackWorldWrong & \LWDeepseekLedgerNoRollbackDouble & \LWDeepseekLedgerNoRollbackWorldNone & \LWDeepseekLedgerNoRollbackConsumerStale & \LWDeepseekLedgerNoRollbackObl & \LWDeepseekLedgerNoRollbackCleanRight/\LWDeepseekLedgerNoRollbackCleanSessions \\
+\multirow{3}{*}{deepseek-chat} & $L_1$ & \LWatomicDeepseekValidatedR & \LWatomicDeepseekValidatedStoreWrong & \LWatomicDeepseekValidatedWorldWrong & \LWatomicDeepseekValidatedDouble & \LWatomicDeepseekValidatedWorldNone & \LWatomicDeepseekValidatedConsumerStale & \LWatomicDeepseekValidatedObl & -- \\
+ & $L_1{+}\ell$, cancel & \LWatomicDeepseekLedgerR & \LWatomicDeepseekLedgerStoreWrong & \LWatomicDeepseekLedgerWorldWrong & \LWatomicDeepseekLedgerDouble & \LWatomicDeepseekLedgerWorldNone & \LWatomicDeepseekLedgerConsumerStale & \LWatomicDeepseekLedgerObl & \LWatomicDeepseekLedgerCleanRight/\LWatomicDeepseekLedgerCleanSessions \\
+ & $L_1{+}\ell$, no cancel & \LWatomicDeepseekLedgerNoRollbackR & \LWatomicDeepseekLedgerNoRollbackStoreWrong & \LWatomicDeepseekLedgerNoRollbackWorldWrong & \LWatomicDeepseekLedgerNoRollbackDouble & \LWatomicDeepseekLedgerNoRollbackWorldNone & \LWatomicDeepseekLedgerNoRollbackConsumerStale & \LWatomicDeepseekLedgerNoRollbackObl & \LWatomicDeepseekLedgerNoRollbackCleanRight/\LWatomicDeepseekLedgerNoRollbackCleanSessions \\
 \bottomrule
 \end{tabular}}
 \end{table}
 \else
-The run is \Pending{runner step 18, three families}; its table replaces this
+The run under atomic registration is \Pending{runner step 21, three families}; its table replaces this
 sentence, and until then the ledger's $0/100$ must be read as the store-level
 statement above and nothing more.
 \fi
@@ -2551,7 +3736,12 @@ is its no-write bypass (a read-only commit is never validated: the
 unfaithful emitter of Theorem L1j; SSI mode closes it). Both endpoints are
 engineered, so this is a sensitivity check of the detector and the runtimes
 on model-driven traces, not a prevalence; every edit-review witness is a
-cold-start read, unlike the live study's supersessions. Pessimistic locking
+cold-start read, unlike the live study's supersessions. One harness defect
+bears on the prices: until 2026-10-17 the pilot's tools told the model
+\texttt{COMMITTED} whatever the runtime did, so a refused agent was never
+told (records unaffected: a dropped operation emits nothing); they now return
+\texttt{REFUSED} under a recorded policy (\texttt{-{}-on-abort
+drop|retry}). The cells here ran with the old tools and are reported as run. Pessimistic locking
 reaches $0\%$ on edit-review by refusing the reviewer's operation in
 $99/100$ sessions---the anomaly is absent because the work is---and on
 triage by dropping one of three agents in $97/100$; the sessions that are
@@ -2564,17 +3754,16 @@ prevention per sound committed operation. A Claude Sonnet~4.5 rerun of the
 vanilla column with operation records reproduced the two determinate cells
 (edit-review $100/100$, plan-execute $0/100$) and found the triage cell void:
 the reporter's prompt supplied no bug, gpt-4o invented one and Sonnet wrote
-``no bug description provided'' in $100/100$ sessions. The pilot now hands
-the reporter a concrete bug drawn by scenario from a fixed list and records
-the protocol beside each cell; rerun under it, the Sonnet triage cell holds
-$100$ sessions of three or more events and no void ticket.
-\ifnum\PilotClaudeAvailable=1 Scored by the verified detector, the Sonnet
-vanilla cells fire \A1 in \VSClaudeEditReviewVanilla{} /
+``no bug description provided'' in $100/100$ sessions. The pilot now seeds
+the reporter with a concrete bug per scenario and records the protocol beside
+each cell.
+\ifnum\PilotClaudeAvailable=1 Rerun so and scored by the verified detector,
+the Sonnet vanilla cells fire \A1 in \VSClaudeEditReviewVanilla{} /
 \VSClaudePlanExecuteVanilla{} / \VSClaudeTriageVanilla{} sessions: the
 seeded triage cell fires nowhere, where gpt-4o's unseeded September cell
-fired in $48\%$; the two differ in family and protocol at once, so the
-comparison is void, and the zero's cause is not established (supplement
-\S\,M). The Sonnet pessimistic and snapshot-isolation cells have run
+fired in $48\%$; family and protocol differ at once, so the comparison is
+void and the zero's cause not established (supplement \S\,M). The Sonnet
+pessimistic and snapshot-isolation cells have run
 (\VSClaudeEditReviewPess{} / \VSClaudePlanExecutePess{} /
 \VSClaudeTriagePess{}; \VSClaudeEditReviewSI{} / \VSClaudePlanExecuteSI{} /
 \VSClaudeTriageSI{}); -- marks a cell awaiting its rescoring by the verified
@@ -2731,39 +3920,68 @@ generation per abort, because the retry carries the conflict into its prompt
 (supplement \S\,M).
 
 \smallskip\noindent\textbf{Wall-clock, with its confound.} The nine cells of
-a run were executed one after another, so a difference between cells carries
-whatever the provider's latency did in between. Plan-execute, on which no
-runtime aborts, is the control, and its ``overheads'' are $-4.5\%$ and
-$-4.9\%$ on gpt-4o (Holm-corrected permutation $p=0.014$, $0.002$) and
-$+13.5\%$ for SI on Claude ($p=0.001$): drift, whose largest magnitude is the
-run's null band. Outside it, on mean and median alike: pessimistic locking at
-$+16.7\%$ (edit-review) and $+34.9\%$ (triage) on gpt-4o and $+109.5\%$
-(triage) on Claude, where it makes $7.75$ model calls per session against
-$4.00$. Snapshot isolation is inside the band in every cell on both families,
-which is not zero: the design cannot resolve an overhead below about $5\%$
-on gpt-4o or $14\%$ on Claude (per-sound-commit intervals in supplement
-\S\,O include both zero and the band). Only a rerun with the three runtimes
-interleaved per session removes the confound; probe~302 is that design.
+a run ran one after another, so a cell difference carries the provider's
+latency drift. Plan-execute, on which no runtime aborts, is the control; its
+``overheads'' are $-4.5\%$ and $-4.9\%$ on gpt-4o (Holm-corrected
+permutation $p=0.014$, $0.002$) and $+13.5\%$ for SI on Claude ($p=0.001$):
+drift, whose largest magnitude is the run's null band. Outside it, on mean
+and median alike: pessimistic locking at $+16.7\%$ (edit-review) and
+$+34.9\%$ (triage) on gpt-4o and $+109.5\%$ (triage) on Claude, where it
+makes $7.75$ model calls per session against $4.00$. Snapshot isolation is inside the band in every cell on both families,
+which is not zero: the design resolves nothing below about $5\%$ on gpt-4o
+or $14\%$ on Claude (supplement \S\,O). Only runtimes interleaved per
+session remove the confound; probe~302 is that design.
 \ifnum\WallclockPairedClaudeAvailable=1 On Claude Sonnet~4.5 its paired
 per-session overheads (mean, bootstrap 95\% CI) are triage pessimistic
 \WallclockPairedClaudeTriagePess{} and SI \WallclockPairedClaudeTriageSI,
 with the plan-execute control at \WallclockPairedClaudePlanExecutePess{} and
 \WallclockPairedClaudePlanExecuteSI{} (supplement \S\,O for every
 cell).\else\ifnum\WallclockStampClaudeAvailable=1 Its Claude Sonnet~4.5 run
-($900$ sessions, the runtimes shuffled per session) lost its per-call timing
-sidecars to a defect in the run script (one survivor per cell; supplement
-\S\,O), so its receipt is the runner's completion stamp per session at $1$\,s
-resolution, which includes an interpreter start-up every arm pays alike: the
-paired overheads are triage pessimistic \WallclockStampClaudeTriagePess{} and
-SI \WallclockStampClaudeTriageSI, with the plan-execute control at
+($900$ sessions, runtimes shuffled per session) lost its per-call timing
+sidecars to a script defect (supplement \S\,O); its receipt is the runner's
+completion stamp per session at $1$\,s resolution, interpreter start-up
+included, which every arm pays alike. Paired overheads:
+triage pessimistic \WallclockStampClaudeTriagePess{} and SI
+\WallclockStampClaudeTriageSI; the plan-execute control
 \WallclockStampClaudePlanExecutePess{} and
-\WallclockStampClaudePlanExecuteSI{}---a coarse estimate, to be read against
-its control.\else Its Claude Sonnet~4.5 run ($900$ sessions, the runtimes
+\WallclockStampClaudePlanExecuteSI; edit-review pessimistic
+\WallclockStampClaudeEditReviewPess, the one cell clearing zero (that runtime
+refuses the reviewer in $99/100$ sessions). The triage cell does not
+contradict the $+109.5\%$ above: in this run the pessimistic arm dropped the
+engineer in $100/100$ sessions (a trace shape, read without the detector) at
+no extra model calls---the one surviving sidecar shows
+the vanilla arm's four, and $+1.3\%$ on an $8$\,s session admits no
+more---where the September run's refusals were retried at $7.75$ calls per
+session. The September sidecars show where the $7.75$ went: not in the refused
+agent's retries but in further rounds of the round-robin chat after the
+refusal ($7$ calls in $68$ sessions, $9$ in $15$, up to $17$; $4$ in $8$),
+which the October chat did not take ($4$, as vanilla; the reporter closed the second
+round with \texttt{DONE}); the prompts were the same three-step protocol
+($696$ against $732$ tokens, the seeded ticket the difference), and both runs
+told the refused agent \texttt{COMMITTED} (\cref{sec:pilot}). The receipts
+do not say why one chat went on and the other stopped; they do say the price
+of pessimistic locking is what the chat does after a refusal, a protocol
+parameter the pilot now states and records.
+\ifnum\RefusalClaudeAvailable=1 Run so on Claude Sonnet~4.5, five arms
+interleaved per session ($n{=}100$): told \texttt{REFUSED} and left to
+decide, the pessimistic triage arm made
+\RefusalClaudeTriagePessDropCalls{} model calls per session against the
+vanilla arm's \RefusalClaudeTriageVanillaCalls{} (wall-clock
+\RefusalClaudeTriagePessDropWallOverhead); asked to redo,
+\RefusalClaudeTriagePessRetryCalls{} calls (wall-clock
+\RefusalClaudeTriagePessRetryWallOverhead); edit-review pessimistic
+\RefusalClaudeEditReviewPessDropCalls{} and
+\RefusalClaudeEditReviewPessRetryCalls{} calls against
+\RefusalClaudeEditReviewVanillaCalls{}; snapshot isolation
+\RefusalClaudeTriageSIDropCalls{} / \RefusalClaudeTriageSIRetryCalls{} on
+triage (supplement \S\,O, every cell with its refusal counts).\else Until
+runner step 22 prices both policies on one model and day, the pilot's cells
+price a refusal that stops the agent and the paired sweep of \cref{sec:cost}
+one that is retried.\fi\else Its Claude Sonnet~4.5 run ($900$ sessions, the runtimes
 shuffled per session) has run, but a defect in the run script overwrote its
 per-call timing sidecars (one survivor per cell); the cell is recoverable
 from the run's completion stamps at $1$\,s resolution and is \Pending{order.tsv
-of the Claude interleaved run}.\fi\fi{} The gpt-4o rerun is not planned, so
-its wall-clock cells above stand with their null band and no finer claim.
+of the Claude interleaved run}.\fi\fi{}
 
 \subsection{RQ3: where the preconditions occur}
 \label{sec:prevalence}
@@ -2774,34 +3992,32 @@ released into the same superstep---we analyzed public code; the answer is a
 bracket, \emph{none confirmed, at most about half}. \emph{Frame}: GitHub
 repositories matching \texttt{langgraph} in name, description or readme
 (Python; forks and the framework's own organization excluded), $60$ per star
-band drawn under a fixed seed from the API's $500$ most recently updated.
+band under a fixed seed from the API's $500$ most recently updated.
 \emph{Instrument}: a static front end that recovers from the syntax tree each
 \texttt{StateGraph} site, the node pairs one fork releases into a superstep,
-and each node's read and written keys; whatever it cannot resolve is
+and each node's read and written keys; what it cannot resolve is
 \emph{unknown}, never guessed (eleven fixtures; a differential oracle agrees
 with execution on the eight runnable ones). All $180$ repositories were read
 (supplement \S\,Q); \CensusRepos{} contain a visible graph, holding
-\CensusSites{} sites, of which \CensusSequential{} ($96\%$) are sequential.
+\CensusSites{} sites, \CensusSequential{} ($96\%$) of them sequential.
 Fifteen sites in \CensusParallelRepos{} repositories ($11.2\%$, Wilson 95\%
 $[6.4, 19.0]$) contain a co-scheduled pair; none is a confirmed
 reader/writer pair on a last-value channel (repository-level upper limit
 $3.8\%$); two are such pairs on a reducer channel, the ordinary
 parallel-agents-on-\texttt{messages} idiom; eight have an unresolved side,
-bounding the susceptible share at $8.2\%$ $[4.2, 15.3]$ of repositories.
-Counting every unresolved site ($82$ with unresolved routing, $7$ with a
-\texttt{Send} fan-out) gives a wide bound of $51\%$. An enriched
-population---the \CensusErrorStringRepos{} third-party repositories whose
-issues quote LangGraph's co-superstep writer/writer error, so demonstrably ran
-parallel writers---has parallel graphs in $12/26$ but again no confirmed site
-in $391$. The narrow reading is a negative result for the motivation of
-\cref{sec:live-a1}, recorded as one; the census measures how code is written,
-not how often a graph runs or whether a co-scheduled read goes stale.
+bounding the susceptible share at $8.2\%$ $[4.2, 15.3]$ of repositories;
+counting every unresolved site ($82$ with unresolved routing, $7$ with a
+\texttt{Send} fan-out) gives $51\%$. An enriched population---the
+\CensusErrorStringRepos{} third-party repositories whose issues quote
+LangGraph's co-superstep writer/writer error, so demonstrably ran parallel
+writers---has parallel graphs in $12/26$ but again no confirmed site in
+$391$. The narrow reading is a negative result for the motivation of
+\cref{sec:live-a1}, recorded as one.
 
 \smallskip\noindent\textbf{Mechanisms, not rates.} Of five deployed designs
-we probed, four close the window by construction and LangGraph's superstep
+we probed, four close the window by construction; LangGraph's superstep
 channels and cross-thread store leave it open, where \cref{sec:live-a1}
-measures it (mechanisms and two framework defects outside the catalog:
-supplement \S\,Q).
+measures it (mechanisms and two framework defects: supplement \S\,Q).
 
 \subsection{Threats to validity}
 \label{sec:threats}
@@ -2814,15 +4030,14 @@ ones. \emph{Internal.} The live rates are
 latency races, $n=100$ per cell, single runs in \cref{tab:live} and
 \cref{fig:offset} and three interleaved runs in \cref{tab:liveruns}; the
 wall-clock cells carry a run-order confound we bound rather than remove
-(probe~302 removes it; its Claude run's timing sidecars were lost,
+(probe~302 removes it; its Claude run is read from $1$\,s stamps,
 \cref{sec:cost}); the L2 live replay rests on $66$
 retractions, $62$ from one family ($1{,}000$ further haiku sessions added
 none). \emph{External.} Three API families and one local; one framework
 driven live; toy workloads of two to three agents. \emph{Reproducibility.}
 Every cell is committed with its traces and rescored by the verified detector
-and an independent implementation of \cref{def:a1}; one September run carries
-a manifest captured at run time, the two earlier ones reconstructed manifests
-that say so.
+and an independent implementation of \cref{def:a1}; one September run has a
+manifest captured at run time, two reconstructed ones that say so.
 
 % ============================================================================
 % sec/07-related.tex
@@ -2862,63 +4077,65 @@ boosting~\cite{HerlihyKoskinen2008Boosting} met the same irreversibility in
 transactional memory; output commit is the dual choice. Commutativity-based
 control~\cite{Weihl1988Commutativity} orders only what does not commute: an
 \A6 discipline over commutativity classes would pay the sequencing cost only
-where it buys something, since the premise of \A6 holds only for
-non-commuting effects and our predicate over-reports on the rest. The basis
-of \cref{def:residue} is why-provenance~\cite{BunemanEtAl2001Why} restricted
-to copying; exactly-once stream processing~\cite{AkidauEtAl2013MillWheel}
-holds side effects at a transactional sink until the input is durable, the
-industrial precedent for output commit. The pessimistic/optimistic choice
-our cost analysis turns on is STM's contention-management problem, and the
-cost-aware selection of a level is consistency
+where it buys something (our predicate over-reports on commuting effects).
+The basis of \cref{def:residue} is why-provenance~\cite{BunemanEtAl2001Why}
+restricted to copying; exactly-once stream
+processing~\cite{AkidauEtAl2013MillWheel} holds side effects at a
+transactional sink until the input is durable, the industrial precedent for
+output commit. The pessimistic/optimistic choice is STM's
+contention-management problem; cost-aware level selection is consistency
 rationing~\cite{KraskaEtAl2009Rationing} and
 TxnSails~\cite{ZhouEtAl2025TxnSails}.
 
 \subsection{Concurrency control and shared memory for LLM agents}
 A 2025--2026 line builds mechanisms for this regime, mostly without verifying
-them, and this paper is one point in it rather than its origin. Agentic
+them, and this paper is one point in it rather than its origin; twenty of the
+2026 works cited in this related-work section are preprints at the time of
+writing (an arXiv identifier and no venue in the bibliography), cited for the
+designs they describe---no claim of ours rests on their results. Agentic
 transactions~\cite{SunEtAl2026AgenticTx} recast ACID as four semantic
 guarantees for a single long-horizon agent and measure task success, with no
 history predicate, model or proof; our catalog is the anomaly-level account
 such guarantees would be checked against (supplement \S\,D places it on the
 lattice). CoAgent~\cite{LyuEtAl2026CoAgent} states
 the regime in our three terms and proposes an advisory protocol in which a
-notified agent repairs its own plan; its correctness argument is conditional
-on a model judgment measured at a $5\%$ failure rate, and its lock/OCC cost
-inversion independently reproduces \cref{sec:cost}. STORM~\cite{LiuEtAl2026STORM} is read validation ($L_1$)
+notified agent repairs its own plan, correct conditional on a model judgment
+measured at a $5\%$ failure rate; its lock/OCC cost inversion independently
+reproduces \cref{sec:cost}. STORM~\cite{LiuEtAl2026STORM} is read validation ($L_1$)
 deployed per file; ATCC~\cite{ZhouEtAl2026ATCC} and GoEX~\cite{PatilEtAl2024GoEX}
 impose a remedy from the runtime. MemTX~\cite{LiEtAl2026MemTX} is the closest
 design to our $L_2$: staged writes under snapshot isolation, irreversible
-tool calls gated on current belief and cascading repair on retraction, with
-two invariants checked by bounded enumeration ($5.5$M states) and a
-five-backbone evaluation; it does not state the predicates it excludes,
-verify the runtime, or price prevention per unit of sound work. Yang et
+tool calls gated on current belief, cascading repair on retraction, two
+invariants checked by bounded enumeration ($5.5$M states), five backbones; it
+does not state the predicates it excludes, verify the runtime, or price
+prevention per unit of sound work. Yang et
 al.~\cite{YangEtAl2026Position} argue that coordination failures attributed
 to communication are concurrency failures; governed shared
 memory~\cite{MargalitEtAl2026Governed} and transactive
 memory~\cite{Transactive2026} address provenance, supersession and scoping
 without treating the generation window as a transaction.
-TOKI~\cite{Wang2026TOKI} is the closest formal treatment of supersession: it
-casts contradiction resolution in agent memory as write-time concurrency
-control, names the isolation each resolution operator presupposes and the
-write anomalies it admits, and proves soundness of a bitemporal operator
-family; it governs which belief a memory keeps, where \Rp{} governs what an
-effect already out still owes, and the two are complementary.
-SAFEFLOW~\cite{LiEtAl2025SAFEFLOW} combines transactional execution with
-information-flow labels and write-ahead rollback at the coordination layer,
-and Cordon~\cite{ChenEtAl2026Cordon} stages external actions in an effect
-outbox released only after whole-workflow validation---output commit at
-task granularity without a model of concurrent tasks or a proof.
+TOKI~\cite{Wang2026TOKI} is the closest formal treatment of supersession:
+contradiction resolution in agent memory as write-time concurrency control,
+with the isolation each operator presupposes, the write anomalies it admits
+and a soundness proof for a bitemporal operator family; it governs which
+belief a memory keeps, where \Rp{} governs what an effect already out still
+owes.
+SAFEFLOW~\cite{LiEtAl2025SAFEFLOW} adds information-flow labels and
+write-ahead rollback to transactional execution, and
+Cordon~\cite{ChenEtAl2026Cordon} stages external actions in an effect outbox
+released after whole-workflow validation---output commit at task
+granularity, without a model of concurrent tasks or a proof.
 StateFuse~\cite{VolkovEtAl2026StateFuse} keeps conflicting observations
 visible under CRDT merging, a contract orthogonal to exclusion like
-CodeCRDT's. Yu et al.~\cite{YuEtAl2026ExecConsistency} ask whether a shared
-memory, however consistent, suffices for an agent's task duties, a question
-above our history level.
+CodeCRDT's; Yu et al.~\cite{YuEtAl2026ExecConsistency} ask whether a
+consistent shared memory suffices for an agent's task duties, a question above
+our history level.
 SagaLLM~\cite{GengChang2025SagaLLM}, Atomix~\cite{MohammadiEtAl2026Atomix}
 and CodeCRDT~\cite{Pugachev2025CodeCRDT} are placed on the lattice informally
 in supplement \S\,D (none reaches $L_4$; \S\,V compares the nearest systems
 dimension by dimension). S-Bus~\cite{Khan2026SBus} (the author's prior work)
 recovers implicit read sets for one contract, the natural supplier of
-trust-base item (ix); agent-memory systems~\cite{PackerEtAl2023MemGPT} and the
+trust-base item (ix); memory systems~\cite{PackerEtAl2023MemGPT} and
 frameworks~\cite{LangGraph2026,WuEtAl2023AutoGen} supply substrate, not
 contract.
 
@@ -2933,49 +4150,46 @@ block $92$--$95\%$ of benign infrastructure races and argue for semantic
 commit predicates; EffectMatch~\cite{ZhangEtAl2026EffectMatch} validates
 persistent outcomes against what was approved; versioned
 execution~\cite{ZhangEtAl2026Revisable} revokes an obsolete execution's
-authority to publish. MemTX~\cite{LiEtAl2026MemTX} alone looks past
-commit: on an explicit \emph{retraction} it walks a derivation DAG to
-executed tool actions and records each as compensated or leaked. None
-treats the ordinary case \cref{tab:live} measures---no retraction, no race,
-a legitimate later write---or states what guarantee is achievable there;
-the remark of \cref{sec:residue} says it is an obligation under an
-open-world store, which the ledger registers at the superseding write. The precision
-objection of Zheng et al.\ is answered at the basis: a basis predicate
-ignores writes to cells the effect never depended on.
+authority to publish. MemTX~\cite{LiEtAl2026MemTX} alone looks past commit:
+on an explicit \emph{retraction} it walks a derivation DAG to executed tool
+actions and records each as compensated or leaked. None treats the ordinary
+case \cref{tab:live} measures---no retraction, no race, a legitimate later
+write---or says what is achievable there; \cref{sec:residue} says an
+obligation, registered at the superseding write. Zheng et al.'s precision
+objection is answered at the basis: a basis predicate ignores writes to cells
+the effect never depended on.
 
 \subsection{Effect order, durable execution, verified systems, taxonomies}
 Parallel function calling is pursued deliberately
 (LLMCompiler~\cite{KimEtAl2024LLMCompiler}, asynchronous
-calling~\cite{GimEtAl2024AsyncLM}), with the ordering of
-effects left to the runtime; \A6 is a wrong independence judgment seen at
-the effect level (\cref{sec:a6-eval}). Sandboxes and policies for tool
-effects~\cite{RuanEtAl2024ToolEmu,DebenedettiEtAl2024AgentDojo}
-gate \emph{what} an agent may do, orthogonally to the order and basis of
-effects; $\tau$-bench~\cite{YaoEtAl2024TauBench} scores end state for a
-single agent. Durable-execution
+calling~\cite{GimEtAl2024AsyncLM}), the ordering of effects left to the
+runtime; \A6 is a wrong independence judgment seen at the effect level
+(\cref{sec:a6-eval}). Sandboxes and policies for tool
+effects~\cite{RuanEtAl2024ToolEmu,DebenedettiEtAl2024AgentDojo} gate
+\emph{what} an agent may do, orthogonally to order and basis;
+$\tau$-bench~\cite{YaoEtAl2024TauBench} scores end state for one agent. Durable-execution
 engines~\cite{BurckhardtEtAl2021Durable} and exactly-once workflow
-systems~\cite{SkiadopoulosEtAl2022DBOS}
-govern whether an effect is \emph{repeated} after a crash---the property $D$
-of \cref{sec:dup} names---while output commit governs whether it may
-\emph{leave} while its basis can be withdrawn, and the two compose; rollback
-recovery discharges duplicates by identity because replay is deterministic,
-a premise agent runtimes break~\cite{ZhengEtAl2026ACRFence}.
+systems~\cite{SkiadopoulosEtAl2022DBOS} govern whether an effect is
+\emph{repeated} after a crash (the property $D$ of \cref{sec:dup} names),
+output commit whether it may \emph{leave} while its basis can be withdrawn;
+the two compose. Rollback recovery discharges duplicates by identity because
+replay is deterministic, a premise agent runtimes
+break~\cite{ZhengEtAl2026ACRFence}.
 Retro~\cite{KimEtAl2010Retro} repairs effects that have already left by
 compensating requests; a refused retraction in our $L_2$ is such an effect.
-IronFleet~\cite{HawblitzelEtAl2015IronFleet} verifies running protocols and
-stores and Perennial~\cite{ChajedEtAl2019Perennial} crash-safe storage by
-layered refinement, the template for the open step of \cref{sec:l1}; ours
-are far smaller, and what they add is verified bytes executed in a
-measurement. Jepsen~\cite{Kingsbury2013Jepsen} and the black-box
-checkers~\cite{TanEtAl2020Cobra,Aphyr2020Elle} (their 2023--24 successors
-in supplement \S\,R) decide isolation levels over database histories with
-unverified analyzers under a uniqueness assumption we share (\cref{sec:a3});
-ours decide a far simpler property and are verified against it, in the
-tradition of runtime verification~\cite{BauerLeuckerSchallhart2011}.
-MAST~\cite{CemriEtAl2025MAST} catalogs cognitive and coordination failures
-and its traces cannot show \A1 either way (supplement \S\,C);
-Agentproof~\cite{XavierEtAl2026Agentproof} analyzes agent graphs
-statically, the programme the census specializes;
+IronFleet~\cite{HawblitzelEtAl2015IronFleet} and
+Perennial~\cite{ChajedEtAl2019Perennial} verify running systems by layered
+refinement, the template for the open step of \cref{sec:l1}; ours are far
+smaller and add verified bytes executed in a measurement. Jepsen~\cite{Kingsbury2013Jepsen} and the black-box
+checkers~\cite{TanEtAl2020Cobra,Aphyr2020Elle} (successors in supplement
+\S\,R) decide isolation levels over database histories with unverified
+analyzers under a uniqueness assumption we share (\cref{sec:a3}); ours
+decide a far simpler property and are verified against it, in the tradition
+of runtime verification~\cite{BauerLeuckerSchallhart2011}.
+MAST~\cite{CemriEtAl2025MAST} catalogs cognitive and coordination failures;
+its traces cannot show \A1 either way (supplement \S\,C).
+Agentproof~\cite{XavierEtAl2026Agentproof} analyzes agent graphs statically,
+the programme the census specializes;
 MCMAS~\cite{LomuscioQuRaimondi2017MCMAS} verifies task-level and strategic
 properties, a complementary layer.
 
@@ -2988,11 +4202,11 @@ properties, a complementary layer.
 \noindent\emph{The predicates are coarser than the phenomena.} \A1
 over-reports in one shape (a value overwritten and restored inside the
 window; \HypRestored{} of \HypAOneWitnesses{} witness pairs on the live
-records) and under-reaches the harm by the post-commit supersession that
-\Rp{} names (\cref{tab:live}); \A6 fires on commuting effects and is blind to
+records) and under-reaches the harm by the post-commit supersession \Rp{}
+names (\cref{tab:live}); \A6 fires on commuting effects and is blind to
 dropped and duplicated ones. The detectors are sound and complete against
 their Verus specifications; \cref{tab:assurance} says where specification
-and definition coincide and under what hypothesis.
+and definition coincide, under what hypothesis.
 
 \smallskip\noindent\emph{\Rp{} is not an anomaly, and its basis is
 syntactic.} \Rp{} fires in $100/100$ sequential sessions because the
@@ -3000,47 +4214,46 @@ workload revises the date in every session; \cref{tab:live} establishes that
 the harm an isolation discipline cannot reach is exactly this predicate, not
 that concurrency causes it. Its basis is argument provenance: a booking
 derived from the date by computation (``the day after'') has an empty basis
-and is invisible, so the extractor under-reaches and the \Rp{} column is a
-lower bound; its coverage here is \HypBasisRecovered/\HypBookings{} because
-the booking tool takes the date as a structured argument, and free-text
-effects need a declared or taint-tracked basis. The ledger's guarantee ends
-at registration; whether an obligation is discharged, and at what cost, is
-the compensator's, and \cref{sec:ledger-world} measures two of them.
+and is invisible, so the \Rp{} column is a lower bound; coverage here is
+\HypBasisRecovered/\HypBookings{} because the booking tool takes the date
+as a structured argument; free-text effects need a declared or taint-tracked
+basis. The ledger's guarantee ends
+at registration; discharge is the compensator's, and \cref{sec:ledger-world}
+measures two of them.
 
 \smallskip\noindent\emph{A refused retraction is not a prevented anomaly.}
 Output commit makes \cref{def:a3} unreachable partly by holding effects and
 partly by refusing to retract an operation whose effects are out; the second
 leaves the world as it was and is counted (\cref{sec:l2-eval}); the
-exposure--latency curve between the harness's point and the live driver's
-extreme is unmeasured.
+exposure--latency curve between the harness's point and the live driver's is
+unmeasured.
 
 \smallskip\noindent\emph{Verification is relative to the trace, and the
 triangle closes on one system only in part.} Trust-base item (ix) is the
-largest and is measured only at the store boundary: a value that reaches the
-model through prompt context is invisible, and our own read-set reconstruction
-finds most reads invisible on a realistic workload~\cite{Khan2026SBus}. \ifnum\VerifiedScorerAvailable=1 The \A1
+largest, measured only at the store boundary: a value that reaches the model
+through prompt context is invisible, and our own read-set reconstruction finds
+most reads invisible on a realistic workload~\cite{Khan2026SBus}. \ifnum\VerifiedScorerAvailable=1 The \A1
 verdict is now the verified bytes behind an interning wrapper; the \A2,
 \A3 and \A6 verdicts remain ports gated against their specifications.\else
 The published \A1 verdicts stand on a gated port until the rescoring through
 the verified bytes is committed; \A2, \A3 and \A6 remain ports gated against
 their specifications.\fi{} The refinement from the two concurrent stores to
-their abstract machines is open (a bounded simulation is evidence, not a
+their abstract machines is open (a bounded simulation is evidence, not
 proof); the $L_2$--$L_4$ exec artifacts are sequential objects a
 multi-threaded caller must serialize; the ledger arm's executable is harness
-code and the ledger's Verus model is scaffolding. Liveness is verified
-nowhere.
+code\ifnum\LfiveExecAvailable=1{} except its bookkeeping (\LfiveExecVerus)\fi, its
+Verus model scaffolding. Liveness is verified nowhere.
 
 \smallskip\noindent\emph{Prevalence is not established, and the census
 points the other way.} The census bounds a structural precondition in public
 code (none confirmed; at most about half counting every unresolved site) and
-says nothing about private deployments, run frequency or the cross-thread
-store variant. Whether these anomalies occur in production at a rate that
+is silent on private deployments, run frequency and the cross-thread store. Whether these anomalies occur in production at a rate that
 justifies the costs of \cref{sec:cost} is open; the live rates are latency
-races, and \cref{tab:liveruns} shows them moving between runs of one arm by
-more than between arms.
+races that \cref{tab:liveruns} shows moving between runs of one arm by more
+than between arms.
 
-\smallskip\noindent\emph{Pending} (runner steps, each marked in the text
-where its receipt lands):
+\smallskip\noindent\emph{Pending} (runner steps, marked where the receipt
+lands):
 \ifnum\VerifiedScorerAvailable=0 the rescoring of every cell through the
 verified detector (step 14; its first run rejected every record carrying
 both \texttt{agent} and \texttt{agent\_id}, a reader defect fixed in this
@@ -3055,8 +4268,8 @@ Claude run (6), recoverable from its completion stamps; \fi\fi
 \ifnum\PilotClaudeAvailable=1 the rescoring of the Claude pilot's pessimistic
 and snapshot-isolation cells (14 after 11). \else the Claude pilot's
 pessimistic and snapshot-isolation cells and the \A1 rate of its rerun triage
-cell (11, 14). \fi Longer tasks, more agents and an instrumented deployment
-are the empirical follow-up; the store refinements, the formal one.
+cell (11, 14). \fi Longer tasks, more agents and an instrumented deployment are the empirical
+follow-up; the store refinements, the formal one.
 
 % ============================================================================
 % sec/09-conclusion.tex
@@ -3065,34 +4278,32 @@ are the empirical follow-up; the store refinements, the formal one.
 \label{sec:conclusion}
 
 Four classical consistency conditions port to the regime in which an agent's
-step spans an inference call, mechanized at stated assurance levels, with the
+step spans an inference call, mechanized at stated assurance levels, the
 disciplines that exclude them verified and measured as the bytes that run.
 What they leave is not an anomaly: an effect out on a basis later writes
 revise, which under an open-world store can only be owed, and an obligation
 is worth exactly what its compensator does---a property the world exposes and
-the records do not. The evaluation's contribution is what sits beside the
-verified zeros: the harm each discipline leaves, its cost per unit of sound
-work, where the preconditions occur in public code, and which comparisons
-the design cannot support.
+the records do not. 
 
 \smallskip\noindent\textbf{What an agent framework should provide.} Four
-requirements follow from the measurements, each with its price.
+requirements follow from the measurements, each priced.
 (i)~\emph{A versioned store with compare-and-set.} LangGraph's
-\texttt{BaseStore} has neither, so $L_1$ cannot be implemented inside the
-framework; with it, read-set validation removes every stale commit at one
-discarded generation per realized conflict, and per sound commit optimistic
-validation costs $+0.4$--$11.1\%$ where locking costs up to $+97\%$.
-(ii)~\emph{An obligation hook on the write path}, atomic with the superseding
-write, and compensators tested against the external system rather than the
-records: \Rp{} was $0$ under a compensator that misreported, and the stale
-effect stands for the compensation's model call (a median of about
-$1.5$\,s here). (iii)~\emph{A sequencer in the tool executor} for calls
-emitted in one turn unless declared commuting: the released \texttt{ToolNode}
-committed \ToolNodeRealSqlite{} and \ToolNodeRealHttp{} replays out of order
-against real effects, the verified sequencer none. (iv)~\emph{Validation at
-dispatch} for tools of a mutable registry, and an idempotency key on resumed
-effects: snapshot resolution called a phantom tool in every run whose plan
-the churn touched, and a re-executed node emitted its effect twice.
+\texttt{BaseStore} has neither, so $L_1$ cannot live inside the framework;
+with it, read-set validation removes every stale commit at one discarded
+generation per realized conflict, and per sound commit optimistic validation
+costs $+0.4$--$11.1\%$ where locking costs up to $+97\%$.
+(ii)~\emph{An obligation hook on the write path}, atomic with the write
+(free; it closes a gap no run of ours could measure), and compensators tested
+against the external system, not the records: \Rp{} was $0$ under a
+compensator that misreported, and the stale effect stands for the
+compensation's model call (median \LWatomicLedgerCompLatencyMedianSRange{}\,s).
+(iii)~\emph{A sequencer in the tool executor} for calls emitted in one turn
+unless declared commuting: the released \texttt{ToolNode} committed
+\ToolNodeRealSqlite{} and \ToolNodeRealHttp{} replays out of order against
+real effects, the verified sequencer none. (iv)~\emph{Validation at dispatch}
+for tools of a mutable registry, and an idempotency key on resumed effects:
+snapshot resolution called a phantom tool in every run the churn touched, and
+a re-executed node emitted its effect twice.
 
 
 % ============================================================================
@@ -3106,9 +4317,7 @@ E.~Y. Chang and L.~Geng, ``{SagaLLM}: Context management, validation, and
 
 \bibitem{MohammadiEtAl2026Atomix}
 B.~Mohammadi, N.~Potamitis, L.~Klein, A.~Arora, and L.~Bindschaedler, ``Atomix:
-  Timely, transactional tool use for reliable agentic workflows,'' \emph{arXiv
-  preprint arXiv:2602.14849}, 2026, preprint; not yet peer-reviewed at time of
-  writing.
+  Timely, transactional tool use for reliable agentic workflows,'' \emph{arXiv:2602.14849}, 2026.
 
 \bibitem{WeikumVossen2001}
 G.~Weikum and G.~Vossen, \emph{Transactional Information Systems: Theory,
@@ -3117,12 +4326,12 @@ G.~Weikum and G.~Vossen, \emph{Transactional Information Systems: Theory,
 
 \bibitem{KungRobinson1981OCC}
 H.~T. Kung and J.~T. Robinson, ``On optimistic methods for concurrency
-  control,'' \emph{ACM Transactions on Database Systems}, vol.~6, no.~2,
+  control,'' \emph{ACM Trans. Database Syst.}, vol.~6, no.~2,
   pp. 213--226, 1981.
 
 \bibitem{Lamport1979SC}
 L.~Lamport, ``How to make a multiprocessor computer that correctly executes
-  multiprocess programs,'' \emph{IEEE Transactions on Computers}, vol. C-28,
+  multiprocess programs,'' \emph{IEEE Trans. Comput.}, vol. C-28,
   no.~9, pp. 690--691, 1979.
 
 \bibitem{HerlihyWing1990}
@@ -3141,8 +4350,7 @@ A.~Adya, ``Weak consistency: A generalized theory and optimistic
 
 \bibitem{AdyaLiskovOneil2000}
 A.~Adya, B.~Liskov, and P.~O'Neil, ``Generalized isolation level definitions,''
-  in \emph{Proceedings of the 16th International Conference on Data Engineering
-  ({ICDE})}, 2000, pp. 67--78.
+  in \emph{Proc. ICDE}, 2000, pp. 67--78.
 
 \bibitem{LloydEtAl2011COPS}
 W.~Lloyd, M.~J. Freedman, M.~Kaminsky, and D.~G. Andersen, ``Don't settle for
@@ -3157,8 +4365,7 @@ M.~Cemri, M.~Z. Pan, S.~Yang, L.~A. Agrawal, B.~Chopra, R.~Tiwari, K.~Keutzer,
 
 \bibitem{CahillRohmFekete2008SSI}
 M.~J. Cahill, U.~R{\"o}hm, and A.~D. Fekete, ``Serializable isolation for
-  snapshot databases,'' in \emph{Proceedings of the {ACM} {SIGMOD}
-  International Conference on Management of Data}, 2008, pp. 729--738.
+  snapshot databases,'' in \emph{Proc. SIGMOD}, 2008, pp. 729--738.
 
 \bibitem{Lamport1978TimeClocks}
 L.~Lamport, ``Time, clocks, and the ordering of events in a distributed
@@ -3168,7 +4375,7 @@ L.~Lamport, ``Time, clocks, and the ordering of events in a distributed
 \bibitem{WuEtAl2023AutoGen}
 Q.~Wu, G.~Bansal, J.~Zhang, Y.~Wu, S.~Zhang, E.~Zhu, B.~Li, L.~Jiang, X.~Zhang,
   and C.~Wang, ``{AutoGen}: Enabling next-gen {LLM} applications via
-  multi-agent conversation,'' in \emph{arXiv preprint arXiv:2308.08155}, 2023.
+  multi-agent conversation,'' in \emph{arXiv:2308.08155}, 2023.
 
 \bibitem{Miller2006Robust}
 M.~S. Miller, ``Robust composition: Towards a unified approach to access
@@ -3181,29 +4388,25 @@ P.~A. Bernstein, V.~Hadzilacos, and N.~Goodman, \emph{Concurrency Control and
   Addison-Wesley, 1987.
 
 \bibitem{GarciaMolinaSalem1987Sagas}
-H.~Garcia-Molina and K.~Salem, ``Sagas,'' in \emph{Proceedings of the 1987 ACM
-  SIGMOD International Conference on Management of Data}, 1987, pp. 249--259.
+H.~Garcia-Molina and K.~Salem, ``Sagas,'' in \emph{Proc. SIGMOD}, 1987, pp. 249--259.
 
 \bibitem{StromYemini1985OptimisticRecovery}
 R.~E. Strom and S.~Yemini, ``Optimistic recovery in distributed systems,''
-  \emph{ACM Transactions on Computer Systems}, vol.~3, no.~3, pp. 204--226,
+  \emph{ACM Trans. Comput. Syst.}, vol.~3, no.~3, pp. 204--226,
   1985.
 
 \bibitem{KorthLevySilberschatz1990Compensating}
 H.~F. Korth, E.~Levy, and A.~Silberschatz, ``A formal approach to recovery by
-  compensating transactions,'' in \emph{Proceedings of the 16th International
-  Conference on Very Large Data Bases (VLDB)}, 1990, pp. 95--106.
+  compensating transactions,'' in \emph{Proc. VLDB}, 1990, pp. 95--106.
 
 \bibitem{FeketeEtAl2005MakingSI}
 A.~Fekete, D.~Liarokapis, E.~O'Neil, P.~O'Neil, and D.~Shasha, ``Making
-  snapshot isolation serializable,'' \emph{ACM Transactions on Database Systems
-  ({TODS})}, vol.~30, no.~2, pp. 492--528, 2005.
+  snapshot isolation serializable,'' \emph{ACM Trans. Database Syst.}, vol.~30, no.~2, pp. 492--528, 2005.
 
 \bibitem{Lattuada2023Verus}
 A.~Lattuada, T.~Hance, C.~Cho, M.~Brun, I.~Subasinghe, Y.~Zhou, J.~Howell,
   B.~Parno, and C.~Hawblitzel, ``Verus: Verifying {Rust} programs using linear
-  ghost types,'' in \emph{Proceedings of the {ACM} on Programming Languages
-  (OOPSLA)}, vol.~7, 2023, pp. 286--315.
+  ghost types,'' in \emph{Proc. ACM Program. Lang. (OOPSLA)}, vol.~7, 2023, pp. 286--315.
 
 \bibitem{AnthropicMCP2024}
 {Anthropic}, ``Model context protocol,'' \url{https://modelcontextprotocol.io},
@@ -3212,16 +4415,15 @@ A.~Lattuada, T.~Hance, C.~Cho, M.~Brun, I.~Subasinghe, Y.~Zhou, J.~Howell,
 \bibitem{MalewiczEtAl2010Pregel}
 G.~Malewicz, M.~H. Austern, A.~J.~C. Bik, J.~C. Dehnert, I.~Horn,
   N.~Leiser, and G.~Czajkowski, ``Pregel: A system for large-scale graph
-  processing,'' in \emph{Proceedings of the ACM SIGMOD International
-  Conference on Management of Data}, 2010, pp. 135--146.
+  processing,'' in \emph{Proc. SIGMOD}, 2010, pp. 135--146.
 
 \bibitem{Pugachev2025CodeCRDT}
 S.~Pugachev, ``{CodeCRDT}: Observation-driven coordination for multi-agent
-  {LLM} code generation,'' \emph{arXiv preprint arXiv:2510.18893}, 2025.
+  {LLM} code generation,'' \emph{arXiv:2510.18893}, 2025.
 
 \bibitem{PortsGrittner2012}
 D.~R.~K. Ports and K.~Grittner, ``Serializable snapshot isolation in
-  {PostgreSQL},'' \emph{Proceedings of the VLDB Endowment}, vol.~5, no.~12,
+  {PostgreSQL},'' \emph{Proc. VLDB Endow.}, vol.~5, no.~12,
   pp. 1850--1861, 2012.
 
 \bibitem{Papadimitriou1979}
@@ -3230,25 +4432,21 @@ C.~H. Papadimitriou, ``The serializability of concurrent database updates,''
 
 \bibitem{CeroneEtAl2015Framework}
 A.~Cerone, G.~Bernardi, and A.~Gotsman, ``A framework for transactional
-  consistency models with atomic visibility,'' in \emph{26th International
-  Conference on Concurrency Theory (CONCUR)}, ser. LIPIcs, vol.~42, 2015,
+  consistency models with atomic visibility,'' in \emph{Proc. CONCUR}, 2015,
   pp. 58--71.
 
 \bibitem{BernardiGotsman2016Robustness}
 G.~Bernardi and A.~Gotsman, ``Robustness against consistency models with
-  atomic visibility,'' in \emph{27th International Conference on Concurrency
-  Theory (CONCUR)}, ser. LIPIcs, vol.~59, 2016, pp. 7:1--7:15.
+  atomic visibility,'' in \emph{Proc. CONCUR}, 2016, pp. 7:1--7:15.
 
 \bibitem{WelcEtAl2008Irrevocable}
 A.~Welc, B.~Saha, and A.-R. Adl-Tabatabai, ``Irrevocable transactions and
-  their applications,'' in \emph{Proc. 20th ACM Symp. Parallelism in Algorithms
-  and Architectures (SPAA)}, 2008.
+  their applications,'' in \emph{Proc. SPAA}, 2008.
 
 \bibitem{HawblitzelEtAl2015IronFleet}
 C.~Hawblitzel, J.~Howell, M.~Kapritsos, J.~R. Lorch, B.~Parno, M.~L. Roberts,
   S.~Setty, and B.~Zill, ``{IronFleet}: Proving practical distributed systems
-  correct,'' in \emph{Proceedings of the 25th ACM Symposium on Operating
-  Systems Principles (SOSP)}, 2015, pp. 1--17.
+  correct,'' in \emph{Proc. SOSP}, 2015, pp. 1--17.
 
 \bibitem{Kingsbury2013Jepsen}
 K.~Kingsbury, ``Jepsen: Distributed systems safety analysis,''
@@ -3256,8 +4454,7 @@ K.~Kingsbury, ``Jepsen: Distributed systems safety analysis,''
 
 \bibitem{TanEtAl2020Cobra}
 C.~Tan, C.~Zhao, S.~Mu, and M.~Walfish, ``{Cobra}: Making transactional
-  key-value stores verifiably serializable,'' in \emph{Proceedings of the 14th
-  {USENIX} Symposium on Operating Systems Design and Implementation ({OSDI})},
+  key-value stores verifiably serializable,'' in \emph{Proc. OSDI},
   2020, pp. 63--80.
 
 \bibitem{Aphyr2020Elle}
@@ -3267,7 +4464,7 @@ K.~Kingsbury and P.~Alvaro, ``{Elle}: Inferring isolation anomalies from
 \bibitem{KimEtAl2024LLMCompiler}
 S.~Kim, S.~Moon, R.~Tabrizi, N.~Lee, M.~W. Mahoney, K.~Keutzer, and
   A.~Gholami, ``An {LLM} compiler for parallel function calling,'' in
-  \emph{Proc. 41st Int. Conf. Machine Learning (ICML)}, 2024.
+  \emph{Proc. ICML}, 2024.
 
 \bibitem{YaoEtAl2024TauBench}
 S.~Yao, N.~Shinn, P.~Razavi, and K.~Narasimhan, ``$\tau$-bench: A benchmark for
@@ -3283,35 +4480,33 @@ E.~Debenedetti, J.~Zhang, M.~Balunovi\'c, L.~Beurer-Kellner, M.~Fischer, and
 \bibitem{BurckhardtEtAl2021Durable}
 S.~Burckhardt, C.~Gillum, D.~Justo, K.~Kallas, C.~McMahon, and C.~S.
   Meiklejohn, ``Durable Functions: Semantics for stateful serverless,''
-  \emph{Proceedings of the ACM on Programming Languages (OOPSLA)},
+  \emph{Proc. ACM Program. Lang. (OOPSLA)},
   vol.~5, 2021.
 
 \bibitem{LyuEtAl2026CoAgent}
 H.~Lyu, D.~Zhang, M.~Wu, X.~Wei, and H.~Chen, ``{CoAgent}: Concurrency control
-  for multi-agent systems,'' arXiv preprint arXiv:2606.15376, 2026.
+  for multi-agent systems,'' arXiv:2606.15376, 2026.
 
 \bibitem{LiuEtAl2026STORM}
 M.~Liu, T.~Chen, Z.~Xu, X.~Jiang, and Y.~Dong, ``Multi-agent collaboration with
-  state management,'' arXiv preprint arXiv:2605.20563, 2026.
+  state management,'' arXiv:2605.20563, 2026.
 
 \bibitem{Khan2026SBus}
 S.~Khan, ``{S-Bus}: Automatic read-set reconstruction for multi-agent {LLM}
-  state coordination,'' arXiv preprint arXiv:2605.17076, 2026.
+  state coordination,'' arXiv:2605.17076, 2026.
 
 \bibitem{ZhouEtAl2026ATCC}
 W.~Zhou, Z.~Wang, Z.~Peng, H.~Chen, Y.~Zhang, and G.~Yu, ``{ATCC}: Adaptive
-  concurrency control for unforeseen agentic transactions,'' arXiv preprint
-  arXiv:2603.13906, 2026.
+  concurrency control for unforeseen agentic transactions,'' arXiv:2603.13906, 2026.
 
 \bibitem{PatilEtAl2024GoEX}
 S.~G. Patil, T.~Zhang, V.~Fang, Noppapon~C., R.~Huang, A.~Hao, M.~Casado,
   J.~E. Gonzalez, R.~A. Popa, and I.~Stoica, ``{GoEX}: Perspectives and designs
-  towards a runtime for autonomous {LLM} applications,'' arXiv preprint
-  arXiv:2404.06921, 2024.
+  towards a runtime for autonomous {LLM} applications,'' arXiv:2404.06921, 2024.
 
 \bibitem{XavierEtAl2026Agentproof}
 M.~Xavier, Vaisakh~M.~A., M.~Jolly, and M.~Xavier, ``{Agentproof}: Static
-  verification of agent workflow graphs,'' arXiv preprint arXiv:2603.20356,
+  verification of agent workflow graphs,'' arXiv:2603.20356,
   2026.
 
 \bibitem{Hadzilacos1988Reliability}
@@ -3320,20 +4515,18 @@ V.~Hadzilacos, ``A theory of reliability in database systems,'' \emph{J. ACM},
 
 \bibitem{KimEtAl2010Retro}
 T.~Kim, X.~Wang, N.~Zeldovich, and M.~F. Kaashoek, ``Intrusion recovery using
-  selective re-execution,'' in \emph{Proc. 9th USENIX Symp. Operating Systems
-  Design and Implementation (OSDI)}, 2010.
+  selective re-execution,'' in \emph{Proc. OSDI}, 2010.
 
 \bibitem{SkiadopoulosEtAl2022DBOS}
 A.~Skiadopoulos, Q.~Li, P.~Kraft, K.~Kaffes, D.~Hong, S.~Mathew, D.~Bestor,
   M.~Cafarella, V.~Gadepally, G.~Graefe, J.~Kepner, C.~Kozyrakis, T.~Kraska,
   M.~Stonebraker, L.~Suresh, and M.~Zaharia, ``{DBOS}: A {DBMS}-oriented
-  operating system,'' \emph{Proceedings of the VLDB Endowment}, vol.~15,
+  operating system,'' \emph{Proc. VLDB Endow.}, vol.~15,
   no.~1, pp. 21--30, 2021.
 
 \bibitem{PackerEtAl2023MemGPT}
 C.~Packer, V.~Fang, S.~G. Patil, K.~Lin, S.~Wooders, and J.~E. Gonzalez,
-  ``{MemGPT}: Towards {LLMs} as operating systems,'' \emph{arXiv preprint
-  arXiv:2310.08560}, 2023.
+  ``{MemGPT}: Towards {LLMs} as operating systems,'' \emph{arXiv:2310.08560}, 2023.
 
 \bibitem{ReuterWachter1991ConTract}
 A.~Reuter and H.~W{\"a}chter, ``The {ConTract} model,'' \emph{IEEE Data
@@ -3341,12 +4534,11 @@ A.~Reuter and H.~W{\"a}chter, ``The {ConTract} model,'' \emph{IEEE Data
 
 \bibitem{ChajedEtAl2019Perennial}
 T.~Chajed, J.~Tassarotti, M.~F. Kaashoek, and N.~Zeldovich, ``Verifying
-  concurrent, crash-safe systems with {Perennial},'' in \emph{Proc. 27th ACM
-  Symposium on Operating Systems Principles (SOSP)}, 2019, pp. 243--258.
+  concurrent, crash-safe systems with {Perennial},'' in \emph{Proc. SOSP}, 2019, pp. 243--258.
 
 \bibitem{BauerLeuckerSchallhart2011}
 A.~Bauer, M.~Leucker, and C.~Schallhart, ``Runtime verification for {LTL} and
-  {TLTL},'' \emph{ACM Transactions on Software Engineering and Methodology},
+  {TLTL},'' \emph{ACM TOSEM},
   vol.~20, no.~4, pp. 14:1--14:64, 2011.
 
 \bibitem{LomuscioQuRaimondi2017MCMAS}
@@ -3356,8 +4548,7 @@ A.~Lomuscio, H.~Qu, and F.~Raimondi, ``{MCMAS}: an open-source model checker
 
 \bibitem{ZhengEtAl2026ACRFence}
 Y.~Zheng, Y.~Yang, W.~Zhang, and A.~Quinn, ``{ACRFence}: Preventing semantic
-  rollback attacks in agent checkpoint-restore,'' arXiv preprint
-  arXiv:2603.20625, 2026.
+  rollback attacks in agent checkpoint-restore,'' arXiv:2603.20625, 2026.
 
 \bibitem{ZhouEtAl2025TxnSails}
 W.~Zhou, Y.~Zhang, Z.~Peng, and G.~Yu, ``{TxnSails}: Achieving serializable
@@ -3368,40 +4559,40 @@ W.~Zhou, Y.~Zhang, Z.~Peng, and G.~Yu, ``{TxnSails}: Achieving serializable
 J.~Gray and A.~Reuter, \emph{Transaction Processing: Concepts and Techniques}.\hskip 1em plus 0.5em minus 0.4em\relax Morgan Kaufmann, 1993.
 
 \bibitem{HerlihyKoskinen2008Boosting}
-M.~Herlihy and E.~Koskinen, ``Transactional boosting: A methodology for highly-concurrent transactional objects,'' in \emph{Proc. 13th ACM SIGPLAN Symp. Principles and Practice of Parallel Programming (PPoPP)}, 2008, pp. 207--216.
+M.~Herlihy and E.~Koskinen, ``Transactional boosting: A methodology for highly-concurrent transactional objects,'' in \emph{Proc. PPoPP}, 2008, pp. 207--216.
 
 \bibitem{KraskaEtAl2009Rationing}
-T.~Kraska, M.~Hentschel, G.~Alonso, and D.~Kossmann, ``Consistency rationing in the cloud: Pay only when it matters,'' \emph{Proceedings of the VLDB Endowment}, vol.~2, no.~1, pp. 253--264, 2009.
+T.~Kraska, M.~Hentschel, G.~Alonso, and D.~Kossmann, ``Consistency rationing in the cloud: Pay only when it matters,'' \emph{Proc. VLDB Endow.}, vol.~2, no.~1, pp. 253--264, 2009.
 
 \bibitem{LiEtAl2026MemTX}
-X.~Li, Y.~Wang, H.~Lu, Z.~Chen, M.~Li, P.~Song, M.~Zheng, and T.~Cai, ``{MemTX}: Transactional belief commit for stateful agent memory,'' arXiv preprint arXiv:2607.23929, 2026.
+X.~Li, Y.~Wang, H.~Lu, Z.~Chen, M.~Li, P.~Song, M.~Zheng, and T.~Cai, ``{MemTX}: Transactional belief commit for stateful agent memory,'' arXiv:2607.23929, 2026.
 
 \bibitem{YangEtAl2026Position}
-X.~Yang, L.~Li, Z.~Ji, T.~J. Zhang, and W.~Jiang, ``Position: Multi-agent systems should prioritize concurrency control,'' arXiv preprint arXiv:2608.18092, 2026.
+X.~Yang, L.~Li, Z.~Ji, T.~J. Zhang, and W.~Jiang, ``Position: Multi-agent systems should prioritize concurrency control,'' arXiv:2608.18092, 2026.
 
 \bibitem{MargalitEtAl2026Governed}
-Y.~Margalit, N.~Cohen-Inger, E.~Avram, R.~Taig, and O.~Margalit, ``Governed shared memory for multi-agent {LLM} systems,'' arXiv preprint arXiv:2606.24535, 2026.
+Y.~Margalit, N.~Cohen-Inger, E.~Avram, R.~Taig, and O.~Margalit, ``Governed shared memory for multi-agent {LLM} systems,'' arXiv:2606.24535, 2026.
 
 \bibitem{Transactive2026}
-T.~E. Kim, X.~He, D.~Jain, A.~Agrawal, N.~Arabzadeh, and F.~Diaz, ``Multi-agent transactive memory,'' arXiv preprint arXiv:2606.19911, 2026.
+T.~E. Kim, X.~He, D.~Jain, A.~Agrawal, N.~Arabzadeh, and F.~Diaz, ``Multi-agent transactive memory,'' arXiv:2606.19911, 2026.
 
 \bibitem{GimEtAl2024AsyncLM}
-I.~Gim, S.~Lee, and L.~Zhong, ``Asynchronous {LLM} function calling,'' arXiv preprint arXiv:2412.07017, 2024.
+I.~Gim, S.~Lee, and L.~Zhong, ``Asynchronous {LLM} function calling,'' arXiv:2412.07017, 2024.
 
 \bibitem{RuanEtAl2024ToolEmu}
-Y.~Ruan, H.~Dong, A.~Wang, S.~Pitis, Y.~Zhou, J.~Ba, Y.~Dubois, C.~J. Maddison, and T.~Hashimoto, ``Identifying the risks of {LM} agents with an {LM}-emulated sandbox,'' in \emph{Int. Conf. Learning Representations (ICLR)}, 2024.
+Y.~Ruan, H.~Dong, A.~Wang, S.~Pitis, Y.~Zhou, J.~Ba, Y.~Dubois, C.~J. Maddison, and T.~Hashimoto, ``Identifying the risks of {LM} agents with an {LM}-emulated sandbox,'' in \emph{Proc. ICLR}, 2024.
 
 \bibitem{SantosGrueiro2026CommitGuard}
-I.~Santos-Grueiro, ``Temporary authority, permanent effects: Commit-time authorization for {LLM} agents,'' arXiv preprint arXiv:2607.10487, 2026.
+I.~Santos-Grueiro, ``Temporary authority, permanent effects: Commit-time authorization for {LLM} agents,'' arXiv:2607.10487, 2026.
 
 \bibitem{ZhengEtAl2026Stale}
-Z.~Zheng, J.~Long, B.~Li, and J.~Yao, ``Stale does not mean unsafe: Guard precision for tool-using {LLM} agents under infrastructure state races,'' arXiv preprint arXiv:2609.29522, 2026.
+Z.~Zheng, J.~Long, B.~Li, and J.~Yao, ``Stale does not mean unsafe: Guard precision for tool-using {LLM} agents under infrastructure state races,'' arXiv:2609.29522, 2026.
 
 \bibitem{ZhangEtAl2026EffectMatch}
-H.~Zhang, H.~Zhang, Z.~Liang, Y.~Yan, D.~Zuo, and H.~Wang, ``Beyond approved actions: Runtime validation of persistent outcomes in agent workflows,'' arXiv preprint arXiv:2609.31301, 2026.
+H.~Zhang, H.~Zhang, Z.~Liang, Y.~Yan, D.~Zuo, and H.~Wang, ``Beyond approved actions: Runtime validation of persistent outcomes in agent workflows,'' arXiv:2609.31301, 2026.
 
 \bibitem{ZhangEtAl2026Revisable}
-Y.~Zhang, R.~Sharma, N.~Vegesna, Z.~Fu, C.~Liu, and T.~Krishnamurthy, ``Serving a revisable world: Versioned execution for interruptible agents,'' arXiv preprint arXiv:2610.01160, 2026.
+Y.~Zhang, R.~Sharma, N.~Vegesna, Z.~Fu, C.~Liu, and T.~Krishnamurthy, ``Serving a revisable world: Versioned execution for interruptible agents,'' arXiv:2610.01160, 2026.
 
 \bibitem{BailisEtAl2014HAT}
 P.~Bailis, A.~Davidson, A.~Fekete, A.~Ghodsi, J.~M. Hellerstein, and I.~Stoica, ``Highly available transactions: Virtues and limitations,'' \emph{Proc. VLDB Endow.}, vol.~7, no.~3, pp. 181--192, 2014.
@@ -3419,50 +4610,44 @@ A.~Gupta and I.~S. Mumick, ``Maintenance of materialized views: Problems, techni
 T.~Akidau, A.~Balikov, K.~Bekiro\u{g}lu, S.~Chernyak, J.~Haberman, R.~Lax, S.~McVeety, D.~Mills, P.~Nordstrom, and S.~Whittle, ``{MillWheel}: Fault-tolerant stream processing at internet scale,'' \emph{Proc. VLDB Endow.}, vol.~6, no.~11, pp. 1033--1044, 2013.
 
 \bibitem{SunEtAl2026AgenticTx}
-Z.~Sun, X.~Wang, and G.~Li, ``Agentic transaction: Towards {ACID}-compliant agent systems,'' arXiv preprint arXiv:2608.13900, 2026.
+Z.~Sun, X.~Wang, and G.~Li, ``Agentic transaction: Towards {ACID}-compliant agent systems,'' arXiv:2608.13900, 2026.
 
 \bibitem{LangGraph2026}
 {LangGraph} 1.2, {Letta}, {CrewAI} 1.15, GitHub repositories, 2026.
 
 \bibitem{Wang2026TOKI}
 Z.~Wang, ``{TOKI}: A bitemporal operator algebra for contradiction resolution
-  in {LLM}-agent persistent memory,'' \emph{arXiv preprint arXiv:2606.06240},
+  in {LLM}-agent persistent memory,'' \emph{arXiv:2606.06240},
   2026.
 
 \bibitem{LiEtAl2025SAFEFLOW}
 P.~Li, Z.~Wu, Y.~Zhang \emph{et~al.}, ``{SAFEFLOW}: A principled protocol for
-  trustworthy and transactional autonomous agent systems,'' \emph{arXiv
-  preprint arXiv:2506.07564}, 2025.
+  trustworthy and transactional autonomous agent systems,'' \emph{arXiv:2506.07564}, 2025.
 
 \bibitem{ChenEtAl2026Cordon}
 Z.~Chen, H.~Liu, D.~Xu, D.~Dong, J.~Li, B.~Pu, and J.~Zhai, ``Cordon: Semantic
-  transactions for tool-using {LLM} agents,'' \emph{arXiv preprint
-  arXiv:2606.17573}, 2026.
+  transactions for tool-using {LLM} agents,'' \emph{arXiv:2606.17573}, 2026.
 
 \bibitem{VolkovEtAl2026StateFuse}
 S.~Volkov, Y.~Li, and Y.~Luo, ``{StateFuse}: Deterministic conflict-preserving
-  memory for multi-agent systems,'' \emph{arXiv preprint arXiv:2607.05844},
+  memory for multi-agent systems,'' \emph{arXiv:2607.05844},
   2026.
 
 \bibitem{YuEtAl2026ExecConsistency}
 Z.~Yu, Z.~Wang, P.~Wang, H.~Lin, R.~Zhao, and C.~Qin, ``Beyond corrected
-  memory: Execution consistency in multi-agent systems,'' \emph{arXiv preprint
-  arXiv:2610.08101}, 2026.
+  memory: Execution consistency in multi-agent systems,'' \emph{arXiv:2610.08101}, 2026.
 
 \bibitem{CrooksEtAl2017Seeing}
 N.~Crooks, Y.~Pu, L.~Alvisi, and A.~Clement, ``Seeing is believing: A
-  client-centric specification of database isolation,'' in \emph{Proc. ACM
-  Symposium on Principles of Distributed Computing (PODC)}, 2017, pp. 73--82.
+  client-centric specification of database isolation,'' in \emph{Proc. PODC}, 2017, pp. 73--82.
 
 \bibitem{TuEtAl2013Silo}
 S.~Tu, W.~Zheng, E.~Kohler, B.~Liskov, and S.~Madden, ``Speedy transactions in
-  multicore in-memory databases,'' in \emph{Proc. 24th ACM Symposium on
-  Operating Systems Principles (SOSP)}, 2013, pp. 18--32.
+  multicore in-memory databases,'' in \emph{Proc. SOSP}, 2013, pp. 18--32.
 
 \bibitem{YuEtAl2016TicToc}
 X.~Yu, A.~Pavlo, D.~Sanchez, and S.~Devadas, ``{TicToc}: Time traveling
-  optimistic concurrency control,'' in \emph{Proc. ACM SIGMOD International
-  Conference on Management of Data}, 2016, pp. 1629--1642.
+  optimistic concurrency control,'' in \emph{Proc. SIGMOD}, 2016, pp. 1629--1642.
 
 \end{thebibliography}
 

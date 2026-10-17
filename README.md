@@ -75,15 +75,22 @@ harness/macaudit/        gates: rescore_cells.py (Def-1 rescoring of every cell)
                          claims_gate.py (+ --artifact-url / --remote-readme), verus_count.sh,
                          verified_bytes_gate.sh, verified_scorer_gate.py, arm_timing.py
                          (are the arms of Table 3 the same race?), live_runs_aggregate.py
-                         (between-run intervals), hypothesis_gates.py H0-H6
+                         (between-run intervals), hypothesis_gates.py H0-H7 (+ the
+                         published-cell scope gate)
 probes/                  numbered probes (101..); `make setup` resolves their envs
 results/                 committed evidence, one directory per campaign:
                          runs/ (AutoGen pilot, 3 stamped runs), live_a1_*/ (LangGraph live),
                          live_a1_outcome/ (probe 303: four arms, offset sweep, three
                          interleaved runs), ledger_world/ (probe 304, the ledger in a
                          world, compensator `all`, 2026-10-15; ledger_world_v1_latest_conf/
-                         is the first run, compensator `latest`, 2026-10-14; both carry
-                         per-session world logs and records), a6_real_latency/,
+                         is the first run, compensator `latest`, 2026-10-14;
+                         ledger_world_atomic/ and ledger_world_window5000/ the 2026-10-16
+                         reruns with atomic registration and a 5 s consumer window;
+                         ledger_world_exec/ the run with the ledger's bookkeeping in the
+                         verified bytes, runner step 23; all carry per-session world logs
+                         and records), runs/*-refusal-*/ (probe 302 with the pilot's
+                         tools telling the model REFUSED, five arms, runner step 22),
+                         a6_real_latency/,
                          live_l2/, langgraph_a6_*/, hc_*/ (contention sweep), traces/,
                          production_traces/, mast_oprecords/, pilot_tokens*/, l2_measure.json,
                          l4_measure.json, verus/count.json

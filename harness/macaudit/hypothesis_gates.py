@@ -298,6 +298,30 @@ def main() -> int:
           f"converted campaigns {sorted(conv)}: {h7c['h7_reads']} reads, {h7c['h7_bad']} disagree, {h7c['h7_unrec']} unrecorded (tool channels and transcripts: reported, not gated)")
     print(f"H5: {tot['dup']} external effect keys emitted twice over {tot['ext']} externalized effects in the committed records"
           + (f"; the interrupt probe emitted the pre-gate effect {ip_before} times (arguments diverge: {ip_div})" if ip_before is not None else ""))
+    # H7 scope (2026-10-17): the campaigns that supply a PUBLISHED cell (results/expected.json: the pilot runs and the live
+    # study) must all be store-instrumented, so that every table cell is scored on records the theorem's store axiom was
+    # checked on; the converted campaigns may appear in the gate totals and nowhere else.  Gated, not just reported.
+    pub = set(); pub_conv = set()
+    ep = os.path.join(a.root, "expected.json")
+    if os.path.exists(ep):
+        try:
+            e = json.load(open(ep))
+            for stamp in (e.get("runs") or {}):
+                pub.add(f"runs/{stamp}")
+            for camp in (e.get("live") or {}):
+                if not camp.startswith("_"):
+                    pub.add(camp)
+        except Exception as ex:
+            print(f"warning: expected.json not read: {ex!r}")
+    # ... plus the campaigns the paper's other tables and rates are folded from (claims_from_results.py): the live study
+    # (live_a1_outcome), the world study (ledger_world*), and the interleaved / refusal / Claude pilot runs
+    for c in per:
+        if c == "live_a1_outcome" or c.startswith("ledger_world") or (c.startswith("runs/") and ("-interleaved" in c or "-refusal-" in c or "-claude" in c)):
+            pub.add(c)
+    pub_conv = {c for c in pub if c.split("/")[0] in CONVERTED or c in CONVERTED}
+    inst_records = sum(d["records"] for d in inst.values()); inst_traces = sum(d["traces"] for d in inst.values())
+    print(f"H7 scope: {len(pub)} campaigns supply a published cell ({sorted(pub)}); {len(pub_conv)} of them converted "
+          f"(must be 0); store-instrumented campaigns hold {inst_records} records in {inst_traces} traces of the {tot['records']} / {tot['traces']} gated")
     if a.tex:
         print("\n% --- hypothesis gates (harness/macaudit/hypothesis_gates.py --tex) ---")
         print(f"\\newcommand{{\\HypRecords}}{{{tot['records']:,}}}".replace(",", "{,}"))
@@ -325,6 +349,12 @@ def main() -> int:
         print(f"\\newcommand{{\\HypStoreAxiomViolations}}{{{h7['h7_bad'] + h7['h7_unrec']}}}")
         print(f"\\newcommand{{\\HypStoreAxiomConvertedReads}}{{{h7c['h7_reads']:,}}}".replace(",", "{,}"))
         print(f"\\newcommand{{\\HypStoreAxiomConvertedCampaigns}}{{{len(conv)}}}")
+        print(f"\\newcommand{{\\HypInstrumentedRecords}}{{{inst_records:,}}}".replace(",", "{,}"))
+        print(f"\\newcommand{{\\HypInstrumentedTraces}}{{{inst_traces:,}}}".replace(",", "{,}"))
+        print(f"\\newcommand{{\\HypPublishedCampaigns}}{{{len(pub)}}}")
+        print(f"\\newcommand{{\\HypPublishedConvertedCampaigns}}{{{len(pub_conv)}}}")
+    if a.check and pub_conv:
+        print(f"FAIL: published cells drawn from converted campaigns {sorted(pub_conv)}: the store axiom is not checked there"); return 1
     if a.check and (tot["h1"] or tot["h0"] or h7["h7_bad"] or h7["h7_unrec"]):
         print("FAIL: Theorem 1's hypotheses do not hold on this data (H0 read-before-commit, H1 per-agent non-overlap or H7 store axiom violated)"); return 1
     return 0

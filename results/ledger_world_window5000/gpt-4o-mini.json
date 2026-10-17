@@ -1,0 +1,5739 @@
+{
+ "provider": "openai",
+ "model": "gpt-4o-mini",
+ "n": 100,
+ "p_revise": 1.0,
+ "seed": 20261014,
+ "offset_ms": 150,
+ "revisions": 2,
+ "p_cancel_fail": 0.1,
+ "p_rebook_fail": 0.1,
+ "consumer_max_ms": 5000,
+ "interleaved": true,
+ "compensator": "all",
+ "registration": "atomic",
+ "cells": [
+  {
+   "mode": "ledger",
+   "n": 100,
+   "revised": 100,
+   "a1": 0,
+   "a7": 0,
+   "store_wrong": 11,
+   "world_wrong_sessions": 11,
+   "world_wrong_bookings": 11,
+   "double_booked": 10,
+   "consumer_saw_stale": 67,
+   "consumer_saw_none": 5,
+   "world_none": 10,
+   "obligation_retries": 7,
+   "obligations_registered": 138,
+   "obligations_discharged": 117,
+   "obligations_failed": 21,
+   "regenerations": 54,
+   "sessions": [
+    {
+     "session": 0,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 623.4,
+      "saw": [
+       "2026-06-21"
+      ],
+      "at_ms": 3019.8
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 1,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 0,
+       "date": "2026-06-21",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 0,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      }
+     ]
+    },
+    {
+     "session": 1,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 4858.4,
+      "saw": [
+       "2026-06-28"
+      ],
+      "at_ms": 6662.66
+     },
+     "consumer_saw_stale": false,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 1,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 1,
+       "date": "2026-06-21",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 1,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      }
+     ]
+    },
+    {
+     "session": 2,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 1419.6,
+      "saw": [
+       "2026-06-21"
+      ],
+      "at_ms": 2323.28
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 0,
+     "obligations_registered": 2,
+     "obligations_discharged": 2,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 2,
+       "date": "2026-06-14",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 2,
+       "date": "2026-06-21",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      },
+      {
+       "op": "cancel",
+       "conf": 2,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 2,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 3
+      }
+     ]
+    },
+    {
+     "session": 3,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-21",
+      "2026-06-28"
+     ],
+     "world_wrong": 1,
+     "double_booked": true,
+     "consumer": {
+      "delay_ms": 4611.4,
+      "saw": [
+       "2026-06-21",
+       "2026-06-28"
+      ],
+      "at_ms": 6607.42
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 1,
+     "obligations_registered": 1,
+     "obligations_discharged": 0,
+     "obligations_failed": 1,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 3,
+       "date": "2026-06-21",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": false
+      },
+      {
+       "op": "book",
+       "session": 3,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      }
+     ]
+    },
+    {
+     "session": 4,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 4140.1,
+      "saw": [
+       "2026-06-28"
+      ],
+      "at_ms": 4972.28
+     },
+     "consumer_saw_stale": false,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 1,
+     "regenerations": 0,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 4,
+       "date": "2026-06-14",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 4,
+       "date": "2026-06-21",
+       "kind": "rebooking",
+       "ok": false
+      },
+      {
+       "op": "book",
+       "session": 4,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      }
+     ]
+    },
+    {
+     "session": 5,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-21",
+      "2026-06-28"
+     ],
+     "world_wrong": 1,
+     "double_booked": true,
+     "consumer": {
+      "delay_ms": 1933.2,
+      "saw": [
+       "2026-06-21",
+       "2026-06-28"
+      ],
+      "at_ms": 3809.8
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 1,
+     "obligations_registered": 1,
+     "obligations_discharged": 0,
+     "obligations_failed": 1,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 5,
+       "date": "2026-06-21",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": false
+      },
+      {
+       "op": "book",
+       "session": 5,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      }
+     ]
+    },
+    {
+     "session": 6,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 1848.6,
+      "saw": [
+       "2026-06-28"
+      ],
+      "at_ms": 3652.59
+     },
+     "consumer_saw_stale": false,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 1,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 6,
+       "date": "2026-06-21",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 6,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      }
+     ]
+    },
+    {
+     "session": 7,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": false,
+     "final": "2026-06-28",
+     "world_active": [],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 1707.8,
+      "saw": [
+       "2026-06-14",
+       "2026-06-21"
+      ],
+      "at_ms": 2724.34
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": true,
+     "obligation_retries": 1,
+     "regenerations": 0,
+     "obligations_registered": 1,
+     "obligations_discharged": 0,
+     "obligations_failed": 1,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 7,
+       "date": "2026-06-14",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": false
+      },
+      {
+       "op": "book",
+       "session": 7,
+       "date": "2026-06-21",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "cancel",
+       "conf": 2,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 7,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": false
+      }
+     ]
+    },
+    {
+     "session": 8,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 127.4,
+      "saw": [
+       "2026-06-21"
+      ],
+      "at_ms": 2029.38
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 1,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 8,
+       "date": "2026-06-21",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 8,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      }
+     ]
+    },
+    {
+     "session": 9,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 4550.1,
+      "saw": [
+       "2026-06-28"
+      ],
+      "at_ms": 6484.5
+     },
+     "consumer_saw_stale": false,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 1,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 9,
+       "date": "2026-06-21",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 9,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      }
+     ]
+    },
+    {
+     "session": 10,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 1756.1,
+      "saw": [
+       "2026-06-21"
+      ],
+      "at_ms": 3496.19
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 1,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 10,
+       "date": "2026-06-21",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 10,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      }
+     ]
+    },
+    {
+     "session": 11,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 1092.9,
+      "saw": [
+       "2026-06-21"
+      ],
+      "at_ms": 3038.24
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 1,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 11,
+       "date": "2026-06-21",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 11,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      }
+     ]
+    },
+    {
+     "session": 12,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 1424.8,
+      "saw": [
+       "2026-06-21"
+      ],
+      "at_ms": 2250.67
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 0,
+     "obligations_registered": 2,
+     "obligations_discharged": 2,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 12,
+       "date": "2026-06-14",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 12,
+       "date": "2026-06-21",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      },
+      {
+       "op": "cancel",
+       "conf": 2,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 12,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 3
+      }
+     ]
+    },
+    {
+     "session": 13,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 612.1,
+      "saw": [
+       "2026-06-14"
+      ],
+      "at_ms": 1515.48
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 0,
+     "obligations_registered": 2,
+     "obligations_discharged": 2,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 13,
+       "date": "2026-06-14",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 13,
+       "date": "2026-06-21",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      },
+      {
+       "op": "cancel",
+       "conf": 2,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 13,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 3
+      }
+     ]
+    },
+    {
+     "session": 14,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 3054.4,
+      "saw": [
+       "2026-06-28"
+      ],
+      "at_ms": 4865.44
+     },
+     "consumer_saw_stale": false,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 1,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 14,
+       "date": "2026-06-21",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 14,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      }
+     ]
+    },
+    {
+     "session": 15,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 58.1,
+      "saw": [
+       "2026-06-21"
+      ],
+      "at_ms": 2147.52
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 1,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 15,
+       "date": "2026-06-21",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 15,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      }
+     ]
+    },
+    {
+     "session": 16,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 1704.9,
+      "saw": [
+       "2026-06-21"
+      ],
+      "at_ms": 2497.34
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 0,
+     "obligations_registered": 2,
+     "obligations_discharged": 2,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 16,
+       "date": "2026-06-14",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 16,
+       "date": "2026-06-21",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      },
+      {
+       "op": "cancel",
+       "conf": 2,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 16,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 3
+      }
+     ]
+    },
+    {
+     "session": 17,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 2870.0,
+      "saw": [
+       "2026-06-21"
+      ],
+      "at_ms": 3756.97
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 0,
+     "obligations_registered": 2,
+     "obligations_discharged": 2,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 17,
+       "date": "2026-06-14",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 17,
+       "date": "2026-06-21",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      },
+      {
+       "op": "cancel",
+       "conf": 2,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 17,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 3
+      }
+     ]
+    },
+    {
+     "session": 18,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 2047.6,
+      "saw": [
+       "2026-06-28"
+      ],
+      "at_ms": 3816.02
+     },
+     "consumer_saw_stale": false,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 1,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 18,
+       "date": "2026-06-21",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 18,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      }
+     ]
+    },
+    {
+     "session": 19,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 1654.5,
+      "saw": [
+       "2026-06-21"
+      ],
+      "at_ms": 2504.65
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 0,
+     "obligations_registered": 2,
+     "obligations_discharged": 2,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 19,
+       "date": "2026-06-14",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 19,
+       "date": "2026-06-21",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      },
+      {
+       "op": "cancel",
+       "conf": 2,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 19,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 3
+      }
+     ]
+    },
+    {
+     "session": 20,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 3811.2,
+      "saw": [
+       "2026-06-28"
+      ],
+      "at_ms": 4677.95
+     },
+     "consumer_saw_stale": false,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 0,
+     "obligations_registered": 2,
+     "obligations_discharged": 2,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 20,
+       "date": "2026-06-14",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 20,
+       "date": "2026-06-21",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      },
+      {
+       "op": "cancel",
+       "conf": 2,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 20,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 3
+      }
+     ]
+    },
+    {
+     "session": 21,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 3842.2,
+      "saw": [
+       "2026-06-28"
+      ],
+      "at_ms": 5615.23
+     },
+     "consumer_saw_stale": false,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 1,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 21,
+       "date": "2026-06-21",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 21,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      }
+     ]
+    },
+    {
+     "session": 22,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 2421.9,
+      "saw": [
+       "2026-06-28"
+      ],
+      "at_ms": 4821.36
+     },
+     "consumer_saw_stale": false,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 1,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 22,
+       "date": "2026-06-21",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 22,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      }
+     ]
+    },
+    {
+     "session": 23,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 884.8,
+      "saw": [
+       "2026-06-14"
+      ],
+      "at_ms": 1738.36
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 0,
+     "obligations_registered": 2,
+     "obligations_discharged": 2,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 23,
+       "date": "2026-06-14",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 23,
+       "date": "2026-06-21",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      },
+      {
+       "op": "cancel",
+       "conf": 2,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 23,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 3
+      }
+     ]
+    },
+    {
+     "session": 24,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 2951.1,
+      "saw": [
+       "2026-06-21"
+      ],
+      "at_ms": 3839.78
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 0,
+     "obligations_registered": 2,
+     "obligations_discharged": 2,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 24,
+       "date": "2026-06-14",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 24,
+       "date": "2026-06-21",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      },
+      {
+       "op": "cancel",
+       "conf": 2,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 24,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 3
+      }
+     ]
+    },
+    {
+     "session": 25,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-21",
+      "2026-06-28"
+     ],
+     "world_wrong": 1,
+     "double_booked": true,
+     "consumer": {
+      "delay_ms": 963.4,
+      "saw": [
+       "2026-06-14"
+      ],
+      "at_ms": 1774.02
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 0,
+     "obligations_registered": 2,
+     "obligations_discharged": 1,
+     "obligations_failed": 1,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 25,
+       "date": "2026-06-14",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 25,
+       "date": "2026-06-21",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      },
+      {
+       "op": "cancel",
+       "conf": 2,
+       "ok": false
+      },
+      {
+       "op": "book",
+       "session": 25,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 3
+      }
+     ]
+    },
+    {
+     "session": 26,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 877.8,
+      "saw": [
+       "2026-06-14"
+      ],
+      "at_ms": 1701.48
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 0,
+     "obligations_registered": 2,
+     "obligations_discharged": 2,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 26,
+       "date": "2026-06-14",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 26,
+       "date": "2026-06-21",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      },
+      {
+       "op": "cancel",
+       "conf": 2,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 26,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 3
+      }
+     ]
+    },
+    {
+     "session": 27,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 1874.4,
+      "saw": [
+       "2026-06-28"
+      ],
+      "at_ms": 5109.01
+     },
+     "consumer_saw_stale": false,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 2,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 27,
+       "date": "2026-06-28",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      }
+     ]
+    },
+    {
+     "session": 28,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 1464.6,
+      "saw": [
+       "2026-06-21"
+      ],
+      "at_ms": 3210.07
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 1,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 28,
+       "date": "2026-06-21",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 28,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      }
+     ]
+    },
+    {
+     "session": 29,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 2286.7,
+      "saw": [
+       "2026-06-21"
+      ],
+      "at_ms": 3135.3
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 0,
+     "obligations_registered": 2,
+     "obligations_discharged": 2,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 29,
+       "date": "2026-06-14",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 29,
+       "date": "2026-06-21",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      },
+      {
+       "op": "cancel",
+       "conf": 2,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 29,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 3
+      }
+     ]
+    },
+    {
+     "session": 30,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 4114.1,
+      "saw": [
+       "2026-06-28"
+      ],
+      "at_ms": 5963.22
+     },
+     "consumer_saw_stale": false,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 1,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 30,
+       "date": "2026-06-21",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 30,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      }
+     ]
+    },
+    {
+     "session": 31,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": false,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-21"
+     ],
+     "world_wrong": 1,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 3545.0,
+      "saw": [
+       "2026-06-21"
+      ],
+      "at_ms": 4545.86
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 0,
+     "obligations_registered": 2,
+     "obligations_discharged": 1,
+     "obligations_failed": 1,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 31,
+       "date": "2026-06-14",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 31,
+       "date": "2026-06-21",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      },
+      {
+       "op": "cancel",
+       "conf": 2,
+       "ok": false
+      },
+      {
+       "op": "book",
+       "session": 31,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": false
+      }
+     ]
+    },
+    {
+     "session": 32,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 3736.8,
+      "saw": [
+       "2026-06-28"
+      ],
+      "at_ms": 5738.35
+     },
+     "consumer_saw_stale": false,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 1,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 32,
+       "date": "2026-06-21",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 32,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      }
+     ]
+    },
+    {
+     "session": 33,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": false,
+     "final": "2026-06-28",
+     "world_active": [],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 3478.1,
+      "saw": [],
+      "at_ms": 5560.21
+     },
+     "consumer_saw_stale": false,
+     "consumer_saw_none": true,
+     "world_none": true,
+     "obligation_retries": 0,
+     "regenerations": 1,
+     "obligations_registered": 1,
+     "obligations_discharged": 0,
+     "obligations_failed": 1,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 33,
+       "date": "2026-06-21",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 33,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": false
+      }
+     ]
+    },
+    {
+     "session": 34,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 2027.5,
+      "saw": [
+       "2026-06-28"
+      ],
+      "at_ms": 4076.76
+     },
+     "consumer_saw_stale": false,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 1,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 34,
+       "date": "2026-06-21",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 34,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      }
+     ]
+    },
+    {
+     "session": 35,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 1119.8,
+      "saw": [
+       "2026-06-21"
+      ],
+      "at_ms": 1959.79
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 0,
+     "obligations_registered": 2,
+     "obligations_discharged": 2,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 35,
+       "date": "2026-06-14",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 35,
+       "date": "2026-06-21",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      },
+      {
+       "op": "cancel",
+       "conf": 2,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 35,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 3
+      }
+     ]
+    },
+    {
+     "session": 36,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-21",
+      "2026-06-28"
+     ],
+     "world_wrong": 1,
+     "double_booked": true,
+     "consumer": {
+      "delay_ms": 2013.2,
+      "saw": [
+       "2026-06-21",
+       "2026-06-28"
+      ],
+      "at_ms": 3959.85
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 1,
+     "obligations_registered": 1,
+     "obligations_discharged": 0,
+     "obligations_failed": 1,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 36,
+       "date": "2026-06-21",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": false
+      },
+      {
+       "op": "book",
+       "session": 36,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      }
+     ]
+    },
+    {
+     "session": 37,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 1171.8,
+      "saw": [
+       "2026-06-14"
+      ],
+      "at_ms": 1986.66
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 0,
+     "obligations_registered": 2,
+     "obligations_discharged": 2,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 37,
+       "date": "2026-06-14",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 37,
+       "date": "2026-06-21",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      },
+      {
+       "op": "cancel",
+       "conf": 2,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 37,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 3
+      }
+     ]
+    },
+    {
+     "session": 38,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 793.8,
+      "saw": [
+       "2026-06-14"
+      ],
+      "at_ms": 1591.98
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 0,
+     "obligations_registered": 2,
+     "obligations_discharged": 2,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 38,
+       "date": "2026-06-14",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 38,
+       "date": "2026-06-21",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      },
+      {
+       "op": "cancel",
+       "conf": 2,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 38,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 3
+      }
+     ]
+    },
+    {
+     "session": 39,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 805.4,
+      "saw": [
+       "2026-06-14"
+      ],
+      "at_ms": 1627.52
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 0,
+     "obligations_registered": 2,
+     "obligations_discharged": 2,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 39,
+       "date": "2026-06-14",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 39,
+       "date": "2026-06-21",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      },
+      {
+       "op": "cancel",
+       "conf": 2,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 39,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 3
+      }
+     ]
+    },
+    {
+     "session": 40,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 1221.1,
+      "saw": [
+       "2026-06-21"
+      ],
+      "at_ms": 3156.53
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 1,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 40,
+       "date": "2026-06-21",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 40,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      }
+     ]
+    },
+    {
+     "session": 41,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": false,
+     "final": "2026-06-28",
+     "world_active": [],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 3912.9,
+      "saw": [
+       "2026-06-14",
+       "2026-06-21"
+      ],
+      "at_ms": 4735.81
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": true,
+     "obligation_retries": 1,
+     "regenerations": 0,
+     "obligations_registered": 1,
+     "obligations_discharged": 0,
+     "obligations_failed": 1,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 41,
+       "date": "2026-06-14",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": false
+      },
+      {
+       "op": "book",
+       "session": 41,
+       "date": "2026-06-21",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "cancel",
+       "conf": 2,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 41,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": false
+      }
+     ]
+    },
+    {
+     "session": 42,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 353.8,
+      "saw": [
+       "2026-06-21"
+      ],
+      "at_ms": 2038.78
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 1,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 42,
+       "date": "2026-06-21",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 42,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      }
+     ]
+    },
+    {
+     "session": 43,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-21",
+      "2026-06-28"
+     ],
+     "world_wrong": 1,
+     "double_booked": true,
+     "consumer": {
+      "delay_ms": 694.6,
+      "saw": [
+       "2026-06-21"
+      ],
+      "at_ms": 2588.17
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 1,
+     "obligations_registered": 1,
+     "obligations_discharged": 0,
+     "obligations_failed": 1,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 43,
+       "date": "2026-06-21",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": false
+      },
+      {
+       "op": "book",
+       "session": 43,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      }
+     ]
+    },
+    {
+     "session": 44,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 1547.8,
+      "saw": [
+       "2026-06-14",
+       "2026-06-21"
+      ],
+      "at_ms": 2361.75
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 1,
+     "regenerations": 0,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 44,
+       "date": "2026-06-14",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": false
+      },
+      {
+       "op": "book",
+       "session": 44,
+       "date": "2026-06-21",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "cancel",
+       "conf": 2,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 44,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 3
+      }
+     ]
+    },
+    {
+     "session": 45,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 1092.6,
+      "saw": [
+       "2026-06-21"
+      ],
+      "at_ms": 2933.61
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 1,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 45,
+       "date": "2026-06-21",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 45,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      }
+     ]
+    },
+    {
+     "session": 46,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 175.3,
+      "saw": [
+       "2026-06-21"
+      ],
+      "at_ms": 2047.49
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 1,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 46,
+       "date": "2026-06-21",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 46,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      }
+     ]
+    },
+    {
+     "session": 47,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 3202.5,
+      "saw": [
+       "2026-06-21"
+      ],
+      "at_ms": 4057.32
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 0,
+     "obligations_registered": 2,
+     "obligations_discharged": 2,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 47,
+       "date": "2026-06-14",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 47,
+       "date": "2026-06-21",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      },
+      {
+       "op": "cancel",
+       "conf": 2,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 47,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 3
+      }
+     ]
+    },
+    {
+     "session": 48,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 4432.8,
+      "saw": [
+       "2026-06-28"
+      ],
+      "at_ms": 5289.68
+     },
+     "consumer_saw_stale": false,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 0,
+     "obligations_registered": 2,
+     "obligations_discharged": 2,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 48,
+       "date": "2026-06-14",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 48,
+       "date": "2026-06-21",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      },
+      {
+       "op": "cancel",
+       "conf": 2,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 48,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 3
+      }
+     ]
+    },
+    {
+     "session": 49,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 554.6,
+      "saw": [
+       "2026-06-14"
+      ],
+      "at_ms": 1398.45
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 0,
+     "obligations_registered": 2,
+     "obligations_discharged": 2,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 49,
+       "date": "2026-06-14",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 49,
+       "date": "2026-06-21",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      },
+      {
+       "op": "cancel",
+       "conf": 2,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 49,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 3
+      }
+     ]
+    },
+    {
+     "session": 50,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 4331.9,
+      "saw": [
+       "2026-06-14",
+       "2026-06-21"
+      ],
+      "at_ms": 5655.41
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 1,
+     "regenerations": 0,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 50,
+       "date": "2026-06-14",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": false
+      },
+      {
+       "op": "book",
+       "session": 50,
+       "date": "2026-06-21",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "cancel",
+       "conf": 2,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 50,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 3
+      }
+     ]
+    },
+    {
+     "session": 51,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 615.7,
+      "saw": [
+       "2026-06-21"
+      ],
+      "at_ms": 2509.65
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 1,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 51,
+       "date": "2026-06-21",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 51,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      }
+     ]
+    },
+    {
+     "session": 52,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 342.4,
+      "saw": [
+       "2026-06-21"
+      ],
+      "at_ms": 2368.0
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 1,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 52,
+       "date": "2026-06-21",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 52,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      }
+     ]
+    },
+    {
+     "session": 53,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 1663.4,
+      "saw": [
+       "2026-06-21"
+      ],
+      "at_ms": 2471.28
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 0,
+     "obligations_registered": 2,
+     "obligations_discharged": 2,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 53,
+       "date": "2026-06-14",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 53,
+       "date": "2026-06-21",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      },
+      {
+       "op": "cancel",
+       "conf": 2,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 53,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 3
+      }
+     ]
+    },
+    {
+     "session": 54,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 2544.3,
+      "saw": [
+       "2026-06-28"
+      ],
+      "at_ms": 4251.55
+     },
+     "consumer_saw_stale": false,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 1,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 54,
+       "date": "2026-06-21",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 54,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      }
+     ]
+    },
+    {
+     "session": 55,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 2986.1,
+      "saw": [
+       "2026-06-28"
+      ],
+      "at_ms": 4958.47
+     },
+     "consumer_saw_stale": false,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 1,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 55,
+       "date": "2026-06-21",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 55,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      }
+     ]
+    },
+    {
+     "session": 56,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 2615.3,
+      "saw": [
+       "2026-06-21"
+      ],
+      "at_ms": 3414.71
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 0,
+     "obligations_registered": 2,
+     "obligations_discharged": 2,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 56,
+       "date": "2026-06-14",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 56,
+       "date": "2026-06-21",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      },
+      {
+       "op": "cancel",
+       "conf": 2,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 56,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 3
+      }
+     ]
+    },
+    {
+     "session": 57,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 1889.1,
+      "saw": [
+       "2026-06-21"
+      ],
+      "at_ms": 2704.88
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 0,
+     "obligations_registered": 2,
+     "obligations_discharged": 2,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 57,
+       "date": "2026-06-14",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 57,
+       "date": "2026-06-21",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      },
+      {
+       "op": "cancel",
+       "conf": 2,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 57,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 3
+      }
+     ]
+    },
+    {
+     "session": 58,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-21",
+      "2026-06-28"
+     ],
+     "world_wrong": 1,
+     "double_booked": true,
+     "consumer": {
+      "delay_ms": 2622.6,
+      "saw": [
+       "2026-06-21"
+      ],
+      "at_ms": 3461.77
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 0,
+     "obligations_registered": 2,
+     "obligations_discharged": 1,
+     "obligations_failed": 1,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 58,
+       "date": "2026-06-14",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 58,
+       "date": "2026-06-21",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      },
+      {
+       "op": "cancel",
+       "conf": 2,
+       "ok": false
+      },
+      {
+       "op": "book",
+       "session": 58,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 3
+      }
+     ]
+    },
+    {
+     "session": 59,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 1683.8,
+      "saw": [
+       "2026-06-21"
+      ],
+      "at_ms": 2601.33
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 0,
+     "obligations_registered": 2,
+     "obligations_discharged": 2,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 59,
+       "date": "2026-06-14",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 59,
+       "date": "2026-06-21",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      },
+      {
+       "op": "cancel",
+       "conf": 2,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 59,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 3
+      }
+     ]
+    },
+    {
+     "session": 60,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 2587.1,
+      "saw": [
+       "2026-06-21"
+      ],
+      "at_ms": 3410.64
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 0,
+     "obligations_registered": 2,
+     "obligations_discharged": 2,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 60,
+       "date": "2026-06-14",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 60,
+       "date": "2026-06-21",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      },
+      {
+       "op": "cancel",
+       "conf": 2,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 60,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 3
+      }
+     ]
+    },
+    {
+     "session": 61,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 3700.1,
+      "saw": [
+       "2026-06-28"
+      ],
+      "at_ms": 5473.63
+     },
+     "consumer_saw_stale": false,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 1,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 61,
+       "date": "2026-06-21",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 61,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      }
+     ]
+    },
+    {
+     "session": 62,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 1405.0,
+      "saw": [
+       "2026-06-21"
+      ],
+      "at_ms": 3305.39
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 1,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 62,
+       "date": "2026-06-21",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 62,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      }
+     ]
+    },
+    {
+     "session": 63,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 3709.5,
+      "saw": [
+       "2026-06-28"
+      ],
+      "at_ms": 5484.69
+     },
+     "consumer_saw_stale": false,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 1,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 63,
+       "date": "2026-06-21",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 63,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      }
+     ]
+    },
+    {
+     "session": 64,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 707.9,
+      "saw": [
+       "2026-06-14"
+      ],
+      "at_ms": 1532.05
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 1,
+     "regenerations": 0,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 64,
+       "date": "2026-06-14",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": false
+      },
+      {
+       "op": "book",
+       "session": 64,
+       "date": "2026-06-21",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "cancel",
+       "conf": 2,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 64,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 3
+      }
+     ]
+    },
+    {
+     "session": 65,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-21",
+      "2026-06-28"
+     ],
+     "world_wrong": 1,
+     "double_booked": true,
+     "consumer": {
+      "delay_ms": 4131.5,
+      "saw": [
+       "2026-06-21",
+       "2026-06-28"
+      ],
+      "at_ms": 5950.84
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 1,
+     "obligations_registered": 1,
+     "obligations_discharged": 0,
+     "obligations_failed": 1,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 65,
+       "date": "2026-06-21",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": false
+      },
+      {
+       "op": "book",
+       "session": 65,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      }
+     ]
+    },
+    {
+     "session": 66,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-21",
+      "2026-06-28"
+     ],
+     "world_wrong": 1,
+     "double_booked": true,
+     "consumer": {
+      "delay_ms": 548.4,
+      "saw": [
+       "2026-06-14"
+      ],
+      "at_ms": 1460.93
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 0,
+     "obligations_registered": 2,
+     "obligations_discharged": 1,
+     "obligations_failed": 1,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 66,
+       "date": "2026-06-14",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 66,
+       "date": "2026-06-21",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      },
+      {
+       "op": "cancel",
+       "conf": 2,
+       "ok": false
+      },
+      {
+       "op": "book",
+       "session": 66,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 3
+      }
+     ]
+    },
+    {
+     "session": 67,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 3402.3,
+      "saw": [
+       "2026-06-21"
+      ],
+      "at_ms": 4236.05
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 0,
+     "obligations_registered": 2,
+     "obligations_discharged": 2,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 67,
+       "date": "2026-06-14",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 67,
+       "date": "2026-06-21",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      },
+      {
+       "op": "cancel",
+       "conf": 2,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 67,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 3
+      }
+     ]
+    },
+    {
+     "session": 68,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 4084.0,
+      "saw": [
+       "2026-06-28"
+      ],
+      "at_ms": 4964.01
+     },
+     "consumer_saw_stale": false,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 0,
+     "obligations_registered": 2,
+     "obligations_discharged": 2,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 68,
+       "date": "2026-06-14",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 68,
+       "date": "2026-06-21",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      },
+      {
+       "op": "cancel",
+       "conf": 2,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 68,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 3
+      }
+     ]
+    },
+    {
+     "session": 69,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 3406.9,
+      "saw": [
+       "2026-06-28"
+      ],
+      "at_ms": 5350.09
+     },
+     "consumer_saw_stale": false,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 1,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 69,
+       "date": "2026-06-21",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 69,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      }
+     ]
+    },
+    {
+     "session": 70,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 98.1,
+      "saw": [
+       "2026-06-21"
+      ],
+      "at_ms": 1988.89
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 1,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 70,
+       "date": "2026-06-21",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 70,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      }
+     ]
+    },
+    {
+     "session": 71,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": false,
+     "final": "2026-06-28",
+     "world_active": [],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 1628.9,
+      "saw": [
+       "2026-06-21"
+      ],
+      "at_ms": 2448.66
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": true,
+     "obligation_retries": 0,
+     "regenerations": 0,
+     "obligations_registered": 2,
+     "obligations_discharged": 1,
+     "obligations_failed": 1,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 71,
+       "date": "2026-06-14",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 71,
+       "date": "2026-06-21",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      },
+      {
+       "op": "cancel",
+       "conf": 2,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 71,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": false
+      }
+     ]
+    },
+    {
+     "session": 72,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 70.9,
+      "saw": [
+       "2026-06-21"
+      ],
+      "at_ms": 1760.16
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 1,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 72,
+       "date": "2026-06-21",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 72,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      }
+     ]
+    },
+    {
+     "session": 73,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 1475.3,
+      "saw": [],
+      "at_ms": 2307.35
+     },
+     "consumer_saw_stale": false,
+     "consumer_saw_none": true,
+     "world_none": false,
+     "obligation_retries": 1,
+     "regenerations": 0,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 73,
+       "date": "2026-06-14",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 73,
+       "date": "2026-06-21",
+       "kind": "rebooking",
+       "ok": false
+      },
+      {
+       "op": "book",
+       "session": 73,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      }
+     ]
+    },
+    {
+     "session": 74,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 4260.8,
+      "saw": [
+       "2026-06-28"
+      ],
+      "at_ms": 5992.6
+     },
+     "consumer_saw_stale": false,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 1,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 74,
+       "date": "2026-06-21",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 74,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      }
+     ]
+    },
+    {
+     "session": 75,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 1803.9,
+      "saw": [
+       "2026-06-28"
+      ],
+      "at_ms": 4944.35
+     },
+     "consumer_saw_stale": false,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 1,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 75,
+       "date": "2026-06-28",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      }
+     ]
+    },
+    {
+     "session": 76,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 2283.8,
+      "saw": [
+       "2026-06-28"
+      ],
+      "at_ms": 4089.34
+     },
+     "consumer_saw_stale": false,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 1,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 76,
+       "date": "2026-06-21",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 76,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      }
+     ]
+    },
+    {
+     "session": 77,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-21",
+      "2026-06-28"
+     ],
+     "world_wrong": 1,
+     "double_booked": true,
+     "consumer": {
+      "delay_ms": 3322.2,
+      "saw": [
+       "2026-06-21",
+       "2026-06-28"
+      ],
+      "at_ms": 5094.84
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 1,
+     "obligations_registered": 1,
+     "obligations_discharged": 0,
+     "obligations_failed": 1,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 77,
+       "date": "2026-06-21",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": false
+      },
+      {
+       "op": "book",
+       "session": 77,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      }
+     ]
+    },
+    {
+     "session": 78,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 229.0,
+      "saw": [
+       "2026-06-14"
+      ],
+      "at_ms": 1202.33
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 0,
+     "obligations_registered": 2,
+     "obligations_discharged": 2,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 78,
+       "date": "2026-06-14",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 78,
+       "date": "2026-06-21",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      },
+      {
+       "op": "cancel",
+       "conf": 2,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 78,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 3
+      }
+     ]
+    },
+    {
+     "session": 79,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": false,
+     "final": "2026-06-28",
+     "world_active": [],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 1361.2,
+      "saw": [
+       "2026-06-21"
+      ],
+      "at_ms": 3043.87
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": true,
+     "obligation_retries": 0,
+     "regenerations": 1,
+     "obligations_registered": 1,
+     "obligations_discharged": 0,
+     "obligations_failed": 1,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 79,
+       "date": "2026-06-21",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 79,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": false
+      }
+     ]
+    },
+    {
+     "session": 80,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 2504.2,
+      "saw": [
+       "2026-06-21"
+      ],
+      "at_ms": 3530.81
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 0,
+     "obligations_registered": 2,
+     "obligations_discharged": 2,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 80,
+       "date": "2026-06-14",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 80,
+       "date": "2026-06-21",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      },
+      {
+       "op": "cancel",
+       "conf": 2,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 80,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 3
+      }
+     ]
+    },
+    {
+     "session": 81,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": false,
+     "final": "2026-06-28",
+     "world_active": [],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 852.1,
+      "saw": [
+       "2026-06-21"
+      ],
+      "at_ms": 2602.66
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": true,
+     "obligation_retries": 0,
+     "regenerations": 1,
+     "obligations_registered": 1,
+     "obligations_discharged": 0,
+     "obligations_failed": 1,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 81,
+       "date": "2026-06-21",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 81,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": false
+      }
+     ]
+    },
+    {
+     "session": 82,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 4924.1,
+      "saw": [
+       "2026-06-28"
+      ],
+      "at_ms": 6684.27
+     },
+     "consumer_saw_stale": false,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 1,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 82,
+       "date": "2026-06-21",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 82,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      }
+     ]
+    },
+    {
+     "session": 83,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 2816.0,
+      "saw": [
+       "2026-06-21"
+      ],
+      "at_ms": 3657.5
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 0,
+     "obligations_registered": 2,
+     "obligations_discharged": 2,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 83,
+       "date": "2026-06-14",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 83,
+       "date": "2026-06-21",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      },
+      {
+       "op": "cancel",
+       "conf": 2,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 83,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 3
+      }
+     ]
+    },
+    {
+     "session": 84,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 4450.0,
+      "saw": [
+       "2026-06-28"
+      ],
+      "at_ms": 6340.45
+     },
+     "consumer_saw_stale": false,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 1,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 84,
+       "date": "2026-06-21",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 84,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      }
+     ]
+    },
+    {
+     "session": 85,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 15.3,
+      "saw": [
+       "2026-06-21"
+      ],
+      "at_ms": 1884.78
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 1,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 85,
+       "date": "2026-06-21",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 85,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      }
+     ]
+    },
+    {
+     "session": 86,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 1273.8,
+      "saw": [
+       "2026-06-21"
+      ],
+      "at_ms": 2192.97
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 0,
+     "obligations_registered": 2,
+     "obligations_discharged": 2,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 86,
+       "date": "2026-06-14",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 86,
+       "date": "2026-06-21",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      },
+      {
+       "op": "cancel",
+       "conf": 2,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 86,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 3
+      }
+     ]
+    },
+    {
+     "session": 87,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": false,
+     "final": "2026-06-28",
+     "world_active": [],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 2142.9,
+      "saw": [],
+      "at_ms": 3924.26
+     },
+     "consumer_saw_stale": false,
+     "consumer_saw_none": true,
+     "world_none": true,
+     "obligation_retries": 0,
+     "regenerations": 1,
+     "obligations_registered": 1,
+     "obligations_discharged": 0,
+     "obligations_failed": 1,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 87,
+       "date": "2026-06-21",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 87,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": false
+      }
+     ]
+    },
+    {
+     "session": 88,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 640.9,
+      "saw": [
+       "2026-06-21"
+      ],
+      "at_ms": 2423.25
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 1,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 88,
+       "date": "2026-06-21",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 88,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      }
+     ]
+    },
+    {
+     "session": 89,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 524.1,
+      "saw": [
+       "2026-06-14"
+      ],
+      "at_ms": 1401.12
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 0,
+     "obligations_registered": 2,
+     "obligations_discharged": 2,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 89,
+       "date": "2026-06-14",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 89,
+       "date": "2026-06-21",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      },
+      {
+       "op": "cancel",
+       "conf": 2,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 89,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 3
+      }
+     ]
+    },
+    {
+     "session": 90,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 4166.9,
+      "saw": [
+       "2026-06-28"
+      ],
+      "at_ms": 6075.11
+     },
+     "consumer_saw_stale": false,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 1,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 90,
+       "date": "2026-06-21",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 90,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      }
+     ]
+    },
+    {
+     "session": 91,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 1155.6,
+      "saw": [
+       "2026-06-21"
+      ],
+      "at_ms": 2011.67
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 0,
+     "obligations_registered": 2,
+     "obligations_discharged": 2,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 91,
+       "date": "2026-06-14",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 91,
+       "date": "2026-06-21",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      },
+      {
+       "op": "cancel",
+       "conf": 2,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 91,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 3
+      }
+     ]
+    },
+    {
+     "session": 92,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": false,
+     "final": "2026-06-28",
+     "world_active": [],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 4789.9,
+      "saw": [],
+      "at_ms": 5613.57
+     },
+     "consumer_saw_stale": false,
+     "consumer_saw_none": true,
+     "world_none": true,
+     "obligation_retries": 0,
+     "regenerations": 0,
+     "obligations_registered": 2,
+     "obligations_discharged": 1,
+     "obligations_failed": 1,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 92,
+       "date": "2026-06-14",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 92,
+       "date": "2026-06-21",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      },
+      {
+       "op": "cancel",
+       "conf": 2,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 92,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": false
+      }
+     ]
+    },
+    {
+     "session": 93,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": false,
+     "final": "2026-06-28",
+     "world_active": [],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 4833.4,
+      "saw": [],
+      "at_ms": 5636.77
+     },
+     "consumer_saw_stale": false,
+     "consumer_saw_none": true,
+     "world_none": true,
+     "obligation_retries": 0,
+     "regenerations": 0,
+     "obligations_registered": 2,
+     "obligations_discharged": 1,
+     "obligations_failed": 1,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 93,
+       "date": "2026-06-14",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 93,
+       "date": "2026-06-21",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      },
+      {
+       "op": "cancel",
+       "conf": 2,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 93,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": false
+      }
+     ]
+    },
+    {
+     "session": 94,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 2191.7,
+      "saw": [
+       "2026-06-21"
+      ],
+      "at_ms": 3033.58
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 0,
+     "obligations_registered": 2,
+     "obligations_discharged": 2,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 94,
+       "date": "2026-06-14",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 94,
+       "date": "2026-06-21",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      },
+      {
+       "op": "cancel",
+       "conf": 2,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 94,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 3
+      }
+     ]
+    },
+    {
+     "session": 95,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 186.0,
+      "saw": [
+       "2026-06-14"
+      ],
+      "at_ms": 1018.12
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 0,
+     "obligations_registered": 2,
+     "obligations_discharged": 2,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 95,
+       "date": "2026-06-14",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 95,
+       "date": "2026-06-21",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      },
+      {
+       "op": "cancel",
+       "conf": 2,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 95,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 3
+      }
+     ]
+    },
+    {
+     "session": 96,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 4706.5,
+      "saw": [
+       "2026-06-28"
+      ],
+      "at_ms": 6912.22
+     },
+     "consumer_saw_stale": false,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 1,
+     "obligations_registered": 1,
+     "obligations_discharged": 1,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 96,
+       "date": "2026-06-21",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 96,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      }
+     ]
+    },
+    {
+     "session": 97,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-21",
+      "2026-06-28"
+     ],
+     "world_wrong": 1,
+     "double_booked": true,
+     "consumer": {
+      "delay_ms": 3846.4,
+      "saw": [
+       "2026-06-21",
+       "2026-06-28"
+      ],
+      "at_ms": 5685.22
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 1,
+     "obligations_registered": 1,
+     "obligations_discharged": 0,
+     "obligations_failed": 1,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 97,
+       "date": "2026-06-21",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": false
+      },
+      {
+       "op": "book",
+       "session": 97,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      }
+     ]
+    },
+    {
+     "session": 98,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": false,
+     "final": "2026-06-28",
+     "world_active": [],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 1309.6,
+      "saw": [
+       "2026-06-21"
+      ],
+      "at_ms": 2258.47
+     },
+     "consumer_saw_stale": true,
+     "consumer_saw_none": false,
+     "world_none": true,
+     "obligation_retries": 0,
+     "regenerations": 0,
+     "obligations_registered": 2,
+     "obligations_discharged": 1,
+     "obligations_failed": 1,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 98,
+       "date": "2026-06-14",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      },
+      {
+       "op": "cancel",
+       "conf": 1,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 98,
+       "date": "2026-06-21",
+       "kind": "rebooking",
+       "ok": true,
+       "conf": 2
+      },
+      {
+       "op": "cancel",
+       "conf": 2,
+       "ok": true
+      },
+      {
+       "op": "book",
+       "session": 98,
+       "date": "2026-06-28",
+       "kind": "rebooking",
+       "ok": false
+      }
+     ]
+    },
+    {
+     "session": 99,
+     "revise": true,
+     "a1": false,
+     "a7": false,
+     "booking_matches_final": true,
+     "final": "2026-06-28",
+     "world_active": [
+      "2026-06-28"
+     ],
+     "world_wrong": 0,
+     "double_booked": false,
+     "consumer": {
+      "delay_ms": 4900.8,
+      "saw": [
+       "2026-06-28"
+      ],
+      "at_ms": 8849.3
+     },
+     "consumer_saw_stale": false,
+     "consumer_saw_none": false,
+     "world_none": false,
+     "obligation_retries": 0,
+     "regenerations": 2,
+     "obligations_registered": 0,
+     "obligations_discharged": 0,
+     "obligations_failed": 0,
+     "world_log": [
+      {
+       "op": "book",
+       "session": 99,
+       "date": "2026-06-28",
+       "kind": "booking",
+       "ok": true,
+       "conf": 1
+      }
+     ]
+    }
+   ],
+   "store_wrong_ci": [
+    0.05620702028548746,
+    0.18830113219644257
+   ],
+   "world_wrong_sessions_ci": [
+    0.05620702028548746,
+    0.18830113219644257
+   ],
+   "double_booked_ci": [
+    0.04900468922148595,
+    0.17622259774002266
+   ],
+   "consumer_saw_stale_ci": [
+    0.5688272492224368,
+    0.7608014653773982
+   ],
+   "consumer_saw_none_ci": [
+    0.016431879182052155,
+    0.11283491110546275
+   ],
+   "world_none_ci": [
+    0.04900468922148595,
+    0.17622259774002266
+   ]
+  }
+ ]
+}

@@ -17,6 +17,13 @@ pub mod verified_si;
 // commit (externalize) holds a dependent's effects until its closure is out.
 pub mod l2_exec;
 
+// The VERIFIED L5 basis ledger (bookkeeping), byte-identical to
+// ../verus-detector/src/lib_l5_exec.rs (2026-10-17): mark is total (no
+// superseded basis without an obligation), report records the compensator's
+// verdict exactly, open_flags is the obligation bits. Behind examples/l5_server.rs
+// for probes/304 --ledger exec. The store hook and the compensator stay outside.
+pub mod l5_exec;
+
 // The L1-class baseline: validates reads, does not cascade. Ordinary Rust,
 // no proofs, no safety claim -- the behaviour L2 removes.
 pub mod l2_unguarded;

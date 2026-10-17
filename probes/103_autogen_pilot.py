@@ -29,7 +29,7 @@ Examples:
 """
 
 from __future__ import annotations
-import argparse, asyncio, os, time
+import argparse, asyncio, json, os, time
 from pathlib import Path
 from autogen_agentchat.agents import AssistantAgent
 from autogen_agentchat.teams import RoundRobinGroupChat
@@ -162,17 +162,61 @@ def _check_api_key(provider: str) -> None:
         raise SystemExit("ANTHROPIC_API_KEY not set")
 
 
+# What the model is told when the runtime refuses or aborts its operation (2026-10-17).
+#
+# Until this date the pilot's tools told the model COMMITTED whatever the runtime did: a pessimistic begin()
+# that lost the lock race left the sentinel {"_aborted": True}, read_state() then raised KeyError (AutoGen
+# returned the exception text to the model), and the following write_state() reported "COMMITTED: {...}" for a
+# commit the runtime had silently dropped; a snapshot-isolation commit that failed validation was dropped the
+# same way, with the model told COMMITTED. The records are unaffected (a dropped operation emits nothing, and
+# the paper's cells are read from the records), but what a model does after a refusal -- retry (more model
+# calls) or stop -- is the price of the discipline, and a model told COMMITTED cannot choose. The two policies
+# below make the price a stated protocol parameter, recorded in protocol.json and per session in
+# refusals.jsonl; the runs tabulated before this date were taken with the old tools and are reported as run.
+ON_ABORT = "drop"            # --on-abort: "drop" tells the truth and gives no instruction; "retry" asks for a redo
+REFUSALS: dict = {}          # {agent: refused operations} for the session in flight (cleared per session)
+
+
+def _aborts(agent) -> int:
+    return int(getattr(agent.recorder, "aborts", 0) or 0)
+
+
+def _refused(agent, what: str, count: bool = True) -> str:
+    """the REFUSED tool result; `count` adds the refusal to the session's tally (one per refused OPERATION: a write
+    after a refused begin is the same operation and is not counted twice)"""
+    if count:
+        REFUSALS.setdefault(agent.agent_id, 0)
+        REFUSALS[agent.agent_id] += 1
+    msg = f"REFUSED: the runtime did not {what} -- another agent holds a lock on, or has concurrently written, a cell you depend on."
+    if ON_ABORT == "retry":
+        msg += " Your operation was NOT applied. Call read_state again, then write_state again."
+    else:
+        msg += " Your operation was NOT applied."
+    return msg
+
+
 def make_tools(agent):
-    def read_state(keys: list[str]) -> dict[str, str]:
+    def read_state(keys: list[str]) -> dict[str, str] | str:
         if agent._pending is not None:
             agent.commit(write_kv=None)
         agent.begin(keys)
-        return dict(agent._pending["read_values"])
+        p = agent._pending
+        if p is None or p.get("_aborted"):
+            # pessimistic: the lock race was lost; the sentinel stays so commit() counts the abort
+            return _refused(agent, "read (the lock is held)")
+        return dict(p["read_values"])
 
     def write_state(updates: dict[str, str]) -> str:
         if agent._pending is None:
             agent.begin([])
+        p = agent._pending
+        aborted_begin = bool(p and p.get("_aborted"))
+        before = _aborts(agent)
         agent.commit(write_kv=updates)
+        if aborted_begin:
+            return _refused(agent, "commit your write (its read was refused)", count=False)
+        if _aborts(agent) > before:
+            return _refused(agent, "commit your write")
         return f"COMMITTED: {updates}"
 
     return read_state, write_state
@@ -350,6 +394,10 @@ async def run_one(scenario_id: int,
                 ia.commit(write_kv=None)
 
     recorder.close()
+    with (output_dir / "refusals.jsonl").open("a") as fh:
+        fh.write(json.dumps({"session": scenario_id, "runtime": _runtime, "workload": workload, "on_abort": ON_ABORT,
+                             "refusals": dict(REFUSALS), "aborts": _aborts(next(iter(iagents.values())))}) + "\n")   # one shared recorder
+    REFUSALS.clear()
     return out
 
 
@@ -369,13 +417,18 @@ async def main() -> None:
                         help="model name; defaults are gpt-4o / claude-3-5-sonnet-20241022 / llama3.2:latest")
     parser.add_argument("--no-seeded-tickets", action="store_true",
                         help="triage: do NOT hand the reporter a concrete bug (the pre-2026-10-14 protocol of run 20260913T0150Z)")
+    parser.add_argument("--on-abort", choices=["drop", "retry"], default="drop",
+                        help="what the model is told when the runtime refuses its operation: 'drop' = REFUSED, not applied, no "
+                             "instruction (default); 'retry' = REFUSED plus an instruction to read and write again. Before "
+                             "2026-10-17 the tools said COMMITTED regardless (see make_tools); recorded in protocol.json")
     parser.add_argument("--scenario-offset", type=int, default=0,
                         help="first scenario id; a one-session call (probes/302_wallclock_interleaved.sh, --n 1) passes its "
                              "session index so that the trace, the token sidecar and the seeded ticket are numbered by session "
                              "(the 2026-10-14 interleaved runs used 0 for every session: one ticket, sidecars named -0000)")
     args = parser.parse_args()
-    global SEEDED_TICKETS
+    global SEEDED_TICKETS, ON_ABORT
     SEEDED_TICKETS = not args.no_seeded_tickets
+    ON_ABORT = args.on_abort
 
     model_name = args.model or DEFAULT_MODEL[args.provider]
     _check_api_key(args.provider)
@@ -390,7 +443,8 @@ async def main() -> None:
     import json as _json
     (output / "protocol.json").write_text(_json.dumps({"seeded_tickets": SEEDED_TICKETS, "provider": args.provider, "model": model_name,
                                                         "workload": args.workload, "runtime": _runtime, "n": args.n, "seed": args.seed,
-                                                        "scenario_offset": args.scenario_offset}, indent=1))
+                                                        "scenario_offset": args.scenario_offset, "on_abort": ON_ABORT,
+                                                        "truthful_tools": True}, indent=1))
     print(f"traces  -> {output.resolve()}")
     print(f"tokens  -> {tokens_output.resolve()}")
     print()

@@ -54,6 +54,13 @@
 #  20    TLC: NoA1 lattice points at MaxOps=3, two values, one cell     java             $0             ~10 min
 #  21    probe 304 again: ATOMIC ledger registration (3 arms x 3        Claude, OpenAI,  haiku ~$2,     ~2.5 h
 #        families) + the ledger arm with a 5 s consumer window           DeepSeek         4o-mini ~$0.5, deepseek ~$0.5
+#  22    probe 302 REFUSAL-PRICE study, claude-sonnet-4-5: edit-review   Claude           ~$15-20        ~2.5 h
+#        and triage, five arms interleaved per session (vanilla,
+#        pessimistic:drop, pessimistic:retry, SI:drop, SI:retry), the
+#        pilot's tools now telling the model REFUSED (2026-10-17); N=100
+#  23    probe 304 with the ledger's BOOKKEEPING in the verified bytes  Claude, OpenAI,  haiku ~$2,     ~2.5 h
+#        (lib_l5_exec.rs behind l5_server; --ledger exec), atomic,     DeepSeek,        4o-mini ~$0.5,
+#        three families -> results/ledger_world_exec/                  cargo, verus (7) deepseek ~$0.5
 #  Claude-side reruns that existed before: 6 (probe 302 on sonnet, ~$15-25) and 11 (the pilot replication
 #  with op-records; its triage cells are void and must be DELETED and rerun with the seeded-ticket reporter).
 set -uo pipefail   # not -e: a failing step is recorded and the next step still runs (summary at the end)
@@ -165,6 +172,10 @@ if want 7; then log 7 "Verus: the ledger model, then the pinned counts, then the
   echo "  using $VERUS ($($VERUS --version 2>/dev/null | grep -oE 'Version: *\S+' || echo '?'); pin $PIN)"
   if have "$VERUS" || [ -x "$VERUS" ]; then
     run "(cd crates/verus-detector && $VERUS --crate-type=lib src/lib_l5_ledger.rs 2>&1 | tee ../../results/verus/lib_l5_ledger.verus.log)"
+    # 2026-10-17: the EXEC ledger (bookkeeping behind examples/l5_server.rs, probes/304 --ledger exec); zero errors required,
+    # the count is reported (pinned at "?" until this run). A failure here is a proof defect in lib_l5_exec.rs: upload the log.
+    run "(cd crates/verus-detector && $VERUS --crate-type=lib src/lib_l5_exec.rs 2>&1 | tee ../../results/verus/lib_l5_exec.verus.log)"
+    if [ "$DRY" = 0 ] && ! grep -qE '[0-9]+ verified, 0 errors' results/verus/lib_l5_exec.verus.log; then echo "  FAIL: lib_l5_exec.rs did not verify (see results/verus/lib_l5_exec.verus.log)"; FAILED+=("verus lib_l5_exec.rs"); fi
     # verus_count.sh looks for the crate beside itself (pilot layout); in the monorepo it lives at crates/verus-detector
     if ! grep -q 'VDET_DIR' harness/macaudit/verus_count.sh; then
       run "sed -i 's|^LOCAL_VDET=\"\$HERE/verus-detector\"|LOCAL_VDET=\"\${VDET_DIR:-\$HERE/verus-detector}\"|' harness/macaudit/verus_count.sh"
@@ -259,7 +270,7 @@ PY
 
 UPLOAD these to the chat and the paper is regenerated from them:
   results/paper_receipts_summary.json          (everything: probe 303/301/302/304 numbers, Verus counts, ledger log, gates)
-  tools/verified_scorer.log  tools/arm_timing.log  tools/live_runs.log  tools/hypothesis_gates.log   (step 14 / 19 receipts)
+  tools/verified_scorer.json  tools/verified_scorer.log  tools/arm_timing.log  tools/live_runs.log  tools/hypothesis_gates.log   (step 14 / 19 receipts)
   formal/tla/tlc.Duplication.log               (step 16)
   results/verus/lib_l5_ledger.verus.log        (if step 7 ran and it is not already inside the summary)
   results/live_l2_haiku1000.log                (if step 10 ran)
@@ -277,6 +288,9 @@ if want 14; then log 14 "cargo: the analyser scores A1 with the VERIFIED detecto
   run "bash harness/macaudit/verified_bytes_gate.sh"
   run "cargo build --release -p mac-analyser 2>&1 | tail -3"
   run "cargo build --release --manifest-path crates/runtime/Cargo.toml --example l3_server 2>&1 | tail -3"
+  run "cargo build --release --manifest-path crates/runtime/Cargo.toml --example l5_server 2>&1 | tail -3"
+  # the fold refuses ledger_world_exec receipts whose server sha256 is not this one (a stand-in cannot pass as the bytes)
+  run "mkdir -p results/verus && sha256sum target/release/examples/l5_server | tee results/verus/l5_server.sha256"
   run "cargo test --release -p agent-consistency-runtime --lib detect_a1_verified 2>&1 | grep -E '^test |test result'"
   run "cargo test --release -p mac-analyser 2>&1 | grep -E '^test |test result'"
   AN="$( { ls target/release/analyser crates/analyser/target/release/analyser 2>/dev/null || true; } | head -1)"
@@ -345,12 +359,40 @@ if want 21; then log 21 "probe 304 with ATOMIC ledger registration (three famili
     else run "$UVG probes/304_ledger_world.py --provider $prov --model $model $* --n 100 --p-revise 1.0 --offset-ms 150 --revisions 2 --second-gap-ms 800 --modes ledger --p-cancel-fail 0.1 --p-rebook-fail 0.1 --consumer-max-ms 5000 --seed 20261014 --compensator all --registration atomic --out $out"; fi
   done; fi
 
+if want 22; then log 22 "probe 302 refusal-price study on claude-sonnet-4-5: vanilla / pessimistic:drop / pessimistic:retry / SI:drop / SI:retry, edit-review + triage, N=100"
+  need_key ANTHROPIC_API_KEY; pilot_packages
+  delivered probes/103_autogen_pilot.py "ON_ABORT" "the truthful REFUSED tool results and --on-abort" || true
+  delivered probes/302_wallclock_interleaved.sh "ARMS_STR" "the policy arms" || true
+  st="$(ls -d results/runs/*-refusal-claude-sonnet-4-5 2>/dev/null | sort | tail -1)"; st="${st:+$(basename "$st")}"; st="${st:-$(date -u +%Y%m%dT%H%MZ)-refusal-claude-sonnet-4-5}"
+  run "ARMS=\"vanilla pessimistic:drop pessimistic:retry snapshot_isolation:drop snapshot_isolation:retry\" WORKLOADS=\"edit-review triage\" N=100 PROVIDER=anthropic MODEL=claude-sonnet-4-5 STAMP=$st PY=\"$UVA_ABS\" ./probes/302_wallclock_interleaved.sh"
+  echo "  UPLOAD after this step: the whole directory results/runs/$st (zip it) -- the fold reads its sidecars, refusals.jsonl and order.tsv"; fi
+
+if want 23; then log 23 "probe 304 with the ledger's bookkeeping in the VERIFIED bytes (--ledger exec; l5_server), atomic registration, three families"
+  need_key ANTHROPIC_API_KEY; need_key OPENAI_API_KEY; need_key DEEPSEEK_API_KEY
+  L5="$( { ls target/release/examples/l5_server crates/runtime/target/release/examples/l5_server 2>/dev/null || true; } | head -1)"
+  [ -n "$L5" ] || { echo "  FAIL: l5_server not built (run --only 14)"; FAILED+=("l5_server missing"); }
+  if [ "$DRY" = 0 ] && ! grep -qE '[0-9]+ verified, 0 errors' results/verus/lib_l5_exec.verus.log 2>/dev/null; then
+    echo "  WARN: results/verus/lib_l5_exec.verus.log does not show a zero-error verification (run --only 7); the run proceeds but the paper will call these bytes a port until it does"; fi
+  mkdir -p results/ledger_world_exec
+  for spec in "$P_HAIKU" "$P_4OMINI" "$P_DEEPSEEK"; do set -- $spec; prov=$1; model=$2; shift 2
+    out="results/ledger_world_exec/${model}.json"
+    if [ -f "$out" ] && [ "$FORCE" = 0 ]; then echo "  $out exists, skipping"
+    else run "L5_SERVER=$L5 $UVG probes/304_ledger_world.py --provider $prov --model $model $* --n 100 --p-revise 1.0 --offset-ms 150 --revisions 2 --second-gap-ms 800 --modes validated,ledger,ledger_norollback --p-cancel-fail 0.1 --p-rebook-fail 0.1 --consumer-max-ms 1500 --seed 20261014 --compensator all --registration atomic --ledger exec --out $out"; fi
+  done
+  echo "  UPLOAD after this step: results/ledger_world_exec/*.json (and the .records.jsonl beside them), results/verus/lib_l5_exec.verus.log"; fi
+
 if want 19; then log 19 "receipt-derived analyses: arm timing, replicated runs, hypothesis gates (then re-run 13)"
   run "python3 harness/macaudit/arm_timing.py --root results --tex --check 2>&1 | tee tools/arm_timing.log | tail -16"
   run "python3 harness/macaudit/live_runs_aggregate.py --root results/live_a1_outcome --tex 2>&1 | tee tools/live_runs.log | tail -30"
   run "python3 harness/macaudit/hypothesis_gates.py --root results --check --tex 2>&1 | tee tools/hypothesis_gates.log | tail -24"
   run "python3 harness/macaudit/a7_rescore.py --check 2>&1 | tail -3"
-  run "python3 harness/macaudit/claims_gate.py --claims CLAIMS.json --scan README.md crates/runtime/README.md paper/main.tex paper/supplement.tex --artifact-url paper/main.tex 2>&1 | tail -4"; fi
+  # the fold itself (step 13's core): without it results/paper_receipts_summary.json is the PREVIOUS run's and the
+  # gate below passes against a stale inlined block (2026-10-16: exactly what happened with --only 14,19,21)
+  run "python3 harness/macaudit/claims_from_results.py --root results --paper paper | tail -4"
+  run "python3 harness/macaudit/claims_gate.py --claims CLAIMS.json --scan README.md crates/runtime/README.md paper/main.tex paper/supplement.tex --artifact-url paper/main.tex 2>&1 | tail -4"
+  echo; echo "UPLOAD after step 19 (the paper is regenerated from these):"
+  echo "  results/paper_receipts_summary.json   tools/verified_scorer.json   tools/verified_scorer.log   tools/hypothesis_gates.log"
+fi
 
 if [ "$DRY" = 0 ]; then
   if [ ${#FAILED[@]} -gt 0 ]; then
