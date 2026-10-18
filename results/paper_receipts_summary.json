@@ -4142,27 +4142,46 @@
  "verified_scorer": {
   "cells": 144,
   "traces": 14400,
-  "problems": [
-   "runs/20261017T0753Z-refusal-claude-sonnet-4-5/edit-review-pessimistic-drop: refusals.jsonl: analyser exit 2: error reading results/runs/20261017T0753Z-refusal-claude-sonnet-4-5/edit-review-pessimistic-drop/refusals.jsonl: line 1: missing field `agent` (or `agent_id`)",
-   "runs/20261017T0753Z-refusal-claude-sonnet-4-5/edit-review-pessimistic-retry: refusals.jsonl: analyser exit 2: error reading results/runs/20261017T0753Z-refusal-claude-sonnet-4-5/edit-review-pessimistic-retry/refusals.jsonl: line 1: missing field `agent` (or `agent_id`)",
-   "runs/20261017T0753Z-refusal-claude-sonnet-4-5/edit-review-snapshot_isolation-drop: refusals.jsonl: analyser exit 2: error reading results/runs/20261017T0753Z-refusal-claude-sonnet-4-5/edit-review-snapshot_isolation-drop/refusals.jsonl: line 1: missing field `agent` (or `agent_id`)",
-   "runs/20261017T0753Z-refusal-claude-sonnet-4-5/edit-review-snapshot_isolation-retry: refusals.jsonl: analyser exit 2: error reading results/runs/20261017T0753Z-refusal-claude-sonnet-4-5/edit-review-snapshot_isolation-retry/refusals.jsonl: line 1: missing field `agent` (or `agent_id`)",
-   "runs/20261017T0753Z-refusal-claude-sonnet-4-5/edit-review-vanilla: refusals.jsonl: analyser exit 2: error reading results/runs/20261017T0753Z-refusal-claude-sonnet-4-5/edit-review-vanilla/refusals.jsonl: line 1: missing field `agent` (or `agent_id`)",
-   "runs/20261017T0753Z-refusal-claude-sonnet-4-5/triage-pessimistic-drop: refusals.jsonl: analyser exit 2: error reading results/runs/20261017T0753Z-refusal-claude-sonnet-4-5/triage-pessimistic-drop/refusals.jsonl: line 1: missing field `agent` (or `agent_id`)",
-   "runs/20261017T0753Z-refusal-claude-sonnet-4-5/triage-pessimistic-retry: refusals.jsonl: analyser exit 2: error reading results/runs/20261017T0753Z-refusal-claude-sonnet-4-5/triage-pessimistic-retry/refusals.jsonl: line 1: missing field `agent` (or `agent_id`)",
-   "runs/20261017T0753Z-refusal-claude-sonnet-4-5/triage-snapshot_isolation-drop: refusals.jsonl: analyser exit 2: error reading results/runs/20261017T0753Z-refusal-claude-sonnet-4-5/triage-snapshot_isolation-drop/refusals.jsonl: line 1: missing field `agent` (or `agent_id`)",
-   "runs/20261017T0753Z-refusal-claude-sonnet-4-5/triage-snapshot_isolation-retry: refusals.jsonl: analyser exit 2: error reading results/runs/20261017T0753Z-refusal-claude-sonnet-4-5/triage-snapshot_isolation-retry/refusals.jsonl: line 1: missing field `agent` (or `agent_id`)",
-   "runs/20261017T0753Z-refusal-claude-sonnet-4-5/triage-vanilla: refusals.jsonl: analyser exit 2: error reading results/runs/20261017T0753Z-refusal-claude-sonnet-4-5/triage-vanilla/refusals.jsonl: line 1: missing field `agent` (or `agent_id`)",
-   "runs/20261017T1615Z-refusal-addressed-claude-sonnet-4-5/edit-review-pessimistic-drop: refusals.jsonl: analyser exit 2: error reading results/runs/20261017T1615Z-refusal-addressed-claude-sonnet-4-5/edit-review-pessimistic-drop/refusals.jsonl: line 1: missing field `agent` (or `agent_id`)",
-   "runs/20261017T1615Z-refusal-addressed-claude-sonnet-4-5/edit-review-pessimistic-retry: refusals.jsonl: analyser exit 2: error reading results/runs/20261017T1615Z-refusal-addressed-claude-sonnet-4-5/edit-review-pessimistic-retry/refusals.jsonl: line 1: missing field `agent` (or `agent_id`)",
-   "runs/20261017T1615Z-refusal-addressed-claude-sonnet-4-5/edit-review-snapshot_isolation-drop: refusals.jsonl: analyser exit 2: error reading results/runs/20261017T1615Z-refusal-addressed-claude-sonnet-4-5/edit-review-snapshot_isolation-drop/refusals.jsonl: line 1: missing field `agent` (or `agent_id`)",
-   "runs/20261017T1615Z-refusal-addressed-claude-sonnet-4-5/edit-review-vanilla: refusals.jsonl: analyser exit 2: error reading results/runs/20261017T1615Z-refusal-addressed-claude-sonnet-4-5/edit-review-vanilla/refusals.jsonl: line 1: missing field `agent` (or `agent_id`)",
-   "runs/20261017T1615Z-refusal-addressed-claude-sonnet-4-5/triage-pessimistic-drop: refusals.jsonl: analyser exit 2: error reading results/runs/20261017T1615Z-refusal-addressed-claude-sonnet-4-5/triage-pessimistic-drop/refusals.jsonl: line 1: missing field `agent` (or `agent_id`)",
-   "runs/20261017T1615Z-refusal-addressed-claude-sonnet-4-5/triage-pessimistic-retry: refusals.jsonl: analyser exit 2: error reading results/runs/20261017T1615Z-refusal-addressed-claude-sonnet-4-5/triage-pessimistic-retry/refusals.jsonl: line 1: missing field `agent` (or `agent_id`)",
-   "runs/20261017T1615Z-refusal-addressed-claude-sonnet-4-5/triage-snapshot_isolation-drop: refusals.jsonl: analyser exit 2: error reading results/runs/20261017T1615Z-refusal-addressed-claude-sonnet-4-5/triage-snapshot_isolation-drop/refusals.jsonl: line 1: missing field `agent` (or `agent_id`)",
-   "runs/20261017T1615Z-refusal-addressed-claude-sonnet-4-5/triage-vanilla: refusals.jsonl: analyser exit 2: error reading results/runs/20261017T1615Z-refusal-addressed-claude-sonnet-4-5/triage-vanilla/refusals.jsonl: line 1: missing field `agent` (or `agent_id`)"
-  ],
-  "passed": false
+  "problems": [],
+  "passed": true
+ },
+ "pilot_claude_verified": {
+  "edit-review|pessimistic": {
+   "a1": 0,
+   "n": 100
+  },
+  "edit-review|snapshot_isolation": {
+   "a1": 50,
+   "n": 100
+  },
+  "edit-review|vanilla": {
+   "a1": 100,
+   "n": 100
+  },
+  "plan-execute|pessimistic": {
+   "a1": 0,
+   "n": 100
+  },
+  "plan-execute|snapshot_isolation": {
+   "a1": 0,
+   "n": 100
+  },
+  "plan-execute|vanilla": {
+   "a1": 0,
+   "n": 100
+  },
+  "triage|pessimistic": {
+   "a1": 0,
+   "n": 100
+  },
+  "triage|snapshot_isolation": {
+   "a1": 0,
+   "n": 100
+  },
+  "triage|vanilla": {
+   "a1": 0,
+   "n": 100
+  }
  },
  "tlc_duplication": {
   "witness_depth": "5",
@@ -6903,8 +6922,19 @@
   "% --- verified_scorer_gate (./tools/verified_scorer.json) ---",
   "\\renewcommand{\\VerifiedScorerCells}{144}",
   "\\renewcommand{\\VerifiedScorerTraces}{14{,}400}",
-  "\\renewcommand{\\VerifiedScorerProblems}{18}",
-  "% verified_scorer_gate reports 18 problem(s) over 144 cell(s): the paper's cell stays PENDING",
+  "\\renewcommand{\\VerifiedScorerProblems}{0}",
+  "\\renewcommand{\\VerifiedScorerAvailable}{1}",
+  "% Claude op-record replication (runs/*-claude), scored by the verified detector; -- = cell not scored yet",
+  "\\providecommand{\\VSClaudeEditReviewVanilla}{100/100}",
+  "\\providecommand{\\VSClaudeEditReviewPess}{0/100}",
+  "\\providecommand{\\VSClaudeEditReviewSI}{50/100}",
+  "\\providecommand{\\VSClaudePlanExecuteVanilla}{0/100}",
+  "\\providecommand{\\VSClaudePlanExecutePess}{0/100}",
+  "\\providecommand{\\VSClaudePlanExecuteSI}{0/100}",
+  "\\providecommand{\\VSClaudeTriageVanilla}{0/100}",
+  "\\providecommand{\\VSClaudeTriagePess}{0/100}",
+  "\\providecommand{\\VSClaudeTriageSI}{0/100}",
+  "\\renewcommand{\\PilotClaudeAvailable}{1}",
   "% --- check_duplication.sh (./formal/tla/tlc.Duplication.log) ---",
   "\\renewcommand{\\DupWitnessDepth}{5}",
   "\\renewcommand{\\DupDivergentDepth}{6}",

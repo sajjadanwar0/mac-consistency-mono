@@ -2719,8 +2719,19 @@
 % --- verified_scorer_gate (./tools/verified_scorer.json) ---
 \renewcommand{\VerifiedScorerCells}{144}
 \renewcommand{\VerifiedScorerTraces}{14{,}400}
-\renewcommand{\VerifiedScorerProblems}{18}
-% verified_scorer_gate reports 18 problem(s) over 144 cell(s): the paper's cell stays PENDING
+\renewcommand{\VerifiedScorerProblems}{0}
+\renewcommand{\VerifiedScorerAvailable}{1}
+% Claude op-record replication (runs/*-claude), scored by the verified detector; -- = cell not scored yet
+\providecommand{\VSClaudeEditReviewVanilla}{100/100}
+\providecommand{\VSClaudeEditReviewPess}{0/100}
+\providecommand{\VSClaudeEditReviewSI}{50/100}
+\providecommand{\VSClaudePlanExecuteVanilla}{0/100}
+\providecommand{\VSClaudePlanExecutePess}{0/100}
+\providecommand{\VSClaudePlanExecuteSI}{0/100}
+\providecommand{\VSClaudeTriageVanilla}{0/100}
+\providecommand{\VSClaudeTriagePess}{0/100}
+\providecommand{\VSClaudeTriageSI}{0/100}
+\renewcommand{\PilotClaudeAvailable}{1}
 % --- check_duplication.sh (./formal/tla/tlc.Duplication.log) ---
 \renewcommand{\DupWitnessDepth}{5}
 \renewcommand{\DupDivergentDepth}{6}

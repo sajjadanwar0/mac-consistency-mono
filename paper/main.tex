@@ -2985,8 +2985,19 @@
 % --- verified_scorer_gate (./tools/verified_scorer.json) ---
 \renewcommand{\VerifiedScorerCells}{144}
 \renewcommand{\VerifiedScorerTraces}{14{,}400}
-\renewcommand{\VerifiedScorerProblems}{18}
-% verified_scorer_gate reports 18 problem(s) over 144 cell(s): the paper's cell stays PENDING
+\renewcommand{\VerifiedScorerProblems}{0}
+\renewcommand{\VerifiedScorerAvailable}{1}
+% Claude op-record replication (runs/*-claude), scored by the verified detector; -- = cell not scored yet
+\providecommand{\VSClaudeEditReviewVanilla}{100/100}
+\providecommand{\VSClaudeEditReviewPess}{0/100}
+\providecommand{\VSClaudeEditReviewSI}{50/100}
+\providecommand{\VSClaudePlanExecuteVanilla}{0/100}
+\providecommand{\VSClaudePlanExecutePess}{0/100}
+\providecommand{\VSClaudePlanExecuteSI}{0/100}
+\providecommand{\VSClaudeTriageVanilla}{0/100}
+\providecommand{\VSClaudeTriagePess}{0/100}
+\providecommand{\VSClaudeTriageSI}{0/100}
+\renewcommand{\PilotClaudeAvailable}{1}
 % --- check_duplication.sh (./formal/tla/tlc.Duplication.log) ---
 \renewcommand{\DupWitnessDepth}{5}
 \renewcommand{\DupDivergentDepth}{6}
@@ -3014,7 +3025,7 @@
 
 \IEEEtitleabstractindextext{%
 \begin{abstract}
-An agent's step in a multi-agent LLM system is a transaction whose compute phase is an inference call of unbounded latency, during which the state it read is neither locked nor re-validated. We give the regime a mechanized consistency theory and test what it buys. Four classical conditions become history predicates---stale generation, phantom tool, causal cascade, tool-effect reordering---with TLC witnesses; TLAPS proves that stale-generation freedom implies commit-order read consistency under three hypotheses, which gates check on the committed records; bounded model checking realizes all sixteen points of their exclusion lattice; and Verus verifies one chain of disciplines whose verified files are byte-identical to the runtime that was measured. The empirical result is what commit-time isolation cannot reach. On a released LangGraph runtime with live models, its store instrumented only to stamp a clock, read-set validation removes every commit grounded in a superseded store read, yet the booking contradicts the final trip date in $1$--$65\%$ of sessions per family and arm, because the revision lands after the commit---a harm that occurs in correct sequential executions. We define it as a predicate on effects and their recovered bases, show that under an open-world store it can only be owed, and test a basis ledger that registers the obligation with the superseding write against a simulated world with refusals and a downstream consumer: the ledger's report and the world agree in $\LWLedgerAgree$ sessions, a compensator that misreported was caught only by the world check, and a consumer still acts on the stale booking until the compensation's model call completes. A released tool executor commits an order-dependent pipeline out of order on $22$ of $30$ turns of one backbone while its transcript shows it in order. Per sound committed operation, snapshot isolation costs $+0.4$--$11.1\%$ in tokens and pessimistic locking up to $+97\%$; per session, a model told the truth about a refusal makes $2$--$4\times$ the calls on the contended workloads when the refusal names no agent and $1.1$--$2.3\times$ when it does; a census of $98$ public LangGraph repositories finds the precondition's statically visible shape, a co-scheduled reader and writer of one channel, confirmed nowhere. From these we derive four concrete requirements for agent frameworks. Every number carries its receipt and its assurance level.
+An agent's step in a multi-agent LLM system is a transaction whose compute phase is an inference call of unbounded latency, during which the state it read is neither locked nor re-validated. We give the regime a mechanized consistency theory and test what it buys. Four classical conditions become history predicates---stale generation, phantom tool, causal cascade, tool-effect reordering---with TLC witnesses; TLAPS proves that stale-generation freedom implies commit-order read consistency under three hypotheses, which gates check on the committed records; bounded model checking realizes all sixteen points of their exclusion lattice; and Verus verifies one chain of disciplines whose verified files are byte-identical to the runtime that was measured. The empirical result is what commit-time isolation cannot reach. On a released LangGraph runtime with live models, its store instrumented only to stamp a clock, read-set validation removes every commit grounded in a superseded store read, yet the booking contradicts the final trip date in $1$--$65\%$ of sessions per API family and arm, because the revision lands after the commit---a harm that occurs in correct sequential executions. We define it as a predicate on effects and their recovered bases, observe that under an open-world store it can only be owed, and test a basis ledger that registers the obligation with the superseding write against a simulated world with refusals and a downstream consumer: the ledger's report and the world agree in $\LWLedgerAgree$ sessions, a compensator that misreported was caught only by the world check, and a consumer still acts on the stale booking until the compensation's model call completes (or finds none, under a compensator that cancels first). A released tool executor commits an order-dependent pipeline out of order on $22$ of $30$ turns of one backbone while its transcript shows it in order. Per sound committed operation, snapshot isolation costs $+0.4$--$11.1\%$ in tokens and pessimistic locking up to $+97\%$; per session, a model told the truth about a refusal makes $2.2$--$4.2\times$ the calls on the contended workloads when the refusal names no agent and $1.1$--$2.3\times$ when it does; a census of $98$ public LangGraph repositories finds the precondition's statically visible shape, a co-scheduled reader and writer of one last-value channel, confirmed nowhere. From these we derive four concrete requirements for agent frameworks. Every number carries its receipt and its assurance level.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -3123,7 +3134,7 @@ consistency~\cite{LloydEtAl2011COPS} treats operations as discrete events
 with summarizable signatures. The agent regime has unbounded generation
 latency, a mutable tool registry and irreversible effects, so the
 cascading-abort machinery of database recovery, which assumes effects can be
-undone, is exactly what fails.
+undone, is what fails.
 
 \subsection{Contributions}
 \label{sec:contributions}
@@ -3195,16 +3206,16 @@ obligations, \VerusLoadBearing{} bear a deployed or measured artifact
 with its own confounds measured} (\cref{sec:eval}). For each discipline we
 report the anomaly it excludes, the harm that remains, and the price: on the
 live LangGraph study the $L_1$ residue is \Rp{} in $1$--$65\%$ of sessions
-per family and arm (pooled over three interleaved runs; $0$--$73$ of $100$
-in single runs), in two implementations of $L_1$ between which the
+per API family and arm (pooled over three interleaved runs; $0$--$73$ of
+$100$ in single runs), in two implementations of $L_1$ between which the
 replications detect no difference; against a simulated world the
 ledger's report and the world agree in $\LWatomicLedgerAgree$ sessions, where a
 first compensator had misreported $1$--$10\%$ (\cref{sec:ledger-world}); output
 commit removes exposure exactly when the review precedes the release; per
 sound committed operation, snapshot isolation costs $+0.4$--$11.1\%$ and
-pessimistic locking up to $+97\%$ in tokens, and, per session, $2$--$4\times$
-the model calls under a refusal that names no agent and $1.1$--$2.3\times$
-under one that does (\cref{sec:cost}). Where the design limits what a
+pessimistic locking up to $+97\%$ in tokens, and, per session,
+$2.2$--$4.2\times$ the model calls under a refusal that names no agent and
+$1.1$--$2.3\times$ under one that does (\cref{sec:cost}). Where the design limits what a
 difference can mean we quantify the confound on the receipts.
 
 \smallskip\noindent\textbf{(C5) Where the preconditions occur} (\cref{sec:prevalence}).
@@ -3244,16 +3255,15 @@ treated as instantaneous; and a \emph{write} phase that atomically appends a
 record to the log, installing the planned writes ($\ws$, $\wv$), the selected
 tool ($\pt$) and the registry at commit ($\wreg$), stamped $\wt$. The log
 length is a logical clock~\cite{Lamport1978TimeClocks}; a history $h$ is the
-log, $h\in\mathrm{Seq}(\fld{OpRecord})$. The specification is
-\texttt{Memory.tla}.
+log, $h\in\mathrm{Seq}(\fld{OpRecord})$ (\texttt{Memory.tla}).
 
 \smallskip\noindent\emph{Store axiom.} A read returns the latest committed
 value at or before its read time (stamps are log lengths, so no write
-shares a stamp with a read and ``after'' is the strict inequality of
-\cref{def:a1}). TLC confirms this and the two hypotheses below as
-invariants of \texttt{Memory.tla} over all \CommitOrderMemoryStates{}
-reachable states at the checked bounds, and gates check all three on the
-committed records (\cref{sec:a1}).
+shares a stamp with a read; ``after'' is \cref{def:a1}'s strict inequality).
+TLC confirms this and the two hypotheses below as invariants of
+\texttt{Memory.tla} (\CommitOrderMemoryStates{} reachable states at the
+checked bounds); gates check all three on the committed records
+(\cref{sec:a1}).
 
 \smallskip\noindent\emph{Per-agent non-overlap; read before commit.} Two
 operations of one agent do not overlap in $[\rt,\wt]$; every operation reads
@@ -3281,10 +3291,9 @@ externalized effects), and violated by one deployed resumption path we
 reproduce.
 
 \smallskip\noindent\emph{No replication; no one runtime.} The memory is one
-logical store (split view under replication, \A4, is formalized in
-supplement \S\,J); the model derives from no one runtime: LangGraph is driven
-through it live (\cref{sec:live-a1}), three others are placed informally
-(supplement \S\,D).
+logical store (split view under replication, \A4, is in supplement \S\,J);
+LangGraph is driven through the model live (\cref{sec:live-a1}), three other
+runtimes are placed informally (supplement \S\,D).
 
 % ============================================================================
 % sec/03-catalog.tex
@@ -3348,8 +3357,8 @@ equivalence~\cite{Papadimitriou1979}).
 
 \begin{theorem}[\A1-freedom implies commit-order read consistency]
 \label{thm:corc}
-Let $h$ satisfy the store axiom, read-before-commit and per-agent non-overlap.
-If $h$ has no \A1 witness, then $h$ is commit-order read consistent.
+If $h$ satisfies the store axiom, read-before-commit and per-agent
+non-overlap and has no \A1 witness, it is commit-order read consistent.
 \end{theorem}
 
 The proof (\texttt{CommitOrder.tla}; TLAPS, \TlapsCommitOrder{} obligations,
@@ -3360,8 +3369,8 @@ window, was made by another agent (one agent's operations do not overlap), and
 wrote a different value---an \A1 witness. Fifteen TLC verdicts
 (\texttt{check\_commitorder.sh}) fix what the statement says, and all
 reproduce: over all \CommitOrderHistories{} histories of length at most
-three the implication holds, is not vacuous, and fails when either droppable
-hypothesis is removed; the relational definitions equal \texttt{Memory.tla}'s
+three (one cell, one value) the implication holds, is not vacuous, and fails
+when either droppable hypothesis is removed; the relational definitions equal \texttt{Memory.tla}'s
 and a literal serial replay; the three hypotheses are invariants of the
 operational model over \CommitOrderMemoryStates{} reachable states; and the
 converse fails in exactly one shape, a value overwritten and then restored
@@ -3372,19 +3381,22 @@ inside the window. The predicates nest strictly:
 \emph{Reach.} The theorem is a conditional guarantee over faithful histories
 that satisfy its three hypotheses; it says nothing about serializability of
 an application, about effects, about reads the instrumentation did not
-declare, or about a runtime that violates per-agent non-overlap---LangGraph's
-\texttt{Send} fan-out, several instances under one agent name, is outside
-the model (\cref{sec:model}). On the committed data all three hypotheses
+declare, or about a runtime that violates per-agent non-overlap (LangGraph's
+\texttt{Send} fan-out, \cref{sec:model}). On the committed data all three hypotheses
 hold where they can be checked (\texttt{hypothesis\_gates.py}, failing on
 the first violation): \HypSameAgentOverlaps{} same-agent overlapping windows
 and \HypReadBeforeCommitViolations{} reads not before their commit in
 \HypRecords{} operation records over \HypTraces{} traces (ledger
 registration records are not operations), and \HypStoreAxiomViolations{}
 store-axiom violations over \HypStoreAxiomReads{} declared reads in the
-\HypStoreAxiomTraces{} traces that record their store; the
-\HypStoreAxiomConvertedCampaigns{} campaigns converted from transcripts and
-tool logs are outside the axiom's reach and supply no rate of this paper's
-tables: the \HypPublishedCampaigns{} campaigns behind them are
+\HypStoreAxiomTraces{} traces that record their store (compensation records,
+which read nothing, carry a synthesized read time one tick before their
+commit and pass trivially). The \HypStoreAxiomConvertedCampaigns{} campaigns
+converted from transcripts and tool logs are not taken at a store boundary
+and fail it---of their \HypStoreAxiomConvertedReads{} reconstructed reads,
+$3{,}289$ disagree with the latest visible write and $1{,}226$ read an
+unrecorded cell (reported, not gated)---which is why they supply no rate of
+this paper's tables: the \HypPublishedCampaigns{} campaigns behind them are
 store-instrumented (\HypPublishedConvertedCampaigns{} converted; gated), so
 every \A1 verdict here is taken on records the hypotheses were checked on.
 The converse shape is a false positive of $L_1$, priced
@@ -3395,7 +3407,7 @@ classical lost update (P4 of Berenson et al.~\cite{BerensonEtAl1995}) is an
 \A1 witness whose stale reader also writes the cell it read, so $L_1$
 excludes it; a \emph{blind} overwrite---a write by an operation that never
 read the cell---is outside isolation theory and the catalog, and is the kind
-of the one in-the-wild bug we reproduce (\cref{sec:prevalence}) and of a
+of the one in-the-wild bug we reproduce (supplement \S\,Q) and of a
 revision landing \emph{after} the reader's commit (\cref{sec:live-a1}).
 
 \subsection{\A2: phantom tool}
@@ -3417,19 +3429,18 @@ exists. TLC's witness has four states. \Cref{def:a2} is stated over
 identifiers; the Verus restatement of \cref{sec:l4} maps identifiers to
 signatures and fires additionally when a tool is re-signed under its old
 name. The two coincide under the encoding the executable dispatcher uses
-(re-signing removes the old pair and inserts a fresh one); the scorer and the
-$L_4$ dispatcher decide the pair form, and \cref{tab:assurance} records the
-correspondence as an encoding, not a proof. A hallucinated call to a tool
+(re-signing removes the old pair and inserts a fresh one), which
+\cref{tab:assurance} records as an encoding, not a proof. A hallucinated call to a tool
 never in $\rreg$ is not \A2 and not in the catalog.
 
 \subsection{\A3: causal cascade}
 \label{sec:a3}
-When an operation is retracted in a compensating (saga-style) runtime, any
+When a compensating (saga-style) runtime retracts an operation, any
 operation that read a value it produced is grounded on a basis no surviving
 commit supports. The classical remedy, cascading abort, flags the dependent
-aborted; if the dependent's tool effects have already been issued, the flag
-changes nothing that reached the world, so the cataloged predicate is stated
-over externalization.
+aborted; if the dependent's tool effects are already out, the flag changes
+nothing that reached the world, so the cataloged predicate is stated over
+externalization.
 
 \begin{definition}[Causal cascade]
 \label{def:a3}
@@ -3479,9 +3490,8 @@ writer's operation identifier makes the hypothesis a system invariant.
 
 \subsection{\A6: tool-effect reordering}
 \label{sec:a6}
-Each record additionally carries an issuance order $\fld{io}$ and a commit
-order $\fld{co}$ over its external effects; $\ws$ and $\wv$ derive from
-$\fld{co}$.
+Each record also carries an issuance order $\fld{io}$ and a commit order
+$\fld{co}$ over its external effects; $\ws$ and $\wv$ derive from $\fld{co}$.
 \begin{definition}[Tool-effect reordering]
 \label{def:a6}
 $h$ exhibits \emph{tool-effect reordering} when for some $i$,
@@ -3496,8 +3506,8 @@ The minimal witness (three states, one agent, two cells) is benign over store
 cells, where writes to distinct cells commute; the predicate names an anomaly
 only when each element of $\fld{io}$ is an external effect whose order an
 observer can see. It over-reports on commuting effects and, requiring a
-permutation, is silent on dropped and duplicated effects (\cref{sec:dup}
-states the duplicated case; \cref{sec:prevalence} reproduces it).
+permutation, is silent on dropped and duplicated effects (\cref{sec:dup};
+supplement \S\,Q).
 
 
 \subsection{Snapshot insufficiency}
@@ -3506,8 +3516,7 @@ $L_1$ is not a snapshot guarantee: ``reads reflect memory at read time''
 is the store axiom of \cref{thm:corc}, holds on every reachable log, and
 TLC exhibits a history satisfying it on which \A1 fires
 (\texttt{MC\_A1\_struct}; supplement \S\,B); LangGraph's superstep pins a
-consistent snapshot per node and has not thereby obtained $L_1$
-(\cref{sec:live-a1}).
+snapshot per node and has not obtained $L_1$ (\cref{sec:live-a1}).
 
 \subsection{What the catalog leaves: the residue predicate}
 \label{sec:residue}
@@ -3531,10 +3540,10 @@ external effect was derived from, and an $\fld{obligation}$ flag. The basis
 is recovered by \emph{argument provenance}: a read value that appears
 verbatim among the effect's arguments is part of its basis, and nothing is
 declared by the agent. This is why-provenance~\cite{BunemanEtAl2001Why}
-restricted to copying, with that tradition's known limit: a value that
+restricted to copying, with its known limit: a value that
 reaches the effect through a computation leaves no basis, so the extractor
-under-reaches and never over-reports. In the model the basis is a
-nondeterministic subset of the read values, so every extractor is covered.
+under-reaches and never over-reports. In the model the basis is any subset
+of the read values, so every extractor is covered.
 
 \begin{definition}[Residue predicate]
 \label{def:residue}
@@ -3566,10 +3575,8 @@ holds whenever the extractor recovers the basis at all, and it recovers
 \HypBasisRecovered/\HypBookings{} because the harness writes the read value
 into the effect's argument; we keep it as a gate (\texttt{a7\_rescore
 -{}-check}) and state the extractor's blind spot in \cref{sec:limitations}.
-TLC's witness has five states and is not an \A1 witness: an operation reads
-$c_1=\mathrm{NULL}$ and commits an effect with basis
-$\{(c_1,\mathrm{NULL})\}$, released at commit; a later operation commits
-$c_1=v_1$.
+TLC's five-state witness is not an \A1 witness: an effect released with
+basis $\{(c_1,\mathrm{NULL})\}$, then a commit of $c_1=v_1$.
 
 \smallskip\noindent\emph{What remains after release (a remark, not a
 result).} Under the \emph{open-world hypothesis}---the store accepts, at
@@ -3578,16 +3585,15 @@ of $B$ by an operation that does not depend on $e$---two things are
 immediate and fix what a discipline can promise. (i)~Some execution
 supersedes $B$ while $e$ is out, because the write is admitted after a
 release that cannot be recalled. (ii)~If obligations are never cleared,
-$\neg R$ holds in every reachable state iff, in every execution, $e$'s
-obligation is set in the same step as, or before, every step that completes
-the other conjuncts of \cref{def:residue} (the superseding commit for a
-released effect; the release for an effect superseded while held), because
-\cref{def:residue} is ``superseded and not owed'' and a monotone flag set by
-the first such step stays set. So a discipline can promise not a current
-basis but an obligation registered atomically with the step that completes
-the witness, which the ledger model of \cref{sec:ledger} does at both steps
-(the executable ledger registers inside the store lock with the write and
-clears a discharged obligation; never-cleared obligations are the model's). Dropping
+$\neg R$ holds in every reachable state iff $e$'s obligation is set in the
+same step as, or before, every step that completes the other conjuncts of
+\cref{def:residue} (the superseding commit for a released effect; the release
+for an effect superseded while held): \cref{def:residue} is ``superseded and
+not owed,'' and a monotone flag set by the first such step stays set. So a
+discipline can promise not a current basis but an obligation registered
+atomically with the step that completes the witness, which the ledger model
+of \cref{sec:ledger} does at both steps (the executable ledger clears a
+discharged obligation; never-cleared obligations are the model's). Dropping
 the hypothesis is not free: freezing the cells of $B$ until the effect is
 acknowledged is a lock held past commit, priced by the pessimistic column of
 \cref{tab:cost}; output commit (\cref{sec:a3}) holds effects only until their
@@ -3595,15 +3601,15 @@ acknowledged is a lock held past commit, priced by the pessimistic column of
 obligation buys in the world is a property of the compensator and is
 measured, not proved (\cref{sec:ledger-world}).
 
-\subsection{What the model assumes about effects: at-most-once, as a predicate}
+\subsection{At-most-once effects, as a predicate}
 \label{sec:dup}
 The model externalizes an operation's effects once, at commit. LangGraph's
 \texttt{interrupt} resumes a node by re-executing it from its start, so an
 irreversible effect issued \emph{before} the gate is emitted again after it,
 with different arguments when the shared value was revised during the gate
-(\cref{sec:prevalence}; \HypInterruptEmissions{} emissions of one pre-gate
-effect in the probe). Rather than record this as a limitation we state the
-hypothesis as a predicate over the effect stream: $D$ holds when two
+(supplement \S\,Q; \HypInterruptEmissions{} emissions of one pre-gate
+effect in the probe). We state the hypothesis as a predicate over the
+effect stream: $D$ holds when two
 emissions carry the same node's effect, $D^{\neq}$ when they also differ in
 their arguments. A five-action \TLA{} module (\texttt{Duplication.tla}:
 issue, gate, resume-from-start, finish, revise) reaches $D$ in
@@ -3636,26 +3642,24 @@ $\emptyset$ admitting everything, top $\mathcal{A}$ admitting nothing
   L_3\equiv\{A_1,A_3,A_6\},\;
   L_4\equiv\mathcal{A},
 \]
-chosen on operational grounds (\A1 first because it is the basic
-read--generate--commit failure; \A2 last because registry stability across
-the operation lifetime is the costliest single requirement); the other
+chosen on operational grounds (\A1 first as the basic read--generate--commit
+failure; \A2 last because registry stability across the operation lifetime
+is the costliest requirement); the other
 twenty-three linearizations are equally valid and the lattice, not the chain,
-is primary. The residue predicate \Rp{} is not a generator: it is not an
-anomaly, and its answer, the basis ledger $\ell$ of \cref{sec:ledger},
-composes with any point.
+is primary. \Rp{} is not a generator: it is not an anomaly, and its answer,
+the basis ledger $\ell$ of \cref{sec:ledger}, composes with any point.
 
 
 \subsection{What is and is not a result}
 The chain's inclusions are definitional and its strictness needs one witness
 per step; neither is a result. What requires work is \emph{realizability}: a
 runtime configuration that excludes exactly each point's anomalies, and for
-the five named points a verified realizing runtime---established here by
-bounded model checking at two agents, two cells and two operations (three
-for \A3 and for the supersession class of \A1), one value for the witness
-half and two for the safety half, and claimed at exactly those bounds, which
-exercise every predicate's minimal witness and nothing longer; the unbounded
-statement exists only for the top point, as the Verus product of
-\cref{sec:composition}.
+the five named points a verified realizing runtime---established by bounded
+model checking at two agents, two cells and two operations (three for \A3
+and for the supersession class of \A1), one value for the witness half and
+two for the safety half, bounds that exercise every minimal witness and
+nothing longer; the unbounded statement exists only for the top point, as
+the Verus product of \cref{sec:composition}.
 
 \subsection{All sixteen points, mechanically; the ledger composes}
 \label{sec:lattice16}
@@ -3679,10 +3683,10 @@ $a\notin S$ it must be violated. All \LatticeRuns{} runs match
 (\texttt{lattice16.sh}; $|A|{=}2$, $|\fld{Cells}|{=}2$, $|\fld{Values}|{=}1$,
 $\fld{MaxOps}{=}2$, symmetry on agents and cells; the $32$ safety runs are
 exhaustive over \LatticeSafeStatesMin{}--\LatticeSafeStatesMax{} distinct
-states). Because \textsc{CausalCascade} ranges over flags and predecessor
-sets and never over cells, the sixteen \textsc{NoA3} points are rechecked at
-$\fld{MaxOps}{=}3$ with one cell, where a transitive cascade first becomes
-reachable: \LatticeMaxOpsThreeRuns{}/\LatticeMaxOpsThreeRuns{} match. A
+states). Because \textsc{CausalCascade} never ranges over cells, the sixteen
+\textsc{NoA3} points are rechecked at $\fld{MaxOps}{=}3$ with one cell, where
+a transitive cascade first becomes reachable:
+\LatticeMaxOpsThreeRuns{}/\LatticeMaxOpsThreeRuns{} match. A
 single-value domain makes \cref{def:a1}'s value conjunct vacuous on non-null
 reads; the safety half re-run at $|\fld{Values}|{=}2$ on the current model
 stays safe (\LatticeVtwoOutcome), and a targeted check shows the
@@ -3698,9 +3702,7 @@ close in $25$ minutes ($72$M states) and the verdict covers one cell\else;
 their recheck at $\fld{MaxOps}{=}3$, $|\fld{Values}|{=}2$, where that class is
 reachable, is \Pending{formal/tla/lattice16\_a1\_maxops3.sh}\fi. Every point
 is thus inhabited by a runtime that excludes exactly its avoidance set
-(soundness only), at these bounds; the Verus product of the $L_2$, $L_3$ and
-$L_4$ models (\cref{sec:composition}) mechanizes the top point without a
-bound.
+(soundness only), at these bounds.
 
 \smallskip\noindent\emph{The ledger composes.} \texttt{Guarded5.tla} adds a
 fifth constant $G_7$, the basis ledger of \cref{sec:ledger}, which refuses
@@ -3781,8 +3783,8 @@ completeness half strengthens each of three nested loop invariants to carry
 \texttt{detect\_a6} are single-record equivalences; \texttt{detect\_a3} is
 exact for the flat-trace residue of \cref{sec:a3}.
 
-The restatement is hand-written and checked by inspection, and inspection
-found a gap we state rather than hide: the Verus \texttt{OpRecord} carries no
+The restatement is hand-written and checked by inspection, which found a
+gap we state: the Verus \texttt{OpRecord} carries no
 agent field, so its \A1 predicate omits the different-agent conjunct of
 \cref{def:a1}, and it decides ``no witness'' when a read value is absent,
 where the \TLA{} compares against $\mathrm{NULL}$. Neither matters on the
@@ -3805,9 +3807,9 @@ is no read cell without a value and \HypSameAgentOverlaps{} same-agent
 overlapping windows (\texttt{hypothesis\_gates.py --check}).
 
 \smallskip\noindent\emph{Which bytes score \A1.} Agreement of three
-transcriptions on committed data is testing, not equivalence, and the
-earlier version of this paper reported tables scored by a hand-written port
-with such a gate. The scorer now takes its \A1 verdict from
+transcriptions on committed data is testing, not equivalence; an earlier
+version scored its tables by a hand-written port with such a gate. The
+scorer now takes its \A1 verdict from
 \texttt{detect\_a1} itself: the verified exec-mode file
 (\texttt{lib\_detect\_a1\_exec.rs}, $9$ obligations, sound and complete
 against \texttt{is\_a1\_witness}, the gated restatement's conjuncts over
@@ -3833,7 +3835,7 @@ handed the analyser as op-records (a reader defect, like the one its first
 pass caught; supplement \S\,W.5), so its clean receipt is \Pending{runner
 step 14 rerun} and until then the tables also stand on the gated port.\fi
 
-\subsection{$L_1$: two concurrent stores whose lock is verified, not assumed}
+\subsection{$L_1$: two concurrent stores under a verified lock}
 \label{sec:l1}
 Three abstract state machines---pessimistic locking, serializable snapshot
 isolation (SSI), and default snapshot isolation with its no-write bypass---are
@@ -3932,25 +3934,25 @@ step is the load-bearing case: the cell that became stale is the cell the
 step marked, and any other stale cell was stale before), and the ledger theorem:
 no state satisfying $\mathit{inv\_l5}$ contains a witness of \cref{def:residue}.
 The model's witness is the state form---an externalized, unowed effect whose
-basis the store now disagrees with---which contains \cref{def:residue}'s (a
-latest post-commit writer that differs implies a current value that
-differs), so excluding it excludes the definition's witness and an effect
+basis the store now disagrees with---which \cref{def:residue}'s witness
+implies (a differing latest post-commit writer is a differing current
+value), so excluding it excludes the definition's witness and an effect
 released on a basis already stale at commit. Non-vacuity in both directions:
 the unguarded write reaches \Rp{} in two steps from an effect derived from
 an unwritten cell, and under the ledger the same write registers the
 obligation while a write that restores the value leaves no witness. The
-ledger refuses nothing; refusing to release a stale-basis effect, or holding
-it for a deadline, is a policy the runtime layers on top. The invariant
+ledger refuses nothing; refusing a stale-basis release, or a hold deadline,
+is a policy layered on top. The invariant
 speaks of records: a compensator that reports a discharge while a stale
 confirmation stays active satisfies it vacuously, which is what
 \cref{sec:ledger-world}'s world check found. The model is \LfiveVerusIntro{} under the pinned
 build; its obligations count as scaffolding (\VerusScaffold{} with it)
 because the executable ledger of the live study is harness code, not these
-bytes; it registers the obligation inside the store lock, in the critical
-section of the superseding write, and runs the compensation in that writer's
-thread after the lock is released\ifnum\LedgerWorldAtomicAvailable=1\else{}
-(the runs reported here predate atomic registration and registered just
-after the put; \cref{sec:ledger-world})\fi. An exec ledger
+bytes; it registers the obligation at the superseding write---inside the
+store lock in the shipped design, a path only probe 304's receipts record
+(\cref{sec:ledger-world}); the probe-303 rows carry no registration
+field---and runs the compensation in that writer's thread after the lock is
+released. An exec ledger
 (\texttt{lib\_l5\_exec.rs}, supplement \S\,S) carries the bookkeeping
 alone---which effects a write obliges (total: no superseded basis without an
 obligation), what a compensator's verdict does, what is open---behind a JSON
@@ -3961,7 +3963,8 @@ erased by cargo; server \texttt{\LWexecServerSha}; three families): world
 wrong \LWexecLedgerWorldWrongRange, none \LWexecLedgerWorldNoneRange,
 agreement $\LWexecLedgerAgree$, the bytes' open set equal to the shadow's in
 every session---the same bookkeeping, the residue the world's. \fi\ifnum\LfiveExecAvailable=1 The file is verified
-(\LfiveExecVerus) and byte-identical in the runtime.\else Its verification
+(\LfiveExecVerus; outside the \VerusCurated/\VerusFull{} totals, which
+predate it) and byte-identical in the runtime.\else Its verification
 under the pinned build is \Pending{runner step 7, pinned build}; until that
 receipt the bookkeeping is a port.\fi
 
@@ -3995,11 +3998,11 @@ Python and Rust instrumentation that produces every \texttt{OpRecord},
 including the read sets it declares---the largest item: a detector is as
 good as the read set it is handed, and S-Bus~\cite{Khan2026SBus}, our own
 read-set reconstruction from HTTP traffic, finds $74\%$ of reads on a
-SWE-bench workload invisible to that surface; at the store boundary, the
-keys a node read between its first read and its commit equal its declared
-read set (gate H6: \HypUndeclaredReads{} undeclared store reads over
-\HypObservedRecords{} records of probes 303 and 304), while a value that
-reaches the model through prompt context neither instrument sees. (x) the
+SWE-bench workload invisible to that surface; at the store boundary the
+declared read set equals the keys read (gate H6: \HypUndeclaredReads{}
+undeclared store reads over \HypObservedRecords{} records of probes 303 and
+304), while a value reaching the model through prompt context neither
+instrument sees. (x) the
 provenance correspondence between the two formalizations of \A3, which agree
 only under value-unique writes (checked on every scored trace); (xi) in the
 live study's verified arm, the $100$-line JSON bridge and the harness's
@@ -4027,8 +4030,8 @@ reads no runtime flag.
 
 \smallskip\noindent\emph{Provenance.} Every table cell maps to a committed
 trace directory and a scorer in the artifact; \texttt{reproduce.sh} rescores
-all of them offline under an implementation of \cref{def:a1} independent of
-the verified detector and the Rust port, and fails on any disagreement.
+them offline under an implementation of \cref{def:a1} independent of the
+verified detector and the Rust port, and fails on any disagreement.
 Model-driven cells are one run each at the stated $n$ unless replicated; a
 regeneration reproduces the protocol and the intervals, not the sessions.
 Intervals are exact Clopper--Pearson unless stated.
@@ -4040,18 +4043,18 @@ runtime (\texttt{langgraph} 1.2.0) with live models. Two compiled graphs
 share one \texttt{BaseStore}, the framework's cross-thread memory, subclassed
 only to stamp a logical clock at \texttt{get}/\texttt{put} under one lock,
 the one instrumentation (\texttt{BaseStore} offers no version or
-compare-and-set, so the framework as shipped cannot validate a read set). A flight agent reads the trip date,
+compare-and-set). A flight agent reads the trip date,
 drafts a reservation over a model call and puts the booking; a date agent,
 started by the harness \LiveOffsetMs{}\,ms after the flight agent's read, reads
 the date, asks its model for a one-week revision and puts it. Three modes:
 \emph{vanilla}; \emph{validated}, the $L_1$ discipline at the application
 layer (re-read before \texttt{put}, discard the generation and regenerate on
-change); and \emph{sequential}, a control in which the date agent runs after
-the flight agent commits. \LiveNPerCell{} sessions per cell on three model
+change); and \emph{sequential}, a control: the date agent runs after the
+flight agent commits. \LiveNPerCell{} sessions per cell on three model
 families. The booking's date is the value the flight agent read; the models
-draft the texts and set the latencies, and model output is scored only in
-the materiality study below. Each session records the \A1 verdict, the
-regenerations, and the booking's and final trip dates (\cref{tab:live}).
+draft the texts and set the latencies; model output is scored only in the
+materiality study below. Each session records the \A1 verdict, the
+regenerations and the booking's and final dates (\cref{tab:live}).
 
 \begin{table*}[t]
 \centering
@@ -4066,9 +4069,9 @@ commit decision taken by the verified $L_1$ store through a JSON bridge;
 \emph{ledger}: application-layer $L_1$ plus the basis ledger and a rebooking
 compensator. The vanilla/validated/sequential rows of the first three blocks
 are the committed September run; the verified, ledger and deepseek-chat rows
-are an October run of all four arms (its own vanilla/validated arms:
-$A_1=94$, $44$; residue $12$, $51$) executed as four sequential blocks of
-$100$ sessions. Every \Rp{} cell is re-derived from the records
+are an October run of all four arms as sequential blocks of $100$ sessions
+(its own vanilla/validated arms: $A_1=94$, $44$; residue $12$, $51$). Every
+\Rp{} cell is re-derived from the records
 (\texttt{a7\_rescore -{}-check}); the ledger rows' \Rp{} is read off the
 compensation record and is definitional, so only their outcome column
 measures anything. Pinned read-to-commit intervals: supplement \S\,W.}
@@ -4118,8 +4121,8 @@ the live study the stale date reached the booking text in $150$ of $152$
 firings (September run); in a controlled triage task, varying only the shared
 value an agent read changed its decision in $150/200$ flagged mismatches
 ($75.0\%$ $[68.4, 80.8]$), the paper's only value-staleness estimate; on the
-pilot's firings materiality is $43/43$ under an LLM judge (supplement
-\S\,N).
+pilot's firings materiality is $43/43$ under an LLM judge, $15$ of them
+hand-coded blind (supplement \S\,N).
 Behind a request-serializing local server the open-weights family's
 revision landed after the commit in $99/100$ sessions (the one firing had the
 longest pinned interval, $\LiveLlamaPinnedMax$\,s): a property of the serving
@@ -4155,25 +4158,23 @@ configuration, not of the model.
 Read-set validation removed every firing ($0/300$) at one discarded
 generation per realized conflict (\LiveGptRegen{} and \LiveHaikuRegen{} per
 $100$ sessions, never two in one session). It did not make the booking agree
-with the final trip date: in $\LiveGptValidatedWrong$ and
+with the final date: in $\LiveGptValidatedWrong$ and
 $\LiveHaikuValidatedWrong$ of $100$ sessions the revision landed after the
-commit---the record is current at its commit point exactly as
-\cref{thm:corc} says, and the booking is stale against a state that did not
+commit---the record is current at its commit point, as \cref{thm:corc}
+says, and the booking is stale against a state that did not
 yet exist: a post-commit supersession, the blind overwrite of \cref{sec:a1},
 outside every isolation discipline, reached only by compensation or by
 holding the effect until its basis is final. The \emph{sequential} control,
 clean under every commit-time predicate, delivers the wrong booking in
-$100/100$ sessions for the same reason; the predicate alone would have
-credited $L_1$ with a correctness it does not provide.
+$100/100$ sessions for the same reason; the predicate alone would credit
+$L_1$ with a correctness it does not provide.
 
 \smallskip\noindent\textbf{\Rp{} decides the residue on the records.}
-The \Rp{} column of \cref{tab:live} is decided on the emitted records alone:
-the basis of each booking is the date value in its arguments, and \Rp{}
-fires in exactly the sessions whose booking disagrees with the final date
-and \A1 does not ($A_1+R=100$ in every unguarded cell; under $L_1$ the \Rp{}
-column equals the residue; \texttt{a7\_rescore.py -{}-check}), two
-independent computations whose agreement rests on the structured date
-argument (\cref{sec:residue}). Two further arms run on three API families
+The \Rp{} column of \cref{tab:live} is decided on the emitted records alone,
+from the date value in each booking's arguments, and fires in exactly the
+sessions whose booking disagrees with the final date and \A1 does not
+($A_1+R=100$ in every unguarded cell; \texttt{a7\_rescore.py -{}-check};
+\cref{sec:residue} says what the agreement rests on). Two further arms run on three API families
 (haiku, gpt-4o-mini and deepseek-chat through its OpenAI-compatible
 endpoint). The application-layer arm's validating re-read and its
 \texttt{put} are two store calls, so it is check-then-act, not an atomic
@@ -4202,39 +4203,36 @@ $100$ (Fisher exact $p=\ArmFisherHaiku$). The attributable design
 interleaves the arms per session in a seeded order, with fresh seeds per run;
 \cref{tab:liveruns} reports \LiveRunsHaiku{} such runs of five arms per family
 (the fifth, \emph{ledger-verified}, is the ledger over the verified store).
-The arms ran the same session back to back, so the comparison is paired: the
-validated arm alone left the
+Paired per session, the validated arm alone left the
 residue in \RunsPairedDiscordantHaiku{} sessions of $300$ on haiku (McNemar
 exact $p\RunsMcNemarHaiku$; difference $\RunsDiffHaiku$ points, Newcombe 95\%
 $\RunsDiffCIHaiku$), \RunsPairedDiscordantGpt{} on gpt-4o-mini
 ($p\RunsMcNemarGpt$; $\RunsDiffGpt$ $\RunsDiffCIGpt$) and
 \RunsPairedDiscordantDeepseek{} on deepseek-chat ($p\RunsMcNemarDeepseek$;
-$\RunsDiffDeepseek$ $\RunsDiffCIDeepseek$): the replication detects no arm
-difference and bounds one at four points on haiku, about ten elsewhere;
-the sequential-run haiku difference did not replicate. \A1 is $0$ in the
-$900$ October-sequential and $3{,}600$ interleaved sessions run under $L_1$
-at this offset. The run, not the arm, is where the residue moves: against
-the sequential run (a contrast that differs in date, seeds and design at
-once, so it bounds the drift without attributing it; $p$-values nominal),
-vanilla \A1 is $94$ vs.\ $\RunsHaikuVanillaAOnePooled$ on haiku
-($p\RunsVsSeqHaikuVanillaAOne$) and $44$ vs.\ $\RunsGptVanillaAOnePooled$ on
-gpt-4o-mini ($p\RunsVsSeqGptVanillaAOne$; deepseek-chat
-$p\RunsVsSeqDeepseekVanillaAOne$), the $L_1$ residue $12$ vs.\
+$\RunsDiffDeepseek$ $\RunsDiffCIDeepseek$): no arm difference, bounded at
+four points on haiku and about ten elsewhere; the sequential-run haiku
+difference did not replicate. \A1 is $0$ in the $900$ October-sequential and
+$3{,}600$ interleaved sessions run under $L_1$ at this offset. The run, not
+the arm, is where the residue moves: against the sequential run (different
+date, seeds and design; nominal $p$-values that bound the drift without
+attributing it), vanilla \A1 is $94$ vs.\ $\RunsHaikuVanillaAOnePooled$ on
+haiku ($p\RunsVsSeqHaikuVanillaAOne$) and $44$ vs.\
+$\RunsGptVanillaAOnePooled$ on gpt-4o-mini ($p\RunsVsSeqGptVanillaAOne$;
+deepseek-chat $p\RunsVsSeqDeepseekVanillaAOne$), the $L_1$ residue $12$ vs.\
 $\RunsHaikuValidatedRPooled$ and $51$ vs.\ $\RunsGptValidatedRPooled$
 ($p\RunsVsSeqHaikuValidatedR$, $p\RunsVsSeqGptValidatedR$; deepseek-chat
-$p\RunsVsSeqDeepseekValidatedR$), and within the interleaved design the three
-runs of one arm differ on deepseek-chat alone (validated residue
-$54$/$73$/$58$, $\chi^2$ $p\RunsHeteroDeepseekValidatedR$; the pooled intervals
-treat the $300$ sessions as one sample, which that test qualifies). And the
-ledger rows do not move: $\RunsHaikuLedgerWrongPooled$ wrong
-bookings in both ledger arms on every family (exact 95\% interval
-$\RunsHaikuLedgerWrongCI$)---on the store, the qualification
-\cref{sec:ledger-world} measures.
+$p\RunsVsSeqDeepseekValidatedR$), and the three interleaved runs of one arm
+differ on deepseek-chat alone (validated residue $54$/$73$/$58$, $\chi^2$
+$p\RunsHeteroDeepseekValidatedR$; the pooled intervals treat the $300$
+sessions as one sample, which that test qualifies). The ledger rows do not
+move: $\RunsHaikuLedgerWrongPooled$ wrong bookings in both ledger arms on
+every family (exact 95\% interval $\RunsHaikuLedgerWrongCI$)---on the store,
+the qualification \cref{sec:ledger-world} measures.
 
 \ifnum\LiveRunsAvailable=1
 \begin{table}[t]
 \centering
-\caption{Replicated, interleaved live study (probe 303 \texttt{-{}-interleave -{}-runs 3}): \Rp{} per run of $100$ sessions at the $150$\,ms offset, the five arms of a session run back to back in a seeded order, and the pooled count (exact 95\% intervals and per-run \A1: supplement \S\,W). \A1 fired in $0/300$ sessions of every $L_1$ arm and in $\RunsHaikuVanillaAOnePooled$, $\RunsGptVanillaAOnePooled$ and $\RunsDeepseekVanillaAOnePooled$ vanilla sessions; booking $\neq$ final is $A_1+R$ in every cell. The ledger rows' \Rp{} is decided from the obligation record emitted at the superseding put; the share of revisions landing after the final commit (wall-clock stamp) equals \Rp{} in every $L_1$ cell.}
+\caption{Replicated, interleaved live study (probe 303 \texttt{-{}-interleave -{}-runs 3}): \Rp{} per run of $100$ sessions at the $150$\,ms offset, the five arms of a session run back to back in a seeded order, and the pooled count (exact 95\% intervals and per-run \A1: supplement \S\,W). \A1 fired in $0/300$ sessions of every $L_1$ arm and in $\RunsHaikuVanillaAOnePooled$, $\RunsGptVanillaAOnePooled$ and $\RunsDeepseekVanillaAOnePooled$ vanilla sessions; booking $\neq$ final is $A_1+R$ in every cell. The ledger rows' \Rp{} is definitional (\cref{tab:live}); the share of revisions landing after the final commit (wall-clock stamp) equals \Rp{} in every $L_1$ cell.}
 \label{tab:liveruns}
 \footnotesize
 \setlength{\tabcolsep}{3pt}
@@ -4257,8 +4255,8 @@ ledger-verified & \RunsHaikuLedgerVerifiedRShort & \RunsGptLedgerVerifiedRShort 
 race instead of fixing it: the date agent starts $0$, $150$, $500$ or
 $1{,}500$\,ms after the flight agent's read and revises in about half the
 sessions ($p=0.5$), $n=100$ per point on the three API families; at $0$\,ms
-the harness imposes only the order (the date agent is released at the flight
-agent's read), no delay: the models' latencies decide where the revision lands. Without a
+the harness imposes only the order, and the models' latencies decide where
+the revision lands. Without a
 discipline \A1 fires in $39$--$46$ of $100$ sessions at $0$\,ms and in $0$ at
 $1{,}500$\,ms, where every revision lands after the commit, while the
 booking is wrong in every revised session at every offset ($44$--$51$).
@@ -4275,9 +4273,9 @@ superstep~\cite{MalewiczEtAl2010Pregel}; the barrier hands both the snapshot
 at superstep entry, so in $300/300$ sessions the summary names the
 destination the writer had changed: the snapshot-insufficiency shape of
 \cref{sec:snapshot} observed live, reported as documented BSP semantics, not
-a rate (the census finds it in no public graph; under a completion clock
-\cref{def:a1} fires in \SuperstepGpt, \SuperstepHaiku, \SuperstepLlama{} of
-$100$).
+a rate (the census finds the shape in two of \CensusSites{} public sites,
+\cref{sec:prevalence}; under a completion clock \cref{def:a1} fires in
+\SuperstepGpt, \SuperstepHaiku, \SuperstepLlama{} of $100$).
 
 
 \subsection{The ledger in a world: a consumer, a cancellation, a compensator that fails}
@@ -4325,11 +4323,11 @@ was refused) and no booking in \LWatomicLedgerWorldNoneRange{} (the rebooking
 was refused). Those shares are the injected refusal rate of
 $\LedgerWorldPCancelFail$ seen from the other side, less what a later
 supersession retried: on haiku only the second revision lands after the
-commit in \LWatomicHaikuLedgerOneObligation{} of $100$ (one obligation,
-$\LWatomicHaikuLedgerRetries$ retries); on deepseek-chat both land after it
-in \LWatomicDeepseekLedgerBothRevisionsAfterCommit, two obligations in
-\LWatomicDeepseekLedgerTwoObligations, the second retrying what the first
-left open ($\LWatomicDeepseekLedgerRetries$ retries). The consumer, reading
+commit (one obligation in \LWatomicHaikuLedgerOneObligation{} of $100$,
+$\LWatomicHaikuLedgerRetries$ retries); on deepseek-chat both do in
+\LWatomicDeepseekLedgerBothRevisionsAfterCommit, two obligations in
+\LWatomicDeepseekLedgerTwoObligations{} and $\LWatomicDeepseekLedgerRetries$
+retries of one left open. The consumer, reading
 within $1.5$\,s of the first release, acted on a booking the final date
 contradicts in \LWatomicLedgerConsumerStaleRange{} sessions, as under $L_1$
 alone; its \texttt{at\_ms} against the records places those reads: in
@@ -4341,7 +4339,11 @@ compensation had not completed---its model call is that window; in
 because the world had refused its cancellation (obligation open); in
 \LWatomicLedgerConsumerStaleCurrentThenSupersededRange{} the consumer saw
 the then-current booking, which a later revision replaced---a reader that has
-read cannot be corrected, only notified. Without the cancellation the world
+read cannot be corrected, only notified. The column is the compensator's
+ordering: the first compensator, which cancelled before drafting, left the
+consumer a stale booking in \LWfirstLedgerConsumerStaleRange{} and none at
+all in \LWfirstLedgerConsumerNoneRange{} of $100$ (supplement \S\,W.4).
+Without the cancellation the world
 is wrong in \LWatomicLedgerNoRollbackWorldWrongRange{} of $100$ and
 double-booked in \LWatomicLedgerNoRollbackDoubleRange{}: a ledger that does
 not withdraw the effect moves nothing in the world.
@@ -4356,7 +4358,7 @@ wrong or empty (\LWatomicLedgerOpenRightRange{} exceptions): report and world ag
 $\LWatomicLedgerAgree$ sessions. That is a property of this compensator, not
 of the ledger---what a correct compensator owes by construction, which the
 world check establishes and the records cannot---and the first run of the
-same probe shows the difference (supplement \S\,W.4): its compensator, which
+same probe (supplement \S\,W.4) shows the difference: its compensator, which
 drafted the replacement \emph{between} cancelling and rebooking, reported
 discharge with the original still active in
 $\LWfirstHaikuLedgerCleanWrong$, $\LWfirstGptLedgerCleanWrong$ and
@@ -4370,8 +4372,8 @@ the put returned (the design until 2026-10-16; another day, unpaired) every
 world column overlaps the atomic run's (world wrong
 \LWLedgerWorldWrongRange{}, none \LWLedgerWorldNoneRange{}, consumer stale
 \LWLedgerConsumerStaleRange{}, agreement $\LWLedgerAgree$)---a null by
-construction, since the probe injects no fault in that gap. The gap is closed
-by the code, unmeasured; the compensation it precedes takes
+construction, since the probe injects no fault in that gap, which the code
+closes unmeasured; the compensation it precedes takes
 \LWatomicLedgerCompLatencyMedianSRange{}\,s (median), and that is where the
 residue is. \fi\ifnum\LedgerWorldWideAvailable=1 With the consumer
 reading up to $5$\,s after the first release it acts on the stale booking in
@@ -4431,10 +4433,10 @@ engineered, so this is a sensitivity check of the detector and the runtimes
 on model-driven traces, not a prevalence; every edit-review witness is a
 cold-start read, unlike the live study's supersessions. One harness defect
 bears on the prices: until 2026-10-17 the pilot's tools told the model
-\texttt{COMMITTED} whatever the runtime did, so a refused agent was never
-told (records unaffected: a dropped operation emits nothing); they now return
-\texttt{REFUSED} under a recorded policy (\texttt{-{}-on-abort
-drop|retry}). The cells here ran with the old tools and are reported as run. Pessimistic locking
+\texttt{COMMITTED} whatever the runtime did (records unaffected: a dropped
+operation emits nothing); they now return \texttt{REFUSED} under a recorded
+policy (\texttt{-{}-on-abort drop|retry}), and the cells here are reported
+as run with the old tools. Pessimistic locking
 reaches $0\%$ on edit-review by refusing the reviewer's operation in
 $99/100$ sessions---the anomaly is absent because the work is---and on
 triage by dropping one of three agents in $97/100$; the sessions that are
@@ -4449,7 +4451,7 @@ vanilla column with operation records reproduced the two determinate cells
 the reporter's prompt supplied no bug, gpt-4o invented one and Sonnet wrote
 ``no bug description provided'' in $100/100$ sessions. The pilot now seeds
 the reporter with a concrete bug per scenario and records the protocol beside
-each cell.
+each cell; the gpt-4o run predates this and is reported as run.
 \ifnum\PilotClaudeAvailable=1 Rerun so and scored by the verified detector,
 the Sonnet cells fire \A1 in \VSClaudeEditReviewVanilla{} /
 \VSClaudePlanExecuteVanilla{} / \VSClaudeTriageVanilla{} sessions
@@ -4462,22 +4464,22 @@ outside the refusal study's locking arms, and the engineer a resolution in
 $0$ (supplement \S\,M lists them; gpt-4o: $44$ and $41$ of $100$), so no
 write lands in a reader's window and the triage cell cannot fire; and the Sonnet reviewer
 writes its review in $50$ of the scored run's $100$ unguarded sessions
-($47$--$48$ in the two later runs) and otherwise commits read-only, the
+($47$--$48$ in two later runs) and otherwise commits read-only, the
 no-write bypass of Theorem L1j that default SI never validates---$50/100$
 against gpt-4o's $5/100$ (SSI mode closes it).
 Which operations a model issues is part of the workload (supplement
 \S\,M).\else Its \A1 rate and the six guarded Sonnet cells are scored
 by the verified detector; the fold withholds them until the scorer gate's
 receipt is clean, \Pending{runner step 14 rerun} (supplement
-\S\,M).\fi{} The gpt-4o run predates the change and is reported as run.
+\S\,M).\fi{}
 
-\subsection{RQ1 for $L_2$: output commit on synthetic cascades and live verdicts}
+\subsection{RQ1 for $L_2$: output commit, synthetic and live}
 \label{sec:l2-eval}
 Three arms run the same $1{,}000$ seeded schedules at nominal chain depths
 $2$, $3$ and $5$: a root commits, a chain of dependents reads the previous
 cell and commits, one committed transaction is put under review and retracted
-or approved, and in a quarter of scenarios the review arrives after that
-transaction has released. The \emph{verified} arm is \texttt{l2\_exec.rs};
+or approved ($771$ of $1{,}000$ retract), and in a quarter of the
+retractions ($199$) the review arrives after that transaction has released. The \emph{verified} arm is \texttt{l2\_exec.rs};
 the \emph{unguarded} arm validates reads, releases at commit and flags only
 the aborted transaction; the \emph{cascade} arm releases at commit and
 cascades the abort. Each trace is scored under \cref{def:a3}, under the
@@ -4524,9 +4526,9 @@ whose docstrings state their dependencies, took the model-emitted call list as
 $\fld{io}$, and dispatched it through the released \texttt{ToolNode} and
 through the $L_3$ sequencer.
 Two things are real---whether a backbone batches an order-dependent
-pipeline into one turn, and the executor---and per-tool latency is modeled,
-drawn uniformly from $10$--$200$\,ms; the replay against real effects below
-removes the model. The finding that survives the modeling is structural (table in
+pipeline into one turn, and the executor---and per-tool latency is modeled
+(uniform $10$--$200$\,ms); the replay against real effects below removes
+the model. The finding that survives the modeling is structural (table in
 supplement \S\,P): gpt-4o-mini batches an order-dependent pipeline on
 $\ToolNodeGptBatched/30$ turns, the full five-tool pipeline on
 $\ToolNodeGptFull$ of them, and \texttt{ToolNode} commits
@@ -4539,11 +4541,10 @@ transcript a developer inspects shows the correct order in all
 Calls emitted in one turn are, by the provider's contract, calls the model
 declared parallelizable, so the defect is shared between a backbone that
 misjudged independence and an executor that cannot notice; the $L_3$
-sequencer makes effect order independent of the backbone. Replaying the $33$
-recorded batches five times each through
-\texttt{ToolNode} against real effects---a WAL-backed SQLite database and a
-local HTTP service, with whatever latency those have---rather than a modeled
-sleep, baseline \A6 fires in \ToolNodeRealSqlite{} replays (SQLite) and
+sequencer makes effect order independent of the backbone. Replayed five
+times each through \texttt{ToolNode} against real effects---a WAL-backed
+SQLite database and a local HTTP service, with their own latency---the $33$
+recorded batches fire baseline \A6 in \ToolNodeRealSqlite{} replays (SQLite) and
 \ToolNodeRealHttp{} (HTTP): the reorder is a property of concurrent dispatch
 under any real latency, not of the distribution we drew. The $L_3$ arm of
 that replay issued the calls one at a time, which cannot reorder and
@@ -4560,19 +4561,19 @@ real effect released only when the verified sequencer of \cref{sec:l3}
 releases it---is \Pending{runner step 15}.\fi
 
 \smallskip\noindent\textbf{$L_4$: validation at dispatch.}\label{sec:l4-eval}
-One seeded schedule per run pins a tool and then revokes or re-signs random
-tools; three dispatchers act on the same registry. Over $1{,}000$ runs at
+One seeded schedule per run pins a tool, then revokes or re-signs random
+tools; three dispatchers act on one registry. Over $1{,}000$ runs at
 registry widths $2$, $4$ and $16$ the churn touched the planned tool in
 \LfourPhantom{} runs, and in exactly those both live and snapshot resolution
 called a phantom (Theorem $L_4$d, measured) while the verified dispatcher
-called none and refused exactly those runs; the informative figures are the
+called none and refused exactly those; the informative figures are the
 hazard rate and the refusal cost, the zero is Theorem $L_4$b executing.
 
 \subsection{RQ2: what prevention costs}
 \label{sec:cost}
 The pilot driver captures per-call usage and wall-clock for every session of
 run \texttt{\CostRun} (gpt-4o, $900$ sessions) and of its Claude Sonnet~4.5
-replication (May 2026, no operation records; \cref{sec:pilot}), at list
+counterpart (May 2026, no operation records; \cref{sec:pilot}), at list
 price at the time of the run. Per session, snapshot isolation's token
 cost is not separable from the unguarded runtime's on either provider
 (overlapping intervals in every cell); pessimistic locking's is
@@ -4636,8 +4637,8 @@ per-session overheads (mean, bootstrap 95\% CI) are triage pessimistic
 with the plan-execute control at \WallclockPairedClaudePlanExecutePess{} and
 \WallclockPairedClaudePlanExecuteSI{} (supplement \S\,O for every
 cell).\else\ifnum\WallclockStampClaudeAvailable=1 Its Claude Sonnet~4.5 run
-($900$ sessions, runtimes shuffled per session) lost its per-call sidecars to
-a script defect and is read from completion stamps at $1$\,s resolution
+($900$ sessions; per-call sidecars lost to a script defect) is read from
+completion stamps at $1$\,s resolution
 (supplement \S\,O): triage pessimistic \WallclockStampClaudeTriagePess,
 the plan-execute control \WallclockStampClaudePlanExecutePess, edit-review
 pessimistic \WallclockStampClaudeEditReviewPess. That cell and the
@@ -4694,9 +4695,9 @@ operations are dropped, not repeated; told to retry,
 \RefusalClaudeAddrTriagePessRetryWallOverhead. On edit-review it changes
 nothing: \RefusalClaudeAddrEditReviewPessDropCalls{} calls,
 \RefusalClaudeAddrEditReviewPessDropRefused{} refusals, the editor's write in
-\RefusalClaudeAddrEditReviewPessDropWriterCommits{} sessions and
-\RefusalClaudeAddrEditReviewPessDropWriteLengthCalls{} write-length
-completions of \RefusalClaudeAddrEditReviewPessDropTotalCalls{}, under both
+\RefusalClaudeAddrEditReviewPessDropWriterCommits{} sessions
+(\RefusalClaudeAddrEditReviewPessDropWriteLengthCalls{} write-length
+completions of \RefusalClaudeAddrEditReviewPessDropTotalCalls), under both
 texts. The price of a truthful refusal is thus set by what the chat shows the
 unrefused agent; its wording decides it on one workload and not on the
 other, and which feature of the \texttt{REFUSED} result costs the editor its
@@ -4729,12 +4730,14 @@ $500$ most recently updated; all $180$ were read (supplement \S\,Q).
 and each node's read and written keys; what it cannot resolve is
 \emph{unknown}, never guessed (validated against execution on eight runnable
 fixtures). Of the $180$, \CensusRepos{} contain a visible graph, holding
-\CensusSites{} sites, \CensusSequential{} ($96\%$) of them sequential.
+\CensusSites{} sites, \CensusSequential{} ($96\%$) of them sequential;
+shares below are of the sampled repositories, unweighted across bands.
 Fifteen sites in \CensusParallelRepos{} repositories ($11.2\%$, Wilson 95\%
 $[6.4, 19.0]$) contain a co-scheduled pair; none is a confirmed
 reader/writer pair on a last-value channel (repository-level upper limit
 $3.8\%$); two are such pairs on a reducer channel (the
-parallel-agents-on-\texttt{messages} idiom); eight have an unresolved side,
+parallel-agents-on-\texttt{messages} idiom: the snapshot-insufficiency shape
+\cref{sec:live-a1} runs live, not \A1's); eight have an unresolved side,
 bounding the susceptible share at $8.2\%$ $[4.2, 15.3]$ of repositories.
 Counting every site the front end cannot settle---an unresolved side,
 \texttt{Send} fan-out (seven sites, the construct outside the model,
@@ -4777,8 +4780,7 @@ run-time manifest, two reconstructed ones that say so.
 \label{sec:related}
 
 \subsection{Classical consistency and isolation}
-The hardware tradition~\cite{Lamport1979SC,HerlihyWing1990} characterizes
-visibility under bounded latency; ours is unbounded. The database isolation
+The database isolation
 hierarchy~\cite{BerensonEtAl1995,Adya1999,AdyaLiskovOneil2000} is the direct
 ancestor: we adopt its anomaly-based method over a different operational
 model, and the SSI line~\cite{FeketeEtAl2005MakingSI,CahillRohmFekete2008SSI,PortsGrittner2012}
@@ -4789,7 +4791,12 @@ validation~\cite{KungRobinson1981OCC}---the read-set validation at commit of
 Silo~\cite{TuEtAl2013Silo} and TicToc~\cite{YuEtAl2016TicToc}, which $L_1$
 is---are what \cref{thm:corc} mechanizes at the level of values read (the
 value-level statement differs from the conflict-level one exactly at the
-overwrite-and-restore shape of \cref{sec:a1}); view
+overwrite-and-restore shape of \cref{sec:a1}, the ABA
+problem~\cite{Michael2004Hazard}, whose classical remedy is the version tag of
+requirement (i)); the application-layer arm of \cref{sec:live-a1} is a chopped
+transaction~\cite{ShashaEtAl1995Chopping} with a check-then-act
+window~\cite{BishopDilger1996TOCTOU}; ACIDRain~\cite{WarszawskiBailis2017ACIDRain}
+is the precedent for scoring isolation anomalies by the harm they cause; view
 equivalence~\cite{Papadimitriou1979} is where the value-level and
 conflict-level notions meet, and \cref{def:corc} is a client-centric,
 state-based statement of the kind Crooks et al.\ give for isolation
@@ -4821,19 +4828,18 @@ rationing~\cite{KraskaEtAl2009Rationing} and
 TxnSails~\cite{ZhouEtAl2025TxnSails}.
 
 \subsection{Concurrency control and shared memory for LLM agents}
-A 2025--2026 line builds mechanisms for this regime, mostly without verifying
-them, and this paper is one point in it rather than its origin; twenty of the
-2026 works cited here are preprints at the time of writing (arXiv identifier,
-no venue), cited for the designs they describe---no claim of ours rests on
-their results. Agentic
+A 2025--2026 line builds mechanisms for this regime, mostly unverified; this
+paper is one point in it, not its origin. Twenty of the 2026 works cited are
+preprints at the time of writing, cited for the designs they describe; no
+claim of ours rests on their results. Agentic
 transactions~\cite{SunEtAl2026AgenticTx} recast ACID as four semantic
 guarantees for one long-horizon agent and measure task success, with no
 history predicate, model or proof; our catalog is the anomaly-level account
-such guarantees would be checked against (supplement \S\,D). CoAgent~\cite{LyuEtAl2026CoAgent} states
+such guarantees would be checked against. CoAgent~\cite{LyuEtAl2026CoAgent} states
 the regime in our three terms and proposes an advisory protocol in which a
 notified agent repairs its own plan, correct conditional on a model judgment
-measured at a $5\%$ failure rate; its lock/OCC cost inversion independently
-reproduces \cref{sec:cost}. STORM~\cite{LiuEtAl2026STORM} is read validation ($L_1$)
+measured at a $5\%$ failure rate; it reports the same lock/OCC cost
+inversion as \cref{sec:cost}. STORM~\cite{LiuEtAl2026STORM} is read validation ($L_1$)
 deployed per file; ATCC~\cite{ZhouEtAl2026ATCC} and GoEX~\cite{PatilEtAl2024GoEX}
 impose a remedy from the runtime. MemTX~\cite{LiEtAl2026MemTX} is the closest
 design to our $L_2$: staged writes under snapshot isolation, irreversible
@@ -4869,7 +4875,7 @@ trust-base item (ix); frameworks~\cite{LangGraph2026,WuEtAl2023AutoGen}
 supply substrate, not contract.
 
 
-\subsection{Commit-time guards, retraction, and what comes after commit}
+\subsection{Commit-time guards, retraction, and after commit}
 \label{sec:related-residue}
 The 2026 work on agent effects acts at the commit boundary:
 CommitGuard~\cite{SantosGrueiro2026CommitGuard} licenses a durable effect
@@ -4888,7 +4894,7 @@ obligation, registered at the superseding write. Zheng et al.'s precision
 objection is met at the basis, as far as the basis is recovered: a basis
 predicate ignores writes the effect never depended on.
 
-\subsection{Effect order, durable execution, verified systems, taxonomies}
+\subsection{Effect order, durability, verification, taxonomies}
 Parallel function calling is pursued deliberately
 (LLMCompiler~\cite{KimEtAl2024LLMCompiler}, asynchronous
 calling~\cite{GimEtAl2024AsyncLM}), the ordering of effects left to the
@@ -4904,7 +4910,9 @@ break~\cite{ZhengEtAl2026ACRFence}.
 IronFleet~\cite{HawblitzelEtAl2015IronFleet} and
 Perennial~\cite{ChajedEtAl2019Perennial} verify running systems by layered
 refinement, the template for the open step of \cref{sec:l1}; ours add
-verified bytes executed in a measurement. Jepsen~\cite{Kingsbury2013Jepsen} and the black-box
+verified bytes executed in a measurement. Anvil~\cite{SunEtAl2024Anvil}
+verifies in Verus controllers that act on possibly stale cluster state,
+liveness included, which we verify nowhere. Jepsen~\cite{Kingsbury2013Jepsen} and the black-box
 checkers~\cite{TanEtAl2020Cobra,Aphyr2020Elle} (successors in supplement
 \S\,R) decide isolation levels over database histories with unverified
 analyzers under a uniqueness assumption we share (\cref{sec:a3}); ours
@@ -4927,8 +4935,7 @@ over-reports in one shape (a value overwritten and restored inside the
 window; \HypRestored{} of \HypAOneWitnesses{} witness pairs on the live
 records) and under-reaches the harm by the post-commit supersession \Rp{}
 names (\cref{tab:live}); \A6 fires on commuting effects and is blind to
-dropped and duplicated ones; \cref{tab:assurance} says where specification
-and definition coincide, under what hypothesis.
+dropped and duplicated ones.
 
 \smallskip\noindent\emph{\Rp{} is not an anomaly, and its basis is
 syntactic.} \Rp{} fires in $100/100$ sequential sessions because the
@@ -4965,9 +4972,9 @@ code\ifnum\LfiveExecAvailable=1{} except its bookkeeping (\LfiveExecVerus)\fi, i
 Verus model scaffolding. Liveness is verified nowhere.
 
 \smallskip\noindent\emph{Prevalence is not established, and the census
-points the other way.} The census bounds a structural precondition in public
-code (none confirmed; routing unresolved in about half the repositories) and
-is silent on private deployments, run frequency and the cross-thread store.
+points the other way.} The census bounds a precondition in public code
+(none confirmed; routing unresolved in about half the repositories) and is
+silent on private deployments, run frequency and the cross-thread store.
 
 \newcount\PendingItems\PendingItems=0
 \smallskip\noindent\emph{Pending} (runner steps):
@@ -5020,9 +5027,10 @@ and compensators tested against the external system, not the records: \Rp{} was 
 compensator that misreported, and the stale effect stands for the
 compensation's model call (median \LWatomicLedgerCompLatencyMedianSRange{}\,s).
 (iii)~\emph{A sequencer in the tool executor} for calls emitted in one turn
-unless declared commuting: the released \texttt{ToolNode} committed
-\ToolNodeRealSqlite{} and \ToolNodeRealHttp{} replays out of order against
-real effects, the verified sequencer none. (iv)~\emph{Validation at dispatch}
+unless declared commuting: in the replay in which the verified sequencer
+committed none out of order, the released \texttt{ToolNode} committed
+\ToolNodeVerifiedBaselineSqlite{} and \ToolNodeVerifiedBaselineHttp{}
+against real effects. (iv)~\emph{Validation at dispatch}
 for tools of a mutable registry, and an idempotency key on resumed effects:
 snapshot resolution called a phantom tool in every run the churn touched; a
 re-executed node emitted its effect twice.
@@ -5341,6 +5349,21 @@ L.~Lamport, \emph{Specifying Systems: The {TLA+} Language and Tools for Hardware
 
 \bibitem{CousineauEtAl2012TLAPS}
 D.~Cousineau, D.~Doligez, L.~Lamport, S.~Merz, D.~Ricketts, and H.~Vanzetto, ``{TLA+} proofs,'' in \emph{Proc. FM}, 2012, pp. 147--154.
+
+\bibitem{Michael2004Hazard}
+M.~M. Michael, ``Hazard pointers: Safe memory reclamation for lock-free objects,'' \emph{IEEE Trans. Parallel Distrib. Syst.}, vol.~15, no.~6, pp. 491--504, 2004.
+
+\bibitem{ShashaEtAl1995Chopping}
+D.~Shasha, F.~Llirbat, E.~Simon, and P.~Valduriez, ``Transaction chopping: Algorithms and performance studies,'' \emph{ACM Trans. Database Syst.}, vol.~20, no.~3, pp. 325--363, 1995.
+
+\bibitem{BishopDilger1996TOCTOU}
+M.~Bishop and M.~Dilger, ``Checking for race conditions in file accesses,'' \emph{Computing Systems}, vol.~9, no.~2, pp. 131--152, 1996.
+
+\bibitem{WarszawskiBailis2017ACIDRain}
+T.~Warszawski and P.~Bailis, ``{ACIDRain}: Concurrency-related attacks in database-backed web applications,'' in \emph{Proc. SIGMOD}, 2017, pp. 5--20.
+
+\bibitem{SunEtAl2024Anvil}
+X.~Sun \emph{et~al.}, ``Anvil: Verifying liveness of cluster management controllers,'' in \emph{Proc. OSDI}, 2024, pp. 649--666.
 
 \end{thebibliography}
 
