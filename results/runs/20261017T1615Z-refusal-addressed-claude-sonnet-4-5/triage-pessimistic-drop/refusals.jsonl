@@ -1,0 +1,100 @@
+{"session": 0, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 1, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 2, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1, "reporter": 1}, "aborts": 2}
+{"session": 3, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 4, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 5, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 6, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 7, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 8, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 9, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 10, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 11, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 12, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 13, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 14, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 15, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 16, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 17, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 18, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 19, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 20, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 21, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 22, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 23, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 24, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 25, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 26, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 27, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1, "reporter": 1}, "aborts": 2}
+{"session": 28, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 29, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 30, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 31, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1, "reporter": 1}, "aborts": 2}
+{"session": 32, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 33, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 34, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 35, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 36, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 37, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 38, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 39, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1, "reporter": 1}, "aborts": 2}
+{"session": 40, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 41, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 42, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 43, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 44, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 45, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 46, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 47, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 48, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 49, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 50, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 51, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 52, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1, "reporter": 1}, "aborts": 2}
+{"session": 53, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 54, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 55, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1, "reporter": 1}, "aborts": 2}
+{"session": 56, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1, "reporter": 1}, "aborts": 2}
+{"session": 57, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 58, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 59, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 60, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 61, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 62, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 63, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 64, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 65, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 66, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 67, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 68, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 69, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 70, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 71, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 72, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 73, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 74, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 75, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 76, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 77, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1, "reporter": 1}, "aborts": 2}
+{"session": 78, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 79, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 80, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1, "reporter": 1}, "aborts": 2}
+{"session": 81, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1, "reporter": 1}, "aborts": 2}
+{"session": 82, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 83, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 84, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 85, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 86, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 87, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 88, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 89, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 90, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 91, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 92, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 93, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 94, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 95, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 96, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 97, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 98, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}
+{"session": 99, "runtime": "pessimistic", "workload": "triage", "on_abort": "drop", "refusal_addressed": true, "refusals": {"engineer": 1}, "aborts": 1}

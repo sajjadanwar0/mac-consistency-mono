@@ -3134,6 +3134,498 @@
    ]
   }
  },
+ "probe304_exec": {
+  "Haiku|validated": {
+   "mode": "validated",
+   "n": 100,
+   "revised": 100,
+   "a1": 0,
+   "a7": 99,
+   "store_wrong": 99,
+   "world_wrong_sessions": 99,
+   "world_wrong_bookings": 99,
+   "double_booked": 0,
+   "consumer_saw_stale": 99,
+   "consumer_saw_none": 0,
+   "world_none": 0,
+   "obligation_retries": 0,
+   "obligations_registered": 0,
+   "obligations_discharged": 0,
+   "obligations_failed": 0,
+   "regenerations": 98,
+   "store_wrong_ci": [
+    0.9455406146079194,
+    0.9997468539670226
+   ],
+   "world_wrong_sessions_ci": [
+    0.9455406146079194,
+    0.9997468539670226
+   ],
+   "double_booked_ci": [
+    0.0,
+    0.03621669264517641
+   ],
+   "consumer_saw_stale_ci": [
+    0.9455406146079194,
+    0.9997468539670226
+   ],
+   "consumer_saw_none_ci": [
+    0.0,
+    0.03621669264517641
+   ],
+   "world_none_ci": [
+    0.0,
+    0.03621669264517641
+   ],
+   "compensator": "all",
+   "registration": "atomic",
+   "clean_sessions": 100,
+   "clean_right": 1,
+   "open_sessions": 0,
+   "open_wrong": 0
+  },
+  "timing": {
+   "Haiku": {
+    "both_revisions_after_commit": 0,
+    "first_revision_median_ms": 930.59,
+    "compensation_latency_median_ms": 1142.0499999999997,
+    "compensation_latency_p90_ms": 1237.73,
+    "booking_to_compensation_median_ms": 1512.1000000000004,
+    "booking_to_compensation_p90_ms": 1641.3899999999999,
+    "consumer_stale_before_revision": 29,
+    "consumer_stale_inside_compensation": 68,
+    "consumer_stale_refused_cancel": 0,
+    "consumer_stale_current_then_superseded": 0,
+    "consumer_stale_other": 0
+   },
+   "Deepseek": {
+    "both_revisions_after_commit": 57,
+    "first_revision_median_ms": 1204.15,
+    "compensation_latency_median_ms": 1131.6399999999999,
+    "compensation_latency_p90_ms": 1319.0400000000002,
+    "booking_to_compensation_median_ms": 1464.54,
+    "booking_to_compensation_p90_ms": 1863.2999999999997,
+    "consumer_stale_before_revision": 27,
+    "consumer_stale_inside_compensation": 66,
+    "consumer_stale_refused_cancel": 1,
+    "consumer_stale_current_then_superseded": 4,
+    "consumer_stale_other": 0
+   },
+   "Gpt": {
+    "both_revisions_after_commit": 56,
+    "first_revision_median_ms": 838.7,
+    "compensation_latency_median_ms": 949.0899999999997,
+    "compensation_latency_p90_ms": 1106.83,
+    "booking_to_compensation_median_ms": 1125.4,
+    "booking_to_compensation_p90_ms": 1637.47,
+    "consumer_stale_before_revision": 25,
+    "consumer_stale_inside_compensation": 56,
+    "consumer_stale_refused_cancel": 3,
+    "consumer_stale_current_then_superseded": 13,
+    "consumer_stale_other": 0
+   }
+  },
+  "Haiku|ledger": {
+   "mode": "ledger",
+   "n": 100,
+   "revised": 100,
+   "a1": 0,
+   "a7": 0,
+   "store_wrong": 6,
+   "world_wrong_sessions": 12,
+   "world_wrong_bookings": 12,
+   "double_booked": 12,
+   "consumer_saw_stale": 97,
+   "consumer_saw_none": 0,
+   "world_none": 6,
+   "obligation_retries": 0,
+   "obligations_registered": 99,
+   "obligations_discharged": 81,
+   "obligations_failed": 18,
+   "regenerations": 101,
+   "store_wrong_ci": [
+    0.022334886071316368,
+    0.12602993458082296
+   ],
+   "world_wrong_sessions_ci": [
+    0.06356890256115931,
+    0.20023568361996882
+   ],
+   "double_booked_ci": [
+    0.06356890256115931,
+    0.20023568361996882
+   ],
+   "consumer_saw_stale_ci": [
+    0.91482394702572,
+    0.9937700284616936
+   ],
+   "consumer_saw_none_ci": [
+    0.0,
+    0.03621669264517641
+   ],
+   "world_none_ci": [
+    0.022334886071316368,
+    0.12602993458082296
+   ],
+   "compensator": "all",
+   "registration": "atomic",
+   "clean_sessions": 82,
+   "clean_right": 82,
+   "open_sessions": 18,
+   "open_wrong": 18
+  },
+  "Haiku|ledger_norollback": {
+   "mode": "ledger_norollback",
+   "n": 100,
+   "revised": 100,
+   "a1": 0,
+   "a7": 0,
+   "store_wrong": 12,
+   "world_wrong_sessions": 99,
+   "world_wrong_bookings": 105,
+   "double_booked": 87,
+   "consumer_saw_stale": 99,
+   "consumer_saw_none": 0,
+   "world_none": 0,
+   "obligation_retries": 1,
+   "obligations_registered": 104,
+   "obligations_discharged": 93,
+   "obligations_failed": 12,
+   "regenerations": 96,
+   "store_wrong_ci": [
+    0.06356890256115931,
+    0.20023568361996882
+   ],
+   "world_wrong_sessions_ci": [
+    0.9455406146079194,
+    0.9997468539670226
+   ],
+   "double_booked_ci": [
+    0.7879593229125502,
+    0.9289269538145705
+   ],
+   "consumer_saw_stale_ci": [
+    0.9455406146079194,
+    0.9997468539670226
+   ],
+   "consumer_saw_none_ci": [
+    0.0,
+    0.03621669264517641
+   ],
+   "world_none_ci": [
+    0.0,
+    0.03621669264517641
+   ],
+   "compensator": "all",
+   "registration": "atomic",
+   "clean_sessions": 88,
+   "clean_right": 1,
+   "open_sessions": 12,
+   "open_wrong": 12
+  },
+  "Deepseek|validated": {
+   "mode": "validated",
+   "n": 100,
+   "revised": 100,
+   "a1": 0,
+   "a7": 99,
+   "store_wrong": 99,
+   "world_wrong_sessions": 99,
+   "world_wrong_bookings": 99,
+   "double_booked": 0,
+   "consumer_saw_stale": 99,
+   "consumer_saw_none": 0,
+   "world_none": 0,
+   "obligation_retries": 0,
+   "obligations_registered": 0,
+   "obligations_discharged": 0,
+   "obligations_failed": 0,
+   "regenerations": 35,
+   "store_wrong_ci": [
+    0.9455406146079194,
+    0.9997468539670226
+   ],
+   "world_wrong_sessions_ci": [
+    0.9455406146079194,
+    0.9997468539670226
+   ],
+   "double_booked_ci": [
+    0.0,
+    0.03621669264517641
+   ],
+   "consumer_saw_stale_ci": [
+    0.9455406146079194,
+    0.9997468539670226
+   ],
+   "consumer_saw_none_ci": [
+    0.0,
+    0.03621669264517641
+   ],
+   "world_none_ci": [
+    0.0,
+    0.03621669264517641
+   ],
+   "compensator": "all",
+   "registration": "atomic",
+   "clean_sessions": 100,
+   "clean_right": 1,
+   "open_sessions": 0,
+   "open_wrong": 0
+  },
+  "Deepseek|ledger": {
+   "mode": "ledger",
+   "n": 100,
+   "revised": 100,
+   "a1": 0,
+   "a7": 0,
+   "store_wrong": 10,
+   "world_wrong_sessions": 6,
+   "world_wrong_bookings": 6,
+   "double_booked": 5,
+   "consumer_saw_stale": 98,
+   "consumer_saw_none": 0,
+   "world_none": 9,
+   "obligation_retries": 16,
+   "obligations_registered": 144,
+   "obligations_discharged": 133,
+   "obligations_failed": 15,
+   "regenerations": 44,
+   "store_wrong_ci": [
+    0.04900468922148595,
+    0.17622259774002266
+   ],
+   "world_wrong_sessions_ci": [
+    0.022334886071316368,
+    0.12602993458082296
+   ],
+   "double_booked_ci": [
+    0.016431879182052155,
+    0.11283491110546275
+   ],
+   "consumer_saw_stale_ci": [
+    0.9296160675289299,
+    0.9975686631760574
+   ],
+   "consumer_saw_none_ci": [
+    0.0,
+    0.03621669264517641
+   ],
+   "world_none_ci": [
+    0.041983595628392247,
+    0.1639822550296352
+   ],
+   "compensator": "all",
+   "registration": "atomic",
+   "clean_sessions": 85,
+   "clean_right": 85,
+   "open_sessions": 15,
+   "open_wrong": 15
+  },
+  "Deepseek|ledger_norollback": {
+   "mode": "ledger_norollback",
+   "n": 100,
+   "revised": 100,
+   "a1": 0,
+   "a7": 0,
+   "store_wrong": 5,
+   "world_wrong_sessions": 100,
+   "world_wrong_bookings": 149,
+   "double_booked": 97,
+   "consumer_saw_stale": 100,
+   "consumer_saw_none": 0,
+   "world_none": 0,
+   "obligation_retries": 9,
+   "obligations_registered": 149,
+   "obligations_discharged": 144,
+   "obligations_failed": 5,
+   "regenerations": 42,
+   "store_wrong_ci": [
+    0.016431879182052155,
+    0.11283491110546275
+   ],
+   "world_wrong_sessions_ci": [
+    0.9637833073548235,
+    1.0
+   ],
+   "double_booked_ci": [
+    0.91482394702572,
+    0.9937700284616936
+   ],
+   "consumer_saw_stale_ci": [
+    0.9637833073548235,
+    1.0
+   ],
+   "consumer_saw_none_ci": [
+    0.0,
+    0.03621669264517641
+   ],
+   "world_none_ci": [
+    0.0,
+    0.03621669264517641
+   ],
+   "compensator": "all",
+   "registration": "atomic",
+   "clean_sessions": 95,
+   "clean_right": 0,
+   "open_sessions": 5,
+   "open_wrong": 5
+  },
+  "Gpt|validated": {
+   "mode": "validated",
+   "n": 100,
+   "revised": 100,
+   "a1": 0,
+   "a7": 100,
+   "store_wrong": 100,
+   "world_wrong_sessions": 100,
+   "world_wrong_bookings": 100,
+   "double_booked": 0,
+   "consumer_saw_stale": 100,
+   "consumer_saw_none": 0,
+   "world_none": 0,
+   "obligation_retries": 0,
+   "obligations_registered": 0,
+   "obligations_discharged": 0,
+   "obligations_failed": 0,
+   "regenerations": 41,
+   "store_wrong_ci": [
+    0.9637833073548235,
+    1.0
+   ],
+   "world_wrong_sessions_ci": [
+    0.9637833073548235,
+    1.0
+   ],
+   "double_booked_ci": [
+    0.0,
+    0.03621669264517641
+   ],
+   "consumer_saw_stale_ci": [
+    0.9637833073548235,
+    1.0
+   ],
+   "consumer_saw_none_ci": [
+    0.0,
+    0.03621669264517641
+   ],
+   "world_none_ci": [
+    0.0,
+    0.03621669264517641
+   ],
+   "compensator": "all",
+   "registration": "atomic",
+   "clean_sessions": 100,
+   "clean_right": 0,
+   "open_sessions": 0,
+   "open_wrong": 0
+  },
+  "Gpt|ledger": {
+   "mode": "ledger",
+   "n": 100,
+   "revised": 100,
+   "a1": 0,
+   "a7": 0,
+   "store_wrong": 11,
+   "world_wrong_sessions": 11,
+   "world_wrong_bookings": 11,
+   "double_booked": 10,
+   "consumer_saw_stale": 97,
+   "consumer_saw_none": 3,
+   "world_none": 10,
+   "obligation_retries": 14,
+   "obligations_registered": 148,
+   "obligations_discharged": 131,
+   "obligations_failed": 21,
+   "regenerations": 44,
+   "store_wrong_ci": [
+    0.05620702028548746,
+    0.18830113219644257
+   ],
+   "world_wrong_sessions_ci": [
+    0.05620702028548746,
+    0.18830113219644257
+   ],
+   "double_booked_ci": [
+    0.04900468922148595,
+    0.17622259774002266
+   ],
+   "consumer_saw_stale_ci": [
+    0.91482394702572,
+    0.9937700284616936
+   ],
+   "consumer_saw_none_ci": [
+    0.006229971538306395,
+    0.08517605297428002
+   ],
+   "world_none_ci": [
+    0.04900468922148595,
+    0.17622259774002266
+   ],
+   "compensator": "all",
+   "registration": "atomic",
+   "clean_sessions": 79,
+   "clean_right": 79,
+   "open_sessions": 21,
+   "open_wrong": 21
+  },
+  "Gpt|ledger_norollback": {
+   "mode": "ledger_norollback",
+   "n": 100,
+   "revised": 100,
+   "a1": 0,
+   "a7": 0,
+   "store_wrong": 8,
+   "world_wrong_sessions": 100,
+   "world_wrong_bookings": 164,
+   "double_booked": 95,
+   "consumer_saw_stale": 100,
+   "consumer_saw_none": 0,
+   "world_none": 0,
+   "obligation_retries": 14,
+   "obligations_registered": 157,
+   "obligations_discharged": 156,
+   "obligations_failed": 8,
+   "regenerations": 37,
+   "store_wrong_ci": [
+    0.0351715625181628,
+    0.15155763586442095
+   ],
+   "world_wrong_sessions_ci": [
+    0.9637833073548235,
+    1.0
+   ],
+   "double_booked_ci": [
+    0.8871650888945373,
+    0.9835681208179479
+   ],
+   "consumer_saw_stale_ci": [
+    0.9637833073548235,
+    1.0
+   ],
+   "consumer_saw_none_ci": [
+    0.0,
+    0.03621669264517641
+   ],
+   "world_none_ci": [
+    0.0,
+    0.03621669264517641
+   ],
+   "compensator": "all",
+   "registration": "atomic",
+   "clean_sessions": 92,
+   "clean_right": 0,
+   "open_sessions": 8,
+   "open_wrong": 8
+  },
+  "ledger_report_world_agreement": {
+   "agree": 300,
+   "n": 300,
+   "disagree_ci95_pct": [
+    0.0,
+    1.2220974694293563
+   ]
+  }
+ },
  "probe301": {
   "sqlite": {
    "replays": 165,
@@ -3152,6 +3644,46 @@
    "replays": 165,
    "baseline_a6": 113,
    "l3_verified_a6": 0
+  }
+ },
+ "probe302_writer_commits": {
+  "20261014T1417Z-interleaved-claude-sonnet-4-5": {
+   "edit-review/pessimistic": {
+    "sessions": 100,
+    "writer_commit_sessions": 100
+   },
+   "edit-review/snapshot_isolation": {
+    "sessions": 100,
+    "writer_commit_sessions": 100
+   },
+   "edit-review/vanilla": {
+    "sessions": 100,
+    "writer_commit_sessions": 100
+   },
+   "plan-execute/pessimistic": {
+    "sessions": 100,
+    "writer_commit_sessions": 100
+   },
+   "plan-execute/snapshot_isolation": {
+    "sessions": 100,
+    "writer_commit_sessions": 100
+   },
+   "plan-execute/vanilla": {
+    "sessions": 100,
+    "writer_commit_sessions": 100
+   },
+   "triage/pessimistic": {
+    "sessions": 100,
+    "writer_commit_sessions": 0
+   },
+   "triage/snapshot_isolation": {
+    "sessions": 100,
+    "writer_commit_sessions": 0
+   },
+   "triage/vanilla": {
+    "sessions": 100,
+    "writer_commit_sessions": 0
+   }
   }
  },
  "probe302_stamp": {
@@ -3207,49 +3739,430 @@
    }
   }
  },
- "verified_scorer": {
-  "cells": 126,
-  "traces": 12600,
-  "problems": [],
-  "passed": true
- },
- "pilot_claude_verified": {
-  "edit-review|pessimistic": {
-   "a1": 0,
-   "n": 100
+ "probe302_refusal": {
+  "20261017T0753Z-refusal-claude-sonnet-4-5": {
+   "model": "claude-sonnet-4-5",
+   "refusal_addressed": false,
+   "edit-review/pessimistic-drop": {
+    "n": 100,
+    "commits_mean": 6.0,
+    "calls_mean": 11.0,
+    "wall_ms_mean": 16734.58,
+    "refused_mean": 5.0,
+    "writer_commit_sessions": 0,
+    "write_length_calls": 0,
+    "wall_overhead_pct": {
+     "mean": 104.23071437874447,
+     "ci95": [
+      99.83981265958577,
+      108.73162839972832
+     ],
+     "n": 100
+    },
+    "calls_overhead_pct": {
+     "mean": 120.0,
+     "ci95": [
+      120.0,
+      120.0
+     ],
+     "n": 100
+    }
+   },
+   "edit-review/pessimistic-retry": {
+    "n": 100,
+    "commits_mean": 6.0,
+    "calls_mean": 11.0,
+    "wall_ms_mean": 17223.33,
+    "refused_mean": 5.0,
+    "writer_commit_sessions": 0,
+    "write_length_calls": 0,
+    "wall_overhead_pct": {
+     "mean": 110.48319281397045,
+     "ci95": [
+      99.37180438763984,
+      128.48739436737594
+     ],
+     "n": 100
+    },
+    "calls_overhead_pct": {
+     "mean": 120.0,
+     "ci95": [
+      120.0,
+      120.0
+     ],
+     "n": 100
+    }
+   },
+   "edit-review/snapshot_isolation-drop": {
+    "n": 100,
+    "commits_mean": 3.0,
+    "calls_mean": 5.88,
+    "wall_ms_mean": 9872.7,
+    "refused_mean": 0.44,
+    "writer_commit_sessions": 100,
+    "write_length_calls": 197,
+    "wall_overhead_pct": {
+     "mean": 19.676824941042625,
+     "ci95": [
+      13.820356459594233,
+      25.749737766200532
+     ],
+     "n": 100
+    },
+    "calls_overhead_pct": {
+     "mean": 17.6,
+     "ci95": [
+      13.6,
+      21.6
+     ],
+     "n": 100
+    }
+   },
+   "edit-review/snapshot_isolation-retry": {
+    "n": 100,
+    "commits_mean": 3.42,
+    "calls_mean": 7.52,
+    "wall_ms_mean": 12376.33,
+    "refused_mean": 0.84,
+    "writer_commit_sessions": 100,
+    "write_length_calls": 268,
+    "wall_overhead_pct": {
+     "mean": 51.9849757661396,
+     "ci95": [
+      38.33531973241278,
+      66.07492330216246
+     ],
+     "n": 100
+    },
+    "calls_overhead_pct": {
+     "mean": 50.4,
+     "ci95": [
+      38.4,
+      62.4
+     ],
+     "n": 100
+    }
+   },
+   "edit-review/vanilla": {
+    "n": 100,
+    "commits_mean": 2.53,
+    "calls_mean": 5.0,
+    "wall_ms_mean": 8262.82,
+    "refused_mean": 0.0,
+    "writer_commit_sessions": 100,
+    "write_length_calls": 147
+   },
+   "triage/pessimistic-drop": {
+    "n": 100,
+    "commits_mean": 6.07,
+    "calls_mean": 15.01,
+    "wall_ms_mean": 25297.39,
+    "refused_mean": 8.47,
+    "writer_commit_sessions": 11,
+    "write_length_calls": null,
+    "wall_overhead_pct": {
+     "mean": 297.8418502383135,
+     "ci95": [
+      278.36645151151,
+      315.36951211588985
+     ],
+     "n": 100
+    },
+    "calls_overhead_pct": {
+     "mean": 275.25,
+     "ci95": [
+      257.25,
+      292.25
+     ],
+     "n": 100
+    }
+   },
+   "triage/pessimistic-retry": {
+    "n": 100,
+    "commits_mean": 6.97,
+    "calls_mean": 16.98,
+    "wall_ms_mean": 27545.46,
+    "refused_mean": 9.89,
+    "writer_commit_sessions": 1,
+    "write_length_calls": null,
+    "wall_overhead_pct": {
+     "mean": 332.73743688021926,
+     "ci95": [
+      324.80015813371074,
+      340.3550894227947
+     ],
+     "n": 100
+    },
+    "calls_overhead_pct": {
+     "mean": 324.5,
+     "ci95": [
+      323.75,
+      325.0
+     ],
+     "n": 100
+    }
+   },
+   "triage/snapshot_isolation-drop": {
+    "n": 100,
+    "commits_mean": 3.0,
+    "calls_mean": 4.0,
+    "wall_ms_mean": 6525.77,
+    "refused_mean": 0.0,
+    "writer_commit_sessions": 0,
+    "write_length_calls": null,
+    "wall_overhead_pct": {
+     "mean": 2.4220095487668445,
+     "ci95": [
+      -0.20943044194197122,
+      5.934403507159618
+     ],
+     "n": 100
+    },
+    "calls_overhead_pct": {
+     "mean": 0.0,
+     "ci95": [
+      0.0,
+      0.0
+     ],
+     "n": 100
+    }
+   },
+   "triage/snapshot_isolation-retry": {
+    "n": 100,
+    "commits_mean": 3.0,
+    "calls_mean": 4.0,
+    "wall_ms_mean": 6455.66,
+    "refused_mean": 0.0,
+    "writer_commit_sessions": 0,
+    "write_length_calls": null,
+    "wall_overhead_pct": {
+     "mean": 1.4225526075868304,
+     "ci95": [
+      -1.1523240047776158,
+      4.378376823720259
+     ],
+     "n": 100
+    },
+    "calls_overhead_pct": {
+     "mean": 0.0,
+     "ci95": [
+      0.0,
+      0.0
+     ],
+     "n": 100
+    }
+   },
+   "triage/vanilla": {
+    "n": 100,
+    "commits_mean": 3.0,
+    "calls_mean": 4.0,
+    "wall_ms_mean": 6397.45,
+    "refused_mean": 0.0,
+    "writer_commit_sessions": 0,
+    "write_length_calls": null
+   }
   },
-  "edit-review|snapshot_isolation": {
-   "a1": 50,
-   "n": 100
-  },
-  "edit-review|vanilla": {
-   "a1": 100,
-   "n": 100
-  },
-  "plan-execute|pessimistic": {
-   "a1": 0,
-   "n": 100
-  },
-  "plan-execute|snapshot_isolation": {
-   "a1": 0,
-   "n": 100
-  },
-  "plan-execute|vanilla": {
-   "a1": 0,
-   "n": 100
-  },
-  "triage|pessimistic": {
-   "a1": 0,
-   "n": 100
-  },
-  "triage|snapshot_isolation": {
-   "a1": 0,
-   "n": 100
-  },
-  "triage|vanilla": {
-   "a1": 0,
-   "n": 100
+  "20261017T1615Z-refusal-addressed-claude-sonnet-4-5": {
+   "model": "claude-sonnet-4-5",
+   "refusal_addressed": true,
+   "edit-review/pessimistic-drop": {
+    "n": 100,
+    "commits_mean": 6.0,
+    "calls_mean": 11.0,
+    "wall_ms_mean": 17978.39,
+    "refused_mean": 5.0,
+    "writer_commit_sessions": 0,
+    "write_length_calls": 0,
+    "wall_overhead_pct": {
+     "mean": 132.61491990801497,
+     "ci95": [
+      128.32106105982524,
+      136.8335735684626
+     ],
+     "n": 100
+    },
+    "calls_overhead_pct": {
+     "mean": 120.0,
+     "ci95": [
+      120.0,
+      120.0
+     ],
+     "n": 100
+    }
+   },
+   "edit-review/pessimistic-retry": {
+    "n": 100,
+    "commits_mean": 6.0,
+    "calls_mean": 11.0,
+    "wall_ms_mean": 18078.86,
+    "refused_mean": 5.0,
+    "writer_commit_sessions": 0,
+    "write_length_calls": 0,
+    "wall_overhead_pct": {
+     "mean": 134.0310271296158,
+     "ci95": [
+      129.41848652441743,
+      138.54214253188798
+     ],
+     "n": 100
+    },
+    "calls_overhead_pct": {
+     "mean": 120.0,
+     "ci95": [
+      120.0,
+      120.0
+     ],
+     "n": 100
+    }
+   },
+   "edit-review/snapshot_isolation-drop": {
+    "n": 100,
+    "commits_mean": 3.0,
+    "calls_mean": 6.08,
+    "wall_ms_mean": 9684.03,
+    "refused_mean": 0.54,
+    "writer_commit_sessions": 100,
+    "write_length_calls": 220,
+    "wall_overhead_pct": {
+     "mean": 25.148875146063702,
+     "ci95": [
+      19.268414483848396,
+      31.07414799428521
+     ],
+     "n": 100
+    },
+    "calls_overhead_pct": {
+     "mean": 21.6,
+     "ci95": [
+      17.6,
+      25.2
+     ],
+     "n": 100
+    }
+   },
+   "edit-review/vanilla": {
+    "n": 100,
+    "commits_mean": 2.62,
+    "calls_mean": 5.0,
+    "wall_ms_mean": 7789.86,
+    "refused_mean": 0.0,
+    "writer_commit_sessions": 100,
+    "write_length_calls": 138
+   },
+   "triage/pessimistic-drop": {
+    "n": 100,
+    "commits_mean": 2.1,
+    "calls_mean": 4.3,
+    "wall_ms_mean": 6735.89,
+    "refused_mean": 1.1,
+    "writer_commit_sessions": 10,
+    "write_length_calls": null,
+    "wall_overhead_pct": {
+     "mean": 7.8929257452533905,
+     "ci95": [
+      3.295769316181349,
+      13.054213911848947
+     ],
+     "n": 100
+    },
+    "calls_overhead_pct": {
+     "mean": 7.5,
+     "ci95": [
+      3.0,
+      12.0
+     ],
+     "n": 100
+    }
+   },
+   "triage/pessimistic-retry": {
+    "n": 100,
+    "commits_mean": 3.87,
+    "calls_mean": 9.0,
+    "wall_ms_mean": 15140.7,
+    "refused_mean": 4.12,
+    "writer_commit_sessions": 19,
+    "write_length_calls": null,
+    "wall_overhead_pct": {
+     "mean": 142.5962520283946,
+     "ci95": [
+      113.94920866602793,
+      171.78209340711766
+     ],
+     "n": 100
+    },
+    "calls_overhead_pct": {
+     "mean": 125.0,
+     "ci95": [
+      97.25,
+      154.0
+     ],
+     "n": 100
+    }
+   },
+   "triage/snapshot_isolation-drop": {
+    "n": 100,
+    "commits_mean": 3.0,
+    "calls_mean": 4.0,
+    "wall_ms_mean": 6319.38,
+    "refused_mean": 0.0,
+    "writer_commit_sessions": 0,
+    "write_length_calls": null,
+    "wall_overhead_pct": {
+     "mean": 1.1512517326268625,
+     "ci95": [
+      -0.7479645637081006,
+      3.051954609846758
+     ],
+     "n": 100
+    },
+    "calls_overhead_pct": {
+     "mean": 0.0,
+     "ci95": [
+      0.0,
+      0.0
+     ],
+     "n": 100
+    }
+   },
+   "triage/vanilla": {
+    "n": 100,
+    "commits_mean": 3.0,
+    "calls_mean": 4.0,
+    "wall_ms_mean": 6278.78,
+    "refused_mean": 0.0,
+    "writer_commit_sessions": 0,
+    "write_length_calls": null
+   }
   }
+ },
+ "verus/lib_l5_exec.verus.log": {
+  "verified": 10,
+  "errors": 0
+ },
+ "verified_scorer": {
+  "cells": 144,
+  "traces": 14400,
+  "problems": [
+   "runs/20261017T0753Z-refusal-claude-sonnet-4-5/edit-review-pessimistic-drop: refusals.jsonl: analyser exit 2: error reading results/runs/20261017T0753Z-refusal-claude-sonnet-4-5/edit-review-pessimistic-drop/refusals.jsonl: line 1: missing field `agent` (or `agent_id`)",
+   "runs/20261017T0753Z-refusal-claude-sonnet-4-5/edit-review-pessimistic-retry: refusals.jsonl: analyser exit 2: error reading results/runs/20261017T0753Z-refusal-claude-sonnet-4-5/edit-review-pessimistic-retry/refusals.jsonl: line 1: missing field `agent` (or `agent_id`)",
+   "runs/20261017T0753Z-refusal-claude-sonnet-4-5/edit-review-snapshot_isolation-drop: refusals.jsonl: analyser exit 2: error reading results/runs/20261017T0753Z-refusal-claude-sonnet-4-5/edit-review-snapshot_isolation-drop/refusals.jsonl: line 1: missing field `agent` (or `agent_id`)",
+   "runs/20261017T0753Z-refusal-claude-sonnet-4-5/edit-review-snapshot_isolation-retry: refusals.jsonl: analyser exit 2: error reading results/runs/20261017T0753Z-refusal-claude-sonnet-4-5/edit-review-snapshot_isolation-retry/refusals.jsonl: line 1: missing field `agent` (or `agent_id`)",
+   "runs/20261017T0753Z-refusal-claude-sonnet-4-5/edit-review-vanilla: refusals.jsonl: analyser exit 2: error reading results/runs/20261017T0753Z-refusal-claude-sonnet-4-5/edit-review-vanilla/refusals.jsonl: line 1: missing field `agent` (or `agent_id`)",
+   "runs/20261017T0753Z-refusal-claude-sonnet-4-5/triage-pessimistic-drop: refusals.jsonl: analyser exit 2: error reading results/runs/20261017T0753Z-refusal-claude-sonnet-4-5/triage-pessimistic-drop/refusals.jsonl: line 1: missing field `agent` (or `agent_id`)",
+   "runs/20261017T0753Z-refusal-claude-sonnet-4-5/triage-pessimistic-retry: refusals.jsonl: analyser exit 2: error reading results/runs/20261017T0753Z-refusal-claude-sonnet-4-5/triage-pessimistic-retry/refusals.jsonl: line 1: missing field `agent` (or `agent_id`)",
+   "runs/20261017T0753Z-refusal-claude-sonnet-4-5/triage-snapshot_isolation-drop: refusals.jsonl: analyser exit 2: error reading results/runs/20261017T0753Z-refusal-claude-sonnet-4-5/triage-snapshot_isolation-drop/refusals.jsonl: line 1: missing field `agent` (or `agent_id`)",
+   "runs/20261017T0753Z-refusal-claude-sonnet-4-5/triage-snapshot_isolation-retry: refusals.jsonl: analyser exit 2: error reading results/runs/20261017T0753Z-refusal-claude-sonnet-4-5/triage-snapshot_isolation-retry/refusals.jsonl: line 1: missing field `agent` (or `agent_id`)",
+   "runs/20261017T0753Z-refusal-claude-sonnet-4-5/triage-vanilla: refusals.jsonl: analyser exit 2: error reading results/runs/20261017T0753Z-refusal-claude-sonnet-4-5/triage-vanilla/refusals.jsonl: line 1: missing field `agent` (or `agent_id`)",
+   "runs/20261017T1615Z-refusal-addressed-claude-sonnet-4-5/edit-review-pessimistic-drop: refusals.jsonl: analyser exit 2: error reading results/runs/20261017T1615Z-refusal-addressed-claude-sonnet-4-5/edit-review-pessimistic-drop/refusals.jsonl: line 1: missing field `agent` (or `agent_id`)",
+   "runs/20261017T1615Z-refusal-addressed-claude-sonnet-4-5/edit-review-pessimistic-retry: refusals.jsonl: analyser exit 2: error reading results/runs/20261017T1615Z-refusal-addressed-claude-sonnet-4-5/edit-review-pessimistic-retry/refusals.jsonl: line 1: missing field `agent` (or `agent_id`)",
+   "runs/20261017T1615Z-refusal-addressed-claude-sonnet-4-5/edit-review-snapshot_isolation-drop: refusals.jsonl: analyser exit 2: error reading results/runs/20261017T1615Z-refusal-addressed-claude-sonnet-4-5/edit-review-snapshot_isolation-drop/refusals.jsonl: line 1: missing field `agent` (or `agent_id`)",
+   "runs/20261017T1615Z-refusal-addressed-claude-sonnet-4-5/edit-review-vanilla: refusals.jsonl: analyser exit 2: error reading results/runs/20261017T1615Z-refusal-addressed-claude-sonnet-4-5/edit-review-vanilla/refusals.jsonl: line 1: missing field `agent` (or `agent_id`)",
+   "runs/20261017T1615Z-refusal-addressed-claude-sonnet-4-5/triage-pessimistic-drop: refusals.jsonl: analyser exit 2: error reading results/runs/20261017T1615Z-refusal-addressed-claude-sonnet-4-5/triage-pessimistic-drop/refusals.jsonl: line 1: missing field `agent` (or `agent_id`)",
+   "runs/20261017T1615Z-refusal-addressed-claude-sonnet-4-5/triage-pessimistic-retry: refusals.jsonl: analyser exit 2: error reading results/runs/20261017T1615Z-refusal-addressed-claude-sonnet-4-5/triage-pessimistic-retry/refusals.jsonl: line 1: missing field `agent` (or `agent_id`)",
+   "runs/20261017T1615Z-refusal-addressed-claude-sonnet-4-5/triage-snapshot_isolation-drop: refusals.jsonl: analyser exit 2: error reading results/runs/20261017T1615Z-refusal-addressed-claude-sonnet-4-5/triage-snapshot_isolation-drop/refusals.jsonl: line 1: missing field `agent` (or `agent_id`)",
+   "runs/20261017T1615Z-refusal-addressed-claude-sonnet-4-5/triage-vanilla: refusals.jsonl: analyser exit 2: error reading results/runs/20261017T1615Z-refusal-addressed-claude-sonnet-4-5/triage-vanilla/refusals.jsonl: line 1: missing field `agent` (or `agent_id`)"
+  ],
+  "passed": false
  },
  "tlc_duplication": {
   "witness_depth": "5",
@@ -3257,16 +4170,16 @@
   "dedup_states": "1714"
  },
  "verus/count.json": {
-  "curated_total": 160,
-  "full_total": 181,
+  "curated_total": 371,
+  "full_total": 392,
   "ledger": {
-   "verified": null,
-   "errors": null,
-   "note": "no summary line; see the log"
+   "verified": 7,
+   "errors": 0
   },
-  "pin": "0.2026.09.13.671956e"
+  "pin": "0.2026.09.13.671956e",
+  "verus_version": "0.2026.09.13.671956e"
  },
- "verus/lib_l5_ledger.verus.log": "error[E0425]: cannot find value `group_map_lemmas` in module `vstd::map`\n  --> src/lib_l5_ledger.rs:48:27\n   |\n48 | broadcast use {vstd::map::group_map_lemmas, vstd::set::group_set_lemmas};\n   |                           ^^^^^^^^^^^^^^^^\n   |\n  --> vstd/map.rs:315:0\n  ::: vstd/map.rs:326:1\n   |\n   = note: similarly named function `group_map_axioms` defined here\nhelp: a function with a similar name exists\n   |\n48 - broadcast use {vstd::map::group_map_lemmas, vstd::set::group_set_lemmas};\n48 + broadcast use {vstd::map::group_map_axioms, vstd::set::group_set_lemmas};\n   |\n\nerror[E0425]: cannot find value `group_set_lemmas` in module `vstd::set`\n  --> src/lib_l5_ledger.rs:48:56\n   |\n48 | broadcast use {vstd::map::group_map_lemmas, vstd::set::group_set_lemmas};\n   |                                                        ^^^^^^^^^^^^^^^^\n   |\n  --> vstd/set.rs:999:0\n  ::: vstd/set.rs:1027:1\n   |\n   = note: similarly named function `group_set_axioms` defined here\nhelp: a function with a similar name exists\n   |\n48 - broadcast use {vstd::map::group_map_lemmas, vstd::set::group_set_lemmas};\n48 + broadcast use {vstd::map::group_map_lemmas, vstd::set::group_set_axioms};\n   |\n\nerror: aborting due to 2 previous errors\n\nFor more information about this error, try `rustc --explain E0425`.\n",
+ "verus/lib_l5_ledger.verus.log": "verification results:: 7 verified, 0 errors\n",
  "../formal/tla/tlaps.CommitOrder.log": "!!prover:tlapm\n@!!already:false\n@!!END\n\n@!!BEGIN\n@!!type:obligation\n@!!id:37\n@!!loc:147:18:147:22\n@!!status:trivial\n@!!prover:tlapm\n@!!already:false\n@!!END\n\n@!!BEGIN\n@!!type:obligation\n@!!id:39\n@!!loc:164:16:164:20\n@!!status:trivial\n@!!prover:tlapm\n@!!already:false\n@!!END\n\n@!!BEGIN\n@!!type:obligation\n@!!id:40\n@!!loc:164:22:164:26\n@!!status:trivial\n@!!prover:tlapm\n@!!already:false\n@!!END\n\n@!!BEGIN\n@!!type:obligation\n@!!id:41\n@!!loc:164:28:164:32\n@!!status:trivial\n@!!prover:tlapm\n@!!already:false\n@!!END\n\n@!!BEGIN\n@!!type:obligation\n@!!id:42\n@!!loc:164:34:164:38\n@!!status:trivial\n@!!prover:tlapm\n@!!already:false\n@!!END\n\n@!!BEGIN\n@!!type:obligation\n@!!id:45\n@!!loc:153:16:153:20\n@!!status:trivial\n@!!prover:tlapm\n@!!already:false\n@!!END\n\n@!!BEGIN\n@!!type:obligation\n@!!id:47\n@!!loc:160:20:160:24\n@!!status:trivial\n@!!prover:tlapm\n@!!already:false\n@!!END\n\n@!!BEGIN\n@!!type:obligation\n@!!id:48\n@!!loc:160:26:160:30\n@!!status:trivial\n@!!prover:tlapm\n@!!already:false\n@!!END\n\n@!!BEGIN\n@!!type:obligation\n@!!id:49\n@!!loc:160:32:160:36\n@!!status:trivial\n@!!prover:tlapm\n@!!already:false\n@!!END\n\n@!!BEGIN\n@!!type:obligation\n@!!id:51\n@!!loc:156:20:156:24\n@!!status:trivial\n@!!prover:tlapm\n@!!already:false\n@!!END\n\n@!!BEGIN\n@!!type:obligation\n@!!id:52\n@!!loc:156:26:156:30\n@!!status:trivial\n@!!prover:tlapm\n@!!already:false\n@!!END\n\n@!!BEGIN\n@!!type:obligation\n@!!id:54\n@!!loc:158:20:158:24\n@!!status:trivial\n@!!prover:tlapm\n@!!already:false\n@!!END\n\n@!!BEGIN\n@!!type:obligation\n@!!id:55\n@!!loc:158:26:158:30\n@!!status:trivial\n@!!prover:tlapm\n@!!already:false\n@!!END\n\n@!!BEGIN\n@!!type:obligation\n@!!id:56\n@!!loc:158:32:158:36\n@!!status:trivial\n@!!prover:tlapm\n@!!already:false\n@!!END\n\n@!!BEGIN\n@!!type:obligation\n@!!id:58\n@!!loc:162:16:162:20\n@!!status:trivial\n@!!prover:tlapm\n@!!already:false\n@!!END\n\n@!!BEGIN\n@!!type:obligation\n@!!id:59\n@!!loc:162:22:162:26\n@!!status:trivial\n@!!prover:tlapm\n@!!already:false\n@!!END\n\n@!!BEGIN\n@!!type:obligation\n@!!id:60\n@!!loc:162:28:162:32\n@!!status:trivial\n@!!prover:tlapm\n@!!already:false\n@!!END\n\n@!!BEGIN\n@!!type:obligation\n@!!id:57\n@!!loc:162:13:162:15\n@!!status:proved\n@!!prover:smt\n@!!meth:time-limit: 5; time-used: 0.0 (0%)\n@!!already:false\n@!!END\n\n@!!BEGIN\n@!!type:obligation\n@!!id:53\n@!!loc:158:17:158:19\n@!!status:proved\n@!!prover:smt\n@!!meth:time-limit: 5; time-used: 0.1 (1%)\n@!!already:false\n@!!END\n\n@!!BEGIN\n@!!type:obligation\n@!!id:50\n@!!loc:156:17:156:19\n@!!status:proved\n@!!prover:smt\n@!!meth:time-limit: 5; time-used: 0.1 (2%)\n@!!already:false\n@!!END\n\n@!!BEGIN\n@!!type:obligation\n@!!id:46\n@!!loc:160:17:160:19\n@!!status:proved\n@!!prover:smt\n@!!meth:time-limit: 5; time-used: 0.1 (2%)\n@!!already:false\n@!!END\n\n@!!BEGIN\n@!!type:obligation\n@!!id:44\n@!!loc:153:13:153:15\n@!!status:proved\n@!!prover:smt\n@!!meth:time-limit: 5; time-used: 0.1 (3%)\n@!!already:false\n@!!END\n\n@!!BEGIN\n@!!type:obligation\n@!!id:43\n@!!loc:151:13:151:15\n@!!status:proved\n@!!prover:smt\n@!!meth:time-limit: 5; time-used: 0.2 (3%)\n@!!already:false\n@!!END\n\n@!!BEGIN\n@!!type:obligation\n@!!id:38\n@!!loc:164:13:164:15\n@!!status:proved\n@!!prover:smt\n@!!meth:time-limit: 5; time-used: 0.2 (4%)\n@!!already:false\n@!!END\n\n@!!BEGIN\n@!!type:obligation\n@!!id:35\n@!!loc:147:9:147:11\n@!!status:proved\n@!!prover:smt\n@!!meth:time-limit: 5; time-used: 0.3 (7%)\n@!!already:false\n@!!END\n\n@!!BEGIN\n@!!type:obligation\n@!!id:33\n@!!loc:143:13:143:15\n@!!status:proved\n@!!prover:smt\n@!!meth:time-limit: 5; time-used: 0.4 (7%)\n@!!already:false\n@!!END\n\n@!!BEGIN\n@!!type:obligation\n@!!id:32\n@!!loc:141:13:141:15\n@!!status:proved\n@!!prover:smt\n@!!meth:time-limit: 5; time-used: 0.4 (8%)\n@!!already:false\n@!!END\n\n@!!BEGIN\n@!!type:obligation\n@!!id:27\n@!!loc:145:13:145:15\n@!!status:proved\n@!!prover:smt\n@!!meth:time-limit: 5; time-used: 0.4 (9%)\n@!!already:false\n@!!END\n\n(* created new \".tlacache/CommitOrder.tlaps/CommitOrder.thy\" *)\n(* fingerprints written in \".tlacache/CommitOrder.tlaps/fingerprints\" *)\nFile \"./CommitOrder.tla\", line 1, character 1 to line 169, character 76:\n[INFO]: All 60 obligations proved.\n",
  "macros": [
   "% generated by harness/macaudit/claims_from_results.py -- do not edit; re-run the probes instead",
@@ -5281,6 +6194,475 @@
   "\\providecommand{\\LWwideLedgerAgree}{300/300}",
   "\\providecommand{\\LWwideLedgerDisagree}{0}",
   "\\providecommand{\\LWwideLedgerDisagreeCI}{[0.0, 1.2]}",
+  "% --- probe 304 (ledger_world_exec): bookkeeping in the VERIFIED bytes (--ledger exec) ---",
+  "\\renewcommand{\\LedgerWorldExecAvailable}{1}",
+  "\\providecommand{\\LWexecRegistration}{atomic}",
+  "\\providecommand{\\LWexecHaikuValidatedR}{99}",
+  "\\providecommand{\\LWexecHaikuValidatedStoreWrong}{99}",
+  "\\providecommand{\\LWexecHaikuValidatedWorldWrong}{99}",
+  "\\providecommand{\\LWexecHaikuValidatedWorldNone}{0}",
+  "\\providecommand{\\LWexecHaikuValidatedDouble}{0}",
+  "\\providecommand{\\LWexecHaikuValidatedConsumerStale}{99}",
+  "\\providecommand{\\LWexecHaikuValidatedConsumerNone}{0}",
+  "\\providecommand{\\LWexecHaikuValidatedRetries}{0}",
+  "\\providecommand{\\LWexecHaikuValidatedObl}{0/0/0}",
+  "\\providecommand{\\LWexecHaikuValidatedN}{100}",
+  "\\providecommand{\\LWexecHaikuValidatedCleanSessions}{100}",
+  "\\providecommand{\\LWexecHaikuValidatedCleanRight}{1}",
+  "\\providecommand{\\LWexecHaikuValidatedCleanWrong}{99}",
+  "\\providecommand{\\LWexecHaikuValidatedCleanVacuous}{100}",
+  "\\providecommand{\\LWexecHaikuValidatedOpenSessions}{0}",
+  "\\providecommand{\\LWexecHaikuValidatedOpenWrong}{0}",
+  "\\providecommand{\\LWexecHaikuValidatedOpenRight}{0}",
+  "\\providecommand{\\LWexecHaikuValidatedFailDouble}{0}",
+  "\\providecommand{\\LWexecHaikuValidatedFailNone}{0}",
+  "\\providecommand{\\LWexecHaikuValidatedFailStaleOnly}{99}",
+  "\\providecommand{\\LWexecHaikuValidatedOneObligation}{0}",
+  "\\providecommand{\\LWexecHaikuValidatedTwoObligations}{0}",
+  "\\providecommand{\\LWexecHaikuValidatedNoObligation}{100}",
+  "\\providecommand{\\LWexecHaikuLedgerR}{0}",
+  "\\providecommand{\\LWexecHaikuLedgerStoreWrong}{6}",
+  "\\providecommand{\\LWexecHaikuLedgerWorldWrong}{12}",
+  "\\providecommand{\\LWexecHaikuLedgerWorldNone}{6}",
+  "\\providecommand{\\LWexecHaikuLedgerDouble}{12}",
+  "\\providecommand{\\LWexecHaikuLedgerConsumerStale}{97}",
+  "\\providecommand{\\LWexecHaikuLedgerConsumerNone}{0}",
+  "\\providecommand{\\LWexecHaikuLedgerRetries}{0}",
+  "\\providecommand{\\LWexecHaikuLedgerObl}{99/81/18}",
+  "\\providecommand{\\LWexecHaikuLedgerN}{100}",
+  "\\providecommand{\\LWexecHaikuLedgerCleanSessions}{82}",
+  "\\providecommand{\\LWexecHaikuLedgerCleanRight}{82}",
+  "\\providecommand{\\LWexecHaikuLedgerCleanWrong}{0}",
+  "\\providecommand{\\LWexecHaikuLedgerCleanVacuous}{1}",
+  "\\providecommand{\\LWexecHaikuLedgerOpenSessions}{18}",
+  "\\providecommand{\\LWexecHaikuLedgerOpenWrong}{18}",
+  "\\providecommand{\\LWexecHaikuLedgerOpenRight}{0}",
+  "\\providecommand{\\LWexecHaikuLedgerFailDouble}{12}",
+  "\\providecommand{\\LWexecHaikuLedgerFailNone}{6}",
+  "\\providecommand{\\LWexecHaikuLedgerFailStaleOnly}{0}",
+  "\\providecommand{\\LWexecHaikuLedgerOneObligation}{99}",
+  "\\providecommand{\\LWexecHaikuLedgerTwoObligations}{0}",
+  "\\providecommand{\\LWexecHaikuLedgerNoObligation}{1}",
+  "\\providecommand{\\LWexecHaikuLedgerConsumerStaleBeforeRevision}{29}",
+  "\\providecommand{\\LWexecHaikuLedgerConsumerStaleInsideCompensation}{68}",
+  "\\providecommand{\\LWexecHaikuLedgerConsumerStaleRefusedCancel}{0}",
+  "\\providecommand{\\LWexecHaikuLedgerConsumerStaleCurrentThenSuperseded}{0}",
+  "\\providecommand{\\LWexecHaikuLedgerConsumerStaleOther}{0}",
+  "\\providecommand{\\LWexecHaikuLedgerBothRevisionsAfterCommit}{0}",
+  "\\providecommand{\\LWexecHaikuLedgerFirstRevisionMedianS}{0.9}",
+  "\\providecommand{\\LWexecHaikuLedgerCompLatencyMedianS}{1.1}",
+  "\\providecommand{\\LWexecHaikuLedgerCompLatencyPNinetyS}{1.2}",
+  "\\providecommand{\\LWexecHaikuLedgerBookingToCompensationMedianS}{1.5}",
+  "\\providecommand{\\LWexecHaikuLedgerBookingToCompensationPNinetyS}{1.6}",
+  "\\providecommand{\\LWexecHaikuLedgerNoRollbackR}{0}",
+  "\\providecommand{\\LWexecHaikuLedgerNoRollbackStoreWrong}{12}",
+  "\\providecommand{\\LWexecHaikuLedgerNoRollbackWorldWrong}{99}",
+  "\\providecommand{\\LWexecHaikuLedgerNoRollbackWorldNone}{0}",
+  "\\providecommand{\\LWexecHaikuLedgerNoRollbackDouble}{87}",
+  "\\providecommand{\\LWexecHaikuLedgerNoRollbackConsumerStale}{99}",
+  "\\providecommand{\\LWexecHaikuLedgerNoRollbackConsumerNone}{0}",
+  "\\providecommand{\\LWexecHaikuLedgerNoRollbackRetries}{1}",
+  "\\providecommand{\\LWexecHaikuLedgerNoRollbackObl}{104/93/12}",
+  "\\providecommand{\\LWexecHaikuLedgerNoRollbackN}{100}",
+  "\\providecommand{\\LWexecHaikuLedgerNoRollbackCleanSessions}{88}",
+  "\\providecommand{\\LWexecHaikuLedgerNoRollbackCleanRight}{1}",
+  "\\providecommand{\\LWexecHaikuLedgerNoRollbackCleanWrong}{87}",
+  "\\providecommand{\\LWexecHaikuLedgerNoRollbackCleanVacuous}{1}",
+  "\\providecommand{\\LWexecHaikuLedgerNoRollbackOpenSessions}{12}",
+  "\\providecommand{\\LWexecHaikuLedgerNoRollbackOpenWrong}{12}",
+  "\\providecommand{\\LWexecHaikuLedgerNoRollbackOpenRight}{0}",
+  "\\providecommand{\\LWexecHaikuLedgerNoRollbackFailDouble}{87}",
+  "\\providecommand{\\LWexecHaikuLedgerNoRollbackFailNone}{0}",
+  "\\providecommand{\\LWexecHaikuLedgerNoRollbackFailStaleOnly}{12}",
+  "\\providecommand{\\LWexecHaikuLedgerNoRollbackOneObligation}{94}",
+  "\\providecommand{\\LWexecHaikuLedgerNoRollbackTwoObligations}{5}",
+  "\\providecommand{\\LWexecHaikuLedgerNoRollbackNoObligation}{1}",
+  "\\providecommand{\\LWexecDeepseekValidatedR}{99}",
+  "\\providecommand{\\LWexecDeepseekValidatedStoreWrong}{99}",
+  "\\providecommand{\\LWexecDeepseekValidatedWorldWrong}{99}",
+  "\\providecommand{\\LWexecDeepseekValidatedWorldNone}{0}",
+  "\\providecommand{\\LWexecDeepseekValidatedDouble}{0}",
+  "\\providecommand{\\LWexecDeepseekValidatedConsumerStale}{99}",
+  "\\providecommand{\\LWexecDeepseekValidatedConsumerNone}{0}",
+  "\\providecommand{\\LWexecDeepseekValidatedRetries}{0}",
+  "\\providecommand{\\LWexecDeepseekValidatedObl}{0/0/0}",
+  "\\providecommand{\\LWexecDeepseekValidatedN}{100}",
+  "\\providecommand{\\LWexecDeepseekValidatedCleanSessions}{100}",
+  "\\providecommand{\\LWexecDeepseekValidatedCleanRight}{1}",
+  "\\providecommand{\\LWexecDeepseekValidatedCleanWrong}{99}",
+  "\\providecommand{\\LWexecDeepseekValidatedCleanVacuous}{100}",
+  "\\providecommand{\\LWexecDeepseekValidatedOpenSessions}{0}",
+  "\\providecommand{\\LWexecDeepseekValidatedOpenWrong}{0}",
+  "\\providecommand{\\LWexecDeepseekValidatedOpenRight}{0}",
+  "\\providecommand{\\LWexecDeepseekValidatedFailDouble}{0}",
+  "\\providecommand{\\LWexecDeepseekValidatedFailNone}{0}",
+  "\\providecommand{\\LWexecDeepseekValidatedFailStaleOnly}{99}",
+  "\\providecommand{\\LWexecDeepseekValidatedOneObligation}{0}",
+  "\\providecommand{\\LWexecDeepseekValidatedTwoObligations}{0}",
+  "\\providecommand{\\LWexecDeepseekValidatedNoObligation}{100}",
+  "\\providecommand{\\LWexecDeepseekLedgerR}{0}",
+  "\\providecommand{\\LWexecDeepseekLedgerStoreWrong}{10}",
+  "\\providecommand{\\LWexecDeepseekLedgerWorldWrong}{6}",
+  "\\providecommand{\\LWexecDeepseekLedgerWorldNone}{9}",
+  "\\providecommand{\\LWexecDeepseekLedgerDouble}{5}",
+  "\\providecommand{\\LWexecDeepseekLedgerConsumerStale}{98}",
+  "\\providecommand{\\LWexecDeepseekLedgerConsumerNone}{0}",
+  "\\providecommand{\\LWexecDeepseekLedgerRetries}{16}",
+  "\\providecommand{\\LWexecDeepseekLedgerObl}{144/133/15}",
+  "\\providecommand{\\LWexecDeepseekLedgerN}{100}",
+  "\\providecommand{\\LWexecDeepseekLedgerCleanSessions}{85}",
+  "\\providecommand{\\LWexecDeepseekLedgerCleanRight}{85}",
+  "\\providecommand{\\LWexecDeepseekLedgerCleanWrong}{0}",
+  "\\providecommand{\\LWexecDeepseekLedgerCleanVacuous}{1}",
+  "\\providecommand{\\LWexecDeepseekLedgerOpenSessions}{15}",
+  "\\providecommand{\\LWexecDeepseekLedgerOpenWrong}{15}",
+  "\\providecommand{\\LWexecDeepseekLedgerOpenRight}{0}",
+  "\\providecommand{\\LWexecDeepseekLedgerFailDouble}{5}",
+  "\\providecommand{\\LWexecDeepseekLedgerFailNone}{9}",
+  "\\providecommand{\\LWexecDeepseekLedgerFailStaleOnly}{1}",
+  "\\providecommand{\\LWexecDeepseekLedgerOneObligation}{54}",
+  "\\providecommand{\\LWexecDeepseekLedgerTwoObligations}{45}",
+  "\\providecommand{\\LWexecDeepseekLedgerNoObligation}{1}",
+  "\\providecommand{\\LWexecDeepseekLedgerConsumerStaleBeforeRevision}{27}",
+  "\\providecommand{\\LWexecDeepseekLedgerConsumerStaleInsideCompensation}{66}",
+  "\\providecommand{\\LWexecDeepseekLedgerConsumerStaleRefusedCancel}{1}",
+  "\\providecommand{\\LWexecDeepseekLedgerConsumerStaleCurrentThenSuperseded}{4}",
+  "\\providecommand{\\LWexecDeepseekLedgerConsumerStaleOther}{0}",
+  "\\providecommand{\\LWexecDeepseekLedgerBothRevisionsAfterCommit}{57}",
+  "\\providecommand{\\LWexecDeepseekLedgerFirstRevisionMedianS}{1.2}",
+  "\\providecommand{\\LWexecDeepseekLedgerCompLatencyMedianS}{1.1}",
+  "\\providecommand{\\LWexecDeepseekLedgerCompLatencyPNinetyS}{1.3}",
+  "\\providecommand{\\LWexecDeepseekLedgerBookingToCompensationMedianS}{1.5}",
+  "\\providecommand{\\LWexecDeepseekLedgerBookingToCompensationPNinetyS}{1.9}",
+  "\\providecommand{\\LWexecDeepseekLedgerNoRollbackR}{0}",
+  "\\providecommand{\\LWexecDeepseekLedgerNoRollbackStoreWrong}{5}",
+  "\\providecommand{\\LWexecDeepseekLedgerNoRollbackWorldWrong}{100}",
+  "\\providecommand{\\LWexecDeepseekLedgerNoRollbackWorldNone}{0}",
+  "\\providecommand{\\LWexecDeepseekLedgerNoRollbackDouble}{97}",
+  "\\providecommand{\\LWexecDeepseekLedgerNoRollbackConsumerStale}{100}",
+  "\\providecommand{\\LWexecDeepseekLedgerNoRollbackConsumerNone}{0}",
+  "\\providecommand{\\LWexecDeepseekLedgerNoRollbackRetries}{9}",
+  "\\providecommand{\\LWexecDeepseekLedgerNoRollbackObl}{149/144/5}",
+  "\\providecommand{\\LWexecDeepseekLedgerNoRollbackN}{100}",
+  "\\providecommand{\\LWexecDeepseekLedgerNoRollbackCleanSessions}{95}",
+  "\\providecommand{\\LWexecDeepseekLedgerNoRollbackCleanRight}{0}",
+  "\\providecommand{\\LWexecDeepseekLedgerNoRollbackCleanWrong}{95}",
+  "\\providecommand{\\LWexecDeepseekLedgerNoRollbackCleanVacuous}{0}",
+  "\\providecommand{\\LWexecDeepseekLedgerNoRollbackOpenSessions}{5}",
+  "\\providecommand{\\LWexecDeepseekLedgerNoRollbackOpenWrong}{5}",
+  "\\providecommand{\\LWexecDeepseekLedgerNoRollbackOpenRight}{0}",
+  "\\providecommand{\\LWexecDeepseekLedgerNoRollbackFailDouble}{97}",
+  "\\providecommand{\\LWexecDeepseekLedgerNoRollbackFailNone}{0}",
+  "\\providecommand{\\LWexecDeepseekLedgerNoRollbackFailStaleOnly}{3}",
+  "\\providecommand{\\LWexecDeepseekLedgerNoRollbackOneObligation}{51}",
+  "\\providecommand{\\LWexecDeepseekLedgerNoRollbackTwoObligations}{49}",
+  "\\providecommand{\\LWexecDeepseekLedgerNoRollbackNoObligation}{0}",
+  "\\providecommand{\\LWexecGptValidatedR}{100}",
+  "\\providecommand{\\LWexecGptValidatedStoreWrong}{100}",
+  "\\providecommand{\\LWexecGptValidatedWorldWrong}{100}",
+  "\\providecommand{\\LWexecGptValidatedWorldNone}{0}",
+  "\\providecommand{\\LWexecGptValidatedDouble}{0}",
+  "\\providecommand{\\LWexecGptValidatedConsumerStale}{100}",
+  "\\providecommand{\\LWexecGptValidatedConsumerNone}{0}",
+  "\\providecommand{\\LWexecGptValidatedRetries}{0}",
+  "\\providecommand{\\LWexecGptValidatedObl}{0/0/0}",
+  "\\providecommand{\\LWexecGptValidatedN}{100}",
+  "\\providecommand{\\LWexecGptValidatedCleanSessions}{100}",
+  "\\providecommand{\\LWexecGptValidatedCleanRight}{0}",
+  "\\providecommand{\\LWexecGptValidatedCleanWrong}{100}",
+  "\\providecommand{\\LWexecGptValidatedCleanVacuous}{100}",
+  "\\providecommand{\\LWexecGptValidatedOpenSessions}{0}",
+  "\\providecommand{\\LWexecGptValidatedOpenWrong}{0}",
+  "\\providecommand{\\LWexecGptValidatedOpenRight}{0}",
+  "\\providecommand{\\LWexecGptValidatedFailDouble}{0}",
+  "\\providecommand{\\LWexecGptValidatedFailNone}{0}",
+  "\\providecommand{\\LWexecGptValidatedFailStaleOnly}{100}",
+  "\\providecommand{\\LWexecGptValidatedOneObligation}{0}",
+  "\\providecommand{\\LWexecGptValidatedTwoObligations}{0}",
+  "\\providecommand{\\LWexecGptValidatedNoObligation}{100}",
+  "\\providecommand{\\LWexecGptLedgerR}{0}",
+  "\\providecommand{\\LWexecGptLedgerStoreWrong}{11}",
+  "\\providecommand{\\LWexecGptLedgerWorldWrong}{11}",
+  "\\providecommand{\\LWexecGptLedgerWorldNone}{10}",
+  "\\providecommand{\\LWexecGptLedgerDouble}{10}",
+  "\\providecommand{\\LWexecGptLedgerConsumerStale}{97}",
+  "\\providecommand{\\LWexecGptLedgerConsumerNone}{3}",
+  "\\providecommand{\\LWexecGptLedgerRetries}{14}",
+  "\\providecommand{\\LWexecGptLedgerObl}{148/131/21}",
+  "\\providecommand{\\LWexecGptLedgerN}{100}",
+  "\\providecommand{\\LWexecGptLedgerCleanSessions}{79}",
+  "\\providecommand{\\LWexecGptLedgerCleanRight}{79}",
+  "\\providecommand{\\LWexecGptLedgerCleanWrong}{0}",
+  "\\providecommand{\\LWexecGptLedgerCleanVacuous}{0}",
+  "\\providecommand{\\LWexecGptLedgerOpenSessions}{21}",
+  "\\providecommand{\\LWexecGptLedgerOpenWrong}{21}",
+  "\\providecommand{\\LWexecGptLedgerOpenRight}{0}",
+  "\\providecommand{\\LWexecGptLedgerFailDouble}{10}",
+  "\\providecommand{\\LWexecGptLedgerFailNone}{10}",
+  "\\providecommand{\\LWexecGptLedgerFailStaleOnly}{1}",
+  "\\providecommand{\\LWexecGptLedgerOneObligation}{52}",
+  "\\providecommand{\\LWexecGptLedgerTwoObligations}{48}",
+  "\\providecommand{\\LWexecGptLedgerNoObligation}{0}",
+  "\\providecommand{\\LWexecGptLedgerConsumerStaleBeforeRevision}{25}",
+  "\\providecommand{\\LWexecGptLedgerConsumerStaleInsideCompensation}{56}",
+  "\\providecommand{\\LWexecGptLedgerConsumerStaleRefusedCancel}{3}",
+  "\\providecommand{\\LWexecGptLedgerConsumerStaleCurrentThenSuperseded}{13}",
+  "\\providecommand{\\LWexecGptLedgerConsumerStaleOther}{0}",
+  "\\providecommand{\\LWexecGptLedgerBothRevisionsAfterCommit}{56}",
+  "\\providecommand{\\LWexecGptLedgerFirstRevisionMedianS}{0.8}",
+  "\\providecommand{\\LWexecGptLedgerCompLatencyMedianS}{0.9}",
+  "\\providecommand{\\LWexecGptLedgerCompLatencyPNinetyS}{1.1}",
+  "\\providecommand{\\LWexecGptLedgerBookingToCompensationMedianS}{1.1}",
+  "\\providecommand{\\LWexecGptLedgerBookingToCompensationPNinetyS}{1.6}",
+  "\\providecommand{\\LWexecGptLedgerNoRollbackR}{0}",
+  "\\providecommand{\\LWexecGptLedgerNoRollbackStoreWrong}{8}",
+  "\\providecommand{\\LWexecGptLedgerNoRollbackWorldWrong}{100}",
+  "\\providecommand{\\LWexecGptLedgerNoRollbackWorldNone}{0}",
+  "\\providecommand{\\LWexecGptLedgerNoRollbackDouble}{95}",
+  "\\providecommand{\\LWexecGptLedgerNoRollbackConsumerStale}{100}",
+  "\\providecommand{\\LWexecGptLedgerNoRollbackConsumerNone}{0}",
+  "\\providecommand{\\LWexecGptLedgerNoRollbackRetries}{14}",
+  "\\providecommand{\\LWexecGptLedgerNoRollbackObl}{157/156/8}",
+  "\\providecommand{\\LWexecGptLedgerNoRollbackN}{100}",
+  "\\providecommand{\\LWexecGptLedgerNoRollbackCleanSessions}{92}",
+  "\\providecommand{\\LWexecGptLedgerNoRollbackCleanRight}{0}",
+  "\\providecommand{\\LWexecGptLedgerNoRollbackCleanWrong}{92}",
+  "\\providecommand{\\LWexecGptLedgerNoRollbackCleanVacuous}{0}",
+  "\\providecommand{\\LWexecGptLedgerNoRollbackOpenSessions}{8}",
+  "\\providecommand{\\LWexecGptLedgerNoRollbackOpenWrong}{8}",
+  "\\providecommand{\\LWexecGptLedgerNoRollbackOpenRight}{0}",
+  "\\providecommand{\\LWexecGptLedgerNoRollbackFailDouble}{95}",
+  "\\providecommand{\\LWexecGptLedgerNoRollbackFailNone}{0}",
+  "\\providecommand{\\LWexecGptLedgerNoRollbackFailStaleOnly}{5}",
+  "\\providecommand{\\LWexecGptLedgerNoRollbackOneObligation}{43}",
+  "\\providecommand{\\LWexecGptLedgerNoRollbackTwoObligations}{57}",
+  "\\providecommand{\\LWexecGptLedgerNoRollbackNoObligation}{0}",
+  "\\providecommand{\\LWexecLedgerBookingToCompensationMedianSLo}{1.1}",
+  "\\providecommand{\\LWexecLedgerBookingToCompensationMedianSHi}{1.5}",
+  "\\providecommand{\\LWexecLedgerBookingToCompensationMedianSRange}{1.1--1.5}",
+  "\\providecommand{\\LWexecLedgerBookingToCompensationPNinetySLo}{1.6}",
+  "\\providecommand{\\LWexecLedgerBookingToCompensationPNinetySHi}{1.9}",
+  "\\providecommand{\\LWexecLedgerBookingToCompensationPNinetySRange}{1.6--1.9}",
+  "\\providecommand{\\LWexecLedgerBothRevisionsAfterCommitLo}{0}",
+  "\\providecommand{\\LWexecLedgerBothRevisionsAfterCommitHi}{57}",
+  "\\providecommand{\\LWexecLedgerBothRevisionsAfterCommitRange}{0--57}",
+  "\\providecommand{\\LWexecLedgerCleanRightLo}{79}",
+  "\\providecommand{\\LWexecLedgerCleanRightHi}{85}",
+  "\\providecommand{\\LWexecLedgerCleanRightRange}{79--85}",
+  "\\providecommand{\\LWexecLedgerCleanSessionsLo}{79}",
+  "\\providecommand{\\LWexecLedgerCleanSessionsHi}{85}",
+  "\\providecommand{\\LWexecLedgerCleanSessionsRange}{79--85}",
+  "\\providecommand{\\LWexecLedgerCleanVacuousLo}{0}",
+  "\\providecommand{\\LWexecLedgerCleanVacuousHi}{1}",
+  "\\providecommand{\\LWexecLedgerCleanVacuousRange}{0--1}",
+  "\\providecommand{\\LWexecLedgerCleanWrongLo}{0}",
+  "\\providecommand{\\LWexecLedgerCleanWrongHi}{0}",
+  "\\providecommand{\\LWexecLedgerCleanWrongRange}{0}",
+  "\\providecommand{\\LWexecLedgerCompLatencyMedianSLo}{0.9}",
+  "\\providecommand{\\LWexecLedgerCompLatencyMedianSHi}{1.1}",
+  "\\providecommand{\\LWexecLedgerCompLatencyMedianSRange}{0.9--1.1}",
+  "\\providecommand{\\LWexecLedgerCompLatencyPNinetySLo}{1.1}",
+  "\\providecommand{\\LWexecLedgerCompLatencyPNinetySHi}{1.3}",
+  "\\providecommand{\\LWexecLedgerCompLatencyPNinetySRange}{1.1--1.3}",
+  "\\providecommand{\\LWexecLedgerConsumerNoneLo}{0}",
+  "\\providecommand{\\LWexecLedgerConsumerNoneHi}{3}",
+  "\\providecommand{\\LWexecLedgerConsumerNoneRange}{0--3}",
+  "\\providecommand{\\LWexecLedgerConsumerStaleLo}{97}",
+  "\\providecommand{\\LWexecLedgerConsumerStaleHi}{98}",
+  "\\providecommand{\\LWexecLedgerConsumerStaleRange}{97--98}",
+  "\\providecommand{\\LWexecLedgerConsumerStaleBeforeRevisionLo}{25}",
+  "\\providecommand{\\LWexecLedgerConsumerStaleBeforeRevisionHi}{29}",
+  "\\providecommand{\\LWexecLedgerConsumerStaleBeforeRevisionRange}{25--29}",
+  "\\providecommand{\\LWexecLedgerConsumerStaleCurrentThenSupersededLo}{0}",
+  "\\providecommand{\\LWexecLedgerConsumerStaleCurrentThenSupersededHi}{13}",
+  "\\providecommand{\\LWexecLedgerConsumerStaleCurrentThenSupersededRange}{0--13}",
+  "\\providecommand{\\LWexecLedgerConsumerStaleInsideCompensationLo}{56}",
+  "\\providecommand{\\LWexecLedgerConsumerStaleInsideCompensationHi}{68}",
+  "\\providecommand{\\LWexecLedgerConsumerStaleInsideCompensationRange}{56--68}",
+  "\\providecommand{\\LWexecLedgerConsumerStaleOtherLo}{0}",
+  "\\providecommand{\\LWexecLedgerConsumerStaleOtherHi}{0}",
+  "\\providecommand{\\LWexecLedgerConsumerStaleOtherRange}{0}",
+  "\\providecommand{\\LWexecLedgerConsumerStaleRefusedCancelLo}{0}",
+  "\\providecommand{\\LWexecLedgerConsumerStaleRefusedCancelHi}{3}",
+  "\\providecommand{\\LWexecLedgerConsumerStaleRefusedCancelRange}{0--3}",
+  "\\providecommand{\\LWexecLedgerDoubleLo}{5}",
+  "\\providecommand{\\LWexecLedgerDoubleHi}{12}",
+  "\\providecommand{\\LWexecLedgerDoubleRange}{5--12}",
+  "\\providecommand{\\LWexecLedgerFailDoubleLo}{5}",
+  "\\providecommand{\\LWexecLedgerFailDoubleHi}{12}",
+  "\\providecommand{\\LWexecLedgerFailDoubleRange}{5--12}",
+  "\\providecommand{\\LWexecLedgerFailNoneLo}{6}",
+  "\\providecommand{\\LWexecLedgerFailNoneHi}{10}",
+  "\\providecommand{\\LWexecLedgerFailNoneRange}{6--10}",
+  "\\providecommand{\\LWexecLedgerFailStaleOnlyLo}{0}",
+  "\\providecommand{\\LWexecLedgerFailStaleOnlyHi}{1}",
+  "\\providecommand{\\LWexecLedgerFailStaleOnlyRange}{0--1}",
+  "\\providecommand{\\LWexecLedgerFirstRevisionMedianSLo}{0.8}",
+  "\\providecommand{\\LWexecLedgerFirstRevisionMedianSHi}{1.2}",
+  "\\providecommand{\\LWexecLedgerFirstRevisionMedianSRange}{0.8--1.2}",
+  "\\providecommand{\\LWexecLedgerNoObligationLo}{0}",
+  "\\providecommand{\\LWexecLedgerNoObligationHi}{1}",
+  "\\providecommand{\\LWexecLedgerNoObligationRange}{0--1}",
+  "\\providecommand{\\LWexecLedgerOneObligationLo}{52}",
+  "\\providecommand{\\LWexecLedgerOneObligationHi}{99}",
+  "\\providecommand{\\LWexecLedgerOneObligationRange}{52--99}",
+  "\\providecommand{\\LWexecLedgerOpenRightLo}{0}",
+  "\\providecommand{\\LWexecLedgerOpenRightHi}{0}",
+  "\\providecommand{\\LWexecLedgerOpenRightRange}{0}",
+  "\\providecommand{\\LWexecLedgerOpenSessionsLo}{15}",
+  "\\providecommand{\\LWexecLedgerOpenSessionsHi}{21}",
+  "\\providecommand{\\LWexecLedgerOpenSessionsRange}{15--21}",
+  "\\providecommand{\\LWexecLedgerOpenWrongLo}{15}",
+  "\\providecommand{\\LWexecLedgerOpenWrongHi}{21}",
+  "\\providecommand{\\LWexecLedgerOpenWrongRange}{15--21}",
+  "\\providecommand{\\LWexecLedgerRLo}{0}",
+  "\\providecommand{\\LWexecLedgerRHi}{0}",
+  "\\providecommand{\\LWexecLedgerRRange}{0}",
+  "\\providecommand{\\LWexecLedgerRetriesLo}{0}",
+  "\\providecommand{\\LWexecLedgerRetriesHi}{16}",
+  "\\providecommand{\\LWexecLedgerRetriesRange}{0--16}",
+  "\\providecommand{\\LWexecLedgerStoreWrongLo}{6}",
+  "\\providecommand{\\LWexecLedgerStoreWrongHi}{11}",
+  "\\providecommand{\\LWexecLedgerStoreWrongRange}{6--11}",
+  "\\providecommand{\\LWexecLedgerTwoObligationsLo}{0}",
+  "\\providecommand{\\LWexecLedgerTwoObligationsHi}{48}",
+  "\\providecommand{\\LWexecLedgerTwoObligationsRange}{0--48}",
+  "\\providecommand{\\LWexecLedgerWorldNoneLo}{6}",
+  "\\providecommand{\\LWexecLedgerWorldNoneHi}{10}",
+  "\\providecommand{\\LWexecLedgerWorldNoneRange}{6--10}",
+  "\\providecommand{\\LWexecLedgerWorldWrongLo}{6}",
+  "\\providecommand{\\LWexecLedgerWorldWrongHi}{12}",
+  "\\providecommand{\\LWexecLedgerWorldWrongRange}{6--12}",
+  "\\providecommand{\\LWexecLedgerNoRollbackCleanRightLo}{0}",
+  "\\providecommand{\\LWexecLedgerNoRollbackCleanRightHi}{1}",
+  "\\providecommand{\\LWexecLedgerNoRollbackCleanRightRange}{0--1}",
+  "\\providecommand{\\LWexecLedgerNoRollbackCleanSessionsLo}{88}",
+  "\\providecommand{\\LWexecLedgerNoRollbackCleanSessionsHi}{95}",
+  "\\providecommand{\\LWexecLedgerNoRollbackCleanSessionsRange}{88--95}",
+  "\\providecommand{\\LWexecLedgerNoRollbackCleanVacuousLo}{0}",
+  "\\providecommand{\\LWexecLedgerNoRollbackCleanVacuousHi}{1}",
+  "\\providecommand{\\LWexecLedgerNoRollbackCleanVacuousRange}{0--1}",
+  "\\providecommand{\\LWexecLedgerNoRollbackCleanWrongLo}{87}",
+  "\\providecommand{\\LWexecLedgerNoRollbackCleanWrongHi}{95}",
+  "\\providecommand{\\LWexecLedgerNoRollbackCleanWrongRange}{87--95}",
+  "\\providecommand{\\LWexecLedgerNoRollbackConsumerNoneLo}{0}",
+  "\\providecommand{\\LWexecLedgerNoRollbackConsumerNoneHi}{0}",
+  "\\providecommand{\\LWexecLedgerNoRollbackConsumerNoneRange}{0}",
+  "\\providecommand{\\LWexecLedgerNoRollbackConsumerStaleLo}{99}",
+  "\\providecommand{\\LWexecLedgerNoRollbackConsumerStaleHi}{100}",
+  "\\providecommand{\\LWexecLedgerNoRollbackConsumerStaleRange}{99--100}",
+  "\\providecommand{\\LWexecLedgerNoRollbackDoubleLo}{87}",
+  "\\providecommand{\\LWexecLedgerNoRollbackDoubleHi}{97}",
+  "\\providecommand{\\LWexecLedgerNoRollbackDoubleRange}{87--97}",
+  "\\providecommand{\\LWexecLedgerNoRollbackFailDoubleLo}{87}",
+  "\\providecommand{\\LWexecLedgerNoRollbackFailDoubleHi}{97}",
+  "\\providecommand{\\LWexecLedgerNoRollbackFailDoubleRange}{87--97}",
+  "\\providecommand{\\LWexecLedgerNoRollbackFailNoneLo}{0}",
+  "\\providecommand{\\LWexecLedgerNoRollbackFailNoneHi}{0}",
+  "\\providecommand{\\LWexecLedgerNoRollbackFailNoneRange}{0}",
+  "\\providecommand{\\LWexecLedgerNoRollbackFailStaleOnlyLo}{3}",
+  "\\providecommand{\\LWexecLedgerNoRollbackFailStaleOnlyHi}{12}",
+  "\\providecommand{\\LWexecLedgerNoRollbackFailStaleOnlyRange}{3--12}",
+  "\\providecommand{\\LWexecLedgerNoRollbackNoObligationLo}{0}",
+  "\\providecommand{\\LWexecLedgerNoRollbackNoObligationHi}{1}",
+  "\\providecommand{\\LWexecLedgerNoRollbackNoObligationRange}{0--1}",
+  "\\providecommand{\\LWexecLedgerNoRollbackOneObligationLo}{43}",
+  "\\providecommand{\\LWexecLedgerNoRollbackOneObligationHi}{94}",
+  "\\providecommand{\\LWexecLedgerNoRollbackOneObligationRange}{43--94}",
+  "\\providecommand{\\LWexecLedgerNoRollbackOpenRightLo}{0}",
+  "\\providecommand{\\LWexecLedgerNoRollbackOpenRightHi}{0}",
+  "\\providecommand{\\LWexecLedgerNoRollbackOpenRightRange}{0}",
+  "\\providecommand{\\LWexecLedgerNoRollbackOpenSessionsLo}{5}",
+  "\\providecommand{\\LWexecLedgerNoRollbackOpenSessionsHi}{12}",
+  "\\providecommand{\\LWexecLedgerNoRollbackOpenSessionsRange}{5--12}",
+  "\\providecommand{\\LWexecLedgerNoRollbackOpenWrongLo}{5}",
+  "\\providecommand{\\LWexecLedgerNoRollbackOpenWrongHi}{12}",
+  "\\providecommand{\\LWexecLedgerNoRollbackOpenWrongRange}{5--12}",
+  "\\providecommand{\\LWexecLedgerNoRollbackRLo}{0}",
+  "\\providecommand{\\LWexecLedgerNoRollbackRHi}{0}",
+  "\\providecommand{\\LWexecLedgerNoRollbackRRange}{0}",
+  "\\providecommand{\\LWexecLedgerNoRollbackRetriesLo}{1}",
+  "\\providecommand{\\LWexecLedgerNoRollbackRetriesHi}{14}",
+  "\\providecommand{\\LWexecLedgerNoRollbackRetriesRange}{1--14}",
+  "\\providecommand{\\LWexecLedgerNoRollbackStoreWrongLo}{5}",
+  "\\providecommand{\\LWexecLedgerNoRollbackStoreWrongHi}{12}",
+  "\\providecommand{\\LWexecLedgerNoRollbackStoreWrongRange}{5--12}",
+  "\\providecommand{\\LWexecLedgerNoRollbackTwoObligationsLo}{5}",
+  "\\providecommand{\\LWexecLedgerNoRollbackTwoObligationsHi}{57}",
+  "\\providecommand{\\LWexecLedgerNoRollbackTwoObligationsRange}{5--57}",
+  "\\providecommand{\\LWexecLedgerNoRollbackWorldNoneLo}{0}",
+  "\\providecommand{\\LWexecLedgerNoRollbackWorldNoneHi}{0}",
+  "\\providecommand{\\LWexecLedgerNoRollbackWorldNoneRange}{0}",
+  "\\providecommand{\\LWexecLedgerNoRollbackWorldWrongLo}{99}",
+  "\\providecommand{\\LWexecLedgerNoRollbackWorldWrongHi}{100}",
+  "\\providecommand{\\LWexecLedgerNoRollbackWorldWrongRange}{99--100}",
+  "\\providecommand{\\LWexecValidatedCleanRightLo}{0}",
+  "\\providecommand{\\LWexecValidatedCleanRightHi}{1}",
+  "\\providecommand{\\LWexecValidatedCleanRightRange}{0--1}",
+  "\\providecommand{\\LWexecValidatedCleanSessionsLo}{100}",
+  "\\providecommand{\\LWexecValidatedCleanSessionsHi}{100}",
+  "\\providecommand{\\LWexecValidatedCleanSessionsRange}{100}",
+  "\\providecommand{\\LWexecValidatedCleanVacuousLo}{100}",
+  "\\providecommand{\\LWexecValidatedCleanVacuousHi}{100}",
+  "\\providecommand{\\LWexecValidatedCleanVacuousRange}{100}",
+  "\\providecommand{\\LWexecValidatedCleanWrongLo}{99}",
+  "\\providecommand{\\LWexecValidatedCleanWrongHi}{100}",
+  "\\providecommand{\\LWexecValidatedCleanWrongRange}{99--100}",
+  "\\providecommand{\\LWexecValidatedConsumerNoneLo}{0}",
+  "\\providecommand{\\LWexecValidatedConsumerNoneHi}{0}",
+  "\\providecommand{\\LWexecValidatedConsumerNoneRange}{0}",
+  "\\providecommand{\\LWexecValidatedConsumerStaleLo}{99}",
+  "\\providecommand{\\LWexecValidatedConsumerStaleHi}{100}",
+  "\\providecommand{\\LWexecValidatedConsumerStaleRange}{99--100}",
+  "\\providecommand{\\LWexecValidatedDoubleLo}{0}",
+  "\\providecommand{\\LWexecValidatedDoubleHi}{0}",
+  "\\providecommand{\\LWexecValidatedDoubleRange}{0}",
+  "\\providecommand{\\LWexecValidatedFailDoubleLo}{0}",
+  "\\providecommand{\\LWexecValidatedFailDoubleHi}{0}",
+  "\\providecommand{\\LWexecValidatedFailDoubleRange}{0}",
+  "\\providecommand{\\LWexecValidatedFailNoneLo}{0}",
+  "\\providecommand{\\LWexecValidatedFailNoneHi}{0}",
+  "\\providecommand{\\LWexecValidatedFailNoneRange}{0}",
+  "\\providecommand{\\LWexecValidatedFailStaleOnlyLo}{99}",
+  "\\providecommand{\\LWexecValidatedFailStaleOnlyHi}{100}",
+  "\\providecommand{\\LWexecValidatedFailStaleOnlyRange}{99--100}",
+  "\\providecommand{\\LWexecValidatedNoObligationLo}{100}",
+  "\\providecommand{\\LWexecValidatedNoObligationHi}{100}",
+  "\\providecommand{\\LWexecValidatedNoObligationRange}{100}",
+  "\\providecommand{\\LWexecValidatedOneObligationLo}{0}",
+  "\\providecommand{\\LWexecValidatedOneObligationHi}{0}",
+  "\\providecommand{\\LWexecValidatedOneObligationRange}{0}",
+  "\\providecommand{\\LWexecValidatedOpenRightLo}{0}",
+  "\\providecommand{\\LWexecValidatedOpenRightHi}{0}",
+  "\\providecommand{\\LWexecValidatedOpenRightRange}{0}",
+  "\\providecommand{\\LWexecValidatedOpenSessionsLo}{0}",
+  "\\providecommand{\\LWexecValidatedOpenSessionsHi}{0}",
+  "\\providecommand{\\LWexecValidatedOpenSessionsRange}{0}",
+  "\\providecommand{\\LWexecValidatedOpenWrongLo}{0}",
+  "\\providecommand{\\LWexecValidatedOpenWrongHi}{0}",
+  "\\providecommand{\\LWexecValidatedOpenWrongRange}{0}",
+  "\\providecommand{\\LWexecValidatedRLo}{99}",
+  "\\providecommand{\\LWexecValidatedRHi}{100}",
+  "\\providecommand{\\LWexecValidatedRRange}{99--100}",
+  "\\providecommand{\\LWexecValidatedRetriesLo}{0}",
+  "\\providecommand{\\LWexecValidatedRetriesHi}{0}",
+  "\\providecommand{\\LWexecValidatedRetriesRange}{0}",
+  "\\providecommand{\\LWexecValidatedStoreWrongLo}{99}",
+  "\\providecommand{\\LWexecValidatedStoreWrongHi}{100}",
+  "\\providecommand{\\LWexecValidatedStoreWrongRange}{99--100}",
+  "\\providecommand{\\LWexecValidatedTwoObligationsLo}{0}",
+  "\\providecommand{\\LWexecValidatedTwoObligationsHi}{0}",
+  "\\providecommand{\\LWexecValidatedTwoObligationsRange}{0}",
+  "\\providecommand{\\LWexecValidatedWorldNoneLo}{0}",
+  "\\providecommand{\\LWexecValidatedWorldNoneHi}{0}",
+  "\\providecommand{\\LWexecValidatedWorldNoneRange}{0}",
+  "\\providecommand{\\LWexecValidatedWorldWrongLo}{99}",
+  "\\providecommand{\\LWexecValidatedWorldWrongHi}{100}",
+  "\\providecommand{\\LWexecValidatedWorldWrongRange}{99--100}",
+  "\\providecommand{\\LWexecLedgerAgree}{300/300}",
+  "\\providecommand{\\LWexecLedgerDisagree}{0}",
+  "\\providecommand{\\LWexecLedgerDisagreeCI}{[0.0, 1.2]}",
+  "\\providecommand{\\LWexecServerSha}{f141b709aaaa0040}",
   "% --- probe 301 (results/a6_real_latency/sqlite.jsonl) ---",
   "\\renewcommand{\\ToolNodeRealSqlite}{$126/165$}",
   "% --- probe 301 --l3-server (results/a6_real_latency/sqlite_verified.jsonl) ---",
@@ -5293,6 +6675,16 @@
   "\\renewcommand{\\ToolNodeVerifiedHttp}{$0/165$}",
   "\\renewcommand{\\ToolNodeVerifiedBaselineHttp}{$113/165$}",
   "\\renewcommand{\\ToolNodeVerifiedAvailable}{1}",
+  "% --- probe 302 (results/runs/20261014T1417Z-interleaved-claude-sonnet-4-5; model claude-sonnet-4-5): the writer role's committed write per cell, from the records ---",
+  "\\providecommand{\\InterleavedClaudeEditReviewPessWriterCommits}{100/100}",
+  "\\providecommand{\\InterleavedClaudeEditReviewSIWriterCommits}{100/100}",
+  "\\providecommand{\\InterleavedClaudeEditReviewVanillaWriterCommits}{100/100}",
+  "\\providecommand{\\InterleavedClaudePlanExecutePessWriterCommits}{100/100}",
+  "\\providecommand{\\InterleavedClaudePlanExecuteSIWriterCommits}{100/100}",
+  "\\providecommand{\\InterleavedClaudePlanExecuteVanillaWriterCommits}{100/100}",
+  "\\providecommand{\\InterleavedClaudeTriagePessWriterCommits}{0/100}",
+  "\\providecommand{\\InterleavedClaudeTriageSIWriterCommits}{0/100}",
+  "\\providecommand{\\InterleavedClaudeTriageVanillaWriterCommits}{0/100}",
   "% --- probe 302 (results/runs/20261014T1417Z-interleaved-claude-sonnet-4-5; model claude-sonnet-4-5; Stamp); order.tsv completion stamps, 1 s resolution; sidecars folded: no ---",
   "\\renewcommand{\\WallclockStampClaudeEditReviewPess}{$+5.3\\%$ [+2.0, +8.4], $n=99$}",
   "\\renewcommand{\\WallclockStampClaudeEditReviewSI}{$+2.4\\%$ [-1.2, +6.4], $n=99$}",
@@ -5301,26 +6693,218 @@
   "\\renewcommand{\\WallclockStampClaudeTriagePess}{$+1.3\\%$ [-1.1, +3.7], $n=99$}",
   "\\renewcommand{\\WallclockStampClaudeTriageSI}{$+1.3\\%$ [-2.1, +5.9], $n=99$}",
   "\\renewcommand{\\WallclockStampClaudeAvailable}{1}",
+  "% --- probe 302 refusal-price study (results/runs/20261017T0753Z-refusal-claude-sonnet-4-5; model claude-sonnet-4-5; REFUSED text unaddressed (broadcast by the group chat)): what a refused operation costs when the model is told ---",
+  "\\renewcommand{\\RefusalClaudeAvailable}{1}",
+  "\\providecommand{\\RefusalClaudeRun}{20261017T0753Z-refusal-claude-sonnet-4-5}",
+  "\\providecommand{\\RefusalClaudeEditReviewPessDropN}{100}",
+  "\\providecommand{\\RefusalClaudeEditReviewPessDropCommits}{6.00}",
+  "\\providecommand{\\RefusalClaudeEditReviewPessDropCalls}{11.00}",
+  "\\providecommand{\\RefusalClaudeEditReviewPessDropWallS}{16.7}",
+  "\\providecommand{\\RefusalClaudeEditReviewPessDropRefused}{5.00}",
+  "\\providecommand{\\RefusalClaudeEditReviewPessDropRefusedSessions}{100/100}",
+  "\\providecommand{\\RefusalClaudeEditReviewPessDropWriterCommits}{0/100}",
+  "\\providecommand{\\RefusalClaudeEditReviewPessDropWriterRecords}{6.00}",
+  "\\providecommand{\\RefusalClaudeEditReviewPessDropWriteLengthCalls}{0}",
+  "\\providecommand{\\RefusalClaudeEditReviewPessDropTotalCalls}{1{,}100}",
+  "\\providecommand{\\RefusalClaudeEditReviewPessDropWallOverhead}{$+104.2\\%$ [+99.8, +108.7], $n=100$}",
+  "\\providecommand{\\RefusalClaudeEditReviewPessDropCallsOverhead}{$+120.0\\%$ [+120.0, +120.0], $n=100$}",
+  "\\providecommand{\\RefusalClaudeEditReviewPessRetryN}{100}",
+  "\\providecommand{\\RefusalClaudeEditReviewPessRetryCommits}{6.00}",
+  "\\providecommand{\\RefusalClaudeEditReviewPessRetryCalls}{11.00}",
+  "\\providecommand{\\RefusalClaudeEditReviewPessRetryWallS}{17.2}",
+  "\\providecommand{\\RefusalClaudeEditReviewPessRetryRefused}{5.00}",
+  "\\providecommand{\\RefusalClaudeEditReviewPessRetryRefusedSessions}{100/100}",
+  "\\providecommand{\\RefusalClaudeEditReviewPessRetryWriterCommits}{0/100}",
+  "\\providecommand{\\RefusalClaudeEditReviewPessRetryWriterRecords}{6.00}",
+  "\\providecommand{\\RefusalClaudeEditReviewPessRetryWriteLengthCalls}{0}",
+  "\\providecommand{\\RefusalClaudeEditReviewPessRetryTotalCalls}{1{,}100}",
+  "\\providecommand{\\RefusalClaudeEditReviewPessRetryWallOverhead}{$+110.5\\%$ [+99.4, +128.5], $n=100$}",
+  "\\providecommand{\\RefusalClaudeEditReviewPessRetryCallsOverhead}{$+120.0\\%$ [+120.0, +120.0], $n=100$}",
+  "\\providecommand{\\RefusalClaudeEditReviewSIDropN}{100}",
+  "\\providecommand{\\RefusalClaudeEditReviewSIDropCommits}{3.00}",
+  "\\providecommand{\\RefusalClaudeEditReviewSIDropCalls}{5.88}",
+  "\\providecommand{\\RefusalClaudeEditReviewSIDropWallS}{9.9}",
+  "\\providecommand{\\RefusalClaudeEditReviewSIDropRefused}{0.44}",
+  "\\providecommand{\\RefusalClaudeEditReviewSIDropRefusedSessions}{44/100}",
+  "\\providecommand{\\RefusalClaudeEditReviewSIDropWriterCommits}{100/100}",
+  "\\providecommand{\\RefusalClaudeEditReviewSIDropWriterRecords}{1.44}",
+  "\\providecommand{\\RefusalClaudeEditReviewSIDropWriteLengthCalls}{197}",
+  "\\providecommand{\\RefusalClaudeEditReviewSIDropTotalCalls}{588}",
+  "\\providecommand{\\RefusalClaudeEditReviewSIDropWallOverhead}{$+19.7\\%$ [+13.8, +25.7], $n=100$}",
+  "\\providecommand{\\RefusalClaudeEditReviewSIDropCallsOverhead}{$+17.6\\%$ [+13.6, +21.6], $n=100$}",
+  "\\providecommand{\\RefusalClaudeEditReviewSIRetryN}{100}",
+  "\\providecommand{\\RefusalClaudeEditReviewSIRetryCommits}{3.42}",
+  "\\providecommand{\\RefusalClaudeEditReviewSIRetryCalls}{7.52}",
+  "\\providecommand{\\RefusalClaudeEditReviewSIRetryWallS}{12.4}",
+  "\\providecommand{\\RefusalClaudeEditReviewSIRetryRefused}{0.84}",
+  "\\providecommand{\\RefusalClaudeEditReviewSIRetryRefusedSessions}{42/100}",
+  "\\providecommand{\\RefusalClaudeEditReviewSIRetryWriterCommits}{100/100}",
+  "\\providecommand{\\RefusalClaudeEditReviewSIRetryWriterRecords}{1.84}",
+  "\\providecommand{\\RefusalClaudeEditReviewSIRetryWriteLengthCalls}{268}",
+  "\\providecommand{\\RefusalClaudeEditReviewSIRetryTotalCalls}{752}",
+  "\\providecommand{\\RefusalClaudeEditReviewSIRetryWallOverhead}{$+52.0\\%$ [+38.3, +66.1], $n=100$}",
+  "\\providecommand{\\RefusalClaudeEditReviewSIRetryCallsOverhead}{$+50.4\\%$ [+38.4, +62.4], $n=100$}",
+  "\\providecommand{\\RefusalClaudeEditReviewVanillaN}{100}",
+  "\\providecommand{\\RefusalClaudeEditReviewVanillaCommits}{2.53}",
+  "\\providecommand{\\RefusalClaudeEditReviewVanillaCalls}{5.00}",
+  "\\providecommand{\\RefusalClaudeEditReviewVanillaWallS}{8.3}",
+  "\\providecommand{\\RefusalClaudeEditReviewVanillaRefused}{0.00}",
+  "\\providecommand{\\RefusalClaudeEditReviewVanillaRefusedSessions}{0/100}",
+  "\\providecommand{\\RefusalClaudeEditReviewVanillaWriterCommits}{100/100}",
+  "\\providecommand{\\RefusalClaudeEditReviewVanillaWriterRecords}{1.00}",
+  "\\providecommand{\\RefusalClaudeEditReviewVanillaWriteLengthCalls}{147}",
+  "\\providecommand{\\RefusalClaudeEditReviewVanillaTotalCalls}{500}",
+  "\\providecommand{\\RefusalClaudeTriagePessDropN}{100}",
+  "\\providecommand{\\RefusalClaudeTriagePessDropCommits}{6.07}",
+  "\\providecommand{\\RefusalClaudeTriagePessDropCalls}{15.01}",
+  "\\providecommand{\\RefusalClaudeTriagePessDropWallS}{25.3}",
+  "\\providecommand{\\RefusalClaudeTriagePessDropRefused}{8.47}",
+  "\\providecommand{\\RefusalClaudeTriagePessDropRefusedSessions}{100/100}",
+  "\\providecommand{\\RefusalClaudeTriagePessDropWriterCommits}{11/100}",
+  "\\providecommand{\\RefusalClaudeTriagePessDropWriterRecords}{4.97}",
+  "\\providecommand{\\RefusalClaudeTriagePessDropWallOverhead}{$+297.8\\%$ [+278.4, +315.4], $n=100$}",
+  "\\providecommand{\\RefusalClaudeTriagePessDropCallsOverhead}{$+275.2\\%$ [+257.2, +292.2], $n=100$}",
+  "\\providecommand{\\RefusalClaudeTriagePessRetryN}{100}",
+  "\\providecommand{\\RefusalClaudeTriagePessRetryCommits}{6.97}",
+  "\\providecommand{\\RefusalClaudeTriagePessRetryCalls}{16.98}",
+  "\\providecommand{\\RefusalClaudeTriagePessRetryWallS}{27.5}",
+  "\\providecommand{\\RefusalClaudeTriagePessRetryRefused}{9.89}",
+  "\\providecommand{\\RefusalClaudeTriagePessRetryRefusedSessions}{100/100}",
+  "\\providecommand{\\RefusalClaudeTriagePessRetryWriterCommits}{1/100}",
+  "\\providecommand{\\RefusalClaudeTriagePessRetryWriterRecords}{5.97}",
+  "\\providecommand{\\RefusalClaudeTriagePessRetryWallOverhead}{$+332.7\\%$ [+324.8, +340.4], $n=100$}",
+  "\\providecommand{\\RefusalClaudeTriagePessRetryCallsOverhead}{$+324.5\\%$ [+323.8, +325.0], $n=100$}",
+  "\\providecommand{\\RefusalClaudeTriageSIDropN}{100}",
+  "\\providecommand{\\RefusalClaudeTriageSIDropCommits}{3.00}",
+  "\\providecommand{\\RefusalClaudeTriageSIDropCalls}{4.00}",
+  "\\providecommand{\\RefusalClaudeTriageSIDropWallS}{6.5}",
+  "\\providecommand{\\RefusalClaudeTriageSIDropRefused}{0.00}",
+  "\\providecommand{\\RefusalClaudeTriageSIDropRefusedSessions}{0/100}",
+  "\\providecommand{\\RefusalClaudeTriageSIDropWriterCommits}{0/100}",
+  "\\providecommand{\\RefusalClaudeTriageSIDropWriterRecords}{1.00}",
+  "\\providecommand{\\RefusalClaudeTriageSIDropWallOverhead}{$+2.4\\%$ [-0.2, +5.9], $n=100$}",
+  "\\providecommand{\\RefusalClaudeTriageSIDropCallsOverhead}{$+0.0\\%$ [+0.0, +0.0], $n=100$}",
+  "\\providecommand{\\RefusalClaudeTriageSIRetryN}{100}",
+  "\\providecommand{\\RefusalClaudeTriageSIRetryCommits}{3.00}",
+  "\\providecommand{\\RefusalClaudeTriageSIRetryCalls}{4.00}",
+  "\\providecommand{\\RefusalClaudeTriageSIRetryWallS}{6.5}",
+  "\\providecommand{\\RefusalClaudeTriageSIRetryRefused}{0.00}",
+  "\\providecommand{\\RefusalClaudeTriageSIRetryRefusedSessions}{0/100}",
+  "\\providecommand{\\RefusalClaudeTriageSIRetryWriterCommits}{0/100}",
+  "\\providecommand{\\RefusalClaudeTriageSIRetryWriterRecords}{1.00}",
+  "\\providecommand{\\RefusalClaudeTriageSIRetryWallOverhead}{$+1.4\\%$ [-1.2, +4.4], $n=100$}",
+  "\\providecommand{\\RefusalClaudeTriageSIRetryCallsOverhead}{$+0.0\\%$ [+0.0, +0.0], $n=100$}",
+  "\\providecommand{\\RefusalClaudeTriageVanillaN}{100}",
+  "\\providecommand{\\RefusalClaudeTriageVanillaCommits}{3.00}",
+  "\\providecommand{\\RefusalClaudeTriageVanillaCalls}{4.00}",
+  "\\providecommand{\\RefusalClaudeTriageVanillaWallS}{6.4}",
+  "\\providecommand{\\RefusalClaudeTriageVanillaRefused}{0.00}",
+  "\\providecommand{\\RefusalClaudeTriageVanillaRefusedSessions}{0/100}",
+  "\\providecommand{\\RefusalClaudeTriageVanillaWriterCommits}{0/100}",
+  "\\providecommand{\\RefusalClaudeTriageVanillaWriterRecords}{1.00}",
+  "% --- probe 302 refusal-price study (results/runs/20261017T1615Z-refusal-addressed-claude-sonnet-4-5; model claude-sonnet-4-5; REFUSED text addressed to the refused agent): what a refused operation costs when the model is told ---",
+  "\\renewcommand{\\RefusalClaudeAddrAvailable}{1}",
+  "\\providecommand{\\RefusalClaudeAddrRun}{20261017T1615Z-refusal-addressed-claude-sonnet-4-5}",
+  "\\providecommand{\\RefusalClaudeAddrEditReviewPessDropN}{100}",
+  "\\providecommand{\\RefusalClaudeAddrEditReviewPessDropCommits}{6.00}",
+  "\\providecommand{\\RefusalClaudeAddrEditReviewPessDropCalls}{11.00}",
+  "\\providecommand{\\RefusalClaudeAddrEditReviewPessDropWallS}{18.0}",
+  "\\providecommand{\\RefusalClaudeAddrEditReviewPessDropRefused}{5.00}",
+  "\\providecommand{\\RefusalClaudeAddrEditReviewPessDropRefusedSessions}{100/100}",
+  "\\providecommand{\\RefusalClaudeAddrEditReviewPessDropWriterCommits}{0/100}",
+  "\\providecommand{\\RefusalClaudeAddrEditReviewPessDropWriterRecords}{6.00}",
+  "\\providecommand{\\RefusalClaudeAddrEditReviewPessDropWriteLengthCalls}{0}",
+  "\\providecommand{\\RefusalClaudeAddrEditReviewPessDropTotalCalls}{1{,}100}",
+  "\\providecommand{\\RefusalClaudeAddrEditReviewPessDropWallOverhead}{$+132.6\\%$ [+128.3, +136.8], $n=100$}",
+  "\\providecommand{\\RefusalClaudeAddrEditReviewPessDropCallsOverhead}{$+120.0\\%$ [+120.0, +120.0], $n=100$}",
+  "\\providecommand{\\RefusalClaudeAddrEditReviewPessRetryN}{100}",
+  "\\providecommand{\\RefusalClaudeAddrEditReviewPessRetryCommits}{6.00}",
+  "\\providecommand{\\RefusalClaudeAddrEditReviewPessRetryCalls}{11.00}",
+  "\\providecommand{\\RefusalClaudeAddrEditReviewPessRetryWallS}{18.1}",
+  "\\providecommand{\\RefusalClaudeAddrEditReviewPessRetryRefused}{5.00}",
+  "\\providecommand{\\RefusalClaudeAddrEditReviewPessRetryRefusedSessions}{100/100}",
+  "\\providecommand{\\RefusalClaudeAddrEditReviewPessRetryWriterCommits}{0/100}",
+  "\\providecommand{\\RefusalClaudeAddrEditReviewPessRetryWriterRecords}{6.00}",
+  "\\providecommand{\\RefusalClaudeAddrEditReviewPessRetryWriteLengthCalls}{0}",
+  "\\providecommand{\\RefusalClaudeAddrEditReviewPessRetryTotalCalls}{1{,}100}",
+  "\\providecommand{\\RefusalClaudeAddrEditReviewPessRetryWallOverhead}{$+134.0\\%$ [+129.4, +138.5], $n=100$}",
+  "\\providecommand{\\RefusalClaudeAddrEditReviewPessRetryCallsOverhead}{$+120.0\\%$ [+120.0, +120.0], $n=100$}",
+  "\\providecommand{\\RefusalClaudeAddrEditReviewSIDropN}{100}",
+  "\\providecommand{\\RefusalClaudeAddrEditReviewSIDropCommits}{3.00}",
+  "\\providecommand{\\RefusalClaudeAddrEditReviewSIDropCalls}{6.08}",
+  "\\providecommand{\\RefusalClaudeAddrEditReviewSIDropWallS}{9.7}",
+  "\\providecommand{\\RefusalClaudeAddrEditReviewSIDropRefused}{0.54}",
+  "\\providecommand{\\RefusalClaudeAddrEditReviewSIDropRefusedSessions}{54/100}",
+  "\\providecommand{\\RefusalClaudeAddrEditReviewSIDropWriterCommits}{100/100}",
+  "\\providecommand{\\RefusalClaudeAddrEditReviewSIDropWriterRecords}{1.54}",
+  "\\providecommand{\\RefusalClaudeAddrEditReviewSIDropWriteLengthCalls}{220}",
+  "\\providecommand{\\RefusalClaudeAddrEditReviewSIDropTotalCalls}{608}",
+  "\\providecommand{\\RefusalClaudeAddrEditReviewSIDropWallOverhead}{$+25.1\\%$ [+19.3, +31.1], $n=100$}",
+  "\\providecommand{\\RefusalClaudeAddrEditReviewSIDropCallsOverhead}{$+21.6\\%$ [+17.6, +25.2], $n=100$}",
+  "\\providecommand{\\RefusalClaudeAddrEditReviewVanillaN}{100}",
+  "\\providecommand{\\RefusalClaudeAddrEditReviewVanillaCommits}{2.62}",
+  "\\providecommand{\\RefusalClaudeAddrEditReviewVanillaCalls}{5.00}",
+  "\\providecommand{\\RefusalClaudeAddrEditReviewVanillaWallS}{7.8}",
+  "\\providecommand{\\RefusalClaudeAddrEditReviewVanillaRefused}{0.00}",
+  "\\providecommand{\\RefusalClaudeAddrEditReviewVanillaRefusedSessions}{0/100}",
+  "\\providecommand{\\RefusalClaudeAddrEditReviewVanillaWriterCommits}{100/100}",
+  "\\providecommand{\\RefusalClaudeAddrEditReviewVanillaWriterRecords}{1.00}",
+  "\\providecommand{\\RefusalClaudeAddrEditReviewVanillaWriteLengthCalls}{138}",
+  "\\providecommand{\\RefusalClaudeAddrEditReviewVanillaTotalCalls}{500}",
+  "\\providecommand{\\RefusalClaudeAddrTriagePessDropN}{100}",
+  "\\providecommand{\\RefusalClaudeAddrTriagePessDropCommits}{2.10}",
+  "\\providecommand{\\RefusalClaudeAddrTriagePessDropCalls}{4.30}",
+  "\\providecommand{\\RefusalClaudeAddrTriagePessDropWallS}{6.7}",
+  "\\providecommand{\\RefusalClaudeAddrTriagePessDropRefused}{1.10}",
+  "\\providecommand{\\RefusalClaudeAddrTriagePessDropRefusedSessions}{100/100}",
+  "\\providecommand{\\RefusalClaudeAddrTriagePessDropWriterCommits}{10/100}",
+  "\\providecommand{\\RefusalClaudeAddrTriagePessDropWriterRecords}{1.00}",
+  "\\providecommand{\\RefusalClaudeAddrTriagePessDropWallOverhead}{$+7.9\\%$ [+3.3, +13.1], $n=100$}",
+  "\\providecommand{\\RefusalClaudeAddrTriagePessDropCallsOverhead}{$+7.5\\%$ [+3.0, +12.0], $n=100$}",
+  "\\providecommand{\\RefusalClaudeAddrTriagePessRetryN}{100}",
+  "\\providecommand{\\RefusalClaudeAddrTriagePessRetryCommits}{3.87}",
+  "\\providecommand{\\RefusalClaudeAddrTriagePessRetryCalls}{9.00}",
+  "\\providecommand{\\RefusalClaudeAddrTriagePessRetryWallS}{15.1}",
+  "\\providecommand{\\RefusalClaudeAddrTriagePessRetryRefused}{4.12}",
+  "\\providecommand{\\RefusalClaudeAddrTriagePessRetryRefusedSessions}{100/100}",
+  "\\providecommand{\\RefusalClaudeAddrTriagePessRetryWriterCommits}{19/100}",
+  "\\providecommand{\\RefusalClaudeAddrTriagePessRetryWriterRecords}{2.68}",
+  "\\providecommand{\\RefusalClaudeAddrTriagePessRetryWallOverhead}{$+142.6\\%$ [+113.9, +171.8], $n=100$}",
+  "\\providecommand{\\RefusalClaudeAddrTriagePessRetryCallsOverhead}{$+125.0\\%$ [+97.2, +154.0], $n=100$}",
+  "\\providecommand{\\RefusalClaudeAddrTriageSIDropN}{100}",
+  "\\providecommand{\\RefusalClaudeAddrTriageSIDropCommits}{3.00}",
+  "\\providecommand{\\RefusalClaudeAddrTriageSIDropCalls}{4.00}",
+  "\\providecommand{\\RefusalClaudeAddrTriageSIDropWallS}{6.3}",
+  "\\providecommand{\\RefusalClaudeAddrTriageSIDropRefused}{0.00}",
+  "\\providecommand{\\RefusalClaudeAddrTriageSIDropRefusedSessions}{0/100}",
+  "\\providecommand{\\RefusalClaudeAddrTriageSIDropWriterCommits}{0/100}",
+  "\\providecommand{\\RefusalClaudeAddrTriageSIDropWriterRecords}{1.00}",
+  "\\providecommand{\\RefusalClaudeAddrTriageSIDropWallOverhead}{$+1.2\\%$ [-0.7, +3.1], $n=100$}",
+  "\\providecommand{\\RefusalClaudeAddrTriageSIDropCallsOverhead}{$+0.0\\%$ [+0.0, +0.0], $n=100$}",
+  "\\providecommand{\\RefusalClaudeAddrTriageVanillaN}{100}",
+  "\\providecommand{\\RefusalClaudeAddrTriageVanillaCommits}{3.00}",
+  "\\providecommand{\\RefusalClaudeAddrTriageVanillaCalls}{4.00}",
+  "\\providecommand{\\RefusalClaudeAddrTriageVanillaWallS}{6.3}",
+  "\\providecommand{\\RefusalClaudeAddrTriageVanillaRefused}{0.00}",
+  "\\providecommand{\\RefusalClaudeAddrTriageVanillaRefusedSessions}{0/100}",
+  "\\providecommand{\\RefusalClaudeAddrTriageVanillaWriterCommits}{0/100}",
+  "\\providecommand{\\RefusalClaudeAddrTriageVanillaWriterRecords}{1.00}",
   "% --- verus (results/verus/count.json) ---",
-  "\\renewcommand{\\VerusCurated}{160}",
-  "\\renewcommand{\\VerusFull}{181}",
-  "% verus exec ledger: results/verus/lib_l5_exec.verus.log shows no zero-error summary line; \\LfiveExecAvailable stays 0",
+  "\\renewcommand{\\VerusCurated}{371}",
+  "\\renewcommand{\\VerusFull}{392}",
+  "% --- verus exec ledger (results/verus/lib_l5_exec.verus.log) ---",
+  "\\renewcommand{\\LfiveExecVerus}{10 obligations, 0 errors}",
+  "\\renewcommand{\\LfiveExecVerusCount}{10}",
+  "\\renewcommand{\\LfiveExecAvailable}{1}",
+  "% --- verus ledger (results/verus/lib_l5_ledger.verus.log) ---",
+  "\\renewcommand{\\LfiveVerus}{7 obligations, 0 errors}",
+  "\\renewcommand{\\LfiveVerusStatus}{verified in Verus (7 obligations, 0 errors)}",
+  "\\renewcommand{\\LfiveVerusIntro}{verified (7 obligations)}",
   "% --- verified_scorer_gate (./tools/verified_scorer.json) ---",
-  "\\renewcommand{\\VerifiedScorerCells}{126}",
-  "\\renewcommand{\\VerifiedScorerTraces}{12{,}600}",
-  "\\renewcommand{\\VerifiedScorerProblems}{0}",
-  "\\renewcommand{\\VerifiedScorerAvailable}{1}",
-  "% Claude op-record replication (runs/*-claude), scored by the verified detector; -- = cell not scored yet",
-  "\\providecommand{\\VSClaudeEditReviewVanilla}{100/100}",
-  "\\providecommand{\\VSClaudeEditReviewPess}{0/100}",
-  "\\providecommand{\\VSClaudeEditReviewSI}{50/100}",
-  "\\providecommand{\\VSClaudePlanExecuteVanilla}{0/100}",
-  "\\providecommand{\\VSClaudePlanExecutePess}{0/100}",
-  "\\providecommand{\\VSClaudePlanExecuteSI}{0/100}",
-  "\\providecommand{\\VSClaudeTriageVanilla}{0/100}",
-  "\\providecommand{\\VSClaudeTriagePess}{0/100}",
-  "\\providecommand{\\VSClaudeTriageSI}{0/100}",
-  "\\renewcommand{\\PilotClaudeAvailable}{1}",
+  "\\renewcommand{\\VerifiedScorerCells}{144}",
+  "\\renewcommand{\\VerifiedScorerTraces}{14{,}400}",
+  "\\renewcommand{\\VerifiedScorerProblems}{18}",
+  "% verified_scorer_gate reports 18 problem(s) over 144 cell(s): the paper's cell stays PENDING",
   "% --- check_duplication.sh (./formal/tla/tlc.Duplication.log) ---",
   "\\renewcommand{\\DupWitnessDepth}{5}",
   "\\renewcommand{\\DupDivergentDepth}{6}",

@@ -189,14 +189,14 @@
 \newcommand{\LiveVerifiedOutcome}{\textbf{[probe 303 -{}-modes verified: pending]}}
 
 % --- hypothesis gates (VERIFIED-HERE: harness/macaudit/hypothesis_gates.py --tex, over every committed record) ---
-\newcommand{\HypRecords}{71{,}714}     % hypothesis_gates.py over results/ on 2026-10-16 (tools/hypothesis_gates.log, 21 campaigns incl. ledger_world_atomic / _window5000): September + probe 303 (sequential, sweep, three interleaved runs) + probe 304 (both runs) + Claude op-record pilot (nine cells) + interleaved Claude wall-clock run
-\newcommand{\HypTraces}{19{,}488}
+\newcommand{\HypRecords}{84{,}282}     % hypothesis_gates.py over results/ on 2026-10-17 (tools/hypothesis_gates.log, 24 campaigns): September + probe 303 (sequential, sweep, three interleaved runs) + probe 304 (after-put, atomic, window5000, exec) + Claude op-record pilot + interleaved Claude wall-clock run + the two refusal-price runs (steps 22, 24)
+\newcommand{\HypTraces}{22{,}188}
 \newcommand{\HypSameAgentOverlaps}{0}
 \newcommand{\HypReadBeforeCommitViolations}{0}
-\newcommand{\HypCampaigns}{21}
+\newcommand{\HypCampaigns}{24}
 \newcommand{\HypValueUniqueCampaigns}{15}
-\newcommand{\HypCollisionCells}{126}
-\newcommand{\HypCollisionTraces}{105}
+\newcommand{\HypCollisionCells}{238}
+\newcommand{\HypCollisionTraces}{217}
 \newcommand{\HypLiveLtwoSessions}{600}
 \newcommand{\HypLiveLtwoCollisions}{0}
 \newcommand{\HypAOneWitnesses}{1{,}299}
@@ -224,13 +224,13 @@
 \newcommand{\RunFisherValidatedGpt}{0.022}\newcommand{\RunFisherVanillaGpt}{0.033}
 \newcommand{\RunFisherValidatedHaiku}{0.335}\newcommand{\RunFisherVanillaHaiku}{0.593}
 \newcommand{\ArmPinnedValidatedHaiku}{1.10}\newcommand{\ArmPinnedVerifiedHaiku}{1.10}
-% hypothesis gates H5/H6 (hypothesis_gates.py --tex, 2026-10-15)
-\newcommand{\HypExternalEffects}{12{,}000}\newcommand{\HypDuplicateEffects}{0}\newcommand{\HypInterruptEmissions}{2}
-\newcommand{\HypObservedRecords}{7{,}500}\newcommand{\HypUndeclaredReads}{0}
+% hypothesis gates H5/H6 (hypothesis_gates.py --tex, 2026-10-17)
+\newcommand{\HypExternalEffects}{12{,}900}\newcommand{\HypDuplicateEffects}{0}\newcommand{\HypInterruptEmissions}{2}
+\newcommand{\HypObservedRecords}{8{,}400}\newcommand{\HypUndeclaredReads}{0}
 % hypothesis gate H7 (the store axiom, ReadsReflectMemory, on every declared read of the store-instrumented campaigns; the
 % four campaigns converted from transcripts and tool logs are reported, not gated): hypothesis_gates.py over the committed
-% receipts held on 2026-10-15 (the runner's step 19 re-derives them over the full tree)
-\newcommand{\HypStoreAxiomReads}{35{,}069}\newcommand{\HypStoreAxiomTraces}{16{,}966}\newcommand{\HypStoreAxiomViolations}{0}
+% receipts held on 2026-10-17 (the runner's step 19 re-derives them over the full tree)
+\newcommand{\HypStoreAxiomReads}{44{,}545}\newcommand{\HypStoreAxiomTraces}{19{,}666}\newcommand{\HypStoreAxiomViolations}{0}
 \newcommand{\HypStoreAxiomConvertedReads}{6{,}448}\newcommand{\HypStoreAxiomConvertedCampaigns}{4}
 % the NoA1 half of the lattice at the bounds where the supersession witness is reachable (formal/tla/lattice16_a1_maxops3.sh)
 % formal/tla/lattice16_a1_maxops3_c1_results.json (2026-10-15, TLC 1.8.0, two workers): 16 NoA1 points + the witness-class pair
@@ -249,20 +249,20 @@
 \newcommand{\LedgerWorldAtomicAvailable}{0}\newcommand{\LedgerWorldWideAvailable}{0}   % runner step 21 (atomic registration; 5 s consumer window)
 % 2026-10-17: the executable ledger's bookkeeping in verified bytes (lib_l5_exec.rs; runner steps 7/14/23), the refusal-price
 % study (step 22), and the H7 scope gate (hypothesis_gates.py: published cells drawn from store-instrumented campaigns only)
-\newcommand{\LfiveExecAvailable}{0}\newcommand{\LfiveExecVerus}{?}\newcommand{\LedgerWorldExecAvailable}{0}
+\newcommand{\LfiveExecAvailable}{0}\newcommand{\LfiveExecVerus}{?}\newcommand{\LfiveExecVerusCount}{?}\newcommand{\LedgerWorldExecAvailable}{0}
 \newcommand{\RefusalClaudeAvailable}{0}\newcommand{\RefusalGptAvailable}{0}
-\newcommand{\RefusalAddrClaudeAvailable}{0}\newcommand{\RefusalAddrGptAvailable}{0}   % step 24: the REFUSED text addressed to the refused agent (the step-22 text was broadcast unaddressed)
-% derived from tools/hypothesis_gates.log (2026-10-16) per-campaign table: records/traces of the 17 store-instrumented campaigns
+\newcommand{\RefusalClaudeAddrAvailable}{0}\newcommand{\RefusalGptAddrAvailable}{0}   % step 24: the REFUSED text addressed to the refused agent (the step-22 text named nobody); the fold emits \RefusalClaudeAddr... (family name as claims_from_results.py writes it)
+% derived from tools/hypothesis_gates.log (2026-10-17) per-campaign table: records/traces of the 20 store-instrumented campaigns
 % = totals minus mast_oprecords (9,137/1,010), oprecords (600/200), production_traces (4,169/600), traces (1,469/700);
-% the published campaigns: results/expected.json's six (three pilot runs, three live_a1 families) + live_a1_outcome, the four
-% ledger_world* runs and the two Claude pilot/interleaved runs of the 2026-10-16 log = 13, none converted (hypothesis_gates.py)
-\newcommand{\HypInstrumentedRecords}{56{,}339}\newcommand{\HypInstrumentedTraces}{16{,}978}
-\newcommand{\HypPublishedCampaigns}{13}\newcommand{\HypPublishedConvertedCampaigns}{0}
+% the published campaigns: results/expected.json's six (three pilot runs, three live_a1 families) + live_a1_outcome, the five
+% ledger_world* runs, the two Claude pilot/interleaved runs and the two refusal-price runs of the 2026-10-17 log = 16, none converted
+\newcommand{\HypInstrumentedRecords}{68{,}907}\newcommand{\HypInstrumentedTraces}{19{,}678}
+\newcommand{\HypPublishedCampaigns}{16}\newcommand{\HypPublishedConvertedCampaigns}{0}
 \newcommand{\PilotClaudeAvailable}{0}   % the Claude pilot cells scored by the verified detector (step 14 after step 11); claims_results.tex overrides
 \newcommand{\Pending}[1]{\textbf{[pending: #1]}}   % release_tag.sh refuses to tag while any \Pending survives in the PDF text
 
 % ============================================================================
-% claims_results.tex (2026-10-14): the receipt overrides generated by harness/macaudit/claims_from_results.py
+% claims_results.tex (2026-10-17): the receipt overrides generated by harness/macaudit/claims_from_results.py
 % ============================================================================
 % generated by harness/macaudit/claims_from_results.py -- do not edit; re-run the probes instead
 % --- probe 303 (results/live_a1_outcome; *_arms150.json -> the live table (Table 2), *_sweep.json -> offset curve) ---
@@ -2745,19 +2745,19 @@
 \providecommand{\LWexecLedgerDisagree}{0}
 \providecommand{\LWexecLedgerDisagreeCI}{[0.0, 1.2]}
 \providecommand{\LWexecServerSha}{f141b709aaaa0040}
-% --- probe 301 (/tmp/claude-0/-home-claude/37127f59-98ee-511c-9a78-827474030281/scratchpad/fold/results/a6_real_latency/sqlite.jsonl) ---
+% --- probe 301 (results/a6_real_latency/sqlite.jsonl) ---
 \renewcommand{\ToolNodeRealSqlite}{$126/165$}
-% --- probe 301 --l3-server (/tmp/claude-0/-home-claude/37127f59-98ee-511c-9a78-827474030281/scratchpad/fold/results/a6_real_latency/sqlite_verified.jsonl) ---
+% --- probe 301 --l3-server (results/a6_real_latency/sqlite_verified.jsonl) ---
 \renewcommand{\ToolNodeVerifiedSqlite}{$0/165$}
 \renewcommand{\ToolNodeVerifiedBaselineSqlite}{$119/165$}
 \renewcommand{\ToolNodeVerifiedAvailable}{1}
-% --- probe 301 (/tmp/claude-0/-home-claude/37127f59-98ee-511c-9a78-827474030281/scratchpad/fold/results/a6_real_latency/http.jsonl) ---
+% --- probe 301 (results/a6_real_latency/http.jsonl) ---
 \renewcommand{\ToolNodeRealHttp}{$112/165$}
-% --- probe 301 --l3-server (/tmp/claude-0/-home-claude/37127f59-98ee-511c-9a78-827474030281/scratchpad/fold/results/a6_real_latency/http_verified.jsonl) ---
+% --- probe 301 --l3-server (results/a6_real_latency/http_verified.jsonl) ---
 \renewcommand{\ToolNodeVerifiedHttp}{$0/165$}
 \renewcommand{\ToolNodeVerifiedBaselineHttp}{$113/165$}
 \renewcommand{\ToolNodeVerifiedAvailable}{1}
-% --- probe 302 (/tmp/claude-0/-home-claude/37127f59-98ee-511c-9a78-827474030281/scratchpad/fold/results/runs/20261014T1417Z-interleaved-claude-sonnet-4-5; model claude-sonnet-4-5): the writer role's committed write per cell, from the records ---
+% --- probe 302 (results/runs/20261014T1417Z-interleaved-claude-sonnet-4-5; model claude-sonnet-4-5): the writer role's committed write per cell, from the records ---
 \providecommand{\InterleavedClaudeEditReviewPessWriterCommits}{100/100}
 \providecommand{\InterleavedClaudeEditReviewSIWriterCommits}{100/100}
 \providecommand{\InterleavedClaudeEditReviewVanillaWriterCommits}{100/100}
@@ -2767,7 +2767,7 @@
 \providecommand{\InterleavedClaudeTriagePessWriterCommits}{0/100}
 \providecommand{\InterleavedClaudeTriageSIWriterCommits}{0/100}
 \providecommand{\InterleavedClaudeTriageVanillaWriterCommits}{0/100}
-% --- probe 302 (/tmp/claude-0/-home-claude/37127f59-98ee-511c-9a78-827474030281/scratchpad/fold/results/runs/20261014T1417Z-interleaved-claude-sonnet-4-5; model claude-sonnet-4-5; Stamp); order.tsv completion stamps, 1 s resolution; sidecars folded: no ---
+% --- probe 302 (results/runs/20261014T1417Z-interleaved-claude-sonnet-4-5; model claude-sonnet-4-5; Stamp); order.tsv completion stamps, 1 s resolution; sidecars folded: no ---
 \renewcommand{\WallclockStampClaudeEditReviewPess}{$+5.3\%$ [+2.0, +8.4], $n=99$}
 \renewcommand{\WallclockStampClaudeEditReviewSI}{$+2.4\%$ [-1.2, +6.4], $n=99$}
 \renewcommand{\WallclockStampClaudePlanExecutePess}{$-0.5\%$ [-3.5, +2.5], $n=99$}
@@ -2775,7 +2775,7 @@
 \renewcommand{\WallclockStampClaudeTriagePess}{$+1.3\%$ [-1.1, +3.7], $n=99$}
 \renewcommand{\WallclockStampClaudeTriageSI}{$+1.3\%$ [-2.1, +5.9], $n=99$}
 \renewcommand{\WallclockStampClaudeAvailable}{1}
-% --- probe 302 refusal-price study (/tmp/claude-0/-home-claude/37127f59-98ee-511c-9a78-827474030281/scratchpad/fold/results/runs/20261017T0753Z-refusal-claude-sonnet-4-5; model claude-sonnet-4-5; REFUSED text unaddressed (broadcast by the group chat)): what a refused operation costs when the model is told ---
+% --- probe 302 refusal-price study (results/runs/20261017T0753Z-refusal-claude-sonnet-4-5; model claude-sonnet-4-5; REFUSED text unaddressed (broadcast by the group chat)): what a refused operation costs when the model is told ---
 \renewcommand{\RefusalClaudeAvailable}{1}
 \providecommand{\RefusalClaudeRun}{20261017T0753Z-refusal-claude-sonnet-4-5}
 \providecommand{\RefusalClaudeEditReviewPessDropN}{100}
@@ -2884,27 +2884,110 @@
 \providecommand{\RefusalClaudeTriageVanillaRefusedSessions}{0/100}
 \providecommand{\RefusalClaudeTriageVanillaWriterCommits}{0/100}
 \providecommand{\RefusalClaudeTriageVanillaWriterRecords}{1.00}
-% --- verus ledger (/tmp/claude-0/-home-claude/37127f59-98ee-511c-9a78-827474030281/scratchpad/fold/results/verus/lib_l5_ledger.verus.log) ---
+% --- probe 302 refusal-price study (results/runs/20261017T1615Z-refusal-addressed-claude-sonnet-4-5; model claude-sonnet-4-5; REFUSED text addressed to the refused agent): what a refused operation costs when the model is told ---
+\renewcommand{\RefusalClaudeAddrAvailable}{1}
+\providecommand{\RefusalClaudeAddrRun}{20261017T1615Z-refusal-addressed-claude-sonnet-4-5}
+\providecommand{\RefusalClaudeAddrEditReviewPessDropN}{100}
+\providecommand{\RefusalClaudeAddrEditReviewPessDropCommits}{6.00}
+\providecommand{\RefusalClaudeAddrEditReviewPessDropCalls}{11.00}
+\providecommand{\RefusalClaudeAddrEditReviewPessDropWallS}{18.0}
+\providecommand{\RefusalClaudeAddrEditReviewPessDropRefused}{5.00}
+\providecommand{\RefusalClaudeAddrEditReviewPessDropRefusedSessions}{100/100}
+\providecommand{\RefusalClaudeAddrEditReviewPessDropWriterCommits}{0/100}
+\providecommand{\RefusalClaudeAddrEditReviewPessDropWriterRecords}{6.00}
+\providecommand{\RefusalClaudeAddrEditReviewPessDropWriteLengthCalls}{0}
+\providecommand{\RefusalClaudeAddrEditReviewPessDropTotalCalls}{1{,}100}
+\providecommand{\RefusalClaudeAddrEditReviewPessDropWallOverhead}{$+132.6\%$ [+128.3, +136.8], $n=100$}
+\providecommand{\RefusalClaudeAddrEditReviewPessDropCallsOverhead}{$+120.0\%$ [+120.0, +120.0], $n=100$}
+\providecommand{\RefusalClaudeAddrEditReviewPessRetryN}{100}
+\providecommand{\RefusalClaudeAddrEditReviewPessRetryCommits}{6.00}
+\providecommand{\RefusalClaudeAddrEditReviewPessRetryCalls}{11.00}
+\providecommand{\RefusalClaudeAddrEditReviewPessRetryWallS}{18.1}
+\providecommand{\RefusalClaudeAddrEditReviewPessRetryRefused}{5.00}
+\providecommand{\RefusalClaudeAddrEditReviewPessRetryRefusedSessions}{100/100}
+\providecommand{\RefusalClaudeAddrEditReviewPessRetryWriterCommits}{0/100}
+\providecommand{\RefusalClaudeAddrEditReviewPessRetryWriterRecords}{6.00}
+\providecommand{\RefusalClaudeAddrEditReviewPessRetryWriteLengthCalls}{0}
+\providecommand{\RefusalClaudeAddrEditReviewPessRetryTotalCalls}{1{,}100}
+\providecommand{\RefusalClaudeAddrEditReviewPessRetryWallOverhead}{$+134.0\%$ [+129.4, +138.5], $n=100$}
+\providecommand{\RefusalClaudeAddrEditReviewPessRetryCallsOverhead}{$+120.0\%$ [+120.0, +120.0], $n=100$}
+\providecommand{\RefusalClaudeAddrEditReviewSIDropN}{100}
+\providecommand{\RefusalClaudeAddrEditReviewSIDropCommits}{3.00}
+\providecommand{\RefusalClaudeAddrEditReviewSIDropCalls}{6.08}
+\providecommand{\RefusalClaudeAddrEditReviewSIDropWallS}{9.7}
+\providecommand{\RefusalClaudeAddrEditReviewSIDropRefused}{0.54}
+\providecommand{\RefusalClaudeAddrEditReviewSIDropRefusedSessions}{54/100}
+\providecommand{\RefusalClaudeAddrEditReviewSIDropWriterCommits}{100/100}
+\providecommand{\RefusalClaudeAddrEditReviewSIDropWriterRecords}{1.54}
+\providecommand{\RefusalClaudeAddrEditReviewSIDropWriteLengthCalls}{220}
+\providecommand{\RefusalClaudeAddrEditReviewSIDropTotalCalls}{608}
+\providecommand{\RefusalClaudeAddrEditReviewSIDropWallOverhead}{$+25.1\%$ [+19.3, +31.1], $n=100$}
+\providecommand{\RefusalClaudeAddrEditReviewSIDropCallsOverhead}{$+21.6\%$ [+17.6, +25.2], $n=100$}
+\providecommand{\RefusalClaudeAddrEditReviewVanillaN}{100}
+\providecommand{\RefusalClaudeAddrEditReviewVanillaCommits}{2.62}
+\providecommand{\RefusalClaudeAddrEditReviewVanillaCalls}{5.00}
+\providecommand{\RefusalClaudeAddrEditReviewVanillaWallS}{7.8}
+\providecommand{\RefusalClaudeAddrEditReviewVanillaRefused}{0.00}
+\providecommand{\RefusalClaudeAddrEditReviewVanillaRefusedSessions}{0/100}
+\providecommand{\RefusalClaudeAddrEditReviewVanillaWriterCommits}{100/100}
+\providecommand{\RefusalClaudeAddrEditReviewVanillaWriterRecords}{1.00}
+\providecommand{\RefusalClaudeAddrEditReviewVanillaWriteLengthCalls}{138}
+\providecommand{\RefusalClaudeAddrEditReviewVanillaTotalCalls}{500}
+\providecommand{\RefusalClaudeAddrTriagePessDropN}{100}
+\providecommand{\RefusalClaudeAddrTriagePessDropCommits}{2.10}
+\providecommand{\RefusalClaudeAddrTriagePessDropCalls}{4.30}
+\providecommand{\RefusalClaudeAddrTriagePessDropWallS}{6.7}
+\providecommand{\RefusalClaudeAddrTriagePessDropRefused}{1.10}
+\providecommand{\RefusalClaudeAddrTriagePessDropRefusedSessions}{100/100}
+\providecommand{\RefusalClaudeAddrTriagePessDropWriterCommits}{10/100}
+\providecommand{\RefusalClaudeAddrTriagePessDropWriterRecords}{1.00}
+\providecommand{\RefusalClaudeAddrTriagePessDropWallOverhead}{$+7.9\%$ [+3.3, +13.1], $n=100$}
+\providecommand{\RefusalClaudeAddrTriagePessDropCallsOverhead}{$+7.5\%$ [+3.0, +12.0], $n=100$}
+\providecommand{\RefusalClaudeAddrTriagePessRetryN}{100}
+\providecommand{\RefusalClaudeAddrTriagePessRetryCommits}{3.87}
+\providecommand{\RefusalClaudeAddrTriagePessRetryCalls}{9.00}
+\providecommand{\RefusalClaudeAddrTriagePessRetryWallS}{15.1}
+\providecommand{\RefusalClaudeAddrTriagePessRetryRefused}{4.12}
+\providecommand{\RefusalClaudeAddrTriagePessRetryRefusedSessions}{100/100}
+\providecommand{\RefusalClaudeAddrTriagePessRetryWriterCommits}{19/100}
+\providecommand{\RefusalClaudeAddrTriagePessRetryWriterRecords}{2.68}
+\providecommand{\RefusalClaudeAddrTriagePessRetryWallOverhead}{$+142.6\%$ [+113.9, +171.8], $n=100$}
+\providecommand{\RefusalClaudeAddrTriagePessRetryCallsOverhead}{$+125.0\%$ [+97.2, +154.0], $n=100$}
+\providecommand{\RefusalClaudeAddrTriageSIDropN}{100}
+\providecommand{\RefusalClaudeAddrTriageSIDropCommits}{3.00}
+\providecommand{\RefusalClaudeAddrTriageSIDropCalls}{4.00}
+\providecommand{\RefusalClaudeAddrTriageSIDropWallS}{6.3}
+\providecommand{\RefusalClaudeAddrTriageSIDropRefused}{0.00}
+\providecommand{\RefusalClaudeAddrTriageSIDropRefusedSessions}{0/100}
+\providecommand{\RefusalClaudeAddrTriageSIDropWriterCommits}{0/100}
+\providecommand{\RefusalClaudeAddrTriageSIDropWriterRecords}{1.00}
+\providecommand{\RefusalClaudeAddrTriageSIDropWallOverhead}{$+1.2\%$ [-0.7, +3.1], $n=100$}
+\providecommand{\RefusalClaudeAddrTriageSIDropCallsOverhead}{$+0.0\%$ [+0.0, +0.0], $n=100$}
+\providecommand{\RefusalClaudeAddrTriageVanillaN}{100}
+\providecommand{\RefusalClaudeAddrTriageVanillaCommits}{3.00}
+\providecommand{\RefusalClaudeAddrTriageVanillaCalls}{4.00}
+\providecommand{\RefusalClaudeAddrTriageVanillaWallS}{6.3}
+\providecommand{\RefusalClaudeAddrTriageVanillaRefused}{0.00}
+\providecommand{\RefusalClaudeAddrTriageVanillaRefusedSessions}{0/100}
+\providecommand{\RefusalClaudeAddrTriageVanillaWriterCommits}{0/100}
+\providecommand{\RefusalClaudeAddrTriageVanillaWriterRecords}{1.00}
+% --- verus (results/verus/count.json) ---
+\renewcommand{\VerusCurated}{371}
+\renewcommand{\VerusFull}{392}
+% --- verus exec ledger (results/verus/lib_l5_exec.verus.log) ---
+\renewcommand{\LfiveExecVerus}{10 obligations, 0 errors}
+\renewcommand{\LfiveExecVerusCount}{10}
+\renewcommand{\LfiveExecAvailable}{1}
+% --- verus ledger (results/verus/lib_l5_ledger.verus.log) ---
 \renewcommand{\LfiveVerus}{7 obligations, 0 errors}
 \renewcommand{\LfiveVerusStatus}{verified in Verus (7 obligations, 0 errors)}
 \renewcommand{\LfiveVerusIntro}{verified (7 obligations)}
-% --- verified_scorer_gate (/tmp/claude-0/-home-claude/37127f59-98ee-511c-9a78-827474030281/scratchpad/fold/tools/verified_scorer.json) ---
-\renewcommand{\VerifiedScorerCells}{126}
-\renewcommand{\VerifiedScorerTraces}{12{,}600}
-\renewcommand{\VerifiedScorerProblems}{0}
-\renewcommand{\VerifiedScorerAvailable}{1}
-% Claude op-record replication (runs/*-claude), scored by the verified detector; -- = cell not scored yet
-\providecommand{\VSClaudeEditReviewVanilla}{100/100}
-\providecommand{\VSClaudeEditReviewPess}{0/100}
-\providecommand{\VSClaudeEditReviewSI}{50/100}
-\providecommand{\VSClaudePlanExecuteVanilla}{0/100}
-\providecommand{\VSClaudePlanExecutePess}{0/100}
-\providecommand{\VSClaudePlanExecuteSI}{0/100}
-\providecommand{\VSClaudeTriageVanilla}{0/100}
-\providecommand{\VSClaudeTriagePess}{0/100}
-\providecommand{\VSClaudeTriageSI}{0/100}
-\renewcommand{\PilotClaudeAvailable}{1}
-% --- check_duplication.sh (/tmp/claude-0/-home-claude/37127f59-98ee-511c-9a78-827474030281/scratchpad/fold/formal/tla/tlc.Duplication.log) ---
+% --- verified_scorer_gate (./tools/verified_scorer.json) ---
+\renewcommand{\VerifiedScorerCells}{144}
+\renewcommand{\VerifiedScorerTraces}{14{,}400}
+\renewcommand{\VerifiedScorerProblems}{18}
+% verified_scorer_gate reports 18 problem(s) over 144 cell(s): the paper's cell stays PENDING
+% --- check_duplication.sh (./formal/tla/tlc.Duplication.log) ---
 \renewcommand{\DupWitnessDepth}{5}
 \renewcommand{\DupDivergentDepth}{6}
 \renewcommand{\DupDedupStates}{1{,}714}
@@ -2925,13 +3008,13 @@
 
 \author{Sajjad~Khan%
 \thanks{S.~Khan is an independent researcher (e-mail: sajjadanwar200@gmail.com).}%
-\thanks{Artifact: \url{https://github.com/sajjadanwar0/mac-consistency-mono}, release tag \texttt{v4.1-tse}, cut by a gate that refuses while any cell of this text is marked pending (\TLA{} models, Verus proofs, the runtime, every harness and the committed traces behind every table; \texttt{reproduce.sh} re-derives each figure; every stated number is in \texttt{CLAIMS.json} or is regenerated into \texttt{claims\_results.tex} from a committed receipt by \texttt{claims\_from\_results.py}). A supplement (\S\S\,A--W) holds raw tables and proofs omitted for length.}}
+\thanks{Artifact: \url{https://github.com/sajjadanwar0/mac-consistency-mono}, tag \texttt{v4.1-tse}, cut by a gate that refuses while any cell of this text is marked pending: \TLA{} models, Verus proofs, the runtime, every harness and the committed traces behind every table; \texttt{reproduce.sh} re-derives each figure, and every stated number is in \texttt{CLAIMS.json} or regenerated into \texttt{claims\_results.tex} from a committed receipt. A supplement (\S\S\,A--W) holds raw tables and proofs omitted for length.}}
 
 \markboth{IEEE Transactions (submitted)}{Khan: Mechanized Anomaly Predicates, Verified Disciplines, and the Residue They Leave in Multi-Agent LLM Systems}
 
 \IEEEtitleabstractindextext{%
 \begin{abstract}
-An agent's step in a multi-agent LLM system is a transaction whose compute phase is an inference call of unbounded latency, during which the state it read is neither locked nor re-validated. We give the regime a mechanized consistency theory and test what it buys. Four classical conditions become history predicates---stale generation, phantom tool, causal cascade, tool-effect reordering---with TLC witnesses; TLAPS proves that stale-generation freedom implies commit-order read consistency under three hypotheses, which gates confirm on every committed record; bounded model checking realizes all sixteen points of their exclusion lattice; and Verus verifies one chain of disciplines whose verified files are byte-identical to the runtime that was measured. The empirical result is what commit-time isolation cannot reach. On an unmodified LangGraph runtime with live models, read-set validation removes every commit grounded in a superseded read, yet the booking contradicts the final trip date in $1$--$65\%$ of sessions per family and arm, because the revision lands after the commit---a harm that occurs in correct sequential executions. We define it as a predicate on effects and their recovered bases, show that under an open-world store it can only be owed, and test a basis ledger that registers the obligation with the superseding write against a simulated world with refusals and a downstream consumer: the ledger's report and the world agree in $\LWLedgerAgree$ sessions, a compensator that misreported was caught only by the world check, and a consumer still acts on the stale booking until the compensation's model call completes. A released tool executor commits an order-dependent pipeline out of order on $22$ of $30$ turns of one backbone while its transcript shows it in order. Per sound committed operation, snapshot isolation costs $+0.4$--$11.1\%$ in tokens and pessimistic locking up to $+97\%$---and once the model is told the truth about a refusal, $2$--$4\times$ in calls on the contended workloads, a price the chat's broadcast of the refusal to the unrefused agent shares; a census of $98$ public LangGraph repositories confirms the stale-generation precondition nowhere. From these we derive four concrete requirements for agent frameworks. Every number carries its receipt and its assurance level.
+An agent's step in a multi-agent LLM system is a transaction whose compute phase is an inference call of unbounded latency, during which the state it read is neither locked nor re-validated. We give the regime a mechanized consistency theory and test what it buys. Four classical conditions become history predicates---stale generation, phantom tool, causal cascade, tool-effect reordering---with TLC witnesses; TLAPS proves that stale-generation freedom implies commit-order read consistency under three hypotheses, which gates check on the committed records; bounded model checking realizes all sixteen points of their exclusion lattice; and Verus verifies one chain of disciplines whose verified files are byte-identical to the runtime that was measured. The empirical result is what commit-time isolation cannot reach. On a released LangGraph runtime with live models, its store instrumented only to stamp a clock, read-set validation removes every commit grounded in a superseded store read, yet the booking contradicts the final trip date in $1$--$65\%$ of sessions per family and arm, because the revision lands after the commit---a harm that occurs in correct sequential executions. We define it as a predicate on effects and their recovered bases, show that under an open-world store it can only be owed, and test a basis ledger that registers the obligation with the superseding write against a simulated world with refusals and a downstream consumer: the ledger's report and the world agree in $\LWLedgerAgree$ sessions, a compensator that misreported was caught only by the world check, and a consumer still acts on the stale booking until the compensation's model call completes. A released tool executor commits an order-dependent pipeline out of order on $22$ of $30$ turns of one backbone while its transcript shows it in order. Per sound committed operation, snapshot isolation costs $+0.4$--$11.1\%$ in tokens and pessimistic locking up to $+97\%$; per session, a model told the truth about a refusal makes $2$--$4\times$ the calls on the contended workloads when the refusal names no agent and $1.1$--$2.3\times$ when it does; a census of $98$ public LangGraph repositories finds the precondition's statically visible shape, a co-scheduled reader and writer of one channel, confirmed nowhere. From these we derive four concrete requirements for agent frameworks. Every number carries its receipt and its assurance level.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -2970,7 +3053,8 @@ it is not is serializable \emph{in the order in which its operations
 committed}: the revision committed first, and a flight agent executing after
 it would have read 21 June (\cref{fig:window}).
 
-We ran this scenario on an unmodified LangGraph runtime under live models
+We ran this scenario on a released LangGraph runtime under live models, its
+store instrumented only to stamp a logical clock
 (\cref{sec:live-a1}). With the second agent started inside the first agent's
 generation window, the framework committed the stale booking in every session
 in which the revision landed inside the window---$\LiveGptVanillaAOne\%$ and
@@ -2985,9 +3069,11 @@ offset; swept in \cref{fig:offset}) and carry no prevalence reading.
 
 \smallskip\noindent\textbf{What this paper is not claiming.} A census of
 \CensusRepos{} public LangGraph repositories (\cref{sec:prevalence}) finds
-the structural precondition of the failure above---a reader and a writer of
-one last-value channel scheduled together---confirmed in none of
-\CensusSites{} graph sites, eight unresolved. We take that at face value:
+the statically visible form of \A1's precondition---a reader and a writer of
+one last-value channel scheduled together inside a graph---confirmed in none
+of \CensusSites{} graph sites, eight unresolved; the cross-thread store the
+failure above shares is not visible to a static front end and is not counted.
+We take the census at face value:
 public LangGraph code is mostly sequential, and four of five frameworks we
 probed close the window by construction. The regime studied is the one in
 which contention is designed in (parallel fan-out over a shared store,
@@ -3066,8 +3152,8 @@ executions) but the harm no commit-time discipline reaches, decided on the
 records by argument provenance; on the live study \A1 and \Rp{} partition the
 outcome column (\cref{sec:residue})---and the \emph{duplication predicate}
 $D$---one node's irreversible effect out twice, the shape a deployed
-resumption path produces, a property of the executor's replay rather than of
-the window, with its witness and the guard that excludes it (\cref{sec:dup}).
+resumption path produces, with its witness and the guard that excludes it
+(\cref{sec:dup}).
 
 \smallskip\noindent\textbf{(C2) A lattice, realized at stated bounds}
 (\cref{sec:lattice}). The $2^4$ exclusion lattice is trivial; what is not is
@@ -3092,43 +3178,46 @@ identity) and the bytes measured\ifnum\ToolNodeVerifiedAvailable=1\else{}
 verified detector executing, behind one interning wrapper in the trust base;
 every published cell was rescored through it (\VerifiedScorerCells{} cells,
 \VerifiedScorerTraces{} traces, \VerifiedScorerProblems{}
-disagreements).\else The \A1 verdict of the published tables was taken by a
-hand-written port gated against the verified predicate on every cell; the
-rescoring through the verified detector is \Pending{runner step 14}.\fi{}
+disagreements).\else The \A1 verdict of every table is the verified detector
+executing, behind one interning wrapper in the trust base, gated against a
+hand-written port on every cell; the gate's last pass rescored
+\VerifiedScorerCells{} cells (\VerifiedScorerTraces{} traces) and exited
+non-zero on \VerifiedScorerProblems{} per-cell refusal sidecars it read as
+op-records, so its clean receipt is \Pending{runner step 14 rerun}.\fi{}
 \Cref{tab:assurance} labels every claim with its assurance level (checked
 model, verified decision procedure, verified bytes, unverified port, open) and
 names each correspondence between \TLA{} definition, Verus restatement,
-executed code and scorer, with its hypothesis and gate. Of \VerusCurated{}
-obligations, \VerusLoadBearing{} bear a deployed or measured artifact and
-\VerusScaffold{} are scaffolding (supplement \S\,S).
+executed code and scorer, with its hypothesis and gate; of \VerusCurated{}
+obligations, \VerusLoadBearing{} bear a deployed or measured artifact
+(supplement \S\,S).
 
 \smallskip\noindent\textbf{(C4) An evaluation scored on outcomes, not flags,
 with its own confounds measured} (\cref{sec:eval}). For each discipline we
 report the anomaly it excludes, the harm that remains, and the price: on the
 live LangGraph study the $L_1$ residue is \Rp{} in $1$--$65\%$ of sessions
-per family and arm, in two implementations of $L_1$ between which three
-interleaved replications detect no difference; against a simulated world the
+per family and arm (pooled over three interleaved runs; $0$--$73$ of $100$
+in single runs), in two implementations of $L_1$ between which the
+replications detect no difference; against a simulated world the
 ledger's report and the world agree in $\LWatomicLedgerAgree$ sessions, where a
 first compensator had misreported $1$--$10\%$ (\cref{sec:ledger-world}); output
 commit removes exposure exactly when the review precedes the release; per
 sound committed operation, snapshot isolation costs $+0.4$--$11.1\%$ and
-pessimistic locking up to $+97\%$ in tokens, and told the truth about a
-refusal, $2$--$4\times$ in model calls, part of it the chat's broadcast of
-the refusal (\cref{sec:cost}). Where the design
-limits what a
-difference can mean we quantify the confound on the receipts. \textbf{(C6)}
-Four requirements for agent frameworks follow, each priced
-(\cref{sec:conclusion}).
+pessimistic locking up to $+97\%$ in tokens, and, per session, $2$--$4\times$
+the model calls under a refusal that names no agent and $1.1$--$2.3\times$
+under one that does (\cref{sec:cost}). Where the design limits what a
+difference can mean we quantify the confound on the receipts.
 
 \smallskip\noindent\textbf{(C5) Where the preconditions occur} (\cref{sec:prevalence}).
 A census of \CensusRepos{} public LangGraph repositories (\CensusSites{} graph
 sites) finds no confirmed co-scheduled reader and writer of a last-value
-channel (eight sites unresolved; a bracket of none to about half)---a
+channel (eight sites unresolved; the static front end cannot resolve the
+routing of sites in about half the repositories)---a
 negative result for \A1's structural precondition, which we report as
 one---while
 a released tool executor dispatches a model-emitted, order-dependent pipeline
 concurrently on $\ToolNodeGptBatched/\ToolNodeGptBatched$ turns of one backbone
-and never on another, which is the case for \A6.
+and never on another, which is the case for \A6. \textbf{(C6)} Four
+requirements for agent frameworks follow, each priced (\cref{sec:conclusion}).
 
 \smallskip\noindent\textbf{What this paper does not establish.} No
 production prevalence for any anomaly: every occurrence figure is a race our
@@ -3176,11 +3265,11 @@ and is outside the model; \cref{sec:prevalence} counts how often that shape
 appears in public code.
 
 \smallskip\noindent\emph{Determinism is not assumed by the theorems.} Every
-mechanized result ranges over recorded histories with write values free. Under
-sampling, a value mismatch need not change the downstream decision, so the
-\A1 detector is a sound candidate screen that over-reports by a factor
-\cref{sec:live-a1} measures (materiality); durable-execution engines take the
-same stance~\cite{BurckhardtEtAl2021Durable}.
+mechanized result ranges over recorded histories with write values free; under
+sampling a value mismatch need not change the downstream decision, so the
+\A1 detector is a sound candidate screen whose over-reporting
+\cref{sec:live-a1} measures (materiality), the stance of durable-execution
+engines~\cite{BurckhardtEtAl2021Durable}.
 
 \smallskip\noindent\emph{Atomic commit is at the record level.} External
 effects are outside the store and are governed separately: their order by
@@ -3298,8 +3387,7 @@ tool logs are outside the axiom's reach and supply no rate of this paper's
 tables: the \HypPublishedCampaigns{} campaigns behind them are
 store-instrumented (\HypPublishedConvertedCampaigns{} converted; gated), so
 every \A1 verdict here is taken on records the hypotheses were checked on.
-A runtime can enforce non-overlap by refusing a second operation of an agent
-whose window is open. The converse shape is a false positive of $L_1$, priced
+The converse shape is a false positive of $L_1$, priced
 in discarded generations; on the live records it occurs in \HypRestored{} of
 \HypAOneWitnesses{} \A1 witness pairs, and cannot on these workloads, whose
 revisions are monotone. Two corollaries are mechanized with the theorem: the
@@ -3385,8 +3473,8 @@ complete, and it is blind to relabeled effects. We therefore claim
 writes hold by construction in the synthetic cascades and in all
 \HypLiveLtwoSessions{} live replay sessions (\HypLiveLtwoCollisions{}
 collisions), the two data sets the detector scores; they fail in
-\HypCollisionCells{} cells of the pilot and occurrence-study traces, where
-only \A1 is scored. A recorder that stamps each written value with its
+\HypCollisionCells{} cells of the pilot, refusal-study, occurrence-study and
+one exec-ledger campaign, on none of which \A3 is scored. A recorder that stamps each written value with its
 writer's operation identifier makes the hypothesis a system invariant.
 
 \subsection{\A6: tool-effect reordering}
@@ -3523,9 +3611,11 @@ issue, gate, resume-from-start, finish, revise) reaches $D$ in
 idempotency key per (node, effect) TLC finds neither over \DupDedupStates{}
 states exhaustively. $D$ stays outside the catalog and the lattice like
 \Rp{}: its carrier, the effect stream, is disjoint from the four
-disciplines', which neither create nor remove it. On the committed records
-\HypDuplicateEffects{} of \HypExternalEffects{} externalized effects were
-emitted twice (\texttt{hypothesis\_gates.py}, H5).
+disciplines', which neither create nor remove it. On the committed operation
+records \HypDuplicateEffects{} of \HypExternalEffects{} externalized effects
+were emitted twice (\texttt{hypothesis\_gates.py}, H5); no campaign of
+those records drives LangGraph's \texttt{interrupt}, and the probe's two
+emissions are in its own receipt, outside that count.
 
 % ============================================================================
 % sec/04-lattice.tex
@@ -3562,10 +3652,10 @@ runtime configuration that excludes exactly each point's anomalies, and for
 the five named points a verified realizing runtime---established here by
 bounded model checking at two agents, two cells and two operations (three
 for \A3 and for the supersession class of \A1), one value for the witness
-half and two for the safety half, and claimed at exactly those bounds;
-histories of that length exercise every predicate's minimal witness and
-nothing longer, and the unbounded statement exists only for the top point, as
-the Verus product of \cref{sec:composition}.
+half and two for the safety half, and claimed at exactly those bounds, which
+exercise every predicate's minimal witness and nothing longer; the unbounded
+statement exists only for the top point, as the Verus product of
+\cref{sec:composition}.
 
 \subsection{All sixteen points, mechanically; the ledger composes}
 \label{sec:lattice16}
@@ -3631,10 +3721,11 @@ mismatches its expectation.
 \label{sec:mechanization}
 
 Three tools carry the development, at assurance levels \cref{tab:assurance}
-labels claim by claim. TLC checks the witnesses, the lattice and ledger
+labels claim by claim. TLC~\cite{Lamport2002SpecifyingSystems} checks the
+witnesses, the lattice and ledger
 matrices and the fifteen \cref{thm:corc} verdicts (bounded, exhaustive
-within bounds). TLAPS proves \cref{thm:corc} (\TlapsCommitOrder{}
-obligations), a coherence check of the chain definitions
+within bounds). TLAPS~\cite{CousineauEtAl2012TLAPS} proves \cref{thm:corc}
+(\TlapsCommitOrder{} obligations), a coherence check of the chain definitions
 (\texttt{Hierarchy.tla}, \TlapsHierarchy{}) and a same-agent exclusion lemma
 (\texttt{A1LowerBound.tla}, \TlapsLowerBound{}); only the first is a
 substantive result. Verus~\cite{Lattuada2023Verus} carries the substantive
@@ -3665,11 +3756,11 @@ Claim & Definition & Proof / check & Executed by & Correspondence, hypothesis, g
 \midrule
 Anomaly witnesses, lattice realizability & \TLA{} & TLC, $|A|{=}2$, $\le2$ cells, $\le2$ values, $\mathrm{MaxOps}\le4$ (witnesses), $\le3$ (matrix) & --- & \textbf{model}: bounded; \LatticeRuns{}$+$\LatticeMaxOpsThreeRuns{}$+32$ two-value safety runs \\
 \cref{thm:corc} & \TLA{} & TLAPS \TlapsCommitOrder{} & --- & \textbf{proof}; its three hypotheses are model invariants (TLC) and hold on the committed records (\texttt{hypothesis\_gates} H0, H1, H7: $0$ violations; \cref{sec:a1}) \\
-\texttt{detect\_a1} sound \& complete & Verus spec & Verus & scorer: \ifnum\VerifiedScorerAvailable=1 verified bytes behind an interning wrapper\else port (gated)\fi{} & \textbf{proof} against the restatement; restatement $=$ \cref{def:a1} under \cref{lem:same-agent}; \ifnum\VerifiedScorerAvailable=1\textbf{bytes}: every published cell rescored (\texttt{verified\_scorer\_gate}: \VerifiedScorerProblems{} disagreements); wrapper trusted (xii)\else\textbf{port}, gated on every cell; rescoring \Pending{step 14}\fi \\
+\texttt{detect\_a1} sound \& complete & Verus spec & Verus & scorer: verified bytes behind an interning wrapper & \textbf{proof} against the restatement; restatement $=$ \cref{def:a1} under \cref{lem:same-agent}; \ifnum\VerifiedScorerAvailable=1\textbf{bytes}: every published cell rescored (\texttt{verified\_scorer\_gate}: \VerifiedScorerProblems{} disagreements); wrapper trusted (xii)\else\textbf{bytes}, gated against the port on every cell; the gate's clean receipt \Pending{step 14 rerun}\fi \\
 \texttt{detect\_a2} & Verus spec (id, signature) & Verus & $L_4$ dispatcher (bytes); scorer (port) & \textbf{proof}; \textbf{port} in the scorer; $=$ \cref{def:a2} under the re-sign-as-replace encoding, \textbf{stated, not proved} \\
 \texttt{detect\_a3} & Verus spec (unsupported read) & Verus & scorer (port) & \textbf{proof} for the screen, \textbf{port} in the scorer; $=$ \cref{def:a3} under value-unique writes (gate H2: \HypLiveLtwoSessions{} sessions, \HypLiveLtwoCollisions{} collisions) \\
 \texttt{detect\_a6} & Verus spec & Verus & scorer (port) & \textbf{proof} of the detector, \textbf{port} in the scorer; single-record equivalence to \cref{def:a6} \\
-$L_1$ stores window-free & Verus & Verus (lock predicate) & pilot (bytes); live \emph{verified} arm (bytes via bridge); \emph{validated} arm (application layer) & \textbf{bytes} in the pilot and the verified arm, \textbf{port} in the validated arm; refinement to the abstract machine \textbf{open} \\
+$L_1$ stores window-free & Verus & Verus (lock predicate) & pilot (bytes); live \emph{verified} arm (bytes via bridge); \emph{validated} arm (application layer) & \textbf{bytes} in the pilot and the verified arm, \textbf{port} in the validated arm (check-then-put, not atomic; a slip would be an \A1 witness, $0$ in $3{,}900$ sessions); refinement to the abstract machine \textbf{open} \\
 $L_2$ output commit & Verus & Verus & \texttt{l2\_exec} (bytes) & \textbf{bytes}; sequential object, caller serializes \\
 $L_3$ sequencing & Verus & Verus & \ifnum\ToolNodeVerifiedAvailable=1 \texttt{l3\_exec} (bytes, via \texttt{l3\_server})\else twin (inspection); \texttt{l3\_exec} behind a bridge \Pending{step 15}\fi & \ifnum\ToolNodeVerifiedAvailable=1\textbf{bytes}; bridge trusted (xiii)\else\textbf{port}\fi \\
 $L_4$ validation at dispatch & Verus & Verus & \texttt{l4\_exec} (bytes) & \textbf{bytes} \\
@@ -3732,9 +3823,15 @@ rescored through the verified bytes: \VerifiedScorerCells{} cells,
 \VerifiedScorerTraces{} traces, \VerifiedScorerProblems{} disagreements with
 the manuscript's counts and with an independent Definition-1 implementation
 (\texttt{verified\_scorer\_gate.py}; receipt committed; its first pass had
-failed on a reader defect the gate caught, supplement \S\,W.5).\else The rescoring
-of every published cell through the verified bytes is \Pending{runner step
-14}; until its receipt is committed the tables stand on the gated port.\fi
+failed on a reader defect the gate caught, supplement \S\,W.5).\else Every
+published \A1 cell was rescored through the verified bytes
+(\texttt{verified\_scorer\_gate.py}: \VerifiedScorerCells{} cells,
+\VerifiedScorerTraces{} traces, each verified count equal to an independent
+Definition-1 count), but the gate exited non-zero on \VerifiedScorerProblems{}
+per-cell \texttt{refusals.jsonl} sidecars of the refusal study that it
+handed the analyser as op-records (a reader defect, like the one its first
+pass caught; supplement \S\,W.5), so its clean receipt is \Pending{runner
+step 14 rerun} and until then the tables also stand on the gated port.\fi
 
 \subsection{$L_1$: two concurrent stores whose lock is verified, not assumed}
 \label{sec:l1}
@@ -3909,7 +4006,9 @@ live study's verified arm, the $100$-line JSON bridge and the harness's
 interning of cells and values; (xii) the $60$-line interning wrapper between
 the verified \A1 detector and a string-valued record
 (\cref{sec:verus-detectors}); (xiii) the $70$-line bridge between the verified
-$L_3$ sequencer and the tool executor (\cref{sec:a6-eval}). No safety-bearing
+$L_3$ sequencer and the tool executor (\cref{sec:a6-eval}); (xiv) for the
+exec ledger of \cref{sec:ledger}, the bridge with its Python shadow, the
+store hook that calls it inside the lock, and the compensator. No safety-bearing
 proof invokes a writes-as-function-of-reads assumption, and the development
 carries no probabilistic obligation.
 
@@ -3936,12 +4035,12 @@ Intervals are exact Clopper--Pearson unless stated.
 
 \subsection{RQ1 on a live runtime: what $L_1$ removes and what it leaves}
 \label{sec:live-a1}
-The scenario of \cref{sec:intro-example} runs on an unmodified LangGraph
+The scenario of \cref{sec:intro-example} runs on a released LangGraph
 runtime (\texttt{langgraph} 1.2.0) with live models. Two compiled graphs
 share one \texttt{BaseStore}, the framework's cross-thread memory, subclassed
-only to stamp a logical clock at \texttt{get}/\texttt{put} under one lock
-(\texttt{BaseStore} offers no version or compare-and-set, so the framework as
-shipped cannot validate a read set). A flight agent reads the trip date,
+only to stamp a logical clock at \texttt{get}/\texttt{put} under one lock,
+the one instrumentation (\texttt{BaseStore} offers no version or
+compare-and-set, so the framework as shipped cannot validate a read set). A flight agent reads the trip date,
 drafts a reservation over a model call and puts the booking; a date agent,
 started by the harness \LiveOffsetMs{}\,ms after the flight agent's read, reads
 the date, asks its model for a one-week revision and puts it. Three modes:
@@ -3956,7 +4055,8 @@ regenerations, and the booking's and final trip dates (\cref{tab:live}).
 
 \begin{table*}[t]
 \centering
-\caption{Live cross-agent stale generation on an unmodified LangGraph runtime,
+\caption{Live cross-agent stale generation on a released LangGraph runtime
+(store instrumented only to stamp a clock),
 $n{=}100$ per cell at a $150$\,ms race offset; the date agent revises in every
 session. \emph{\A1}: \cref{def:a1} on the emitted records. \emph{\Rp{}}:
 \cref{def:residue} by argument provenance. \emph{Booking $\neq$ final}: the
@@ -4075,10 +4175,15 @@ column equals the residue; \texttt{a7\_rescore.py -{}-check}), two
 independent computations whose agreement rests on the structured date
 argument (\cref{sec:residue}). Two further arms run on three API families
 (haiku, gpt-4o-mini and deepseek-chat through its OpenAI-compatible
-endpoint). In the \emph{verified} arm the $L_1$ decision is taken by the
-verified store through the bridge of \cref{sec:trust}: \A1 fires in $0/300$
-sessions and the residue is $2$, $51$ and $52$ of $100$ against $12$, $51$
-and $63$ for the application-layer arm of the same run. In the \emph{ledger}
+endpoint). The application-layer arm's validating re-read and its
+\texttt{put} are two store calls, so it is check-then-act, not an atomic
+commit: a revision landing between them would commit stale, and would be an
+\A1 witness on the record, whose read time is the validating read's; none did
+in the $3{,}900$ sessions of this study that ran over it ($2{,}700$
+validated, $1{,}200$ ledger), which bounds the window without closing it. In the \emph{verified} arm the $L_1$ decision is taken
+inside the verified store's lock through the bridge of \cref{sec:trust}: \A1
+fires in $0/300$ sessions and the residue is $2$, $51$ and $52$ of $100$
+against $12$, $51$ and $63$ for the application-layer arm of the same run. In the \emph{ledger}
 arm a superseding put registers the obligation and a compensator issues a
 replacement booking: $0/100$ wrong on all three families ($5$, $45$ and $53$
 obligations, each discharged by one compensation generation), at the price
@@ -4120,10 +4225,8 @@ $\RunsHaikuValidatedRPooled$ and $51$ vs.\ $\RunsGptValidatedRPooled$
 $p\RunsVsSeqDeepseekValidatedR$), and within the interleaved design the three
 runs of one arm differ on deepseek-chat alone (validated residue
 $54$/$73$/$58$, $\chi^2$ $p\RunsHeteroDeepseekValidatedR$; the pooled intervals
-treat the $300$ sessions as one sample, which that test qualifies); the split
-of the revision rate into predicate and residue is the provider's latency at
-the hour of the run, which a deployment reads off its own records, not off a
-table. And the ledger rows do not move: $\RunsHaikuLedgerWrongPooled$ wrong
+treat the $300$ sessions as one sample, which that test qualifies). And the
+ledger rows do not move: $\RunsHaikuLedgerWrongPooled$ wrong
 bookings in both ledger arms on every family (exact 95\% interval
 $\RunsHaikuLedgerWrongCI$)---on the store, the qualification
 \cref{sec:ledger-world} measures.
@@ -4131,7 +4234,7 @@ $\RunsHaikuLedgerWrongCI$)---on the store, the qualification
 \ifnum\LiveRunsAvailable=1
 \begin{table}[t]
 \centering
-\caption{Replicated, interleaved live study (probe 303 \texttt{-{}-interleave -{}-runs 3}): \Rp{} per run of $100$ sessions at the $150$\,ms offset, the five arms of a session run back to back in a seeded order, and the pooled count (exact 95\% intervals and per-run \A1: supplement \S\,W). \A1 fired in $0/300$ sessions of every $L_1$ arm and in $\RunsHaikuVanillaAOnePooled$, $\RunsGptVanillaAOnePooled$ and $\RunsDeepseekVanillaAOnePooled$ vanilla sessions; booking $\neq$ final is $A_1+R$ in every cell. The ledger rows' \Rp{} is decided from the obligation record emitted at the superseding put; the share of revisions landing after the final commit (wall-clock stamp) equals \Rp{} in every validated and verified cell.}
+\caption{Replicated, interleaved live study (probe 303 \texttt{-{}-interleave -{}-runs 3}): \Rp{} per run of $100$ sessions at the $150$\,ms offset, the five arms of a session run back to back in a seeded order, and the pooled count (exact 95\% intervals and per-run \A1: supplement \S\,W). \A1 fired in $0/300$ sessions of every $L_1$ arm and in $\RunsHaikuVanillaAOnePooled$, $\RunsGptVanillaAOnePooled$ and $\RunsDeepseekVanillaAOnePooled$ vanilla sessions; booking $\neq$ final is $A_1+R$ in every cell. The ledger rows' \Rp{} is decided from the obligation record emitted at the superseding put; the share of revisions landing after the final commit (wall-clock stamp) equals \Rp{} in every $L_1$ cell.}
 \label{tab:liveruns}
 \footnotesize
 \setlength{\tabcolsep}{3pt}
@@ -4263,12 +4366,12 @@ cannot tell the two compensators apart; the world does, and the lesson is the
 remark of \cref{sec:residue}: a registered obligation buys exactly its
 compensator's truthfulness. Two further runs bound the rest.
 \ifnum\LedgerWorldAvailable=1 With the obligation registered \emph{after}
-the put returned (the design until 2026-10-16; another day, unpaired): world
-wrong \LWLedgerWorldWrongRange{}, none \LWLedgerWorldNoneRange{}, consumer
-stale \LWLedgerConsumerStaleRange{}, agreement $\LWLedgerAgree$, every
-interval overlapping the atomic run's---a null by construction, since the
-probe injects no fault in that gap; it shows the change moved nothing else.
-The gap is closed by the code, unmeasured; the compensation it precedes takes
+the put returned (the design until 2026-10-16; another day, unpaired) every
+world column overlaps the atomic run's (world wrong
+\LWLedgerWorldWrongRange{}, none \LWLedgerWorldNoneRange{}, consumer stale
+\LWLedgerConsumerStaleRange{}, agreement $\LWLedgerAgree$)---a null by
+construction, since the probe injects no fault in that gap. The gap is closed
+by the code, unmeasured; the compensation it precedes takes
 \LWatomicLedgerCompLatencyMedianSRange{}\,s (median), and that is where the
 residue is. \fi\ifnum\LedgerWorldWideAvailable=1 With the consumer
 reading up to $5$\,s after the first release it acts on the stale booking in
@@ -4363,9 +4466,9 @@ writes its review in $50$ of the scored run's $100$ unguarded sessions
 no-write bypass of Theorem L1j that default SI never validates---$50/100$
 against gpt-4o's $5/100$ (SSI mode closes it).
 Which operations a model issues is part of the workload (supplement
-\S\,M).\else Its \A1 rate, like the
-Sonnet pessimistic and snapshot-isolation cells, is to be scored by the
-verified detector of step 14 and is \Pending{runner steps 11/14} (supplement
+\S\,M).\else Its \A1 rate and the six guarded Sonnet cells are scored
+by the verified detector; the fold withholds them until the scorer gate's
+receipt is clean, \Pending{runner step 14 rerun} (supplement
 \S\,M).\fi{} The gpt-4o run predates the change and is reported as run.
 
 \subsection{RQ1 for $L_2$: output commit on synthetic cascades and live verdicts}
@@ -4447,9 +4550,11 @@ that replay issued the calls one at a time, which cannot reorder and
 measures nothing; \ifnum\ToolNodeVerifiedAvailable=1 the arm that counts
 dispatches the batch concurrently through the same executor and releases
 each real effect only when the verified sequencer (\cref{sec:l3}) releases
-it: \A6 in \ToolNodeVerifiedSqlite{} replays (SQLite, baseline
-\ToolNodeVerifiedBaselineSqlite{} in the same replays) and
-\ToolNodeVerifiedHttp{} (HTTP, baseline \ToolNodeVerifiedBaselineHttp).\else
+it. In a second, separate replay of the same $33$ batches (runner step 15,
+with its own baseline arm, which differs from the first run's because
+concurrent dispatch is nondeterministic): \A6 in \ToolNodeVerifiedSqlite{}
+replays (SQLite; baseline \ToolNodeVerifiedBaselineSqlite{} in that run) and
+\ToolNodeVerifiedHttp{} (HTTP; baseline \ToolNodeVerifiedBaselineHttp).\else
 the arm that counts---concurrent dispatch through the same executor, each
 real effect released only when the verified sequencer of \cref{sec:l3}
 releases it---is \Pending{runner step 15}.\fi
@@ -4467,8 +4572,8 @@ hazard rate and the refusal cost, the zero is Theorem $L_4$b executing.
 \label{sec:cost}
 The pilot driver captures per-call usage and wall-clock for every session of
 run \texttt{\CostRun} (gpt-4o, $900$ sessions) and of its Claude Sonnet~4.5
-cost replication (May 2026, without operation records; \cref{sec:pilot}),
-at list price at the time of the run. Per session, snapshot isolation's token
+replication (May 2026, no operation records; \cref{sec:pilot}), at list
+price at the time of the run. Per session, snapshot isolation's token
 cost is not separable from the unguarded runtime's on either provider
 (overlapping intervals in every cell); pessimistic locking's is
 provider-dependent (at most $1.6\times$ on gpt-4o and $2.2\times$ on Claude,
@@ -4521,9 +4626,10 @@ permutation $p=0.014$, $0.002$) and $+13.5\%$ for SI on Claude ($p=0.001$):
 drift, whose largest magnitude is the run's null band. Outside it: pessimistic
 locking at $+16.7\%$ (edit-review) and $+34.9\%$ (triage) on gpt-4o and
 $+109.5\%$ (triage) on Claude, $7.75$ model calls per session against
-$4.00$. Snapshot isolation is inside the band in every cell on both families,
-which is not zero: the design resolves nothing below about $5\%$ on gpt-4o
-or $14\%$ on Claude (supplement \S\,O). Probe~302 interleaves the runtimes per session, removing the confound.
+$4.00$. Snapshot isolation is inside the band in every cell on both
+families---not zero: the design resolves nothing below about $5\%$ on gpt-4o
+or $14\%$ on Claude (supplement \S\,O). Probe~302 removes the confound by
+interleaving the runtimes per session.
 \ifnum\WallclockPairedClaudeAvailable=1 On Claude Sonnet~4.5 its paired
 per-session overheads (mean, bootstrap 95\% CI) are triage pessimistic
 \WallclockPairedClaudeTriagePess{} and SI \WallclockPairedClaudeTriageSI,
@@ -4536,46 +4642,70 @@ a script defect and is read from completion stamps at $1$\,s resolution
 the plan-execute control \WallclockStampClaudePlanExecutePess, edit-review
 pessimistic \WallclockStampClaudeEditReviewPess. That cell and the
 $+109.5\%$ above are two readings of a pilot that told the refused agent
-\texttt{COMMITTED} (\cref{sec:pilot}): the May run's price was paid in
-chat rounds after the refusal ($7.75$ calls per session), the October run's
-chat closed at once ($4$; supplement \S\,M).
+\texttt{COMMITTED} (\cref{sec:pilot}): $7.75$ chat calls per session in May,
+$4$ in October (supplement \S\,M).
 \ifnum\RefusalClaudeAvailable=1 With the tools telling the truth (Claude
 Sonnet~4.5, five arms interleaved per session, $n{=}100$, edit-review and
 triage) the price is what the lie had hidden, and the sidecars say who pays
 it. Under locking the triager's read-only operation holds the ticket's lock
 from one of its turns to the next, so the reporter and the engineer are
 refused on every turn of theirs (\RefusalClaudeTriagePessDropRefused{}
-refused operations per session, $100/100$ sessions) and the chat runs on:
+refused operations per session) and the chat runs on:
 told \texttt{REFUSED}, \RefusalClaudeTriagePessDropCalls{} model calls per
 session against vanilla's \RefusalClaudeTriageVanillaCalls{}, wall-clock
 \RefusalClaudeTriagePessDropWallOverhead; asked to redo,
 \RefusalClaudeTriagePessRetryCalls{} calls,
 \RefusalClaudeTriagePessRetryWallOverhead. On edit-review the editor's lock
-refuses the reviewer ($5$ per session): \RefusalClaudeEditReviewPessDropCalls{}
-calls against \RefusalClaudeEditReviewVanillaCalls,
-\RefusalClaudeEditReviewPessDropWallOverhead---and the editor never issues
+refuses the reviewer five times per session
+(\RefusalClaudeEditReviewPessDropCalls{} calls against
+\RefusalClaudeEditReviewVanillaCalls,
+\RefusalClaudeEditReviewPessDropWallOverhead), and the editor never issues
 its own write (\RefusalClaudeEditReviewPessDropWriterCommits{} sessions
 against \RefusalClaudeEditReviewVanillaWriterCommits{} unguarded;
-\RefusalClaudeEditReviewPessDropWriteLengthCalls{} of the arm's
+\RefusalClaudeEditReviewPessDropWriteLengthCalls{} of its
 \RefusalClaudeEditReviewPessDropTotalCalls{} completions have a
 \texttt{write\_state} call's length, against
 \RefusalClaudeEditReviewVanillaWriteLengthCalls{} of
-\RefusalClaudeEditReviewVanillaTotalCalls), repeating its read in each of its
-six turns and re-acquiring the lock. The group chat shows the reviewer's
-\texttt{REFUSED} result to the editor too, and the editor acts on it as its
-own: under snapshot isolation, which refuses only the reviewer's overwritten
-commit (\RefusalClaudeEditReviewSIDropRefusedSessions{} sessions;
+\RefusalClaudeEditReviewVanillaTotalCalls), re-reading in each of its six
+turns. The chat shows the reviewer's \texttt{REFUSED} result to the editor
+too, and the editor acts on it: under snapshot isolation, which refuses only
+the reviewer's overwritten commit
+(\RefusalClaudeEditReviewSIDropRefusedSessions{} sessions;
 \RefusalClaudeEditReviewSIDropWallOverhead{} drop,
 \RefusalClaudeEditReviewSIRetryWallOverhead{} retry; never on triage), the
-editor repeats a step of its own after the refusal, a blind rewrite of
-\texttt{doc} or a re-read (\RefusalClaudeEditReviewSIDropWriterRecords{}
-records per session against $1.00$), while under the earlier tools, whose refused read surfaced as an
-exception text (the 2026-10-14 interleaved run), the locked editor wrote in
-\InterleavedClaudeEditReviewPessWriterCommits{} sessions. The price measured
-is that of a refusal in a chat that broadcasts tool results---AutoGen's
-default---not of the lock alone; the arm with the text addressed to the
-refused agent is runner step 24, \Pending{runner step 24} (supplement
-\S\,O).\else Until
+editor then repeats a step of its own, a blind rewrite or a re-read
+(\RefusalClaudeEditReviewSIDropWriterRecords{} records per session against
+$1.00$), while under the earlier tools, whose refused read surfaced as an
+exception text (the 2026-10-14 run), the locked editor wrote in
+\InterleavedClaudeEditReviewPessWriterCommits{} sessions.
+\ifnum\RefusalClaudeAddrAvailable=1 The control addresses the
+\texttt{REFUSED} text to the refused agent and marks it as not theirs to the
+others (runner step 24; four of the five arms, $n{=}100$; supplement \S\,O). On
+triage it removes most of the locking price: told to drop,
+\RefusalClaudeAddrTriagePessDropCalls{} calls against vanilla's
+\RefusalClaudeAddrTriageVanillaCalls{}
+(\RefusalClaudeAddrTriagePessDropRefused{} refusals per session,
+\RefusalClaudeAddrTriagePessDropWallOverhead), at
+\RefusalClaudeAddrTriagePessDropCommits{} committed operations per session
+against \RefusalClaudeAddrTriageVanillaCommits{}---the refused agents'
+operations are dropped, not repeated; told to retry,
+\RefusalClaudeAddrTriagePessRetryCalls{} calls,
+\RefusalClaudeAddrTriagePessRetryCommits{} commits,
+\RefusalClaudeAddrTriagePessRetryWallOverhead. On edit-review it changes
+nothing: \RefusalClaudeAddrEditReviewPessDropCalls{} calls,
+\RefusalClaudeAddrEditReviewPessDropRefused{} refusals, the editor's write in
+\RefusalClaudeAddrEditReviewPessDropWriterCommits{} sessions and
+\RefusalClaudeAddrEditReviewPessDropWriteLengthCalls{} write-length
+completions of \RefusalClaudeAddrEditReviewPessDropTotalCalls{}, under both
+texts. The price of a truthful refusal is thus set by what the chat shows the
+unrefused agent; its wording decides it on one workload and not on the
+other, and which feature of the \texttt{REFUSED} result costs the editor its
+write these runs do not isolate (the one text under which the locked editor
+wrote is the exception text of the 2026-10-14 run).\else The price
+measured is that of a refusal in a chat that broadcasts tool
+results---AutoGen's default---not of the lock alone; the arm with the text
+addressed to the refused agent is runner step 24, \Pending{runner step 24}
+(supplement \S\,O).\fi\else Until
 runner step 22 prices both policies on one model and day, the pilot's cells
 price a refusal that stops the agent and the paired sweep of \cref{sec:cost}
 one that is retried.\fi\else Its Claude Sonnet~4.5 run ($900$ sessions, the runtimes
@@ -4586,36 +4716,38 @@ of the Claude interleaved run}.\fi\fi{}
 
 \subsection{RQ3: where the preconditions occur}
 \label{sec:prevalence}
-Every occurrence figure above is a race we opened or a rate on our own
-workloads. To put a denominator under the structural precondition of \A1 in
+To put a denominator under the structural precondition of \A1 in
 the framework we studied---a reader and a writer of one last-value channel
-released into the same superstep---we analyzed public code; the answer is a
-bracket, \emph{none confirmed, at most about half}. \emph{Frame}: $60$ GitHub
+released into the same superstep---we analyzed public code; the answer is
+\emph{none confirmed}, by an instrument blind to about half the repositories.
+\emph{Frame}: $60$ GitHub
 repositories per star band matching \texttt{langgraph} (Python; forks and
-the framework's own organization excluded), drawn under a fixed seed from
-the API's $500$ most recently updated.
+the framework's own organization excluded), a seeded draw from the API's
+$500$ most recently updated; all $180$ were read (supplement \S\,Q).
 \emph{Instrument}: a static front end that recovers from the syntax tree each
 \texttt{StateGraph} site, the node pairs one fork releases into a superstep,
 and each node's read and written keys; what it cannot resolve is
 \emph{unknown}, never guessed (validated against execution on eight runnable
-fixtures). All $180$ repositories were read
-(supplement \S\,Q); \CensusRepos{} contain a visible graph, holding
+fixtures). Of the $180$, \CensusRepos{} contain a visible graph, holding
 \CensusSites{} sites, \CensusSequential{} ($96\%$) of them sequential.
 Fifteen sites in \CensusParallelRepos{} repositories ($11.2\%$, Wilson 95\%
 $[6.4, 19.0]$) contain a co-scheduled pair; none is a confirmed
 reader/writer pair on a last-value channel (repository-level upper limit
-$3.8\%$); two are such pairs on a reducer channel, the ordinary
-parallel-agents-on-\texttt{messages} idiom; eight have an unresolved side,
-bounding the susceptible share at $8.2\%$ $[4.2, 15.3]$ of repositories;
-counting every unresolved site gives $51\%$. An enriched population---the
+$3.8\%$); two are such pairs on a reducer channel (the
+parallel-agents-on-\texttt{messages} idiom); eight have an unresolved side,
+bounding the susceptible share at $8.2\%$ $[4.2, 15.3]$ of repositories.
+Counting every site the front end cannot settle---an unresolved side,
+\texttt{Send} fan-out (seven sites, the construct outside the model,
+\cref{sec:model}) or routing it cannot resolve---gives $94$ sites in $50$
+repositories ($51\%$): the instrument's reach, where nothing is confirmed
+or excluded, not a bound. An enriched population---the
 \CensusErrorStringRepos{} third-party repositories whose issues quote
 LangGraph's co-superstep writer/writer error, so demonstrably ran parallel
-writers---has parallel graphs in $12/26$ but again no confirmed site in
-$391$. The narrow reading is a negative result for the motivation of
-\cref{sec:live-a1}, recorded as one. Of five deployed designs we probed, four
+writers---has parallel graphs in $12$ of its $26$ with a visible graph but
+again no confirmed site in $391$. Of five deployed designs we probed, four
 close the window by construction; LangGraph's superstep channels and
 cross-thread store leave it open, where \cref{sec:live-a1} measures it
-(mechanisms and two framework defects: supplement \S\,Q).
+(supplement \S\,Q).
 
 \subsection{Threats to validity}
 \label{sec:threats}
@@ -4623,18 +4755,20 @@ cross-thread store leave it open, where \cref{sec:live-a1} measures it
 reports both and \Rp{} names the gap. The basis is argument provenance,
 verbatim and not semantic; whether a booking that disagrees with a later
 revision is harm is the application's call, and we count it because the user
-asked for one trip. \A6 fires on commuting effects and is silent on dropped
-ones. \emph{Internal.} The live rates are latency races, $n=100$ per cell,
+asked for one trip. \emph{Internal.} The live rates are latency races, $n=100$ per cell,
 single runs in \cref{tab:live} and \cref{fig:offset} and three interleaved
-runs in \cref{tab:liveruns}; the sequential wall-clock cells carry a
+runs in \cref{tab:liveruns}; the application-layer $L_1$ arm is
+check-then-put (\cref{sec:live-a1}); the sequential wall-clock cells carry a
 run-order confound we bound rather than remove (\cref{sec:cost}); the
 pilot's prices depend on what a model does with a refusal, its own or a
-peer's broadcast one (\cref{sec:cost}); the L2 live replay rests on $66$ retractions, $62$ from one
-family. \emph{External.} Three API families and one local; one framework
+peer's broadcast one (\cref{sec:cost}); RQ2 is priced in tokens for $L_1$
+only---$L_2$ in hold latency, $L_4$ in refused dispatches, $L_3$ unpriced
+(the sequencer adds no model call); the L2 live replay rests on $66$
+retractions, $62$ from one family. \emph{External.} Three API families and one local; one framework
 driven live; toy workloads of two to three agents. \emph{Reproducibility.}
 Every cell is committed with its traces and rescored by the verified detector
 and an independent implementation of \cref{def:a1}; one September run has a
-manifest captured at run time, two reconstructed ones that say so.
+run-time manifest, two reconstructed ones that say so.
 
 % ============================================================================
 % sec/07-related.tex
@@ -4648,12 +4782,14 @@ visibility under bounded latency; ours is unbounded. The database isolation
 hierarchy~\cite{BerensonEtAl1995,Adya1999,AdyaLiskovOneil2000} is the direct
 ancestor: we adopt its anomaly-based method over a different operational
 model, and the SSI line~\cite{FeketeEtAl2005MakingSI,CahillRohmFekete2008SSI,PortsGrittner2012}
-is the reference for our SSI runtime (the work discarded on abort is an
-inference). Weikum and Vossen's commit-order-preserving
+is the reference for our SSI runtime. Commitment ordering~\cite{Raz1992CO}, Weikum and Vossen's
+commit-order-preserving
 serializability~\cite{WeikumVossen2001} and Kung and Robinson's backward
 validation~\cite{KungRobinson1981OCC}---the read-set validation at commit of
 Silo~\cite{TuEtAl2013Silo} and TicToc~\cite{YuEtAl2016TicToc}, which $L_1$
-is---are what \cref{thm:corc} mechanizes at the level of values read; view
+is---are what \cref{thm:corc} mechanizes at the level of values read (the
+value-level statement differs from the conflict-level one exactly at the
+overwrite-and-restore shape of \cref{sec:a1}); view
 equivalence~\cite{Papadimitriou1979} is where the value-level and
 conflict-level notions meet, and \cref{def:corc} is a client-centric,
 state-based statement of the kind Crooks et al.\ give for isolation
@@ -4674,7 +4810,7 @@ boosting~\cite{HerlihyKoskinen2008Boosting} met the same irreversibility in
 transactional memory; output commit is the dual choice. Commutativity-based
 control~\cite{Weihl1988Commutativity} orders only what does not commute: an
 \A6 discipline over commutativity classes would pay the sequencing cost only
-where it buys something (our predicate over-reports on commuting effects).
+where it buys something.
 The basis of \cref{def:residue} is why-provenance~\cite{BunemanEtAl2001Why}
 restricted to copying; exactly-once stream
 processing~\cite{AkidauEtAl2013MillWheel} holds side effects at a
@@ -4687,9 +4823,9 @@ TxnSails~\cite{ZhouEtAl2025TxnSails}.
 \subsection{Concurrency control and shared memory for LLM agents}
 A 2025--2026 line builds mechanisms for this regime, mostly without verifying
 them, and this paper is one point in it rather than its origin; twenty of the
-2026 works cited in this related-work section are preprints at the time of
-writing (an arXiv identifier and no venue in the bibliography), cited for the
-designs they describe---no claim of ours rests on their results. Agentic
+2026 works cited here are preprints at the time of writing (arXiv identifier,
+no venue), cited for the designs they describe---no claim of ours rests on
+their results. Agentic
 transactions~\cite{SunEtAl2026AgenticTx} recast ACID as four semantic
 guarantees for one long-horizon agent and measure task success, with no
 history predicate, model or proof; our catalog is the anomaly-level account
@@ -4712,8 +4848,7 @@ memory~\cite{Transactive2026} address provenance, supersession and scoping
 without treating the generation window as a transaction.
 TOKI~\cite{Wang2026TOKI} is the closest formal treatment of supersession:
 contradiction resolution in agent memory as write-time concurrency control,
-with the isolation each operator presupposes, the write anomalies it admits
-and a soundness proof for a bitemporal operator family; it governs which
+with a soundness proof for a bitemporal operator family; it governs which
 belief a memory keeps, where \Rp{} governs what an effect already out still
 owes.
 SAFEFLOW~\cite{LiEtAl2025SAFEFLOW} adds information-flow labels and
@@ -4723,7 +4858,7 @@ released after whole-workflow validation---output commit at task
 granularity, without a model of concurrent tasks or a proof.
 StateFuse~\cite{VolkovEtAl2026StateFuse} keeps conflicting observations
 visible under CRDT merging, orthogonal to exclusion like CodeCRDT; Yu et
-al.~\cite{YuEtAl2026ExecConsistency} ask whether a consistent shared memory
+al.~\cite{YuEtAl2026ExecConsistency} ask whether consistent shared memory
 suffices for an agent's task duties, a question above our history level.
 SagaLLM~\cite{GengChang2025SagaLLM}, Atomix~\cite{MohammadiEtAl2026Atomix}
 and CodeCRDT~\cite{Pugachev2025CodeCRDT} are placed on the lattice informally
@@ -4749,17 +4884,16 @@ on an explicit \emph{retraction} it walks a derivation DAG to executed tool
 actions and records each as compensated or leaked. None treats the ordinary
 case \cref{tab:live} measures---no retraction, no race, a legitimate later
 write---or says what is achievable there; \cref{sec:residue} says an
-obligation, registered at the superseding write. Zheng et al.'s precision objection is met at the basis: a basis predicate
-ignores writes the effect never depended on.
+obligation, registered at the superseding write. Zheng et al.'s precision
+objection is met at the basis, as far as the basis is recovered: a basis
+predicate ignores writes the effect never depended on.
 
 \subsection{Effect order, durable execution, verified systems, taxonomies}
 Parallel function calling is pursued deliberately
 (LLMCompiler~\cite{KimEtAl2024LLMCompiler}, asynchronous
 calling~\cite{GimEtAl2024AsyncLM}), the ordering of effects left to the
 runtime; \A6 is a wrong independence judgment seen at the effect level
-(\cref{sec:a6-eval}). Sandboxes and policies for tool
-effects~\cite{RuanEtAl2024ToolEmu,DebenedettiEtAl2024AgentDojo} gate
-\emph{what} an agent may do, orthogonally to order and basis. Durable-execution
+(\cref{sec:a6-eval}). Durable-execution
 engines~\cite{BurckhardtEtAl2021Durable} and exactly-once workflow
 systems~\cite{SkiadopoulosEtAl2022DBOS} govern whether an effect is
 \emph{repeated} after a crash (the property $D$ of \cref{sec:dup} names),
@@ -4769,8 +4903,8 @@ replay is deterministic, a premise agent runtimes
 break~\cite{ZhengEtAl2026ACRFence}.
 IronFleet~\cite{HawblitzelEtAl2015IronFleet} and
 Perennial~\cite{ChajedEtAl2019Perennial} verify running systems by layered
-refinement, the template for the open step of \cref{sec:l1}; ours are far
-smaller and add verified bytes executed in a measurement. Jepsen~\cite{Kingsbury2013Jepsen} and the black-box
+refinement, the template for the open step of \cref{sec:l1}; ours add
+verified bytes executed in a measurement. Jepsen~\cite{Kingsbury2013Jepsen} and the black-box
 checkers~\cite{TanEtAl2020Cobra,Aphyr2020Elle} (successors in supplement
 \S\,R) decide isolation levels over database histories with unverified
 analyzers under a uniqueness assumption we share (\cref{sec:a3}); ours
@@ -4779,9 +4913,8 @@ verification~\cite{BauerLeuckerSchallhart2011}.
 MAST~\cite{CemriEtAl2025MAST} catalogs cognitive and coordination failures;
 its traces cannot show \A1 either way (supplement \S\,C).
 Agentproof~\cite{XavierEtAl2026Agentproof} analyzes agent graphs statically,
-the programme the census specializes;
-MCMAS~\cite{LomuscioQuRaimondi2017MCMAS} verifies task-level and strategic
-properties.
+as the census does; MCMAS~\cite{LomuscioQuRaimondi2017MCMAS} verifies
+task-level and strategic properties.
 
 % ============================================================================
 % sec/08-limitations.tex
@@ -4808,10 +4941,10 @@ here, the date being a structured argument); free-text effects need a
 declared or taint-tracked basis.
 
 \smallskip\noindent\emph{A refused retraction is not a prevented anomaly.}
-Output commit makes \cref{def:a3} unreachable partly by holding effects and
-partly by refusing to retract an operation whose effects are out; the second
-leaves the world as it was and is counted (\cref{sec:l2-eval}); the
-exposure--latency curve between harness and live driver is unmeasured.
+Output commit makes \cref{def:a3} unreachable partly by refusing to retract
+an operation whose effects are out, which leaves the world as it was and is
+counted (\cref{sec:l2-eval}); the exposure--latency curve between harness and
+live driver is unmeasured.
 
 \smallskip\noindent\emph{Verification is relative to the trace, and the
 triangle closes on one system only in part.} Trust-base item (ix) is the
@@ -4820,39 +4953,48 @@ through prompt context is invisible, and our own read-set reconstruction finds
 most reads invisible on a realistic workload~\cite{Khan2026SBus}. \ifnum\VerifiedScorerAvailable=1 The \A1
 verdict is now the verified bytes behind an interning wrapper; the \A2,
 \A3 and \A6 verdicts remain ports gated against their specifications.\else
-The published \A1 verdicts stand on a gated port until the rescoring through
-the verified bytes is committed; \A2, \A3 and \A6 remain ports gated against
-their specifications.\fi{} The refinement from the two concurrent stores to
+The \A1 verdict is the verified bytes behind an interning wrapper, its gate
+receipt pending; \A2, \A3 and \A6 remain ports gated against their
+specifications.\fi{} The refinement from the two concurrent stores to
 their abstract machines is open (a bounded simulation is evidence, not
-proof); the $L_2$--$L_4$ exec artifacts are sequential objects a
+proof); the application-layer $L_1$ arm is check-then-put, its window bounded
+by $3{,}900$ sessions, not closed (\cref{sec:live-a1}); the $L_2$--$L_4$ exec
+artifacts are sequential objects a
 multi-threaded caller must serialize; the ledger arm's executable is harness
 code\ifnum\LfiveExecAvailable=1{} except its bookkeeping (\LfiveExecVerus)\fi, its
 Verus model scaffolding. Liveness is verified nowhere.
 
 \smallskip\noindent\emph{Prevalence is not established, and the census
 points the other way.} The census bounds a structural precondition in public
-code (none confirmed; at most about half counting every unresolved site) and
+code (none confirmed; routing unresolved in about half the repositories) and
 is silent on private deployments, run frequency and the cross-thread store.
 
+\newcount\PendingItems\PendingItems=0
 \smallskip\noindent\emph{Pending} (runner steps):
-\ifnum\VerifiedScorerAvailable=0 the rescoring of every cell through the
-verified detector (step 14; its first run rejected every record carrying
-both \texttt{agent} and \texttt{agent\_id}, a reader defect fixed in this
-version of the artifact, its rerun pending); \fi\ifnum\ToolNodeVerifiedAvailable=0 the
-replay with the verified $L_3$ bytes (15); \fi\ifnum\LiveRunsAvailable=0
-the replicated, interleaved live study with the ledger over the verified
-store (17); \fi\ifnum\LedgerWorldAvailable=0 the ledger in a world (18);
-\fi\ifnum\LedgerWorldFirstAvailable=0 the world study's rerun under the
-corrected compensator (18); \fi\ifnum\WallclockPairedClaudeAvailable=0
-\ifnum\WallclockStampClaudeAvailable=0 the wall-clock cell of the interleaved
-Claude run (6), recoverable from its completion stamps; \fi\fi
-\ifnum\PilotClaudeAvailable=0 the Claude pilot's
-pessimistic and snapshot-isolation cells and the \A1 rate of its rerun triage
-cell (11, 14); \fi\ifnum\LfiveExecAvailable=0 the verification of the exec
-ledger's bookkeeping under the pinned Verus build (7; its first run used
-another toolchain)\ifnum\RefusalAddrClaudeAvailable=0;\else.\fi{} \fi\ifnum\RefusalAddrClaudeAvailable=0 the refusal-price
-arms with the \texttt{REFUSED} text addressed to the refused agent (24), the
-control for the chat's broadcast of it (\cref{sec:cost}). \fi Longer tasks, more agents and an instrumented
+\ifnum\VerifiedScorerAvailable=0 the clean receipt of the verified-scorer
+gate (step 14; its last pass rescored every cell but exited non-zero on the
+refusal study's per-cell sidecars); \advance\PendingItems by 1\relax\fi
+\ifnum\ToolNodeVerifiedAvailable=0 the replay with the verified $L_3$ bytes
+(15); \advance\PendingItems by 1\relax\fi
+\ifnum\LiveRunsAvailable=0 the replicated, interleaved live study with the
+ledger over the verified store (17); \advance\PendingItems by 1\relax\fi
+\ifnum\LedgerWorldAvailable=0 the ledger in a world (18); \advance\PendingItems by 1\relax\fi
+\ifnum\LedgerWorldFirstAvailable=0 the world study's rerun under the
+corrected compensator (18); \advance\PendingItems by 1\relax\fi
+\ifnum\WallclockPairedClaudeAvailable=0 \ifnum\WallclockStampClaudeAvailable=0
+the wall-clock cell of the interleaved Claude run (6), recoverable from its
+completion stamps; \advance\PendingItems by 1\relax\fi\fi
+\ifnum\PilotClaudeAvailable=0 the Claude pilot's pessimistic and
+snapshot-isolation cells and the \A1 rate of its rerun triage cell
+(11, 14); \advance\PendingItems by 1\relax\fi
+\ifnum\LfiveExecAvailable=0 the verification of the exec ledger's
+bookkeeping under the pinned Verus build (7; its first run used another
+toolchain); \advance\PendingItems by 1\relax\fi
+\ifnum\RefusalClaudeAddrAvailable=0 the refusal-price arms with the
+\texttt{REFUSED} text addressed to the refused agent (24), the control for
+the chat's broadcast of it (\cref{sec:cost}); \advance\PendingItems by 1\relax\fi
+\ifnum\PendingItems=0 none at this version.\else and no other.\fi{}
+Longer tasks, more agents and an instrumented
 deployment are the empirical follow-up; the store refinements, the formal
 one.
 
@@ -4892,8 +5034,7 @@ re-executed node emitted its effect twice.
 \begin{thebibliography}{100}
 \bibitem{GengChang2025SagaLLM}
 E.~Y. Chang and L.~Geng, ``{SagaLLM}: Context management, validation, and
-  transaction guarantees for multi-agent {LLM} planning,'' \emph{Proc. VLDB Endow.}, 2025,
-  arXiv:2503.11951.
+  transaction guarantees for multi-agent {LLM} planning,'' \emph{Proc. VLDB Endow.}, 2025.
 
 \bibitem{MohammadiEtAl2026Atomix}
 B.~Mohammadi, N.~Potamitis, L.~Klein, A.~Arora, and L.~Bindschaedler, ``Atomix:
@@ -4937,10 +5078,8 @@ W.~Lloyd, M.~J. Freedman, M.~Kaminsky, and D.~G. Andersen, ``Don't settle for
   \emph{SOSP}, 2011, pp. 401--416.
 
 \bibitem{CemriEtAl2025MAST}
-M.~Cemri, M.~Z. Pan, S.~Yang, L.~A. Agrawal, B.~Chopra, R.~Tiwari, K.~Keutzer,
-  A.~Parameswaran, D.~Klein, K.~Ramchandran, M.~Zaharia, J.~E. Gonzalez, and
-  I.~Stoica, ``Why do multi-agent {LLM} systems fail?'' in \emph{NeurIPS
-  Datasets and Benchmarks Track}, 2025, spotlight; arXiv:2503.13657.
+M.~Cemri \emph{et~al.}, ``Why do multi-agent {LLM} systems fail?'' in \emph{NeurIPS
+  Datasets and Benchmarks Track}, 2025.
 
 \bibitem{CahillRohmFekete2008SSI}
 M.~J. Cahill, U.~R{\"o}hm, and A.~D. Fekete, ``Serializable isolation for
@@ -4952,14 +5091,12 @@ L.~Lamport, ``Time, clocks, and the ordering of events in a distributed
   1978.
 
 \bibitem{WuEtAl2023AutoGen}
-Q.~Wu, G.~Bansal, J.~Zhang, Y.~Wu, S.~Zhang, E.~Zhu, B.~Li, L.~Jiang, X.~Zhang,
-  and C.~Wang, ``{AutoGen}: Enabling next-gen {LLM} applications via
-  multi-agent conversation,'' in \emph{arXiv:2308.08155}, 2023.
+Q.~Wu \emph{et~al.}, ``{AutoGen}: Enabling next-gen {LLM} applications via
+  multi-agent conversation,'' arXiv:2308.08155, 2023.
 
 \bibitem{Miller2006Robust}
 M.~S. Miller, ``Robust composition: Towards a unified approach to access
-  control and concurrency control,'' Ph.D. dissertation, Johns Hopkins
-  University, 2006.
+  control and concurrency control,'' Ph.D. dissertation, Johns Hopkins Univ., 2006.
 
 \bibitem{BernsteinHadzilacosGoodman1987}
 P.~A. Bernstein, V.~Hadzilacos, and N.~Goodman, \emph{Concurrency Control and
@@ -4983,17 +5120,15 @@ A.~Fekete, D.~Liarokapis, E.~O'Neil, P.~O'Neil, and D.~Shasha, ``Making
   snapshot isolation serializable,'' \emph{ACM Trans. Database Syst.}, vol.~30, no.~2, pp. 492--528, 2005.
 
 \bibitem{Lattuada2023Verus}
-A.~Lattuada, T.~Hance, C.~Cho, M.~Brun, I.~Subasinghe, Y.~Zhou, J.~Howell,
-  B.~Parno, and C.~Hawblitzel, ``Verus: Verifying {Rust} programs using linear
-  ghost types,'' in \emph{Proc. ACM Program. Lang. (OOPSLA)}, vol.~7, 2023, pp. 286--315.
+A.~Lattuada \emph{et~al.}, ``Verus: Verifying {Rust} programs using linear
+  ghost types,'' \emph{Proc. ACM Program. Lang. (OOPSLA)}, vol.~7, 2023, pp. 286--315.
 
 \bibitem{AnthropicMCP2024}
 {Anthropic}, ``Model context protocol,'' \url{https://modelcontextprotocol.io},
   2024.
 
 \bibitem{MalewiczEtAl2010Pregel}
-G.~Malewicz, M.~H. Austern, A.~J.~C. Bik, J.~C. Dehnert, I.~Horn,
-  N.~Leiser, and G.~Czajkowski, ``Pregel: A system for large-scale graph
+G.~Malewicz \emph{et~al.}, ``Pregel: A system for large-scale graph
   processing,'' in \emph{Proc. SIGMOD}, 2010, pp. 135--146.
 
 \bibitem{Pugachev2025CodeCRDT}
@@ -5023,13 +5158,11 @@ A.~Welc, B.~Saha, and A.-R. Adl-Tabatabai, ``Irrevocable transactions and
   their applications,'' in \emph{Proc. SPAA}, 2008.
 
 \bibitem{HawblitzelEtAl2015IronFleet}
-C.~Hawblitzel, J.~Howell, M.~Kapritsos, J.~R. Lorch, B.~Parno, M.~L. Roberts,
-  S.~Setty, and B.~Zill, ``{IronFleet}: Proving practical distributed systems
+C.~Hawblitzel \emph{et~al.}, ``{IronFleet}: Proving practical distributed systems
   correct,'' in \emph{Proc. SOSP}, 2015, pp. 1--17.
 
 \bibitem{Kingsbury2013Jepsen}
-K.~Kingsbury, ``Jepsen: Distributed systems safety analysis,''
-  \url{https://jepsen.io}, 2013--present, accessed 2026.
+K.~Kingsbury, ``Jepsen,'' \url{https://jepsen.io}, 2013--present.
 
 \bibitem{TanEtAl2020Cobra}
 C.~Tan, C.~Zhao, S.~Mu, and M.~Walfish, ``{Cobra}: Making transactional
@@ -5041,16 +5174,8 @@ K.~Kingsbury and P.~Alvaro, ``{Elle}: Inferring isolation anomalies from
   experimental observations,'' arXiv:2003.10554, 2020.
 
 \bibitem{KimEtAl2024LLMCompiler}
-S.~Kim, S.~Moon, R.~Tabrizi, N.~Lee, M.~W. Mahoney, K.~Keutzer, and
-  A.~Gholami, ``An {LLM} compiler for parallel function calling,'' in
+S.~Kim \emph{et~al.}, ``An {LLM} compiler for parallel function calling,'' in
   \emph{Proc. ICML}, 2024.
-
-\bibitem{DebenedettiEtAl2024AgentDojo}
-E.~Debenedetti, J.~Zhang, M.~Balunovi\'c, L.~Beurer-Kellner, M.~Fischer, and
-  F.~Tram\`er, ``{AgentDojo}: A dynamic environment to evaluate prompt
-  injection attacks and defenses for {LLM} agents,'' in \emph{Advances in
-  Neural Information Processing Systems (NeurIPS), Datasets and Benchmarks
-  Track}, 2024.
 
 \bibitem{BurckhardtEtAl2021Durable}
 S.~Burckhardt, C.~Gillum, D.~Justo, K.~Kallas, C.~McMahon, and C.~S.
@@ -5075,8 +5200,7 @@ W.~Zhou, Z.~Wang, Z.~Peng, H.~Chen, Y.~Zhang, and G.~Yu, ``{ATCC}: Adaptive
   concurrency control for unforeseen agentic transactions,'' arXiv:2603.13906, 2026.
 
 \bibitem{PatilEtAl2024GoEX}
-S.~G. Patil, T.~Zhang, V.~Fang, Noppapon~C., R.~Huang, A.~Hao, M.~Casado,
-  J.~E. Gonzalez, R.~A. Popa, and I.~Stoica, ``{GoEX}: Perspectives and designs
+S.~G. Patil \emph{et~al.}, ``{GoEX}: Perspectives and designs
   towards a runtime for autonomous {LLM} applications,'' arXiv:2404.06921, 2024.
 
 \bibitem{XavierEtAl2026Agentproof}
@@ -5089,11 +5213,8 @@ V.~Hadzilacos, ``A theory of reliability in database systems,'' \emph{J. ACM},
   vol.~35, no.~1, pp. 121--145, 1988.
 
 \bibitem{SkiadopoulosEtAl2022DBOS}
-A.~Skiadopoulos, Q.~Li, P.~Kraft, K.~Kaffes, D.~Hong, S.~Mathew, D.~Bestor,
-  M.~Cafarella, V.~Gadepally, G.~Graefe, J.~Kepner, C.~Kozyrakis, T.~Kraska,
-  M.~Stonebraker, L.~Suresh, and M.~Zaharia, ``{DBOS}: A {DBMS}-oriented
-  operating system,'' \emph{Proc. VLDB Endow.}, vol.~15,
-  no.~1, pp. 21--30, 2021.
+A.~Skiadopoulos \emph{et~al.}, ``{DBOS}: A {DBMS}-oriented
+  operating system,'' \emph{Proc. VLDB Endow.}, vol.~15, no.~1, pp. 21--30, 2021.
 
 \bibitem{ReuterWachter1991ConTract}
 A.~Reuter and H.~W{\"a}chter, ``The {ConTract} model,'' \emph{IEEE Data Eng. Bull.}, vol.~14, no.~1, pp. 39--43, 1991.
@@ -5118,8 +5239,8 @@ Y.~Zheng, Y.~Yang, W.~Zhang, and A.~Quinn, ``{ACRFence}: Preventing semantic
 
 \bibitem{ZhouEtAl2025TxnSails}
 W.~Zhou, Y.~Zhang, Z.~Peng, and G.~Yu, ``{TxnSails}: Achieving serializable
-  transaction scheduling with self-adaptive isolation level selection,'' arXiv
-  preprint arXiv:2502.00991, 2025.
+  transaction scheduling with self-adaptive isolation level selection,''
+  arXiv:2502.00991, 2025.
 
 \bibitem{GrayReuter1993}
 J.~Gray and A.~Reuter, \emph{Transaction Processing: Concepts and Techniques}.\hskip 1em plus 0.5em minus 0.4em\relax Morgan Kaufmann, 1993.
@@ -5131,7 +5252,7 @@ M.~Herlihy and E.~Koskinen, ``Transactional boosting: A methodology for highly-c
 T.~Kraska, M.~Hentschel, G.~Alonso, and D.~Kossmann, ``Consistency rationing in the cloud: Pay only when it matters,'' \emph{Proc. VLDB Endow.}, vol.~2, no.~1, pp. 253--264, 2009.
 
 \bibitem{LiEtAl2026MemTX}
-X.~Li, Y.~Wang, H.~Lu, Z.~Chen, M.~Li, P.~Song, M.~Zheng, and T.~Cai, ``{MemTX}: Transactional belief commit for stateful agent memory,'' arXiv:2607.23929, 2026.
+X.~Li \emph{et~al.}, ``{MemTX}: Transactional belief commit for stateful agent memory,'' arXiv:2607.23929, 2026.
 
 \bibitem{YangEtAl2026Position}
 X.~Yang, L.~Li, Z.~Ji, T.~J. Zhang, and W.~Jiang, ``Position: Multi-agent systems should prioritize concurrency control,'' arXiv:2608.18092, 2026.
@@ -5144,9 +5265,6 @@ T.~E. Kim, X.~He, D.~Jain, A.~Agrawal, N.~Arabzadeh, and F.~Diaz, ``Multi-agent 
 
 \bibitem{GimEtAl2024AsyncLM}
 I.~Gim, S.~Lee, and L.~Zhong, ``Asynchronous {LLM} function calling,'' arXiv:2412.07017, 2024.
-
-\bibitem{RuanEtAl2024ToolEmu}
-Y.~Ruan, H.~Dong, A.~Wang, S.~Pitis, Y.~Zhou, J.~Ba, Y.~Dubois, C.~J. Maddison, and T.~Hashimoto, ``Identifying the risks of {LM} agents with an {LM}-emulated sandbox,'' in \emph{Proc. ICLR}, 2024.
 
 \bibitem{SantosGrueiro2026CommitGuard}
 I.~Santos-Grueiro, ``Temporary authority, permanent effects: Commit-time authorization for {LLM} agents,'' arXiv:2607.10487, 2026.
@@ -5173,7 +5291,7 @@ P.~Buneman, S.~Khanna, and W.-C. Tan, ``Why and where: A characterization of dat
 A.~Gupta and I.~S. Mumick, ``Maintenance of materialized views: Problems, techniques, and applications,'' \emph{IEEE Data Eng. Bull.}, vol.~18, no.~2, pp. 3--18, 1995.
 
 \bibitem{AkidauEtAl2013MillWheel}
-T.~Akidau, A.~Balikov, K.~Bekiro\u{g}lu, S.~Chernyak, J.~Haberman, R.~Lax, S.~McVeety, D.~Mills, P.~Nordstrom, and S.~Whittle, ``{MillWheel}: Fault-tolerant stream processing at internet scale,'' \emph{Proc. VLDB Endow.}, vol.~6, no.~11, pp. 1033--1044, 2013.
+T.~Akidau \emph{et~al.}, ``{MillWheel}: Fault-tolerant stream processing at internet scale,'' \emph{Proc. VLDB Endow.}, vol.~6, no.~11, pp. 1033--1044, 2013.
 
 \bibitem{SunEtAl2026AgenticTx}
 Z.~Sun, X.~Wang, and G.~Li, ``Agentic transaction: Towards {ACID}-compliant agent systems,'' arXiv:2608.13900, 2026.
@@ -5191,8 +5309,8 @@ P.~Li, Z.~Wu, Y.~Zhang \emph{et~al.}, ``{SAFEFLOW}: A principled protocol for
   trustworthy and transactional autonomous agent systems,'' \emph{arXiv:2506.07564}, 2025.
 
 \bibitem{ChenEtAl2026Cordon}
-Z.~Chen, H.~Liu, D.~Xu, D.~Dong, J.~Li, B.~Pu, and J.~Zhai, ``Cordon: Semantic
-  transactions for tool-using {LLM} agents,'' \emph{arXiv:2606.17573}, 2026.
+Z.~Chen \emph{et~al.}, ``Cordon: Semantic
+  transactions for tool-using {LLM} agents,'' arXiv:2606.17573, 2026.
 
 \bibitem{VolkovEtAl2026StateFuse}
 S.~Volkov, Y.~Li, and Y.~Luo, ``{StateFuse}: Deterministic conflict-preserving
@@ -5214,6 +5332,15 @@ S.~Tu, W.~Zheng, E.~Kohler, B.~Liskov, and S.~Madden, ``Speedy transactions in
 \bibitem{YuEtAl2016TicToc}
 X.~Yu, A.~Pavlo, D.~Sanchez, and S.~Devadas, ``{TicToc}: Time traveling
   optimistic concurrency control,'' in \emph{Proc. SIGMOD}, 2016, pp. 1629--1642.
+
+\bibitem{Raz1992CO}
+Y.~Raz, ``The principle of commitment ordering,'' in \emph{Proc. VLDB}, 1992, pp. 292--312.
+
+\bibitem{Lamport2002SpecifyingSystems}
+L.~Lamport, \emph{Specifying Systems: The {TLA+} Language and Tools for Hardware and Software Engineers}.\hskip 1em plus 0.5em minus 0.4em\relax Addison-Wesley, 2002.
+
+\bibitem{CousineauEtAl2012TLAPS}
+D.~Cousineau, D.~Doligez, L.~Lamport, S.~Merz, D.~Ricketts, and H.~Vanzetto, ``{TLA+} proofs,'' in \emph{Proc. FM}, 2012, pp. 147--154.
 
 \end{thebibliography}
 

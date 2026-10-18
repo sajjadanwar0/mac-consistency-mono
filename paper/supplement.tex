@@ -223,14 +223,14 @@
 \newcommand{\LiveVerifiedOutcome}{\textbf{[probe 303 -{}-modes verified: pending]}}
 
 % --- hypothesis gates (VERIFIED-HERE: harness/macaudit/hypothesis_gates.py --tex, over every committed record) ---
-\newcommand{\HypRecords}{71{,}714}     % hypothesis_gates.py over results/ on 2026-10-16 (tools/hypothesis_gates.log, 21 campaigns incl. ledger_world_atomic / _window5000): September + probe 303 (sequential, sweep, three interleaved runs) + probe 304 (both runs) + Claude op-record pilot (nine cells) + interleaved Claude wall-clock run
-\newcommand{\HypTraces}{19{,}488}
+\newcommand{\HypRecords}{84{,}282}     % hypothesis_gates.py over results/ on 2026-10-17 (tools/hypothesis_gates.log, 24 campaigns): September + probe 303 (sequential, sweep, three interleaved runs) + probe 304 (after-put, atomic, window5000, exec) + Claude op-record pilot + interleaved Claude wall-clock run + the two refusal-price runs (steps 22, 24)
+\newcommand{\HypTraces}{22{,}188}
 \newcommand{\HypSameAgentOverlaps}{0}
 \newcommand{\HypReadBeforeCommitViolations}{0}
-\newcommand{\HypCampaigns}{21}
+\newcommand{\HypCampaigns}{24}
 \newcommand{\HypValueUniqueCampaigns}{15}
-\newcommand{\HypCollisionCells}{126}
-\newcommand{\HypCollisionTraces}{105}
+\newcommand{\HypCollisionCells}{238}
+\newcommand{\HypCollisionTraces}{217}
 \newcommand{\HypLiveLtwoSessions}{600}
 \newcommand{\HypLiveLtwoCollisions}{0}
 \newcommand{\HypAOneWitnesses}{1{,}299}
@@ -258,13 +258,13 @@
 \newcommand{\RunFisherValidatedGpt}{0.022}\newcommand{\RunFisherVanillaGpt}{0.033}
 \newcommand{\RunFisherValidatedHaiku}{0.335}\newcommand{\RunFisherVanillaHaiku}{0.593}
 \newcommand{\ArmPinnedValidatedHaiku}{1.10}\newcommand{\ArmPinnedVerifiedHaiku}{1.10}
-% hypothesis gates H5/H6 (hypothesis_gates.py --tex, 2026-10-15)
-\newcommand{\HypExternalEffects}{12{,}000}\newcommand{\HypDuplicateEffects}{0}\newcommand{\HypInterruptEmissions}{2}
-\newcommand{\HypObservedRecords}{7{,}500}\newcommand{\HypUndeclaredReads}{0}
+% hypothesis gates H5/H6 (hypothesis_gates.py --tex, 2026-10-17)
+\newcommand{\HypExternalEffects}{12{,}900}\newcommand{\HypDuplicateEffects}{0}\newcommand{\HypInterruptEmissions}{2}
+\newcommand{\HypObservedRecords}{8{,}400}\newcommand{\HypUndeclaredReads}{0}
 % hypothesis gate H7 (the store axiom, ReadsReflectMemory, on every declared read of the store-instrumented campaigns; the
 % four campaigns converted from transcripts and tool logs are reported, not gated): hypothesis_gates.py over the committed
-% receipts held on 2026-10-15 (the runner's step 19 re-derives them over the full tree)
-\newcommand{\HypStoreAxiomReads}{35{,}069}\newcommand{\HypStoreAxiomTraces}{16{,}966}\newcommand{\HypStoreAxiomViolations}{0}
+% receipts held on 2026-10-17 (the runner's step 19 re-derives them over the full tree)
+\newcommand{\HypStoreAxiomReads}{44{,}545}\newcommand{\HypStoreAxiomTraces}{19{,}666}\newcommand{\HypStoreAxiomViolations}{0}
 \newcommand{\HypStoreAxiomConvertedReads}{6{,}448}\newcommand{\HypStoreAxiomConvertedCampaigns}{4}
 % the NoA1 half of the lattice at the bounds where the supersession witness is reachable (formal/tla/lattice16_a1_maxops3.sh)
 % formal/tla/lattice16_a1_maxops3_c1_results.json (2026-10-15, TLC 1.8.0, two workers): 16 NoA1 points + the witness-class pair
@@ -283,20 +283,20 @@
 \newcommand{\LedgerWorldAtomicAvailable}{0}\newcommand{\LedgerWorldWideAvailable}{0}   % runner step 21 (atomic registration; 5 s consumer window)
 % 2026-10-17: the executable ledger's bookkeeping in verified bytes (lib_l5_exec.rs; runner steps 7/14/23), the refusal-price
 % study (step 22), and the H7 scope gate (hypothesis_gates.py: published cells drawn from store-instrumented campaigns only)
-\newcommand{\LfiveExecAvailable}{0}\newcommand{\LfiveExecVerus}{?}\newcommand{\LedgerWorldExecAvailable}{0}
+\newcommand{\LfiveExecAvailable}{0}\newcommand{\LfiveExecVerus}{?}\newcommand{\LfiveExecVerusCount}{?}\newcommand{\LedgerWorldExecAvailable}{0}
 \newcommand{\RefusalClaudeAvailable}{0}\newcommand{\RefusalGptAvailable}{0}
-\newcommand{\RefusalAddrClaudeAvailable}{0}\newcommand{\RefusalAddrGptAvailable}{0}   % step 24: the REFUSED text addressed to the refused agent (the step-22 text was broadcast unaddressed)
-% derived from tools/hypothesis_gates.log (2026-10-16) per-campaign table: records/traces of the 17 store-instrumented campaigns
+\newcommand{\RefusalClaudeAddrAvailable}{0}\newcommand{\RefusalGptAddrAvailable}{0}   % step 24: the REFUSED text addressed to the refused agent (the step-22 text named nobody); the fold emits \RefusalClaudeAddr... (family name as claims_from_results.py writes it)
+% derived from tools/hypothesis_gates.log (2026-10-17) per-campaign table: records/traces of the 20 store-instrumented campaigns
 % = totals minus mast_oprecords (9,137/1,010), oprecords (600/200), production_traces (4,169/600), traces (1,469/700);
-% the published campaigns: results/expected.json's six (three pilot runs, three live_a1 families) + live_a1_outcome, the four
-% ledger_world* runs and the two Claude pilot/interleaved runs of the 2026-10-16 log = 13, none converted (hypothesis_gates.py)
-\newcommand{\HypInstrumentedRecords}{56{,}339}\newcommand{\HypInstrumentedTraces}{16{,}978}
-\newcommand{\HypPublishedCampaigns}{13}\newcommand{\HypPublishedConvertedCampaigns}{0}
+% the published campaigns: results/expected.json's six (three pilot runs, three live_a1 families) + live_a1_outcome, the five
+% ledger_world* runs, the two Claude pilot/interleaved runs and the two refusal-price runs of the 2026-10-17 log = 16, none converted
+\newcommand{\HypInstrumentedRecords}{68{,}907}\newcommand{\HypInstrumentedTraces}{19{,}678}
+\newcommand{\HypPublishedCampaigns}{16}\newcommand{\HypPublishedConvertedCampaigns}{0}
 \newcommand{\PilotClaudeAvailable}{0}   % the Claude pilot cells scored by the verified detector (step 14 after step 11); claims_results.tex overrides
 \newcommand{\Pending}[1]{\textbf{[pending: #1]}}   % release_tag.sh refuses to tag while any \Pending survives in the PDF text
 
 % ============================================================================
-% claims_results.tex (2026-10-14): the receipt overrides generated by harness/macaudit/claims_from_results.py
+% claims_results.tex (2026-10-17): the receipt overrides generated by harness/macaudit/claims_from_results.py
 % ============================================================================
 % generated by harness/macaudit/claims_from_results.py -- do not edit; re-run the probes instead
 % --- probe 303 (results/live_a1_outcome; *_arms150.json -> the live table (Table 2), *_sweep.json -> offset curve) ---
@@ -2779,19 +2779,19 @@
 \providecommand{\LWexecLedgerDisagree}{0}
 \providecommand{\LWexecLedgerDisagreeCI}{[0.0, 1.2]}
 \providecommand{\LWexecServerSha}{f141b709aaaa0040}
-% --- probe 301 (/tmp/claude-0/-home-claude/37127f59-98ee-511c-9a78-827474030281/scratchpad/fold/results/a6_real_latency/sqlite.jsonl) ---
+% --- probe 301 (results/a6_real_latency/sqlite.jsonl) ---
 \renewcommand{\ToolNodeRealSqlite}{$126/165$}
-% --- probe 301 --l3-server (/tmp/claude-0/-home-claude/37127f59-98ee-511c-9a78-827474030281/scratchpad/fold/results/a6_real_latency/sqlite_verified.jsonl) ---
+% --- probe 301 --l3-server (results/a6_real_latency/sqlite_verified.jsonl) ---
 \renewcommand{\ToolNodeVerifiedSqlite}{$0/165$}
 \renewcommand{\ToolNodeVerifiedBaselineSqlite}{$119/165$}
 \renewcommand{\ToolNodeVerifiedAvailable}{1}
-% --- probe 301 (/tmp/claude-0/-home-claude/37127f59-98ee-511c-9a78-827474030281/scratchpad/fold/results/a6_real_latency/http.jsonl) ---
+% --- probe 301 (results/a6_real_latency/http.jsonl) ---
 \renewcommand{\ToolNodeRealHttp}{$112/165$}
-% --- probe 301 --l3-server (/tmp/claude-0/-home-claude/37127f59-98ee-511c-9a78-827474030281/scratchpad/fold/results/a6_real_latency/http_verified.jsonl) ---
+% --- probe 301 --l3-server (results/a6_real_latency/http_verified.jsonl) ---
 \renewcommand{\ToolNodeVerifiedHttp}{$0/165$}
 \renewcommand{\ToolNodeVerifiedBaselineHttp}{$113/165$}
 \renewcommand{\ToolNodeVerifiedAvailable}{1}
-% --- probe 302 (/tmp/claude-0/-home-claude/37127f59-98ee-511c-9a78-827474030281/scratchpad/fold/results/runs/20261014T1417Z-interleaved-claude-sonnet-4-5; model claude-sonnet-4-5): the writer role's committed write per cell, from the records ---
+% --- probe 302 (results/runs/20261014T1417Z-interleaved-claude-sonnet-4-5; model claude-sonnet-4-5): the writer role's committed write per cell, from the records ---
 \providecommand{\InterleavedClaudeEditReviewPessWriterCommits}{100/100}
 \providecommand{\InterleavedClaudeEditReviewSIWriterCommits}{100/100}
 \providecommand{\InterleavedClaudeEditReviewVanillaWriterCommits}{100/100}
@@ -2801,7 +2801,7 @@
 \providecommand{\InterleavedClaudeTriagePessWriterCommits}{0/100}
 \providecommand{\InterleavedClaudeTriageSIWriterCommits}{0/100}
 \providecommand{\InterleavedClaudeTriageVanillaWriterCommits}{0/100}
-% --- probe 302 (/tmp/claude-0/-home-claude/37127f59-98ee-511c-9a78-827474030281/scratchpad/fold/results/runs/20261014T1417Z-interleaved-claude-sonnet-4-5; model claude-sonnet-4-5; Stamp); order.tsv completion stamps, 1 s resolution; sidecars folded: no ---
+% --- probe 302 (results/runs/20261014T1417Z-interleaved-claude-sonnet-4-5; model claude-sonnet-4-5; Stamp); order.tsv completion stamps, 1 s resolution; sidecars folded: no ---
 \renewcommand{\WallclockStampClaudeEditReviewPess}{$+5.3\%$ [+2.0, +8.4], $n=99$}
 \renewcommand{\WallclockStampClaudeEditReviewSI}{$+2.4\%$ [-1.2, +6.4], $n=99$}
 \renewcommand{\WallclockStampClaudePlanExecutePess}{$-0.5\%$ [-3.5, +2.5], $n=99$}
@@ -2809,7 +2809,7 @@
 \renewcommand{\WallclockStampClaudeTriagePess}{$+1.3\%$ [-1.1, +3.7], $n=99$}
 \renewcommand{\WallclockStampClaudeTriageSI}{$+1.3\%$ [-2.1, +5.9], $n=99$}
 \renewcommand{\WallclockStampClaudeAvailable}{1}
-% --- probe 302 refusal-price study (/tmp/claude-0/-home-claude/37127f59-98ee-511c-9a78-827474030281/scratchpad/fold/results/runs/20261017T0753Z-refusal-claude-sonnet-4-5; model claude-sonnet-4-5; REFUSED text unaddressed (broadcast by the group chat)): what a refused operation costs when the model is told ---
+% --- probe 302 refusal-price study (results/runs/20261017T0753Z-refusal-claude-sonnet-4-5; model claude-sonnet-4-5; REFUSED text unaddressed (broadcast by the group chat)): what a refused operation costs when the model is told ---
 \renewcommand{\RefusalClaudeAvailable}{1}
 \providecommand{\RefusalClaudeRun}{20261017T0753Z-refusal-claude-sonnet-4-5}
 \providecommand{\RefusalClaudeEditReviewPessDropN}{100}
@@ -2918,27 +2918,110 @@
 \providecommand{\RefusalClaudeTriageVanillaRefusedSessions}{0/100}
 \providecommand{\RefusalClaudeTriageVanillaWriterCommits}{0/100}
 \providecommand{\RefusalClaudeTriageVanillaWriterRecords}{1.00}
-% --- verus ledger (/tmp/claude-0/-home-claude/37127f59-98ee-511c-9a78-827474030281/scratchpad/fold/results/verus/lib_l5_ledger.verus.log) ---
+% --- probe 302 refusal-price study (results/runs/20261017T1615Z-refusal-addressed-claude-sonnet-4-5; model claude-sonnet-4-5; REFUSED text addressed to the refused agent): what a refused operation costs when the model is told ---
+\renewcommand{\RefusalClaudeAddrAvailable}{1}
+\providecommand{\RefusalClaudeAddrRun}{20261017T1615Z-refusal-addressed-claude-sonnet-4-5}
+\providecommand{\RefusalClaudeAddrEditReviewPessDropN}{100}
+\providecommand{\RefusalClaudeAddrEditReviewPessDropCommits}{6.00}
+\providecommand{\RefusalClaudeAddrEditReviewPessDropCalls}{11.00}
+\providecommand{\RefusalClaudeAddrEditReviewPessDropWallS}{18.0}
+\providecommand{\RefusalClaudeAddrEditReviewPessDropRefused}{5.00}
+\providecommand{\RefusalClaudeAddrEditReviewPessDropRefusedSessions}{100/100}
+\providecommand{\RefusalClaudeAddrEditReviewPessDropWriterCommits}{0/100}
+\providecommand{\RefusalClaudeAddrEditReviewPessDropWriterRecords}{6.00}
+\providecommand{\RefusalClaudeAddrEditReviewPessDropWriteLengthCalls}{0}
+\providecommand{\RefusalClaudeAddrEditReviewPessDropTotalCalls}{1{,}100}
+\providecommand{\RefusalClaudeAddrEditReviewPessDropWallOverhead}{$+132.6\%$ [+128.3, +136.8], $n=100$}
+\providecommand{\RefusalClaudeAddrEditReviewPessDropCallsOverhead}{$+120.0\%$ [+120.0, +120.0], $n=100$}
+\providecommand{\RefusalClaudeAddrEditReviewPessRetryN}{100}
+\providecommand{\RefusalClaudeAddrEditReviewPessRetryCommits}{6.00}
+\providecommand{\RefusalClaudeAddrEditReviewPessRetryCalls}{11.00}
+\providecommand{\RefusalClaudeAddrEditReviewPessRetryWallS}{18.1}
+\providecommand{\RefusalClaudeAddrEditReviewPessRetryRefused}{5.00}
+\providecommand{\RefusalClaudeAddrEditReviewPessRetryRefusedSessions}{100/100}
+\providecommand{\RefusalClaudeAddrEditReviewPessRetryWriterCommits}{0/100}
+\providecommand{\RefusalClaudeAddrEditReviewPessRetryWriterRecords}{6.00}
+\providecommand{\RefusalClaudeAddrEditReviewPessRetryWriteLengthCalls}{0}
+\providecommand{\RefusalClaudeAddrEditReviewPessRetryTotalCalls}{1{,}100}
+\providecommand{\RefusalClaudeAddrEditReviewPessRetryWallOverhead}{$+134.0\%$ [+129.4, +138.5], $n=100$}
+\providecommand{\RefusalClaudeAddrEditReviewPessRetryCallsOverhead}{$+120.0\%$ [+120.0, +120.0], $n=100$}
+\providecommand{\RefusalClaudeAddrEditReviewSIDropN}{100}
+\providecommand{\RefusalClaudeAddrEditReviewSIDropCommits}{3.00}
+\providecommand{\RefusalClaudeAddrEditReviewSIDropCalls}{6.08}
+\providecommand{\RefusalClaudeAddrEditReviewSIDropWallS}{9.7}
+\providecommand{\RefusalClaudeAddrEditReviewSIDropRefused}{0.54}
+\providecommand{\RefusalClaudeAddrEditReviewSIDropRefusedSessions}{54/100}
+\providecommand{\RefusalClaudeAddrEditReviewSIDropWriterCommits}{100/100}
+\providecommand{\RefusalClaudeAddrEditReviewSIDropWriterRecords}{1.54}
+\providecommand{\RefusalClaudeAddrEditReviewSIDropWriteLengthCalls}{220}
+\providecommand{\RefusalClaudeAddrEditReviewSIDropTotalCalls}{608}
+\providecommand{\RefusalClaudeAddrEditReviewSIDropWallOverhead}{$+25.1\%$ [+19.3, +31.1], $n=100$}
+\providecommand{\RefusalClaudeAddrEditReviewSIDropCallsOverhead}{$+21.6\%$ [+17.6, +25.2], $n=100$}
+\providecommand{\RefusalClaudeAddrEditReviewVanillaN}{100}
+\providecommand{\RefusalClaudeAddrEditReviewVanillaCommits}{2.62}
+\providecommand{\RefusalClaudeAddrEditReviewVanillaCalls}{5.00}
+\providecommand{\RefusalClaudeAddrEditReviewVanillaWallS}{7.8}
+\providecommand{\RefusalClaudeAddrEditReviewVanillaRefused}{0.00}
+\providecommand{\RefusalClaudeAddrEditReviewVanillaRefusedSessions}{0/100}
+\providecommand{\RefusalClaudeAddrEditReviewVanillaWriterCommits}{100/100}
+\providecommand{\RefusalClaudeAddrEditReviewVanillaWriterRecords}{1.00}
+\providecommand{\RefusalClaudeAddrEditReviewVanillaWriteLengthCalls}{138}
+\providecommand{\RefusalClaudeAddrEditReviewVanillaTotalCalls}{500}
+\providecommand{\RefusalClaudeAddrTriagePessDropN}{100}
+\providecommand{\RefusalClaudeAddrTriagePessDropCommits}{2.10}
+\providecommand{\RefusalClaudeAddrTriagePessDropCalls}{4.30}
+\providecommand{\RefusalClaudeAddrTriagePessDropWallS}{6.7}
+\providecommand{\RefusalClaudeAddrTriagePessDropRefused}{1.10}
+\providecommand{\RefusalClaudeAddrTriagePessDropRefusedSessions}{100/100}
+\providecommand{\RefusalClaudeAddrTriagePessDropWriterCommits}{10/100}
+\providecommand{\RefusalClaudeAddrTriagePessDropWriterRecords}{1.00}
+\providecommand{\RefusalClaudeAddrTriagePessDropWallOverhead}{$+7.9\%$ [+3.3, +13.1], $n=100$}
+\providecommand{\RefusalClaudeAddrTriagePessDropCallsOverhead}{$+7.5\%$ [+3.0, +12.0], $n=100$}
+\providecommand{\RefusalClaudeAddrTriagePessRetryN}{100}
+\providecommand{\RefusalClaudeAddrTriagePessRetryCommits}{3.87}
+\providecommand{\RefusalClaudeAddrTriagePessRetryCalls}{9.00}
+\providecommand{\RefusalClaudeAddrTriagePessRetryWallS}{15.1}
+\providecommand{\RefusalClaudeAddrTriagePessRetryRefused}{4.12}
+\providecommand{\RefusalClaudeAddrTriagePessRetryRefusedSessions}{100/100}
+\providecommand{\RefusalClaudeAddrTriagePessRetryWriterCommits}{19/100}
+\providecommand{\RefusalClaudeAddrTriagePessRetryWriterRecords}{2.68}
+\providecommand{\RefusalClaudeAddrTriagePessRetryWallOverhead}{$+142.6\%$ [+113.9, +171.8], $n=100$}
+\providecommand{\RefusalClaudeAddrTriagePessRetryCallsOverhead}{$+125.0\%$ [+97.2, +154.0], $n=100$}
+\providecommand{\RefusalClaudeAddrTriageSIDropN}{100}
+\providecommand{\RefusalClaudeAddrTriageSIDropCommits}{3.00}
+\providecommand{\RefusalClaudeAddrTriageSIDropCalls}{4.00}
+\providecommand{\RefusalClaudeAddrTriageSIDropWallS}{6.3}
+\providecommand{\RefusalClaudeAddrTriageSIDropRefused}{0.00}
+\providecommand{\RefusalClaudeAddrTriageSIDropRefusedSessions}{0/100}
+\providecommand{\RefusalClaudeAddrTriageSIDropWriterCommits}{0/100}
+\providecommand{\RefusalClaudeAddrTriageSIDropWriterRecords}{1.00}
+\providecommand{\RefusalClaudeAddrTriageSIDropWallOverhead}{$+1.2\%$ [-0.7, +3.1], $n=100$}
+\providecommand{\RefusalClaudeAddrTriageSIDropCallsOverhead}{$+0.0\%$ [+0.0, +0.0], $n=100$}
+\providecommand{\RefusalClaudeAddrTriageVanillaN}{100}
+\providecommand{\RefusalClaudeAddrTriageVanillaCommits}{3.00}
+\providecommand{\RefusalClaudeAddrTriageVanillaCalls}{4.00}
+\providecommand{\RefusalClaudeAddrTriageVanillaWallS}{6.3}
+\providecommand{\RefusalClaudeAddrTriageVanillaRefused}{0.00}
+\providecommand{\RefusalClaudeAddrTriageVanillaRefusedSessions}{0/100}
+\providecommand{\RefusalClaudeAddrTriageVanillaWriterCommits}{0/100}
+\providecommand{\RefusalClaudeAddrTriageVanillaWriterRecords}{1.00}
+% --- verus (results/verus/count.json) ---
+\renewcommand{\VerusCurated}{371}
+\renewcommand{\VerusFull}{392}
+% --- verus exec ledger (results/verus/lib_l5_exec.verus.log) ---
+\renewcommand{\LfiveExecVerus}{10 obligations, 0 errors}
+\renewcommand{\LfiveExecVerusCount}{10}
+\renewcommand{\LfiveExecAvailable}{1}
+% --- verus ledger (results/verus/lib_l5_ledger.verus.log) ---
 \renewcommand{\LfiveVerus}{7 obligations, 0 errors}
 \renewcommand{\LfiveVerusStatus}{verified in Verus (7 obligations, 0 errors)}
 \renewcommand{\LfiveVerusIntro}{verified (7 obligations)}
-% --- verified_scorer_gate (/tmp/claude-0/-home-claude/37127f59-98ee-511c-9a78-827474030281/scratchpad/fold/tools/verified_scorer.json) ---
-\renewcommand{\VerifiedScorerCells}{126}
-\renewcommand{\VerifiedScorerTraces}{12{,}600}
-\renewcommand{\VerifiedScorerProblems}{0}
-\renewcommand{\VerifiedScorerAvailable}{1}
-% Claude op-record replication (runs/*-claude), scored by the verified detector; -- = cell not scored yet
-\providecommand{\VSClaudeEditReviewVanilla}{100/100}
-\providecommand{\VSClaudeEditReviewPess}{0/100}
-\providecommand{\VSClaudeEditReviewSI}{50/100}
-\providecommand{\VSClaudePlanExecuteVanilla}{0/100}
-\providecommand{\VSClaudePlanExecutePess}{0/100}
-\providecommand{\VSClaudePlanExecuteSI}{0/100}
-\providecommand{\VSClaudeTriageVanilla}{0/100}
-\providecommand{\VSClaudeTriagePess}{0/100}
-\providecommand{\VSClaudeTriageSI}{0/100}
-\renewcommand{\PilotClaudeAvailable}{1}
-% --- check_duplication.sh (/tmp/claude-0/-home-claude/37127f59-98ee-511c-9a78-827474030281/scratchpad/fold/formal/tla/tlc.Duplication.log) ---
+% --- verified_scorer_gate (./tools/verified_scorer.json) ---
+\renewcommand{\VerifiedScorerCells}{144}
+\renewcommand{\VerifiedScorerTraces}{14{,}400}
+\renewcommand{\VerifiedScorerProblems}{18}
+% verified_scorer_gate reports 18 problem(s) over 144 cell(s): the paper's cell stays PENDING
+% --- check_duplication.sh (./formal/tla/tlc.Duplication.log) ---
 \renewcommand{\DupWitnessDepth}{5}
 \renewcommand{\DupDivergentDepth}{6}
 \renewcommand{\DupDedupStates}{1{,}714}
@@ -2986,7 +3069,8 @@
 
 \noindent This supplement collects the raw experimental and benchmarking tables
 referenced from the main paper (Tables S1--S6) and the material moved out of
-it for length. Each table is referenced by
+it for length. Its reference list is its own and is numbered independently of
+the main paper's. Each table is referenced by
 its S-number from the main text; the surrounding analysis, findings, and
 interpretation remain in the main paper. Appendices~G--S hold material moved out of the main paper for length; it is the main paper's own text, with its cross-references rewritten to point into the main paper or into this appendix. The full reproducibility artifact
 accompanies this appendix: \texttt{verus\_count.sh} regenerates the obligation
@@ -4965,7 +5049,7 @@ vanilla cell was rerun under the seeded protocol on 2026-10-14 (runner step
 placeholder ticket, so the cell is no longer void. \ifnum\PilotClaudeAvailable=1
 Scored by the verified detector (runner step 14,
 \texttt{verified\_scorer\_gate.py} scores every cell under
-\texttt{results/runs/}; receipts of 2026-10-15 and 2026-10-17), the Sonnet vanilla cells fire
+\texttt{results/runs/}), the Sonnet vanilla cells fire
 \A1 in \VSClaudeEditReviewVanilla{} (edit-review), \VSClaudePlanExecuteVanilla{}
 (plan-execute) and \VSClaudeTriageVanilla{} (triage, seeded tickets)
 sessions. The triage zero has no established cause: the gpt-4o triage cell
@@ -4983,23 +5067,22 @@ under \texttt{results/} by the repository migration as a namespace package;
 the pilot now locates it and the runner puts its parent on
 \texttt{PYTHONPATH}): all $900$ Sonnet traces pass the H0/H1 gates
 (\texttt{hypothesis\_gates}: $0$ overlaps, $0$ read-after-commit). Their \A1
-verdicts under the verified scorer's pass of 2026-10-17
-(\texttt{tools/verified\_scorer.json}, $126$ cells, $0$ problems) are
+verdicts under the verified scorer's latest clean pass
+(\texttt{tools/verified\_scorer.json}, \VerifiedScorerCells{} cells,
+\VerifiedScorerProblems{} problems) are
 \VSClaudeEditReviewPess{} / \VSClaudePlanExecutePess{} /
 \VSClaudeTriagePess{} pessimistic and \VSClaudeEditReviewSI{} /
 \VSClaudePlanExecuteSI{} / \VSClaudeTriageSI{} snapshot isolation; the main
 text reads them against the records (the triager and engineer commit
 read-only operations in every Sonnet session, and the reviewer writes its
-review in about half, the no-write bypass default SI never validates).\else Its \A1 rate is scored by
-the verified detector of runner step 14 (\texttt{verified\_scorer\_gate.py}
-now scores every cell under \texttt{results/runs/}) and is
-\Pending{runner steps 11/14}. The six guarded Sonnet cells (pessimistic and
-snapshot isolation on three workloads) did not execute in the first attempt:
-the runtimes import the \texttt{baselines} package, filed under
-\texttt{results/} by the repository migration as a namespace package, which
-the runner's locator never found; the pilot now locates the package itself
-and the runner puts its parent on \texttt{PYTHONPATH}, and the cells are
-rerun with step 11.\fi
+review in about half, the no-write bypass default SI never validates).\else
+Its \A1 rate and the six guarded Sonnet cells (pessimistic and snapshot
+isolation on three workloads, run on 2026-10-15; all $900$ Sonnet traces pass
+the H0/H1 gates) are scored by the verified detector of runner step 14, and
+the fold publishes the nine cells only from a pass of
+\texttt{verified\_scorer\_gate.py} that reports zero problems; the latest
+pass rescored them but exited non-zero on the refusal study's sidecars
+(\S\,W.5), so they are \Pending{runner step 14 rerun}.\fi
 
 
 \medskip
@@ -5510,23 +5593,98 @@ against $1.00$: a second, blind \texttt{doc} write in $28$ of the $44$
 drop sessions and a re-read in $16$); and in the interleaved run of
 2026-10-14, whose tools surfaced the reviewer's refused read as a
 \texttt{KeyError} text instead, the locked editor wrote in
-\InterleavedClaudeEditReviewPessWriterCommits{} sessions. The price measured
-here is therefore the price of a refusal in a chat that broadcasts tool
-results, the framework's default, not of the discipline alone: the
-\texttt{REFUSED} text is now a protocol parameter
+\InterleavedClaudeEditReviewPessWriterCommits{} sessions. The
+\texttt{REFUSED} text is a protocol parameter
 (\texttt{-{}-refusal-addressed} names the refused agent and tells the others
-it is not theirs; \texttt{protocol.json} records which text ran) and the
-addressed arms are runner step 24 (\texttt{runs/*-refusal-addressed-*}, folded
-as \texttt{\textbackslash RefusalAddrClaude...}), \Pending{runner step 24}.
+it is not theirs; \texttt{protocol.json} records which text ran).
+\ifnum\RefusalClaudeAddrAvailable=1 \emph{The addressed-text control (runner
+step 24, 2026-10-17; folded as \texttt{\textbackslash RefusalClaudeAddr...}
+from \texttt{runs/*-refusal-addressed-*}).} Same model; four of the five
+arms (vanilla, pessimistic/drop, pessimistic/retry, SI/drop), $n{=}100$, run
+eight hours after the unaddressed study, so the two are compared as unpaired
+runs.
+Edit-review: vanilla \RefusalClaudeAddrEditReviewVanillaCalls{} calls,
+\RefusalClaudeAddrEditReviewVanillaCommits{} commits, editor's write in
+\RefusalClaudeAddrEditReviewVanillaWriterCommits{} sessions
+(\RefusalClaudeAddrEditReviewVanillaWriteLengthCalls{} of
+\RefusalClaudeAddrEditReviewVanillaTotalCalls{} completions of a write's
+length); pessimistic/drop \RefusalClaudeAddrEditReviewPessDropCalls{} calls,
+\RefusalClaudeAddrEditReviewPessDropRefused{} refused,
+\RefusalClaudeAddrEditReviewPessDropCommits{} commits, editor's write in
+\RefusalClaudeAddrEditReviewPessDropWriterCommits{} sessions
+(\RefusalClaudeAddrEditReviewPessDropWriteLengthCalls{} of
+\RefusalClaudeAddrEditReviewPessDropTotalCalls{} completions), wall
+\RefusalClaudeAddrEditReviewPessDropWallOverhead, calls
+\RefusalClaudeAddrEditReviewPessDropCallsOverhead; pessimistic/retry
+\RefusalClaudeAddrEditReviewPessRetryCalls{} calls,
+\RefusalClaudeAddrEditReviewPessRetryRefused{} refused,
+\RefusalClaudeAddrEditReviewPessRetryCommits{} commits, editor's write in
+\RefusalClaudeAddrEditReviewPessRetryWriterCommits{} sessions, wall
+\RefusalClaudeAddrEditReviewPessRetryWallOverhead; SI/drop
+\RefusalClaudeAddrEditReviewSIDropCalls{} calls,
+\RefusalClaudeAddrEditReviewSIDropRefused{} refused
+(\RefusalClaudeAddrEditReviewSIDropRefusedSessions), editor records
+\RefusalClaudeAddrEditReviewSIDropWriterRecords{} per session, wall
+\RefusalClaudeAddrEditReviewSIDropWallOverhead. Triage: vanilla
+\RefusalClaudeAddrTriageVanillaCalls{} calls,
+\RefusalClaudeAddrTriageVanillaCommits{} commits; pessimistic/drop
+\RefusalClaudeAddrTriagePessDropCalls{} calls,
+\RefusalClaudeAddrTriagePessDropRefused{} refused
+(\RefusalClaudeAddrTriagePessDropRefusedSessions),
+\RefusalClaudeAddrTriagePessDropCommits{} commits, triager records
+\RefusalClaudeAddrTriagePessDropWriterRecords{} per session, priority
+written in \RefusalClaudeAddrTriagePessDropWriterCommits{} sessions, wall
+\RefusalClaudeAddrTriagePessDropWallOverhead, calls
+\RefusalClaudeAddrTriagePessDropCallsOverhead; pessimistic/retry
+\RefusalClaudeAddrTriagePessRetryCalls{} calls,
+\RefusalClaudeAddrTriagePessRetryRefused{} refused,
+\RefusalClaudeAddrTriagePessRetryCommits{} commits, triager records
+\RefusalClaudeAddrTriagePessRetryWriterRecords{}, priority written in
+\RefusalClaudeAddrTriagePessRetryWriterCommits{} sessions, wall
+\RefusalClaudeAddrTriagePessRetryWallOverhead, calls
+\RefusalClaudeAddrTriagePessRetryCallsOverhead; SI/drop
+\RefusalClaudeAddrTriageSIDropCalls{} calls,
+\RefusalClaudeAddrTriageSIDropRefused{} refused, wall
+\RefusalClaudeAddrTriageSIDropWallOverhead. What the control settles.
+On edit-review, addressing the refusal to the reviewer changes nothing the
+records can see: the same \RefusalClaudeAddrEditReviewPessDropCalls{} calls
+and \RefusalClaudeAddrEditReviewPessDropRefused{} refusals per session as
+with the unaddressed text, the editor's write committed in
+\RefusalClaudeAddrEditReviewPessDropWriterCommits{} sessions under both
+policies, and \RefusalClaudeAddrEditReviewPessDropWriteLengthCalls{} of
+\RefusalClaudeAddrEditReviewPessDropTotalCalls{} completions of a write's
+length. So the hypothesis of the previous paragraph---that the editor loses
+its write because the refusal it sees names no agent---is refuted: the
+editor loses it under a \texttt{REFUSED} result that names the reviewer and
+tells the editor it is not its own, and keeps it only under the
+\texttt{KeyError} exception text of the 2026-10-14 run. Which feature of the
+\texttt{REFUSED} result the editor reacts to is not isolated by these three
+runs; the sidecars of the addressed run are on record for that question.
+On triage the addressed text removes most of the locking price under drop:
+\RefusalClaudeAddrTriagePessDropCalls{} calls and
+\RefusalClaudeAddrTriagePessDropRefused{} refusals per session against
+\RefusalClaudeTriagePessDropCalls{} and \RefusalClaudeTriagePessDropRefused{}
+unaddressed, wall-clock \RefusalClaudeAddrTriagePessDropWallOverhead{}
+against \RefusalClaudeTriagePessDropWallOverhead---the refused reporter and
+engineer stop re-issuing their operations, and the session commits
+\RefusalClaudeAddrTriagePessDropCommits{} records against vanilla's
+\RefusalClaudeAddrTriageVanillaCommits{}, the dropped work; under retry the
+refused agents retry (\RefusalClaudeAddrTriagePessRetryRefused{} refusals,
+\RefusalClaudeAddrTriagePessRetryCalls{} calls,
+\RefusalClaudeAddrTriagePessRetryCommits{} commits, wall
+\RefusalClaudeAddrTriagePessRetryWallOverhead). The main text's
+\S\,6.6 states the price both ways.\else The addressed arms are runner step
+24 (\texttt{runs/*-refusal-addressed-*}, folded as
+\texttt{\textbackslash RefusalClaudeAddr...}), \Pending{runner step 24}.\fi
 Snapshot isolation refuses only a commit whose read set was overwritten,
 which on these workloads is the reviewer's in
 \RefusalClaudeEditReviewSIDropRefusedSessions{} sessions and nobody's on
 triage. The committed-record counts per session (\emph{commits}) rise under
 locking because every retried read-only operation commits a record of its
-own. The campaign ran after this round's verified-scorer and hypothesis-gate
-passes (runner steps 14 and 19 preceded 22), so no \A1 verdict is taken from
-it and it is outside the gate counts above until the next pass, whose scope
-gate names \texttt{runs/*-refusal-*} as published.\fi
+own. Both refusal campaigns are gated as published store-instrumented
+campaigns by the hypothesis-gate pass of 2026-10-17 (\HypPublishedCampaigns{}
+published, \HypPublishedConvertedCampaigns{} converted) and rescored by the
+verified scorer's pass of the same day.\fi
 
 \texttt{order.tsv} holds $897$ of the $900$ stamps---session $0$'s three
 vanilla stamps are absent, hence $n=99$---and at $1$\,s resolution over
@@ -7369,35 +7527,31 @@ behaviour on that case). The analyser (\texttt{crates/analyser}) takes its
 where the two disagree; \texttt{verified\_scorer\_gate.py} runs the binary over
 every cell of \texttt{results/expected.json}, the September live sessions and
 every probe-303 trace, comparing with the manuscript's counts and an
-independent Definition-1 implementation. \ifnum\VerifiedScorerAvailable=1
-Receipt (\texttt{tools/verified\_scorer.json}, 2026-10-15):
-\VerifiedScorerCells{} cells, \VerifiedScorerTraces{} traces,
+independent Definition-1 implementation; every cell under
+\texttt{results/runs/} (the September pilot runs, the Claude op-record
+replication, the interleaved Claude run and the two refusal-price runs) and
+every probe-303 cell is in its scope. \ifnum\VerifiedScorerAvailable=1
+Receipt (\texttt{tools/verified\_scorer.json}, the latest pass of runner
+step 14): \VerifiedScorerCells{} cells, \VerifiedScorerTraces{} traces,
 \VerifiedScorerProblems{} problems; every cell's verified count equals the
-Definition-1 Python count and, where asserted, the manuscript's (three of the
-cells are the one-trace stubs the interleaved Claude run held at the time of
-the pass; they are rescored at $100$ traces by its next pass). The gate's
-first run (2026-10-14) had rejected every trace: the analyser's record reader
-declared \texttt{agent\_id} as a serde alias of \texttt{agent}, and every
-probe-303 record carries both keys with the same value, which serde reports
-as ``duplicate field \texttt{agent}''; the reader now reconciles the two keys
-explicitly (equal values accepted, different values an error, neither an
-error; five unit tests), and the fold marks the cell available only when the
-gate reports zero problems---the first receipt, with $4{,}818$ problems, had
-been folded as available. The cells of the Claude op-record replication
-(\texttt{runs/*-claude}) are scored by the same gate: the three vanilla cells
-are in this receipt (\S\,M); the pessimistic and snapshot-isolation cells
-were produced after it ran and await the next pass of step 14.\else
-The gate's first run (2026-10-14; \texttt{cargo build} succeeded, the bytes
-gate passed on all six measured files) rejected every trace: the analyser's
-record reader declared \texttt{agent\_id} as a serde alias of
+Definition-1 Python count and, where asserted, the manuscript's.\else
+Its latest pass (2026-10-17) rescored \VerifiedScorerCells{} cells
+(\VerifiedScorerTraces{} traces) with every verified count equal to the
+Definition-1 Python count and, where asserted, the manuscript's, and exited
+non-zero on \VerifiedScorerProblems{} problems, all of one kind: the
+per-cell \texttt{refusals.jsonl} sidecar that the two refusal-price runs
+write beside their traces was handed to the analyser as an op-record file,
+which it rejects (``missing field \texttt{agent}''). The fold marks the cell
+available only when the gate reports zero problems, so the receipt is
+\Pending{runner step 14 rerun, sidecars excluded from the analyser's
+input}.\fi{} The gate's first run (2026-10-14) had rejected every trace: the
+analyser's record reader declared \texttt{agent\_id} as a serde alias of
 \texttt{agent}, and every probe-303 record carries both keys with the same
-value, which serde reports as ``duplicate field \texttt{agent}''. The reader
+value, which serde reports as ``duplicate field \texttt{agent}''; the reader
 now reconciles the two keys explicitly (equal values accepted, different
-values an error, neither an error; five unit tests), and the fold
-(\texttt{claims\_from\_results.py}) marks the cell available only when the
-gate reports zero problems---the first receipt, with $4{,}818$ problems, had
-been folded as available, which this version corrects.
-\Pending{runner step 14 rerun (\texttt{cargo build --release -p mac-analyser}; the gate writes \texttt{tools/verified\_scorer.json})}.\fi
+values an error, neither an error; five unit tests). The first receipt, with
+$4{,}818$ problems, had been folded as available, which the fold's
+zero-problems rule now prevents.
 Likewise the $L_3$ replay: \texttt{examples/l3\_server.rs} exposes the
 verified sequencer over JSON lines; probe 301 \texttt{-{}-l3-server} dispatches
 each recorded batch concurrently through the released \texttt{ToolNode} and
@@ -7491,7 +7645,7 @@ File (\texttt{verus-detector/src/}) & Verified & Distinct & Bears \\
 \texttt{lib\_l4\_exec.rs}                        & 11 & 11 & L: the measured $L_4$ bytes \\
 \texttt{lib\_l4\_safety.rs}                      & 9  & 9 & L: Theorems $L_4$b/d \\
 \texttt{lib\_l5\_ledger.rs}                      & 7  & 7 & S: the ledger model (the measured ledger is harness code) \\
-\texttt{lib\_l5\_exec.rs}                        & \ifnum\LfiveExecAvailable=1 \LfiveExecVerusCount \else ? \fi & --- & \ifnum\LfiveExecAvailable=1 L: the ledger's bookkeeping (\texttt{l5\_server}); see below \else added 2026-10-17; unverified until step 7; outside both totals \fi \\
+\texttt{lib\_l5\_exec.rs}                        & \ifnum\LfiveExecAvailable=1 \LfiveExecVerusCount \else ? \fi & --- & \ifnum\LfiveExecAvailable=1 L: the ledger's bookkeeping (\texttt{l5\_server}); verified, kept outside both totals (see below) \else added 2026-10-17; unverified until step 7; outside both totals \fi \\
 \texttt{lib\_langgraph\_refinement.rs}           & 7  & 7 & L: the reducer-channel theorem (Appendix~Q) \\
 \texttt{lib\_occ\_l2\_refinement.rs}             & 8  & 8 & L: the ETag/OCC channel (Appendix~Q) \\
 \texttt{lib\_pessimistic\_exec.rs}$\dagger$      & 5  & --- & helper by the curation \\
@@ -7557,7 +7711,13 @@ runner step 14 records), and a stand-in run is never folded. Trusted beside
 the crate's trust base:
 the bridge, the interning, the store hook that decides when \texttt{mark} is
 called and holds the lock, and the compensator. \ifnum\LfiveExecAvailable=1
-Verified on the pinned build: \LfiveExecVerus.\else Its verification on the
+Verified on the pinned build (runner step 7, 2026-10-17): \LfiveExecVerus{};
+byte-identical to \texttt{crates/runtime/src/l5\_exec.rs} by the bytes gate
+of the same run. \texttt{verus\_count.sh} skips the file in both modes (its
+\texttt{NEVER\_COUNT} list; the count logs print it without obligations), so
+its \LfiveExecVerusCount{} obligations are outside both totals above
+(\VerusCurated{}/\VerusFull{} are the pre-existing inventory; a reader who
+adds the file arrives at a larger headline).\else Its verification on the
 pinned build is runner step 7; until that receipt the file is a port and
 contributes to neither total above. The first attempt (2026-10-17) ran under
 a May 2026 Verus found on the author's PATH instead of the pinned September
