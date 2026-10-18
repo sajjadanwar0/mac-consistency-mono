@@ -49,6 +49,43 @@ def load(fp):
     return out
 
 
+# Since 2026-10-17 the pilot writes per-cell sidecars BESIDE the traces (refusals.jsonl: one line per refused
+# operation, no `agent`/`read_time`/`write_time` keys; protocol.json; order.tsv). A cell's trace files are the
+# *.jsonl files whose first record is an operation record; anything else is a sidecar and is never handed to the
+# analyser (2026-10-17: `*.jsonl` fed refusals.jsonl to it, the analyser rejected it, the gate failed twice and the
+# fold kept every verified-scorer cell pending). Skipped files are recorded in the receipt, never dropped silently.
+SIDECAR_NAMES = {"refusals.jsonl"}
+SKIPPED = []
+
+
+def is_trace(fp) -> bool:
+    """an op-record trace: its first JSON line carries the record keys; a sidecar does not"""
+    if os.path.basename(fp) in SIDECAR_NAMES:
+        return False
+    with open(fp) as f:
+        for line in f:
+            line = line.strip()
+            if not line:
+                continue
+            try:
+                r = json.loads(line)
+            except json.JSONDecodeError:
+                continue            # load() skips such lines too
+            return isinstance(r, dict) and ("agent" in r or "agent_id" in r) and "write_time" in r
+    return True                     # an empty file is scored as before (the analyser decides)
+
+
+def trace_files(pattern):
+    """sorted glob, op-record traces only; every file set aside is remembered for the receipt"""
+    out = []
+    for fp in sorted(glob.glob(pattern)):
+        if is_trace(fp):
+            out.append(fp)
+        else:
+            SKIPPED.append(os.path.relpath(fp))
+    return out
+
+
 def run_analyser(binary, fp):
     p = subprocess.run([binary, "--json", "--strict", fp], capture_output=True, text=True)
     if p.returncode == 3:
@@ -114,7 +151,7 @@ def main() -> int:
     asserted = set()
     for stamp, run in exp.get("runs", {}).items():
         for cell, want in run.get("cells", {}).items():
-            files = sorted(glob.glob(os.path.join(a.root, "runs", stamp, cell, "*.jsonl")))
+            files = trace_files(os.path.join(a.root, "runs", stamp, cell, "*.jsonl"))
             if files:
                 asserted.add((stamp, cell))
                 score_files(f"runs/{stamp}/{cell}", files, want.get("a1"))
@@ -126,7 +163,7 @@ def main() -> int:
         stamp, cell = os.path.basename(os.path.dirname(cell_dir)), os.path.basename(cell_dir)
         if (stamp, cell) in asserted:
             continue
-        files = sorted(glob.glob(os.path.join(cell_dir, "*.jsonl")))
+        files = trace_files(os.path.join(cell_dir, "*.jsonl"))
         if files:
             score_files(f"runs/{stamp}/{cell}", files, None)
     # (2) the September live study: per-session files
@@ -134,7 +171,7 @@ def main() -> int:
         if os.path.basename(m) in ("live_a1_mock", "live_a1_outcome"):
             continue
         for mode in ["store_vanilla", "store_validated", "store_sequential", "superstep"]:
-            files = sorted(glob.glob(os.path.join(m, "sessions", f"{mode}_*.jsonl")))
+            files = trace_files(os.path.join(m, "sessions", f"{mode}_*.jsonl"))
             if files:
                 want = None
                 try:
@@ -161,9 +198,13 @@ def main() -> int:
             pass
     for cell in sorted(by_cell):
         score_files(cell, sorted(by_cell[cell]), receipts.get(cell))
+    for fp in SKIPPED:
+        if os.path.basename(fp) not in SIDECAR_NAMES:
+            bad.append(f"{fp}: skipped: not an op-record trace and not a known sidecar (add it to SIDECAR_NAMES if it is one)")
     os.makedirs(os.path.dirname(a.out) or ".", exist_ok=True)
-    json.dump({"analyser": a.analyser, "cells": cells, "problems": bad}, open(a.out, "w"), indent=1)
-    print(f"\n{len(cells)} cells scored by the verified detector; {len(bad)} problem(s); receipt {a.out}")
+    json.dump({"analyser": a.analyser, "cells": cells, "problems": bad, "skipped_sidecars": SKIPPED}, open(a.out, "w"), indent=1)
+    print(f"\n{len(cells)} cells scored by the verified detector; {len(bad)} problem(s); "
+          f"{len(SKIPPED)} sidecar file(s) set aside ({', '.join(sorted(set(os.path.basename(f) for f in SKIPPED))) or 'none'}); receipt {a.out}")
     for b in bad:
         print("PROBLEM", b)
     return 1 if bad else 0

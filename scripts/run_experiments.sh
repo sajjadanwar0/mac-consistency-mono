@@ -302,6 +302,9 @@ fi
 
 if want 14; then log 14 "cargo: the analyser scores A1 with the VERIFIED detector; l3_server; the two bytes gates"
   delivered crates/analyser/src/oprecord.rs normalize_agent_key "the agent/agent_id reader fix" || true
+  # 2026-10-17: the gate fed the per-cell refusals.jsonl sidecars of steps 22/24 to the analyser (glob *.jsonl) and failed
+  # twice; the delivered gate selects op-record traces by content and lists every sidecar it set aside in the receipt
+  delivered harness/macaudit/verified_scorer_gate.py SIDECAR_NAMES "the sidecar-aware trace selection" || true
   run "bash harness/macaudit/verified_bytes_gate.sh"
   run "cargo build --release -p mac-analyser 2>&1 | tail -3"
   run "cargo build --release --manifest-path crates/runtime/Cargo.toml --example l3_server 2>&1 | tail -3"
